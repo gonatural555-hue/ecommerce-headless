@@ -48,7 +48,7 @@ export default function ProductImageGallery({
       {/* Featured / Main Image */}
       <div
         className={[
-          "aspect-[4/5] md:aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          "relative aspect-[4/5] md:aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
           featuredContainerClassName,
         ]
           .filter(Boolean)

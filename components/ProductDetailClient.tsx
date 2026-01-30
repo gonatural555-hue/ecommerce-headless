@@ -89,22 +89,13 @@ export default function ProductDetailClient({
     setSelections(initialSelections);
   }, [initialSelections]);
 
-  const selectedVariantValue = useMemo(() => {
-    if (!productVariants) return "";
-    for (const variant of productVariants.variants) {
-      const value = selections[variant.type];
-      if (value) return value;
-    }
-    return "";
-  }, [productVariants, selections]);
-
   const activeImages = useMemo(() => {
     const defaultImages = {
       featured: baseFeatured,
       gallery: baseGallery,
     };
 
-    if (!productImages.variantImages || !selectedVariantValue) {
+    if (!productImages.variantImages || Object.keys(selections).length === 0) {
       return defaultImages;
     }
 
@@ -127,7 +118,13 @@ export default function ProductDetailClient({
 
     if (!variant) {
       const flatMap = productImages.variantImages as VariantImagesValueMap;
-      variant = flatMap[selectedVariantValue];
+      const selectedValues = Object.values(selections);
+      for (const value of selectedValues) {
+        if (flatMap[value]) {
+          variant = flatMap[value];
+          break;
+        }
+      }
     }
 
     if (!variant) {
@@ -153,7 +150,6 @@ export default function ProductDetailClient({
     productImages,
     productVariants,
     selections,
-    selectedVariantValue,
   ]);
 
   const resolvedPrice = useMemo(() => {
@@ -203,7 +199,7 @@ export default function ProductDetailClient({
   return (
     <section className="grid gap-8 md:gap-10 xl:grid-cols-[3fr_2fr]">
       {/* Galería */}
-      <div className="bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full">
+      <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full">
         <ProductImageGallery
           featured={activeImages.featured}
           gallery={activeImages.gallery}
@@ -219,7 +215,7 @@ export default function ProductDetailClient({
       </div>
 
       {/* Info principal */}
-      <div className="flex flex-col gap-5 md:gap-8">
+      <div className="relative z-10 flex flex-col gap-5 md:gap-8">
         <div className="order-1 md:order-1">
           <h1 className="text-2xl md:text-4xl font-semibold text-text-primary">
             {seoH1}

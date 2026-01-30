@@ -282,7 +282,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] items-center">
             {productImages.lifestyle.length > 0 && (
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10">
                 <Image
                   src={productImages.lifestyle[0]}
                   alt={`${localizedProduct.title} lifestyle`}
