@@ -83,7 +83,7 @@ export default function ProductImageGallery({
         className={[
           // Square container with dark surface to keep images fully visible.
           "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
-          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none",
+          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:max-w-[560px] lg:max-h-[560px]",
           featuredContainerClassName,
         ]
           .filter(Boolean)
