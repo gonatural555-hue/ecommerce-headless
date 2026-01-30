@@ -201,9 +201,9 @@ export default function ProductDetailClient({
   const cartImage = activeImages.featured || product.images[0];
 
   return (
-    <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <section className="grid gap-8 md:gap-12 lg:grid-cols-[1.1fr_0.9fr]">
       {/* Galería */}
-      <div className="bg-dark-surface/40 rounded-2xl p-4 md:p-6">
+      <div className="bg-dark-surface/40 rounded-2xl p-3 md:p-6">
         <ProductImageGallery
           featured={activeImages.featured}
           gallery={activeImages.gallery}
@@ -219,37 +219,25 @@ export default function ProductDetailClient({
       </div>
 
       {/* Info principal */}
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary">
+      <div className="flex flex-col gap-6 md:gap-8">
+        <div className="order-1">
+          <h1 className="text-2xl md:text-4xl font-semibold text-text-primary">
             {seoH1}
           </h1>
-          <p className="mt-3 text-base md:text-lg text-text-muted">
-            {product.description}
-          </p>
-          <div className="mt-6 flex items-center gap-3">
-            <p className="text-sm text-text-muted">
-              ${resolvedPrice.toFixed(2)}
-            </p>
-            {product.freeShipping && freeShippingLabel && (
-              <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
-                {freeShippingLabel}
-              </span>
-            )}
-          </div>
         </div>
 
-        {productVariants && (
-          <div>
-            <VariantSelector
-              variants={productVariants}
-              onChange={setSelections}
-              value={selections}
-            />
-          </div>
-        )}
+        <div className="order-2 md:order-3 flex items-center gap-3">
+          <p className="text-2xl md:text-sm text-text-primary">
+            ${resolvedPrice.toFixed(2)}
+          </p>
+          {product.freeShipping && freeShippingLabel && (
+            <span className="hidden md:inline text-xs uppercase tracking-[0.12em] text-text-muted/80">
+              {freeShippingLabel}
+            </span>
+          )}
+        </div>
 
-        <div>
+        <div className="order-3 md:order-5">
           <AddToCartButton
             id={product.id}
             title={product.title}
@@ -258,6 +246,30 @@ export default function ProductDetailClient({
             variantSelections={variantSelections}
             label={ctaLabel}
           />
+        </div>
+
+        {productVariants && (
+          <div className="order-4 md:order-4">
+            <VariantSelector
+              variants={productVariants}
+              onChange={setSelections}
+              value={selections}
+            />
+          </div>
+        )}
+
+        {product.freeShipping && freeShippingLabel && (
+          <div className="order-5 md:hidden">
+            <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
+              {freeShippingLabel}
+            </span>
+          </div>
+        )}
+
+        <div className="order-6 md:order-2">
+          <p className="text-sm md:text-lg text-text-muted">
+            {product.description}
+          </p>
         </div>
       </div>
     </section>
