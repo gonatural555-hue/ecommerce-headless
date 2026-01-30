@@ -1,0 +1,29 @@
+{
+  "id": "gn-cycling-clothing-002",
+  "images": {
+    "featured": [
+      "/assets/images/products/gn-cycling-clothing-002/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-cycling-clothing-002/featured01.webp",
+      "/assets/images/products/gn-cycling-clothing-002/featured02.webp",
+      "/assets/images/products/gn-cycling-clothing-002/featured03.webp",
+      "/assets/images/products/gn-cycling-clothing-002/featured04.webp"
+    ],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/Sbd08d556ee9946b59e20bf48db9439212.jpg",
+      "https://ae01.alicdn.com/kf/S77d28217a0d64618bcf4c91bc1fde3e7g.jpg",
+      "https://ae01.alicdn.com/kf/Sc3b5dee3369447b3a4cf6aacad1eda61U.jpg",
+      "https://ae01.alicdn.com/kf/S1dd247ed62aa419f9b90e5d648a31f78A.jpg",
+      "https://ae01.alicdn.com/kf/S015d354ecf8045f681161e251200186dI.jpg"
+
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/Sefb141668ef84f919a6d1fcba52e7c47e.jpg",
+      "https://ae01.alicdn.com/kf/Sdbca448d3e4740368558be46ab012755N.jpg",
+      "https://ae01.alicdn.com/kf/S1be4bd1ac92343ad83a207d8028d136bU.jpg",
+      "https://ae01.alicdn.com/kf/S3dd5fb8714de4150b3c10a6ea1ebdf21b.jpg"
+    ]
+  }
+}
+

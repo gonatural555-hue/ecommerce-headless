@@ -1,0 +1,25 @@
+{
+  "id": "gn-outdoor-003",
+  "images": {
+    "featured": [
+      "/assets/images/products/gn-outdoor-003/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-outdoor-003/image1.webp"
+    ],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S635795f9a3ff47b5bb9de4e2ddae737d4.jpg",
+      "https://ae01.alicdn.com/kf/Sdcafadbaabef470a839ed6e81f8245ccL.jpg",
+      "https://ae01.alicdn.com/kf/S7bfb7f6a80b545708d9269d1d638e292e.jpg"
+
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S18155bd621b241cdb8267d2b54e58c6cy.jpg",
+      "https://ae01.alicdn.com/kf/Sf88b72e42fe24d099f3ac76cd74d2ceeQ.jpg",
+      "https://ae01.alicdn.com/kf/Sa70fa0aa58734376b938957b33733893t.jpg",
+      "https://ae01.alicdn.com/kf/Sab2976bbeca148d7bddbec7801430b43x.jpg"
+
+    ]
+  }
+}
+

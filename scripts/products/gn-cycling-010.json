@@ -1,0 +1,70 @@
+{
+  "id": "gn-cycling-010",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S8f3c0a594f714e3bb49002f79af05800L.jpg?width=800&height=799&hash=1599",
+      "https://ae01.alicdn.com/kf/S7cc98852899840b292ecd324aa10e6a8U.jpg?width=800&height=808&hash=1608"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/Se9523ed560d44983baed8b0a7da51e8bQ.jpg?width=800&height=1000&hash=1800",
+      "https://ae01.alicdn.com/kf/Sb8416dce9442453591f8754c8fc29443q.jpg?width=800&height=1197&hash=1997",
+      "https://ae01.alicdn.com/kf/S0203690157b54773a3a091677fed5c76X.jpg?width=800&height=1049&hash=1849",
+      "https://ae01.alicdn.com/kf/S70653cec254f436799faa5932a805719A.jpg?width=800&height=1816&hash=2616",
+      "https://ae01.alicdn.com/kf/S70653cec254f436799faa5932a805719A.jpg?width=800&height=1816&hash=2616",
+      ""
+    ]
+  },
+  "variantImages": {
+    "model-01": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-01/image.webp"
+    ]
+     },
+    "model-02": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-02/image.webp"
+    ]
+     },
+    "model-03": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-03/image.webp"
+    ]
+     },
+    "model-04": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-04/image.webp"
+    ]
+     },
+    "model-05": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-05/image.webp"
+    ]
+     },
+    "model-06": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-06/image.webp"
+    ]
+     },
+    "model-07": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-07/image.webp"
+    ]
+     },
+    "model-08": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-08/image.webp"
+    ]
+     },
+    "model-09": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-09/image.webp"
+    ]
+     },
+    "model-10": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-10/image.webp"
+    ]
+     },
+    "model-11": { "featured": [
+      "/assets/images/products/gn-cycling-010/model-11/image.webp"
+    ]
+     },
+    "model-12": { "featured": [
+        "/assets/images/products/gn-cycling-010/model-12/image.webp"
+    ]
+     }
+  }
+}
+

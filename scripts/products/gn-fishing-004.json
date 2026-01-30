@@ -1,0 +1,61 @@
+{
+  "id": "gn-fishing-004",
+  "images": {
+    "featured": [
+      "/assets/images/products/gn-fishing-004/casting/featured.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-fishing-004/casting/gallery-01.webp",
+      "/assets/images/products/gn-fishing-004/casting/gallery-02.webp"
+    ],
+    "lifestyle": [
+      "/assets/images/products/gn-fishing-004/casting/gallery-02.webp"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S39d7a28bc0bb4c3f97cce95b2714539dH.jpg",
+      "https://ae01.alicdn.com/kf/Sbe5369e8876b47bb96bacba85a5188dbh.jpg",
+      "https://ae01.alicdn.com/kf/S19306ec49bbc4905a3f339b311aed1538.jpg",
+      "https://ae01.alicdn.com/kf/S9906723f0adc49c092bbdc26c8f40dcfO.jpg"
+    ]
+  },
+  "variants": {
+    "type": "rod_type",
+    "label": "Tipo",
+    "default": "spinning",
+    "options": [
+      {
+        "value": "spinning",
+        "label": "Spinning"
+      },
+      {
+        "value": "casting",
+        "label": "Casting"
+      }
+    ]
+  },
+  "variantImages": {
+    "rod_type": {
+      "spinning": {
+        "featured": [
+          "/assets/images/products/gn-fishing-004/spinning/featured.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-fishing-004/spinning/gallery-01.webp",
+          "/assets/images/products/gn-fishing-004/spinning/gallery-02.webp",
+          "/assets/images/products/gn-fishing-004/spinning/gallery-03.webp"
+        ]
+      },
+      "casting": {
+        "featured": [
+          "/assets/images/products/gn-fishing-004/casting/featured.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-fishing-004/casting/gallery-01.webp",
+          "/assets/images/products/gn-fishing-004/casting/gallery-02.webp",
+          "/assets/images/products/gn-fishing-004/casting/gallery-03.webp"
+        ]
+      }
+    }
+  }
+}
+

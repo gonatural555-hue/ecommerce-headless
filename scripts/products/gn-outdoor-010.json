@@ -1,0 +1,56 @@
+{
+  "id": "gn-outdoor-010",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variantImages": {
+    "black": {
+      "featured": [
+        "/assets/images/products/gn-outdoor-010/black.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-outdoor-010/gallery.webp",
+        "/assets/images/products/gn-outdoor-010/gallery1.webp"
+      ]
+    },
+    "blue": {
+      "featured": [
+        "/assets/images/products/gn-outdoor-010/blue.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-outdoor-010/gallery.webp",
+        "/assets/images/products/gn-outdoor-010/gallery1.webp"
+      ]
+    },
+    "red": {
+      "featured": [
+        "/assets/images/products/gn-outdoor-010/red.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-outdoor-010/gallery.webp",
+        "/assets/images/products/gn-outdoor-010/gallery1.webp"
+      ]
+    },
+    "orange": {
+      "featured": [
+        "/assets/images/products/gn-outdoor-010/orange.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-outdoor-010/gallery.webp",
+        "/assets/images/products/gn-outdoor-010/gallery1.webp"
+      ]
+    },
+    "green": {
+      "featured": [
+          "/assets/images/products/gn-outdoor-010/green.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-outdoor-010/gallery.webp",
+        "/assets/images/products/gn-outdoor-010/gallery1.webp"
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "gn-cycling-shoes-002",
+  "images": {
+    "featured": [
+    ],
+    "gallery": [
+    ],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variantImages": {
+    "color": {
+      "black": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-4.webp"  
+        ]   
+      },
+      "white": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-5.webp"
+        ]
+      },
+      "red": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-7.webp"
+        ]
+      },
+      "blue": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-1.webp"
+        ]
+      },
+      "green": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-3.webp"
+        ]
+      },
+      "special": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-6.webp"
+        ]
+      },
+      "black-green": {
+        "featured": [
+          "/assets/images/products/gn-cycling-shoes-002/gn-cycling-shoes-2.webp"
+        ]
+      }
+    }
+  }
+}
+

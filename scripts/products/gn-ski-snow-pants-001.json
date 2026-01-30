@@ -1,0 +1,41 @@
+{
+  "id": "gn-ski-snow-pants-001",
+  "images": {
+    "featured": [
+    ],
+    "gallery": [
+    ],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variantImages": {
+    "color": {
+      "black": {
+        "featured": [
+          "/assets/images/products/gn-ski-snow-pants-001/alpine-snow-pants-1.webp"
+        ]
+      },    
+      "light-grey-black": {
+        "featured": [
+          "/assets/images/products/gn-ski-snow-pants-001/alpine-snow-pants-4.webp"
+        ]
+      },
+      "dark-grey-black": {
+        "featured": [
+          "/assets/images/products/gn-ski-snow-pants-001/alpine-snow-pants.webp"
+        ]
+      },
+      "dark-grey-green": {
+        "featured": [
+          "/assets/images/products/gn-ski-snow-pants-001/alpine-snow-pants-2.webp"
+        ]
+      },
+      "dark-grey-navy": {
+        "featured": [
+          "/assets/images/products/gn-ski-snow-pants-001/alpine-snow-pants-3.webp"
+        ]
+      }
+    }
+  }
+}
+

@@ -1,0 +1,64 @@
+{
+  "id": "gn-cycling-011",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S822905ad778d40b891c13b88af64dc24O.jpg?width=800&height=879&hash=1679"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S763b9935722c4c0ba25a7a06867802ec3.jpg?width=800&height=1363&hash=2163",
+      "https://ae01.alicdn.com/kf/Sbb6726961aea4f41a42543dd0c665a29x.jpg?width=800&height=702&hash=1502",
+      "https://ae01.alicdn.com/kf/Sfd485123cb734aa8a09bede24c58bacaH.jpg?width=800&height=701&hash=1501",
+      "https://ae01.alicdn.com/kf/S89b8481731334ba7af2d12600e6761ebR.jpg?width=800&height=702&hash=1502"
+    ]
+  },
+  "variantImages": {
+    "model-01": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-01/image.webp"
+      ]
+    },
+    "model-02": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-02/image.webp"
+      ]
+    },
+    "model-03": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-03/image.webp"
+      ]
+    },
+    "model-04": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-04/image.webp"
+      ]
+    },
+    "model-05": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-05/image.webp"
+      ]
+    },
+    "model-06": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-06/image.webp"
+      ]
+    },
+    "model-07": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-07/image.webp"
+      ]
+    },
+    "model-08": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-08/image.webp"
+      ]
+    },
+    "model-09": {
+      "featured": [
+        "/assets/images/products/gn-cycling-011/model-9/image.webp"
+      ]
+    }
+  }
+}
+

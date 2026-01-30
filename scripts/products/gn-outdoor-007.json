@@ -1,0 +1,57 @@
+{
+  "id": "gn-outdoor-007",
+  "images": {
+    "featured": [],
+    "gallery": [
+    ],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S60f8af039ba845c3bb8cd3095f74f0efT.jpg",
+      "https://ae01.alicdn.com/kf/Sd27217c876fc44d9b0ce7597912a0f95F.jpg"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/Se39db0235f3d4622880fb12bd25c496dX.jpg",
+      "https://ae01.alicdn.com/kf/S1c40ff1310ca4c50b23f60f8af87fc417.jpg",
+      "https://ae01.alicdn.com/kf/S9fb3dfaf1b5442fbab8d47d73cb15756t.jpg",
+      "https://ae01.alicdn.com/kf/Sd69c7cc6f96f4c19accd14761ed4d5b8R.jpg",
+      "https://ae01.alicdn.com/kf/S037d52dc70024eda8f490f49dc76c870C.jpg"
+      
+    ]
+  },
+  "variants": {
+    "type": "color",
+    "label": "Color",
+    "default": "verde",
+    "options": [
+      { "value": "verde", "label": "Verde" },
+      { "value": "azul", "label": "Azul" },
+      { "value": "rojo", "label": "Rojo" },
+      { "value": "negro", "label": "Negro" }
+    ]
+  },
+  "variantImages": {
+    "verde": { "featured": [
+      "/assets/images/products/gn-outdoor-007/verde/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-outdoor-007/gallery.webp"
+    ] },
+    "azul": { "featured": [
+      "/assets/images/products/gn-outdoor-007/azul/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-outdoor-007/gallery.webp"
+    ] },
+    "rojo": { "featured": [
+      "/assets/images/products/gn-outdoor-007/rojo/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-outdoor-007/gallery.webp"
+    ] },
+    "negro": { "featured": [
+      "/assets/images/products/gn-outdoor-007/negro/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-outdoor-007/gallery.webp"
+    ] }
+  }
+}

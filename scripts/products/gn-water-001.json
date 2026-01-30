@@ -1,0 +1,38 @@
+{
+  "id": "gn-water-001",
+  "images": {
+    "featured": [
+      "https://ae01.alicdn.com/kf/Sdb9dd09ff76542e7b840f97ffaf8eb65h.jpg"
+    ],
+    "gallery": [
+      "https://ae01.alicdn.com/kf/Sdb9dd09ff76542e7b840f97ffaf8eb65h.jpg"
+    ],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/Sdb9dd09ff76542e7b840f97ffaf8eb65h.jpg"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S9a9d3494f631442e8111e4889015b8a0p.jpg",
+      "https://ae01.alicdn.com/kf/Sd7005c8b448f42a786cd162ffeb1d63fi.jpg",
+      "https://ae01.alicdn.com/kf/Sd87f70002c34407cb259e5628c3ed019T.jpg",
+      "https://ae01.alicdn.com/kf/Sb07a9d1d65864d35a720888e77d7d3b35.jpg"
+    ]
+  },
+  "variantImages": {
+    "black": {
+      "featured": [
+        "/assets/images/products/gn-water-001/black/featured.webp"
+      ]
+    },
+    "blue": {
+      "featured": [
+        "/assets/images/products/gn-water-001/blue/featured.webp"
+      ]
+    },
+    "pink": {
+      "featured": [
+        "/assets/images/products/gn-water-001/pink/featured.webp"
+      ]
+    }
+  }
+}
+  

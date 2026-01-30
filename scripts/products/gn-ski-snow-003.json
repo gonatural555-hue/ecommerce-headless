@@ -1,0 +1,58 @@
+{
+  "id": "gn-ski-snow-003",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S10704810356f4288a477de8061f6bbcf5.jpg",
+      "https://ae01.alicdn.com/kf/S5b917aaf19c34d7486683e4b7cf8f7d0V.jpg",
+      "https://ae01.alicdn.com/kf/S35ae22aa95c241609f7642d74439aed80.jpg",
+      "https://ae01.alicdn.com/kf/S490fe74fe05248afbd9855e0ce8e9b08x.jpg",
+      "https://ae01.alicdn.com/kf/Sda300d70a0cf43e5b3e5b9c8a9e5b6deb.jpg",
+      "https://ae01.alicdn.com/kf/S227509d26b924cb58bebada76a9b2666a.jpg"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S058dffe53e10482a8415da5a81a46646N.jpg",
+      "https://ae01.alicdn.com/kf/S633eaa7d7a5342cd874dcd5e0c68efb1V.jpg",
+      "https://ae01.alicdn.com/kf/S179a9fedefba4d228c01094a62e4a4b67.jpg",
+      "https://ae01.alicdn.com/kf/S179a9fedefba4d228c01094a62e4a4b67.jpg"
+    ]
+  },
+  "variantImages": {
+    "negro": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/negro/image.webp"
+      ]
+    },
+    "blanco": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/blanco/image.webp"
+      ]
+    },
+    "marron": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/marron/image.webp"
+      ]
+    },
+    "naranja": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/naranja/image.webp"
+      ]
+    },
+    "amarillo": {
+      "featured": [
+          "/assets/images/products/gn-ski-snow-003/amarillo/image.webp"
+      ]
+    },
+    "rojo": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/rojo/image.webp"
+      ]
+    },
+    "verde": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-003/verde/image.webp"
+      ]
+    }
+  }
+}

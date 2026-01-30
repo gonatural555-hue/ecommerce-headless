@@ -1,0 +1,41 @@
+{
+  "id": "gn-cycling-clothes-002",
+  "images": {
+    "featured": [
+    ],
+    "gallery": [
+    ],
+    "lifestyle": [
+    ],
+    "extras": []
+  },
+  "variantImages": {
+    "color": {
+      "orange": {
+        "featured": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket-1.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket.webp"
+        ]
+      },
+      "grey": {
+        "featured": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket-3.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket.webp"
+        ]
+      },
+      "green": {
+        "featured": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket-2.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cycling-clothes-002/thermal-cycling-jacket.webp"
+        ]
+      }
+    }
+  }
+}
+

@@ -1,0 +1,80 @@
+{
+  "id": "gn-fishing-eq-007",
+  "images": {
+    "featured": [],
+    "gallery": [
+      "https://ae01.alicdn.com/kf/HTB1ehM6kDnI8KJjy0Ffq6AdoVXax.jpg",
+        "https://ae01.alicdn.com/kf/HTB1z_AzkBDH8KJjy1zeq6xjepXaO.jpg",
+        "https://ae01.alicdn.com/kf/HTB1vfcGkv6H8KJjy0Fjq6yXepXaH.jpg",
+        "https://ae01.alicdn.com/kf/H2241a187e2704d01b8955d90c018628fk.jpg",
+        "https://ae01.alicdn.com/kf/H65242665ed7245d7a00e048ac3c118062.jpg"
+    ],
+    "lifestyle": [],
+    "extras": [
+      "https://ae01.alicdn.com/kf/H127ae26825af49d4869bb44536070991A.jpg",
+        "https://ae01.alicdn.com/kf/Hfd3f525679b940de92d94b46cf3d4874Y.jpg",
+        "https://ae01.alicdn.com/kf/H6eea152354ab42f68f8ba04439b75dcdP.jpg",
+        "https://ae01.alicdn.com/kf/HTB1Ap2OkwvD8KJjSsplq6yIEFXar.jpg",
+        "https://ae01.alicdn.com/kf/HTB1tdIWkwDD8KJjy0Fdq6AjvXXa9.jpg",
+        "https://ae01.alicdn.com/kf/HTB15YSlaBaE3KVjSZLeq6xsSFXar.jpg"
+    ]
+  },
+  "variantImages": {
+    "1000": {
+      "featured": [
+        "/assets/images/products/gn-fishing-eq-007/1000/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-fishing-eq-007/1000/gallery-01.webp",
+        "/assets/images/products/gn-fishing-eq-007/1000/gallery-02.webp",
+        "/assets/images/products/gn-fishing-eq-007/1000/gallery-03.webp",
+        "/assets/images/products/gn-fishing-eq-007/1000/gallery-04.webp"      
+      ]
+    },
+    "2000": {
+      "featured": [
+        "/assets/images/products/gn-fishing-eq-007/2000/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-fishing-eq-007/2000/gallery-01.webp",
+        "/assets/images/products/gn-fishing-eq-007/2000/gallery-02.webp",
+        "/assets/images/products/gn-fishing-eq-007/2000/gallery-03.webp",
+        "/assets/images/products/gn-fishing-eq-007/2000/gallery-04.webp"
+      ]
+    },
+    "3000": {
+      "featured": [
+        "/assets/images/products/gn-fishing-eq-007/3000/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-fishing-eq-007/3000/gallery-01.webp",
+        "/assets/images/products/gn-fishing-eq-007/3000/gallery-02.webp",
+        "/assets/images/products/gn-fishing-eq-007/3000/gallery-03.webp",
+        "/assets/images/products/gn-fishing-eq-007/3000/gallery-04.webp"
+      ]
+    },
+    "4000": {
+      "featured": [
+        "/assets/images/products/gn-fishing-eq-007/4000/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-fishing-eq-007/4000/gallery-01.webp",
+        "/assets/images/products/gn-fishing-eq-007/4000/gallery-02.webp",
+        "/assets/images/products/gn-fishing-eq-007/4000/gallery-03.webp",
+        "/assets/images/products/gn-fishing-eq-007/4000/gallery-04.webp"
+      ]
+    },
+    "5000": {
+      "featured": [
+        "/assets/images/products/gn-fishing-eq-007/5000/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-fishing-eq-007/5000/gallery-01.webp",
+        "/assets/images/products/gn-fishing-eq-007/5000/gallery-02.webp",
+        "/assets/images/products/gn-fishing-eq-007/5000/gallery-03.webp",
+        "/assets/images/products/gn-fishing-eq-007/5000/gallery-04.webp"
+      ]
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+{
+  "id": "gn-ski-snow-002",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S8603f60675f244cf8f10171444bd7c72c.jpg?width=1035&height=539&hash=1574",
+      "https://ae01.alicdn.com/kf/HTB12IKBKpXXXXbqaXXXq6xXFXXXZ/222336195/HTB12IKBKpXXXXbqaXXXq6xXFXXXZ.jpg",
+      "https://ae01.alicdn.com/kf/HTB1ON4nazzuK1RjSspeq6ziHVXac.jpg",
+      "https://ae01.alicdn.com/kf/Hd7d6379cf09f4121a6b17e7dc3758ce1l.jpg"
+    ]
+  }
+,
+  "variantImages": {
+    "negro": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-002/negro/image.webp"
+      ]
+    },
+    "sapphire": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-002/sapphire/image.webp"
+      ]
+    },
+    "verde-militar": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-002/verde-militar/image.webp"
+      ]
+    },
+    "rojo": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-002/rojo/image.webp"
+      ]
+    },
+    "caqui": {
+      "featured": [
+        "/assets/images/products/gn-ski-snow-002/caqui/image.webp"
+      ]
+    }
+  }
+}

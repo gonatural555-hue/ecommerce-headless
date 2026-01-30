@@ -1,0 +1,41 @@
+{
+  "id": "gn-cycling-014",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S8230733e4fd84affabb3093dbab82364U.jpg",
+      "https://ae01.alicdn.com/kf/S9e6b9c55aba6431bbc8a9fb185d40931e.jpg",
+      "https://ae01.alicdn.com/kf/S0a40bace2386402a87fb2f85c525cd6a2.jpg",
+      "https://ae01.alicdn.com/kf/Sdcff45bcd52945acbbdce53ca9104c2aL.jpg",
+      "https://ae01.alicdn.com/kf/S405134e084314a03b21158fdfd260c2co.jpg",
+      "https://ae01.alicdn.com/kf/S9164839906f04a4e82a8475e04634a1bp.jpg",
+      "https://ae01.alicdn.com/kf/S557180dc671e4b06874b8dd7148ae781H.jpg",
+      "https://ae01.alicdn.com/kf/S420243e2572a40a78025ae410fe85fabx.jpg"
+    ]
+  },
+  "variantImages": {
+    "rojo": {
+      "featured": [
+        "/assets/images/products/gn-cycling-014/rojo/image.webp"
+      ]
+    },
+    "negro": {
+      "featured": [
+        "/assets/images/products/gn-cycling-014/negro/image.webp"
+      ]
+    },
+    "azul": {
+      "featured": [
+        "/assets/images/products/gn-cycling-014/azul/image.webp"
+      ]
+    },
+    "celeste": {
+      "featured": [
+        "/assets/images/products/gn-cycling-014/celeste/image.webp"
+      ]
+    }
+  }
+}
+

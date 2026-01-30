@@ -1,0 +1,66 @@
+{
+  "id": "gn-fishing-eq-006",
+  "images": {
+    "featured": [
+      "https://ae01.alicdn.com/kf/S08a59be7cd0a4bdbac101ba4df2b1732P.jpg"
+    ],
+    "gallery": [
+      "https://ae01.alicdn.com/kf/S52abe993fe4b4bea963b8fb9318ce539h.jpg",
+      "https://ae01.alicdn.com/kf/Sb84b1fc9d690466a997c8d3342872e9fb.jpg",
+      "https://ae01.alicdn.com/kf/S683c5f07d12a469fabcbad0f63585a97i.jpg"
+    ],
+    "lifestyle": [
+      "https://ae01.alicdn.com/kf/S7be955f7db784765a45f7436a2d8fac0V.jpg",
+      "https://ae01.alicdn.com/kf/Sd3152552b34e4b59a7df5f733159455bF.jpg",
+      "https://ae01.alicdn.com/kf/Sed89c875d0e14469b3fd57d93bc35f11r.jpg"
+    ],
+    "extras": []
+  },
+  "variants": {
+    "type": "color",
+    "label": "Color",
+    "default": "black",
+    "options": [
+      { "value": "blue", "label": "Azul" },
+      { "value": "black", "label": "Negro" },
+      { "value": "orange", "label": "Naranja" },
+      { "value": "yellow", "label": "Amarillo" }
+    ]
+  },
+  "variantImages": {
+    "color": {
+      "blue": {
+        "featured": [
+          "/assets/images/products/gn-fishing-eq-006/blue/image.webp"
+        ],
+        "gallery": [
+
+        ]
+      },
+      "black": {
+        "featured": [
+          "/assets/images/products/gn-fishing-eq-006/black/image.webp"
+        ],
+        "gallery": [
+
+        ]
+      },
+      "orange": {
+        "featured": [
+          "/assets/images/products/gn-fishing-eq-006/orange/image.webp"
+        ],
+        "gallery": [
+
+        ]
+      },
+      "yellow": {
+        "featured": [
+          "/assets/images/products/gn-fishing-eq-006/yellow/image.webp"
+        ],
+        "gallery": [
+
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "gn-camping-survival-002",
+  "images": {
+    "featured": [],
+    "gallery": [
+      "/assets/images/products/gn-camping-survival-002/gallery.webp"
+    ],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variantImages": {
+    "with-adaptor": {
+      "featured": [
+        "/assets/images/products/gn-camping-survival-002/featured.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-camping-survival-002/gallery.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery1.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery2.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery3.webp"
+      ]
+    },
+    "gas-stove": {
+      "featured": [
+        "/assets/images/products/gn-camping-survival-002/featured1.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-camping-survival-002/gallery.webp", 
+        "/assets/images/products/gn-camping-survival-002/gallery1.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery2.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery3.webp"
+      ]
+    },
+    "with-stable-support": {
+      "featured": [
+        "/assets/images/products/gn-camping-survival-002/featured2.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-camping-survival-002/gallery.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery1.webp",
+        "/assets/images/products/gn-camping-survival-002/gallery2.webp",  
+        "/assets/images/products/gn-camping-survival-002/gallery3.webp"
+      ]
+    }
+  }
+}
+

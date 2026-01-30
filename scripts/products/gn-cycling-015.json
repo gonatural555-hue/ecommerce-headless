@@ -1,0 +1,24 @@
+{
+  "id": "gn-cycling-015",
+  "images": {
+    "featured": [
+      "/assets/images/products/gn-cycling-015/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-cycling-015/featured.webp",
+      "/assets/images/products/gn-cycling-015/featured01.webp",
+      "/assets/images/products/gn-cycling-015/featured02.webp"
+    ],
+    "lifestyle": [
+      "/assets/images/products/gn-cycling-015/featured04.webp", 
+      "/assets/images/products/gn-cycling-015/featured03.webp"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S4abd5b76264b4d87a6e4facd2d70b912Y.jpg",
+      "https://ae01.alicdn.com/kf/S6ea19a3dc00444b4b8a7284f820ecaabq.jpg",
+      "https://ae01.alicdn.com/kf/S7006f295fe784bc2ae7d1984e8e3ab27p.jpg",
+      "https://ae01.alicdn.com/kf/S979cef02572e45f4a925500d60e83a25G.jpg"
+    ]
+  }
+}
+

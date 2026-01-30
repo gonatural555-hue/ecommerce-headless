@@ -1,0 +1,55 @@
+{
+  "id": "gn-water-004",
+  "images": {
+    "featured": [
+      
+    ],
+    "gallery": [
+
+    ],
+    "lifestyle": [
+      "/assets/images/products/gn-water-004/gallery.webp"
+    ],
+    "extras": [
+      "https://ae01.alicdn.com/kf/S5ca8de3b8f4c414da3015afa345668d54.png",
+      "https://ae01.alicdn.com/kf/Sf46d9fcac2044e4596d4d0aeeef9be12X.jpg",
+      "https://ae01.alicdn.com/kf/S9196c9bd7f8540168aae0a4c0ea47191q.jpg",
+      "https://ae01.alicdn.com/kf/S81bf92cdbbbd427db14077d93224892cl.jpg",
+      "https://ae01.alicdn.com/kf/S9e5e857241ed42a98dc6ca343c7705abx.jpg",
+      "https://ae01.alicdn.com/kf/Sf321bcfa76414814b6d1fb00c9cc9a151.jpg",
+      "https://ae01.alicdn.com/kf/Sced698d117544e20a55f46166730a600h.jpg" 
+    ]
+  },
+  "variantImages": {
+    "gris": {
+      "featured": [
+        "/assets/images/products/gn-water-004/gris/featured.webp"
+      ]
+    },
+    "azul": {
+      "featured": [
+        "/assets/images/products/gn-water-004/gallery.webp"
+      ]
+    },
+    "turquesa": {
+      "featured": [
+        "/assets/images/products/gn-water-004/turquesa/featured.webp"
+      ]
+    },
+    "blanco": {
+      "featured": [
+        "/assets/images/products/gn-water-004/blanco/featured.webp"
+      ]
+    },
+    "rosa": {
+      "featured": [
+        "/assets/images/products/gn-water-004/rosa/featured.webp"
+      ]
+    },
+    "negro": {
+      "featured": [
+        "/assets/images/products/gn-water-004/negro/featured.webp"
+      ]
+    }
+  }
+}
