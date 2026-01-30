@@ -252,7 +252,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <main className="bg-dark-base overflow-x-hidden">
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-16 md:py-20">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-16 md:py-20 max-w-full">
         <ProductDetailClient
           product={localizedProduct}
           seoH1={seoH1}

@@ -197,9 +197,9 @@ export default function ProductDetailClient({
   const cartImage = activeImages.featured || product.images[0];
 
   return (
-    <section className="grid gap-8 md:gap-10 xl:grid-cols-[3fr_2fr]">
+    <section className="grid gap-8 md:gap-10 xl:grid-cols-[3fr_2fr] max-w-full">
       {/* Galería */}
-      <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full">
+      <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden">
         <ProductImageGallery
           featured={activeImages.featured}
           gallery={activeImages.gallery}
@@ -215,9 +215,9 @@ export default function ProductDetailClient({
       </div>
 
       {/* Info principal */}
-      <div className="relative z-10 flex flex-col gap-5 md:gap-8">
+      <div className="relative z-10 flex flex-col gap-5 md:gap-8 min-w-0">
         <div className="order-1 md:order-1">
-          <h1 className="text-2xl md:text-4xl font-semibold text-text-primary">
+          <h1 className="text-2xl md:text-4xl font-semibold text-text-primary break-words">
             {seoH1}
           </h1>
         </div>
@@ -262,8 +262,8 @@ export default function ProductDetailClient({
           </div>
         )}
 
-        <div className="order-6 md:order-2">
-          <p className="text-sm md:text-lg text-text-muted">
+        <div className="order-6 md:order-2 min-w-0">
+          <p className="text-sm md:text-lg text-text-muted break-words">
             {product.description}
           </p>
         </div>

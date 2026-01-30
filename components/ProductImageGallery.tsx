@@ -44,11 +44,12 @@ export default function ProductImageGallery({
   }
 
   return (
-    <div className="max-w-full">
+    <div className="max-w-full overflow-x-hidden">
       {/* Featured / Main Image */}
       <div
         className={[
-          "relative aspect-[4/5] md:aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          // Constrain mobile height to avoid overflow while preserving ratio.
+          "relative w-full max-w-full aspect-[4/5] md:aspect-square max-h-[70vh] md:max-h-none bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
           featuredContainerClassName,
         ]
           .filter(Boolean)
@@ -62,7 +63,7 @@ export default function ProductImageGallery({
           placeholder="blur"
           blurDataURL={PRODUCT_BLUR_DATA_URL}
           className={[
-            "object-contain",
+            "object-contain w-full h-full",
             featuredImageClassName,
           ]
             .filter(Boolean)
@@ -73,7 +74,7 @@ export default function ProductImageGallery({
 
       {/* Gallery Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 overflow-x-auto pb-2">
+        <div className="flex gap-3 max-w-full overflow-x-auto pb-2">
           {allImages.map((img, index) => (
             <button
               key={img}
