@@ -48,8 +48,9 @@ export default function ProductImageGallery({
       {/* Featured / Main Image */}
       <div
         className={[
-          // Constrain mobile height to avoid overflow while preserving ratio.
-          "relative w-full max-w-full aspect-[4/5] md:aspect-square max-h-[70vh] md:max-h-none bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          // Square container with dark surface to keep images fully visible.
+          "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none",
           featuredContainerClassName,
         ]
           .filter(Boolean)
