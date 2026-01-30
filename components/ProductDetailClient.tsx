@@ -201,9 +201,9 @@ export default function ProductDetailClient({
   const cartImage = activeImages.featured || product.images[0];
 
   return (
-    <section className="grid gap-8 md:gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <section className="grid gap-8 md:gap-10 xl:grid-cols-[3fr_2fr]">
       {/* Galería */}
-      <div className="bg-dark-surface/40 rounded-2xl p-3 md:p-6">
+      <div className="bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full">
         <ProductImageGallery
           featured={activeImages.featured}
           gallery={activeImages.gallery}
@@ -219,8 +219,8 @@ export default function ProductDetailClient({
       </div>
 
       {/* Info principal */}
-      <div className="flex flex-col gap-6 md:gap-8">
-        <div className="order-1">
+      <div className="flex flex-col gap-5 md:gap-8">
+        <div className="order-1 md:order-1">
           <h1 className="text-2xl md:text-4xl font-semibold text-text-primary">
             {seoH1}
           </h1>
@@ -237,7 +237,17 @@ export default function ProductDetailClient({
           )}
         </div>
 
-        <div className="order-3 md:order-5">
+        {productVariants && (
+          <div className="order-3 md:order-4">
+            <VariantSelector
+              variants={productVariants}
+              onChange={setSelections}
+              value={selections}
+            />
+          </div>
+        )}
+
+        <div className="order-4 md:order-5">
           <AddToCartButton
             id={product.id}
             title={product.title}
@@ -247,16 +257,6 @@ export default function ProductDetailClient({
             label={ctaLabel}
           />
         </div>
-
-        {productVariants && (
-          <div className="order-4 md:order-4">
-            <VariantSelector
-              variants={productVariants}
-              onChange={setSelections}
-              value={selections}
-            />
-          </div>
-        )}
 
         {product.freeShipping && freeShippingLabel && (
           <div className="order-5 md:hidden">

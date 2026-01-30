@@ -251,8 +251,8 @@ export default async function ProductPage({ params }: Props) {
     : benefits;
 
   return (
-    <main className="bg-dark-base">
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-20">
+    <main className="bg-dark-base overflow-x-hidden">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-16 md:py-20">
         <ProductDetailClient
           product={localizedProduct}
           seoH1={seoH1}

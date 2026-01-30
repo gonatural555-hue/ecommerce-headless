@@ -44,11 +44,11 @@ export default function ProductImageGallery({
   }
 
   return (
-    <div>
+    <div className="max-w-full">
       {/* Featured / Main Image */}
       <div
         className={[
-          "aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          "aspect-[4/5] md:aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
           featuredContainerClassName,
         ]
           .filter(Boolean)
@@ -62,7 +62,7 @@ export default function ProductImageGallery({
           placeholder="blur"
           blurDataURL={PRODUCT_BLUR_DATA_URL}
           className={[
-            "object-cover",
+            "object-contain",
             featuredImageClassName,
           ]
             .filter(Boolean)
@@ -79,7 +79,7 @@ export default function ProductImageGallery({
               key={img}
               type="button"
               onClick={() => setSelectedImage(img)}
-              className={`flex-shrink-0 w-20 h-20 rounded-xl border overflow-hidden transition-all ${
+              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all ${
                 selectedImage === img
                   ? "border-accent-gold ring-1 ring-accent-gold/60"
                   : "border-white/15 hover:border-white/30"
