@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
 
@@ -27,13 +27,46 @@ export default function ProductImageGallery({
       : gallery;
   }, [featured, gallery]);
 
-  const [selectedImage, setSelectedImage] = useState<string>(
-    featured || gallery[0] || ""
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startXRef = useRef(0);
 
   useEffect(() => {
-    setSelectedImage(featured || gallery[0] || "");
+    setCurrentIndex(0);
+    setDragOffset(0);
+    setIsDragging(false);
   }, [featured, gallery]);
+
+  const selectedImage = allImages[currentIndex] || "";
+  const canSwipe = allImages.length > 1;
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (!canSwipe) return;
+    setIsDragging(true);
+    startXRef.current = event.touches[0]?.clientX ?? 0;
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging || !canSwipe) return;
+    const currentX = event.touches[0]?.clientX ?? 0;
+    setDragOffset(currentX - startXRef.current);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging || !canSwipe) return;
+    const threshold = 60;
+    const delta = dragOffset;
+    setIsDragging(false);
+    setDragOffset(0);
+
+    if (delta <= -threshold && currentIndex < allImages.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      return;
+    }
+    if (delta >= threshold && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   if (allImages.length === 0) {
     return (
@@ -55,22 +88,43 @@ export default function ProductImageGallery({
         ]
           .filter(Boolean)
           .join(" ")}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
-        <Image
-          src={selectedImage}
-          alt={`${title} - Vista principal`}
-          fill
-          priority
-          placeholder="blur"
-          blurDataURL={PRODUCT_BLUR_DATA_URL}
+        <div
           className={[
-            "object-contain w-full h-full",
-            featuredImageClassName,
+            "flex h-full w-full",
+            isDragging ? "" : "transition-transform duration-300 ease-out",
           ]
             .filter(Boolean)
             .join(" ")}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 60vw"
-        />
+          style={{
+            transform: `translateX(calc(${-currentIndex * 100}% + ${dragOffset}px))`,
+          }}
+        >
+          {allImages.map((img, index) => (
+            <div key={img} className="relative h-full w-full flex-shrink-0">
+              <Image
+                src={img}
+                alt={`${title} - Vista ${index + 1}`}
+                fill
+                priority={index === 0}
+                loading={index === currentIndex ? "eager" : "lazy"}
+                placeholder="blur"
+                blurDataURL={PRODUCT_BLUR_DATA_URL}
+                className={[
+                  "object-contain w-full h-full",
+                  featuredImageClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 60vw"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Gallery Thumbnails */}
@@ -80,7 +134,7 @@ export default function ProductImageGallery({
             <button
               key={img}
               type="button"
-              onClick={() => setSelectedImage(img)}
+              onClick={() => setCurrentIndex(index)}
               className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all ${
                 selectedImage === img
                   ? "border-accent-gold ring-1 ring-accent-gold/60"
