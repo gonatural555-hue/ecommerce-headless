@@ -30,13 +30,26 @@ export default function ProductImageGallery({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const startXRef = useRef(0);
 
   useEffect(() => {
     setCurrentIndex(0);
     setDragOffset(0);
     setIsDragging(false);
+    setIsLightboxOpen(false);
   }, [featured, gallery]);
+
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsLightboxOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isLightboxOpen]);
 
   const selectedImage = allImages[currentIndex] || "";
   const canSwipe = allImages.length > 1;
@@ -68,6 +81,14 @@ export default function ProductImageGallery({
     }
   };
 
+  const handleLightboxOpen = () => {
+    setIsLightboxOpen(true);
+  };
+
+  const handleLightboxClose = () => {
+    setIsLightboxOpen(false);
+  };
+
   if (allImages.length === 0) {
     return (
       <div className="aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10">
@@ -93,10 +114,13 @@ export default function ProductImageGallery({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
+        onClick={handleLightboxOpen}
+        role="button"
+        aria-label={`Zoom ${title}`}
       >
         <div
           className={[
-            "flex h-full w-full",
+            "flex h-full w-full cursor-zoom-in",
             isDragging ? "" : "transition-transform duration-300 ease-out",
           ]
             .filter(Boolean)
@@ -130,13 +154,13 @@ export default function ProductImageGallery({
 
       {/* Gallery Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 max-w-full overflow-x-auto pb-2">
+        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 md:justify-center">
           {allImages.map((img, index) => (
             <button
               key={img}
               type="button"
               onClick={() => setCurrentIndex(index)}
-              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all ${
+              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 ${
                 selectedImage === img
                   ? "border-accent-gold ring-1 ring-accent-gold/60"
                   : "border-white/15 hover:border-white/30"
@@ -147,12 +171,60 @@ export default function ProductImageGallery({
                 alt={`${title} - Vista ${index + 1}`}
                 width={80}
                 height={80}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
                 className="h-full w-full object-cover"
               />
             </button>
           ))}
+        </div>
+      )}
+
+      {isLightboxOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Preview ${title}`}
+          onClick={handleLightboxClose}
+        >
+          <div
+            className="relative w-full max-w-5xl aspect-square bg-dark-base rounded-2xl overflow-hidden border border-white/10"
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
+          >
+            <div
+              className={[
+                "flex h-full w-full",
+                isDragging ? "" : "transition-transform duration-300 ease-out",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={{
+                transform: `translateX(calc(${-currentIndex * 100}% + ${dragOffset}px))`,
+              }}
+            >
+              {allImages.map((img, index) => (
+                <div key={`${img}-lightbox`} className="relative h-full w-full flex-shrink-0">
+                  <Image
+                    src={img}
+                    alt={`${title} - Vista ${index + 1}`}
+                    fill
+                    priority={index === currentIndex}
+                    loading={index === currentIndex ? "eager" : "lazy"}
+                    placeholder="blur"
+                    blurDataURL={PRODUCT_BLUR_DATA_URL}
+                    className="object-contain w-full h-full"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 900px"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
