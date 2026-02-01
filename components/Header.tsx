@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import AuthModal from "@/components/AuthModal";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCategories } from "@/lib/categories";
 import { blogSections } from "@/lib/blog-sections";
@@ -11,7 +13,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Header() {
   const { totalItems } = useCart();
+  const { isLoggedIn, user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const productsCloseTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -343,6 +347,19 @@ export default function Header() {
                 </Link>
               ))}
             </div>
+            {isLoggedIn && user ? (
+              <span className="hidden md:inline text-sm font-semibold text-text-primary">
+                Hola, {user.name}
+              </span>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setAuthOpen(true)}
+                className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+              >
+                Cuenta
+              </button>
+            )}
             {/* Cart Icon with Badge */}
             <Link
               href={`/${locale}/cart`}
@@ -410,6 +427,29 @@ export default function Header() {
                 </svg>
               )}
             </button>
+            {!isLoggedIn && (
+              <button
+                type="button"
+                onClick={() => setAuthOpen(true)}
+                className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
+                aria-label="Cuenta"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 7.5a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0v.75H4.5v-.75Z"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
 
@@ -494,11 +534,24 @@ export default function Header() {
                     {lang.toUpperCase()}
                   </Link>
                 ))}
+                {!isLoggedIn && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthOpen(true);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                  >
+                    Cuenta
+                  </button>
+                )}
               </div>
             </div>
           </nav>
         )}
       </div>
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </header>
   );
 }

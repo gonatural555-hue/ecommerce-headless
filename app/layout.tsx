@@ -1,6 +1,7 @@
 import "./globals.css";
 import { headers } from "next/headers";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import { defaultLocale } from "@/lib/i18n/config";
 
 export default async function RootLayout({
@@ -14,9 +15,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body>
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
