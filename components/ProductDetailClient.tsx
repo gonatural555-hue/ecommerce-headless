@@ -197,7 +197,7 @@ export default function ProductDetailClient({
   const cartImage = activeImages.featured || product.images[0];
 
   return (
-    <section className="grid gap-8 md:gap-10 xl:grid-cols-[3fr_2fr] max-w-full">
+    <section className="grid gap-8 md:gap-12 xl:grid-cols-[3fr_2fr] items-start max-w-full">
       {/* Galería */}
       <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden">
         <ProductImageGallery
@@ -215,14 +215,14 @@ export default function ProductDetailClient({
       </div>
 
       {/* Info principal */}
-      <div className="relative z-10 flex flex-col gap-5 md:gap-8 min-w-0">
+      <div className="relative z-10 flex flex-col gap-6 md:gap-10 min-w-0">
         <div className="order-1 md:order-1">
           <h1 className="text-2xl md:text-4xl font-semibold text-text-primary break-words">
             {seoH1}
           </h1>
         </div>
 
-        <div className="order-2 md:order-3 flex items-center gap-3">
+        <div className="order-2 md:order-3 flex items-center gap-3 pb-2 md:pb-4">
           <p className="text-2xl md:text-sm text-text-primary">
             ${resolvedPrice.toFixed(2)}
           </p>
@@ -234,7 +234,7 @@ export default function ProductDetailClient({
         </div>
 
         {productVariants && (
-          <div className="order-3 md:order-4">
+          <div className="order-3 md:order-4 pt-1 md:pt-3">
             <VariantSelector
               variants={productVariants}
               onChange={setSelections}
@@ -243,7 +243,7 @@ export default function ProductDetailClient({
           </div>
         )}
 
-        <div className="order-4 md:order-5">
+        <div className="order-4 md:order-5 pt-1 md:pt-3">
           <AddToCartButton
             id={product.id}
             title={product.title}
@@ -251,6 +251,7 @@ export default function ProductDetailClient({
             image={cartImage}
             variantSelections={variantSelections}
             label={ctaLabel}
+            className="md:w-full"
           />
         </div>
 

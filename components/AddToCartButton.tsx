@@ -15,6 +15,7 @@ type Props = {
   }[];
   disabled?: boolean;
   label?: string;
+  className?: string;
 };
 
 export default function AddToCartButton({
@@ -25,6 +26,7 @@ export default function AddToCartButton({
   variantSelections,
   disabled,
   label,
+  className,
 }: Props) {
   const { addItem } = useCart();
 
@@ -32,7 +34,15 @@ export default function AddToCartButton({
     <button
       onClick={() => addItem({ id, title, price, image, variantSelections })}
       disabled={disabled}
-      className="mt-6 w-full md:w-auto px-6 py-3 bg-accent-gold text-dark-base rounded-md transition-colors duration-300 ease-out hover:bg-accent-gold/90 disabled:opacity-60 disabled:cursor-not-allowed"
+      className={[
+        "mt-6 w-full md:w-auto px-6 py-3 bg-accent-gold text-dark-base rounded-md",
+        "transition-all duration-300 ease-out hover:bg-accent-gold/90 hover:shadow-[0_12px_26px_rgba(200,155,60,0.25)]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/80 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base",
+        "active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       {label || "Add to cart"}
     </button>
