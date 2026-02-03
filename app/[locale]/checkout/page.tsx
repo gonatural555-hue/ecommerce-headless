@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 export default function CheckoutPage() {
-  const { items, subtotal } = useCart();
+  const { items, subtotal, clearCart } = useCart();
   const router = useRouter();
+  const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const [addresses, setAddresses] = useState<
     {
@@ -48,40 +50,33 @@ export default function CheckoutPage() {
     }).format(price);
   };
 
-  const handlePayment = async () => {
-    if (items.length === 0) return;
+  const handleConfirmOrder = () => {
+    if (items.length === 0 || !defaultAddress) return;
 
     setIsLoading(true);
 
+    const orderId = `order_${Date.now()}`;
+    const order = {
+      id: orderId,
+      items,
+      subtotal,
+      address: defaultAddress,
+      date: new Date().toISOString(),
+    };
+
     try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al crear sesión de pago");
-      }
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("No se recibió URL de redirección");
-      }
-    } catch (error) {
-      console.error("Error en checkout:", error);
-      alert(
-        error instanceof Error
-          ? error.message
-          : "Error al procesar el pago. Por favor, intentá nuevamente."
-      );
-      setIsLoading(false);
+      const stored = localStorage.getItem("orders");
+      const parsed = stored ? (JSON.parse(stored) as typeof order[]) : [];
+      const nextOrders = Array.isArray(parsed) ? parsed : [];
+      nextOrders.unshift(order);
+      localStorage.setItem("orders", JSON.stringify(nextOrders));
+      localStorage.setItem("last_order_id", orderId);
+    } catch {
+      // no-op
     }
+
+    clearCart();
+    router.push(`/${locale}/order-success`);
   };
 
   if (items.length === 0) {
@@ -95,7 +90,7 @@ export default function CheckoutPage() {
             Agregá productos para continuar con tu compra.
           </p>
           <Link
-            href="/products"
+            href={`/${locale}/products`}
             className="inline-flex justify-center rounded-md bg-black px-8 py-4 text-base font-medium text-white hover:bg-gray-900 transition"
           >
             Ver productos
@@ -109,8 +104,8 @@ export default function CheckoutPage() {
     <main className="max-w-6xl mx-auto px-4 py-6 md:py-12">
       {/* Header */}
       <div className="mb-8">
-        <Link
-          href="/cart"
+          <Link
+            href={`/${locale}/cart`}
           className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition mb-4"
         >
           ← Volver al carrito
@@ -133,7 +128,7 @@ export default function CheckoutPage() {
                   Agregá una dirección para continuar
                 </p>
                 <Link
-                  href="/account"
+                  href={`/${locale}/account`}
                   className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
                 >
                   Agregar dirección
@@ -222,19 +217,19 @@ export default function CheckoutPage() {
             </div>
 
             <button
-              onClick={handlePayment}
-              disabled={isLoading}
+              onClick={handleConfirmOrder}
+              disabled={isLoading || !defaultAddress}
               className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Procesando..." : "Pagar ahora"}
+              {isLoading ? "Confirmando..." : "Confirmar pedido"}
             </button>
 
             <p className="mt-4 text-xs text-center text-gray-500">
-              Al hacer clic en "Pagar", aceptás nuestros términos y condiciones
+              Al confirmar tu pedido, aceptás nuestros términos y condiciones
             </p>
 
             <Link
-              href="/cart"
+              href={`/${locale}/cart`}
               className="block mt-6 text-center text-sm text-gray-600 hover:text-gray-900 underline transition"
             >
               Volver al carrito
