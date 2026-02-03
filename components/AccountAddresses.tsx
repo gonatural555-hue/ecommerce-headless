@@ -1,22 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-
-type Address = {
-  id: string;
-  fullName: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2?: string;
-  city: string;
-  postalCode: string;
-  country: string;
-  isDefault: boolean;
-};
+import { useMemo, useState } from "react";
+import { useUser, type Address } from "@/context/UserContext";
 
 type FormState = Omit<Address, "id" | "isDefault"> & { isDefault: boolean };
-
-const STORAGE_KEY = "user_addresses";
 
 const emptyForm: FormState = {
   fullName: "",
@@ -35,27 +22,10 @@ function normalizeDefault(list: Address[], selectedId: string | null) {
 }
 
 export default function AccountAddresses() {
-  const [addresses, setAddresses] = useState<Address[]>([]);
+  const { addresses, setAddresses, setDefaultAddress, removeAddress } = useUser();
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) return;
-    try {
-      const parsed = JSON.parse(stored) as Address[];
-      if (Array.isArray(parsed)) {
-        setAddresses(parsed);
-      }
-    } catch {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(addresses));
-  }, [addresses]);
 
   const hasAddresses = addresses.length > 0;
   const sortedAddresses = useMemo(() => {
@@ -86,11 +56,11 @@ export default function AccountAddresses() {
   };
 
   const handleDelete = (id: string) => {
-    setAddresses((prev) => prev.filter((item) => item.id !== id));
+    removeAddress(id);
   };
 
   const handleDefault = (id: string) => {
-    setAddresses((prev) => normalizeDefault(prev, id));
+    setDefaultAddress(id);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -124,13 +94,11 @@ export default function AccountAddresses() {
       isDefault: form.isDefault,
     };
 
-    setAddresses((prev) => {
-      const updated = editingId
-        ? prev.map((item) => (item.id === editingId ? nextAddress : item))
-        : [...prev, nextAddress];
-      const defaultId = nextAddress.isDefault ? nextAddress.id : null;
-      return normalizeDefault(updated, defaultId);
-    });
+    const updated = editingId
+      ? addresses.map((item) => (item.id === editingId ? nextAddress : item))
+      : [...addresses, nextAddress];
+    const defaultId = nextAddress.isDefault ? nextAddress.id : null;
+    setAddresses(normalizeDefault(updated, defaultId));
 
     setIsEditing(false);
     setEditingId(null);

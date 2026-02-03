@@ -1,44 +1,33 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthModal from "@/components/AuthModal";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 import { defaultLocale } from "@/lib/i18n/config";
 import AccountAddresses from "@/components/AccountAddresses";
-
-type Order = {
-  id: string;
-  date: string;
-  total: string;
-  status: "Procesando" | "Enviado" | "Completado";
-};
 
 type SectionKey = "account" | "orders" | "addresses";
 
 export default function AccountPage() {
-  const { isLoggedIn, user, logout } = useAuth();
+  const { isLoggedIn, user, logout, orders } = useUser();
   const router = useRouter();
   const [activeSection, setActiveSection] = useState<SectionKey>("account");
-  const [orders, setOrders] = useState<Order[]>([]);
   const [authOpen, setAuthOpen] = useState(false);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("gn-orders");
-    if (!stored) return;
-    try {
-      const parsed = JSON.parse(stored) as Order[];
-      if (Array.isArray(parsed)) {
-        setOrders(parsed);
-      }
-    } catch {
-      localStorage.removeItem("gn-orders");
-    }
-  }, []);
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+  const userOrders = orders;
 
   const content = useMemo(() => {
     if (activeSection === "orders") {
-      if (orders.length === 0) {
+      if (userOrders.length === 0) {
         return (
           <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
             <p className="text-sm text-text-muted">
@@ -49,7 +38,7 @@ export default function AccountPage() {
       }
       return (
         <div className="space-y-3">
-          {orders.map((order) => (
+          {userOrders.map((order) => (
             <div
               key={order.id}
               className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-dark-surface/30 p-5 md:flex-row md:items-center md:justify-between"
@@ -61,7 +50,9 @@ export default function AccountPage() {
                 <p className="text-xs text-text-muted">{order.date}</p>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-text-primary">{order.total}</span>
+                <span className="text-sm text-text-primary">
+                  {formatPrice(order.subtotal)}
+                </span>
                 <span className="text-xs uppercase tracking-[0.12em] text-text-muted">
                   {order.status}
                 </span>
@@ -89,7 +80,7 @@ export default function AccountPage() {
         </div>
       </div>
     );
-  }, [activeSection, orders, user]);
+  }, [activeSection, userOrders, user]);
 
   if (!isLoggedIn) {
     return (

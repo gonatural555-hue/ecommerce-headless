@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthModal from "@/components/AuthModal";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import AccountAddresses from "@/components/AccountAddresses";
 
@@ -17,29 +17,17 @@ type Order = {
 type SectionKey = "account" | "orders" | "addresses";
 
 export default function AccountPage() {
-  const { isLoggedIn, user, logout } = useAuth();
+  const { isLoggedIn, user, logout, orders } = useUser();
   const router = useRouter();
   const locale = useLocale();
   const [activeSection, setActiveSection] = useState<SectionKey>("account");
-  const [orders, setOrders] = useState<Order[]>([]);
   const [authOpen, setAuthOpen] = useState(false);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("gn-orders");
-    if (!stored) return;
-    try {
-      const parsed = JSON.parse(stored) as Order[];
-      if (Array.isArray(parsed)) {
-        setOrders(parsed);
-      }
-    } catch {
-      localStorage.removeItem("gn-orders");
-    }
-  }, []);
+  const userOrders = orders as Order[];
 
   const content = useMemo(() => {
     if (activeSection === "orders") {
-      if (orders.length === 0) {
+      if (userOrders.length === 0) {
         return (
           <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
             <p className="text-sm text-text-muted">
@@ -50,7 +38,7 @@ export default function AccountPage() {
       }
       return (
         <div className="space-y-3">
-          {orders.map((order) => (
+          {userOrders.map((order) => (
             <div
               key={order.id}
               className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-dark-surface/30 p-5 md:flex-row md:items-center md:justify-between"
@@ -90,7 +78,7 @@ export default function AccountPage() {
         </div>
       </div>
     );
-  }, [activeSection, orders, user]);
+  }, [activeSection, userOrders, user]);
 
   if (!isLoggedIn) {
     return (

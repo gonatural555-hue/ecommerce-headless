@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 import AuthModal from "@/components/AuthModal";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCategories } from "@/lib/categories";
@@ -13,7 +13,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Header() {
   const { totalItems } = useCart();
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -349,7 +349,7 @@ export default function Header() {
             </div>
             {isLoggedIn && user ? (
               <Link
-                href="/account"
+                href={`/${locale}/account`}
                 className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
               >
                 Hola, {user.name}
@@ -539,7 +539,7 @@ export default function Header() {
                 ))}
                 {isLoggedIn && user ? (
                   <Link
-                    href="/account"
+                    href={`/${locale}/account`}
                     className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >

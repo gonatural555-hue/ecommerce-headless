@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 
 type Props = {
   open: boolean;
@@ -11,7 +11,7 @@ type Props = {
 type Tab = "login" | "register";
 
 export default function AuthModal({ open, onClose }: Props) {
-  const { login, register } = useAuth();
+  const { login, register } = useUser();
   const [activeTab, setActiveTab] = useState<Tab>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

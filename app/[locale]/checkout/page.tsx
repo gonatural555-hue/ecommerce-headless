@@ -5,44 +5,32 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useUser, type Address } from "@/context/UserContext";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const router = useRouter();
   const locale = useLocale();
+  const { user, addresses, setAddresses, addOrder } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
     "manual" | "whatsapp" | "paypal_pending"
   >("manual");
-  const [addresses, setAddresses] = useState<
-    {
-      id: string;
-      fullName: string;
-      phone: string;
-      addressLine1: string;
-      addressLine2?: string;
-      city: string;
-      postalCode: string;
-      country: string;
-      isDefault: boolean;
-    }[]
-  >([]);
 
   const defaultAddress =
     addresses.find((address) => address.isDefault) || addresses[0];
 
-  useEffect(() => {
-    const stored = localStorage.getItem("user_addresses");
-    if (!stored) return;
-    try {
-      const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed)) {
-        setAddresses(parsed);
-      }
-    } catch {
-      localStorage.removeItem("user_addresses");
-    }
-  }, []);
+  const [guestAddress, setGuestAddress] = useState<Address>({
+    id: "",
+    fullName: user?.name || "",
+    phone: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    isDefault: true,
+  });
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-AR", {
@@ -69,16 +57,7 @@ export default function CheckoutPage() {
       paymentMethod,
     };
 
-    try {
-      const stored = localStorage.getItem("orders");
-      const parsed = stored ? (JSON.parse(stored) as typeof order[]) : [];
-      const nextOrders = Array.isArray(parsed) ? parsed : [];
-      nextOrders.unshift(order);
-      localStorage.setItem("orders", JSON.stringify(nextOrders));
-      localStorage.setItem("last_order_id", orderId);
-    } catch {
-      // no-op
-    }
+    addOrder(order);
 
     clearCart();
     router.push(`/${locale}/order-success`);
@@ -127,19 +106,7 @@ export default function CheckoutPage() {
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
               Dirección de envío
             </h2>
-            {!defaultAddress ? (
-              <div className="space-y-4">
-                <p className="text-sm text-gray-600">
-                  Agregá una dirección para continuar
-                </p>
-                <Link
-                  href={`/${locale}/account`}
-                  className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
-                >
-                  Agregar dirección
-                </Link>
-              </div>
-            ) : (
+            {defaultAddress ? (
               <div className="text-sm text-gray-700 space-y-1">
                 <p className="font-semibold text-gray-900">
                   {defaultAddress.fullName}
@@ -155,6 +122,127 @@ export default function CheckoutPage() {
                 </p>
                 <p>{defaultAddress.country}</p>
                 <p>{defaultAddress.phone}</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-sm text-gray-600">
+                  Agregá una dirección para continuar
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <input
+                    value={guestAddress.fullName}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        fullName: event.target.value,
+                      }))
+                    }
+                    type="text"
+                    placeholder="Nombre completo"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  />
+                  <input
+                    value={guestAddress.phone}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        phone: event.target.value,
+                      }))
+                    }
+                    type="tel"
+                    placeholder="Teléfono"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  />
+                  <input
+                    value={guestAddress.addressLine1}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        addressLine1: event.target.value,
+                      }))
+                    }
+                    type="text"
+                    placeholder="Dirección"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
+                  />
+                  <input
+                    value={guestAddress.city}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        city: event.target.value,
+                      }))
+                    }
+                    type="text"
+                    placeholder="Ciudad"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  />
+                  <input
+                    value={guestAddress.postalCode}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        postalCode: event.target.value,
+                      }))
+                    }
+                    type="text"
+                    placeholder="Código postal"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                  />
+                  <input
+                    value={guestAddress.country}
+                    onChange={(event) =>
+                      setGuestAddress((prev) => ({
+                        ...prev,
+                        country: event.target.value,
+                      }))
+                    }
+                    type="text"
+                    placeholder="País"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
+                  />
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const trimmed = {
+                        ...guestAddress,
+                        fullName: guestAddress.fullName.trim(),
+                        phone: guestAddress.phone.trim(),
+                        addressLine1: guestAddress.addressLine1.trim(),
+                        city: guestAddress.city.trim(),
+                        postalCode: guestAddress.postalCode.trim(),
+                        country: guestAddress.country.trim(),
+                      };
+                      if (
+                        !trimmed.fullName ||
+                        !trimmed.phone ||
+                        !trimmed.addressLine1 ||
+                        !trimmed.city ||
+                        !trimmed.postalCode ||
+                        !trimmed.country
+                      ) {
+                        return;
+                      }
+                      const next: Address = {
+                        ...trimmed,
+                        id: `addr_${Date.now()}`,
+                        isDefault: true,
+                      };
+                      setAddresses([next]);
+                    }}
+                    className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
+                  >
+                    Guardar dirección
+                  </button>
+                  <Link
+                    href={`/${locale}/account`}
+                    className="text-sm text-gray-600 hover:text-gray-900 underline transition"
+                  >
+                    Gestionar en mi cuenta
+                  </Link>
+                </div>
               </div>
             )}
           </div>

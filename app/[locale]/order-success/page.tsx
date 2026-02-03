@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useUser, type Order } from "@/context/UserContext";
 
 type Address = {
   id: string;
@@ -16,40 +17,18 @@ type Address = {
   isDefault: boolean;
 };
 
-type Order = {
-  id: string;
-  items: {
-    id: string;
-    title: string;
-    price: number;
-    quantity: number;
-  }[];
-  subtotal: number;
-  address: Address;
-  date: string;
-  status: string;
-  paymentMethod?: "manual" | "whatsapp" | "paypal_pending";
-};
-
 export default function OrderSuccessPage() {
   const locale = useLocale();
+  const { orders, lastOrderId } = useUser();
   const [order, setOrder] = useState<Order | null>(null);
 
   useEffect(() => {
-    const lastId = localStorage.getItem("last_order_id");
-    const stored = localStorage.getItem("orders");
-    if (!stored) return;
-    try {
-      const parsed = JSON.parse(stored) as Order[];
-      if (!Array.isArray(parsed)) return;
-      const found = lastId
-        ? parsed.find((entry) => entry.id === lastId)
-        : parsed[0];
-      if (found) setOrder(found);
-    } catch {
-      // no-op
-    }
-  }, []);
+    if (!orders || orders.length === 0) return;
+    const found = lastOrderId
+      ? orders.find((entry) => entry.id === lastOrderId)
+      : orders[0];
+    if (found) setOrder(found);
+  }, [orders, lastOrderId]);
 
   const formattedDate = useMemo(() => {
     if (!order?.date) return "";
