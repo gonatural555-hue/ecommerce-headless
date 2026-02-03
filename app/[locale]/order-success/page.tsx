@@ -27,6 +27,8 @@ type Order = {
   subtotal: number;
   address: Address;
   date: string;
+  status: string;
+  paymentMethod?: "manual" | "whatsapp" | "paypal_pending";
 };
 
 export default function OrderSuccessPage() {
@@ -98,6 +100,17 @@ export default function OrderSuccessPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Resumen del pedido
             </h2>
+            <div className="mb-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700">
+              {order.paymentMethod === "whatsapp" && (
+                <span>Te contactaremos por WhatsApp para finalizar el pago.</span>
+              )}
+              {order.paymentMethod === "paypal_pending" && (
+                <span>Te enviaremos el link de pago de PayPal.</span>
+              )}
+              {(!order.paymentMethod || order.paymentMethod === "manual") && (
+                <span>Te contactaremos para finalizar el pago.</span>
+              )}
+            </div>
             <div className="space-y-4">
               {order.items.map((item) => (
                 <div
@@ -147,6 +160,18 @@ export default function OrderSuccessPage() {
               <p>{order.address.country}</p>
               <p>{order.address.phone}</p>
             </div>
+            {order.paymentMethod === "whatsapp" && (
+              <Link
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  `Hola! Quiero coordinar el pago del pedido ${order.id} por ${formatPrice(
+                    order.subtotal
+                  )}.`
+                )}`}
+                className="inline-flex mt-6 justify-center rounded-md bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
+              >
+                Contactar por WhatsApp
+              </Link>
+            )}
             <Link
               href={`/${locale}/products`}
               className="inline-flex mt-6 justify-center rounded-md bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"

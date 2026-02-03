@@ -11,6 +11,9 @@ export default function CheckoutPage() {
   const router = useRouter();
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<
+    "manual" | "whatsapp" | "paypal_pending"
+  >("manual");
   const [addresses, setAddresses] = useState<
     {
       id: string;
@@ -62,6 +65,8 @@ export default function CheckoutPage() {
       subtotal,
       address: defaultAddress,
       date: new Date().toISOString(),
+      status: "pending_payment",
+      paymentMethod,
     };
 
     try {
@@ -152,6 +157,56 @@ export default function CheckoutPage() {
                 <p>{defaultAddress.phone}</p>
               </div>
             )}
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+              Método de pago
+            </h2>
+            <div className="space-y-3">
+              {[
+                {
+                  value: "manual",
+                  label: "Transferencia / Pago manual",
+                  hint: "Te contactaremos con los datos para el pago",
+                },
+                {
+                  value: "whatsapp",
+                  label: "Contacto por WhatsApp",
+                  hint: "Coordinamos el pago por mensaje",
+                },
+                {
+                  value: "paypal_pending",
+                  label: "PayPal (próximamente)",
+                  hint: "Te enviaremos el link de pago",
+                },
+              ].map((option) => (
+                <label
+                  key={option.value}
+                  className="flex items-start gap-3 rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 transition-colors hover:border-gray-300"
+                >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value={option.value}
+                    checked={paymentMethod === option.value}
+                    onChange={() =>
+                      setPaymentMethod(
+                        option.value as "manual" | "whatsapp" | "paypal_pending"
+                      )
+                    }
+                    className="mt-1 h-4 w-4"
+                  />
+                  <span className="space-y-1">
+                    <span className="block font-semibold text-gray-900">
+                      {option.label}
+                    </span>
+                    <span className="block text-xs text-gray-500">
+                      {option.hint}
+                    </span>
+                  </span>
+                </label>
+              ))}
+            </div>
           </div>
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
