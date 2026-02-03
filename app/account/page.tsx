@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import AuthModal from "@/components/AuthModal";
 import { useAuth } from "@/context/AuthContext";
 import { defaultLocale } from "@/lib/i18n/config";
+import AccountAddresses from "@/components/AccountAddresses";
 
 type Order = {
   id: string;
@@ -72,14 +73,7 @@ export default function AccountPage() {
     }
 
     if (activeSection === "addresses") {
-      return (
-        <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
-          <p className="text-sm text-text-muted">
-            Próximamente vas a poder guardar tus direcciones para un checkout más
-            rápido
-          </p>
-        </div>
-      );
+      return <AccountAddresses />;
     }
 
     return (
