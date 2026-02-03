@@ -352,7 +352,7 @@ export default function Header() {
                 href={`/${locale}/account`}
                 className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
               >
-                Hola, {user.name}
+                {t("header.greeting")}, {user.name}
               </Link>
             ) : (
               <button
@@ -360,7 +360,7 @@ export default function Header() {
                 onClick={() => setAuthOpen(true)}
                 className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
               >
-                Cuenta
+                {t("header.account")}
               </button>
             )}
             {/* Cart Icon with Badge */}
@@ -435,7 +435,7 @@ export default function Header() {
                 type="button"
                 onClick={() => setAuthOpen(true)}
                 className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
-                aria-label="Cuenta"
+                aria-label={t("header.account")}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -543,7 +543,7 @@ export default function Header() {
                     className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Hola, {user.name}
+                    {t("header.greeting")}, {user.name}
                   </Link>
                 ) : (
                   <button
@@ -554,7 +554,7 @@ export default function Header() {
                     }}
                     className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
                   >
-                    Cuenta
+                    {t("header.account")}
                   </button>
                 )}
               </div>

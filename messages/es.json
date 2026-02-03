@@ -7,7 +7,9 @@
       "cart": "Carrito",
       "about": "About",
       "contact": "Contacto"
-    }
+    },
+    "greeting": "Hola",
+    "account": "Cuenta"
   },
   "common": {
     "viewProduct": "Ver producto",

@@ -7,7 +7,9 @@
       "cart": "Panier",
       "about": "À propos",
       "contact": "Contact"
-    }
+    },
+    "greeting": "Bonjour",
+    "account": "Compte"
   },
   "common": {
     "viewProduct": "Voir le produit",

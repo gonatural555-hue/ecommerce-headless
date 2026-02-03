@@ -7,7 +7,9 @@
       "cart": "Carrello",
       "about": "About",
       "contact": "Contatti"
-    }
+    },
+    "greeting": "Ciao",
+    "account": "Account"
   },
   "common": {
     "viewProduct": "Vedi prodotto",
