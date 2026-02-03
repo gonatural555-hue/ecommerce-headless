@@ -88,16 +88,18 @@ export default function CheckoutPage() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-6 md:py-12">
       {/* Header */}
-      <div className="mb-8">
-        <Link
+      <div className="mb-8 pt-4">
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            {t("checkoutPage.title")}
+          </h1>
+          <Link
             href={`/${locale}/cart`}
-          className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition mb-4"
-        >
-          {t("checkoutPage.backToCart")}
-        </Link>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          {t("checkoutPage.title")}
-        </h1>
+            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition whitespace-nowrap"
+          >
+            {t("checkoutPage.backToCart")}
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
