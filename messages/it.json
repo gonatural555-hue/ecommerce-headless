@@ -1715,6 +1715,95 @@
       "cycling": "Ciclismo",
       "running": "Running"
     }
+  },
+  "accountPage": {
+    "title": "Il mio account",
+    "subtitle": "Gestisci il tuo profilo e rivedi i tuoi ordini",
+    "loginRequired": "Devi effettuare l'accesso per accedere al tuo account",
+    "loginButton": "Accedi",
+    "sections": {
+      "account": "Il mio account",
+      "orders": "I miei ordini",
+      "addresses": "Indirizzi"
+    },
+    "logout": "Esci",
+    "welcomeText": "Da qui puoi visualizzare i tuoi ordini e gestire i tuoi dati",
+    "noOrders": "Non hai ancora effettuato ordini",
+    "orderLabel": "Ordine",
+    "userLabel": "Utente"
+  },
+  "accountAddresses": {
+    "title": "Indirizzi",
+    "addNew": "Aggiungi nuovo",
+    "noAddresses": "Non hai ancora aggiunto indirizzi",
+    "defaultBadge": "Indirizzo principale",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "setAsDefault": "Usa come principale",
+    "form": {
+      "fullName": "Nome completo",
+      "fullNamePlaceholder": "Nome e cognome",
+      "phone": "Telefono",
+      "phonePlaceholder": "+39 345 678 9012",
+      "address": "Indirizzo",
+      "addressPlaceholder": "Via e numero",
+      "addressLine2": "Complemento",
+      "addressLine2Placeholder": "Appartamento, piano, ecc. (opzionale)",
+      "city": "Città",
+      "cityPlaceholder": "Città",
+      "postalCode": "Codice postale",
+      "postalCodePlaceholder": "CAP",
+      "country": "Paese",
+      "countryPlaceholder": "Italia",
+      "setAsDefault": "Usa come indirizzo principale",
+      "save": "Salva indirizzo",
+      "cancel": "Annulla"
+    }
+  },
+  "checkoutPage": {
+    "emptyTitle": "Il tuo carrello è vuoto",
+    "emptyText": "Aggiungi prodotti per continuare con l'acquisto.",
+    "emptyCta": "Vedi prodotti",
+    "backToCart": "← Torna al carrello",
+    "title": "Checkout",
+    "shippingAddress": "Indirizzo di spedizione",
+    "addAddress": "Aggiungi un indirizzo per continuare",
+    "manageAddresses": "Gestisci nel mio account",
+    "saveAddress": "Salva indirizzo",
+    "form": {
+      "fullName": "Nome completo",
+      "phone": "Telefono",
+      "address": "Indirizzo",
+      "city": "Città",
+      "postalCode": "Codice postale",
+      "country": "Paese"
+    },
+    "paymentMethod": "Metodo di pagamento",
+    "paymentOptions": {
+      "manual": {
+        "label": "Bonifico / Pagamento manuale",
+        "hint": "Ti contatteremo con i dettagli per il pagamento"
+      },
+      "whatsapp": {
+        "label": "Contatto tramite WhatsApp",
+        "hint": "Coordiniamo il pagamento tramite messaggio"
+      },
+      "paypal_pending": {
+        "label": "PayPal (in arrivo)",
+        "hint": "Ti invieremo il link di pagamento"
+      }
+    },
+    "orderSummary": "Riepilogo ordine",
+    "summary": "Riepilogo",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "shippingCalculated": "Calcolato al checkout",
+    "total": "Totale",
+    "quantity": "Quantità",
+    "unitPrice": "cad.",
+    "confirmOrder": "Conferma ordine",
+    "confirming": "Conferma in corso...",
+    "terms": "Confermando il tuo ordine, accetti i nostri termini e condizioni"
   }
 }
 

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useUser, type Address } from "@/context/UserContext";
+import { useTranslations } from "@/components/i18n/LocaleProvider";
 
 type FormState = Omit<Address, "id" | "isDefault"> & { isDefault: boolean };
 
@@ -23,6 +24,7 @@ function normalizeDefault(list: Address[], selectedId: string | null) {
 
 export default function AccountAddresses() {
   const { addresses, setAddresses, setDefaultAddress, removeAddress } = useUser();
+  const t = useTranslations();
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
@@ -108,20 +110,20 @@ export default function AccountAddresses() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-text-primary">Direcciones</h2>
+        <h2 className="text-lg font-semibold text-text-primary">{t("accountAddresses.title")}</h2>
         <button
           type="button"
           onClick={startNew}
           className="rounded-xl border border-white/10 bg-dark-surface/50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-primary transition-colors duration-200 ease-out hover:border-accent-gold/60 hover:text-accent-gold/90"
         >
-          Agregar nueva
+          {t("accountAddresses.addNew")}
         </button>
       </div>
 
       {!hasAddresses && !isEditing && (
         <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
           <p className="text-sm text-text-muted">
-            Todavía no agregaste ninguna dirección
+            {t("accountAddresses.noAddresses")}
           </p>
         </div>
       )}
@@ -142,7 +144,7 @@ export default function AccountAddresses() {
                 </div>
                 {address.isDefault && (
                   <span className="rounded-full border border-accent-gold/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-gold">
-                    Dirección principal
+                    {t("accountAddresses.defaultBadge")}
                   </span>
                 )}
               </div>
@@ -160,14 +162,14 @@ export default function AccountAddresses() {
                   onClick={() => startEdit(address)}
                   className="text-xs font-semibold uppercase tracking-[0.18em] text-text-primary hover:text-accent-gold/90 transition-colors duration-200"
                 >
-                  Editar
+                  {t("accountAddresses.edit")}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleDelete(address.id)}
                   className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted hover:text-text-primary transition-colors duration-200"
                 >
-                  Eliminar
+                  {t("accountAddresses.delete")}
                 </button>
                 {!address.isDefault && (
                   <button
@@ -175,7 +177,7 @@ export default function AccountAddresses() {
                     onClick={() => handleDefault(address.id)}
                     className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted hover:text-accent-gold/90 transition-colors duration-200"
                   >
-                    Usar como principal
+                    {t("accountAddresses.setAsDefault")}
                   </button>
                 )}
               </div>
@@ -192,7 +194,7 @@ export default function AccountAddresses() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-                Nombre completo
+                {t("accountAddresses.form.fullName")}
               </label>
               <input
                 value={form.fullName}
@@ -202,12 +204,12 @@ export default function AccountAddresses() {
                 type="text"
                 required
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-                placeholder="Nombre y apellido"
+                placeholder={t("accountAddresses.form.fullNamePlaceholder")}
               />
             </div>
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-                Teléfono
+                {t("accountAddresses.form.phone")}
               </label>
               <input
                 value={form.phone}
@@ -217,14 +219,14 @@ export default function AccountAddresses() {
                 type="tel"
                 required
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-                placeholder="+34 600 000 000"
+                placeholder={t("accountAddresses.form.phonePlaceholder")}
               />
             </div>
           </div>
 
           <div className="space-y-2">
             <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-              Dirección
+              {t("accountAddresses.form.address")}
             </label>
             <input
               value={form.addressLine1}
@@ -234,13 +236,13 @@ export default function AccountAddresses() {
               type="text"
               required
               className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-              placeholder="Calle y número"
+              placeholder={t("accountAddresses.form.addressPlaceholder")}
             />
           </div>
 
           <div className="space-y-2">
             <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-              Complemento
+              {t("accountAddresses.form.addressLine2")}
             </label>
             <input
               value={form.addressLine2}
@@ -249,14 +251,14 @@ export default function AccountAddresses() {
               }
               type="text"
               className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-              placeholder="Departamento, piso, etc. (opcional)"
+              placeholder={t("accountAddresses.form.addressLine2Placeholder")}
             />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-                Ciudad
+                {t("accountAddresses.form.city")}
               </label>
               <input
                 value={form.city}
@@ -266,12 +268,12 @@ export default function AccountAddresses() {
                 type="text"
                 required
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-                placeholder="Ciudad"
+                placeholder={t("accountAddresses.form.cityPlaceholder")}
               />
             </div>
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-                Código postal
+                {t("accountAddresses.form.postalCode")}
               </label>
               <input
                 value={form.postalCode}
@@ -281,12 +283,12 @@ export default function AccountAddresses() {
                 type="text"
                 required
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-                placeholder="CP"
+                placeholder={t("accountAddresses.form.postalCodePlaceholder")}
               />
             </div>
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
-                País
+                {t("accountAddresses.form.country")}
               </label>
               <input
                 value={form.country}
@@ -296,7 +298,7 @@ export default function AccountAddresses() {
                 type="text"
                 required
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
-                placeholder="España"
+                placeholder={t("accountAddresses.form.countryPlaceholder")}
               />
             </div>
           </div>
@@ -310,7 +312,7 @@ export default function AccountAddresses() {
               }
               className="h-4 w-4 rounded border border-white/20 bg-dark-surface/70 text-accent-gold focus:ring-accent-gold/60"
             />
-            Usar como dirección principal
+            {t("accountAddresses.form.setAsDefault")}
           </label>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -318,7 +320,7 @@ export default function AccountAddresses() {
               type="submit"
               className="rounded-xl bg-text-primary px-5 py-3 text-sm font-semibold text-dark-base transition-colors duration-200 ease-out hover:bg-white"
             >
-              Guardar dirección
+              {t("accountAddresses.form.save")}
             </button>
             <button
               type="button"
@@ -329,7 +331,7 @@ export default function AccountAddresses() {
               }}
               className="rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold text-text-muted transition-colors duration-200 ease-out hover:text-text-primary"
             >
-              Cancelar
+              {t("accountAddresses.form.cancel")}
             </button>
           </div>
         </form>

@@ -135,7 +135,7 @@ export default function ProductCardSimple({
                 );
               })}
             </div>
-          </div>
+        </div>
         )}
 
         {/* INFO */}

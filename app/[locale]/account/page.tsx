@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthModal from "@/components/AuthModal";
 import { useUser } from "@/context/UserContext";
-import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import AccountAddresses from "@/components/AccountAddresses";
 
 type Order = {
@@ -20,10 +20,20 @@ export default function AccountPage() {
   const { isLoggedIn, user, logout, orders } = useUser();
   const router = useRouter();
   const locale = useLocale();
+  const t = useTranslations();
   const [activeSection, setActiveSection] = useState<SectionKey>("account");
   const [authOpen, setAuthOpen] = useState(false);
 
-  const userOrders = orders as Order[];
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat(locale === "es" ? "es-AR" : locale === "fr" ? "fr-FR" : locale === "it" ? "it-IT" : "en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const userOrders = orders;
 
   const content = useMemo(() => {
     if (activeSection === "orders") {
@@ -31,7 +41,7 @@ export default function AccountPage() {
         return (
           <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
             <p className="text-sm text-text-muted">
-              Todavía no realizaste pedidos
+              {t("accountPage.noOrders")}
             </p>
           </div>
         );
@@ -45,12 +55,14 @@ export default function AccountPage() {
             >
               <div>
                 <p className="text-sm font-semibold text-text-primary">
-                  Pedido #{order.id}
+                  {t("accountPage.orderLabel")} #{order.id}
                 </p>
                 <p className="text-xs text-text-muted">{order.date}</p>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-text-primary">{order.total}</span>
+                <span className="text-sm text-text-primary">
+                  {formatPrice(order.subtotal)}
+                </span>
                 <span className="text-xs uppercase tracking-[0.12em] text-text-muted">
                   {order.status}
                 </span>
@@ -68,17 +80,17 @@ export default function AccountPage() {
     return (
       <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
         <p className="text-sm text-text-muted">
-          Desde acá podés ver tus pedidos y gestionar tus datos
+          {t("accountPage.welcomeText")}
         </p>
         <div className="mt-4 space-y-2">
           <p className="text-sm text-text-primary">
-            {user?.name || "Usuario"}
+            {user?.name || t("accountPage.userLabel")}
           </p>
           <p className="text-sm text-text-muted">{user?.email}</p>
         </div>
       </div>
     );
-  }, [activeSection, userOrders, user]);
+  }, [activeSection, userOrders, user, t]);
 
   if (!isLoggedIn) {
     return (
@@ -86,17 +98,17 @@ export default function AccountPage() {
         <div className="mx-auto max-w-xl">
           <div className="rounded-3xl border border-white/10 bg-dark-surface/40 p-8 text-center">
             <h1 className="text-2xl font-semibold text-text-primary">
-              Mi cuenta
+              {t("accountPage.title")}
             </h1>
             <p className="mt-3 text-sm text-text-muted">
-              Debés iniciar sesión para acceder a tu cuenta
+              {t("accountPage.loginRequired")}
             </p>
             <button
               type="button"
               onClick={() => setAuthOpen(true)}
               className="mt-6 w-full rounded-xl bg-text-primary px-4 py-3 text-sm font-semibold text-dark-base transition-colors duration-200 ease-out hover:bg-white"
             >
-              Iniciar sesión
+              {t("accountPage.loginButton")}
             </button>
           </div>
         </div>
@@ -110,19 +122,19 @@ export default function AccountPage() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-text-primary">
-            Mi cuenta
+            {t("accountPage.title")}
           </h1>
           <p className="mt-2 text-sm text-text-muted">
-            Gestioná tu perfil y revisá tus pedidos
+            {t("accountPage.subtitle")}
           </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
           <aside className="space-y-3">
             {[
-              { key: "account", label: "Mi cuenta" },
-              { key: "orders", label: "Mis pedidos" },
-              { key: "addresses", label: "Direcciones" },
+              { key: "account", label: t("accountPage.sections.account") },
+              { key: "orders", label: t("accountPage.sections.orders") },
+              { key: "addresses", label: t("accountPage.sections.addresses") },
             ].map((item) => {
               const isActive = activeSection === item.key;
               return (
@@ -150,7 +162,7 @@ export default function AccountPage() {
               }}
               className="w-full rounded-xl border border-white/10 px-4 py-3 text-left text-sm font-semibold text-text-muted transition-colors duration-200 ease-out hover:text-text-primary"
             >
-              Cerrar sesión
+              {t("accountPage.logout")}
             </button>
           </aside>
 

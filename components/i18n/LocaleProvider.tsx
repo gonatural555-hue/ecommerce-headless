@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import { createTranslator } from "@/lib/i18n/translate";
 
@@ -11,6 +11,8 @@ type LocaleContextValue = {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
+const LOCALE_STORAGE_KEY = "gn-locale";
+
 export function LocaleProvider({
   locale,
   messages,
@@ -20,6 +22,12 @@ export function LocaleProvider({
   messages: Record<string, any>;
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+    }
+  }, [locale]);
+
   return (
     <LocaleContext.Provider value={{ locale, messages }}>
       {children}

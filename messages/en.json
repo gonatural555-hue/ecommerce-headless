@@ -1715,6 +1715,95 @@
       "cycling": "Cycling",
       "running": "Running"
     }
+  },
+  "accountPage": {
+    "title": "My Account",
+    "subtitle": "Manage your profile and review your orders",
+    "loginRequired": "You must log in to access your account",
+    "loginButton": "Log in",
+    "sections": {
+      "account": "My Account",
+      "orders": "My Orders",
+      "addresses": "Addresses"
+    },
+    "logout": "Log out",
+    "welcomeText": "From here you can view your orders and manage your data",
+    "noOrders": "You haven't placed any orders yet",
+    "orderLabel": "Order",
+    "userLabel": "User"
+  },
+  "accountAddresses": {
+    "title": "Addresses",
+    "addNew": "Add new",
+    "noAddresses": "You haven't added any addresses yet",
+    "defaultBadge": "Default address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "setAsDefault": "Set as default",
+    "form": {
+      "fullName": "Full name",
+      "fullNamePlaceholder": "First and last name",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 234 567 890",
+      "address": "Address",
+      "addressPlaceholder": "Street and number",
+      "addressLine2": "Additional info",
+      "addressLine2Placeholder": "Apartment, floor, etc. (optional)",
+      "city": "City",
+      "cityPlaceholder": "City",
+      "postalCode": "Postal code",
+      "postalCodePlaceholder": "ZIP",
+      "country": "Country",
+      "countryPlaceholder": "Country",
+      "setAsDefault": "Use as default address",
+      "save": "Save address",
+      "cancel": "Cancel"
+    }
+  },
+  "checkoutPage": {
+    "emptyTitle": "Your cart is empty",
+    "emptyText": "Add products to continue with your purchase.",
+    "emptyCta": "View products",
+    "backToCart": "← Back to cart",
+    "title": "Checkout",
+    "shippingAddress": "Shipping address",
+    "addAddress": "Add an address to continue",
+    "manageAddresses": "Manage in my account",
+    "saveAddress": "Save address",
+    "form": {
+      "fullName": "Full name",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "postalCode": "Postal code",
+      "country": "Country"
+    },
+    "paymentMethod": "Payment method",
+    "paymentOptions": {
+      "manual": {
+        "label": "Transfer / Manual payment",
+        "hint": "We will contact you with payment details"
+      },
+      "whatsapp": {
+        "label": "Contact via WhatsApp",
+        "hint": "We coordinate payment via message"
+      },
+      "paypal_pending": {
+        "label": "PayPal (coming soon)",
+        "hint": "We will send you the payment link"
+      }
+    },
+    "orderSummary": "Order summary",
+    "summary": "Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingCalculated": "Calculated at checkout",
+    "total": "Total",
+    "quantity": "Quantity",
+    "unitPrice": "each",
+    "confirmOrder": "Confirm order",
+    "confirming": "Confirming...",
+    "terms": "By confirming your order, you accept our terms and conditions"
   }
 }
 

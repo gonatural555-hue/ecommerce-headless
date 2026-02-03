@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { useUser, type Address } from "@/context/UserContext";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const router = useRouter();
   const locale = useLocale();
+  const t = useTranslations();
   const { user, addresses, setAddresses, addOrder } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
@@ -33,7 +34,7 @@ export default function CheckoutPage() {
   });
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("es-AR", {
+    return new Intl.NumberFormat(locale === "es" ? "es-AR" : locale === "fr" ? "fr-FR" : locale === "it" ? "it-IT" : "en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 0,
@@ -68,16 +69,16 @@ export default function CheckoutPage() {
       <main className="max-w-4xl mx-auto px-4 py-12 md:py-20">
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Tu carrito está vacío
+            {t("checkoutPage.emptyTitle")}
           </h1>
           <p className="text-gray-600 mb-8">
-            Agregá productos para continuar con tu compra.
+            {t("checkoutPage.emptyText")}
           </p>
           <Link
             href={`/${locale}/products`}
             className="inline-flex justify-center rounded-md bg-black px-8 py-4 text-base font-medium text-white hover:bg-gray-900 transition"
           >
-            Ver productos
+            {t("checkoutPage.emptyCta")}
           </Link>
         </div>
       </main>
@@ -88,14 +89,14 @@ export default function CheckoutPage() {
     <main className="max-w-6xl mx-auto px-4 py-6 md:py-12">
       {/* Header */}
       <div className="mb-8">
-          <Link
+        <Link
             href={`/${locale}/cart`}
           className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition mb-4"
         >
-          ← Volver al carrito
+          {t("checkoutPage.backToCart")}
         </Link>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Checkout
+          {t("checkoutPage.title")}
         </h1>
       </div>
 
@@ -104,7 +105,7 @@ export default function CheckoutPage() {
         <div className="lg:col-span-2 order-2 lg:order-1 space-y-6">
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
-              Dirección de envío
+              {t("checkoutPage.shippingAddress")}
             </h2>
             {defaultAddress ? (
               <div className="text-sm text-gray-700 space-y-1">
@@ -126,7 +127,7 @@ export default function CheckoutPage() {
             ) : (
               <div className="space-y-4">
                 <p className="text-sm text-gray-600">
-                  Agregá una dirección para continuar
+                  {t("checkoutPage.addAddress")}
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input
@@ -138,7 +139,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="text"
-                    placeholder="Nombre completo"
+                    placeholder={t("checkoutPage.form.fullName")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                   />
                   <input
@@ -150,7 +151,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="tel"
-                    placeholder="Teléfono"
+                    placeholder={t("checkoutPage.form.phone")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                   />
                   <input
@@ -162,7 +163,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="text"
-                    placeholder="Dirección"
+                    placeholder={t("checkoutPage.form.address")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
                   />
                   <input
@@ -174,7 +175,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="text"
-                    placeholder="Ciudad"
+                    placeholder={t("checkoutPage.form.city")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                   />
                   <input
@@ -186,7 +187,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="text"
-                    placeholder="Código postal"
+                    placeholder={t("checkoutPage.form.postalCode")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
                   />
                   <input
@@ -198,7 +199,7 @@ export default function CheckoutPage() {
                       }))
                     }
                     type="text"
-                    placeholder="País"
+                    placeholder={t("checkoutPage.form.country")}
                     className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
                   />
                 </div>
@@ -234,13 +235,13 @@ export default function CheckoutPage() {
                     }}
                     className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
                   >
-                    Guardar dirección
+                    {t("checkoutPage.saveAddress")}
                   </button>
                   <Link
                     href={`/${locale}/account`}
                     className="text-sm text-gray-600 hover:text-gray-900 underline transition"
                   >
-                    Gestionar en mi cuenta
+                    {t("checkoutPage.manageAddresses")}
                   </Link>
                 </div>
               </div>
@@ -248,24 +249,24 @@ export default function CheckoutPage() {
           </div>
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
-              Método de pago
+              {t("checkoutPage.paymentMethod")}
             </h2>
             <div className="space-y-3">
               {[
                 {
                   value: "manual",
-                  label: "Transferencia / Pago manual",
-                  hint: "Te contactaremos con los datos para el pago",
+                  label: t("checkoutPage.paymentOptions.manual.label"),
+                  hint: t("checkoutPage.paymentOptions.manual.hint"),
                 },
                 {
                   value: "whatsapp",
-                  label: "Contacto por WhatsApp",
-                  hint: "Coordinamos el pago por mensaje",
+                  label: t("checkoutPage.paymentOptions.whatsapp.label"),
+                  hint: t("checkoutPage.paymentOptions.whatsapp.hint"),
                 },
                 {
                   value: "paypal_pending",
-                  label: "PayPal (próximamente)",
-                  hint: "Te enviaremos el link de pago",
+                  label: t("checkoutPage.paymentOptions.paypal_pending.label"),
+                  hint: t("checkoutPage.paymentOptions.paypal_pending.hint"),
                 },
               ].map((option) => (
                 <label
@@ -298,7 +299,7 @@ export default function CheckoutPage() {
           </div>
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
-              Resumen del pedido
+              {t("checkoutPage.orderSummary")}
             </h2>
 
             <div className="space-y-6">
@@ -312,10 +313,10 @@ export default function CheckoutPage() {
                       {item.title}
                     </h3>
                     <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                      <span>Cantidad: {item.quantity}</span>
+                      <span>{t("checkoutPage.quantity")}: {item.quantity}</span>
                       <span className="hidden sm:inline">•</span>
                       <span className="hidden sm:inline">
-                        {formatPrice(item.price)} c/u
+                        {formatPrice(item.price)} {t("checkoutPage.unitPrice")}
                       </span>
                     </div>
                   </div>
@@ -334,24 +335,24 @@ export default function CheckoutPage() {
         <div className="lg:col-span-1 order-1 lg:order-2">
           <div className="bg-gray-50 rounded-lg p-6 md:p-8 lg:sticky lg:top-4 border border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              Resumen
+              {t("checkoutPage.summary")}
             </h2>
 
             <div className="space-y-4 mb-6">
               <div className="flex justify-between text-base text-gray-700">
-                <span>Subtotal</span>
+                <span>{t("checkoutPage.subtotal")}</span>
                 <span className="font-medium">{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between text-sm text-gray-600 pt-2 border-t border-gray-300">
-                <span>Envío</span>
-                <span>Calculado al finalizar</span>
+                <span>{t("checkoutPage.shipping")}</span>
+                <span>{t("checkoutPage.shippingCalculated")}</span>
               </div>
             </div>
 
             <div className="pt-6 border-t-2 border-gray-300 mb-6">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-gray-900">
-                  Total
+                  {t("checkoutPage.total")}
                 </span>
                 <span className="text-xl font-bold text-gray-900">
                   {formatPrice(subtotal)}
@@ -364,18 +365,18 @@ export default function CheckoutPage() {
               disabled={isLoading || !defaultAddress}
               className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Confirmando..." : "Confirmar pedido"}
+              {isLoading ? t("checkoutPage.confirming") : t("checkoutPage.confirmOrder")}
             </button>
 
             <p className="mt-4 text-xs text-center text-gray-500">
-              Al confirmar tu pedido, aceptás nuestros términos y condiciones
+              {t("checkoutPage.terms")}
             </p>
 
             <Link
               href={`/${locale}/cart`}
               className="block mt-6 text-center text-sm text-gray-600 hover:text-gray-900 underline transition"
             >
-              Volver al carrito
+              {t("checkoutPage.backToCart")}
             </Link>
           </div>
         </div>
