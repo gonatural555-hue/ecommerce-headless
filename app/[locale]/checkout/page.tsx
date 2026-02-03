@@ -3,12 +3,41 @@
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
   const { items, subtotal } = useCart();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [addresses, setAddresses] = useState<
+    {
+      id: string;
+      fullName: string;
+      phone: string;
+      addressLine1: string;
+      addressLine2?: string;
+      city: string;
+      postalCode: string;
+      country: string;
+      isDefault: boolean;
+    }[]
+  >([]);
+
+  const defaultAddress =
+    addresses.find((address) => address.isDefault) || addresses[0];
+
+  useEffect(() => {
+    const stored = localStorage.getItem("user_addresses");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        setAddresses(parsed);
+      }
+    } catch {
+      localStorage.removeItem("user_addresses");
+    }
+  }, []);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-AR", {
@@ -93,7 +122,42 @@ export default function CheckoutPage() {
 
       <div className="grid gap-8 lg:grid-cols-3">
         {/* Resumen del pedido - Mobile first: aparece primero en mobile */}
-        <div className="lg:col-span-2 order-2 lg:order-1">
+        <div className="lg:col-span-2 order-2 lg:order-1 space-y-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+              Dirección de envío
+            </h2>
+            {!defaultAddress ? (
+              <div className="space-y-4">
+                <p className="text-sm text-gray-600">
+                  Agregá una dirección para continuar
+                </p>
+                <Link
+                  href="/account"
+                  className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
+                >
+                  Agregar dirección
+                </Link>
+              </div>
+            ) : (
+              <div className="text-sm text-gray-700 space-y-1">
+                <p className="font-semibold text-gray-900">
+                  {defaultAddress.fullName}
+                </p>
+                <p>
+                  {defaultAddress.addressLine1}
+                  {defaultAddress.addressLine2
+                    ? `, ${defaultAddress.addressLine2}`
+                    : ""}
+                </p>
+                <p>
+                  {defaultAddress.city} · {defaultAddress.postalCode}
+                </p>
+                <p>{defaultAddress.country}</p>
+                <p>{defaultAddress.phone}</p>
+              </div>
+            )}
+          </div>
           <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
               Resumen del pedido
