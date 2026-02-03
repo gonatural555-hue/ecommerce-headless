@@ -348,9 +348,12 @@ export default function Header() {
               ))}
             </div>
             {isLoggedIn && user ? (
-              <span className="hidden md:inline text-sm font-semibold text-text-primary">
+              <Link
+                href="/account"
+                className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+              >
                 Hola, {user.name}
-              </span>
+              </Link>
             ) : (
               <button
                 type="button"
@@ -534,7 +537,15 @@ export default function Header() {
                     {lang.toUpperCase()}
                   </Link>
                 ))}
-                {!isLoggedIn && (
+                {isLoggedIn && user ? (
+                  <Link
+                    href="/account"
+                    className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Hola, {user.name}
+                  </Link>
+                ) : (
                   <button
                     type="button"
                     onClick={() => {
