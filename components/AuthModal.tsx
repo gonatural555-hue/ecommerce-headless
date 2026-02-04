@@ -67,7 +67,7 @@ export default function AuthModal({ open, onClose }: Props) {
     return "Creá tu cuenta para acelerar futuras compras";
   }, [activeTab]);
 
-  const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
+  const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement | null>) => {
     if (inputRef.current) {
       // Small delay to ensure keyboard is opening
       setTimeout(() => {

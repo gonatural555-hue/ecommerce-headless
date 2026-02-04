@@ -93,12 +93,12 @@ export default function CheckoutPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             {t("checkoutPage.title")}
           </h1>
-          <Link
+        <Link
             href={`/${locale}/cart`}
             className="inline-flex items-center text-base text-white hover:text-accent-gold transition-colors duration-200 whitespace-nowrap"
-          >
+        >
             {t("checkoutPage.backToCart")}
-          </Link>
+        </Link>
         </div>
       </div>
 
