@@ -7,12 +7,19 @@ export interface BreadcrumbItem {
 
 type Props = {
   items: BreadcrumbItem[];
+  variant?: "default" | "light";
 };
 
-export default function Breadcrumbs({ items }: Props) {
+export default function Breadcrumbs({ items, variant = "default" }: Props) {
+  const isLight = variant === "light";
+  const textColor = isLight ? "text-white" : "text-gray-600";
+  const linkHoverColor = isLight ? "hover:text-white/80" : "hover:text-gray-900";
+  const lastItemColor = isLight ? "text-white" : "text-gray-900";
+  const separatorColor = isLight ? "text-white/60" : "text-gray-400";
+
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
-      <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+      <ol className={`flex flex-wrap items-center gap-2 text-sm ${textColor}`}>
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
 
@@ -21,17 +28,17 @@ export default function Breadcrumbs({ items }: Props) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-gray-900 transition-colors duration-200"
+                  className={`${linkHoverColor} transition-colors duration-200`}
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className={isLast ? "text-gray-900 font-medium" : ""}>
+                <span className={isLast ? `${lastItemColor} font-medium` : ""}>
                   {item.label}
                 </span>
               )}
               {!isLast && (
-                <span className="mx-2 text-gray-400" aria-hidden="true">
+                <span className={`mx-2 ${separatorColor}`} aria-hidden="true">
                   /
                 </span>
               )}
