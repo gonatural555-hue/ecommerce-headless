@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductImageGallery from "@/components/ProductImageGallery";
+import ProductImageGridDesktop from "@/components/ProductImageGridDesktop";
 import VariantSelector from "@/components/VariantSelector";
 import type {
   ProductImages,
@@ -198,8 +199,9 @@ export default function ProductDetailClient({
 
   return (
     <>
-      <section className="grid gap-6 md:gap-8 xl:grid-cols-[3fr_2fr] items-start max-w-full pb-20 md:pb-0">
-        {/* Galería */}
+      {/* Mobile Layout (<1024px) - Mantener exactamente igual */}
+      <section className="lg:hidden grid gap-6 md:gap-8 items-start max-w-full pb-20">
+        {/* Galería Mobile */}
         <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden">
           <ProductImageGallery
             featured={activeImages.featured}
@@ -215,10 +217,10 @@ export default function ProductDetailClient({
           />
         </div>
 
-        {/* Info principal */}
+        {/* Info principal Mobile */}
         <div className="relative z-10 flex flex-col gap-4 md:gap-7 min-w-0">
           {/* Mobile: Precio primero (más grande que título) */}
-          <div className="order-1 md:order-3 md:hidden">
+          <div className="order-1">
             <div className="flex items-baseline gap-2">
               <p className="text-4xl font-bold text-text-primary">
                 ${resolvedPrice.toFixed(2)}
@@ -232,27 +234,15 @@ export default function ProductDetailClient({
           </div>
 
           {/* Título - más pequeño en mobile */}
-          <div className="order-2 md:order-1">
-            <h1 className="text-xl md:text-4xl font-semibold text-text-primary break-words">
+          <div className="order-2">
+            <h1 className="text-xl font-semibold text-text-primary break-words">
               {seoH1}
             </h1>
           </div>
 
-          {/* Desktop: Precio */}
-          <div className="hidden md:flex order-3 items-center gap-3 pb-1.5 md:pb-3">
-            <p className="text-2xl font-bold text-text-primary">
-              ${resolvedPrice.toFixed(2)}
-            </p>
-            {product.freeShipping && freeShippingLabel && (
-              <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
-                {freeShippingLabel}
-              </span>
-            )}
-          </div>
-
           {/* Variantes */}
           {productVariants && (
-            <div className="order-3 md:order-4 pt-1 md:pt-2.5">
+            <div className="order-3 pt-1">
               <VariantSelector
                 variants={productVariants}
                 onChange={setSelections}
@@ -261,24 +251,79 @@ export default function ProductDetailClient({
             </div>
           )}
 
-          {/* Desktop: CTA (no sticky) */}
-          <div className="hidden md:block order-5 pt-1 md:pt-2.5">
-            <AddToCartButton
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              image={cartImage}
-              variantSelections={variantSelections}
-              label={ctaLabel}
-              className="w-full"
-            />
-          </div>
-
           {/* Descripción - visible arriba en mobile */}
-          <div className="order-4 md:order-2 min-w-0">
-            <p className="text-sm md:text-lg text-text-muted break-words line-clamp-3 md:line-clamp-none">
+          <div className="order-4 min-w-0">
+            <p className="text-sm text-text-muted break-words line-clamp-3">
               {product.description}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Desktop Layout (>=1024px) - Layout tipo Patagonia */}
+      <section className="hidden lg:grid lg:grid-cols-[1.6fr_1fr] lg:gap-12 items-start max-w-full">
+        {/* Columna izquierda: Grid de imágenes (60-65%) */}
+        <div className="relative z-0">
+          <ProductImageGridDesktop
+            featured={activeImages.featured}
+            gallery={activeImages.gallery}
+            title={product.title}
+            noImageLabel={noImageLabel}
+          />
+        </div>
+
+        {/* Columna derecha: Info sticky (35-40%) */}
+        <div className="relative z-10">
+          <div className="sticky top-24 flex flex-col gap-6">
+            {/* Título */}
+            <div>
+              <h1 className="text-4xl font-semibold text-text-primary break-words">
+                {seoH1}
+              </h1>
+            </div>
+
+            {/* Precio */}
+            <div className="flex items-center gap-3 pb-1.5">
+              <p className="text-2xl font-bold text-text-primary">
+                ${resolvedPrice.toFixed(2)}
+              </p>
+              {product.freeShipping && freeShippingLabel && (
+                <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
+                  {freeShippingLabel}
+                </span>
+              )}
+            </div>
+
+            {/* Descripción corta */}
+            <div className="min-w-0">
+              <p className="text-lg text-text-muted break-words">
+                {product.description}
+              </p>
+            </div>
+
+            {/* Variantes */}
+            {productVariants && (
+              <div className="pt-1">
+                <VariantSelector
+                  variants={productVariants}
+                  onChange={setSelections}
+                  value={selections}
+                />
+              </div>
+            )}
+
+            {/* CTA */}
+            <div className="pt-1">
+              <AddToCartButton
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                image={cartImage}
+                variantSelections={variantSelections}
+                label={ctaLabel}
+                className="w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
