@@ -421,10 +421,10 @@
     "decline": "Refuser"
   },
   "registrationCTA": {
-    "title": "Créez votre compte",
-    "text": "Obtenez la livraison gratuite et enregistrez vos données pour un paiement plus rapide.",
+    "title": "Livraison gratuite pendant 1 an",
+    "subtitle": "Créez votre compte et profitez d'un paiement plus rapide",
+    "secondaryText": "Uniquement pour les nouveaux utilisateurs",
     "cta": "Créer un compte",
-    "later": "Peut-être plus tard",
     "minimize": "Réduire",
     "expand": "Développer"
   },

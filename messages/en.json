@@ -421,10 +421,10 @@
     "decline": "Decline"
   },
   "registrationCTA": {
-    "title": "Create your account",
-    "text": "Get free shipping and save your details for faster checkout.",
+    "title": "Free shipping for 1 year",
+    "subtitle": "Create your account and enjoy faster checkout",
+    "secondaryText": "For new users only",
     "cta": "Create account",
-    "later": "Maybe later",
     "minimize": "Minimize",
     "expand": "Expand"
   },

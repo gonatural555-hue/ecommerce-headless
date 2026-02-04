@@ -6,7 +6,6 @@ import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslations, useLocale } from "@/components/i18n/LocaleProvider";
 
-const SESSION_STORAGE_KEY = "gn-registration-cta-dismissed";
 const SESSION_STORAGE_MINIMIZED = "gn-registration-cta-minimized";
 
 export default function RegistrationCTA() {
@@ -18,7 +17,6 @@ export default function RegistrationCTA() {
   const t = useTranslations();
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   // Check sessionStorage on mount and when dependencies change
@@ -28,7 +26,6 @@ export default function RegistrationCTA() {
     // Never show if user is logged in
     if (isLoggedIn) {
       setIsVisible(false);
-      setIsDismissed(true);
       return;
     }
 
@@ -39,24 +36,16 @@ export default function RegistrationCTA() {
     }
 
     // Check if CTA should be shown on current page
-    // Show only on Home and Products pages
+    // Show on Home, Products listing, and PDP
     if (!pathname) {
       setIsVisible(false);
       return;
     }
     const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
-    const isProducts = pathname.includes("/products") && !pathname.includes("/products/");
+    const isProducts = pathname.includes("/products");
     const shouldShowOnPage = isHome || isProducts;
 
     if (!shouldShowOnPage) {
-      setIsVisible(false);
-      return;
-    }
-
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem(SESSION_STORAGE_KEY) === "true";
-    if (dismissed) {
-      setIsDismissed(true);
       setIsVisible(false);
       return;
     }
@@ -76,9 +65,7 @@ export default function RegistrationCTA() {
   useEffect(() => {
     if (isLoggedIn) {
       setIsVisible(false);
-      setIsDismissed(true);
       if (typeof window !== "undefined") {
-        sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
         sessionStorage.removeItem(SESSION_STORAGE_MINIMIZED);
       }
     }
@@ -88,20 +75,20 @@ export default function RegistrationCTA() {
   useEffect(() => {
     if (authOpen) {
       setIsVisible(false);
-    } else if (!isDismissed && !isLoggedIn && pathname) {
+    } else if (!isLoggedIn && pathname) {
       // Check if should show on current page
       const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
-      const isProducts = pathname.includes("/products") && !pathname.includes("/products/");
+      const isProducts = pathname.includes("/products");
       const shouldShowOnPage = isHome || isProducts;
       
       if (shouldShowOnPage && !isInputFocused) {
-        // Show again when modal closes (if not dismissed and no input focused)
+        // Show again when modal closes (if no input focused)
         const minimized = typeof window !== "undefined" && sessionStorage.getItem(SESSION_STORAGE_MINIMIZED) === "true";
         setIsMinimized(minimized);
         setIsVisible(true);
       }
     }
-  }, [authOpen, isDismissed, isLoggedIn, pathname, isInputFocused]);
+  }, [authOpen, isLoggedIn, pathname, isInputFocused]);
 
   // Detect when inputs are focused (mobile keyboard detection)
   useEffect(() => {
@@ -120,9 +107,9 @@ export default function RegistrationCTA() {
       setTimeout(() => {
         setIsInputFocused(false);
         // Restore visibility if conditions are met
-        if (!isDismissed && !isLoggedIn && !authOpen && pathname) {
+        if (!isLoggedIn && !authOpen && pathname) {
           const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
-          const isProducts = pathname.includes("/products") && !pathname.includes("/products/");
+          const isProducts = pathname.includes("/products");
           if (isHome || isProducts) {
             const minimized = sessionStorage.getItem(SESSION_STORAGE_MINIMIZED) === "true";
             setIsMinimized(minimized);
@@ -160,16 +147,7 @@ export default function RegistrationCTA() {
       window.visualViewport?.removeEventListener("resize", handleResize);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isDismissed, isLoggedIn, authOpen, pathname]);
-
-  const handleDismiss = () => {
-    setIsDismissed(true);
-    setIsVisible(false);
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
-      sessionStorage.removeItem(SESSION_STORAGE_MINIMIZED);
-    }
-  };
+  }, [isLoggedIn, authOpen, pathname]);
 
   const handleMinimize = () => {
     setIsMinimized(true);
@@ -199,10 +177,10 @@ export default function RegistrationCTA() {
 
   if (isMinimized) {
     return (
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] animate-fade-in safe-area-inset-bottom">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] animate-fade-in pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pb-0">
         <button
           onClick={handleExpand}
-          className="px-4 py-2 rounded-full bg-dark-surface border border-white/10 text-text-primary text-sm font-medium hover:border-accent-gold/60 transition-all duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+          className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-dark-surface border border-white/10 text-text-primary text-xs md:text-sm font-medium hover:border-accent-gold/60 transition-all duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
           aria-label={t("registrationCTA.expand")}
         >
           {t("registrationCTA.title")}
@@ -212,57 +190,42 @@ export default function RegistrationCTA() {
   }
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] md:w-auto md:max-w-sm animate-fade-in safe-area-inset-bottom">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] md:w-auto md:max-w-sm animate-fade-in pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pb-0">
       <div className="bg-dark-surface border border-white/10 rounded-2xl p-4 sm:p-5 shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
-        <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex-1">
-            <h3 className="text-base font-semibold text-text-primary mb-1">
+            {/* Título principal con color accent-gold */}
+            <h3 className="text-base md:text-lg font-semibold text-accent-gold mb-1.5">
               {t("registrationCTA.title")}
             </h3>
-            <p className="text-sm text-text-muted leading-relaxed">
-              {t("registrationCTA.text")}
+            {/* Subtítulo */}
+            <p className="text-sm text-text-muted leading-relaxed mb-2">
+              {t("registrationCTA.subtitle")}
+            </p>
+            {/* Texto secundario pequeño */}
+            <p className="text-xs text-text-muted/70">
+              {t("registrationCTA.secondaryText")}
             </p>
           </div>
-          <div className="flex items-start gap-2">
-            <button
-              onClick={handleMinimize}
-              className="text-text-muted hover:text-text-primary transition-colors duration-200 p-1"
-              aria-label={t("registrationCTA.minimize")}
+          <button
+            onClick={handleMinimize}
+            className="text-text-muted hover:text-text-primary transition-colors duration-200 p-1 flex-shrink-0"
+            aria-label={t("registrationCTA.minimize")}
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20 12H4"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={handleDismiss}
-              className="text-text-muted hover:text-text-primary transition-colors duration-200 p-1"
-              aria-label="Cerrar"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M20 12H4"
+              />
+            </svg>
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
           <button
@@ -272,10 +235,10 @@ export default function RegistrationCTA() {
             {t("registrationCTA.cta")}
           </button>
           <button
-            onClick={handleDismiss}
+            onClick={handleMinimize}
             className="px-4 py-2.5 rounded-xl border border-white/20 text-text-muted text-sm font-medium hover:border-white/40 hover:text-text-primary transition-colors duration-200"
           >
-            {t("registrationCTA.later")}
+            {t("registrationCTA.minimize")}
           </button>
         </div>
       </div>

@@ -421,10 +421,10 @@
     "decline": "Rechazar"
   },
   "registrationCTA": {
-    "title": "Creá tu cuenta",
-    "text": "Obtené envío gratis y guardá tus datos para un checkout más rápido.",
+    "title": "Envío gratis por 1 año",
+    "subtitle": "Creá tu cuenta y disfrutá un checkout más rápido",
+    "secondaryText": "Solo para nuevos usuarios",
     "cta": "Crear cuenta",
-    "later": "Quizás más tarde",
     "minimize": "Minimizar",
     "expand": "Expandir"
   },
