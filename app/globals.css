@@ -121,7 +121,7 @@ body::before {
 .fade-up {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 650ms ease-out, transform 650ms ease-out;
+  transition: opacity 455ms ease-out, transform 455ms ease-out;
 }
 
 .fade-visible {
