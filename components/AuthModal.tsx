@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useUser } from "@/context/UserContext";
 
 type Props = {
@@ -16,6 +16,9 @@ export default function AuthModal({ open, onClose }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -23,10 +26,29 @@ export default function AuthModal({ open, onClose }: Props) {
       if (event.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
+    
+    // Lock body scroll when modal is open (mobile-safe)
+    const scrollY = window.scrollY;
     document.body.style.overflow = "hidden";
+    // Only apply position fixed on mobile to prevent iOS bounce
+    if (window.innerWidth < 768) {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    }
+    
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
+      if (window.innerWidth < 768) {
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        }
+      }
     };
   }, [open, onClose]);
 
@@ -45,17 +67,32 @@ export default function AuthModal({ open, onClose }: Props) {
     return "Creá tu cuenta para acelerar futuras compras";
   }, [activeTab]);
 
+  const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
+    if (inputRef.current) {
+      // Small delay to ensure keyboard is opening
+      setTimeout(() => {
+        inputRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 100);
+    }
+  };
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end md:items-center md:justify-center">
+    <div 
+      className="fixed inset-0 z-50 flex items-end md:items-center md:justify-center overflow-y-auto md:overflow-y-visible" 
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
       <button
         type="button"
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
         aria-label="Cerrar"
       />
-      <div className="relative w-full md:max-w-md bg-dark-base border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] rounded-t-3xl md:rounded-3xl px-6 py-7 md:px-8 md:py-8">
+      <div className="relative w-full md:max-w-md bg-dark-base border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] rounded-t-3xl md:rounded-3xl px-6 py-7 md:px-8 md:py-8 max-h-[100dvh] md:max-h-none my-auto md:my-0 pb-[max(2rem,env(safe-area-inset-bottom))] md:pb-8">
         <div className="flex items-center gap-2 rounded-full bg-dark-surface/60 p-1">
           {(["login", "register"] as Tab[]).map((tab) => {
             const isActive = activeTab === tab;
@@ -103,8 +140,10 @@ export default function AuthModal({ open, onClose }: Props) {
                 Nombre
               </label>
               <input
+                ref={nameInputRef}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
+                onFocus={() => handleInputFocus(nameInputRef)}
                 type="text"
                 className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
                 placeholder="Tu nombre"
@@ -118,8 +157,10 @@ export default function AuthModal({ open, onClose }: Props) {
               Email
             </label>
             <input
+              ref={emailInputRef}
               value={email}
               onChange={(event) => setEmail(event.target.value)}
+              onFocus={() => handleInputFocus(emailInputRef)}
               type="email"
               className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
               placeholder="tuemail@email.com"
@@ -132,8 +173,10 @@ export default function AuthModal({ open, onClose }: Props) {
               Contraseña
             </label>
             <input
+              ref={passwordInputRef}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              onFocus={() => handleInputFocus(passwordInputRef)}
               type="password"
               className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
               placeholder="••••••••"
