@@ -47,9 +47,9 @@ export default async function HomePage({
   const ctaHref = `/${locale}/products`;
   const journalCtaHref = `/${locale}/blog`;
   const featuredSlugs = [
-    "quiet-journeys",
-    "edge-of-water",
-    "quiet-morning-at-camp",
+    "camping-fin-de-semana-basico",
+    "no-mires-para-arriba",
+    "atreverse-un-poco-mas",
   ];
   const featuredPosts = featuredSlugs
     .map((slug) => {
