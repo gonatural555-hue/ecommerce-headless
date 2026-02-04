@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { CartProvider } from "@/context/CartContext";
 import { UserProvider } from "@/context/UserContext";
 import { defaultLocale } from "@/lib/i18n/config";
-import RegistrationCTADebug from "@/components/RegistrationCTADebug";
+import RegistrationCTA from "@/components/RegistrationCTA";
 
 export default async function RootLayout({
   children,
@@ -19,8 +19,8 @@ export default async function RootLayout({
         <UserProvider>
           <CartProvider>{children}</CartProvider>
         </UserProvider>
-        {/* DEBUG: RegistrationCTA mounted globally in root layout */}
-        <RegistrationCTADebug />
+        {/* DEBUG: RegistrationCTA mounted globally in root layout - NO CONDITIONS */}
+        <RegistrationCTA />
       </body>
     </html>
   );

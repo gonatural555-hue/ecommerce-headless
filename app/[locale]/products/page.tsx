@@ -83,7 +83,6 @@ export default async function ProductsPage({
         <div className="absolute inset-0 bg-gradient-to-b from-dark-base/75 via-dark-base/50 to-dark-base/85" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-20">
           <Breadcrumbs
-            variant="light"
             items={[
               { label: t("header.nav.home"), href: `/${locale}` },
               { label: t("header.nav.products") },
