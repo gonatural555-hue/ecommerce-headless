@@ -84,7 +84,7 @@ export default function ProductImageGallery({
           // Square container with dark surface to keep images fully visible.
           "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
           // Desktop: keep gallery contained and premium-sized.
-          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
+          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none xl:mx-auto xl:max-w-[520px] xl:max-h-[520px]",
           featuredContainerClassName,
         ]
           .filter(Boolean)
@@ -130,13 +130,13 @@ export default function ProductImageGallery({
 
       {/* Gallery Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 md:justify-center">
+        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 md:justify-center xl:gap-4">
           {allImages.map((img, index) => (
             <button
               key={img}
               type="button"
               onClick={() => setCurrentIndex(index)}
-              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 ${
+              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 xl:w-24 xl:h-24 rounded-xl border overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 ${
                 selectedImage === img
                   ? "border-accent-gold ring-1 ring-accent-gold/60"
                   : "border-white/15 hover:border-white/30"
