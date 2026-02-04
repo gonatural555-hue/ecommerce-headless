@@ -27,6 +27,7 @@ export default async function LocaleLayout({
       <Header />
       {children}
       <CookieConsent />
+      {/* RegistrationCTA mounted here - appears on Home, Products, and PDP pages */}
       <RegistrationCTA />
       <Footer />
     </LocaleProvider>

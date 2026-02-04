@@ -17,77 +17,89 @@ export default function RegistrationCTA() {
   const locale = useLocale();
   const t = useTranslations();
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // TEMP: Force visible
   const [isMinimized, setIsMinimized] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(true); // TEMP: Force mounted
   const [authOpen, setAuthOpen] = useState(false);
 
+  // TEMP: Commented out all conditional logic to force rendering
   // Check if we should show the CTA on current page
-  const shouldShowOnPage = () => {
-    if (!pathname) return false;
-    // Show on: home, products list, product detail pages
-    const path = pathname.replace(`/${locale}`, "") || "/";
-    return (
-      path === "/" ||
-      path === "/products" ||
-      path.startsWith("/products/")
-    );
-  };
+  // const shouldShowOnPage = () => {
+  //   if (!pathname) return false;
+  //   // Show on: home, products list, product detail pages
+  //   const path = pathname.replace(`/${locale}`, "") || "/";
+  //   return (
+  //     path === "/" ||
+  //     path === "/products" ||
+  //     path.startsWith("/products/")
+  //   );
+  // };
 
+  // TEMP: Simplified useEffect to just log
   useEffect(() => {
-    setIsMounted(true);
-    
-    // Don't show if user is logged in
-    if (isLoggedIn) {
-      return;
-    }
-
-    // Don't show if dismissed
-    const stored = typeof window !== "undefined" 
-      ? localStorage.getItem(STORAGE_KEY) 
-      : null;
-    
-    if (stored === STATES.dismissed) {
-      return;
-    }
-
-    // Check if minimized
-    if (stored === STATES.minimized) {
-      setIsMinimized(true);
-    }
-
-    // Only show on specific pages
-    if (shouldShowOnPage()) {
-      setIsVisible(true);
-    }
+    console.log("[RegistrationCTA] Component mounted");
+    console.log("[RegistrationCTA] pathname:", pathname);
+    console.log("[RegistrationCTA] locale:", locale);
+    console.log("[RegistrationCTA] isLoggedIn:", isLoggedIn);
   }, [isLoggedIn, pathname, locale]);
 
-  // Hide when user logs in
-  useEffect(() => {
-    if (isLoggedIn) {
-      setIsVisible(false);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, STATES.dismissed);
-      }
-    }
-  }, [isLoggedIn]);
+  // TEMP: Commented out
+  // useEffect(() => {
+  //   setIsMounted(true);
+  //   
+  //   // Don't show if user is logged in
+  //   if (isLoggedIn) {
+  //     return;
+  //   }
 
-  // Update visibility when pathname changes
-  useEffect(() => {
-    if (isLoggedIn) return;
-    
-    const stored = typeof window !== "undefined" 
-      ? localStorage.getItem(STORAGE_KEY) 
-      : null;
-    
-    if (stored === STATES.dismissed) return;
+  //   // Don't show if dismissed
+  //   const stored = typeof window !== "undefined" 
+  //     ? localStorage.getItem(STORAGE_KEY) 
+  //     : null;
+  //   
+  //   if (stored === STATES.dismissed) {
+  //     return;
+  //   }
 
-    if (shouldShowOnPage()) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  }, [pathname, locale, isLoggedIn]);
+  //   // Check if minimized
+  //   if (stored === STATES.minimized) {
+  //     setIsMinimized(true);
+  //   }
+
+  //   // Only show on specific pages
+  //   if (shouldShowOnPage()) {
+  //     setIsVisible(true);
+  //   }
+  // }, [isLoggedIn, pathname, locale]);
+
+  // TEMP: Commented out
+  // // Hide when user logs in
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setIsVisible(false);
+  //     if (typeof window !== "undefined") {
+  //       localStorage.setItem(STORAGE_KEY, STATES.dismissed);
+  //     }
+  //   }
+  // }, [isLoggedIn]);
+
+  // TEMP: Commented out
+  // // Update visibility when pathname changes
+  // useEffect(() => {
+  //   if (isLoggedIn) return;
+  //   
+  //   const stored = typeof window !== "undefined" 
+  //     ? localStorage.getItem(STORAGE_KEY) 
+  //     : null;
+  //   
+  //   if (stored === STATES.dismissed) return;
+
+  //   if (shouldShowOnPage()) {
+  //     setIsVisible(true);
+  //   } else {
+  //     setIsVisible(false);
+  //   }
+  // }, [pathname, locale, isLoggedIn]);
 
   const handleDismiss = () => {
     if (typeof window !== "undefined") {
@@ -114,9 +126,10 @@ export default function RegistrationCTA() {
     setAuthOpen(true);
   };
 
-  if (!isMounted || !isVisible || isLoggedIn) {
-    return null;
-  }
+  // TEMP: Removed all conditions - force render
+  // if (!isMounted || !isVisible || isLoggedIn) {
+  //   return null;
+  // }
 
   // Minimized state (mobile pill)
   if (isMinimized) {
