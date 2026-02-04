@@ -6,13 +6,14 @@ import { useUser } from "@/context/UserContext";
 type Props = {
   open: boolean;
   onClose: () => void;
+  initialTab?: "login" | "register";
 };
 
 type Tab = "login" | "register";
 
-export default function AuthModal({ open, onClose }: Props) {
+export default function AuthModal({ open, onClose, initialTab = "login" }: Props) {
   const { login, register } = useUser();
-  const [activeTab, setActiveTab] = useState<Tab>("login");
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,8 +58,8 @@ export default function AuthModal({ open, onClose }: Props) {
     setName("");
     setEmail("");
     setPassword("");
-    setActiveTab("login");
-  }, [open]);
+    setActiveTab(initialTab);
+  }, [open, initialTab]);
 
   const subtitle = useMemo(() => {
     if (activeTab === "login") {

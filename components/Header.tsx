@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
+import { useAuth } from "@/context/AuthContext";
 import AuthModal from "@/components/AuthModal";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCategories } from "@/lib/categories";
@@ -14,8 +15,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function Header() {
   const { totalItems } = useCart();
   const { isLoggedIn, user } = useUser();
+  const { authOpen, setAuthOpen, openAuthModal, initialTab } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const productsCloseTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -357,7 +358,7 @@ export default function Header() {
             ) : (
               <button
                 type="button"
-                onClick={() => setAuthOpen(true)}
+                onClick={() => openAuthModal("login")}
                 className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
               >
                 {t("header.account")}
@@ -433,7 +434,7 @@ export default function Header() {
             {!isLoggedIn && (
               <button
                 type="button"
-                onClick={() => setAuthOpen(true)}
+                onClick={() => openAuthModal("login")}
                 className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
                 aria-label={t("header.account")}
               >
@@ -562,7 +563,7 @@ export default function Header() {
           </nav>
         )}
       </div>
-      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} initialTab={initialTab} />
     </header>
   );
 }
