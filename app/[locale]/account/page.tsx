@@ -118,7 +118,7 @@ export default function AccountPage() {
   }
 
   return (
-    <main className="min-h-screen bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16">
+      <main className="min-h-[100dvh] bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-text-primary">

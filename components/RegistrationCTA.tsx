@@ -17,6 +17,7 @@ export default function RegistrationCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   // Check sessionStorage on mount and when dependencies change
   useEffect(() => {
@@ -91,14 +92,73 @@ export default function RegistrationCTA() {
       const isProducts = pathname.includes("/products") && !pathname.includes("/products/");
       const shouldShowOnPage = isHome || isProducts;
       
-      if (shouldShowOnPage) {
-        // Show again when modal closes (if not dismissed)
+      if (shouldShowOnPage && !isInputFocused) {
+        // Show again when modal closes (if not dismissed and no input focused)
         const minimized = typeof window !== "undefined" && sessionStorage.getItem(SESSION_STORAGE_MINIMIZED) === "true";
         setIsMinimized(minimized);
         setIsVisible(true);
       }
     }
-  }, [authOpen, isDismissed, isLoggedIn, pathname]);
+  }, [authOpen, isDismissed, isLoggedIn, pathname, isInputFocused]);
+
+  // Detect when inputs are focused (mobile keyboard detection)
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth >= 768) return;
+
+    const handleFocus = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        setIsInputFocused(true);
+        setIsVisible(false);
+      }
+    };
+
+    const handleBlur = () => {
+      // Delay to allow keyboard to close
+      setTimeout(() => {
+        setIsInputFocused(false);
+        // Restore visibility if conditions are met
+        if (!isDismissed && !isLoggedIn && !authOpen && pathname) {
+          const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
+          const isProducts = pathname.includes("/products") && !pathname.includes("/products/");
+          if (isHome || isProducts) {
+            const minimized = sessionStorage.getItem(SESSION_STORAGE_MINIMIZED) === "true";
+            setIsMinimized(minimized);
+            setIsVisible(true);
+          }
+        }
+      }, 300);
+    };
+
+    // Also detect viewport resize (keyboard open/close on iOS)
+    let initialViewportHeight = window.visualViewport?.height || window.innerHeight;
+    const handleResize = () => {
+      if (window.innerWidth >= 768) return;
+      const currentHeight = window.visualViewport?.height || window.innerHeight;
+      const heightDiff = initialViewportHeight - currentHeight;
+      
+      // If viewport shrunk significantly (keyboard opened)
+      if (heightDiff > 150) {
+        setIsInputFocused(true);
+        setIsVisible(false);
+      } else if (heightDiff < 50) {
+        // Viewport restored (keyboard closed)
+        handleBlur();
+      }
+    };
+
+    document.addEventListener("focusin", handleFocus);
+    document.addEventListener("focusout", handleBlur);
+    window.visualViewport?.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("focusin", handleFocus);
+      document.removeEventListener("focusout", handleBlur);
+      window.visualViewport?.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDismissed, isLoggedIn, authOpen, pathname]);
 
   const handleDismiss = () => {
     setIsDismissed(true);
@@ -127,7 +187,8 @@ export default function RegistrationCTA() {
     openAuthModal("register");
   };
 
-  if (!isVisible) return null;
+  // Don't show if input is focused (keyboard is open)
+  if (!isVisible || isInputFocused) return null;
 
   if (isMinimized) {
     return (
