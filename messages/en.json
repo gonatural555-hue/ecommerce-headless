@@ -420,6 +420,14 @@
     "accept": "Accept",
     "decline": "Decline"
   },
+  "registrationCTA": {
+    "title": "Free shipping for members",
+    "text": "Create an account and get free shipping on your first order.",
+    "cta": "Create account",
+    "later": "Maybe later",
+    "minimize": "Minimize",
+    "expand": "Expand"
+  },
   "cartPage": {
     "emptyTitle": "Your cart is empty",
     "emptyText": "Add products to start your purchase.",

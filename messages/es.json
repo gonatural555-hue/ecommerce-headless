@@ -420,6 +420,14 @@
     "accept": "Aceptar",
     "decline": "Rechazar"
   },
+  "registrationCTA": {
+    "title": "Envío gratis para miembros",
+    "text": "Creá tu cuenta y obtené envío gratis en tu primer pedido.",
+    "cta": "Crear cuenta",
+    "later": "Quizás más tarde",
+    "minimize": "Minimizar",
+    "expand": "Expandir"
+  },
   "cartPage": {
     "emptyTitle": "Tu carrito está vacío",
     "emptyText": "Agregá productos para comenzar tu compra.",

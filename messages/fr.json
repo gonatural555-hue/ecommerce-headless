@@ -416,9 +416,17 @@
     "rights": "Tous droits réservés."
   },
   "cookieConsent": {
-    "text": "Nous utilisons des cookies minimaux pour améliorer l’expérience. Rien d’invasif.",
+    "text": "Nous utilisons des cookies minimaux pour améliorer l'expérience. Rien d'invasif.",
     "accept": "Accepter",
     "decline": "Refuser"
+  },
+  "registrationCTA": {
+    "title": "Livraison gratuite pour les membres",
+    "text": "Créez un compte et bénéficiez de la livraison gratuite sur votre première commande.",
+    "cta": "Créer un compte",
+    "later": "Peut-être plus tard",
+    "minimize": "Réduire",
+    "expand": "Développer"
   },
   "cartPage": {
     "emptyTitle": "Votre panier est vide",

@@ -5,6 +5,7 @@ import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { getMessages } from "@/lib/i18n/messages";
 import { locales, type Locale } from "@/lib/i18n/config";
 import CookieConsent from "@/components/CookieConsent";
+import RegistrationCTA from "@/components/RegistrationCTA";
 
 export default async function LocaleLayout({
   children,
@@ -26,6 +27,7 @@ export default async function LocaleLayout({
       <Header />
       {children}
       <CookieConsent />
+      <RegistrationCTA />
       <Footer />
     </LocaleProvider>
   );
