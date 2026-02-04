@@ -52,10 +52,10 @@ export default function OrderSuccessPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 py-12 md:py-20">
       <div className="text-center max-w-2xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <h1 className="text-3xl md:text-4xl font-bold text-white">
           Pedido confirmado
         </h1>
-        <p className="mt-3 text-gray-600">
+        <p className="mt-3 text-text-muted">
           Gracias por tu compra. Te vamos a avisar cuando tu pedido esté en
           camino.
         </p>
