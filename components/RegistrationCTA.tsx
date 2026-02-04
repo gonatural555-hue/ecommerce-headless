@@ -37,13 +37,17 @@ export default function RegistrationCTA() {
 
     // Check if CTA should be shown on current page
     // Show on Home, Products listing, and PDP
+    // Do NOT show on checkout, cart, or account pages
     if (!pathname) {
       setIsVisible(false);
       return;
     }
     const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
     const isProducts = pathname.includes("/products");
-    const shouldShowOnPage = isHome || isProducts;
+    const isCheckout = pathname.includes("/checkout");
+    const isCart = pathname.includes("/cart");
+    const isAccount = pathname.includes("/account");
+    const shouldShowOnPage = (isHome || isProducts) && !isCheckout && !isCart && !isAccount;
 
     if (!shouldShowOnPage) {
       setIsVisible(false);
@@ -79,7 +83,10 @@ export default function RegistrationCTA() {
       // Check if should show on current page
       const isHome = pathname === "/es" || pathname === "/en" || pathname === "/fr" || pathname === "/it" || pathname.match(/^\/[a-z]{2}\/?$/);
       const isProducts = pathname.includes("/products");
-      const shouldShowOnPage = isHome || isProducts;
+      const isCheckout = pathname.includes("/checkout");
+      const isCart = pathname.includes("/cart");
+      const isAccount = pathname.includes("/account");
+      const shouldShowOnPage = (isHome || isProducts) && !isCheckout && !isCart && !isAccount;
       
       if (shouldShowOnPage && !isInputFocused) {
         // Show again when modal closes (if no input focused)
@@ -180,7 +187,7 @@ export default function RegistrationCTA() {
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] animate-fade-in pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pb-0">
         <button
           onClick={handleExpand}
-          className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-dark-surface border border-white/10 text-text-primary text-xs md:text-sm font-medium hover:border-accent-gold/60 transition-all duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+          className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-dark-surface/95 backdrop-blur-sm border border-white/10 text-accent-gold text-[10px] md:text-xs font-medium hover:border-accent-gold/60 transition-all duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.3)] whitespace-nowrap"
           aria-label={t("registrationCTA.expand")}
         >
           {t("registrationCTA.title")}
