@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PostCard from "@/components/blog/PostCard";
 
 type FeaturedPost = {
   href: string;
@@ -50,33 +51,14 @@ export default function FeaturedJournalSection({
 
         <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <Link
+            <PostCard
               key={post.href}
               href={post.href}
-              className="group block space-y-5"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="h-full w-full object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-dark-base/10 via-dark-base/25 to-dark-base/60" />
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-xl font-semibold text-text-primary transition-opacity duration-200 group-hover:opacity-90">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-text-muted leading-relaxed transition-opacity duration-200 group-hover:opacity-90">
-                  {post.excerpt}
-                </p>
-                <span className="text-sm text-text-muted/80 group-hover:text-text-primary transition-colors duration-200">
-                  {readLabel}
-                </span>
-              </div>
-            </Link>
+              title={post.title}
+              excerpt={post.excerpt}
+              image={post.image}
+              ctaLabel={readLabel}
+            />
           ))}
         </div>
       </div>

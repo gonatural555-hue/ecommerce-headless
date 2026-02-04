@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type BlogCardProps = {
+type PostCardProps = {
   href: string;
   title: string;
   excerpt: string;
@@ -8,17 +8,17 @@ type BlogCardProps = {
   ctaLabel: string;
 };
 
-export default function BlogCard({
+export default function PostCard({
   href,
   title,
   excerpt,
   image,
   ctaLabel,
-}: BlogCardProps) {
+}: PostCardProps) {
   return (
     <Link href={href} className="group block">
-      <article className="overflow-hidden rounded-2xl border border-white/5 bg-dark-surface/60 shadow-[0_8px_22px_rgba(0,0,0,0.28)] transition-shadow duration-300 ease-out hover:shadow-[0_12px_30px_rgba(0,0,0,0.34)]">
-        <div className="relative aspect-[4/5] overflow-hidden">
+      <article className="overflow-hidden rounded-2xl border border-white/5 bg-dark-surface/60 shadow-[0_8px_22px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:shadow-[0_12px_30px_rgba(0,0,0,0.34)] hover:-translate-y-1">
+        <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={image}
             alt={title}
@@ -32,7 +32,9 @@ export default function BlogCard({
           <h2 className="text-lg font-semibold text-text-primary line-clamp-2">
             {title}
           </h2>
-          <p className="text-sm text-text-muted line-clamp-2">{excerpt}</p>
+          <p className="text-sm text-text-muted leading-relaxed line-clamp-2">
+            {excerpt}
+          </p>
           <span className="inline-flex text-sm text-accent-gold transition-colors duration-200 ease-out group-hover:text-accent-gold/90">
             {ctaLabel}
           </span>

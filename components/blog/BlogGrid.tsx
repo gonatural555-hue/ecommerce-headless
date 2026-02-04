@@ -1,5 +1,5 @@
 // Client not required: no scroll animation needed for visibility.
-import BlogCard from "@/components/blog/BlogCard";
+import PostCard from "@/components/blog/PostCard";
 
 type BlogPostItem = {
   href: string;
@@ -19,7 +19,7 @@ export default function BlogGrid({ posts, ctaLabel }: BlogGridProps) {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <BlogCard
+            <PostCard
               key={post.href}
               href={post.href}
               title={post.title}
