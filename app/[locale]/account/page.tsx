@@ -94,7 +94,7 @@ export default function AccountPage() {
 
   if (!isLoggedIn) {
     return (
-      <main className="min-h-screen bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16">
+      <main className="min-h-[100dvh] bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-xl">
           <div className="rounded-3xl border border-white/10 bg-dark-surface/40 p-8 text-center">
             <h1 className="text-2xl font-semibold text-text-primary">

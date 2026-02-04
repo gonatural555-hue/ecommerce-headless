@@ -29,7 +29,7 @@ export default async function AboutPage({
   const about = messages.aboutPage;
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-[100dvh] bg-black">
       <div className="absolute inset-0">
         <Image
           src="/assets/images/hero/home-image.webp"

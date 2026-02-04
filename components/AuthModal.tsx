@@ -69,14 +69,21 @@ export default function AuthModal({ open, onClose, initialTab = "login" }: Props
   }, [activeTab]);
 
   const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement | null>) => {
-    if (inputRef.current) {
-      // Small delay to ensure keyboard is opening
-      setTimeout(() => {
-        inputRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 100);
+    if (inputRef.current && window.innerWidth < 768) {
+      // For mobile: scroll input into view after keyboard appears
+      // Use requestAnimationFrame to ensure DOM is updated
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (inputRef.current) {
+            // Scroll the input into view, but use 'nearest' to avoid jumping
+            inputRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "nearest",
+            });
+          }
+        }, 300); // Longer delay for iOS keyboard animation
+      });
     }
   };
 
@@ -93,7 +100,7 @@ export default function AuthModal({ open, onClose, initialTab = "login" }: Props
         onClick={onClose}
         aria-label="Cerrar"
       />
-      <div className="relative w-full md:max-w-md bg-dark-base border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] rounded-t-3xl md:rounded-3xl px-6 py-7 md:px-8 md:py-8 max-h-[100dvh] md:max-h-none my-auto md:my-0 pb-[max(2rem,env(safe-area-inset-bottom))] md:pb-8">
+      <div className="relative w-full md:max-w-md bg-dark-base border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] rounded-t-3xl md:rounded-3xl px-4 sm:px-6 py-7 md:px-8 md:py-8 max-h-[100dvh] md:max-h-none my-auto md:my-0 pb-[max(2rem,env(safe-area-inset-bottom))] md:pb-8 overflow-y-auto overscroll-contain">
         <div className="flex items-center gap-2 rounded-full bg-dark-surface/60 p-1">
           {(["login", "register"] as Tab[]).map((tab) => {
             const isActive = activeTab === tab;
@@ -146,7 +153,7 @@ export default function AuthModal({ open, onClose, initialTab = "login" }: Props
                 onChange={(event) => setName(event.target.value)}
                 onFocus={() => handleInputFocus(nameInputRef)}
                 type="text"
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-3 sm:px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
                 placeholder="Tu nombre"
                 required
               />

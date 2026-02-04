@@ -131,7 +131,7 @@ export default function RegistrationCTA() {
 
   if (isMinimized) {
     return (
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-40 animate-fade-in">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] animate-fade-in safe-area-inset-bottom">
         <button
           onClick={handleExpand}
           className="px-4 py-2 rounded-full bg-dark-surface border border-white/10 text-text-primary text-sm font-medium hover:border-accent-gold/60 transition-all duration-200 shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
@@ -144,8 +144,8 @@ export default function RegistrationCTA() {
   }
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-40 w-[calc(100%-2rem)] md:w-auto md:max-w-sm animate-fade-in">
-      <div className="bg-dark-surface border border-white/10 rounded-2xl p-5 shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:left-4 md:translate-x-0 z-[45] w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] md:w-auto md:max-w-sm animate-fade-in safe-area-inset-bottom">
+      <div className="bg-dark-surface border border-white/10 rounded-2xl p-4 sm:p-5 shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex-1">
             <h3 className="text-base font-semibold text-text-primary mb-1">

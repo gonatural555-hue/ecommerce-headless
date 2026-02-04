@@ -86,7 +86,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-4 pt-28 pb-8 md:pt-32 md:pb-12">
+    <main className="max-w-6xl mx-auto px-3 sm:px-4 pt-28 pb-8 md:pt-32 md:pb-12 min-h-[100dvh] md:min-h-0">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between gap-4">
@@ -102,10 +102,10 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-8 lg:grid-cols-3 overflow-x-hidden">
         {/* Resumen del pedido - Mobile first: aparece primero en mobile */}
         <div className="lg:col-span-2 order-2 lg:order-1 space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
               {t("checkoutPage.shippingAddress")}
             </h2>
@@ -131,7 +131,7 @@ export default function CheckoutPage() {
                 <p className="text-sm text-gray-600">
                   {t("checkoutPage.addAddress")}
                 </p>
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2 overflow-x-hidden">
                   <input
                     value={guestAddress.fullName}
                     onChange={(event) =>
@@ -142,7 +142,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.fullName")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
                   />
                   <input
                     value={guestAddress.phone}
@@ -154,7 +154,7 @@ export default function CheckoutPage() {
                     }
                     type="tel"
                     placeholder={t("checkoutPage.form.phone")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
                   />
                   <input
                     value={guestAddress.addressLine1}
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.address")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2 max-w-full"
                   />
                   <input
                     value={guestAddress.city}
@@ -178,7 +178,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.city")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
                   />
                   <input
                     value={guestAddress.postalCode}
@@ -190,7 +190,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.postalCode")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
                   />
                   <input
                     value={guestAddress.country}
@@ -202,7 +202,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.country")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2"
+                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2 max-w-full"
                   />
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
@@ -249,7 +249,7 @@ export default function CheckoutPage() {
               </div>
             )}
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
               {t("checkoutPage.paymentMethod")}
             </h2>
@@ -299,7 +299,7 @@ export default function CheckoutPage() {
               ))}
             </div>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
               {t("checkoutPage.orderSummary")}
             </h2>
@@ -335,7 +335,7 @@ export default function CheckoutPage() {
 
         {/* Panel de pago - Sticky en desktop */}
         <div className="lg:col-span-1 order-1 lg:order-2">
-          <div className="bg-gray-50 rounded-lg p-6 md:p-8 lg:sticky lg:top-4 border border-gray-200">
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6 md:p-8 lg:sticky lg:top-4 border border-gray-200 overflow-x-hidden">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
               {t("checkoutPage.summary")}
             </h2>
