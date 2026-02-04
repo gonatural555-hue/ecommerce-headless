@@ -11,8 +11,6 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { buildMetadata, formatTemplate } from "@/lib/seo";
 import ProductDetailClient from "@/components/ProductDetailClient";
 import ProductReviews from "@/components/ProductReviews";
-import EditorialPostCards from "@/components/editorial/EditorialPostCards";
-import { pickPostsForProduct } from "@/lib/internal-links";
 import { REVIEWS_SEED, getReviewsByProductSlug } from "@/lib/reviews-data";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
 
@@ -179,16 +177,6 @@ export default async function ProductPage({ params }: Props) {
   const { useCase, whyBetter, benefits } = getProductCopy(localizedProduct);
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
-  const relatedPosts = pickPostsForProduct(product, messages.blog.posts, 3)
-    .map(([slug, post]) => ({
-      href: `/${locale}/blog/${slug}`,
-      title: post.title || "",
-      image:
-        post.heroImage ||
-        post.sections?.[0]?.image ||
-        "/assets/images/blog/blog-hero.webp",
-    }))
-    .filter((post) => post.title);
   const productImages = await getProductImages(product.id);
   const variantsFromJson = await getProductVariants(product.id);
   const productVariants =
@@ -271,11 +259,6 @@ export default async function ProductPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
         />
       )}
-
-      <EditorialPostCards
-        title={t("productPage.relatedStoriesTitle")}
-        posts={relatedPosts}
-      />
 
       {/* Story / uso del producto */}
       <section className="py-16 md:py-20">
