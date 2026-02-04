@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
-import { useTranslations } from "@/components/i18n/LocaleProvider";
+import { useTranslations, useLocale } from "@/components/i18n/LocaleProvider";
 
 const SESSION_STORAGE_KEY = "gn-registration-cta-dismissed";
 const SESSION_STORAGE_MINIMIZED = "gn-registration-cta-minimized";
 
 export default function RegistrationCTA() {
   const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
   const { isLoggedIn } = useUser();
   const { authOpen, openAuthModal } = useAuth();
   const t = useTranslations();
@@ -184,7 +186,12 @@ export default function RegistrationCTA() {
   };
 
   const handleCreateAccount = () => {
-    openAuthModal("register");
+    // Mobile: redirect to page, Desktop: open modal
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      router.push(`/${locale}/auth?tab=register`);
+    } else {
+      openAuthModal("register");
+    }
   };
 
   // Don't show if input is focused (keyboard is open)

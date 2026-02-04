@@ -356,13 +356,23 @@ export default function Header() {
                 {t("header.greeting")}, {user.name}
               </Link>
             ) : (
-              <button
-                type="button"
-                onClick={() => openAuthModal("login")}
-                className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
-              >
-                {t("header.account")}
-              </button>
+              <>
+                {/* Desktop: Modal */}
+                <button
+                  type="button"
+                  onClick={() => openAuthModal("login")}
+                  className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                >
+                  {t("header.account")}
+                </button>
+                {/* Mobile: Redirect to page */}
+                <Link
+                  href={`/${locale}/auth?tab=login`}
+                  className="md:hidden text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                >
+                  {t("header.account")}
+                </Link>
+              </>
             )}
             {/* Cart Icon with Badge */}
             <Link
@@ -432,9 +442,8 @@ export default function Header() {
               )}
             </button>
             {!isLoggedIn && (
-              <button
-                type="button"
-                onClick={() => openAuthModal("login")}
+              <Link
+                href={`/${locale}/auth?tab=login`}
                 className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
                 aria-label={t("header.account")}
               >
@@ -452,7 +461,7 @@ export default function Header() {
                     d="M15.75 7.5a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0v.75H4.5v-.75Z"
                   />
                 </svg>
-              </button>
+              </Link>
             )}
           </div>
         </div>
@@ -547,16 +556,13 @@ export default function Header() {
                     {t("header.greeting")}, {user.name}
                   </Link>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAuthOpen(true);
-                      setMobileMenuOpen(false);
-                    }}
+                  <Link
+                    href={`/${locale}/auth?tab=login`}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
                   >
                     {t("header.account")}
-                  </button>
+                  </Link>
                 )}
               </div>
             </div>
