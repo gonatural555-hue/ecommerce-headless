@@ -197,53 +197,103 @@ export default function ProductDetailClient({
   const cartImage = activeImages.featured || product.images[0];
 
   return (
-    <section className="grid gap-6 md:gap-8 xl:grid-cols-[3fr_2fr] items-start max-w-full">
-      {/* Galería */}
-      <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden">
-        <ProductImageGallery
-          featured={activeImages.featured}
-          gallery={activeImages.gallery}
-          title={product.title}
-          noImageLabel={noImageLabel}
-          featuredContainerClassName={
-            showFullImage ? "aspect-auto overflow-visible" : undefined
-          }
-          featuredImageClassName={
-            showFullImage ? "object-contain h-auto mx-auto p-2 md:p-3" : undefined
-          }
-        />
-      </div>
-
-      {/* Info principal */}
-      <div className="relative z-10 flex flex-col gap-4 md:gap-7 min-w-0">
-        <div className="order-1 md:order-1">
-          <h1 className="text-2xl md:text-4xl font-semibold text-text-primary break-words">
-            {seoH1}
-          </h1>
+    <>
+      <section className="grid gap-6 md:gap-8 xl:grid-cols-[3fr_2fr] items-start max-w-full pb-20 md:pb-0">
+        {/* Galería */}
+        <div className="relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden">
+          <ProductImageGallery
+            featured={activeImages.featured}
+            gallery={activeImages.gallery}
+            title={product.title}
+            noImageLabel={noImageLabel}
+            featuredContainerClassName={
+              showFullImage ? "aspect-auto overflow-visible" : undefined
+            }
+            featuredImageClassName={
+              showFullImage ? "object-contain h-auto mx-auto p-2 md:p-3" : undefined
+            }
+          />
         </div>
 
-        <div className="order-2 md:order-3 flex items-center gap-3 pb-1.5 md:pb-3">
-          <p className="text-3xl md:text-2xl font-bold text-text-primary">
-            ${resolvedPrice.toFixed(2)}
-          </p>
-          {product.freeShipping && freeShippingLabel && (
-            <span className="hidden md:inline text-xs uppercase tracking-[0.12em] text-text-muted/80">
-              {freeShippingLabel}
-            </span>
+        {/* Info principal */}
+        <div className="relative z-10 flex flex-col gap-4 md:gap-7 min-w-0">
+          {/* Mobile: Precio primero (más grande que título) */}
+          <div className="order-1 md:order-3 md:hidden">
+            <div className="flex items-baseline gap-2">
+              <p className="text-4xl font-bold text-text-primary">
+                ${resolvedPrice.toFixed(2)}
+              </p>
+              {product.freeShipping && freeShippingLabel && (
+                <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
+                  {freeShippingLabel}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Título - más pequeño en mobile */}
+          <div className="order-2 md:order-1">
+            <h1 className="text-xl md:text-4xl font-semibold text-text-primary break-words">
+              {seoH1}
+            </h1>
+          </div>
+
+          {/* Desktop: Precio */}
+          <div className="hidden md:flex order-3 items-center gap-3 pb-1.5 md:pb-3">
+            <p className="text-2xl font-bold text-text-primary">
+              ${resolvedPrice.toFixed(2)}
+            </p>
+            {product.freeShipping && freeShippingLabel && (
+              <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
+                {freeShippingLabel}
+              </span>
+            )}
+          </div>
+
+          {/* Variantes */}
+          {productVariants && (
+            <div className="order-3 md:order-4 pt-1 md:pt-2.5">
+              <VariantSelector
+                variants={productVariants}
+                onChange={setSelections}
+                value={selections}
+              />
+            </div>
           )}
-        </div>
 
-        {productVariants && (
-          <div className="order-3 md:order-4 pt-1 md:pt-2.5">
-            <VariantSelector
-              variants={productVariants}
-              onChange={setSelections}
-              value={selections}
+          {/* Desktop: CTA (no sticky) */}
+          <div className="hidden md:block order-5 pt-1 md:pt-2.5">
+            <AddToCartButton
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              image={cartImage}
+              variantSelections={variantSelections}
+              label={ctaLabel}
+              className="w-full"
             />
           </div>
-        )}
 
-        <div className="order-4 md:order-5 pt-1 md:pt-2.5">
+          {/* Descripción - visible arriba en mobile */}
+          <div className="order-4 md:order-2 min-w-0">
+            <p className="text-sm md:text-lg text-text-muted break-words line-clamp-3 md:line-clamp-none">
+              {product.description}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile: Sticky CTA con microcopy */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-dark-base/98 backdrop-blur-md border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pt-3 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div className="max-w-full mx-auto">
+          {/* Precio siempre visible en sticky */}
+          <div className="mb-2 text-center">
+            <p className="text-2xl font-bold text-text-primary">
+              ${resolvedPrice.toFixed(2)}
+            </p>
+          </div>
+          
+          {/* CTA Button */}
           <AddToCartButton
             id={product.id}
             title={product.title}
@@ -251,25 +301,20 @@ export default function ProductDetailClient({
             image={cartImage}
             variantSelections={variantSelections}
             label={ctaLabel}
-            className="md:w-full"
+            className="w-full mt-0 py-3.5 text-base"
           />
-        </div>
 
-        {product.freeShipping && freeShippingLabel && (
-          <div className="order-5 md:hidden">
-            <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
-              {freeShippingLabel}
-            </span>
+          {/* Microcopy de confianza */}
+          <div className="mt-2.5 flex items-center justify-center gap-3 text-[10px] text-text-muted/70 leading-tight">
+            <span>Envíos internacionales</span>
+            <span>•</span>
+            <span>Devolución sin costo</span>
+            <span>•</span>
+            <span>Compra segura</span>
           </div>
-        )}
-
-        <div className="order-6 md:order-2 min-w-0">
-          <p className="text-sm md:text-lg text-text-muted break-words">
-            {product.description}
-          </p>
         </div>
       </div>
-    </section>
+    </>
   );
 }
 
