@@ -12,7 +12,7 @@ type Props = {
 export default function Breadcrumbs({ items }: Props) {
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
-      <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
+      <ol className="flex flex-wrap items-center gap-2 text-sm text-white">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
 
@@ -21,17 +21,17 @@ export default function Breadcrumbs({ items }: Props) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-gray-900 transition-colors duration-200"
+                  className="hover:text-white/80 transition-colors duration-200"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className={isLast ? "text-gray-900 font-medium" : ""}>
+                <span className={isLast ? "text-white font-medium" : "text-white"}>
                   {item.label}
                 </span>
               )}
               {!isLast && (
-                <span className="mx-2 text-gray-400" aria-hidden="true">
+                <span className="mx-2 text-white/70" aria-hidden="true">
                   /
                 </span>
               )}
