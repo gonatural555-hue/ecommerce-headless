@@ -5,7 +5,8 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
-import { useUser, type Address } from "@/context/UserContext";
+import { useUser, type Address, type Order } from "@/context/UserContext";
+import PayPalButton from "@/components/PayPalButton";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -15,7 +16,7 @@ export default function CheckoutPage() {
   const { user, addresses, setAddresses, addOrder } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
-    "manual" | "whatsapp" | "paypal_pending"
+    "manual" | "whatsapp" | "paypal" | "paypal_pending"
   >("manual");
 
   const defaultAddress =
@@ -45,6 +46,11 @@ export default function CheckoutPage() {
   const handleConfirmOrder = () => {
     if (items.length === 0 || !defaultAddress) return;
 
+    // Si el método de pago es PayPal, no procesamos aquí, se maneja en PayPalButton
+    if (paymentMethod === "paypal") {
+      return;
+    }
+
     setIsLoading(true);
 
     const orderId = `order_${Date.now()}`;
@@ -62,6 +68,35 @@ export default function CheckoutPage() {
 
     clearCart();
     router.push(`/${locale}/order-success`);
+  };
+
+  const handlePayPalSuccess = (details: any) => {
+    if (items.length === 0 || !defaultAddress) return;
+
+    setIsLoading(true);
+
+    const orderId = `order_${Date.now()}`;
+    const order: Order = {
+      id: orderId,
+      items,
+      subtotal,
+      address: defaultAddress,
+      date: new Date().toISOString(),
+      status: "paid",
+      paymentMethod: "paypal" as const,
+      paypalOrderId: details.id,
+    };
+
+    addOrder(order);
+
+    clearCart();
+    router.push(`/${locale}/order-success`);
+  };
+
+  const handlePayPalError = (error: any) => {
+    console.error("PayPal payment error:", error);
+    setIsLoading(false);
+    // Aquí podrías mostrar un mensaje de error al usuario
   };
 
   if (items.length === 0) {
@@ -266,6 +301,11 @@ export default function CheckoutPage() {
                   hint: t("checkoutPage.paymentOptions.whatsapp.hint"),
                 },
                 {
+                  value: "paypal",
+                  label: t("checkoutPage.paymentOptions.paypal.label"),
+                  hint: t("checkoutPage.paymentOptions.paypal.hint"),
+                },
+                {
                   value: "paypal_pending",
                   label: t("checkoutPage.paymentOptions.paypal_pending.label"),
                   hint: t("checkoutPage.paymentOptions.paypal_pending.hint"),
@@ -282,7 +322,7 @@ export default function CheckoutPage() {
                     checked={paymentMethod === option.value}
                     onChange={() =>
                       setPaymentMethod(
-                        option.value as "manual" | "whatsapp" | "paypal_pending"
+                        option.value as "manual" | "whatsapp" | "paypal" | "paypal_pending"
                       )
                     }
                     className="mt-1 h-4 w-4"
@@ -297,6 +337,18 @@ export default function CheckoutPage() {
                   </span>
                 </label>
               ))}
+              {/* Mostrar botón de PayPal cuando se seleccione PayPal */}
+              {paymentMethod === "paypal" && defaultAddress && (
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <PayPalButton
+                    amount={subtotal}
+                    currency="USD"
+                    onSuccess={handlePayPalSuccess}
+                    onError={handlePayPalError}
+                    onCancel={() => setIsLoading(false)}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
@@ -362,13 +414,15 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <button
-              onClick={handleConfirmOrder}
-              disabled={isLoading || !defaultAddress}
-              className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? t("checkoutPage.confirming") : t("checkoutPage.confirmOrder")}
-            </button>
+            {paymentMethod !== "paypal" && (
+              <button
+                onClick={handleConfirmOrder}
+                disabled={isLoading || !defaultAddress}
+                className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? t("checkoutPage.confirming") : t("checkoutPage.confirmOrder")}
+              </button>
+            )}
 
             <p className="mt-4 text-xs text-center text-gray-500">
               {t("checkoutPage.terms")}

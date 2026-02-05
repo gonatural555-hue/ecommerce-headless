@@ -1798,6 +1798,10 @@
         "label": "Contact via WhatsApp",
         "hint": "We coordinate payment via message"
       },
+      "paypal": {
+        "label": "PayPal",
+        "hint": "Pay securely with PayPal"
+      },
       "paypal_pending": {
         "label": "PayPal (coming soon)",
         "hint": "We will send you the payment link"
