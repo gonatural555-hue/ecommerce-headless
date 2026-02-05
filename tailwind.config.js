@@ -19,6 +19,7 @@ const config = {
         background: {
           DEFAULT: "#0B0F0E",
           surface: "#121917",
+          primary: "#122220",
         },
         text: {
           primary: "#E6ECE9",

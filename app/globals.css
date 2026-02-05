@@ -11,6 +11,9 @@
   --color-accent-gold: #C89B3C;
   --color-accent-moss: #3A5F4A;
 
+  /* Global background color */
+  --bg-primary: #122220;
+
   /* Variables semánticas para uso en componentes */
   --background: var(--color-dark-base);
   --foreground: var(--color-text-primary);
@@ -38,12 +41,13 @@
 html {
   height: 100%;
   position: relative;
+  background-color: var(--bg-primary);
 }
 
 body {
   position: relative;
   min-height: 100%;
-  background: var(--background);
+  background: var(--bg-primary);
   color: var(--foreground);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   /* Ensure content is above background */
