@@ -45,7 +45,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <main className="relative w-full overflow-hidden pt-28 pb-12 md:pt-32 md:pb-20">
+      <main data-route="cart" className="relative w-full overflow-hidden pt-28 pb-12 md:pt-32 md:pb-20">
         <div className="absolute inset-0">
           <Image
             src="/assets/images/hero/emptycart.webp"
@@ -73,7 +73,7 @@ export default function CartPage() {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 md:pt-32 md:pb-12">
+    <main data-route="cart" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 md:pt-32 md:pb-12">
       <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">
         {t("cartPage.title")}
       </h1>

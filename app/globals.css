@@ -161,3 +161,24 @@ body::before {
     animation: none;
   }
 }
+
+/* Estilos específicos para páginas de carrito, checkout y order-success */
+/* Cambiar contenedores blancos a #CCD0CF solo en estas páginas */
+
+/* Cart page - Sobrescribir bg-white y bg-gray-50 */
+main[data-route="cart"] .bg-white,
+main[data-route="cart"] .bg-gray-50 {
+  background-color: #CCD0CF !important;
+}
+
+/* Checkout page - Sobrescribir bg-white y bg-gray-50 */
+main[data-route="checkout"] .bg-white,
+main[data-route="checkout"] .bg-gray-50 {
+  background-color: #CCD0CF !important;
+}
+
+/* Order success page - Sobrescribir bg-white y bg-gray-50 */
+main[data-route="order-success"] .bg-white,
+main[data-route="order-success"] .bg-gray-50 {
+  background-color: #CCD0CF !important;
+}

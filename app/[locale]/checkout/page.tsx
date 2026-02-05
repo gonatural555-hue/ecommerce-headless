@@ -101,7 +101,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <main className="max-w-4xl mx-auto px-4 py-12 md:py-20">
+      <main data-route="checkout" className="max-w-4xl mx-auto px-4 py-12 md:py-20">
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {t("checkoutPage.emptyTitle")}
@@ -121,7 +121,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-3 sm:px-4 pt-28 pb-8 md:pt-32 md:pb-12 min-h-[100dvh] md:min-h-0">
+    <main data-route="checkout" className="max-w-6xl mx-auto px-3 sm:px-4 pt-28 pb-8 md:pt-32 md:pb-12 min-h-[100dvh] md:min-h-0">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between gap-4">
