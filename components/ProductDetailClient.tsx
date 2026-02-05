@@ -261,7 +261,7 @@ export default function ProductDetailClient({
       </section>
 
       {/* Desktop Layout (>=1024px) - Layout tipo Patagonia */}
-      <section className="hidden lg:grid lg:grid-cols-[1.6fr_1fr] lg:gap-12 items-start max-w-full">
+      <section className="hidden lg:grid lg:grid-cols-[1.65fr_1fr] lg:gap-12 items-start max-w-full">
         {/* Columna izquierda: Grid de imágenes (60-65%) */}
         <div className="relative z-0">
           <ProductImageGridDesktop
@@ -274,7 +274,7 @@ export default function ProductDetailClient({
 
         {/* Columna derecha: Info sticky (35-40%) */}
         <div className="relative z-10">
-          <div className="sticky top-24 flex flex-col gap-6">
+          <div className="sticky top-24 flex flex-col gap-6 min-w-0">
             {/* Título */}
             <div>
               <h1 className="text-4xl font-semibold text-text-primary break-words">

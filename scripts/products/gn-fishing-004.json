@@ -11,12 +11,7 @@
     "lifestyle": [
       "/assets/images/products/gn-fishing-004/casting/gallery-02.webp"
     ],
-    "extras": [
-      "https://ae01.alicdn.com/kf/S39d7a28bc0bb4c3f97cce95b2714539dH.jpg",
-      "https://ae01.alicdn.com/kf/Sbe5369e8876b47bb96bacba85a5188dbh.jpg",
-      "https://ae01.alicdn.com/kf/S19306ec49bbc4905a3f339b311aed1538.jpg",
-      "https://ae01.alicdn.com/kf/S9906723f0adc49c092bbdc26c8f40dcfO.jpg"
-    ]
+    "extras": []
   },
   "variants": {
     "type": "rod_type",
