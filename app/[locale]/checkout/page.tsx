@@ -16,7 +16,7 @@ export default function CheckoutPage() {
   const { user, addresses, setAddresses, addOrder } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<
-    "manual" | "whatsapp" | "paypal" | "paypal_pending"
+    "manual" | "whatsapp" | "paypal"
   >("manual");
 
   const defaultAddress =
@@ -106,7 +106,7 @@ export default function CheckoutPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {t("checkoutPage.emptyTitle")}
           </h1>
-          <p className="text-gray-600 mb-8">
+          <p className="text-accent-gold mb-8">
             {t("checkoutPage.emptyText")}
           </p>
           <Link
@@ -145,25 +145,25 @@ export default function CheckoutPage() {
               {t("checkoutPage.shippingAddress")}
             </h2>
             {defaultAddress ? (
-              <div className="text-sm text-gray-700 space-y-1">
+              <div className="text-sm space-y-1">
                 <p className="font-semibold text-gray-900">
                   {defaultAddress.fullName}
                 </p>
-                <p>
+                <p className="text-accent-gold">
                   {defaultAddress.addressLine1}
                   {defaultAddress.addressLine2
                     ? `, ${defaultAddress.addressLine2}`
                     : ""}
                 </p>
-                <p>
+                <p className="text-accent-gold">
                   {defaultAddress.city} · {defaultAddress.postalCode}
                 </p>
-                <p>{defaultAddress.country}</p>
-                <p>{defaultAddress.phone}</p>
+                <p className="text-accent-gold">{defaultAddress.country}</p>
+                <p className="text-accent-gold">{defaultAddress.phone}</p>
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-accent-gold">
                   {t("checkoutPage.addAddress")}
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2 overflow-x-hidden">
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
                   </button>
                   <Link
                     href={`/${locale}/account`}
-                    className="text-sm text-gray-600 hover:text-gray-900 underline transition"
+                    className="text-sm text-accent-gold hover:text-accent-gold/80 underline transition"
                   >
                     {t("checkoutPage.manageAddresses")}
                   </Link>
@@ -305,15 +305,10 @@ export default function CheckoutPage() {
                   label: t("checkoutPage.paymentOptions.paypal.label"),
                   hint: t("checkoutPage.paymentOptions.paypal.hint"),
                 },
-                {
-                  value: "paypal_pending",
-                  label: t("checkoutPage.paymentOptions.paypal_pending.label"),
-                  hint: t("checkoutPage.paymentOptions.paypal_pending.hint"),
-                },
               ].map((option) => (
                 <label
                   key={option.value}
-                  className="flex items-start gap-3 rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 transition-colors hover:border-gray-300"
+                  className="flex items-start gap-3 rounded-lg border border-gray-200 px-4 py-3 text-sm transition-colors hover:border-gray-300"
                 >
                   <input
                     type="radio"
@@ -322,7 +317,7 @@ export default function CheckoutPage() {
                     checked={paymentMethod === option.value}
                     onChange={() =>
                       setPaymentMethod(
-                        option.value as "manual" | "whatsapp" | "paypal" | "paypal_pending"
+                        option.value as "manual" | "whatsapp" | "paypal"
                       )
                     }
                     className="mt-1 h-4 w-4"
@@ -331,7 +326,7 @@ export default function CheckoutPage() {
                     <span className="block font-semibold text-gray-900">
                       {option.label}
                     </span>
-                    <span className="block text-xs text-gray-500">
+                    <span className="block text-xs text-accent-gold">
                       {option.hint}
                     </span>
                   </span>
@@ -366,7 +361,7 @@ export default function CheckoutPage() {
                     <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1 truncate">
                       {item.title}
                     </h3>
-                    <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                    <div className="flex items-center gap-4 mt-2 text-sm text-accent-gold">
                       <span>{t("checkoutPage.quantity")}: {item.quantity}</span>
                       <span className="hidden sm:inline">•</span>
                       <span className="hidden sm:inline">
@@ -393,11 +388,11 @@ export default function CheckoutPage() {
             </h2>
 
             <div className="space-y-4 mb-6">
-              <div className="flex justify-between text-base text-gray-700">
-                <span>{t("checkoutPage.subtotal")}</span>
-                <span className="font-medium">{formatPrice(subtotal)}</span>
+              <div className="flex justify-between text-base">
+                <span className="text-accent-gold">{t("checkoutPage.subtotal")}</span>
+                <span className="font-medium text-gray-900">{formatPrice(subtotal)}</span>
               </div>
-              <div className="flex justify-between text-sm text-gray-600 pt-2 border-t border-gray-300">
+              <div className="flex justify-between text-sm text-accent-gold pt-2 border-t border-gray-300">
                 <span>{t("checkoutPage.shipping")}</span>
                 <span>{t("checkoutPage.shippingCalculated")}</span>
               </div>
@@ -424,13 +419,13 @@ export default function CheckoutPage() {
               </button>
             )}
 
-            <p className="mt-4 text-xs text-center text-gray-500">
+            <p className="mt-4 text-xs text-center text-accent-gold">
               {t("checkoutPage.terms")}
             </p>
 
             <Link
               href={`/${locale}/cart`}
-              className="block mt-6 text-center text-sm text-gray-600 hover:text-gray-900 underline transition"
+              className="block mt-6 text-center text-sm text-accent-gold hover:text-accent-gold/80 underline transition"
             >
               {t("checkoutPage.backToCart")}
             </Link>

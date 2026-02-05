@@ -63,7 +63,7 @@ export default function OrderSuccessPage() {
 
       {!order ? (
         <div className="mt-10 bg-white border border-gray-200 rounded-lg p-6 md:p-8 text-center">
-          <p className="text-gray-600">
+          <p className="text-accent-gold">
             No encontramos información del pedido reciente.
           </p>
           <Link
@@ -79,12 +79,9 @@ export default function OrderSuccessPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Resumen del pedido
             </h2>
-            <div className="mb-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700">
+            <div className="mb-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-accent-gold">
               {order.paymentMethod === "whatsapp" && (
                 <span>Te contactaremos por WhatsApp para finalizar el pago.</span>
-              )}
-              {order.paymentMethod === "paypal_pending" && (
-                <span>Te enviaremos el link de pago de PayPal.</span>
               )}
               {(!order.paymentMethod || order.paymentMethod === "manual") && (
                 <span>Te contactaremos para finalizar el pago.</span>
@@ -94,11 +91,11 @@ export default function OrderSuccessPage() {
               {order.items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between text-sm text-gray-700"
+                  className="flex items-center justify-between text-sm"
                 >
                   <div>
                     <p className="font-semibold text-gray-900">{item.title}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-accent-gold">
                       Cantidad: {item.quantity}
                     </p>
                   </div>
@@ -113,7 +110,7 @@ export default function OrderSuccessPage() {
               <span>{formatPrice(order.subtotal)}</span>
             </div>
             {formattedDate && (
-              <p className="mt-3 text-xs text-gray-500">
+              <p className="mt-3 text-xs text-accent-gold">
                 Pedido realizado el {formattedDate}
               </p>
             )}
@@ -123,21 +120,21 @@ export default function OrderSuccessPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Dirección de envío
             </h2>
-            <div className="text-sm text-gray-700 space-y-1">
+            <div className="text-sm space-y-1">
               <p className="font-semibold text-gray-900">
                 {order.address.fullName}
               </p>
-              <p>
+              <p className="text-accent-gold">
                 {order.address.addressLine1}
                 {order.address.addressLine2
                   ? `, ${order.address.addressLine2}`
                   : ""}
               </p>
-              <p>
+              <p className="text-accent-gold">
                 {order.address.city} · {order.address.postalCode}
               </p>
-              <p>{order.address.country}</p>
-              <p>{order.address.phone}</p>
+              <p className="text-accent-gold">{order.address.country}</p>
+              <p className="text-accent-gold">{order.address.phone}</p>
             </div>
             {order.paymentMethod === "whatsapp" && (
               <Link

@@ -31,7 +31,7 @@ export type Order = {
   address: Address;
   date: string;
   status: string;
-  paymentMethod?: "manual" | "whatsapp" | "paypal" | "paypal_pending";
+  paymentMethod?: "manual" | "whatsapp" | "paypal";
   paypalOrderId?: string;
 };
 

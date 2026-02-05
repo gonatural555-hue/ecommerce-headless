@@ -108,7 +108,7 @@ export default function CartPage() {
                         <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
                           {item.title}
                         </h2>
-                        <p className="text-base text-gray-600 mb-4">
+                        <p className="text-base text-accent-gold mb-4">
                           {t("cartPage.unitPrice")}: {formatPrice(item.price)}
                           {formatVariantSummary(item)
                             ? ` · ${formatVariantSummary(item)}`
@@ -152,7 +152,7 @@ export default function CartPage() {
                       {/* Subtotal del item */}
                       <div className="flex sm:flex-col justify-between sm:justify-start items-end sm:items-end gap-2 sm:gap-1">
                         <div className="text-right sm:text-right">
-                          <p className="text-sm text-gray-500 sm:mb-1">
+                          <p className="text-sm text-accent-gold sm:mb-1">
                             {t("cartPage.itemSubtotal")}
                           </p>
                           <p className="text-lg sm:text-xl font-bold text-gray-900">
@@ -176,15 +176,15 @@ export default function CartPage() {
             </h2>
 
             <div className="space-y-4 mb-6">
-              <div className="flex justify-between items-center text-gray-700">
-                <span className="text-base">{t("cartPage.summarySubtotal")}</span>
+              <div className="flex justify-between items-center">
+                <span className="text-base text-accent-gold">{t("cartPage.summarySubtotal")}</span>
                 <span className="font-semibold text-gray-900">
                   {formatPrice(subtotal)}
                 </span>
               </div>
 
               <div className="pt-4 border-t border-gray-300">
-                <p className="text-sm text-gray-600 mb-2">
+                <p className="text-sm text-accent-gold mb-2">
                   {t("cartPage.summaryNote")}
                 </p>
               </div>
@@ -209,7 +209,7 @@ export default function CartPage() {
 
               <Link
                 href={`/${locale}/products`}
-                className="block mt-4 text-center text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-150"
+                className="block mt-4 text-center text-sm text-accent-gold hover:text-accent-gold/80 font-medium transition-colors duration-150"
               >
                 {t("cartPage.continueShopping")}
               </Link>
