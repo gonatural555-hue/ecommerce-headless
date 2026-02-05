@@ -48,7 +48,7 @@ const PRODUCTS: Product[] = [
   {
     id: "gn-fishing-001",
     title: "Caña de Pescar Telescópica de Carbono Ultraligera",
-    price: 22.90,
+    price: 0.10,
     category: "Fishing",
     images: [
           "/assets/images/products/gn-fishing-001/image.webp"
