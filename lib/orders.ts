@@ -15,6 +15,9 @@ import {
 // Esto se ejecuta solo una vez al importar el módulo
 import "./order-email-handlers";
 
+// Registrar handlers de automatizaciones post-compra
+import "./order-automation-handlers";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {
