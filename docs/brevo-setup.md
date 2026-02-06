@@ -38,7 +38,7 @@ Agrega estas variables a tu `.env.local`:
 
 ```env
 # Brevo Configuration
-BREVO_API_KEY=tu_api_key_aqui
+BREVO_API_KEY=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
 BREVO_LIST_COMPRADORES=1
 BREVO_LIST_REGISTRADOS=2
 BREVO_LIST_NEWSLETTER=3
