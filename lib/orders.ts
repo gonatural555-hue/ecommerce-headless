@@ -5,6 +5,12 @@
  * Funciones inmutables y extensibles.
  */
 
+import {
+  emitOrderCreated,
+  emitOrderPaid,
+  emitOrderCompleted,
+} from "./order-events";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {
@@ -27,19 +33,20 @@ export type Order = {
 
 /**
  * Crea una nueva orden con estado "created"
+ * Dispara el evento ORDER_CREATED
  * 
  * @param data - Datos de la orden
  * @returns Nueva orden con estado "created"
  */
-export function createOrder(data: {
+export async function createOrder(data: {
   id: string;
   email: string;
   items: OrderItem[];
   totalAmount: number;
   currency?: string;
   paymentMethod: string;
-}): Order {
-  return {
+}): Promise<Order> {
+  const order: Order = {
     id: data.id,
     email: data.email,
     items: [...data.items], // Copia para inmutabilidad
@@ -49,48 +56,65 @@ export function createOrder(data: {
     status: "created",
     createdAt: new Date(),
   };
+
+  // Disparar evento ORDER_CREATED
+  await emitOrderCreated(order);
+
+  return order;
 }
 
 /**
  * Marca una orden como pagada
  * Valida que la orden esté en estado "created"
+ * Dispara el evento ORDER_PAID
  * 
  * @param order - Orden a marcar como pagada
  * @returns Nueva orden con estado "paid"
  * @throws Error si la orden no está en estado "created"
  */
-export function markOrderAsPaid(order: Order): Order {
+export async function markOrderAsPaid(order: Order): Promise<Order> {
   if (order.status !== "created") {
     throw new Error(
       `Cannot mark order as paid. Current status: ${order.status}. Expected: "created"`
     );
   }
 
-  return {
+  const paidOrder: Order = {
     ...order,
     status: "paid",
   };
+
+  // Disparar evento ORDER_PAID
+  await emitOrderPaid(paidOrder);
+
+  return paidOrder;
 }
 
 /**
  * Marca una orden como completada
  * Valida que la orden esté en estado "paid"
+ * Dispara el evento ORDER_COMPLETED
  * 
  * @param order - Orden a marcar como completada
  * @returns Nueva orden con estado "completed"
  * @throws Error si la orden no está en estado "paid"
  */
-export function markOrderAsCompleted(order: Order): Order {
+export async function markOrderAsCompleted(order: Order): Promise<Order> {
   if (order.status !== "paid") {
     throw new Error(
       `Cannot mark order as completed. Current status: ${order.status}. Expected: "paid"`
     );
   }
 
-  return {
+  const completedOrder: Order = {
     ...order,
     status: "completed",
   };
+
+  // Disparar evento ORDER_COMPLETED
+  await emitOrderCompleted(completedOrder);
+
+  return completedOrder;
 }
 
 /**
