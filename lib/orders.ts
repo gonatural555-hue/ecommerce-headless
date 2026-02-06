@@ -21,6 +21,9 @@ import "./order-automation-handlers";
 // Registrar handlers de sincronización con Google Sheets
 import "./order-sheets-handler";
 
+// Registrar handlers de sincronización con Brevo
+import "./brevo-handlers";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {
