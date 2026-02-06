@@ -18,6 +18,9 @@ import "./order-email-handlers";
 // Registrar handlers de automatizaciones post-compra
 import "./order-automation-handlers";
 
+// Registrar handlers de sincronización con Google Sheets
+import "./order-sheets-handler";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {

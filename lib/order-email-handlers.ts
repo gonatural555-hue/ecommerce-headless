@@ -15,6 +15,7 @@ import {
   getOrderPaidEmailTemplate,
   getOrderCompletedEmailTemplate,
 } from "./email-templates";
+import { markEmailAsSentInSheet } from "./order-sheets-handler";
 
 /**
  * Handler para ORDER_CREATED
@@ -27,7 +28,12 @@ async function handleOrderCreated(event: OrderEvent): Promise<void> {
   const subject = `Pedido confirmado - ${order.id}`;
   const html = getOrderCreatedEmailTemplate(order, supportEmail);
 
-  await sendTransactionalEmail(order.email, subject, html);
+  const sent = await sendTransactionalEmail(order.email, subject, html);
+  
+  // Actualizar estado en Google Sheets si se envió
+  if (sent) {
+    await markEmailAsSentInSheet(order.id);
+  }
 }
 
 /**
@@ -41,7 +47,12 @@ async function handleOrderPaid(event: OrderEvent): Promise<void> {
   const subject = `Pago recibido - ${order.id}`;
   const html = getOrderPaidEmailTemplate(order, supportEmail);
 
-  await sendTransactionalEmail(order.email, subject, html);
+  const sent = await sendTransactionalEmail(order.email, subject, html);
+  
+  // Actualizar estado en Google Sheets si se envió
+  if (sent) {
+    await markEmailAsSentInSheet(order.id);
+  }
 }
 
 /**
@@ -55,7 +66,12 @@ async function handleOrderCompleted(event: OrderEvent): Promise<void> {
   const subject = `Pedido completado - ${order.id}`;
   const html = getOrderCompletedEmailTemplate(order, supportEmail);
 
-  await sendTransactionalEmail(order.email, subject, html);
+  const sent = await sendTransactionalEmail(order.email, subject, html);
+  
+  // Actualizar estado en Google Sheets si se envió
+  if (sent) {
+    await markEmailAsSentInSheet(order.id);
+  }
 }
 
 /**
