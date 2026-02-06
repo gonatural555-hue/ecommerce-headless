@@ -24,6 +24,9 @@ import "./order-sheets-handler";
 // Registrar handlers de sincronización con Brevo
 import "./brevo-handlers";
 
+// Registrar handler de email transaccional con Brevo para ORDER_CREATED
+import "./brevo-order-email-handler";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {
