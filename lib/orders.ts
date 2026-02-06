@@ -11,6 +11,10 @@ import {
   emitOrderCompleted,
 } from "./order-events";
 
+// Registrar handlers de email automáticamente
+// Esto se ejecuta solo una vez al importar el módulo
+import "./order-email-handlers";
+
 export type OrderStatus = "created" | "paid" | "completed";
 
 export type OrderItem = {
