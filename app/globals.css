@@ -42,6 +42,25 @@ html {
   height: 100%;
   position: relative;
   background-color: var(--bg-primary);
+  /* Smooth scrolling más pesado y suave */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Momentum scrolling para efecto más pesado */
+  overscroll-behavior-y: contain;
+  /* Suavizar transiciones de scroll */
+  scroll-padding-top: 0;
+}
+
+/* Smooth scroll con momentum pesado */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Aplicar momentum scrolling más pesado */
+  * {
+    scroll-behavior: inherit;
+  }
 }
 
 body {
@@ -52,6 +71,11 @@ body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   /* Ensure content is above background */
   z-index: 1;
+  /* Smooth scrolling con momentum pesado */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Reducir velocidad del scroll para efecto más pesado */
+  scroll-padding-top: 0;
 }
 
 /* Cinematic Dark Outdoor - Fondo sutil */
