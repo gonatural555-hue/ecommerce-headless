@@ -34,18 +34,49 @@
 
 ### 5. Configurar Variables de Entorno
 
-Agrega estas variables a tu `.env.local`:
+#### ⚠️ IMPORTANTE: Seguridad de Secretos
+
+**NUNCA commitees API keys o secretos al repositorio.** Todos los secretos deben configurarse exclusivamente mediante variables de entorno.
+
+#### Para Desarrollo Local
+
+Crea un archivo `.env.local` en la raíz del proyecto (este archivo ya está en `.gitignore`):
 
 ```env
 # Brevo Configuration
-BREVO_API_KEY=YOUR_BREVO_API_KEY
-BREVO_LIST_COMPRADORES=1
-BREVO_LIST_REGISTRADOS=2
-BREVO_LIST_NEWSLETTER=3
+BREVO_API_KEY=YOUR_BREVO_API_KEY_HERE
+BREVO_LIST_COMPRADORES=YOUR_LIST_ID_HERE
+BREVO_LIST_REGISTRADOS=YOUR_LIST_ID_HERE
+BREVO_LIST_NEWSLETTER=YOUR_LIST_ID_HERE
 
 # Opcional: Secret para proteger el endpoint de sincronización
-BREVO_SYNC_SECRET=tu_secret_aqui
+BREVO_SYNC_SECRET=YOUR_SECRET_HERE
 ```
+
+**Reemplaza los valores `YOUR_*_HERE` con tus valores reales.** Este archivo nunca debe ser commiteado.
+
+#### Para Producción (Vercel)
+
+1. Ve a tu proyecto en [Vercel Dashboard](https://vercel.com/dashboard)
+2. Navega a **Settings** > **Environment Variables**
+3. Agrega las siguientes variables:
+
+| Variable | Valor | Entornos |
+|----------|-------|----------|
+| `BREVO_API_KEY` | Tu API Key de Brevo | Production, Preview, Development |
+| `BREVO_LIST_COMPRADORES` | ID de la lista de compradores | Production, Preview, Development |
+| `BREVO_LIST_REGISTRADOS` | ID de la lista de registrados (opcional) | Production, Preview, Development |
+| `BREVO_LIST_NEWSLETTER` | ID de la lista de newsletter (opcional) | Production, Preview, Development |
+| `BREVO_SYNC_SECRET` | Secret para proteger el endpoint (opcional) | Production, Preview, Development |
+
+4. Haz clic en **Save** para cada variable
+5. Vercel aplicará automáticamente estas variables en el próximo deploy
+
+#### Verificación
+
+El código verifica automáticamente si las variables están configuradas:
+- Si falta `BREVO_API_KEY`, el sistema loguea un warning pero no rompe el flujo
+- Los emails y sincronizaciones solo funcionan si las variables están correctamente configuradas
 
 ## Funcionalidades
 
@@ -62,14 +93,14 @@ Para sincronizar contactos manualmente:
 
 ```bash
 POST /api/brevo/sync
-Authorization: Bearer YOUR_SECRET
+Authorization: Bearer YOUR_BREVO_SYNC_SECRET
 Content-Type: application/json
 
 {
   "type": "buyer", // "buyer" | "registered" | "newsletter"
   "contacts": [
     {
-      "email": "cliente@email.com",
+      "email": "cliente@example.com",
       "fechaPrimeraCompra": "2024-01-15T10:00:00Z",
       "totalGastado": 150.00,
       "idioma": "es",
@@ -79,6 +110,8 @@ Content-Type: application/json
   ]
 }
 ```
+
+**Nota:** Reemplaza `YOUR_BREVO_SYNC_SECRET` con el valor de `BREVO_SYNC_SECRET` configurado en tus variables de entorno. Si no configuraste `BREVO_SYNC_SECRET`, el endpoint no requiere autenticación (no recomendado para producción).
 
 ## Cumplimiento GDPR
 
