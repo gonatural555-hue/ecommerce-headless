@@ -173,7 +173,7 @@ const PRODUCTS: Product[] = [
   {
     id: "gn-fishing-eq-006",
     title: "Alicates de Pesca Multifunción con Cortador de Línea",
-    price: 7.30,
+    price: 0,
     category: "Fishing Equipment",
     images: [
       "/assets/images/products/gn-fishing-eq-006/blue/image.webp"
