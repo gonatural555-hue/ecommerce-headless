@@ -70,12 +70,65 @@ export default function CheckoutPage() {
     router.push(`/${locale}/order-success`);
   };
 
-  const handlePayPalSuccess = (details: any) => {
+  const handlePayPalSuccess = async (details: any) => {
     if (items.length === 0 || !defaultAddress) return;
 
     setIsLoading(true);
 
     const orderId = `order_${Date.now()}`;
+
+    // 1) Enviar la orden al backend para crearla y marcarla como pagada
+    //    Esto dispara los eventos de órdenes y la sincronización con Google Sheets.
+    try {
+      const payload = {
+        orderId,
+        email: user?.email || "",
+        items: items.map((item) => ({
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+        totalAmount: subtotal,
+        currency: "USD" as const,
+        paypalOrderId: details?.id,
+      };
+
+      console.log("[Checkout] Enviando orden PayPal al backend", payload);
+
+      const response = await fetch("/api/orders/paypal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      console.log("[Checkout] Respuesta backend /api/orders/paypal", {
+        ok: response.ok,
+        status: response.status,
+        body: data,
+      });
+
+      if (!response.ok || !data?.success) {
+        console.error(
+          "[Checkout] Falló creación de orden en backend, continuando sin Sheets",
+          {
+            status: response.status,
+            body: data,
+          }
+        );
+      }
+    } catch (error) {
+      console.error(
+        "[Checkout] Error llamando a /api/orders/paypal, continuando sin Sheets",
+        error
+      );
+    }
+
+    // 2) Actualizar estado local del usuario para la UI
     const order: Order = {
       id: orderId,
       items,

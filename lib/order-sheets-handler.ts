@@ -13,7 +13,19 @@ import { upsertOrderToSheet, updateEmailSentStatus } from "./google-sheets";
  */
 async function handleOrderCreated(event: OrderEvent): Promise<void> {
   const { order } = event;
-  await upsertOrderToSheet(order, false);
+
+  console.log("[Order Sheets Handler] ORDER_CREATED recibido", {
+    orderId: order.id,
+    status: order.status,
+  });
+
+  const synced = await upsertOrderToSheet(order, false);
+
+  console.log("[Order Sheets Handler] Resultado sincronización ORDER_CREATED", {
+    orderId: order.id,
+    status: order.status,
+    synced,
+  });
 }
 
 /**
@@ -22,7 +34,19 @@ async function handleOrderCreated(event: OrderEvent): Promise<void> {
  */
 async function handleOrderPaid(event: OrderEvent): Promise<void> {
   const { order } = event;
-  await upsertOrderToSheet(order, false);
+
+  console.log("[Order Sheets Handler] ORDER_PAID recibido", {
+    orderId: order.id,
+    status: order.status,
+  });
+
+  const synced = await upsertOrderToSheet(order, false);
+
+  console.log("[Order Sheets Handler] Resultado sincronización ORDER_PAID", {
+    orderId: order.id,
+    status: order.status,
+    synced,
+  });
 }
 
 /**
@@ -31,7 +55,22 @@ async function handleOrderPaid(event: OrderEvent): Promise<void> {
  */
 async function handleOrderCompleted(event: OrderEvent): Promise<void> {
   const { order } = event;
-  await upsertOrderToSheet(order, false);
+
+  console.log("[Order Sheets Handler] ORDER_COMPLETED recibido", {
+    orderId: order.id,
+    status: order.status,
+  });
+
+  const synced = await upsertOrderToSheet(order, false);
+
+  console.log(
+    "[Order Sheets Handler] Resultado sincronización ORDER_COMPLETED",
+    {
+      orderId: order.id,
+      status: order.status,
+      synced,
+    }
+  );
 }
 
 /**

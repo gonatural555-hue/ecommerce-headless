@@ -11,21 +11,11 @@ import {
   emitOrderCompleted,
 } from "./order-events";
 
-// Registrar handlers de email automáticamente
-// Esto se ejecuta solo una vez al importar el módulo
-import "./order-email-handlers";
-
-// Registrar handlers de automatizaciones post-compra
-import "./order-automation-handlers";
-
 // Registrar handlers de sincronización con Google Sheets
+// IMPORTANTE: dejamos solo la integración de Sheets activa.
+// Todos los handlers de email / Brevo / automatizaciones se desactivan
+// para estabilizar el sistema y evitar efectos secundarios no deseados.
 import "./order-sheets-handler";
-
-// Registrar handlers de sincronización con Brevo
-import "./brevo-handlers";
-
-// Registrar handler de email transaccional con Brevo para ORDER_CREATED
-import "./brevo-order-email-handler";
 
 export type OrderStatus = "created" | "paid" | "completed";
 
