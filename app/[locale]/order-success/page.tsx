@@ -2,23 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { useLocale } from "@/components/i18n/LocaleProvider";
+import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { useUser, type Order } from "@/context/UserContext";
 
-type Address = {
-  id: string;
-  fullName: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2?: string;
-  city: string;
-  postalCode: string;
-  country: string;
-  isDefault: boolean;
-};
+function interpolate(template: string, vars: Record<string, string>) {
+  return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
+}
+
+type FlowStep = { title: string; description: string };
 
 export default function OrderSuccessPage() {
   const locale = useLocale();
+  const t = useTranslations();
   const { orders, lastOrderId } = useUser();
   const [order, setOrder] = useState<Order | null>(null);
 
@@ -30,18 +25,27 @@ export default function OrderSuccessPage() {
     if (found) setOrder(found);
   }, [orders, lastOrderId]);
 
+  const dateLocale =
+    locale === "es"
+      ? "es-AR"
+      : locale === "fr"
+        ? "fr-FR"
+        : locale === "it"
+          ? "it-IT"
+          : "en-US";
+
   const formattedDate = useMemo(() => {
     if (!order?.date) return "";
     const date = new Date(order.date);
-    return date.toLocaleDateString("es-AR", {
+    return date.toLocaleDateString(dateLocale, {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
-  }, [order?.date]);
+  }, [order?.date, dateLocale]);
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("es-AR", {
+    return new Intl.NumberFormat(dateLocale, {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 0,
@@ -49,274 +53,266 @@ export default function OrderSuccessPage() {
     }).format(price);
   };
 
-  const getNextSteps = () => {
-    if (order?.paymentMethod === "whatsapp") {
-      return [
-        {
-          icon: "💬",
-          title: "Te contactaremos por WhatsApp",
-          description: "En las próximas horas nos pondremos en contacto para coordinar el pago.",
-        },
-        {
-          icon: "📦",
-          title: "Prepararemos tu pedido",
-          description: "Una vez confirmado el pago, comenzaremos a preparar tu envío.",
-        },
-        {
-          icon: "🚚",
-          title: "Te notificaremos el envío",
-          description: "Recibirás un email con el número de seguimiento cuando tu pedido salga.",
-        },
-      ];
+  let flowSteps: FlowStep[] = [];
+  if (order) {
+    const key =
+      order.paymentMethod === "whatsapp"
+        ? "orderSuccessPage.flows.whatsapp"
+        : order.paymentMethod === "paypal" && order.status === "paid"
+          ? "orderSuccessPage.flows.paypalPaid"
+          : "orderSuccessPage.flows.default";
+    const raw = t(key);
+    flowSteps = Array.isArray(raw) ? (raw as FlowStep[]) : [];
+  }
+
+  const paymentBanner = (() => {
+    if (!order) return null;
+    if (order.paymentMethod === "whatsapp") {
+      return {
+        title: t("orderSuccessPage.paymentBanner.whatsappTitle"),
+        body: t("orderSuccessPage.paymentBanner.whatsappBody"),
+        className: "border-amber-400/30 bg-amber-950/40 text-amber-100/95",
+      };
     }
-    if (order?.paymentMethod === "paypal" && order?.status === "paid") {
-      return [
-        {
-          icon: "✅",
-          title: "Pago confirmado",
-          description: "Tu pago ha sido procesado correctamente.",
-        },
-        {
-          icon: "📦",
-          title: "Preparando tu pedido",
-          description: "Estamos preparando tu pedido para el envío.",
-        },
-        {
-          icon: "🚚",
-          title: "Te notificaremos el envío",
-          description: "Recibirás un email con el número de seguimiento cuando tu pedido salga.",
-        },
-      ];
+    if (!order.paymentMethod || order.paymentMethod === "manual") {
+      return {
+        title: t("orderSuccessPage.paymentBanner.manualTitle"),
+        body: t("orderSuccessPage.paymentBanner.manualBody"),
+        className: "border-blue-400/25 bg-blue-950/35 text-blue-100/95",
+      };
     }
-    return [
-      {
-        icon: "📧",
-        title: "Revisa tu email",
-        description: "Te enviamos un email de confirmación con los detalles de tu pedido.",
-      },
-      {
-        icon: "⏳",
-        title: "Procesando tu pedido",
-        description: "Estamos procesando tu pedido y te contactaremos pronto.",
-      },
-      {
-        icon: "📦",
-        title: "Preparación y envío",
-        description: "Una vez confirmado, prepararemos tu pedido y te notificaremos cuando salga.",
-      },
-    ];
-  };
+    if (order.paymentMethod === "paypal" && order.status === "paid") {
+      return {
+        title: t("orderSuccessPage.paymentBanner.paidTitle"),
+        body: t("orderSuccessPage.paymentBanner.paidBody"),
+        className: "border-emerald-400/30 bg-emerald-950/35 text-emerald-100/95",
+      };
+    }
+    return {
+      title: t("orderSuccessPage.paymentBanner.manualTitle"),
+      body: t("orderSuccessPage.paymentBanner.manualBody"),
+      className: "border-blue-400/25 bg-blue-950/35 text-blue-100/95",
+    };
+  })();
 
   return (
-    <main data-route="order-success" className="max-w-5xl mx-auto px-4 py-12 md:py-20">
-      {/* Header con mensaje claro */}
-      <div className="text-center max-w-2xl mx-auto mb-12">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+    <main
+      data-route="order-success"
+      className="max-w-5xl mx-auto px-4 pt-28 pb-20 md:pt-32 md:pb-28 overflow-x-hidden"
+    >
+      {/* Hero */}
+      <section className="relative text-center max-w-2xl mx-auto mb-14 md:mb-16">
+        <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full border border-accent-gold/40 bg-accent-gold/10 shadow-[0_0_40px_-8px_rgba(200,155,60,0.4)] transition-shadow duration-700 hover:shadow-[0_0_52px_-6px_rgba(200,155,60,0.55)]">
           <svg
-            className="w-10 h-10 text-green-600"
+            className="h-9 w-9 text-accent-gold"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.75}
               d="M5 13l4 4L19 7"
             />
           </svg>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          ¡Pedido recibido!
+        <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
+          Go Natural
+        </p>
+        <h1 className="text-3xl md:text-[2.15rem] font-semibold text-text-primary tracking-tight leading-tight mb-4">
+          {t("orderSuccessPage.headline")}
         </h1>
-        <p className="text-lg text-text-muted">
-          Gracias por tu compra. Hemos recibido tu pedido y te enviaremos un email de confirmación en breve.
+        <p className="text-base md:text-lg text-text-muted leading-relaxed">
+          {t("orderSuccessPage.subheadline")}
+        </p>
+        <p className="mt-6 text-sm text-text-muted/95 leading-relaxed max-w-lg mx-auto">
+          {t("orderSuccessPage.emailLine")}
         </p>
         {order && (
-          <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-            <span className="text-sm font-medium text-white">
-              Número de pedido:
+          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 backdrop-blur-sm">
+            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+              {t("orderSuccessPage.orderNumber")}
             </span>
             <span className="text-sm font-mono font-semibold text-accent-gold">
               {order.id}
             </span>
           </div>
         )}
-      </div>
+      </section>
 
       {!order ? (
-        <div className="mt-10 bg-white border border-gray-200 rounded-lg p-6 md:p-8 text-center">
-          <p className="text-gray-600 mb-2">
-            No encontramos información del pedido reciente.
-          </p>
-          <p className="text-sm text-gray-500 mb-6">
-            Si acabas de realizar un pedido, puede tardar unos segundos en aparecer.
+        <div className="rounded-2xl border border-white/10 bg-dark-surface/80 p-8 md:p-10 text-center backdrop-blur-sm">
+          <h2 className="text-lg font-semibold text-text-primary mb-2">
+            {t("orderSuccessPage.noOrderTitle")}
+          </h2>
+          <p className="text-sm text-text-muted mb-8 max-w-md mx-auto leading-relaxed">
+            {t("orderSuccessPage.noOrderHint")}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href={`/${locale}/products`}
-              className="inline-flex justify-center rounded-md bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
+              className="inline-flex justify-center rounded-xl bg-accent-gold px-8 py-3.5 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/20 transition hover:bg-accent-gold/90 active:scale-[0.98]"
             >
-              Seguir comprando
+              {t("orderSuccessPage.continueShopping")}
             </Link>
             <Link
               href={`/${locale}/account`}
-              className="inline-flex justify-center rounded-md border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
+              className="inline-flex justify-center rounded-xl border border-white/20 px-8 py-3.5 text-sm font-semibold text-text-primary transition hover:bg-white/5"
             >
-              Ver mi cuenta
+              {t("orderSuccessPage.viewAccount")}
             </Link>
           </div>
         </div>
       ) : (
-        <div className="space-y-8">
-          {/* Grid principal: Resumen y Dirección */}
+        <div className="space-y-10 md:space-y-12">
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Resumen del pedido */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                Resumen del pedido
-              </h2>
-              
-              {order.paymentMethod === "whatsapp" && (
-                <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm">
-                  <p className="font-medium text-amber-800 mb-1">
-                    💬 Pago pendiente
-                  </p>
-                  <p className="text-amber-700">
-                    Te contactaremos por WhatsApp para finalizar el pago.
-                  </p>
-                </div>
-              )}
-              {(!order.paymentMethod || order.paymentMethod === "manual") && (
-                <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm">
-                  <p className="font-medium text-blue-800 mb-1">
-                    ⏳ Procesando
-                  </p>
-                  <p className="text-blue-700">
-                    Te contactaremos para finalizar el pago.
-                  </p>
-                </div>
-              )}
-              {order.paymentMethod === "paypal" && order.status === "paid" && (
-                <div className="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm">
-                  <p className="font-medium text-green-800 mb-1">
-                    ✅ Pago confirmado
-                  </p>
-                  <p className="text-green-700">
-                    Tu pago ha sido procesado correctamente.
-                  </p>
+            <div className="rounded-2xl border border-white/10 bg-dark-surface/70 p-6 md:p-8">
+              {paymentBanner && (
+                <div
+                  className={`mb-6 rounded-xl border px-4 py-3 text-sm leading-relaxed ${paymentBanner.className}`}
+                >
+                  <p className="font-semibold mb-1">{paymentBanner.title}</p>
+                  <p className="opacity-95">{paymentBanner.body}</p>
                 </div>
               )}
 
-              <div className="space-y-4 mb-6">
+              <h2 className="text-lg font-semibold text-text-primary mb-6">
+                {t("orderSuccessPage.orderSummary")}
+              </h2>
+
+              <ul className="space-y-4 mb-8">
                 {order.items.map((item) => (
-                  <div
+                  <li
                     key={item.id}
-                    className="flex items-start justify-between gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0"
+                    className="flex items-start justify-between gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0"
                   >
-                    <div className="flex-1">
-                      <p className="font-semibold text-gray-900 mb-1">
+                    <div className="min-w-0">
+                      <p className="font-medium text-text-primary leading-snug">
                         {item.title}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        Cantidad: {item.quantity} × {formatPrice(item.price)}
+                      <p className="text-xs text-text-muted mt-1">
+                        {t("checkoutPage.quantity")}: {item.quantity} ×{" "}
+                        {formatPrice(item.price)}
                       </p>
                     </div>
-                    <span className="font-semibold text-gray-900 whitespace-nowrap">
+                    <span className="font-semibold tabular-nums text-text-primary shrink-0">
                       {formatPrice(item.price * item.quantity)}
                     </span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              <div className="pt-4 border-t border-gray-200">
-                <div className="flex items-center justify-between text-lg font-semibold text-gray-900 mb-3">
-                  <span>Total</span>
-                  <span>{formatPrice(order.subtotal)}</span>
+              <div className="pt-4 border-t border-white/10">
+                <div className="flex items-center justify-between text-lg font-semibold text-text-primary mb-2">
+                  <span>{t("orderSuccessPage.total")}</span>
+                  <span className="tabular-nums text-accent-gold">
+                    {formatPrice(order.subtotal)}
+                  </span>
                 </div>
                 {formattedDate && (
-                  <p className="text-xs text-gray-500">
-                    Pedido realizado el {formattedDate}
+                  <p className="text-xs text-text-muted">
+                    {interpolate(t("orderSuccessPage.placedOn"), {
+                      date: formattedDate,
+                    })}
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Dirección de envío */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 md:p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                Dirección de envío
+            <div className="rounded-2xl border border-accent-gold/20 bg-gradient-to-b from-dark-surface to-dark-base p-6 md:p-8">
+              <h2 className="text-lg font-semibold text-text-primary mb-6">
+                {t("orderSuccessPage.shippingTitle")}
               </h2>
-              <div className="text-sm space-y-2 mb-6">
-                <p className="font-semibold text-gray-900">
+              <div className="text-sm space-y-2 leading-relaxed text-text-muted">
+                <p className="font-semibold text-text-primary text-base">
                   {order.address.fullName}
                 </p>
-                <p className="text-gray-600">
+                <p>
                   {order.address.addressLine1}
                   {order.address.addressLine2
                     ? `, ${order.address.addressLine2}`
                     : ""}
                 </p>
-                <p className="text-gray-600">
+                <p>
                   {order.address.city}, {order.address.postalCode}
                 </p>
-                <p className="text-gray-600">{order.address.country}</p>
-                <p className="text-gray-600 mt-3">
-                  📞 {order.address.phone}
-                </p>
+                <p>{order.address.country}</p>
+                <p className="pt-3 text-text-primary/90">{order.address.phone}</p>
               </div>
             </div>
           </div>
 
-          {/* Qué sucede ahora */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              ¿Qué sucede ahora?
+          {/* What happens next */}
+          <section className="rounded-2xl border border-white/10 bg-dark-surface/60 p-6 md:p-10">
+            <h2 className="text-lg md:text-xl font-semibold text-text-primary mb-8 text-center md:text-left">
+              {t("orderSuccessPage.stepsTitle")}
             </h2>
-            <div className="grid gap-4 md:grid-cols-3">
-              {getNextSteps().map((step, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-start p-4 rounded-lg bg-gray-50 border border-gray-100"
+            <ol className="grid gap-6 md:grid-cols-3 md:gap-8">
+              {flowSteps.map((step, index) => (
+                <li
+                  key={`${step.title}-${index}`}
+                  className="relative flex gap-4 md:flex-col md:text-left"
                 >
-                  <div className="text-2xl mb-3">{step.icon}</div>
-                  <h3 className="font-semibold text-gray-900 mb-2 text-sm">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent-gold/35 bg-accent-gold/10 text-sm font-semibold text-accent-gold">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-text-primary text-sm mb-2 leading-snug">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-text-muted leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ol>
+          </section>
 
-          {/* CTAs secundarios */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Emotional + optional recommendations shell */}
+          <section className="rounded-2xl border border-dashed border-white/15 bg-dark-base/50 p-8 md:p-10 text-center">
+            <p className="text-sm md:text-base text-text-primary/95 font-medium leading-relaxed max-w-2xl mx-auto">
+              {t("orderSuccessPage.brandQuote")}
+            </p>
+            <div className="mt-10 pt-10 border-t border-white/10">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-accent-gold/90 mb-2">
+                {t("orderSuccessPage.recommendTitle")}
+              </h3>
+              <p className="text-xs text-text-muted max-w-lg mx-auto leading-relaxed">
+                {t("orderSuccessPage.recommendBody")}
+              </p>
+              <div className="mt-6 min-h-[72px] rounded-xl border border-white/5 bg-white/[0.02]" />
+            </div>
+          </section>
+
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2">
             <Link
               href={`/${locale}/products`}
-              className="inline-flex justify-center items-center rounded-md bg-black px-8 py-3 text-base font-semibold text-white hover:bg-gray-900 transition"
+              className="inline-flex justify-center items-center rounded-xl bg-accent-gold px-8 py-3.5 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/20 transition hover:bg-accent-gold/90 active:scale-[0.98]"
             >
-              Seguir comprando
+              {t("orderSuccessPage.continueShopping")}
             </Link>
             <Link
               href={`/${locale}/account`}
-              className="inline-flex justify-center items-center rounded-md border-2 border-gray-300 px-8 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition"
+              className="inline-flex justify-center items-center rounded-xl border border-white/20 px-8 py-3.5 text-sm font-semibold text-text-primary transition hover:bg-white/5"
             >
-              Ver mi cuenta
+              {t("orderSuccessPage.viewAccount")}
             </Link>
             {order.paymentMethod === "whatsapp" && (
               <Link
                 href={`https://wa.me/?text=${encodeURIComponent(
-                  `Hola! Quiero coordinar el pago del pedido ${order.id} por ${formatPrice(
-                    order.subtotal
-                  )}.`
+                  interpolate(t("orderSuccessPage.whatsappMessage"), {
+                    orderId: order.id,
+                    amount: formatPrice(order.subtotal),
+                  })
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex justify-center items-center rounded-md bg-green-600 px-8 py-3 text-base font-semibold text-white hover:bg-green-700 transition"
+                className="inline-flex justify-center items-center rounded-xl bg-[#128C7E] px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0f7a6d] active:scale-[0.98]"
               >
-                Contactar por WhatsApp
+                {t("orderSuccessPage.whatsappCta")}
               </Link>
             )}
           </div>
@@ -325,4 +321,3 @@ export default function OrderSuccessPage() {
     </main>
   );
 }
-

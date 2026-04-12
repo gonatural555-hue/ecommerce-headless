@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { useUser, type Address, type Order } from "@/context/UserContext";
 import PayPalButton from "@/components/PayPalButton";
@@ -35,18 +36,26 @@ export default function CheckoutPage() {
   });
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(locale === "es" ? "es-AR" : locale === "fr" ? "fr-FR" : locale === "it" ? "it-IT" : "en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+    return new Intl.NumberFormat(
+      locale === "es"
+        ? "es-AR"
+        : locale === "fr"
+          ? "fr-FR"
+          : locale === "it"
+            ? "it-IT"
+            : "en-US",
+      {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }
+    ).format(price);
   };
 
   const handleConfirmOrder = () => {
     if (items.length === 0 || !defaultAddress) return;
 
-    // Si el método de pago es PayPal, no procesamos aquí, se maneja en PayPalButton
     if (paymentMethod === "paypal") {
       return;
     }
@@ -77,8 +86,6 @@ export default function CheckoutPage() {
 
     const orderId = `order_${Date.now()}`;
 
-    // 1) Enviar la orden al backend para crearla y marcarla como pagada
-    //    Esto dispara los eventos de órdenes y la sincronización con Google Sheets.
     try {
       const payload = {
         orderId,
@@ -128,7 +135,6 @@ export default function CheckoutPage() {
       );
     }
 
-    // 2) Actualizar estado local del usuario para la UI
     const order: Order = {
       id: orderId,
       items,
@@ -149,77 +155,98 @@ export default function CheckoutPage() {
   const handlePayPalError = (error: any) => {
     console.error("PayPal payment error:", error);
     setIsLoading(false);
-    // Aquí podrías mostrar un mensaje de error al usuario
   };
+
+  const inputClass =
+    "w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/25 max-w-full";
+
+  const showMobilePayDock =
+    paymentMethod !== "paypal" && Boolean(defaultAddress) && items.length > 0;
 
   if (items.length === 0) {
     return (
-      <main data-route="checkout" className="max-w-4xl mx-auto px-4 py-12 md:py-20">
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t("checkoutPage.emptyTitle")}
-          </h1>
-          <p className="text-accent-gold mb-8">
-            {t("checkoutPage.emptyText")}
-          </p>
-          <Link
-            href={`/${locale}/products`}
-            className="inline-flex justify-center rounded-md bg-black px-8 py-4 text-base font-medium text-white hover:bg-gray-900 transition"
-          >
-            {t("checkoutPage.emptyCta")}
-          </Link>
-        </div>
+      <main
+        data-route="checkout"
+        className="max-w-xl mx-auto px-4 py-20 md:py-28 text-center"
+      >
+        <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
+          Checkout
+        </p>
+        <h1 className="text-3xl md:text-4xl font-semibold text-text-primary mb-4">
+          {t("checkoutPage.emptyTitle")}
+        </h1>
+        <p className="text-text-muted mb-10 leading-relaxed">
+          {t("checkoutPage.emptyText")}
+        </p>
+        <Link
+          href={`/${locale}/products`}
+          className="inline-flex justify-center rounded-xl bg-accent-gold px-8 py-3.5 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/20 transition hover:bg-accent-gold/90 active:scale-[0.98]"
+        >
+          {t("checkoutPage.emptyCta")}
+        </Link>
       </main>
     );
   }
 
   return (
-    <main data-route="checkout" className="max-w-6xl mx-auto px-3 sm:px-4 pt-28 pb-8 md:pt-32 md:pb-12 min-h-[100dvh] md:min-h-0">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between gap-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
+    <main
+      data-route="checkout"
+      className={`max-w-6xl mx-auto px-3 sm:px-4 pt-28 md:pt-32 min-h-[100dvh] md:min-h-0 overflow-x-hidden ${
+        showMobilePayDock ? "pb-28 md:pb-12" : "pb-12"
+      }`}
+    >
+      <header className="mb-8 md:mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-xl">
+          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary tracking-tight">
             {t("checkoutPage.title")}
           </h1>
-        <Link
-            href={`/${locale}/cart`}
-            className="inline-flex items-center text-base text-white hover:text-accent-gold transition-colors duration-200 whitespace-nowrap"
-        >
-            {t("checkoutPage.backToCart")}
-        </Link>
+          <p className="mt-2 text-text-muted text-sm md:text-base leading-relaxed">
+            {t("checkoutPage.subtitle")}
+          </p>
+          {user?.email ? (
+            <p className="mt-3 text-sm text-text-muted/90">
+              {t("checkoutPage.emailNote")}
+            </p>
+          ) : null}
         </div>
-      </div>
+        <Link
+          href={`/${locale}/cart`}
+          className="text-sm font-medium text-accent-gold hover:text-accent-gold/85 transition-colors whitespace-nowrap self-start sm:self-auto"
+        >
+          {t("checkoutPage.backToCart")}
+        </Link>
+      </header>
 
-      <div className="grid gap-8 lg:grid-cols-3 overflow-x-hidden">
-        {/* Resumen del pedido - Mobile first: aparece primero en mobile */}
-        <div className="lg:col-span-2 order-2 lg:order-1 space-y-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+      <div className="grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1fr)_min(100%,400px)] lg:items-start">
+        {/* Left: shipping & payment */}
+        <div className="order-2 lg:order-1 space-y-6 md:space-y-8 min-w-0">
+          <section className="rounded-2xl border border-gray-100 bg-white p-5 sm:p-7 md:p-8 shadow-sm">
+            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-5">
               {t("checkoutPage.shippingAddress")}
             </h2>
             {defaultAddress ? (
-              <div className="text-sm space-y-1">
+              <div className="text-sm space-y-2 leading-relaxed">
                 <p className="font-semibold text-gray-900">
                   {defaultAddress.fullName}
                 </p>
-                <p className="text-accent-gold">
+                <p className="text-gray-600">
                   {defaultAddress.addressLine1}
                   {defaultAddress.addressLine2
                     ? `, ${defaultAddress.addressLine2}`
                     : ""}
                 </p>
-                <p className="text-accent-gold">
+                <p className="text-gray-600">
                   {defaultAddress.city} · {defaultAddress.postalCode}
                 </p>
-                <p className="text-accent-gold">{defaultAddress.country}</p>
-                <p className="text-accent-gold">{defaultAddress.phone}</p>
+                <p className="text-gray-600">{defaultAddress.country}</p>
+                <p className="text-gray-600">{defaultAddress.phone}</p>
               </div>
             ) : (
-              <div className="space-y-4">
-                <p className="text-sm text-accent-gold">
+              <div className="space-y-5">
+                <p className="text-sm text-gray-600">
                   {t("checkoutPage.addAddress")}
                 </p>
-                <div className="grid gap-3 sm:grid-cols-2 overflow-x-hidden">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <input
                     value={guestAddress.fullName}
                     onChange={(event) =>
@@ -230,7 +257,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.fullName")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
+                    className={`${inputClass} sm:col-span-2`}
                   />
                   <input
                     value={guestAddress.phone}
@@ -242,7 +269,7 @@ export default function CheckoutPage() {
                     }
                     type="tel"
                     placeholder={t("checkoutPage.form.phone")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
+                    className={inputClass}
                   />
                   <input
                     value={guestAddress.addressLine1}
@@ -254,7 +281,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.address")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2 max-w-full"
+                    className={`${inputClass} sm:col-span-2`}
                   />
                   <input
                     value={guestAddress.city}
@@ -266,7 +293,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.city")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
+                    className={inputClass}
                   />
                   <input
                     value={guestAddress.postalCode}
@@ -278,7 +305,7 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.postalCode")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm max-w-full"
+                    className={inputClass}
                   />
                   <input
                     value={guestAddress.country}
@@ -290,10 +317,10 @@ export default function CheckoutPage() {
                     }
                     type="text"
                     placeholder={t("checkoutPage.form.country")}
-                    className="w-full rounded-md border border-gray-200 px-3 py-2 text-sm sm:col-span-2 max-w-full"
+                    className={`${inputClass} sm:col-span-2`}
                   />
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3 pt-1">
                   <button
                     type="button"
                     onClick={() => {
@@ -323,22 +350,23 @@ export default function CheckoutPage() {
                       };
                       setAddresses([next]);
                     }}
-                    className="inline-flex items-center justify-center rounded-md bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-900 transition"
+                    className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-black active:scale-[0.98]"
                   >
                     {t("checkoutPage.saveAddress")}
                   </button>
                   <Link
                     href={`/${locale}/account`}
-                    className="text-sm text-accent-gold hover:text-accent-gold/80 underline transition"
+                    className="text-sm font-medium text-accent-moss hover:text-accent-moss/85 underline-offset-4 hover:underline"
                   >
                     {t("checkoutPage.manageAddresses")}
                   </Link>
                 </div>
               </div>
             )}
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+          </section>
+
+          <section className="rounded-2xl border border-gray-100 bg-white p-5 sm:p-7 md:p-8 shadow-sm">
+            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-5">
               {t("checkoutPage.paymentMethod")}
             </h2>
             <div className="space-y-3">
@@ -361,7 +389,11 @@ export default function CheckoutPage() {
               ].map((option) => (
                 <label
                   key={option.value}
-                  className="flex items-start gap-3 rounded-lg border border-gray-200 px-4 py-3 text-sm transition-colors hover:border-gray-300"
+                  className={`flex items-start gap-3 rounded-xl border px-4 py-3.5 text-sm transition-all cursor-pointer ${
+                    paymentMethod === option.value
+                      ? "border-accent-gold/50 bg-amber-50/50 ring-1 ring-accent-gold/20"
+                      : "border-gray-200 hover:border-gray-300 hover:bg-gray-50/80"
+                  }`}
                 >
                   <input
                     type="radio"
@@ -373,21 +405,33 @@ export default function CheckoutPage() {
                         option.value as "manual" | "whatsapp" | "paypal"
                       )
                     }
-                    className="mt-1 h-4 w-4"
+                    className="mt-1 h-4 w-4 border-gray-300 text-accent-gold focus:ring-accent-gold"
                   />
-                  <span className="space-y-1">
+                  <span className="space-y-1 min-w-0">
                     <span className="block font-semibold text-gray-900">
                       {option.label}
                     </span>
-                    <span className="block text-xs text-accent-gold">
+                    <span className="block text-xs text-gray-500 leading-relaxed">
                       {option.hint}
                     </span>
                   </span>
                 </label>
               ))}
-              {/* Mostrar botón de PayPal cuando se seleccione PayPal */}
+
+              {paymentMethod === "paypal" ? (
+                <div className="mt-4 rounded-xl border border-accent-gold/25 bg-gradient-to-br from-amber-50/80 to-white px-4 py-3 text-xs text-gray-700 leading-relaxed">
+                  <span className="font-semibold text-gray-900">
+                    PayPal ·{" "}
+                  </span>
+                  {t("checkoutPage.paymentPayPalHighlight")}{" "}
+                  <span className="text-gray-600">
+                    {t("checkoutPage.trustPayPalProtection")}
+                  </span>
+                </div>
+              ) : null}
+
               {paymentMethod === "paypal" && defaultAddress && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="mt-4 pt-4 border-t border-gray-100">
                   <PayPalButton
                     amount={subtotal}
                     currency="USD"
@@ -398,94 +442,148 @@ export default function CheckoutPage() {
                 </div>
               )}
             </div>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 md:p-8 overflow-x-hidden">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
-              {t("checkoutPage.orderSummary")}
-            </h2>
+          </section>
+        </div>
 
-            <div className="space-y-6">
+        {/* Right: order summary */}
+        <aside className="order-1 lg:order-2 lg:sticky lg:top-28 space-y-4 min-w-0">
+          <div className="rounded-2xl border border-accent-gold/25 bg-gradient-to-b from-dark-surface to-dark-base p-5 sm:p-7 shadow-[0_24px_80px_-28px_rgba(0,0,0,0.7)] overflow-x-hidden">
+            <div className="flex flex-wrap gap-2 mb-6 text-[0.7rem] uppercase tracking-[0.12em] text-text-muted">
+              <span className="rounded-full border border-white/15 px-2.5 py-1">
+                {t("checkoutPage.trustSecureCheckout")}
+              </span>
+              <span className="rounded-full border border-white/15 px-2.5 py-1">
+                PayPal
+              </span>
+              <span className="rounded-full border border-white/15 px-2.5 py-1">
+                {t("checkoutPage.trustEasyReturns")}
+              </span>
+            </div>
+
+            <h2 className="text-lg font-semibold text-text-primary mb-1">
+              {t("checkoutPage.summary")}
+            </h2>
+            <p className="text-xs text-text-muted mb-6">
+              {t("checkoutPage.lineItemsHeading")}
+            </p>
+
+            <ul className="space-y-5 mb-8 max-h-[min(50vh,420px)] overflow-y-auto pr-1 -mr-1">
               {items.map((item) => (
-                <div
+                <li
                   key={item.id}
-                  className="flex gap-4 pb-6 border-b border-gray-200 last:border-0 last:pb-0"
+                  className="flex gap-3 pb-5 border-b border-white/10 last:border-0 last:pb-0"
                 >
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1 truncate">
-                      {item.title}
-                    </h3>
-                    <div className="flex items-center gap-4 mt-2 text-sm text-accent-gold">
-                      <span>{t("checkoutPage.quantity")}: {item.quantity}</span>
-                      <span className="hidden sm:inline">•</span>
-                      <span className="hidden sm:inline">
-                        {formatPrice(item.price)} {t("checkoutPage.unitPrice")}
-                      </span>
-                    </div>
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-dark-base ring-1 ring-white/10">
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover object-center"
+                      />
+                    ) : null}
                   </div>
-                  <div className="text-right flex-shrink-0">
-                    <p className="text-base md:text-lg font-semibold text-gray-900">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-text-primary leading-snug line-clamp-2">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-xs text-text-muted">
+                      {t("checkoutPage.quantity")}: {item.quantity} ·{" "}
+                      {formatPrice(item.price)} {t("checkoutPage.unitPrice")}
+                    </p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-sm font-semibold tabular-nums text-text-primary">
                       {formatPrice(item.price * item.quantity)}
                     </p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-          </div>
-        </div>
+            </ul>
 
-        {/* Panel de pago - Sticky en desktop */}
-        <div className="lg:col-span-1 order-1 lg:order-2">
-          <div className="bg-gray-50 rounded-lg p-4 sm:p-6 md:p-8 lg:sticky lg:top-4 border border-gray-200 overflow-x-hidden">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              {t("checkoutPage.summary")}
-            </h2>
-
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between text-base">
-                <span className="text-accent-gold">{t("checkoutPage.subtotal")}</span>
-                <span className="font-medium text-gray-900">{formatPrice(subtotal)}</span>
+            <div className="space-y-3 mb-6 text-sm">
+              <div className="flex justify-between gap-4 text-text-muted">
+                <span>{t("checkoutPage.subtotal")}</span>
+                <span className="font-medium tabular-nums text-text-primary">
+                  {formatPrice(subtotal)}
+                </span>
               </div>
-              <div className="flex justify-between text-sm text-accent-gold pt-2 border-t border-gray-300">
+              <div className="flex justify-between gap-4 text-xs text-text-muted pt-2 border-t border-white/10">
                 <span>{t("checkoutPage.shipping")}</span>
                 <span>{t("checkoutPage.shippingCalculated")}</span>
               </div>
             </div>
 
-            <div className="pt-6 border-t-2 border-gray-300 mb-6">
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold text-gray-900">
+            <div className="pt-4 border-t border-white/15 mb-6">
+              <div className="flex justify-between items-baseline gap-4">
+                <span className="text-base font-semibold text-text-primary">
                   {t("checkoutPage.total")}
                 </span>
-                <span className="text-xl font-bold text-gray-900">
+                <span className="text-2xl font-semibold tabular-nums text-accent-gold">
                   {formatPrice(subtotal)}
                 </span>
               </div>
             </div>
 
+            <p className="text-[0.7rem] text-text-muted/90 leading-relaxed mb-6">
+              {t("checkoutPage.summaryReassurance")}
+            </p>
+
             {paymentMethod !== "paypal" && (
               <button
+                type="button"
                 onClick={handleConfirmOrder}
                 disabled={isLoading || !defaultAddress}
-                className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="hidden lg:flex w-full rounded-xl bg-accent-gold px-6 py-4 text-sm font-semibold text-dark-base justify-center items-center shadow-lg shadow-accent-gold/25 transition hover:bg-accent-gold/90 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 motion-reduce:transform-none focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 focus:ring-offset-dark-base"
               >
-                {isLoading ? t("checkoutPage.confirming") : t("checkoutPage.confirmOrder")}
+                {isLoading
+                  ? t("checkoutPage.confirming")
+                  : t("checkoutPage.confirmOrder")}
               </button>
             )}
 
-            <p className="mt-4 text-xs text-center text-accent-gold">
+            <p className="mt-4 text-[0.65rem] text-center text-text-muted leading-relaxed">
               {t("checkoutPage.terms")}
             </p>
 
             <Link
               href={`/${locale}/cart`}
-              className="block mt-6 text-center text-sm text-accent-gold hover:text-accent-gold/80 underline transition"
+              className="mt-6 block text-center text-sm font-medium text-accent-gold/90 hover:text-accent-gold transition-colors"
             >
               {t("checkoutPage.backToCart")}
             </Link>
           </div>
-        </div>
+        </aside>
       </div>
+
+      {/* Mobile payment dock — non-PayPal flows */}
+      {showMobilePayDock ? (
+        <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-dark-base/95 backdrop-blur-md px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(0,0,0,0.45)]">
+          <div className="max-w-6xl mx-auto flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.65rem] uppercase tracking-wider text-text-muted">
+                {t("checkoutPage.total")}
+              </p>
+              <p className="text-lg font-semibold tabular-nums text-accent-gold truncate">
+                {formatPrice(subtotal)}
+              </p>
+              <p className="text-[0.65rem] text-text-muted mt-0.5 line-clamp-2">
+                {t("checkoutPage.mobileStickyHint")}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleConfirmOrder}
+              disabled={isLoading || !defaultAddress}
+              className="shrink-0 rounded-xl bg-accent-gold px-5 py-3.5 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/20 transition active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading
+                ? t("checkoutPage.confirming")
+                : t("checkoutPage.confirmOrder")}
+            </button>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
-

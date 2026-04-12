@@ -433,6 +433,8 @@
     "emptyText": "Ajoutez des produits pour commencer votre achat.",
     "emptyCta": "Voir les produits",
     "title": "Panier",
+    "heroTitle": "Votre équipement est presque prêt",
+    "heroSubtitle": "Vérifiez votre sélection avant le départ",
     "unitPrice": "Prix unitaire",
     "decreaseQty": "Diminuer la quantité",
     "increaseQty": "Augmenter la quantité",
@@ -442,8 +444,18 @@
     "summarySubtotal": "Sous-total",
     "summaryNote": "Les frais de livraison et taxes seront calculés à la caisse",
     "summaryTotal": "Total estimé",
-    "checkout": "Passer à la caisse",
+    "checkout": "Continuer vers le paiement",
     "continueShopping": "← Continuer les achats",
+    "freeShippingLabel": "Livraison standard offerte",
+    "freeShippingAway": "Encore {amount} pour la livraison standard offerte",
+    "freeShippingUnlocked": "Livraison standard offerte débloquée",
+    "freeShippingThresholdHint": "Commandes d'au moins {amount} : livraison offerte",
+    "trustSecure": "Paiement sécurisé",
+    "trustPayPal": "Protection PayPal",
+    "trustReturns": "Retours simples",
+    "completeGearTitle": "Complétez votre équipement",
+    "completeGearBody": "Des suggestions personnalisées apparaîtront ici lorsqu'elles seront disponibles.",
+    "ctaReassurance": "Paiement sécurisé — votre sélection est réservée pendant le règlement.",
     "variantLabels": {
       "size": "Taille",
       "color": "Couleur",
@@ -1776,6 +1788,13 @@
     "emptyCta": "Voir les produits",
     "backToCart": "← Retour au panier",
     "title": "Checkout",
+    "subtitle": "Un équipement utile, bien choisi.",
+    "emailNote": "Nous enverrons la confirmation et les mises à jour par e-mail.",
+    "trustSecureCheckout": "Paiement sécurisé",
+    "trustPayPalProtection": "Protection des achats PayPal lorsque applicable.",
+    "trustEasyReturns": "Retours clairs",
+    "lineItemsHeading": "Votre commande",
+    "paymentPayPalHighlight": "PayPal chiffre vos informations pour un paiement plus sûr.",
     "shippingAddress": "Adresse de livraison",
     "addAddress": "Ajoutez une adresse pour continuer",
     "manageAddresses": "Gérer dans mon compte",
@@ -1817,7 +1836,81 @@
     "unitPrice": "l'unité",
     "confirmOrder": "Confirmer la commande",
     "confirming": "Confirmation...",
-    "terms": "En confirmant votre commande, vous acceptez nos conditions générales"
+    "terms": "En confirmant votre commande, vous acceptez nos conditions générales",
+    "mobileStickyHint": "Vérifiez le total, puis confirmez quand vous êtes prêt.",
+    "summaryReassurance": "Paiement chiffré · PayPal disponible · Politique de retour claire"
+  },
+  "orderSuccessPage": {
+    "headline": "Votre aventure commence maintenant",
+    "subheadline": "Nous préparons votre commande avec le soin qu'elle mérite.",
+    "emailLine": "Nous avons envoyé un e-mail de confirmation avec les détails de votre commande.",
+    "orderNumber": "Numéro de commande",
+    "orderSummary": "Résumé de la commande",
+    "shippingTitle": "Adresse de livraison",
+    "total": "Total",
+    "placedOn": "Passée le {date}",
+    "noOrderTitle": "Impossible de charger cette commande pour l'instant",
+    "noOrderHint": "Si vous venez de finaliser le paiement, les détails peuvent mettre quelques secondes à apparaître.",
+    "continueShopping": "Continuer les achats",
+    "viewAccount": "Voir mon compte",
+    "whatsappCta": "Contacter sur WhatsApp",
+    "whatsappMessage": "Bonjour ! Je souhaite coordonner le paiement de la commande {orderId} ({amount}).",
+    "stepsTitle": "La suite",
+    "brandQuote": "Chaque pièce que vous avez choisie est faite pour aller là où ça compte.",
+    "recommendTitle": "Prêt pour la suite",
+    "recommendBody": "Explorez plus d'équipement quand vous planifierez la prochaine sortie.",
+    "paymentBanner": {
+      "whatsappTitle": "Paiement en attente",
+      "whatsappBody": "Nous vous contacterons sur WhatsApp pour coordonner le paiement.",
+      "manualTitle": "En cours",
+      "manualBody": "Nous vous contacterons bientôt pour finaliser le paiement.",
+      "paidTitle": "Paiement confirmé",
+      "paidBody": "Votre paiement PayPal a été traité avec succès."
+    },
+    "flows": {
+      "whatsapp": [
+        {
+          "title": "Nous vous écrivons sur WhatsApp",
+          "description": "Dans les prochaines heures, nous coordonnons le paiement avec vous."
+        },
+        {
+          "title": "Nous préparons votre commande",
+          "description": "Une fois le paiement confirmé, nous préparons l'expédition."
+        },
+        {
+          "title": "Mise à jour d'expédition",
+          "description": "Vous recevrez un e-mail avec le suivi dès l'envoi."
+        }
+      ],
+      "paypalPaid": [
+        {
+          "title": "Commande confirmée",
+          "description": "Votre paiement a été reçu et votre commande est enregistrée."
+        },
+        {
+          "title": "Préparation",
+          "description": "Nous préparons votre équipement avec soin avant l'envoi."
+        },
+        {
+          "title": "Mise à jour d'expédition",
+          "description": "Vous recevrez le suivi dès qu'il quitte nos mains."
+        }
+      ],
+      "default": [
+        {
+          "title": "E-mail de confirmation",
+          "description": "Consultez votre boîte de réception pour le récapitulatif."
+        },
+        {
+          "title": "Traitement",
+          "description": "Nous examinons votre commande et vous recontactons si besoin."
+        },
+        {
+          "title": "Préparation et expédition",
+          "description": "Après confirmation, nous emballons et vous prévenons à l'envoi."
+        }
+      ]
+    }
   }
 }
 

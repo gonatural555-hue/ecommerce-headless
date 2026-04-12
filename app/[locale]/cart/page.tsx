@@ -2,9 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
+
+const FREE_SHIPPING_THRESHOLD_USD = 100;
+
+function interpolate(template: string, vars: Record<string, string>) {
+  return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
+}
 
 export default function CartPage() {
   const { items, subtotal, increaseQty, decreaseQty, removeItem } = useCart();
@@ -13,13 +20,37 @@ export default function CartPage() {
   const t = useTranslations();
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+    return new Intl.NumberFormat(
+      locale === "es"
+        ? "es-AR"
+        : locale === "fr"
+          ? "fr-FR"
+          : locale === "it"
+            ? "it-IT"
+            : "en-US",
+      {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }
+    ).format(price);
   };
+
+  const thresholdLabel = formatPrice(FREE_SHIPPING_THRESHOLD_USD);
+
+  const { shippingPct, shippingRemaining, shippingUnlocked } = useMemo(() => {
+    const pct = Math.min(
+      100,
+      Math.round((subtotal / FREE_SHIPPING_THRESHOLD_USD) * 1000) / 10
+    );
+    const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD_USD - subtotal);
+    return {
+      shippingPct: pct,
+      shippingRemaining: remaining,
+      shippingUnlocked: subtotal >= FREE_SHIPPING_THRESHOLD_USD,
+    };
+  }, [subtotal]);
 
   const handleCheckout = () => {
     router.push(`/${locale}/checkout`);
@@ -45,25 +76,33 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <main data-route="cart" className="relative w-full overflow-hidden pt-28 pb-12 md:pt-32 md:pb-20">
+      <main
+        data-route="cart"
+        className="relative w-full overflow-hidden pt-28 pb-16 md:pt-32 md:pb-24"
+      >
         <div className="absolute inset-0">
           <Image
             src="/assets/images/hero/emptycart.webp"
-            alt="Carrito vacío"
+            alt={t("cartPage.emptyTitle")}
             fill
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-black/70 to-black/50" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white-900 mb-4">
+        <div className="relative z-10 max-w-lg mx-auto px-4 text-center">
+          <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
+            Go Natural
+          </p>
+          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-4">
             {t("cartPage.emptyTitle")}
           </h1>
-          <p className="text-white-600 mb-8">{t("cartPage.emptyText")}</p>
+          <p className="text-text-muted mb-10 leading-relaxed">
+            {t("cartPage.emptyText")}
+          </p>
           <Link
             href={`/${locale}/products`}
-            className="inline-flex justify-center rounded-md bg-white px-8 py-4 text-base font-medium text-black hover:bg-gray-900 transition-colors duration-200"
+            className="inline-flex justify-center rounded-lg bg-accent-gold px-8 py-3.5 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/20 transition hover:bg-accent-gold/90 hover:shadow-accent-gold/30 active:scale-[0.98]"
           >
             {t("cartPage.emptyCta")}
           </Link>
@@ -73,149 +112,246 @@ export default function CartPage() {
   }
 
   return (
-    <main data-route="cart" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 md:pt-32 md:pb-12">
-      <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">
-        {t("cartPage.title")}
-      </h1>
+    <main
+      data-route="cart"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-20"
+    >
+      <header className="mb-10 md:mb-12 max-w-2xl">
+        <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-3">
+          {t("cartPage.summaryTitle")}
+        </p>
+        <h1 className="text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-3">
+          {t("cartPage.heroTitle")}
+        </h1>
+        <p className="text-text-muted text-base md:text-lg leading-relaxed">
+          {t("cartPage.heroSubtitle")}
+        </p>
+      </header>
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        {/* Lista de productos */}
-        <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="divide-y divide-gray-200">
+      <div className="grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1fr)_min(100%,380px)] lg:items-start">
+        <div className="space-y-8 min-w-0">
+          {/* Free shipping progress */}
+          <section
+            className="rounded-2xl border border-accent-gold/25 bg-dark-surface/80 p-5 md:p-6 shadow-[0_0_0_1px_rgba(200,155,60,0.08)] backdrop-blur-sm"
+            aria-label={t("cartPage.freeShippingLabel")}
+          >
+            <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
+              <div>
+                <h2 className="text-sm font-semibold text-text-primary">
+                  {t("cartPage.freeShippingLabel")}
+                </h2>
+                <p className="text-xs text-text-muted mt-1">
+                  {interpolate(t("cartPage.freeShippingThresholdHint"), {
+                    amount: thresholdLabel,
+                  })}
+                </p>
+              </div>
+              {!shippingUnlocked && (
+                <span className="text-xs font-medium tabular-nums text-accent-gold">
+                  {interpolate(t("cartPage.freeShippingAway"), {
+                    amount: formatPrice(shippingRemaining),
+                  })}
+                </span>
+              )}
+            </div>
+            <div
+              className="h-2 rounded-full bg-white/10 overflow-hidden"
+              role="progressbar"
+              aria-valuenow={Math.round(shippingPct)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            >
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-accent-moss to-accent-gold transition-[width] duration-700 ease-out motion-reduce:transition-none"
+                style={{ width: `${shippingPct}%` }}
+              />
+            </div>
+            {shippingUnlocked && (
+              <p className="mt-3 text-sm text-accent-gold/95 font-medium">
+                {t("cartPage.freeShippingUnlocked")}
+              </p>
+            )}
+          </section>
+
+          {/* Line items */}
+          <section className="rounded-2xl border border-white/10 bg-dark-surface/60 overflow-hidden">
+            <ul className="divide-y divide-white/10">
               {items.map((item) => {
                 const itemSubtotal = item.price * item.quantity;
+                const variantText = formatVariantSummary(item);
                 return (
-                  <div
+                  <li
                     key={item.id}
-                    className="p-4 sm:p-6 hover:bg-gray-50 transition-colors duration-150"
+                    className="p-4 sm:p-6 transition-colors hover:bg-white/[0.03]"
                   >
-                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  {item.image ? (
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 overflow-hidden rounded-md border border-gray-200 bg-white">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover object-center"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-md border border-gray-200 bg-gray-50" />
-                  )}
-                      {/* Información del producto */}
-                      <div className="flex-1 min-w-0">
-                        <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-                          {item.title}
-                        </h2>
-                        <p className="text-base text-accent-gold mb-4">
-                          {t("cartPage.unitPrice")}: {formatPrice(item.price)}
-                          {formatVariantSummary(item)
-                            ? ` · ${formatVariantSummary(item)}`
-                            : ""}
-                        </p>
+                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-6">
+                      {item.image ? (
+                        <div className="relative w-[104px] h-[104px] sm:w-[120px] sm:h-[120px] shrink-0 overflow-hidden rounded-xl ring-1 ring-white/10 bg-dark-base">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover object-center"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          className="w-[104px] h-[104px] sm:w-[120px] sm:h-[120px] shrink-0 rounded-xl border border-dashed border-white/20 bg-white/5"
+                          aria-hidden
+                        />
+                      )}
 
-                        {/* Controles de cantidad y acciones */}
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                          {/* Controles de cantidad */}
-                          <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                            <button
-                              onClick={() => decreaseQty(item.id)}
-                              className="px-3 sm:px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150 font-medium text-lg"
-                              aria-label={t("cartPage.decreaseQty")}
-                            >
-                              −
-                            </button>
-                            <span className="px-4 sm:px-6 py-2 text-gray-900 font-semibold min-w-[3.5rem] text-center border-x border-gray-300 bg-white">
-                              {item.quantity}
+                      <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:justify-between gap-4">
+                        <div className="min-w-0">
+                          <h2 className="text-lg font-semibold text-text-primary leading-snug">
+                            {item.title}
+                          </h2>
+                          {variantText ? (
+                            <p className="mt-2 text-sm text-accent-gold/90 leading-relaxed">
+                              {variantText}
+                            </p>
+                          ) : null}
+                          <p className="mt-2 text-sm text-text-muted">
+                            {t("cartPage.unitPrice")}{" "}
+                            <span className="text-text-primary font-medium tabular-nums">
+                              {formatPrice(item.price)}
                             </span>
+                          </p>
+
+                          <div className="mt-4 flex flex-wrap items-center gap-3">
+                            <div className="inline-flex items-center rounded-lg border border-white/15 bg-dark-base/60 shadow-inner">
+                              <button
+                                type="button"
+                                onClick={() => decreaseQty(item.id)}
+                                className="px-3.5 py-2 text-text-primary hover:bg-white/10 active:scale-95 transition motion-reduce:transform-none rounded-l-lg"
+                                aria-label={t("cartPage.decreaseQty")}
+                              >
+                                −
+                              </button>
+                              <span className="min-w-[2.75rem] px-2 py-2 text-center text-sm font-semibold tabular-nums text-text-primary border-x border-white/15">
+                                {item.quantity}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => increaseQty(item.id)}
+                                className="px-3.5 py-2 text-text-primary hover:bg-white/10 active:scale-95 transition motion-reduce:transform-none rounded-r-lg"
+                                aria-label={t("cartPage.increaseQty")}
+                              >
+                                +
+                              </button>
+                            </div>
+
                             <button
-                              onClick={() => increaseQty(item.id)}
-                              className="px-3 sm:px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150 font-medium text-lg"
-                              aria-label={t("cartPage.increaseQty")}
+                              type="button"
+                              onClick={() => removeItem(item.id)}
+                              className="text-sm font-medium text-text-muted hover:text-red-400/90 underline-offset-4 hover:underline transition-colors"
                             >
-                              +
+                              {t("cartPage.remove")}
                             </button>
                           </div>
-
-                          {/* Botón eliminar */}
-                          <button
-                            onClick={() => removeItem(item.id)}
-                            className="text-sm text-red-600 hover:text-red-700 font-medium underline transition-colors duration-150"
-                            aria-label={t("cartPage.remove")}
-                          >
-                            {t("cartPage.remove")}
-                          </button>
                         </div>
-                      </div>
 
-                      {/* Subtotal del item */}
-                      <div className="flex sm:flex-col justify-between sm:justify-start items-end sm:items-end gap-2 sm:gap-1">
-                        <div className="text-right sm:text-right">
-                          <p className="text-sm text-accent-gold sm:mb-1">
+                        <div className="sm:text-right shrink-0">
+                          <p className="text-xs uppercase tracking-wider text-text-muted">
                             {t("cartPage.itemSubtotal")}
                           </p>
-                          <p className="text-lg sm:text-xl font-bold text-gray-900">
+                          <p className="text-xl font-semibold tabular-nums text-text-primary mt-1">
                             {formatPrice(itemSubtotal)}
                           </p>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
+          </section>
+
+          {/* Complete your gear — structure ready for future recommendations */}
+          <section className="rounded-2xl border border-dashed border-white/15 bg-dark-base/40 p-6 md:p-8">
+            <h2 className="text-lg font-semibold text-text-primary">
+              {t("cartPage.completeGearTitle")}
+            </h2>
+            <p className="mt-2 text-sm text-text-muted leading-relaxed max-w-xl">
+              {t("cartPage.completeGearBody")}
+            </p>
+            <div className="mt-6 min-h-[120px] rounded-xl border border-white/5 bg-white/[0.02]" />
+          </section>
+
+          {/* Trust */}
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm text-text-muted justify-center sm:justify-start">
+            <span className="inline-flex items-center gap-2">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-accent-gold"
+                aria-hidden
+              />
+              {t("cartPage.trustSecure")}
+            </span>
+            <span className="text-white/20 hidden sm:inline" aria-hidden>
+              ·
+            </span>
+            <span>{t("cartPage.trustPayPal")}</span>
+            <span className="text-white/20 hidden sm:inline" aria-hidden>
+              ·
+            </span>
+            <span>{t("cartPage.trustReturns")}</span>
           </div>
         </div>
 
-        {/* Resumen lateral */}
-        <div className="lg:col-span-1">
-          <div className="bg-gray-50 rounded-lg border border-gray-200 p-6 sticky top-4">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        {/* Summary */}
+        <aside className="lg:sticky lg:top-28 space-y-6">
+          <div className="rounded-2xl border border-accent-gold/20 bg-gradient-to-b from-dark-surface to-dark-base p-6 md:p-8 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.65)]">
+            <h2 className="text-lg font-semibold text-text-primary mb-6">
               {t("cartPage.summaryTitle")}
             </h2>
 
             <div className="space-y-4 mb-6">
-              <div className="flex justify-between items-center">
-                <span className="text-base text-accent-gold">{t("cartPage.summarySubtotal")}</span>
-                <span className="font-semibold text-gray-900">
+              <div className="flex justify-between items-baseline gap-4 text-sm">
+                <span className="text-text-muted">{t("cartPage.summarySubtotal")}</span>
+                <span className="font-semibold tabular-nums text-text-primary">
                   {formatPrice(subtotal)}
                 </span>
               </div>
-
-              <div className="pt-4 border-t border-gray-300">
-                <p className="text-sm text-accent-gold mb-2">
-                  {t("cartPage.summaryNote")}
-                </p>
-              </div>
+              <p className="text-xs text-text-muted leading-relaxed border-t border-white/10 pt-4">
+                {t("cartPage.summaryNote")}
+              </p>
             </div>
 
-            <div className="pt-6 border-t border-gray-300">
-              <div className="flex justify-between items-center mb-6">
-                <span className="text-lg font-semibold text-gray-900">
+            <div className="pt-2 border-t border-white/10">
+              <div className="flex justify-between items-baseline gap-4 mb-8">
+                <span className="text-base font-semibold text-text-primary">
                   {t("cartPage.summaryTotal")}
                 </span>
-                <span className="text-xl font-bold text-gray-900">
+                <span className="text-2xl font-semibold tabular-nums text-accent-gold">
                   {formatPrice(subtotal)}
                 </span>
               </div>
 
               <button
+                type="button"
                 onClick={handleCheckout}
-                className="w-full rounded-md bg-black px-6 py-4 text-base font-medium text-white hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 shadow-sm hover:shadow-md"
+                className="group relative w-full overflow-hidden rounded-xl bg-accent-gold px-6 py-4 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/25 transition hover:shadow-xl hover:shadow-accent-gold/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] motion-reduce:transform-none"
               >
-                {t("cartPage.checkout")}
+                <span className="relative z-10">{t("cartPage.checkout")}</span>
+                <span
+                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out motion-reduce:hidden"
+                  aria-hidden
+                />
               </button>
+
+              <p className="mt-4 text-center text-xs text-text-muted leading-relaxed">
+                {t("cartPage.ctaReassurance")}
+              </p>
 
               <Link
                 href={`/${locale}/products`}
-                className="block mt-4 text-center text-sm text-accent-gold hover:text-accent-gold/80 font-medium transition-colors duration-150"
+                className="mt-6 block text-center text-sm font-medium text-accent-gold/90 hover:text-accent-gold transition-colors"
               >
                 {t("cartPage.continueShopping")}
               </Link>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </main>
   );

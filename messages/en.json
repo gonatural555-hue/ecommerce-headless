@@ -433,6 +433,8 @@
     "emptyText": "Add products to start your purchase.",
     "emptyCta": "View products",
     "title": "Shopping cart",
+    "heroTitle": "Your gear is almost ready",
+    "heroSubtitle": "Review your selection before heading out",
     "unitPrice": "Unit price",
     "decreaseQty": "Decrease quantity",
     "increaseQty": "Increase quantity",
@@ -442,8 +444,18 @@
     "summarySubtotal": "Subtotal",
     "summaryNote": "Shipping and taxes will be calculated at checkout",
     "summaryTotal": "Estimated total",
-    "checkout": "Proceed to checkout",
+    "checkout": "Continue to checkout",
     "continueShopping": "← Continue shopping",
+    "freeShippingLabel": "Free standard shipping",
+    "freeShippingAway": "{amount} away from free standard shipping",
+    "freeShippingUnlocked": "You've unlocked free standard shipping",
+    "freeShippingThresholdHint": "Orders {amount}+ ship free",
+    "trustSecure": "Secure payment",
+    "trustPayPal": "PayPal protected",
+    "trustReturns": "Easy returns",
+    "completeGearTitle": "Complete your gear",
+    "completeGearBody": "Personalized suggestions will appear here when available.",
+    "ctaReassurance": "Secure checkout — your selection is held while you finish payment.",
     "variantLabels": {
       "size": "Size",
       "color": "Color",
@@ -1776,6 +1788,13 @@
     "emptyCta": "View products",
     "backToCart": "← Back to cart",
     "title": "Checkout",
+    "subtitle": "Purpose-built gear, chosen well.",
+    "emailNote": "We'll send your confirmation and order updates by email.",
+    "trustSecureCheckout": "Secure checkout",
+    "trustPayPalProtection": "Protected by PayPal Buyer Protection where applicable.",
+    "trustEasyReturns": "Easy returns",
+    "lineItemsHeading": "Your order",
+    "paymentPayPalHighlight": "PayPal encrypts your payment details for a safer checkout.",
     "shippingAddress": "Shipping address",
     "addAddress": "Add an address to continue",
     "manageAddresses": "Manage in my account",
@@ -1817,7 +1836,81 @@
     "unitPrice": "each",
     "confirmOrder": "Confirm order",
     "confirming": "Confirming...",
-    "terms": "By confirming your order, you accept our terms and conditions"
+    "terms": "By confirming your order, you accept our terms and conditions",
+    "mobileStickyHint": "Review your total, then confirm when you're ready.",
+    "summaryReassurance": "Encrypted checkout · PayPal available · Clear return policy"
+  },
+  "orderSuccessPage": {
+    "headline": "Your adventure starts now",
+    "subheadline": "We're preparing your order with the care it deserves.",
+    "emailLine": "We've sent a confirmation email with the details of your order.",
+    "orderNumber": "Order number",
+    "orderSummary": "Order summary",
+    "shippingTitle": "Shipping address",
+    "total": "Total",
+    "placedOn": "Placed on {date}",
+    "noOrderTitle": "We couldn't load this order yet",
+    "noOrderHint": "If you just completed checkout, details may take a moment to appear.",
+    "continueShopping": "Continue shopping",
+    "viewAccount": "View account",
+    "whatsappCta": "Contact via WhatsApp",
+    "whatsappMessage": "Hi! I'd like to coordinate payment for order {orderId} ({amount}).",
+    "stepsTitle": "What happens next",
+    "brandQuote": "Every piece of gear you chose is made to go where it matters.",
+    "recommendTitle": "Ready for what's next",
+    "recommendBody": "Explore more gear whenever you're planning the next outing.",
+    "paymentBanner": {
+      "whatsappTitle": "Payment pending",
+      "whatsappBody": "We'll reach out on WhatsApp to coordinate payment.",
+      "manualTitle": "Processing",
+      "manualBody": "We'll contact you shortly to finalize payment.",
+      "paidTitle": "Payment confirmed",
+      "paidBody": "Your PayPal payment was processed successfully."
+    },
+    "flows": {
+      "whatsapp": [
+        {
+          "title": "We'll reach out on WhatsApp",
+          "description": "In the next few hours we'll coordinate payment with you."
+        },
+        {
+          "title": "We prepare your order",
+          "description": "Once payment is confirmed, we start preparing your shipment."
+        },
+        {
+          "title": "Shipping update",
+          "description": "You'll get an email with tracking when your order ships."
+        }
+      ],
+      "paypalPaid": [
+        {
+          "title": "Order confirmed",
+          "description": "Your payment was received and your order is logged."
+        },
+        {
+          "title": "Preparation",
+          "description": "We're carefully preparing your gear for dispatch."
+        },
+        {
+          "title": "Shipping update",
+          "description": "You'll receive tracking details as soon as it leaves our hands."
+        }
+      ],
+      "default": [
+        {
+          "title": "Confirmation email",
+          "description": "Check your inbox for a summary of your purchase."
+        },
+        {
+          "title": "Processing",
+          "description": "We're reviewing your order and will follow up if needed."
+        },
+        {
+          "title": "Preparation & shipping",
+          "description": "Once confirmed, we pack and notify you when it ships."
+        }
+      ]
+    }
   }
 }
 

@@ -10,9 +10,15 @@ export function getMessage(messages: Messages, key: string): string {
 }
 
 export function createTranslator(messages: Messages) {
-  return (key: string, fallback = "") => {
+  return (key: string, fallback: string | any = "") => {
     const value = getMessage(messages, key);
-    return value || fallback || key;
+    if (value !== "" && value !== undefined && value !== null) {
+      return value;
+    }
+    if (fallback !== "" && fallback !== undefined) {
+      return fallback;
+    }
+    return key;
   };
 }
 
