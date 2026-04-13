@@ -222,42 +222,47 @@ export default async function HomePage({
         posts={featuredPosts}
       />
 
-      <section className="bg-[#1A2620] border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
-          <div>
-            <h3 className="font-semibold text-lg text-text-primary">
-              {messages.home.benefits[0].title}
-            </h3>
-            <p className="mt-2 text-sm text-text-muted">
-              {messages.home.benefits[0].text}
-            </p>
+      <section className="border-t border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div className="bg-[#E88C3A] px-4 py-14 sm:py-16">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-10 text-center">
+              <div>
+                <h3 className="font-semibold text-lg text-white">
+                  {messages.home.benefits[0].title}
+                </h3>
+                <p className="mt-2 text-sm text-white/90">
+                  {messages.home.benefits[0].text}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg text-white">
+                  {messages.home.benefits[1].title}
+                </h3>
+                <p className="mt-2 text-sm text-white/90">
+                  {messages.home.benefits[1].text}
+                </p>
+              </div>
+            </div>
           </div>
-
-          <div>
-            <h3 className="font-semibold text-lg text-text-primary">
-              {messages.home.benefits[1].title}
-            </h3>
-            <p className="mt-2 text-sm text-text-muted">
-              {messages.home.benefits[1].text}
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-lg text-text-primary">
-              {messages.home.benefits[2].title}
-            </h3>
-            <p className="mt-2 text-sm text-text-muted">
-              {messages.home.benefits[2].text}
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-lg text-text-primary">
-              {messages.home.benefits[3].title}
-            </h3>
-            <p className="mt-2 text-sm text-text-muted">
-              {messages.home.benefits[3].text}
-            </p>
+          <div className="bg-[#8E2F2F] px-4 py-14 sm:py-16">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-10 text-center">
+              <div>
+                <h3 className="font-semibold text-lg text-white">
+                  {messages.home.benefits[2].title}
+                </h3>
+                <p className="mt-2 text-sm text-white/90">
+                  {messages.home.benefits[2].text}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg text-white">
+                  {messages.home.benefits[3].title}
+                </h3>
+                <p className="mt-2 text-sm text-white/90">
+                  {messages.home.benefits[3].text}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -282,16 +287,16 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="bg-[#182820] border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-          <div className="flex flex-col items-center">
+      <section className="border-t border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+          <div className="flex flex-col items-center bg-[#E88C3A] px-4 py-14 sm:py-16 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
-              className="w-6 h-6 text-accent-gold/80 mb-3"
+              className="w-6 h-6 text-white mb-3"
             >
               <path
                 strokeLinecap="round"
@@ -299,22 +304,22 @@ export default async function HomePage({
                 d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
               />
             </svg>
-            <h4 className="font-semibold text-text-primary">
+            <h4 className="font-semibold text-white">
               {messages.home.trust[0].title}
             </h4>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-white/90">
               {messages.home.trust[0].text}
             </p>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center bg-[#8E2F2F] px-4 py-14 sm:py-16 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
-              className="w-6 h-6 text-accent-gold/80 mb-3"
+              className="w-6 h-6 text-white mb-3"
             >
               <path
                 strokeLinecap="round"
@@ -322,22 +327,22 @@ export default async function HomePage({
                 d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
               />
             </svg>
-            <h4 className="font-semibold text-text-primary">
+            <h4 className="font-semibold text-white">
               {messages.home.trust[1].title}
             </h4>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-white/90">
               {messages.home.trust[1].text}
             </p>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center bg-[#E88C3A] px-4 py-14 sm:py-16 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
-              className="w-6 h-6 text-accent-gold/80 mb-3"
+              className="w-6 h-6 text-white mb-3"
             >
               <path
                 strokeLinecap="round"
@@ -345,10 +350,10 @@ export default async function HomePage({
                 d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-1.135 9.232 9.232 0 003.478-3.465c.33-.921-.074-1.9-.563-2.44a2.253 2.253 0 00-1.5-1.5c-.921-.33-1.9-.074-2.44.563a2.253 2.253 0 01-1.5 1.5 9.232 9.232 0 00-3.465 3.478 9.38 9.38 0 00-.372 2.625c0 .633.135 1.25.372 1.853a2.253 2.253 0 01-1.5 1.5 9.337 9.337 0 01-4.121 1.135 9.232 9.232 0 01-3.478-3.465 2.253 2.253 0 00-1.5-1.5 9.38 9.38 0 01-.372-2.625 9.38 9.38 0 00-.372-2.625 2.253 2.253 0 011.5-1.5 9.232 9.232 0 013.478-3.465 2.253 2.253 0 011.5-1.5c.921-.33 1.9-.074 2.44.563a2.253 2.253 0 011.5 1.5 9.232 9.232 0 003.465 3.478 9.38 9.38 0 00.372 2.625c0 .633-.135 1.25-.372 1.853a2.253 2.253 0 01-1.5 1.5z"
               />
             </svg>
-            <h4 className="font-semibold text-text-primary">
+            <h4 className="font-semibold text-white">
               {messages.home.trust[2].title}
             </h4>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-white/90">
               {messages.home.trust[2].text}
             </p>
           </div>
