@@ -17,13 +17,8 @@ const emptyForm: FormState = {
   isDefault: false,
 };
 
-function normalizeDefault(list: Address[], selectedId: string | null) {
-  if (!selectedId) return list;
-  return list.map((addr) => ({ ...addr, isDefault: addr.id === selectedId }));
-}
-
 export default function AccountAddresses() {
-  const { addresses, setAddresses, setDefaultAddress, removeAddress } = useUser();
+  const { addresses, upsertAddress, setDefaultAddress, removeAddress } = useUser();
   const t = useTranslations();
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -58,53 +53,50 @@ export default function AccountAddresses() {
   };
 
   const handleDelete = (id: string) => {
-    removeAddress(id);
+    void removeAddress(id);
   };
 
   const handleDefault = (id: string) => {
-    setDefaultAddress(id);
+    void setDefaultAddress(id);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const trimmed = {
-      ...form,
-      fullName: form.fullName.trim(),
-      phone: form.phone.trim(),
-      addressLine1: form.addressLine1.trim(),
-      addressLine2: form.addressLine2?.trim() || "",
-      city: form.city.trim(),
-      postalCode: form.postalCode.trim(),
-      country: form.country.trim(),
-    };
+    void (async () => {
+      const trimmed = {
+        ...form,
+        fullName: form.fullName.trim(),
+        phone: form.phone.trim(),
+        addressLine1: form.addressLine1.trim(),
+        addressLine2: form.addressLine2?.trim() || "",
+        city: form.city.trim(),
+        postalCode: form.postalCode.trim(),
+        country: form.country.trim(),
+      };
 
-    if (
-      !trimmed.fullName ||
-      !trimmed.phone ||
-      !trimmed.addressLine1 ||
-      !trimmed.city ||
-      !trimmed.postalCode ||
-      !trimmed.country
-    ) {
-      return;
-    }
+      if (
+        !trimmed.fullName ||
+        !trimmed.phone ||
+        !trimmed.addressLine1 ||
+        !trimmed.city ||
+        !trimmed.postalCode ||
+        !trimmed.country
+      ) {
+        return;
+      }
 
-    const nextId = editingId ?? `addr_${Date.now()}`;
-    const nextAddress: Address = {
-      id: nextId,
-      ...trimmed,
-      isDefault: form.isDefault,
-    };
+      const nextAddress: Address = {
+        id: editingId ?? "",
+        ...trimmed,
+        isDefault: form.isDefault,
+      };
 
-    const updated = editingId
-      ? addresses.map((item) => (item.id === editingId ? nextAddress : item))
-      : [...addresses, nextAddress];
-    const defaultId = nextAddress.isDefault ? nextAddress.id : null;
-    setAddresses(normalizeDefault(updated, defaultId));
+      await upsertAddress(nextAddress);
 
-    setIsEditing(false);
-    setEditingId(null);
-    setForm(emptyForm);
+      setIsEditing(false);
+      setEditingId(null);
+      setForm(emptyForm);
+    })();
   };
 
   return (

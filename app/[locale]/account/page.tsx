@@ -17,7 +17,7 @@ type Order = {
 type SectionKey = "account" | "orders" | "addresses";
 
 export default function AccountPage() {
-  const { isLoggedIn, user, logout, orders } = useUser();
+  const { isLoggedIn, user, logout, orders, authLoading } = useUser();
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations();
@@ -57,7 +57,22 @@ export default function AccountPage() {
                 <p className="text-sm font-semibold text-text-primary">
                   {t("accountPage.orderLabel")} #{order.id}
                 </p>
-                <p className="text-xs text-text-muted">{order.date}</p>
+                <p className="text-xs text-text-muted">
+                  {new Date(order.date).toLocaleDateString(
+                    locale === "es"
+                      ? "es-AR"
+                      : locale === "fr"
+                        ? "fr-FR"
+                        : locale === "it"
+                          ? "it-IT"
+                          : "en-US",
+                    {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    }
+                  )}
+                </p>
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-text-primary">
@@ -90,7 +105,15 @@ export default function AccountPage() {
         </div>
       </div>
     );
-  }, [activeSection, userOrders, user, t]);
+  }, [activeSection, userOrders, user, t, locale]);
+
+  if (authLoading) {
+    return (
+      <main className="min-h-[100dvh] bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16 flex items-center justify-center">
+        <p className="text-sm text-text-muted">{t("checkoutPage.loadingAuth")}</p>
+      </main>
+    );
+  }
 
   if (!isLoggedIn) {
     return (
@@ -157,8 +180,10 @@ export default function AccountPage() {
             <button
               type="button"
               onClick={() => {
-                logout();
-                router.push(`/${locale}`);
+                void (async () => {
+                  await logout();
+                  router.push(`/${locale}`);
+                })();
               }}
               className="w-full rounded-xl border border-white/10 px-4 py-3 text-left text-sm font-semibold text-text-muted transition-colors duration-200 ease-out hover:text-text-primary"
             >

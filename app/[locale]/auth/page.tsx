@@ -11,23 +11,25 @@ function AuthPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const locale = useLocale();
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn, authLoading } = useUser();
   const [mounted, setMounted] = useState(false);
-  
+
   const tab = (searchParams.get("tab") as "login" | "register" | null) || "login";
+  const redirectParam = searchParams.get("redirect");
+  const redirectTo =
+    redirectParam && redirectParam.startsWith("/") ? redirectParam : undefined;
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Redirect if already logged in
   useEffect(() => {
-    if (mounted && isLoggedIn) {
-      router.push(`/${locale}/account`);
+    if (mounted && !authLoading && isLoggedIn) {
+      router.push(redirectTo || `/${locale}/account`);
     }
-  }, [mounted, isLoggedIn, router, locale]);
+  }, [mounted, authLoading, isLoggedIn, router, locale, redirectTo]);
 
-  if (!mounted) {
+  if (!mounted || authLoading) {
     return (
       <main className="min-h-[100dvh] bg-dark-base flex items-center justify-center px-4">
         <div className="text-text-muted">Cargando...</div>
@@ -65,7 +67,11 @@ function AuthPageContent() {
 
         {/* Auth Form Container */}
         <div className="bg-dark-surface/40 border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-          <AuthForm initialTab={tab} isPage={true} />
+          <AuthForm
+            initialTab={tab}
+            isPage={true}
+            redirectTo={redirectTo}
+          />
         </div>
       </div>
     </main>

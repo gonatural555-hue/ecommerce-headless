@@ -57,31 +57,15 @@ export default function OrderSuccessPage() {
   let flowSteps: FlowStep[] = [];
   if (order) {
     const key =
-      order.paymentMethod === "whatsapp"
-        ? "orderSuccessPage.flows.whatsapp"
-        : order.paymentMethod === "paypal" && order.status === "paid"
-          ? "orderSuccessPage.flows.paypalPaid"
-          : "orderSuccessPage.flows.default";
+      order.paymentMethod === "paypal" && order.status === "paid"
+        ? "orderSuccessPage.flows.paypalPaid"
+        : "orderSuccessPage.flows.default";
     const raw = t(key);
     flowSteps = Array.isArray(raw) ? (raw as FlowStep[]) : [];
   }
 
   const paymentBanner = (() => {
     if (!order) return null;
-    if (order.paymentMethod === "whatsapp") {
-      return {
-        title: t("orderSuccessPage.paymentBanner.whatsappTitle"),
-        body: t("orderSuccessPage.paymentBanner.whatsappBody"),
-        className: "border-amber-400/30 bg-amber-950/40 text-amber-100/95",
-      };
-    }
-    if (!order.paymentMethod || order.paymentMethod === "manual") {
-      return {
-        title: t("orderSuccessPage.paymentBanner.manualTitle"),
-        body: t("orderSuccessPage.paymentBanner.manualBody"),
-        className: "border-blue-400/25 bg-blue-950/35 text-blue-100/95",
-      };
-    }
     if (order.paymentMethod === "paypal" && order.status === "paid") {
       return {
         title: t("orderSuccessPage.paymentBanner.paidTitle"),
@@ -90,9 +74,9 @@ export default function OrderSuccessPage() {
       };
     }
     return {
-      title: t("orderSuccessPage.paymentBanner.manualTitle"),
-      body: t("orderSuccessPage.paymentBanner.manualBody"),
-      className: "border-blue-400/25 bg-blue-950/35 text-blue-100/95",
+      title: t("orderSuccessPage.paymentBanner.paidTitle"),
+      body: t("orderSuccessPage.paymentBanner.paidBody"),
+      className: "border-emerald-400/30 bg-emerald-950/35 text-emerald-100/95",
     };
   })();
 
@@ -287,21 +271,6 @@ export default function OrderSuccessPage() {
             >
               {t("orderSuccessPage.viewAccount")}
             </Link>
-            {order.paymentMethod === "whatsapp" && (
-              <Link
-                href={`https://wa.me/?text=${encodeURIComponent(
-                  interpolate(t("orderSuccessPage.whatsappMessage"), {
-                    orderId: order.id,
-                    amount: formatPrice(order.subtotal),
-                  })
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex justify-center items-center rounded-xl bg-[#128C7E] px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0f7a6d] active:scale-[0.98]"
-              >
-                {t("orderSuccessPage.whatsappCta")}
-              </Link>
-            )}
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createOrder, markOrderAsPaid, type OrderItem } from "@/lib/orders";
 
 type PayPalOrderPayload = {
@@ -8,14 +9,38 @@ type PayPalOrderPayload = {
   totalAmount: number;
   currency?: string;
   paypalOrderId?: string;
+  /** Snapshot de dirección (JSON alineado con Address en cliente) */
+  shippingAddress?: Record<string, unknown>;
 };
 
+/**
+ * Orden de operaciones: 1) Supabase (fuente de verdad) 2) lib/orders (Sheets / eventos).
+ * Requiere sesión Supabase válida (cookie).
+ */
 export async function POST(request: NextRequest) {
   try {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const body = (await request.json()) as Partial<PayPalOrderPayload>;
 
-    const { orderId, email, items, totalAmount, currency, paypalOrderId } =
-      body;
+    const {
+      orderId,
+      items,
+      totalAmount,
+      currency,
+      paypalOrderId,
+      shippingAddress,
+    } = body;
 
     if (!orderId || !items || !Array.isArray(items) || !items.length) {
       console.error("[PayPal Order API] Payload inválido", { body });
@@ -43,44 +68,94 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const safeEmail =
-      typeof email === "string" && email.includes("@") ? email : "";
+    const ship = shippingAddress as Record<string, unknown> | undefined;
+    const fullName =
+      ship && typeof ship.fullName === "string" ? ship.fullName.trim() : "";
+    if (!fullName) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "shippingAddress es obligatorio.",
+        },
+        { status: 400 }
+      );
+    }
 
-    console.log("[PayPal Order API] Creando orden desde pago PayPal", {
+    const safeEmail =
+      typeof user.email === "string" && user.email.includes("@")
+        ? user.email
+        : "";
+
+    console.log("[PayPal Order API] Persistiendo en Supabase + eventos", {
       orderId,
       paypalOrderId,
+      userId: user.id,
       totalAmount,
       currency: currency || "USD",
-      hasEmail: Boolean(safeEmail),
       itemsCount: items.length,
     });
 
-    // 1) Crear orden en código (ORDER_CREATED)
-    const createdOrder = await createOrder({
+    const { error: orderErr } = await supabase.from("orders").insert({
       id: orderId,
-      email: safeEmail,
-      items,
-      totalAmount,
+      user_id: user.id,
+      status: "paid",
+      subtotal: totalAmount,
       currency: currency || "USD",
-      paymentMethod: "paypal",
+      payment_method: "paypal",
+      paypal_order_id: paypalOrderId ?? null,
+      shipping_json: shippingAddress as Record<string, unknown>,
     });
 
-    // 2) Marcar como pagada (ORDER_PAID)
-    const paidOrder = await markOrderAsPaid(createdOrder);
+    if (orderErr) {
+      console.error("[PayPal Order API] orders insert", orderErr);
+      return NextResponse.json(
+        { success: false, error: "No se pudo guardar el pedido." },
+        { status: 500 }
+      );
+    }
 
-    console.log("[PayPal Order API] Orden marcada como pagada", {
-      orderId: paidOrder.id,
-      status: paidOrder.status,
-    });
+    const itemRows = items.map((it) => ({
+      order_id: orderId,
+      product_id: it.id,
+      title: it.title,
+      price: it.price,
+      quantity: it.quantity,
+    }));
 
-    // IMPORTANTE:
-    // - La sincronización con Google Sheets se maneja vía order-sheets-handler
-    // - Si Sheets falla, loguea el error internamente y NO rompe este flujo
+    const { error: itemsErr } = await supabase
+      .from("order_items")
+      .insert(itemRows);
+
+    if (itemsErr) {
+      console.error("[PayPal Order API] order_items insert", itemsErr);
+      await supabase.from("orders").delete().eq("id", orderId);
+      return NextResponse.json(
+        { success: false, error: "No se pudieron guardar las líneas del pedido." },
+        { status: 500 }
+      );
+    }
+
+    try {
+      const createdOrder = await createOrder({
+        id: orderId,
+        email: safeEmail,
+        items,
+        totalAmount,
+        currency: currency || "USD",
+        paymentMethod: "paypal",
+      });
+      await markOrderAsPaid(createdOrder);
+    } catch (sheetErr) {
+      console.error(
+        "[PayPal Order API] Sheets/eventos tras guardar en DB:",
+        sheetErr
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      orderId: paidOrder.id,
-      status: paidOrder.status,
+      orderId,
+      status: "paid",
     });
   } catch (error) {
     console.error("[PayPal Order API] Error procesando orden PayPal:", error);
@@ -93,5 +168,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-

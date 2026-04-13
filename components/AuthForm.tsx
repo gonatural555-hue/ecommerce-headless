@@ -10,10 +10,17 @@ type Tab = "login" | "register";
 type Props = {
   initialTab?: Tab;
   onSuccess?: () => void;
-  isPage?: boolean; // true if used in dedicated page, false if in modal
+  isPage?: boolean;
+  /** Ruta interna (ej. /es/checkout) tras login correcto */
+  redirectTo?: string;
 };
 
-export default function AuthForm({ initialTab = "login", onSuccess, isPage = false }: Props) {
+export default function AuthForm({
+  initialTab = "login",
+  onSuccess,
+  isPage = false,
+  redirectTo,
+}: Props) {
   const { login, register } = useUser();
   const router = useRouter();
   const locale = useLocale();
@@ -21,6 +28,8 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -29,6 +38,7 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
     setName("");
     setEmail("");
     setPassword("");
+    setError(null);
     setActiveTab(initialTab);
   }, [initialTab]);
 
@@ -41,7 +51,6 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
 
   const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement | null>) => {
     if (inputRef.current && isPage) {
-      // For mobile page: scroll input into view after keyboard appears
       requestAnimationFrame(() => {
         setTimeout(() => {
           if (inputRef.current) {
@@ -56,19 +65,38 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (activeTab === "login") {
-      login({ email, password });
-    } else {
-      register({ name, email, password });
-    }
-    
+  const afterAuthSuccess = () => {
+    const target =
+      redirectTo && redirectTo.startsWith("/") ? redirectTo : `/${locale}/account`;
     if (isPage) {
-      // Redirect to account page after successful login/register
-      router.push(`/${locale}/account`);
+      router.push(target);
+      router.refresh();
     } else if (onSuccess) {
       onSuccess();
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      if (activeTab === "login") {
+        const { error: err } = await login({ email, password });
+        if (err) {
+          setError(err);
+          return;
+        }
+      } else {
+        const { error: err } = await register({ name, email, password });
+        if (err) {
+          setError(err);
+          return;
+        }
+      }
+      afterAuthSuccess();
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -103,7 +131,13 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
         <p className="text-sm text-text-muted">{subtitle}</p>
       </div>
 
-      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+      {error ? (
+        <p className="mt-4 text-sm text-red-400/95" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      <form className="mt-6 space-y-4" onSubmit={(e) => void handleSubmit(e)}>
         {activeTab === "register" && (
           <div className="space-y-2">
             <label className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
@@ -151,17 +185,22 @@ export default function AuthForm({ initialTab = "login", onSuccess, isPage = fal
             className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-3 sm:px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/70 focus:border-accent-gold/60 focus:outline-none"
             placeholder="••••••••"
             required
+            minLength={6}
           />
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-text-primary px-4 py-3 text-sm font-semibold text-dark-base transition-colors duration-200 ease-out hover:bg-white"
+          disabled={submitting}
+          className="w-full rounded-xl bg-text-primary px-4 py-3 text-sm font-semibold text-dark-base transition-colors duration-200 ease-out hover:bg-white disabled:opacity-60"
         >
-          {activeTab === "login" ? "Iniciar sesión" : "Crear cuenta"}
+          {submitting
+            ? "…"
+            : activeTab === "login"
+              ? "Iniciar sesión"
+              : "Crear cuenta"}
         </button>
       </form>
     </div>
   );
 }
-
