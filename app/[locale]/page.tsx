@@ -167,7 +167,7 @@ export default async function HomePage({
       />
 
       {featuredProduct && (
-        <section className="bg-[#182820] py-24 md:py-32 border-t border-white/5">
+        <section className="bg-dark-base py-24 md:py-32 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <div className="grid gap-12 md:gap-16 md:grid-cols-[3fr_2fr] items-center">
               <Link href={`/${locale}/products/${featuredProduct.id}`}>
