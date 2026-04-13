@@ -158,7 +158,7 @@ export default function CheckoutPage() {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/25 max-w-full";
+    "w-full rounded-lg border border-white/15 bg-dark-base/50 px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted/60 transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/30 focus-visible:border-accent-gold focus-visible:ring-2 focus-visible:ring-accent-gold/35 max-w-full";
 
   const showMobilePayDock =
     paymentMethod !== "paypal" && Boolean(defaultAddress) && items.length > 0;
@@ -220,30 +220,30 @@ export default function CheckoutPage() {
       <div className="grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1fr)_min(100%,400px)] lg:items-start">
         {/* Left: shipping & payment */}
         <div className="order-2 lg:order-1 space-y-6 md:space-y-8 min-w-0">
-          <section className="rounded-2xl border border-gray-100 bg-white p-5 sm:p-7 md:p-8 shadow-sm">
-            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-5">
+          <section className="rounded-2xl border border-white/10 bg-[#1F2D26]/90 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.22)]">
+            <h2 className="text-lg md:text-xl font-semibold text-text-primary mb-5">
               {t("checkoutPage.shippingAddress")}
             </h2>
             {defaultAddress ? (
               <div className="text-sm space-y-2 leading-relaxed">
-                <p className="font-semibold text-gray-900">
+                <p className="font-semibold text-text-primary">
                   {defaultAddress.fullName}
                 </p>
-                <p className="text-gray-600">
+                <p className="text-text-muted">
                   {defaultAddress.addressLine1}
                   {defaultAddress.addressLine2
                     ? `, ${defaultAddress.addressLine2}`
                     : ""}
                 </p>
-                <p className="text-gray-600">
+                <p className="text-text-muted">
                   {defaultAddress.city} · {defaultAddress.postalCode}
                 </p>
-                <p className="text-gray-600">{defaultAddress.country}</p>
-                <p className="text-gray-600">{defaultAddress.phone}</p>
+                <p className="text-text-muted">{defaultAddress.country}</p>
+                <p className="text-text-muted">{defaultAddress.phone}</p>
               </div>
             ) : (
               <div className="space-y-5">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-text-muted">
                   {t("checkoutPage.addAddress")}
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -350,13 +350,13 @@ export default function CheckoutPage() {
                       };
                       setAddresses([next]);
                     }}
-                    className="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-black active:scale-[0.98]"
+                    className="inline-flex items-center justify-center rounded-xl bg-accent-gold px-5 py-3 text-sm font-semibold text-dark-base transition hover:bg-accent-gold/90 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F2D26]"
                   >
                     {t("checkoutPage.saveAddress")}
                   </button>
                   <Link
                     href={`/${locale}/account`}
-                    className="text-sm font-medium text-accent-moss hover:text-accent-moss/85 underline-offset-4 hover:underline"
+                    className="text-sm font-medium text-accent-gold/90 hover:text-accent-gold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40 rounded-sm"
                   >
                     {t("checkoutPage.manageAddresses")}
                   </Link>
@@ -365,8 +365,8 @@ export default function CheckoutPage() {
             )}
           </section>
 
-          <section className="rounded-2xl border border-gray-100 bg-white p-5 sm:p-7 md:p-8 shadow-sm">
-            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-5">
+          <section className="rounded-2xl border border-white/10 bg-[#1F2D26]/90 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.22)]">
+            <h2 className="text-lg md:text-xl font-semibold text-text-primary mb-5">
               {t("checkoutPage.paymentMethod")}
             </h2>
             <div className="space-y-3">
@@ -391,8 +391,8 @@ export default function CheckoutPage() {
                   key={option.value}
                   className={`flex items-start gap-3 rounded-xl border px-4 py-3.5 text-sm transition-all cursor-pointer ${
                     paymentMethod === option.value
-                      ? "border-accent-gold/50 bg-amber-50/50 ring-1 ring-accent-gold/20"
-                      : "border-gray-200 hover:border-gray-300 hover:bg-gray-50/80"
+                      ? "border-accent-gold/55 bg-accent-gold/10 ring-1 ring-accent-gold/30"
+                      : "border-white/12 bg-dark-base/30 hover:border-white/25 hover:bg-white/[0.05]"
                   }`}
                 >
                   <input
@@ -405,13 +405,13 @@ export default function CheckoutPage() {
                         option.value as "manual" | "whatsapp" | "paypal"
                       )
                     }
-                    className="mt-1 h-4 w-4 border-gray-300 text-accent-gold focus:ring-accent-gold"
+                    className="mt-1 h-4 w-4 shrink-0 border-white/35 bg-dark-base/80 text-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/35 focus:ring-offset-0 focus:ring-offset-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45"
                   />
                   <span className="space-y-1 min-w-0">
-                    <span className="block font-semibold text-gray-900">
+                    <span className="block font-semibold text-text-primary">
                       {option.label}
                     </span>
-                    <span className="block text-xs text-gray-500 leading-relaxed">
+                    <span className="block text-xs text-text-muted leading-relaxed">
                       {option.hint}
                     </span>
                   </span>
@@ -419,19 +419,19 @@ export default function CheckoutPage() {
               ))}
 
               {paymentMethod === "paypal" ? (
-                <div className="mt-4 rounded-xl border border-accent-gold/25 bg-gradient-to-br from-amber-50/80 to-white px-4 py-3 text-xs text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-gray-900">
+                <div className="mt-4 rounded-xl border border-accent-gold/30 bg-dark-base/70 px-4 py-3 text-xs text-text-muted leading-relaxed">
+                  <span className="font-semibold text-text-primary">
                     PayPal ·{" "}
                   </span>
                   {t("checkoutPage.paymentPayPalHighlight")}{" "}
-                  <span className="text-gray-600">
+                  <span className="text-text-muted/95">
                     {t("checkoutPage.trustPayPalProtection")}
                   </span>
                 </div>
               ) : null}
 
               {paymentMethod === "paypal" && defaultAddress && (
-                <div className="mt-4 pt-4 border-t border-gray-100">
+                <div className="mt-4 pt-4 border-t border-white/10">
                   <PayPalButton
                     amount={subtotal}
                     currency="USD"
