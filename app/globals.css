@@ -186,6 +186,77 @@ body::before {
   }
 }
 
+/* Home immersive — hero motion & scroll cue */
+@keyframes home-hero-ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.home-hero-ken-burns {
+  animation: home-hero-ken-burns 24s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes home-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-hero-fade {
+  animation: home-hero-fade-in 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-hero-fade-delay {
+  animation-delay: 160ms;
+}
+
+.home-hero-fade-delay-2 {
+  animation-delay: 320ms;
+}
+
+@keyframes home-scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.home-scroll-bounce {
+  animation: home-scroll-bounce 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-ken-burns {
+    animation: none;
+    transform: scale(1.04);
+  }
+
+  .home-hero-fade,
+  .home-hero-fade-delay,
+  .home-hero-fade-delay-2 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .home-scroll-bounce {
+    animation: none;
+  }
+}
+
 /* Estilos específicos para páginas de carrito, checkout y order-success */
 /* Cambiar contenedores blancos a #CCD0CF solo en estas páginas */
 

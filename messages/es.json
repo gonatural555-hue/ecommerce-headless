@@ -57,6 +57,17 @@
     "subtitle": "Equipo pensado para quienes viajan con intención.",
     "cta": "Explorar la colección"
   },
+  "homeImmersive": {
+    "heroHeading": "Muévete, explora, vive",
+    "scrollHint": "Descubrir",
+    "categories": {
+      "snowMountain": "Nieve y montaña",
+      "camping": "Camping",
+      "cyclingRunning": "Ciclismo y running",
+      "waterSports": "Deportes acuáticos"
+    },
+    "viewCategory": "Ver categoría"
+  },
   "categoriesSection": {
     "items": {
       "mountainSnow": "Montaña & Nieve",

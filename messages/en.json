@@ -57,6 +57,17 @@
     "subtitle": "Gear designed for those who travel with intention.",
     "cta": "Explore the collection"
   },
+  "homeImmersive": {
+    "heroHeading": "Move, explore, live",
+    "scrollHint": "Discover",
+    "categories": {
+      "snowMountain": "Snow & Mountain",
+      "camping": "Camping",
+      "cyclingRunning": "Cycling & Running",
+      "waterSports": "Water Sports"
+    },
+    "viewCategory": "View category"
+  },
   "categoriesSection": {
     "items": {
       "mountainSnow": "Mountain & Snow",

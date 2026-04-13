@@ -57,6 +57,17 @@
     "subtitle": "Gear pensato per chi viaggia con intenzione.",
     "cta": "Esplora la collezione"
   },
+  "homeImmersive": {
+    "heroHeading": "Muoviti, esplora, vivi",
+    "scrollHint": "Scopri",
+    "categories": {
+      "snowMountain": "Neve e montagna",
+      "camping": "Camping",
+      "cyclingRunning": "Ciclismo e running",
+      "waterSports": "Sport acquatici"
+    },
+    "viewCategory": "Vedi categoria"
+  },
   "categoriesSection": {
     "items": {
       "mountainSnow": "Montagna & Neve",
