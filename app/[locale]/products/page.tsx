@@ -71,43 +71,58 @@ export default async function ProductsPage({
   );
 
   return (
-    <main className="bg-black-50">
-      <section className="relative overflow-hidden">
+    <main className="min-h-screen bg-dark-base text-text-primary">
+      <section className="relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0">
           <img
             src="/assets/images/hero/productsbanner.webp"
-            alt="Productos Go Natural"
-            className="h-full w-full object-cover object-center"
+            alt={t("productsPage.title")}
+            className="h-full min-h-[280px] w-full object-cover object-center scale-[1.02] motion-reduce:scale-100"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/75 via-dark-base/50 to-dark-base/85" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-20">
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark-base/40 via-transparent to-dark-base"
+          aria-hidden
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pt-20 md:pb-24 lg:pt-24 lg:pb-28 min-h-[min(48vh,560px)] flex flex-col justify-end">
           <Breadcrumbs
+            variant="darkHero"
             items={[
               { label: t("header.nav.home"), href: `/${locale}` },
               { label: t("header.nav.products") },
             ]}
           />
-          <header className="mt-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <header className="mt-8 md:mt-10 max-w-2xl">
+            <h1 className="text-2xl sm:text-3xl md:text-[2rem] font-semibold tracking-tight text-white leading-tight">
               {t("productsPage.title")}
             </h1>
-            <p className="text-white max-w-2xl">
+            <p className="mt-5 text-base md:text-lg text-white/70 leading-relaxed">
               {t("productsPage.subtitle")}
+            </p>
+            <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#C2A27A]/30 bg-[#C2A27A]/20 px-4 py-2 text-sm font-medium text-[#E6E2D8]">
+              <span
+                className="h-1 w-1 shrink-0 rounded-full bg-[#C2A27A]/80"
+                aria-hidden
+              />
+              {t("home.shippingHighlight")}
             </p>
           </header>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 md:py-16">
-        {/* Filtros de categorías */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-rail-premium">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24">
+        <div className="border-b border-white/5 pb-10 md:pb-12">
+          <div className="flex flex-wrap gap-2.5 sm:gap-3 overflow-x-auto pb-2 scrollbar-rail-premium -mx-1 px-1">
             {categories.map((category) => (
               <Link
                 key={category.slug}
                 href={`/${locale}/category/${category.slug}`}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-text-primary border border-white/10 rounded-full hover:border-accent-gold/60 hover:text-accent-gold transition-colors duration-200 whitespace-nowrap"
+                className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/70 transition-colors duration-200 whitespace-nowrap hover:border-white/15 hover:bg-white/10 hover:text-white"
               >
                 {t(`categories.names.${category.slug}`, category.name)}
               </Link>
@@ -115,15 +130,17 @@ export default async function ProductsPage({
           </div>
         </div>
 
-        <ProductGridSimple
-          products={filteredProducts}
-          locale={locale}
-          labels={{
-            viewProduct: t("common.viewProduct"),
-            addToCart: t("common.addToCart"),
-            noImage: t("common.noImage"),
-          }}
-        />
+        <div className="mt-16 md:mt-20">
+          <ProductGridSimple
+            products={filteredProducts}
+            locale={locale}
+            labels={{
+              viewProduct: t("common.viewProduct"),
+              addToCart: t("common.addToCart"),
+              noImage: t("common.noImage"),
+            }}
+          />
+        </div>
       </div>
     </main>
   );

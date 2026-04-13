@@ -53,7 +53,7 @@ export default function ProductCardSimple({
 
   return (
     <Link href={`/${locale}/products/${product.id}`}>
-      <article className="group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/60 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-shadow duration-300 ease-out hover:shadow-[0_10px_22px_rgba(0,0,0,0.28)]">
+      <article className="group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
         
         {/* IMAGE */}
         <div className="relative w-full bg-dark-surface overflow-hidden">
