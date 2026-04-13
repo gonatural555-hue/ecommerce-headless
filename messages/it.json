@@ -19,7 +19,8 @@
     "readArticle": "Leggi articolo",
     "noImage": "Nessuna immagine",
     "exploreAll": "Esplora le collezioni",
-    "backToJournal": "Torna al journal"
+    "backToJournal": "Torna al journal",
+    "swipeRailHint": "Scorri in orizzontale per vedere altro"
   },
   "seo": {
     "home": {

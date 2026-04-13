@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Product } from "@/lib/products";
 import type { Locale } from "@/lib/i18n/config";
 import ProductCardSimple from "@/components/ProductCardSimple";
+import HorizontalSwipeHint from "@/components/HorizontalSwipeHint";
 
 type Props = {
   title: string;
@@ -68,8 +69,12 @@ export default function HomeCategoryCarousel({
             </Link>
           </header>
 
+          {products.length > 0 ? <HorizontalSwipeHint className="mt-8" /> : null}
+
           <div
-            className="mt-10 md:mt-12 overflow-x-auto overflow-y-visible pb-4 [scrollbar-width:thin] scroll-smooth snap-x snap-mandatory"
+            className={`${
+              products.length > 0 ? "mt-3 md:mt-12" : "mt-10 md:mt-12"
+            } overflow-x-auto overflow-y-visible pb-4 scrollbar-rail-premium scroll-smooth snap-x snap-mandatory`}
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             <div className="flex gap-5 md:gap-7 w-max pr-8">

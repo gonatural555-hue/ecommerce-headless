@@ -102,7 +102,7 @@ export default async function ProductsPage({
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 md:py-16">
         {/* Filtros de categorías */}
         <div className="mb-8">
-          <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
+          <div className="flex flex-wrap gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-rail-premium">
             {categories.map((category) => (
               <Link
                 key={category.slug}

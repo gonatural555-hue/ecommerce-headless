@@ -257,6 +257,34 @@ body::before {
   }
 }
 
+/**
+ * Barra de desplazamiento horizontal discreta (Firefox + WebKit).
+ * Usar en contenedores con overflow-x-auto.
+ */
+.scrollbar-rail-premium {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-accent-gold) 42%, transparent)
+    color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+}
+
+.scrollbar-rail-premium::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-rail-premium::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  border-radius: 9999px;
+}
+
+.scrollbar-rail-premium::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-accent-gold) 45%, transparent);
+  border-radius: 9999px;
+}
+
+.scrollbar-rail-premium::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-accent-gold) 62%, transparent);
+}
+
 /* Estilos específicos para páginas de carrito, checkout y order-success */
 /* Cambiar contenedores blancos a #CCD0CF solo en estas páginas */
 

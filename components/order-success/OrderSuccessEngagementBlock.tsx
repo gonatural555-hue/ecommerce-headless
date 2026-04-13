@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { INSTAGRAM_URL, TIKTOK_URL } from "@/lib/social-links";
+import HorizontalSwipeHint from "@/components/HorizontalSwipeHint";
 
 /** Mismos slugs destacados que en `app/[locale]/page.tsx` (posts reales en messages.blog.posts). */
 const ORDER_SUCCESS_BLOG_SLUGS = [
@@ -83,8 +84,9 @@ export default function OrderSuccessEngagementBlock() {
         <p className="text-xs text-text-muted max-w-2xl mx-auto md:mx-0 mb-6 text-center md:text-left leading-relaxed">
           {t("orderSuccessPage.blogCarouselSubtitle")}
         </p>
+        <HorizontalSwipeHint className="mb-3 md:hidden" />
         <div
-          className="-mx-2 overflow-x-auto overflow-y-visible pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:thin] focus-within:outline-none"
+          className="-mx-2 overflow-x-auto overflow-y-visible pb-2 scroll-smooth snap-x snap-mandatory scrollbar-rail-premium focus-within:outline-none"
           tabIndex={0}
           role="region"
           aria-label={t("orderSuccessPage.blogCarouselAria")}

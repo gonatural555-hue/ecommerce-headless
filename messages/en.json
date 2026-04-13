@@ -19,7 +19,8 @@
     "readArticle": "Read article",
     "noImage": "No image",
     "exploreAll": "Explore all collections",
-    "backToJournal": "Back to journal"
+    "backToJournal": "Back to journal",
+    "swipeRailHint": "Swipe sideways to see more"
   },
   "seo": {
     "home": {

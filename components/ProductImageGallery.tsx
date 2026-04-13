@@ -130,7 +130,7 @@ export default function ProductImageGallery({
 
       {/* Gallery Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 md:justify-center">
+        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 scrollbar-rail-premium md:justify-center">
           {allImages.map((img, index) => (
             <button
               key={img}

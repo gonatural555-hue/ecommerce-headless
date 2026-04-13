@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Product } from "@/lib/products";
 import type { Locale } from "@/lib/i18n/config";
 import ProductCardSimple from "@/components/ProductCardSimple";
+import HorizontalSwipeHint from "@/components/HorizontalSwipeHint";
 
 type Labels = {
   viewProduct: string;
@@ -106,11 +107,13 @@ export default function CartSuggestedProductsRail({
       )}
 
       {!loading && !error && products.length > 0 && (
-        <div
-          className="-mx-1 overflow-x-auto overflow-y-visible pb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:thin]"
-          tabIndex={0}
-          style={{ WebkitOverflowScrolling: "touch" }}
-        >
+        <>
+          <HorizontalSwipeHint className="mt-1 mb-2" />
+          <div
+            className="-mx-1 overflow-x-auto overflow-y-visible pb-2 scroll-smooth snap-x snap-mandatory scrollbar-rail-premium"
+            tabIndex={0}
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
           <div className="flex gap-4 md:gap-5 w-max px-1">
             {products.map((product) => (
               <div
@@ -126,6 +129,7 @@ export default function CartSuggestedProductsRail({
             ))}
           </div>
         </div>
+        </>
       )}
     </div>
   );
