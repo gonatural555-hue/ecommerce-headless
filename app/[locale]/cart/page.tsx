@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
+import CartSuggestedProductsRail from "@/components/cart/CartSuggestedProductsRail";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
@@ -38,6 +39,8 @@ export default function CartPage() {
   };
 
   const thresholdLabel = formatPrice(FREE_SHIPPING_THRESHOLD_USD);
+
+  const cartItemIds = useMemo(() => items.map((item) => item.id), [items]);
 
   const { shippingPct, shippingRemaining, shippingUnlocked } = useMemo(() => {
     const pct = Math.min(
@@ -267,7 +270,7 @@ export default function CartPage() {
             </ul>
           </section>
 
-          {/* Complete your gear — structure ready for future recommendations */}
+          {/* Completá tu equipo: sugerencias vía /api/cart/suggestions (lógica en getCartSuggestedProducts). */}
           <section className="rounded-2xl border border-dashed border-white/15 bg-dark-base/40 p-6 md:p-8">
             <h2 className="text-lg font-semibold text-text-primary">
               {t("cartPage.completeGearTitle")}
@@ -275,7 +278,17 @@ export default function CartPage() {
             <p className="mt-2 text-sm text-text-muted leading-relaxed max-w-xl">
               {t("cartPage.completeGearBody")}
             </p>
-            <div className="mt-6 min-h-[120px] rounded-xl border border-white/5 bg-white/[0.02]" />
+            <CartSuggestedProductsRail
+              locale={locale}
+              labels={{
+                viewProduct: t("common.viewProduct"),
+                addToCart: t("common.addToCart"),
+                noImage: t("common.noImage"),
+              }}
+              cartItemIds={cartItemIds}
+              regionAriaLabel={t("cartPage.completeGearSuggestionsAria")}
+              suggestError={t("cartPage.completeGearSuggestionsError")}
+            />
           </section>
 
           {/* Trust */}

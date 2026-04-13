@@ -466,6 +466,8 @@
     "trustReturns": "Devoluciones simples",
     "completeGearTitle": "Completá tu equipo",
     "completeGearBody": "Las sugerencias personalizadas aparecerán acá cuando estén disponibles.",
+    "completeGearSuggestionsAria": "Productos sugeridos según tu carrito",
+    "completeGearSuggestionsError": "No se pudieron cargar las sugerencias.",
     "ctaReassurance": "Checkout seguro: tu selección se mantiene mientras completás el pago.",
     "variantLabels": {
       "size": "Talle",

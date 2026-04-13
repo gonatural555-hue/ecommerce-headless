@@ -219,3 +219,71 @@ export function getProductsByCategorySlug(slug: string): Product[] {
   });
 }
 
+/**
+ * Sugerencias de carrito (solo servidor / API): usa PRODUCT_CATEGORY_MAP por ítem,
+ * une candidatos por slug de categoría, excluye el carrito, deduplica y rellena
+ * con categorías padre y luego orden del catálogo si hace falta llegar a targetMin.
+ */
+export function getCartSuggestedProducts(
+  cartProductIds: string[],
+  options: { targetMin?: number; max?: number } = {}
+): Product[] {
+  const targetMin = options.targetMin ?? 8;
+  const max = options.max ?? 12;
+  const exclude = new Set(cartProductIds);
+  const allProducts = getProducts();
+
+  if (cartProductIds.length === 0) {
+    return [];
+  }
+
+  const slugSet = new Set<string>();
+  for (const id of cartProductIds) {
+    const slugs = PRODUCT_CATEGORY_MAP[id] || [];
+    slugs.forEach((s) => slugSet.add(s));
+  }
+
+  const seen = new Set<string>();
+  const result: Product[] = [];
+
+  const tryAdd = (p: Product) => {
+    if (result.length >= max) return;
+    if (exclude.has(p.id) || seen.has(p.id)) return;
+    seen.add(p.id);
+    result.push(p);
+  };
+
+  for (const slug of slugSet) {
+    for (const p of getProductsByCategorySlug(slug)) {
+      tryAdd(p);
+      if (result.length >= max) break;
+    }
+    if (result.length >= max) break;
+  }
+
+  if (result.length < targetMin) {
+    const parentSlugs = new Set<string>();
+    for (const slug of slugSet) {
+      const cat = CATEGORIES.find((c) => c.slug === slug);
+      if (cat?.parentSlug) parentSlugs.add(cat.parentSlug);
+      else if (cat && !cat.parentSlug) parentSlugs.add(slug);
+    }
+    for (const parent of parentSlugs) {
+      for (const p of getProductsByCategorySlug(parent)) {
+        tryAdd(p);
+        if (result.length >= max) break;
+      }
+      if (result.length >= max) break;
+    }
+  }
+
+  if (result.length < targetMin) {
+    for (const p of allProducts) {
+      tryAdd(p);
+      if (result.length >= max) break;
+    }
+  }
+
+  return result.slice(0, max);
+}
+

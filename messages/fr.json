@@ -466,6 +466,8 @@
     "trustReturns": "Retours simples",
     "completeGearTitle": "Complétez votre équipement",
     "completeGearBody": "Des suggestions personnalisées apparaîtront ici lorsqu'elles seront disponibles.",
+    "completeGearSuggestionsAria": "Produits suggérés selon votre panier",
+    "completeGearSuggestionsError": "Impossible de charger les suggestions.",
     "ctaReassurance": "Paiement sécurisé — votre sélection est réservée pendant le règlement.",
     "variantLabels": {
       "size": "Taille",

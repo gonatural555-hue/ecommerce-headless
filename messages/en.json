@@ -466,6 +466,8 @@
     "trustReturns": "Easy returns",
     "completeGearTitle": "Complete your gear",
     "completeGearBody": "Personalized suggestions will appear here when available.",
+    "completeGearSuggestionsAria": "Suggested products based on your cart",
+    "completeGearSuggestionsError": "Suggestions could not be loaded.",
     "ctaReassurance": "Secure checkout — your selection is held while you finish payment.",
     "variantLabels": {
       "size": "Size",

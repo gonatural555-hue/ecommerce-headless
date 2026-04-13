@@ -466,6 +466,8 @@
     "trustReturns": "Resi semplici",
     "completeGearTitle": "Completa l'equipaggiamento",
     "completeGearBody": "I suggerimenti personalizzati appariranno qui quando disponibili.",
+    "completeGearSuggestionsAria": "Prodotti suggeriti in base al carrello",
+    "completeGearSuggestionsError": "Impossibile caricare i suggerimenti.",
     "ctaReassurance": "Checkout sicuro: la tua selezione resta riservata durante il pagamento.",
     "variantLabels": {
       "size": "Taglia",
