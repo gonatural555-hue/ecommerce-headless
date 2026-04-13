@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { useUser, type Order } from "@/context/UserContext";
+import OrderSuccessEngagementBlock from "@/components/order-success/OrderSuccessEngagementBlock";
 
 function interpolate(template: string, vars: Record<string, string>) {
   return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
@@ -271,21 +272,7 @@ export default function OrderSuccessPage() {
             </ol>
           </section>
 
-          {/* Emotional + optional recommendations shell */}
-          <section className="rounded-2xl border border-dashed border-white/15 bg-dark-base/50 p-8 md:p-10 text-center">
-            <p className="text-sm md:text-base text-text-primary/95 font-medium leading-relaxed max-w-2xl mx-auto">
-              {t("orderSuccessPage.brandQuote")}
-            </p>
-            <div className="mt-10 pt-10 border-t border-white/10">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-accent-gold/90 mb-2">
-                {t("orderSuccessPage.recommendTitle")}
-              </h3>
-              <p className="text-xs text-text-muted max-w-lg mx-auto leading-relaxed">
-                {t("orderSuccessPage.recommendBody")}
-              </p>
-              <div className="mt-6 min-h-[72px] rounded-xl border border-white/5 bg-white/[0.02]" />
-            </div>
-          </section>
+          <OrderSuccessEngagementBlock />
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2">
             <Link
