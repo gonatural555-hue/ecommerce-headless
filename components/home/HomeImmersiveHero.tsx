@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback } from "react";
 
 type Props = {
@@ -43,23 +42,12 @@ export default function HomeImmersiveHero({
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-[#1F2D26]/95 pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto py-20">
-        <div className="home-hero-fade mb-10 md:mb-12">
-          <Image
-            src="/assets/images/logo/logo.webp"
-            alt="Go Natural"
-            width={320}
-            height={120}
-            priority
-            className="mx-auto h-auto w-[min(72vw,280px)] md:w-[min(56vw,360px)] object-contain drop-shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
-          />
-        </div>
-
-        <h1 className="home-hero-fade home-hero-fade-delay text-[clamp(2rem,6vw,3.75rem)] font-semibold tracking-tight text-[#FAF6F0] leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+      <div className="relative z-10 flex flex-col items-center justify-center px-6 sm:px-8 text-center max-w-4xl mx-auto py-24 md:py-32">
+        <h1 className="home-hero-fade text-[clamp(2.35rem,7.25vw,4.35rem)] font-semibold leading-[1.06] tracking-[0.04em] text-[#FFFEF9] [text-shadow:0_2px_40px_rgba(0,0,0,0.45),0_1px_3px_rgba(0,0,0,0.35)]">
           {heading}
         </h1>
 
-        <div className="home-hero-fade home-hero-fade-delay-2 mt-14 md:mt-16 flex flex-col items-center gap-2">
+        <div className="home-hero-fade home-hero-fade-delay-2 mt-16 md:mt-20 flex flex-col items-center gap-2">
           <button
             type="button"
             onClick={scrollToNext}
