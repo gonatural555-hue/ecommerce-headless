@@ -120,7 +120,6 @@ export default async function HomePage({
 
       <HomeCategoryCarousel
         title={t("homeImmersive.categories.snowMountain")}
-        backgroundImage="/assets/images/categories/mountain-snow.webp"
         products={snowProducts}
         locale={locale}
         categoryHref={`/${locale}/category/mountain-snow`}
@@ -130,7 +129,6 @@ export default async function HomePage({
 
       <HomeCategoryCarousel
         title={t("homeImmersive.categories.camping")}
-        backgroundImage="/assets/images/categories/outdoor-adventure.webp"
         products={campingProducts}
         locale={locale}
         categoryHref={`/${locale}/category/outdoor-adventure`}
@@ -140,7 +138,6 @@ export default async function HomePage({
 
       <HomeCategoryCarousel
         title={t("homeImmersive.categories.cyclingRunning")}
-        backgroundImage="/assets/images/categories/cycling.webp"
         products={cyclingRunningProducts}
         locale={locale}
         categoryHref={`/${locale}/category/active-sports`}
@@ -150,7 +147,6 @@ export default async function HomePage({
 
       <HomeCategoryCarousel
         title={t("homeImmersive.categories.waterSports")}
-        backgroundImage="/assets/images/categories/water-sports.webp"
         products={waterProducts}
         locale={locale}
         categoryHref={`/${locale}/category/water-sports`}
