@@ -112,7 +112,11 @@ type UserContextValue = UserState & {
     name: string;
     email: string;
     password: string;
-  }) => Promise<{ error: string | null }>;
+  }) => Promise<{
+    error: string | null;
+    needsEmailConfirmation?: boolean;
+    pendingEmail?: string;
+  }>;
   logout: () => Promise<void>;
   setAddresses: (next: Address[]) => void;
   upsertAddress: (next: Address) => Promise<void>;
@@ -316,7 +320,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return { error: "Supabase no está configurado." };
       }
       const supabase = getSupabaseBrowserClient();
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -327,7 +331,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
               : undefined,
         },
       });
-      return { error: error?.message ?? null };
+      if (error) {
+        return { error: error.message };
+      }
+      if (data.session) {
+        return { error: null, needsEmailConfirmation: false };
+      }
+      const pendingEmail = data.user?.email ?? email;
+      return {
+        error: null,
+        needsEmailConfirmation: true,
+        pendingEmail,
+      };
     },
     []
   );

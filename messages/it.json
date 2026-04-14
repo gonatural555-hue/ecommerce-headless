@@ -22,6 +22,11 @@
     "backToJournal": "Torna al journal",
     "swipeRailHint": "Scorri in orizzontale per vedere altro"
   },
+  "authForm": {
+    "confirmEmailTitle": "Controlla la tua email",
+    "confirmEmailDescription": "Abbiamo inviato un link di conferma a {email}. Apri il messaggio e tocca il link per attivare l’account (controlla anche lo spam).",
+    "goToLogin": "Vai al login"
+  },
   "seo": {
     "home": {
       "title": "Equipaggiamento outdoor premium per l’esplorazione lenta",

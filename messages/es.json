@@ -22,6 +22,11 @@
     "backToJournal": "Volver al journal",
     "swipeRailHint": "Desliza hacia los lados para ver más"
   },
+  "authForm": {
+    "confirmEmailTitle": "Revisá tu correo",
+    "confirmEmailDescription": "Te enviamos un enlace de confirmación a {email}. Abrí el mensaje y tocá el enlace para activar tu cuenta (revisá también spam).",
+    "goToLogin": "Ir a iniciar sesión"
+  },
   "seo": {
     "home": {
       "title": "Equipamiento outdoor premium para explorar con calma",
