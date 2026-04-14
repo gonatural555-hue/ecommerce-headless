@@ -65,6 +65,7 @@ export default function ProductCardSimple({
   return (
     <Link
       href={`/${locale}/products/${product.id}`}
+      className={L ? "block text-neutral-900" : "block text-text-primary"}
       onClick={() => {
         trackSelectItem({
           item: {
