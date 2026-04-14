@@ -115,6 +115,19 @@ export default function Header() {
     return `/${segments.join("/")}${query ? `?${query}` : ""}`;
   };
 
+  const submitSearch = () => {
+    const trimmed = searchQuery.trim();
+    router.push(
+      trimmed
+        ? `/${locale}/products?q=${encodeURIComponent(trimmed)}`
+        : `/${locale}/products`
+    );
+    setMobileMenuOpen(false);
+  };
+
+  const navLinkClass =
+    "text-sm font-medium text-white hover:text-white/80 transition-colors duration-200";
+
   return (
     <header
       className={[
@@ -125,286 +138,12 @@ export default function Header() {
       ].join(" ")}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo / Brand */}
-          <Link 
-            href={`/${locale}`}
-            className="group flex items-center"
-            aria-label="Go Natural"
-          >
-            <img
-              src="/assets/images/logo/logo.webp"
-              alt="Go Natural"
-              className="h-16 md:h-22 w-auto opacity-90 transition-transform duration-300 ease-out group-hover:scale-[1.06]"
-              loading="lazy"
-              decoding="async"
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              if (link.href === `/${locale}/products`) {
-                return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={openProductsMenu}
-                    onMouseLeave={closeProductsMenu}
-                  >
-                    <Link
-                      href={link.href}
-                      className="text-sm font-medium text-text-muted hover:text-text-primary transition-colors duration-200"
-                      onFocus={openProductsMenu}
-                      onBlur={closeProductsMenu}
-                      aria-haspopup="true"
-                      aria-expanded={productsOpen}
-                    >
-                      Products
-                    </Link>
-                    <div
-                      className={[
-                        "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
-                        productsOpen
-                          ? "opacity-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 translate-y-2 pointer-events-none",
-                      ].join(" ")}
-                    >
-                      <div className="p-10 columns-2 gap-16">
-                        {mainCategories.map((category) => (
-                          <div
-                            key={category.slug}
-                            className="mb-10 break-inside-avoid"
-                          >
-                            <Link
-                              href={`/${locale}/category/${category.slug}`}
-                              className="text-sm font-semibold tracking-[0.02em] text-text-primary hover:text-accent-gold transition-colors duration-200"
-                              onClick={() => setProductsOpen(false)}
-                            >
-                              {t(
-                                `categories.names.${category.slug}`,
-                                category.name
-                              )}
-                            </Link>
-                            <div className="mt-3 columns-2 gap-10">
-                              {(subCategoriesByParent[category.slug] || []).map(
-                                (sub) => (
-                                  <Link
-                                    key={sub.slug}
-                                    href={`/${locale}/category/${sub.slug}`}
-                                    className="mb-2 block break-inside-avoid text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-                                    onClick={() => setProductsOpen(false)}
-                                  >
-                                    {t(`categories.names.${sub.slug}`, sub.name)}
-                                  </Link>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              if (link.href === `/${locale}/blog`) {
-                return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={openBlogMenu}
-                    onMouseLeave={closeBlogMenu}
-                  >
-                    <Link
-                      href={link.href}
-                      className="text-sm font-medium text-text-muted hover:text-text-primary transition-colors duration-200"
-                      onFocus={openBlogMenu}
-                      onBlur={closeBlogMenu}
-                      aria-haspopup="true"
-                      aria-expanded={blogOpen}
-                    >
-                      {link.label}
-                    </Link>
-                    <div
-                      className={[
-                        "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
-                        blogOpen
-                          ? "opacity-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 translate-y-2 pointer-events-none",
-                      ].join(" ")}
-                    >
-                      <div className="p-10 columns-2 gap-16">
-                        {blogSections.map((section) => (
-                          <div
-                            key={section.slug}
-                            className="mb-10 break-inside-avoid"
-                          >
-                            <Link
-                              href={`/${locale}/blog/${section.slug}`}
-                              className="text-sm font-semibold tracking-[0.02em] text-text-primary hover:text-accent-gold transition-colors duration-200"
-                              onClick={() => setBlogOpen(false)}
-                            >
-                              {t(
-                                `blogSections.${section.slug}.title`,
-                                section.title
-                              )}
-                            </Link>
-                            <div className="mt-3 columns-2 gap-10">
-                              {section.subtopics.map((subtopic) => (
-                                <Link
-                                  key={subtopic.slug}
-                                  href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className="mb-2 block break-inside-avoid text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-                                  onClick={() => setBlogOpen(false)}
-                                >
-                                  {t(
-                                    `blogSections.${section.slug}.subtopics.${subtopic.slug}`,
-                                    subtopic.label
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-text-muted hover:text-text-primary transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Desktop Search */}
-          <form
-            className="hidden lg:flex items-center flex-1 max-w-xs mx-6"
-            onSubmit={(event) => {
-              event.preventDefault();
-              const trimmed = searchQuery.trim();
-              router.push(
-                trimmed
-                  ? `/${locale}/products?q=${encodeURIComponent(trimmed)}`
-                  : `/${locale}/products`
-              );
-            }}
-            role="search"
-          >
-            <label htmlFor="header-search" className="sr-only">
-              {t("common.searchLabel")}
-            </label>
-            <div className="relative w-full">
-              <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-4 w-4"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.65 6.65a7.5 7.5 0 0 0 10.6 10.6Z"
-                  />
-                </svg>
-              </span>
-              <input
-                id="header-search"
-                type="search"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder={t("common.searchPlaceholder")}
-                className="w-full rounded-full border border-white/10 bg-dark-base/70 py-2.5 pl-9 pr-4 text-sm text-text-primary placeholder:text-text-muted/70 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none"
-              />
-            </div>
-          </form>
-
-          {/* Cart Icon + Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-3">
-              {locales.map((lang) => (
-                <Link
-                  key={lang}
-                  href={buildLocaleHref(lang)}
-                  className={`text-xs font-semibold tracking-[0.12em] transition-colors duration-200 ${
-                    lang === locale
-                      ? "text-accent-gold"
-                      : "text-text-muted hover:text-text-primary"
-                  }`}
-                >
-                  {lang.toUpperCase()}
-                </Link>
-              ))}
-            </div>
-            {isLoggedIn && user ? (
-              <Link
-                href={`/${locale}/account`}
-                className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
-              >
-                {t("header.greeting")}, {user.name}
-              </Link>
-            ) : (
-              <>
-                {/* Desktop: Modal */}
-                <button
-                  type="button"
-                  onClick={() => openAuthModal("login")}
-                  className="hidden md:inline text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
-                >
-                  {t("header.account")}
-                </button>
-                {/* Mobile: Redirect to page */}
-                <Link
-                  href={`/${locale}/auth?tab=login`}
-                  className="md:hidden text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
-                >
-                  {t("header.account")}
-                </Link>
-              </>
-            )}
-            {/* Cart Icon with Badge */}
-            <Link
-              href={`/${locale}/cart`}
-              className="relative flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
-              aria-label={`Cart with ${totalItems} items`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.277M7.5 14.25l13.5-5.25M5.106 5.277c.194-1.01.937-1.777 1.936-1.777h13.916c.999 0 1.742.767 1.936 1.777M5.106 5.277L2.25 3m0 0h18.75M2.25 3v18m18.75-18v18"
-                />
-              </svg>
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-medium text-dark-base bg-accent-gold rounded-full">
-                  {totalItems > 99 ? "99+" : totalItems}
-                </span>
-              )}
-            </Link>
-
-            {/* Mobile Menu Button */}
+        <div className="relative flex h-16 md:h-20 items-center">
+          {/* Izquierda: menú móvil + nav desktop */}
+          <div className="flex min-w-0 flex-1 items-center justify-start gap-2">
             <button
               type="button"
-              className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
+              className="md:hidden flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 rounded-lg"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
@@ -441,10 +180,278 @@ export default function Header() {
                 </svg>
               )}
             </button>
+
+            <nav className="hidden min-w-0 md:flex md:items-center md:gap-6 lg:gap-8">
+            {navLinks.map((link) => {
+              if (link.href === `/${locale}/products`) {
+                return (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={openProductsMenu}
+                    onMouseLeave={closeProductsMenu}
+                  >
+                    <Link
+                      href={link.href}
+                      className={navLinkClass}
+                      onFocus={openProductsMenu}
+                      onBlur={closeProductsMenu}
+                      aria-haspopup="true"
+                      aria-expanded={productsOpen}
+                    >
+                      {link.label}
+                    </Link>
+                    <div
+                      className={[
+                        "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
+                        productsOpen
+                          ? "opacity-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 translate-y-2 pointer-events-none",
+                      ].join(" ")}
+                    >
+                      <div className="p-10 columns-2 gap-16">
+                        {mainCategories.map((category) => (
+                          <div
+                            key={category.slug}
+                            className="mb-10 break-inside-avoid"
+                          >
+                            <Link
+                              href={`/${locale}/category/${category.slug}`}
+                              className="text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200"
+                              onClick={() => setProductsOpen(false)}
+                            >
+                              {t(
+                                `categories.names.${category.slug}`,
+                                category.name
+                              )}
+                            </Link>
+                            <div className="mt-3 columns-2 gap-10">
+                              {(subCategoriesByParent[category.slug] || []).map(
+                                (sub) => (
+                                  <Link
+                                    key={sub.slug}
+                                    href={`/${locale}/category/${sub.slug}`}
+                                    className="mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200"
+                                    onClick={() => setProductsOpen(false)}
+                                  >
+                                    {t(`categories.names.${sub.slug}`, sub.name)}
+                                  </Link>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (link.href === `/${locale}/blog`) {
+                return (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={openBlogMenu}
+                    onMouseLeave={closeBlogMenu}
+                  >
+                    <Link
+                      href={link.href}
+                      className={navLinkClass}
+                      onFocus={openBlogMenu}
+                      onBlur={closeBlogMenu}
+                      aria-haspopup="true"
+                      aria-expanded={blogOpen}
+                    >
+                      {link.label}
+                    </Link>
+                    <div
+                      className={[
+                        "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
+                        blogOpen
+                          ? "opacity-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 translate-y-2 pointer-events-none",
+                      ].join(" ")}
+                    >
+                      <div className="p-10 columns-2 gap-16">
+                        {blogSections.map((section) => (
+                          <div
+                            key={section.slug}
+                            className="mb-10 break-inside-avoid"
+                          >
+                            <Link
+                              href={`/${locale}/blog/${section.slug}`}
+                              className="text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200"
+                              onClick={() => setBlogOpen(false)}
+                            >
+                              {t(
+                                `blogSections.${section.slug}.title`,
+                                section.title
+                              )}
+                            </Link>
+                            <div className="mt-3 columns-2 gap-10">
+                              {section.subtopics.map((subtopic) => (
+                                <Link
+                                  key={subtopic.slug}
+                                  href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
+                                  className="mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200"
+                                  onClick={() => setBlogOpen(false)}
+                                >
+                                  {t(
+                                    `blogSections.${section.slug}.subtopics.${subtopic.slug}`,
+                                    subtopic.label
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={navLinkClass}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            </nav>
+          </div>
+
+          {/* Logo centrado en la barra */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 justify-center">
+            <Link
+              href={`/${locale}`}
+              className="pointer-events-auto group flex items-center"
+              aria-label="Go Natural"
+            >
+              <img
+                src="/assets/images/logo/logo.webp"
+                alt="Go Natural"
+                className="h-12 w-auto opacity-95 transition-transform duration-300 ease-out group-hover:scale-[1.06] sm:h-14 md:h-16 md:w-auto"
+                loading="lazy"
+                decoding="async"
+              />
+            </Link>
+          </div>
+
+          {/* Derecha: búsqueda (md+) + idiomas + cuenta + carrito */}
+          <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
+            <form
+              className="hidden min-w-0 max-w-[200px] flex-1 sm:max-w-[240px] md:flex md:max-w-xs md:items-center lg:max-w-sm"
+              onSubmit={(event) => {
+                event.preventDefault();
+                submitSearch();
+              }}
+              role="search"
+            >
+              <label htmlFor="header-search" className="sr-only">
+                {t("common.searchLabel")}
+              </label>
+              <div className="relative w-full">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.65 6.65a7.5 7.5 0 0 0 10.6 10.6Z"
+                    />
+                  </svg>
+                </span>
+                <input
+                  id="header-search"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder={t("common.searchPlaceholder")}
+                  className="w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                />
+              </div>
+            </form>
+
+            <div className="hidden items-center gap-2 md:flex md:gap-3">
+              {locales.map((lang) => (
+                <Link
+                  key={lang}
+                  href={buildLocaleHref(lang)}
+                  className={`text-xs font-semibold tracking-[0.12em] transition-colors duration-200 ${
+                    lang === locale
+                      ? "text-accent-gold"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {lang.toUpperCase()}
+                </Link>
+              ))}
+            </div>
+            {isLoggedIn && user ? (
+              <Link
+                href={`/${locale}/account`}
+                className="hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+              >
+                {t("header.greeting")}, {user.name}
+              </Link>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => openAuthModal("login")}
+                  className="hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+                >
+                  {t("header.account")}
+                </button>
+                <Link
+                  href={`/${locale}/auth?tab=login`}
+                  className="md:hidden text-xs font-semibold text-white transition-colors hover:text-white/80"
+                >
+                  {t("header.account")}
+                </Link>
+              </>
+            )}
+            <Link
+              href={`/${locale}/cart`}
+              className="relative flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80"
+              aria-label={`Cart with ${totalItems} items`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.277M7.5 14.25l13.5-5.25M5.106 5.277c.194-1.01.937-1.777 1.936-1.777h13.916c.999 0 1.742.767 1.936 1.777M5.106 5.277L2.25 3m0 0h18.75M2.25 3v18m18.75-18v18"
+                />
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent-gold px-1.5 text-xs font-medium text-dark-base">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Link>
             {!isLoggedIn && (
               <Link
                 href={`/${locale}/auth?tab=login`}
-                className="md:hidden flex items-center justify-center w-10 h-10 text-text-muted hover:text-text-primary transition-colors duration-200"
+                className="flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
                 aria-label={t("header.account")}
               >
                 <svg
@@ -470,18 +477,57 @@ export default function Header() {
         {mobileMenuOpen && (
           <nav className="md:hidden pb-4 mt-2 pt-4 bg-dark-base/95 backdrop-blur-md rounded-b-2xl">
             <div className="flex flex-col gap-3">
+              <form
+                className="flex items-center gap-2 px-1"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  submitSearch();
+                }}
+                role="search"
+              >
+                <label htmlFor="header-search-mobile" className="sr-only">
+                  {t("common.searchLabel")}
+                </label>
+                <div className="relative flex-1">
+                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-4 w-4"
+                      aria-hidden
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.65 6.65a7.5 7.5 0 0 0 10.6 10.6Z"
+                      />
+                    </svg>
+                  </span>
+                  <input
+                    id="header-search-mobile"
+                    type="search"
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    placeholder={t("common.searchPlaceholder")}
+                    className="w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                  />
+                </div>
+              </form>
               {navLinks.map((link) =>
                 link.href === `/${locale}/blog` ? (
                   <div key={link.href} className="flex flex-col gap-2">
                     <button
                       type="button"
-                      className="flex items-center justify-between text-base font-medium text-text-primary hover:text-accent-gold transition-colors duration-200 py-2 px-2 rounded-md"
+                      className="flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
                       onClick={() => setMobileBlogOpen((open) => !open)}
                       aria-expanded={mobileBlogOpen}
                       aria-controls="mobile-blog-menu"
                     >
                       <span>{link.label}</span>
-                      <span className="text-sm text-text-muted">
+                      <span className="text-sm text-white/60">
                         {mobileBlogOpen ? "−" : "+"}
                       </span>
                     </button>
@@ -494,7 +540,7 @@ export default function Header() {
                           <div key={section.slug} className="space-y-2">
                             <Link
                               href={`/${locale}/blog/${section.slug}`}
-                              className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                              className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               {t(
@@ -507,7 +553,7 @@ export default function Header() {
                                 <Link
                                   key={subtopic.slug}
                                   href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
+                                  className="text-sm text-white/75 transition-colors hover:text-white"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {t(
@@ -526,14 +572,14 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-base font-medium text-text-primary hover:text-accent-gold transition-colors duration-200 py-2 px-2 rounded-md"
+                    className="rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 )
               )}
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 border-t border-white/10 pt-3">
                 {locales.map((lang) => (
                   <Link
                     key={lang}
@@ -541,7 +587,7 @@ export default function Header() {
                     className={`text-sm font-medium transition-colors duration-200 ${
                       lang === locale
                         ? "text-accent-gold"
-                        : "text-text-muted hover:text-text-primary"
+                        : "text-white/70 hover:text-white"
                     }`}
                   >
                     {lang.toUpperCase()}
@@ -550,7 +596,7 @@ export default function Header() {
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
-                    className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                    className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.greeting")}, {user.name}
@@ -559,7 +605,7 @@ export default function Header() {
                   <Link
                     href={`/${locale}/auth?tab=login`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+                    className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
                   >
                     {t("header.account")}
                   </Link>

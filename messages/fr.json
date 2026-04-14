@@ -147,7 +147,11 @@
   },
   "productsPage": {
     "title": "Produits Go Natural",
-    "subtitle": "Équipement outdoor fonctionnel pour voyager léger et avancer librement."
+    "subtitle": "Équipement outdoor fonctionnel pour voyager léger et avancer librement.",
+    "searchResultsFor": "Résultats pour « {query} »",
+    "searchNoResults": "Aucun produit ne correspond à cette recherche.",
+    "searchNoResultsHint": "Essayez d'autres mots ou parcourez le catalogue complet.",
+    "searchViewAll": "Voir tous les produits"
   },
   "categoriesPage": {
     "ctaTitle": "Continuer l’exploration.",

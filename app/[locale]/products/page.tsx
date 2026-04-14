@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProducts } from "@/lib/products";
+import { getProducts, type Product } from "@/lib/products";
 import ProductGridSimple from "@/components/ProductGridSimple";
 import { getCategoryBySlug } from "@/lib/categories";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -9,6 +9,42 @@ import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+function interpolate(template: string, vars: Record<string, string>) {
+  return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
+}
+
+function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function productMatchesQuery(
+  product: Product,
+  locale: Locale,
+  query: string,
+  norm: typeof normalizeText
+): boolean {
+  if (!query) return true;
+  const loc = product.translations?.[locale];
+  const chunks: string[] = [
+    product.id,
+    product.slug ?? "",
+    product.title,
+    loc?.title ?? "",
+    product.category,
+    product.description,
+    loc?.description ?? "",
+    product.shortDescription ?? "",
+    loc?.shortDescription ?? "",
+    ...(product.features ?? []),
+    ...(loc?.features ?? []),
+  ];
+  const haystack = norm(chunks.filter(Boolean).join(" "));
+  return haystack.includes(query);
+}
 
 export async function generateMetadata({
   params,
@@ -46,29 +82,27 @@ export default async function ProductsPage({
   searchParams,
 }: {
   params: Promise<{ locale: Locale }>;
-  searchParams?: { q?: string };
+  searchParams?: Promise<{ q?: string }>;
 }) {
   const { locale } = await params;
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
-  const products = getProducts();
-  const rawQuery = typeof searchParams?.q === "string" ? searchParams.q : "";
-  const normalizeText = (value: string) =>
-    value
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
+  const sp = searchParams != null ? await searchParams : {};
+  const rawQuery = typeof sp.q === "string" ? sp.q : "";
   const query = normalizeText(rawQuery.trim());
+
+  const products = getProducts();
   const filteredProducts = query
-    ? products.filter((product) => {
-        const localized = product.translations?.[locale];
-        const title = localized?.title || product.title;
-        return normalizeText(title).includes(query);
-      })
+    ? products.filter((product) =>
+        productMatchesQuery(product, locale, query, normalizeText)
+      )
     : products;
+
   const categories = MAIN_CATEGORIES.map((slug) => getCategoryBySlug(slug)).filter(
     (cat): cat is NonNullable<typeof cat> => cat !== undefined
   );
+
+  const hasActiveSearch = rawQuery.trim().length > 0;
 
   return (
     <main className="min-h-screen bg-dark-base text-text-primary">
@@ -104,6 +138,13 @@ export default async function ProductsPage({
             <p className="mt-5 text-base md:text-lg text-white/70 leading-relaxed">
               {t("productsPage.subtitle")}
             </p>
+            {hasActiveSearch ? (
+              <p className="mt-4 text-sm font-medium text-white/90">
+                {interpolate(t("productsPage.searchResultsFor", ""), {
+                  query: rawQuery.trim(),
+                })}
+              </p>
+            ) : null}
             <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#C2A27A]/30 bg-[#C2A27A]/20 px-4 py-2 text-sm font-medium text-[#E6E2D8]">
               <span
                 className="h-1 w-1 shrink-0 rounded-full bg-[#C2A27A]/80"
@@ -131,16 +172,33 @@ export default async function ProductsPage({
         </div>
 
         <div className="mt-16 md:mt-20">
-          <ProductGridSimple
-            products={filteredProducts}
-            locale={locale}
-            analyticsListName="all_products"
-            labels={{
-              viewProduct: t("common.viewProduct"),
-              addToCart: t("common.addToCart"),
-              noImage: t("common.noImage"),
-            }}
-          />
+          {hasActiveSearch && filteredProducts.length === 0 ? (
+            <div className="rounded-2xl border border-white/10 bg-dark-surface/60 px-6 py-12 text-center">
+              <p className="text-lg font-semibold text-text-primary">
+                {t("productsPage.searchNoResults", "")}
+              </p>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed max-w-md mx-auto">
+                {t("productsPage.searchNoResultsHint", "")}
+              </p>
+              <Link
+                href={`/${locale}/products`}
+                className="mt-8 inline-flex items-center justify-center rounded-xl bg-accent-gold px-6 py-3 text-sm font-semibold text-dark-base transition hover:bg-accent-gold/90"
+              >
+                {t("productsPage.searchViewAll", "")}
+              </Link>
+            </div>
+          ) : (
+            <ProductGridSimple
+              products={filteredProducts}
+              locale={locale}
+              analyticsListName="all_products"
+              labels={{
+                viewProduct: t("common.viewProduct"),
+                addToCart: t("common.addToCart"),
+                noImage: t("common.noImage"),
+              }}
+            />
+          )}
         </div>
       </div>
     </main>

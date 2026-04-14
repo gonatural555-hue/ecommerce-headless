@@ -147,7 +147,11 @@
   },
   "productsPage": {
     "title": "Go Natural Products",
-    "subtitle": "Functional outdoor gear, built for light travel and free movement."
+    "subtitle": "Functional outdoor gear, built for light travel and free movement.",
+    "searchResultsFor": "Results for \"{query}\"",
+    "searchNoResults": "We couldn't find products matching that search.",
+    "searchNoResultsHint": "Try different words or browse the full catalog.",
+    "searchViewAll": "View all products"
   },
   "categoriesPage": {
     "ctaTitle": "Continue exploring the collection.",
