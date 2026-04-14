@@ -11,6 +11,10 @@ import {
   cartLineToGa4Item,
   trackViewCart,
 } from "@/lib/analytics/ga4";
+import {
+  formatCartPrice,
+  formatCartVariantSummary,
+} from "@/lib/cart-formatting";
 
 const FREE_SHIPPING_THRESHOLD_USD = 100;
 
@@ -37,23 +41,7 @@ export default function CartPage() {
     );
   }, [items, subtotal]);
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(
-      locale === "es"
-        ? "es-AR"
-        : locale === "fr"
-          ? "fr-FR"
-          : locale === "it"
-            ? "it-IT"
-            : "en-US",
-      {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }
-    ).format(price);
-  };
+  const formatPrice = (price: number) => formatCartPrice(locale, price);
 
   const thresholdLabel = formatPrice(FREE_SHIPPING_THRESHOLD_USD);
 
@@ -76,23 +64,12 @@ export default function CartPage() {
     router.push(`/${locale}/checkout`);
   };
 
-  const formatVariantSummary = (item: (typeof items)[number]) => {
-    if (item.variantSelections && item.variantSelections.length > 0) {
-      return item.variantSelections
-        .map((selection) => {
-          const label = t(
-            `cartPage.variantLabels.${selection.type}`,
-            selection.typeLabel || selection.type
-          );
-          const optionKey = `cartPage.variantOptions.${selection.type}.${selection.value}`;
-          const value = t(optionKey, selection.label || selection.value);
-          return `${label}: ${value}`;
-        })
-        .join(" · ");
-    }
-
-    return item.variantSummary || "";
-  };
+  const formatVariantSummary = (item: (typeof items)[number]) =>
+    formatCartVariantSummary(
+      item.variantSelections,
+      item.variantSummary,
+      t
+    );
 
   if (items.length === 0) {
     return (

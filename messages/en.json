@@ -22,6 +22,13 @@
     "backToJournal": "Back to journal",
     "swipeRailHint": "Swipe sideways to see more"
   },
+  "addedToCartModal": {
+    "title": "Product added to cart",
+    "closeAria": "Close",
+    "goToCart": "Go to cart",
+    "continueShopping": "Continue shopping",
+    "priceLabel": "Price"
+  },
   "authForm": {
     "confirmEmailTitle": "Check your email",
     "confirmEmailDescription": "We sent a confirmation link to {email}. Open the message and tap the link to activate your account (check spam too).",

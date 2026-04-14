@@ -3,7 +3,7 @@
 import { useCart } from "@/context/CartContext";
 import type { UISurface } from "@/lib/ui-surface";
 
-type Props = {
+export type AddToCartLinePayload = {
   id: string;
   title: string;
   price: number;
@@ -14,11 +14,16 @@ type Props = {
     value: string;
     label?: string;
   }[];
+};
+
+type Props = AddToCartLinePayload & {
   disabled?: boolean;
   label?: string;
   className?: string;
   /** PDP claro: anillo de foco sobre fondo blanco. */
   surface?: UISurface;
+  /** Tras `addItem` exitoso (analytics sigue en CartContext). */
+  onAfterAdd?: (item: AddToCartLinePayload) => void;
 };
 
 export default function AddToCartButton({
@@ -31,6 +36,7 @@ export default function AddToCartButton({
   label,
   className,
   surface = "dark",
+  onAfterAdd,
 }: Props) {
   const { addItem } = useCart();
   const ringOffset =
@@ -40,7 +46,11 @@ export default function AddToCartButton({
 
   return (
     <button
-      onClick={() => addItem({ id, title, price, image, variantSelections })}
+      onClick={() => {
+        const payload = { id, title, price, image, variantSelections };
+        addItem(payload);
+        onAfterAdd?.(payload);
+      }}
       disabled={disabled}
       className={[
         "w-full px-6 py-3 bg-accent-gold text-dark-base rounded-md font-semibold",

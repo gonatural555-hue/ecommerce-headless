@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import AddToCartButton from "@/components/AddToCartButton";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import AddedToCartModal, {
+  type AddedToCartLineSnapshot,
+} from "@/components/AddedToCartModal";
+import AddToCartButton, {
+  type AddToCartLinePayload,
+} from "@/components/AddToCartButton";
 import ProductImageGallery from "@/components/ProductImageGallery";
 import ProductGalleryGrid from "@/components/pdp/ProductGalleryGrid";
 import ProductInfoPanel from "@/components/pdp/ProductInfoPanel";
@@ -122,6 +127,19 @@ export default function ProductDetailClient({
   const [selections, setSelections] = useState<Record<string, string>>(
     initialSelections
   );
+
+  const [addedToCart, setAddedToCart] = useState<AddedToCartLineSnapshot | null>(
+    null
+  );
+
+  const handleAfterAddToCart = useCallback((item: AddToCartLinePayload) => {
+    setAddedToCart({
+      title: item.title,
+      price: item.price,
+      image: item.image,
+      variantSelections: item.variantSelections,
+    });
+  }, []);
 
   useEffect(() => {
     setSelections(initialSelections);
@@ -410,6 +428,7 @@ export default function ProductDetailClient({
               image: cartImage,
               variantSelections,
             }}
+            onAfterAdd={handleAfterAddToCart}
           />
         </div>
       </section>
@@ -446,6 +465,7 @@ export default function ProductDetailClient({
             label={ctaLabel}
             className="w-full mt-0 py-3.5 text-base"
             surface={surface}
+            onAfterAdd={handleAfterAddToCart}
           />
 
           {/* Microcopy de confianza */}
@@ -464,6 +484,12 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
+
+      <AddedToCartModal
+        open={addedToCart !== null}
+        item={addedToCart}
+        onClose={() => setAddedToCart(null)}
+      />
     </>
   );
 }

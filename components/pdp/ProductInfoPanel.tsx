@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import AddToCartButton from "@/components/AddToCartButton";
+import AddToCartButton, {
+  type AddToCartLinePayload,
+} from "@/components/AddToCartButton";
 import VariantSelector from "@/components/VariantSelector";
 import ColorSwatchSelector from "@/components/pdp/ColorSwatchSelector";
 import SizeSelector from "@/components/pdp/SizeSelector";
@@ -51,6 +53,7 @@ type Props = {
       label?: string;
     }[];
   };
+  onAfterAdd?: (item: AddToCartLinePayload) => void;
 };
 
 function MiniStars({ rating, surface }: { rating: number; surface: UISurface }) {
@@ -98,6 +101,7 @@ export default function ProductInfoPanel({
   reviewsLinkLabel,
   pdpDesktop,
   cartPayload,
+  onAfterAdd,
 }: Props) {
   const L = surface === "light";
   const matrix = productVariants?.variantMatrix;
@@ -252,6 +256,7 @@ export default function ProductInfoPanel({
             disabled={ctaDisabled}
             surface={surface}
             className={pillCta}
+            onAfterAdd={onAfterAdd}
           />
           <p
             className={

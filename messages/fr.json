@@ -22,6 +22,13 @@
     "backToJournal": "Retour au journal",
     "swipeRailHint": "Faites défiler latéralement pour voir plus"
   },
+  "addedToCartModal": {
+    "title": "Produit ajouté au panier",
+    "closeAria": "Fermer",
+    "goToCart": "Aller au panier",
+    "continueShopping": "Continuer les achats",
+    "priceLabel": "Prix"
+  },
   "authForm": {
     "confirmEmailTitle": "Vérifiez votre e-mail",
     "confirmEmailDescription": "Nous avons envoyé un lien de confirmation à {email}. Ouvrez le message et suivez le lien pour activer votre compte (vérifiez aussi les spams).",
