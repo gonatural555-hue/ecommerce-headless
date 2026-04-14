@@ -172,7 +172,12 @@
       "shippingHeading": "Estimated delivery",
       "shippingEurope": "Europe: 5–10 business days",
       "shippingLatam": "Latin America: 7–15 business days",
-      "returns": "Easy 15-day returns after delivery."
+      "returns": "Easy 15-day returns after delivery.",
+      "selectSize": "Select a size",
+      "sizeGuide": "Size guide",
+      "promoLine": "3 interest-free installments and free shipping on eligible orders.",
+      "taxNote": "Final price; taxes included where applicable.",
+      "reviewSingular": "review"
     },
     "crossSellTitle": "Continue exploring",
     "addToCart": "Add to cart",

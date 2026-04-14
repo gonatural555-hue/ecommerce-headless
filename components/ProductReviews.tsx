@@ -46,7 +46,7 @@ export default function ProductReviews({
   const averageLabel = average.toFixed(1);
 
   return (
-    <section className="py-16 md:py-20">
+    <section id="pdp-reviews" className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
         <h2
           className={

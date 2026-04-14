@@ -172,7 +172,12 @@
       "shippingHeading": "Livraison estimée",
       "shippingEurope": "Europe : 5–10 jours ouvrés",
       "shippingLatam": "Amérique latine : 7–15 jours ouvrés",
-      "returns": "Retours simples sous 15 jours après réception."
+      "returns": "Retours simples sous 15 jours après réception.",
+      "selectSize": "Choisir une taille",
+      "sizeGuide": "Guide des tailles",
+      "promoLine": "3 paiements sans frais et livraison gratuite sur une sélection de commandes.",
+      "taxNote": "Prix final ; taxes incluses le cas échéant.",
+      "reviewSingular": "avis"
     },
     "crossSellTitle": "Continuer à explorer",
     "addToCart": "Ajouter au panier",

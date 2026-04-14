@@ -262,8 +262,17 @@ export default async function ProductPage({ params }: Props) {
     idealForLine: idealFor.join(" · "),
   };
 
+  const reviewsLinkLabel =
+    reviews.length > 0
+      ? `${reviews.length} ${
+          reviews.length === 1
+            ? t("productPage.pdpDesktop.reviewSingular")
+            : t("productPage.reviewsCountLabel")
+        }`
+      : undefined;
+
   return (
-    <main className="bg-[#FFFFFF] overflow-x-hidden text-neutral-900">
+    <main className="bg-dark-base overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-32 md:py-20 max-w-full md:pb-20">
         <ProductDetailClient
           product={localizedProduct}
@@ -274,14 +283,22 @@ export default async function ProductPage({ params }: Props) {
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}
           pdpDesktop={pdpDesktop}
-          surface="light"
+          surface="dark"
+          reviewsAverage={reviewsAverage}
+          reviewsCount={reviews.length}
+          reviewsLinkLabel={reviewsLinkLabel}
+          taxNote={t("productPage.pdpDesktop.taxNote")}
+          promoLine={t("productPage.pdpDesktop.promoLine")}
+          selectSizeLabel={t("productPage.pdpDesktop.selectSize")}
+          sizeGuideLabel={t("productPage.pdpDesktop.sizeGuide")}
+          sizeGuideHref={`/${locale}/contact`}
         />
       </div>
 
       <ProductReviews
         productSlug={productSlug}
         reviews={REVIEWS_SEED}
-        surface="light"
+        surface="dark"
       />
       {reviewsSchema && (
         <script
@@ -291,11 +308,11 @@ export default async function ProductPage({ params }: Props) {
       )}
 
       {/* Story / uso del producto */}
-      <section className="py-16 md:py-20 border-t border-neutral-200/80">
+      <section className="py-16 md:py-20 border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] items-center">
             {productImages.lifestyle.length > 0 && (
-              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-neutral-200 shadow-sm">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-white/10">
                 <Image
                   src={productImages.lifestyle[0]}
                   alt={`${localizedProduct.title} lifestyle`}
@@ -305,17 +322,17 @@ export default async function ProductPage({ params }: Props) {
                   className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/25" />
+                <div className="absolute inset-0 bg-gradient-to-b from-dark-base/20 via-dark-base/30 to-dark-base/60" />
               </div>
             )}
             <div className="max-w-2xl">
-              <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
+              <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">
                 {t("productPage.storyTitle")}
               </h2>
-              <p className="mt-5 text-base md:text-lg text-neutral-600 leading-relaxed">
+              <p className="mt-5 text-base md:text-lg text-text-muted leading-relaxed">
                 {useCase}
               </p>
-              <p className="mt-4 text-base md:text-lg text-neutral-600 leading-relaxed">
+              <p className="mt-4 text-base md:text-lg text-text-muted leading-relaxed">
                 {whyBetter}
               </p>
             </div>
@@ -325,13 +342,13 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Specs técnicas */}
       {specs.length > 0 && (
-        <section className="py-16 md:py-20 border-t border-neutral-200/80 bg-neutral-50/80">
+        <section className="py-16 md:py-20 border-t border-white/10">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
             <div className="max-w-3xl">
-              <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
+              <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">
                 {t("productPage.specsTitle")}
               </h2>
-              <ul className="mt-6 space-y-3 text-neutral-600">
+              <ul className="mt-6 space-y-3 text-text-muted">
                 {specs.map((spec) => (
                   <li key={spec} className="flex items-start gap-3">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent-gold" />
@@ -346,7 +363,7 @@ export default async function ProductPage({ params }: Props) {
                 {productImages.extras.map((img, index) => (
                   <div
                     key={img}
-                    className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm"
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-dark-surface/40"
                   >
                     <Image
                       src={img}
@@ -368,9 +385,9 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Cross-sell suave */}
       {relatedProducts.length > 0 && (
-        <section className="py-16 md:py-20 border-t border-neutral-200/80">
+        <section className="py-16 md:py-20 border-t border-white/10">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
+            <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">
               {t("productPage.crossSellTitle")}
             </h2>
             <div className="mt-8 grid gap-8 md:grid-cols-3">
@@ -379,7 +396,6 @@ export default async function ProductPage({ params }: Props) {
                   key={item.id}
                   product={item}
                   locale={locale}
-                  surface="light"
                   analyticsListId="related_products"
                   analyticsListName="related_products"
                   labels={{

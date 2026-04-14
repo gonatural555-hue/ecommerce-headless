@@ -172,7 +172,12 @@
       "shippingHeading": "Tempi di consegna stimati",
       "shippingEurope": "Europa: 5–10 giorni lavorativi",
       "shippingLatam": "America Latina: 7–15 giorni lavorativi",
-      "returns": "Resi semplici entro 15 giorni dalla consegna."
+      "returns": "Resi semplici entro 15 giorni dalla consegna.",
+      "selectSize": "Seleziona una taglia",
+      "sizeGuide": "Guida alle taglie",
+      "promoLine": "3 rate senza interessi e spedizione gratuita su ordini selezionati.",
+      "taxNote": "Prezzo finale; tasse incluse ove applicabile.",
+      "reviewSingular": "recensione"
     },
     "crossSellTitle": "Continua a esplorare",
     "addToCart": "Aggiungi al carrello",

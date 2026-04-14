@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
-import type {
-  ProductVariants,
-  VariantDefinition,
-  VariantMatrix,
-} from "@/lib/product-variants";
+import type { ProductVariants, VariantDefinition } from "@/lib/product-variants";
+import {
+  isOptionValid,
+  isValidCombination,
+} from "@/lib/product-variant-matrix";
 import type { UISurface } from "@/lib/ui-surface";
 
 type VariantSelectorProps = {
@@ -16,57 +16,6 @@ type VariantSelectorProps = {
   appearance?: "default" | "premium";
   surface?: UISurface;
 };
-
-/**
- * Valida si una combinación de selecciones es válida según variantMatrix
- */
-function isValidCombination(
-  selections: Record<string, string>,
-  variantMatrix?: VariantMatrix
-): boolean {
-  if (!variantMatrix || variantMatrix.length === 0) {
-    return true; // Sin matriz, todas las combinaciones son válidas
-  }
-
-  // Verificar si existe alguna combinación en la matriz que coincida
-  return variantMatrix.some((matrixRow) => {
-    // Todas las claves en selections deben coincidir con matrixRow
-    return Object.keys(selections).every((key) => {
-      const selectionValue = selections[key];
-      const matrixValue = matrixRow[key];
-
-      // Si la matriz no tiene esta clave, no es válida
-      if (matrixValue === undefined) {
-        return false;
-      }
-
-      // Comparar valores (pueden ser value o label)
-      return matrixValue === selectionValue;
-    });
-  });
-}
-
-/**
- * Verifica si una opción específica es válida dado el estado actual de selecciones
- */
-function isOptionValid(
-  variantType: string,
-  optionValue: string,
-  currentSelections: Record<string, string>,
-  variantMatrix?: VariantMatrix
-): boolean {
-  if (!variantMatrix || variantMatrix.length === 0) {
-    return true; // Sin matriz, todas las opciones son válidas
-  }
-
-  // Crear una combinación temporal con esta opción
-  const testSelections = {
-    ...currentSelections,
-    [variantType]: optionValue,
-  };
-
-  return isValidCombination(testSelections, variantMatrix);
-}
 
 /**
  * Selector visual de variantes reutilizable.

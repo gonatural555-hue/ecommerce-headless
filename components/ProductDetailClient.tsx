@@ -3,8 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductImageGallery from "@/components/ProductImageGallery";
-import ProductDesktopGallery from "@/components/ProductDesktopGallery";
+import ProductGalleryGrid from "@/components/pdp/ProductGalleryGrid";
+import ProductInfoPanel from "@/components/pdp/ProductInfoPanel";
 import VariantSelector from "@/components/VariantSelector";
+import { splitVariantDefinitions } from "@/lib/pdp-variant-utils";
 import type {
   ProductImages,
   VariantImagesMap,
@@ -53,6 +55,14 @@ type Props = {
   freeShippingLabel?: string;
   pdpDesktop: PdpDesktopContent;
   surface?: UISurface;
+  reviewsAverage?: number;
+  reviewsCount?: number;
+  reviewsLinkLabel?: string;
+  taxNote?: string | null;
+  promoLine?: string | null;
+  selectSizeLabel: string;
+  sizeGuideLabel: string;
+  sizeGuideHref?: string;
 };
 
 function getDefaultSelections(variants: VariantDefinition[]) {
@@ -88,6 +98,14 @@ export default function ProductDetailClient({
   freeShippingLabel,
   pdpDesktop,
   surface = "dark",
+  reviewsAverage = 0,
+  reviewsCount = 0,
+  reviewsLinkLabel,
+  taxNote,
+  promoLine,
+  selectSizeLabel,
+  sizeGuideLabel,
+  sizeGuideHref,
 }: Props) {
   const L = surface === "light";
   const showFullImage = product.id === "gn-ski-snow-pants-001";
@@ -228,12 +246,26 @@ export default function ProductDetailClient({
 
   const cartImage = activeImages.featured || product.images[0];
 
-  const desktopLead =
+  const desktopDescription =
     product.shortDescription?.trim() || product.description;
 
-  const ctaDesktopClassName = L
-    ? "w-full lg:rounded-lg lg:py-3.5 lg:px-8 lg:text-[0.95rem] lg:font-semibold lg:tracking-wide lg:shadow-[0_8px_28px_rgba(0,0,0,0.12)] lg:transition-all lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5 lg:hover:shadow-[0_14px_36px_rgba(200,155,60,0.28)]"
-    : "w-full lg:rounded-lg lg:py-3.5 lg:px-8 lg:text-[0.95rem] lg:font-semibold lg:tracking-wide lg:shadow-[0_10px_32px_rgba(0,0,0,0.35)] lg:transition-all lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5 lg:hover:shadow-[0_14px_36px_rgba(200,155,60,0.32)]";
+  const gridDesktopImages = useMemo(() => {
+    const list: string[] = [];
+    const push = (url: string) => {
+      if (url && !list.includes(url)) list.push(url);
+    };
+    if (activeImages.featured) push(activeImages.featured);
+    activeImages.gallery.forEach(push);
+    productImages.lifestyle.forEach(push);
+    productImages.extras.forEach(push);
+    return list;
+  }, [activeImages, productImages.lifestyle, productImages.extras]);
+
+  const { color: colorDef, size: sizeDef, other: otherVariantDefs } =
+    useMemo(
+      () => splitVariantDefinitions(productVariants?.variants ?? []),
+      [productVariants]
+    );
 
   return (
     <>
@@ -330,265 +362,58 @@ export default function ProductDetailClient({
         </div>
       </section>
 
-      {/* Desktop Layout (>=1024px) — galería ~35% / contenido ~65% */}
-      <section className="hidden lg:grid lg:grid-cols-[7fr_13fr] lg:gap-x-12 xl:gap-x-16 lg:gap-y-10 items-start max-w-full">
-        <div className="relative z-0 min-w-0 pr-1 xl:pr-2">
+      {/* Desktop (lg+): galería rejilla 60% + panel sticky 40% */}
+      <section className="hidden lg:grid lg:grid-cols-[3fr_2fr] lg:items-start lg:gap-x-10 xl:gap-x-14 max-w-full">
+        <div className="min-w-0">
           <div
             className={
               L
-                ? "rounded-2xl bg-neutral-100 p-4 xl:p-5 ring-1 ring-neutral-200/90 border border-neutral-200/80"
-                : "rounded-2xl bg-dark-surface/30 p-4 xl:p-5 ring-1 ring-white/[0.06]"
+                ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-4 xl:p-5"
+                : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-4 xl:p-5 ring-1 ring-white/[0.04]"
             }
           >
-            <ProductDesktopGallery
-              featured={activeImages.featured}
-              gallery={activeImages.gallery}
+            <ProductGalleryGrid
+              images={gridDesktopImages}
               title={product.title}
               noImageLabel={noImageLabel}
-              showFullImage={showFullImage}
               surface={surface}
             />
           </div>
         </div>
-
-        <div className="relative z-10 min-w-0">
-          <div className="sticky top-24 flex flex-col gap-8 xl:gap-10 min-w-0">
-            <header className="space-y-4">
-              <h1
-                className={
-                  L
-                    ? "text-3xl xl:text-[2rem] font-semibold text-neutral-900 tracking-tight break-words leading-snug text-balance"
-                    : "text-3xl xl:text-[2rem] font-semibold text-text-primary tracking-tight break-words leading-snug text-balance"
-                }
-              >
-                {seoH1}
-              </h1>
-              <div
-                className={
-                  L
-                    ? "flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1 border-t border-neutral-200"
-                    : "flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1 border-t border-white/[0.08]"
-                }
-              >
-                <p
-                  className={
-                    L
-                      ? "text-2xl xl:text-[1.65rem] font-semibold text-neutral-900 tabular-nums"
-                      : "text-2xl xl:text-[1.65rem] font-semibold text-text-primary tabular-nums"
-                  }
-                >
-                  ${resolvedPrice.toFixed(2)}
-                </p>
-                {product.freeShipping && freeShippingLabel && (
-                  <span
-                    className={
-                      L
-                        ? "text-[11px] uppercase tracking-[0.14em] text-neutral-500"
-                        : "text-[11px] uppercase tracking-[0.14em] text-text-muted/85"
-                    }
-                  >
-                    {freeShippingLabel}
-                  </span>
-                )}
-              </div>
-            </header>
-
-            <div className="min-w-0">
-              <p
-                className={
-                  L
-                    ? "text-base xl:text-[1.05rem] text-neutral-700 leading-relaxed break-words"
-                    : "text-base xl:text-[1.05rem] text-text-primary/85 leading-relaxed break-words"
-                }
-              >
-                {desktopLead}
-              </p>
-            </div>
-
-            {pdpDesktop.benefits.length > 0 ? (
-              <section
-                className={
-                  L
-                    ? "rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4 xl:px-5 xl:py-5"
-                    : "rounded-xl border border-white/[0.08] bg-dark-surface/25 px-4 py-4 xl:px-5 xl:py-5"
-                }
-                aria-labelledby="pdp-benefits-heading"
-              >
-                <h2
-                  id="pdp-benefits-heading"
-                  className={
-                    L
-                      ? "text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 mb-3"
-                      : "text-xs font-semibold uppercase tracking-[0.16em] text-text-muted mb-3"
-                  }
-                >
-                  {pdpDesktop.benefitsTitle}
-                </h2>
-                <ul className="space-y-2.5">
-                  {pdpDesktop.benefits.map((line) => (
-                    <li
-                      key={line}
-                      className={
-                        L
-                          ? "flex gap-3 text-sm text-neutral-800 leading-snug"
-                          : "flex gap-3 text-sm text-text-primary/90 leading-snug"
-                      }
-                    >
-                      <span
-                        className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent-gold/90"
-                        aria-hidden
-                      />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ) : null}
-
-            {productVariants ? (
-              <div className="pt-0.5">
-                <VariantSelector
-                  variants={productVariants}
-                  onChange={setSelections}
-                  value={selections}
-                  appearance="premium"
-                  surface={surface}
-                />
-              </div>
-            ) : null}
-
-            {pdpDesktop.specBullets.length > 0 ? (
-              <details
-                className={
-                  L
-                    ? "group rounded-xl border border-neutral-200 bg-white px-4 py-3 xl:px-5 open:pb-4 transition-[padding] duration-200 shadow-sm"
-                    : "group rounded-xl border border-white/[0.08] bg-dark-surface/20 px-4 py-3 xl:px-5 open:pb-4 transition-[padding] duration-200"
-                }
-              >
-                <summary
-                  className={
-                    L
-                      ? "flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-neutral-900 select-none marker:content-none [&::-webkit-details-marker]:hidden"
-                      : "flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-text-primary select-none marker:content-none [&::-webkit-details-marker]:hidden"
-                  }
-                >
-                  <span>{pdpDesktop.specsToggle}</span>
-                  <span
-                    className={
-                      L
-                        ? "text-neutral-500 transition-transform duration-200 group-open:rotate-180"
-                        : "text-text-muted transition-transform duration-200 group-open:rotate-180"
-                    }
-                    aria-hidden
-                  >
-                    ▼
-                  </span>
-                </summary>
-                <div
-                  className={
-                    L
-                      ? "mt-4 space-y-4 border-t border-neutral-200 pt-4"
-                      : "mt-4 space-y-4 border-t border-white/[0.06] pt-4"
-                  }
-                >
-                  <ul
-                    className={
-                      L
-                        ? "space-y-2 text-sm text-neutral-700 leading-relaxed"
-                        : "space-y-2 text-sm text-text-primary/80 leading-relaxed"
-                    }
-                  >
-                    {pdpDesktop.specBullets.map((spec) => (
-                      <li key={spec} className="flex gap-2.5">
-                        <span
-                          className="mt-2 h-px w-3 shrink-0 bg-accent-gold/50 self-start"
-                          aria-hidden
-                        />
-                        <span>{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {pdpDesktop.idealForLine ? (
-                    <p
-                      className={
-                        L
-                          ? "text-xs text-neutral-600 leading-relaxed"
-                          : "text-xs text-text-muted leading-relaxed"
-                      }
-                    >
-                      <span
-                        className={
-                          L
-                            ? "font-medium text-neutral-800"
-                            : "font-medium text-text-primary/70"
-                        }
-                      >
-                        {pdpDesktop.idealForLabel}
-                      </span>{" "}
-                      {pdpDesktop.idealForLine}
-                    </p>
-                  ) : null}
-                </div>
-              </details>
-            ) : null}
-
-            <div className="space-y-3 pt-1">
-              <AddToCartButton
-                id={product.id}
-                title={product.title}
-                price={resolvedPrice}
-                image={cartImage}
-                variantSelections={variantSelections}
-                label={ctaLabel}
-                className={ctaDesktopClassName}
-                surface={surface}
-              />
-              <p
-                className={
-                  L
-                    ? "text-center text-[11px] leading-relaxed text-neutral-500 tracking-wide"
-                    : "text-center text-[11px] leading-relaxed text-text-muted/75 tracking-wide"
-                }
-              >
-                {pdpDesktop.trustMicrocopy}
-              </p>
-            </div>
-
-            <aside
-              className={
-                L
-                  ? "rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4 xl:px-5 text-sm text-neutral-700 leading-relaxed space-y-3"
-                  : "rounded-xl border border-white/[0.07] bg-dark-surface/30 px-4 py-4 xl:px-5 text-sm text-text-primary/80 leading-relaxed space-y-3"
-              }
-            >
-              <h2
-                className={
-                  L
-                    ? "text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500"
-                    : "text-xs font-semibold uppercase tracking-[0.14em] text-text-muted"
-                }
-              >
-                {pdpDesktop.shippingHeading}
-              </h2>
-              <ul
-                className={
-                  L ? "space-y-1.5 text-neutral-600" : "space-y-1.5 text-text-muted/90"
-                }
-              >
-                <li>{pdpDesktop.shippingEurope}</li>
-                <li>{pdpDesktop.shippingLatam}</li>
-              </ul>
-              <p
-                className={
-                  L
-                    ? "text-neutral-600 border-t border-neutral-200 pt-3"
-                    : "text-text-muted/90 border-t border-white/[0.06] pt-3"
-                }
-              >
-                {pdpDesktop.returns}
-              </p>
-            </aside>
-          </div>
+        <div className="min-w-0">
+          <ProductInfoPanel
+            productId={product.id}
+            surface={surface}
+            seoH1={seoH1}
+            description={desktopDescription}
+            resolvedPrice={resolvedPrice}
+            freeShipping={product.freeShipping}
+            freeShippingLabel={freeShippingLabel}
+            taxNote={taxNote}
+            promoLine={promoLine}
+            reviewsAverage={reviewsAverage}
+            reviewsCount={reviewsCount}
+            reviewsLinkLabel={reviewsLinkLabel}
+            productVariants={productVariants}
+            colorDef={colorDef}
+            sizeDef={sizeDef}
+            otherVariantDefs={otherVariantDefs}
+            selections={selections}
+            onSelectionsChange={setSelections}
+            sizeGuideHref={sizeGuideHref}
+            sizeGuideLabel={sizeGuideLabel}
+            selectSizeLabel={selectSizeLabel}
+            ctaLabel={ctaLabel}
+            trustMicrocopy={pdpDesktop.trustMicrocopy}
+            pdpDesktop={pdpDesktop}
+            cartPayload={{
+              id: product.id,
+              title: product.title,
+              price: resolvedPrice,
+              image: cartImage,
+              variantSelections,
+            }}
+          />
         </div>
       </section>
 

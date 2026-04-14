@@ -125,16 +125,8 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  /** Solo PDP individual `/[locale]/products/[id]`, no listado ni otras rutas. */
-  const isProductDetailPage = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    return (
-      segments.length === 3 &&
-      segments[0] === locale &&
-      segments[1] === "products" &&
-      segments[2].length > 0
-    );
-  }, [pathname, locale]);
+  /** PDP usa el mismo header oscuro que el resto del sitio. */
+  const isProductDetailPage = false;
 
   const navLinkClass = isProductDetailPage
     ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"
