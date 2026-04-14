@@ -137,13 +137,19 @@ export default function Header() {
           : "bg-transparent",
       ].join(" ")}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="relative flex h-16 md:h-20 items-center">
-          {/* Izquierda: menú móvil + nav desktop */}
-          <div className="flex min-w-0 flex-1 items-center justify-start gap-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div
+          className={[
+            "grid h-16 items-center gap-x-2 sm:gap-x-3",
+            "grid-cols-[auto_minmax(0,1fr)_auto]",
+            "md:h-20 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 lg:gap-x-5",
+          ].join(" ")}
+        >
+          {/* Columna izquierda: hamburguesa (móvil) + nav pegado al centro / logo */}
+          <div className="flex min-w-0 items-center justify-start gap-2 md:justify-end md:pr-2 lg:pr-3">
             <button
               type="button"
-              className="md:hidden flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 rounded-lg"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
@@ -181,7 +187,7 @@ export default function Header() {
               )}
             </button>
 
-            <nav className="hidden min-w-0 md:flex md:items-center md:gap-6 lg:gap-8">
+            <nav className="hidden min-w-0 items-center justify-end gap-3 md:flex lg:gap-4 xl:gap-5">
             {navLinks.map((link) => {
               if (link.href === `/${locale}/products`) {
                 return (
@@ -325,27 +331,27 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* Logo centrado en la barra */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 justify-center">
+          {/* Columna central: logo (celda propia = sin solaparse con nav ni buscador) */}
+          <div className="flex min-w-0 justify-center justify-self-center px-1 sm:px-2">
             <Link
               href={`/${locale}`}
-              className="pointer-events-auto group flex items-center"
+              className="group flex shrink-0 items-center"
               aria-label="Go Natural"
             >
               <img
                 src="/assets/images/logo/logo.webp"
                 alt="Go Natural"
-                className="h-12 w-auto opacity-95 transition-transform duration-300 ease-out group-hover:scale-[1.06] sm:h-14 md:h-16 md:w-auto"
+                className="h-11 w-auto opacity-95 transition-transform duration-300 ease-out group-hover:scale-[1.06] sm:h-12 md:h-14 lg:h-16"
                 loading="lazy"
                 decoding="async"
               />
             </Link>
           </div>
 
-          {/* Derecha: búsqueda (md+) + idiomas + cuenta + carrito */}
-          <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
+          {/* Columna derecha: búsqueda acotada (md+) + idiomas + cuenta + carrito, pegados al logo */}
+          <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-2.5 md:justify-start md:gap-3 md:pl-2 lg:gap-4">
             <form
-              className="hidden min-w-0 max-w-[200px] flex-1 sm:max-w-[240px] md:flex md:max-w-xs md:items-center lg:max-w-sm"
+              className="hidden w-[min(100%,11rem)] shrink-0 sm:w-[min(100%,12.5rem)] md:flex md:w-[min(100%,13rem)] md:items-center lg:w-[min(100%,14rem)]"
               onSubmit={(event) => {
                 event.preventDefault();
                 submitSearch();
