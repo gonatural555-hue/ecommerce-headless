@@ -125,8 +125,16 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  /** PDP usa el mismo header oscuro que el resto del sitio. */
-  const isProductDetailPage = false;
+  /** Solo ficha de producto `/[locale]/products/[id]` — header claro para leer sobre fondo blanco. */
+  const isProductDetailPage = useMemo(() => {
+    const segments = pathname.split("/").filter(Boolean);
+    return (
+      segments.length === 3 &&
+      segments[0] === locale &&
+      segments[1] === "products" &&
+      segments[2].length > 0
+    );
+  }, [pathname, locale]);
 
   const navLinkClass = isProductDetailPage
     ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"

@@ -23,7 +23,6 @@ type Props = {
   freeShipping?: boolean;
   freeShippingLabel?: string;
   taxNote?: string | null;
-  promoLine?: string | null;
   reviewsAverage?: number;
   reviewsCount?: number;
   productVariants: ProductVariants | null;
@@ -83,7 +82,6 @@ export default function ProductInfoPanel({
   freeShipping,
   freeShippingLabel,
   taxNote,
-  promoLine,
   reviewsAverage = 0,
   reviewsCount = 0,
   productVariants,
@@ -215,17 +213,6 @@ export default function ProductInfoPanel({
           ) : null}
         </div>
 
-        {promoLine ? (
-          <p
-            className={
-              L
-                ? "text-sm font-medium leading-relaxed text-neutral-700"
-                : "text-sm font-medium leading-relaxed text-text-primary/85"
-            }
-          >
-            {promoLine}
-          </p>
-        ) : null}
       </header>
 
       <div className="flex flex-col gap-7">

@@ -59,7 +59,6 @@ type Props = {
   reviewsCount?: number;
   reviewsLinkLabel?: string;
   taxNote?: string | null;
-  promoLine?: string | null;
   selectSizeLabel: string;
   sizeGuideLabel: string;
   sizeGuideHref?: string;
@@ -102,7 +101,6 @@ export default function ProductDetailClient({
   reviewsCount = 0,
   reviewsLinkLabel,
   taxNote,
-  promoLine,
   selectSizeLabel,
   sizeGuideLabel,
   sizeGuideHref,
@@ -390,7 +388,6 @@ export default function ProductDetailClient({
             freeShipping={product.freeShipping}
             freeShippingLabel={freeShippingLabel}
             taxNote={taxNote}
-            promoLine={promoLine}
             reviewsAverage={reviewsAverage}
             reviewsCount={reviewsCount}
             reviewsLinkLabel={reviewsLinkLabel}
