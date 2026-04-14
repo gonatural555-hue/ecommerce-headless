@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import type { UISurface } from "@/lib/ui-surface";
 
 type Props = {
   id: string;
@@ -16,6 +17,8 @@ type Props = {
   disabled?: boolean;
   label?: string;
   className?: string;
+  /** PDP claro: anillo de foco sobre fondo blanco. */
+  surface?: UISurface;
 };
 
 export default function AddToCartButton({
@@ -27,8 +30,13 @@ export default function AddToCartButton({
   disabled,
   label,
   className,
+  surface = "dark",
 }: Props) {
   const { addItem } = useCart();
+  const ringOffset =
+    surface === "light"
+      ? "focus-visible:ring-offset-white"
+      : "focus-visible:ring-offset-dark-base";
 
   return (
     <button
@@ -37,7 +45,8 @@ export default function AddToCartButton({
       className={[
         "w-full px-6 py-3 bg-accent-gold text-dark-base rounded-md font-semibold",
         "transition-all duration-300 ease-out hover:bg-accent-gold/90 hover:shadow-[0_12px_26px_rgba(200,155,60,0.25)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/80 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/80 focus-visible:ring-offset-2",
+        ringOffset,
         "active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed",
         className,
       ]

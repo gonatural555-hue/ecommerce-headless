@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
+import type { UISurface } from "@/lib/ui-surface";
 
 type Props = {
   featured: string | null;
@@ -11,6 +12,7 @@ type Props = {
   noImageLabel?: string;
   /** Wider frame for tall products (e.g. ski pants). */
   showFullImage?: boolean;
+  surface?: UISurface;
 };
 
 const FADE_MS = 200;
@@ -21,7 +23,9 @@ export default function ProductDesktopGallery({
   title,
   noImageLabel = "No image",
   showFullImage,
+  surface = "dark",
 }: Props) {
+  const light = surface === "light";
   const allImages = useMemo(() => {
     return featured
       ? [featured, ...gallery.filter((img) => img !== featured)]
@@ -57,8 +61,16 @@ export default function ProductDesktopGallery({
 
   if (allImages.length === 0) {
     return (
-      <div className="aspect-[4/5] max-h-[520px] bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10">
-        <span className="text-text-muted">{noImageLabel}</span>
+      <div
+        className={
+          light
+            ? "aspect-[4/5] max-h-[520px] bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
+            : "aspect-[4/5] max-h-[520px] bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
+        }
+      >
+        <span className={light ? "text-neutral-500" : "text-text-muted"}>
+          {noImageLabel}
+        </span>
       </div>
     );
   }
@@ -66,7 +78,11 @@ export default function ProductDesktopGallery({
   const activeSrc = allImages[activeIndex] ?? allImages[0];
 
   const mainFrameClass = showFullImage
-    ? "relative w-full h-[min(520px,65vh)] min-h-[300px] max-h-[520px] rounded-2xl border border-white/10 bg-dark-surface/50 overflow-hidden"
+    ? light
+      ? "relative w-full h-[min(520px,65vh)] min-h-[300px] max-h-[520px] rounded-2xl border border-neutral-200 bg-neutral-100 overflow-hidden"
+      : "relative w-full h-[min(520px,65vh)] min-h-[300px] max-h-[520px] rounded-2xl border border-white/10 bg-dark-surface/50 overflow-hidden"
+    : light
+    ? "relative w-full aspect-[4/5] max-h-[520px] mx-auto rounded-2xl border border-neutral-200 bg-neutral-100 overflow-hidden"
     : "relative w-full aspect-[4/5] max-h-[520px] mx-auto rounded-2xl border border-white/10 bg-dark-surface/50 overflow-hidden";
 
   const zoomClass = showFullImage
@@ -111,13 +127,24 @@ export default function ProductDesktopGallery({
                 aria-current={isActive ? "true" : undefined}
                 className={[
                   "shrink-0 rounded-xl p-0.5 transition-all duration-200 ease-out",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70 focus-visible:ring-offset-2",
+                  light
+                    ? "focus-visible:ring-offset-white"
+                    : "focus-visible:ring-offset-dark-base",
                   isActive
                     ? "ring-1 ring-accent-gold/80 shadow-[0_0_0_1px_rgba(212,175,55,0.2)]"
+                    : light
+                    ? "ring-1 ring-transparent hover:ring-neutral-300"
                     : "ring-1 ring-transparent hover:ring-white/20",
                 ].join(" ")}
               >
-                <div className="relative h-[72px] w-[72px] overflow-hidden rounded-lg border border-white/10 bg-dark-surface/60">
+                <div
+                  className={
+                    light
+                      ? "relative h-[72px] w-[72px] overflow-hidden rounded-lg border border-neutral-200 bg-white"
+                      : "relative h-[72px] w-[72px] overflow-hidden rounded-lg border border-white/10 bg-dark-surface/60"
+                  }
+                >
                   <Image
                     src={thumb}
                     alt=""

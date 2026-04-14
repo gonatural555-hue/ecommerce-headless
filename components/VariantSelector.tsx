@@ -6,6 +6,7 @@ import type {
   VariantDefinition,
   VariantMatrix,
 } from "@/lib/product-variants";
+import type { UISurface } from "@/lib/ui-surface";
 
 type VariantSelectorProps = {
   variants: ProductVariants;
@@ -13,6 +14,7 @@ type VariantSelectorProps = {
   onChange?: (selections: Record<string, string>) => void;
   /** Refined styling for desktop PDP; mobile should use default. */
   appearance?: "default" | "premium";
+  surface?: UISurface;
 };
 
 /**
@@ -78,6 +80,7 @@ export default function VariantSelector({
   value,
   onChange,
   appearance = "default",
+  surface = "dark",
 }: VariantSelectorProps) {
   const { variants: variantDefinitions, variantMatrix } = variants;
 
@@ -142,6 +145,17 @@ export default function VariantSelector({
   }
 
   const isPremium = appearance === "premium";
+  const light = surface === "light";
+
+  const headingTitle = light
+    ? isPremium
+      ? "text-sm font-semibold tracking-wide text-neutral-900"
+      : "text-base font-semibold text-neutral-900"
+    : isPremium
+      ? "text-sm font-semibold tracking-wide text-text-primary"
+      : "text-base font-semibold text-text-primary";
+
+  const headingMuted = light ? "text-sm text-neutral-600" : "text-sm text-text-muted";
 
   return (
     <div className={isPremium ? "space-y-5" : "space-y-6"}>
@@ -158,17 +172,11 @@ export default function VariantSelector({
             className={isPremium ? "space-y-2.5" : "space-y-3"}
           >
             <div className="flex items-center gap-2">
-              <h3
-                className={
-                  isPremium
-                    ? "text-sm font-semibold tracking-wide text-text-primary"
-                    : "text-base font-semibold text-text-primary"
-                }
-              >
+              <h3 className={headingTitle}>
                 {variant.label}
               </h3>
               {currentValue && (
-                <span className="text-sm text-text-muted">
+                <span className={headingMuted}>
                   {variant.options.find(
                     (opt) =>
                       (opt.value || opt.label) === currentValue
@@ -194,19 +202,35 @@ export default function VariantSelector({
                   variantMatrix
                 );
 
-                const baseFocus =
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base";
+                const baseFocus = [
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2",
+                  light
+                    ? "focus-visible:ring-offset-white"
+                    : "focus-visible:ring-offset-dark-base",
+                ].join(" ");
 
                 const premiumClasses = !isValid
-                  ? "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/30 text-text-muted"
+                  ? light
+                    ? "opacity-40 cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-500"
+                    : "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/30 text-text-muted"
                   : isActive
-                  ? "border-accent-gold/85 bg-dark-surface text-text-primary ring-1 ring-accent-gold shadow-[0_0_0_1px_rgba(212,175,55,0.22)]"
+                  ? light
+                    ? "border-accent-gold/90 bg-white text-neutral-900 ring-1 ring-accent-gold shadow-[0_0_0_1px_rgba(212,175,55,0.25)]"
+                    : "border-accent-gold/85 bg-dark-surface text-text-primary ring-1 ring-accent-gold shadow-[0_0_0_1px_rgba(212,175,55,0.22)]"
+                  : light
+                  ? "border-neutral-200 bg-neutral-50 text-neutral-900 hover:border-accent-gold/50 hover:shadow-[0_0_14px_rgba(200,155,60,0.08)]"
                   : "border-white/12 bg-dark-surface/50 text-text-primary hover:border-accent-gold/40 hover:shadow-[0_0_14px_rgba(200,155,60,0.07)]";
 
                 const defaultClasses = !isValid
-                  ? "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
+                  ? light
+                    ? "opacity-40 cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-500"
+                    : "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
                   : isActive
-                  ? "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
+                  ? light
+                    ? "border-accent-gold bg-white text-neutral-900 ring-1 ring-accent-gold/60"
+                    : "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
+                  : light
+                  ? "border-neutral-200 bg-white text-neutral-900 hover:border-neutral-400"
                   : "border-white/15 bg-dark-surface/60 text-text-primary hover:border-white/30";
 
                 return (

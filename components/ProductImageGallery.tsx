@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
+import type { UISurface } from "@/lib/ui-surface";
 
 type Props = {
   featured: string | null;
@@ -11,6 +12,7 @@ type Props = {
   noImageLabel?: string;
   featuredContainerClassName?: string;
   featuredImageClassName?: string;
+  surface?: UISurface;
 };
 
 export default function ProductImageGallery({
@@ -20,7 +22,9 @@ export default function ProductImageGallery({
   noImageLabel = "No image",
   featuredContainerClassName,
   featuredImageClassName,
+  surface = "dark",
 }: Props) {
+  const light = surface === "light";
   const allImages = useMemo(() => {
     return featured
       ? [featured, ...gallery.filter((img) => img !== featured)]
@@ -70,8 +74,16 @@ export default function ProductImageGallery({
 
   if (allImages.length === 0) {
     return (
-      <div className="aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10">
-        <span className="text-text-muted">{noImageLabel}</span>
+      <div
+        className={
+          light
+            ? "aspect-square bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
+            : "aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
+        }
+      >
+        <span className={light ? "text-neutral-500" : "text-text-muted"}>
+          {noImageLabel}
+        </span>
       </div>
     );
   }
@@ -81,9 +93,9 @@ export default function ProductImageGallery({
       {/* Featured / Main Image */}
       <div
         className={[
-          // Square container with dark surface to keep images fully visible.
-          "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
-          // Desktop: keep gallery contained and premium-sized.
+          light
+            ? "relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
+            : "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
           "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
           featuredContainerClassName,
         ]
@@ -139,7 +151,9 @@ export default function ProductImageGallery({
               className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 ${
                 selectedImage === img
                   ? "border-accent-gold ring-1 ring-accent-gold/60"
-                  : "border-white/15 hover:border-white/30"
+                  : light
+                    ? "border-neutral-200 hover:border-neutral-400"
+                    : "border-white/15 hover:border-white/30"
               }`}
             >
               <Image

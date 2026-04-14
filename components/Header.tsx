@@ -125,15 +125,51 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  const navLinkClass =
-    "text-sm font-medium text-white hover:text-white/80 transition-colors duration-200";
+  /** Solo PDP individual `/[locale]/products/[id]`, no listado ni otras rutas. */
+  const isProductDetailPage = useMemo(() => {
+    const segments = pathname.split("/").filter(Boolean);
+    return (
+      segments.length === 3 &&
+      segments[0] === locale &&
+      segments[1] === "products" &&
+      segments[2].length > 0
+    );
+  }, [pathname, locale]);
+
+  const navLinkClass = isProductDetailPage
+    ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"
+    : "text-sm font-medium text-white hover:text-white/80 transition-colors duration-200";
+
+  const megaProductsPanel = [
+    "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
+    isProductDetailPage
+      ? "border border-neutral-200/90 bg-white/98 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.1)]"
+      : "border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)]",
+  ].join(" ");
+
+  const megaBlogPanel = [
+    "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
+    isProductDetailPage
+      ? "border border-neutral-200/90 bg-white/98 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.1)]"
+      : "border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)]",
+  ].join(" ");
+
+  const megaCatTitle = isProductDetailPage
+    ? "text-sm font-semibold tracking-[0.02em] text-neutral-900 hover:text-accent-gold transition-colors duration-200"
+    : "text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
+
+  const megaCatSub = isProductDetailPage
+    ? "mb-2 block break-inside-avoid text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-200"
+    : "mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200";
 
   return (
     <header
       className={[
         "fixed top-0 z-50 w-full transition-all duration-300 ease-out",
         isScrolled
-          ? "bg-dark-base/80 backdrop-blur-md"
+          ? isProductDetailPage
+            ? "bg-white/92 backdrop-blur-md border-b border-neutral-200/80"
+            : "bg-dark-base/80 backdrop-blur-md"
           : "bg-transparent",
       ].join(" ")}
     >
@@ -149,7 +185,12 @@ export default function Header() {
           <div className="flex min-w-0 items-center justify-start gap-2 md:justify-end md:pr-2 lg:pr-3">
             <button
               type="button"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 md:hidden"
+              className={[
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 md:hidden",
+                isProductDetailPage
+                  ? "text-neutral-900 hover:text-neutral-600"
+                  : "text-white hover:text-white/80",
+              ].join(" ")}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
@@ -209,7 +250,7 @@ export default function Header() {
                     </Link>
                     <div
                       className={[
-                        "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
+                        megaProductsPanel,
                         productsOpen
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 translate-y-2 pointer-events-none",
@@ -223,7 +264,7 @@ export default function Header() {
                           >
                             <Link
                               href={`/${locale}/category/${category.slug}`}
-                              className="text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200"
+                              className={megaCatTitle}
                               onClick={() => setProductsOpen(false)}
                             >
                               {t(
@@ -237,7 +278,7 @@ export default function Header() {
                                   <Link
                                     key={sub.slug}
                                     href={`/${locale}/category/${sub.slug}`}
-                                    className="mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200"
+                                    className={megaCatSub}
                                     onClick={() => setProductsOpen(false)}
                                   >
                                     {t(`categories.names.${sub.slug}`, sub.name)}
@@ -273,7 +314,7 @@ export default function Header() {
                     </Link>
                     <div
                       className={[
-                        "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out",
+                        megaBlogPanel,
                         blogOpen
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 translate-y-2 pointer-events-none",
@@ -287,7 +328,7 @@ export default function Header() {
                           >
                             <Link
                               href={`/${locale}/blog/${section.slug}`}
-                              className="text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200"
+                              className={megaCatTitle}
                               onClick={() => setBlogOpen(false)}
                             >
                               {t(
@@ -300,7 +341,7 @@ export default function Header() {
                                 <Link
                                   key={subtopic.slug}
                                   href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className="mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200"
+                                  className={megaCatSub}
                                   onClick={() => setBlogOpen(false)}
                                 >
                                   {t(
@@ -362,7 +403,13 @@ export default function Header() {
                 {t("common.searchLabel")}
               </label>
               <div className="relative w-full">
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+                <span
+                  className={
+                    isProductDetailPage
+                      ? "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
+                      : "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50"
+                  }
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -385,7 +432,11 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("common.searchPlaceholder")}
-                  className="w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                  className={
+                    isProductDetailPage
+                      ? "w-full rounded-full border border-neutral-200 bg-white/90 py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                      : "w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                  }
                 />
               </div>
             </form>
@@ -398,7 +449,9 @@ export default function Header() {
                   className={`text-xs font-semibold tracking-[0.12em] transition-colors duration-200 ${
                     lang === locale
                       ? "text-accent-gold"
-                      : "text-white/70 hover:text-white"
+                      : isProductDetailPage
+                        ? "text-neutral-500 hover:text-neutral-800"
+                        : "text-white/70 hover:text-white"
                   }`}
                 >
                   {lang.toUpperCase()}
@@ -408,7 +461,11 @@ export default function Header() {
             {isLoggedIn && user ? (
               <Link
                 href={`/${locale}/account`}
-                className="hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+                className={
+                  isProductDetailPage
+                    ? "hidden text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold md:inline"
+                    : "hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+                }
               >
                 {t("header.greeting")}, {user.name}
               </Link>
@@ -417,13 +474,21 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => openAuthModal("login")}
-                  className="hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+                  className={
+                    isProductDetailPage
+                      ? "hidden text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold md:inline"
+                      : "hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
+                  }
                 >
                   {t("header.account")}
                 </button>
                 <Link
                   href={`/${locale}/auth?tab=login`}
-                  className="md:hidden text-xs font-semibold text-white transition-colors hover:text-white/80"
+                  className={
+                    isProductDetailPage
+                      ? "md:hidden text-xs font-semibold text-neutral-900 transition-colors hover:text-neutral-600"
+                      : "md:hidden text-xs font-semibold text-white transition-colors hover:text-white/80"
+                  }
                 >
                   {t("header.account")}
                 </Link>
@@ -431,7 +496,11 @@ export default function Header() {
             )}
             <Link
               href={`/${locale}/cart`}
-              className="relative flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80"
+              className={
+                isProductDetailPage
+                  ? "relative flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600"
+                  : "relative flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80"
+              }
               aria-label={`Cart with ${totalItems} items`}
             >
               <svg
@@ -455,11 +524,15 @@ export default function Header() {
               )}
             </Link>
             {!isLoggedIn && (
-              <Link
-                href={`/${locale}/auth?tab=login`}
-                className="flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
-                aria-label={t("header.account")}
-              >
+                <Link
+                  href={`/${locale}/auth?tab=login`}
+                  className={
+                    isProductDetailPage
+                      ? "flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 md:hidden"
+                      : "flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
+                  }
+                  aria-label={t("header.account")}
+                >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -481,7 +554,13 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden pb-4 mt-2 pt-4 bg-dark-base/95 backdrop-blur-md rounded-b-2xl">
+          <nav
+            className={
+              isProductDetailPage
+                ? "md:hidden pb-4 mt-2 pt-4 bg-white/95 backdrop-blur-md rounded-b-2xl border border-neutral-200/80 shadow-sm"
+                : "md:hidden pb-4 mt-2 pt-4 bg-dark-base/95 backdrop-blur-md rounded-b-2xl"
+            }
+          >
             <div className="flex flex-col gap-3">
               <form
                 className="flex items-center gap-2 px-1"
@@ -495,7 +574,13 @@ export default function Header() {
                   {t("common.searchLabel")}
                 </label>
                 <div className="relative flex-1">
-                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+                  <span
+                    className={
+                      isProductDetailPage
+                        ? "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
+                        : "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50"
+                    }
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -518,7 +603,11 @@ export default function Header() {
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                     placeholder={t("common.searchPlaceholder")}
-                    className="w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                    className={
+                      isProductDetailPage
+                        ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                        : "w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                    }
                   />
                 </div>
               </form>
@@ -527,26 +616,44 @@ export default function Header() {
                   <div key={link.href} className="flex flex-col gap-2">
                     <button
                       type="button"
-                      className="flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                      className={
+                        isProductDetailPage
+                          ? "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                          : "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                      }
                       onClick={() => setMobileBlogOpen((open) => !open)}
                       aria-expanded={mobileBlogOpen}
                       aria-controls="mobile-blog-menu"
                     >
                       <span>{link.label}</span>
-                      <span className="text-sm text-white/60">
+                      <span
+                        className={
+                          isProductDetailPage
+                            ? "text-sm text-neutral-500"
+                            : "text-sm text-white/60"
+                        }
+                      >
                         {mobileBlogOpen ? "−" : "+"}
                       </span>
                     </button>
                     {mobileBlogOpen && (
                       <div
                         id="mobile-blog-menu"
-                        className="pl-3 border-l border-white/10 space-y-3"
+                        className={
+                          isProductDetailPage
+                            ? "pl-3 border-l border-neutral-200 space-y-3"
+                            : "pl-3 border-l border-white/10 space-y-3"
+                        }
                       >
                         {blogSections.map((section) => (
                           <div key={section.slug} className="space-y-2">
                             <Link
                               href={`/${locale}/blog/${section.slug}`}
-                              className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                              className={
+                                isProductDetailPage
+                                  ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
+                                  : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                              }
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               {t(
@@ -559,7 +666,11 @@ export default function Header() {
                                 <Link
                                   key={subtopic.slug}
                                   href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className="text-sm text-white/75 transition-colors hover:text-white"
+                                  className={
+                                    isProductDetailPage
+                                      ? "text-sm text-neutral-600 transition-colors hover:text-neutral-900"
+                                      : "text-sm text-white/75 transition-colors hover:text-white"
+                                  }
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {t(
@@ -578,14 +689,24 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                    className={
+                      isProductDetailPage
+                        ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                        : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                    }
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 )
               )}
-              <div className="flex flex-wrap items-center gap-3 border-t border-white/10 pt-3">
+              <div
+                className={
+                  isProductDetailPage
+                    ? "flex flex-wrap items-center gap-3 border-t border-neutral-200 pt-3"
+                    : "flex flex-wrap items-center gap-3 border-t border-white/10 pt-3"
+                }
+              >
                 {locales.map((lang) => (
                   <Link
                     key={lang}
@@ -593,7 +714,9 @@ export default function Header() {
                     className={`text-sm font-medium transition-colors duration-200 ${
                       lang === locale
                         ? "text-accent-gold"
-                        : "text-white/70 hover:text-white"
+                        : isProductDetailPage
+                          ? "text-neutral-500 hover:text-neutral-800"
+                          : "text-white/70 hover:text-white"
                     }`}
                   >
                     {lang.toUpperCase()}
@@ -602,7 +725,11 @@ export default function Header() {
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
-                    className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                    className={
+                      isProductDetailPage
+                        ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
+                        : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                    }
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.greeting")}, {user.name}
@@ -611,7 +738,11 @@ export default function Header() {
                   <Link
                     href={`/${locale}/auth?tab=login`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                    className={
+                      isProductDetailPage
+                        ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
+                        : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                    }
                   >
                     {t("header.account")}
                   </Link>

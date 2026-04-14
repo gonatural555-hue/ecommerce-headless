@@ -1,8 +1,10 @@
 import type { ReviewSeed } from "@/lib/reviews-data";
+import type { UISurface } from "@/lib/ui-surface";
 
 type ProductReviewsProps = {
   productSlug: string;
   reviews: ReviewSeed[];
+  surface?: UISurface;
 };
 
 function getAverageRating(reviews: ReviewSeed[]) {
@@ -11,15 +13,17 @@ function getAverageRating(reviews: ReviewSeed[]) {
   return total / reviews.length;
 }
 
-function renderStars(rating: number) {
+function renderStars(rating: number, surface: UISurface) {
   const rounded = Math.round(rating);
+  const emptyClass =
+    surface === "light" ? "text-neutral-300" : "text-white/20";
   return Array.from({ length: 5 }).map((_, index) => {
     const isFilled = index < rounded;
     return (
       <svg
         key={`star-${index}`}
         viewBox="0 0 20 20"
-        className={`h-4 w-4 ${isFilled ? "text-accent-gold" : "text-white/20"}`}
+        className={`h-4 w-4 ${isFilled ? "text-accent-gold" : emptyClass}`}
         fill="currentColor"
         aria-hidden="true"
       >
@@ -32,7 +36,9 @@ function renderStars(rating: number) {
 export default function ProductReviews({
   productSlug,
   reviews,
+  surface = "dark",
 }: ProductReviewsProps) {
+  const L = surface === "light";
   const productReviews = reviews.filter(
     (review) => review.productSlug === productSlug
   );
@@ -42,21 +48,39 @@ export default function ProductReviews({
   return (
     <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-        <h2 className="text-2xl md:text-3xl font-semibold text-text-primary">
+        <h2
+          className={
+            L
+              ? "text-2xl md:text-3xl font-semibold text-neutral-900"
+              : "text-2xl md:text-3xl font-semibold text-text-primary"
+          }
+        >
           Customer reviews
         </h2>
 
         {productReviews.length === 0 ? (
-          <p className="mt-3 text-sm text-text-muted">
+          <p
+            className={
+              L ? "mt-3 text-sm text-neutral-600" : "mt-3 text-sm text-text-muted"
+            }
+          >
             This product does not have published reviews yet
           </p>
         ) : (
           <>
-            <div className="mt-3 flex items-center gap-3 text-sm text-text-muted">
+            <div
+              className={
+                L
+                  ? "mt-3 flex items-center gap-3 text-sm text-neutral-600"
+                  : "mt-3 flex items-center gap-3 text-sm text-text-muted"
+              }
+            >
               <div className="flex items-center gap-1">
-                {renderStars(average)}
+                {renderStars(average, surface)}
               </div>
-              <span className="text-text-primary">{averageLabel}</span>
+              <span className={L ? "text-neutral-900" : "text-text-primary"}>
+                {averageLabel}
+              </span>
               <span aria-hidden="true">•</span>
               <span>{productReviews.length} reviews</span>
             </div>
@@ -65,27 +89,59 @@ export default function ProductReviews({
               {productReviews.map((review) => (
                 <article
                   key={review.id}
-                  className="rounded-2xl border border-white/10 bg-dark-surface/30 p-5"
+                  className={
+                    L
+                      ? "rounded-2xl border border-neutral-200 bg-neutral-50 p-5 shadow-sm"
+                      : "rounded-2xl border border-white/10 bg-dark-surface/30 p-5"
+                  }
                 >
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-1">
-                      {renderStars(review.rating)}
+                      {renderStars(review.rating, surface)}
                     </div>
-                    <span className="text-xs text-text-muted">{review.date}</span>
+                    <span
+                      className={
+                        L ? "text-xs text-neutral-500" : "text-xs text-text-muted"
+                      }
+                    >
+                      {review.date}
+                    </span>
                   </div>
-                  <p className="mt-3 text-sm font-semibold text-text-primary">
+                  <p
+                    className={
+                      L
+                        ? "mt-3 text-sm font-semibold text-neutral-900"
+                        : "mt-3 text-sm font-semibold text-text-primary"
+                    }
+                  >
                     {review.author}
                   </p>
                   {review.title && (
-                    <p className="mt-1 text-sm text-text-primary">
+                    <p
+                      className={
+                        L ? "mt-1 text-sm text-neutral-800" : "mt-1 text-sm text-text-primary"
+                      }
+                    >
                       {review.title}
                     </p>
                   )}
-                  <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                  <p
+                    className={
+                      L
+                        ? "mt-3 text-sm text-neutral-600 leading-relaxed"
+                        : "mt-3 text-sm text-text-muted leading-relaxed"
+                    }
+                  >
                     {review.comment}
                   </p>
                   {review.verified && (
-                    <span className="mt-4 inline-flex rounded-full border border-white/10 px-3 py-1 text-xs text-text-muted">
+                    <span
+                      className={
+                        L
+                          ? "mt-4 inline-flex rounded-full border border-neutral-200 px-3 py-1 text-xs text-neutral-600"
+                          : "mt-4 inline-flex rounded-full border border-white/10 px-3 py-1 text-xs text-text-muted"
+                      }
+                    >
                       Verified purchase
                     </span>
                   )}
@@ -98,4 +154,3 @@ export default function ProductReviews({
     </section>
   );
 }
-
