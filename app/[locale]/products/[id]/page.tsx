@@ -395,7 +395,6 @@ export default async function ProductPage({ params }: Props) {
                   key={item.id}
                   product={item}
                   locale={locale}
-                  surface="light"
                   analyticsListId="related_products"
                   analyticsListName="related_products"
                   labels={{
