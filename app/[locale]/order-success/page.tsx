@@ -18,6 +18,13 @@ export default function OrderSuccessPage() {
   const { orders, lastOrderId } = useUser();
   const [order, setOrder] = useState<Order | null>(null);
 
+  const previewOrder = useMemo(() => {
+    if (!orders || orders.length === 0) return null;
+    return lastOrderId
+      ? orders.find((entry) => entry.id === lastOrderId) ?? null
+      : orders[0];
+  }, [orders, lastOrderId]);
+
   useEffect(() => {
     if (!orders || orders.length === 0) return;
     const found = lastOrderId
@@ -59,7 +66,9 @@ export default function OrderSuccessPage() {
     const key =
       order.paymentMethod === "paypal" && order.status === "paid"
         ? "orderSuccessPage.flows.paypalPaid"
-        : "orderSuccessPage.flows.default";
+        : order.paymentMethod === "whatsapp"
+          ? "orderSuccessPage.flows.whatsapp"
+          : "orderSuccessPage.flows.default";
     const raw = t(key);
     flowSteps = Array.isArray(raw) ? (raw as FlowStep[]) : [];
   }
@@ -71,6 +80,13 @@ export default function OrderSuccessPage() {
         title: t("orderSuccessPage.paymentBanner.paidTitle"),
         body: t("orderSuccessPage.paymentBanner.paidBody"),
         className: "border-emerald-400/30 bg-emerald-950/35 text-emerald-100/95",
+      };
+    }
+    if (order.paymentMethod === "whatsapp") {
+      return {
+        title: t("orderSuccessPage.paymentBanner.whatsappTitle"),
+        body: t("orderSuccessPage.paymentBanner.whatsappBody"),
+        className: "border-amber-400/35 bg-amber-950/30 text-amber-50/95",
       };
     }
     return {
@@ -113,7 +129,12 @@ export default function OrderSuccessPage() {
           {t("orderSuccessPage.subheadline")}
         </p>
         <p className="mt-6 text-sm text-text-muted/95 leading-relaxed max-w-lg mx-auto">
-          {t("orderSuccessPage.emailLine")}
+          {previewOrder?.paymentMethod === "whatsapp"
+            ? t(
+                "orderSuccessPage.emailLineCoordinatingWhatsapp",
+                t("orderSuccessPage.emailLine", "")
+              )
+            : t("orderSuccessPage.emailLine")}
         </p>
         {order && (
           <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 backdrop-blur-sm">

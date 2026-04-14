@@ -14,6 +14,10 @@ import {
   trackBeginCheckout,
   trackPurchase,
 } from "@/lib/analytics/ga4";
+import {
+  getCheckoutWhatsappDigits,
+  isCheckoutWhatsappEnabled,
+} from "@/lib/checkout/whatsapp";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -167,6 +171,61 @@ export default function CheckoutPage() {
     setIsLoading(false);
   };
 
+  const handleWhatsappCoordinate = () => {
+    if (!defaultAddress || items.length === 0) return;
+    const digits = getCheckoutWhatsappDigits();
+    if (digits.length < 8) return;
+
+    const orderId = `order_${Date.now()}`;
+    const totalLabel = formatPrice(subtotal);
+    const itemsBlock = items
+      .map(
+        (it) =>
+          `· ${it.quantity}× ${it.title} — ${formatPrice(it.price * it.quantity)}`
+      )
+      .join("\n");
+    const addr = defaultAddress;
+    const addressBlock = [
+      addr.fullName,
+      addr.addressLine1,
+      addr.addressLine2,
+      `${addr.city}, ${addr.postalCode}`,
+      addr.country,
+      addr.phone,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const body = t("checkoutPage.whatsappPrefillBody", "")
+      .replace("{orderId}", orderId)
+      .replace("{email}", user?.email ?? "—")
+      .replace("{total}", totalLabel)
+      .replace("{items}", itemsBlock)
+      .replace("{address}", addressBlock);
+
+    const url = `https://wa.me/${digits}?text=${encodeURIComponent(body)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+
+    const order: Order = {
+      id: orderId,
+      items: items.map((item) => ({
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      subtotal,
+      address: defaultAddress,
+      date: new Date().toISOString(),
+      status: "pending_payment",
+      paymentMethod: "whatsapp",
+    };
+
+    addOrder(order);
+    clearCart();
+    router.push(`/${locale}/order-success`);
+  };
+
   const inputClass =
     "w-full rounded-lg border border-white/15 bg-dark-base/50 px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted/60 transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/30 focus-visible:border-accent-gold focus-visible:ring-2 focus-visible:ring-accent-gold/35 max-w-full";
 
@@ -245,7 +304,12 @@ export default function CheckoutPage() {
             {t("checkoutPage.title")}
           </h1>
           <p className="mt-2 text-text-muted text-sm md:text-base leading-relaxed">
-            {t("checkoutPage.subtitlePayPalOnly")}
+            {isCheckoutWhatsappEnabled()
+              ? t(
+                  "checkoutPage.subtitleWithWhatsapp",
+                  t("checkoutPage.subtitlePayPalOnly", "")
+                )
+              : t("checkoutPage.subtitlePayPalOnly")}
           </p>
           {user?.email ? (
             <p className="mt-3 text-sm text-text-muted/90">
@@ -416,8 +480,48 @@ export default function CheckoutPage() {
               {t("checkoutPage.paymentMethod")}
             </h2>
             <p className="text-sm text-text-muted mb-4">
-              {t("checkoutPage.paypalOnlyHint")}
+              {isCheckoutWhatsappEnabled()
+                ? t(
+                    "checkoutPage.paymentHintPaypalAndWhatsapp",
+                    t("checkoutPage.paypalOnlyHint", "")
+                  )
+                : t("checkoutPage.paypalOnlyHint")}
             </p>
+
+            {isCheckoutWhatsappEnabled() ? (
+              <div className="mb-6 rounded-xl border border-emerald-500/25 bg-emerald-950/20 px-4 py-4 text-sm text-text-muted leading-relaxed">
+                <h3 className="font-semibold text-text-primary mb-2">
+                  {t("checkoutPage.whatsappCoordinarTitle", "")}
+                </h3>
+                <p className="text-xs sm:text-sm mb-4">
+                  {t("checkoutPage.whatsappCoordinarDescription", "")}
+                </p>
+                {defaultAddress ? (
+                  <button
+                    type="button"
+                    onClick={handleWhatsappCoordinate}
+                    className="w-full rounded-xl border border-emerald-500/40 bg-emerald-900/30 px-4 py-3 text-sm font-semibold text-emerald-100/95 transition hover:bg-emerald-900/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+                  >
+                    {t("checkoutPage.whatsappCoordinarCta", "")}
+                  </button>
+                ) : (
+                  <p className="text-xs text-text-muted">
+                    {t("checkoutPage.whatsappNeedsAddress", "")}
+                  </p>
+                )}
+              </div>
+            ) : null}
+
+            {isCheckoutWhatsappEnabled() ? (
+              <div className="relative mb-6 flex items-center gap-3">
+                <span className="h-px flex-1 bg-white/10" aria-hidden />
+                <span className="text-[0.65rem] uppercase tracking-[0.2em] text-text-muted shrink-0">
+                  {t("checkoutPage.paymentDividerOr", "")}
+                </span>
+                <span className="h-px flex-1 bg-white/10" aria-hidden />
+              </div>
+            ) : null}
+
             <div className="rounded-xl border border-accent-gold/30 bg-dark-base/70 px-4 py-3 text-xs text-text-muted leading-relaxed mb-4">
               <span className="font-semibold text-text-primary">PayPal · </span>
               {t("checkoutPage.paymentPayPalHighlight")}{" "}
@@ -448,6 +552,11 @@ export default function CheckoutPage() {
               <span className="rounded-full border border-white/15 px-2.5 py-1">
                 {t("checkoutPage.trustSecureCheckout")}
               </span>
+              {isCheckoutWhatsappEnabled() ? (
+                <span className="rounded-full border border-white/15 px-2.5 py-1">
+                  WhatsApp
+                </span>
+              ) : null}
               <span className="rounded-full border border-white/15 px-2.5 py-1">
                 PayPal
               </span>

@@ -43,7 +43,7 @@ export type Order = {
   address: Address;
   date: string;
   status: string;
-  paymentMethod?: "paypal";
+  paymentMethod?: "paypal" | "whatsapp";
   paypalOrderId?: string;
 };
 
@@ -224,7 +224,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         address: ship && ship.fullName ? ship : fallbackAddr,
         date: row.created_at,
         status: row.status,
-        paymentMethod: "paypal",
+        paymentMethod:
+          row.payment_method === "whatsapp" ? "whatsapp" : "paypal",
         paypalOrderId: row.paypal_order_id || undefined,
       };
     }) ?? [];
