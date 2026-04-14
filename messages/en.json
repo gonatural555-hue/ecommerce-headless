@@ -164,6 +164,16 @@
   "productPage": {
     "storyTitle": "Built for quiet movement",
     "specsTitle": "Technical specs",
+    "pdpDesktop": {
+      "benefitsTitle": "What matters",
+      "specsToggle": "Materials & details",
+      "idealForLabel": "Best for:",
+      "trustMicrocopy": "Secure checkout · PayPal buyer protection",
+      "shippingHeading": "Estimated delivery",
+      "shippingEurope": "Europe: 5–10 business days",
+      "shippingLatam": "Latin America: 7–15 business days",
+      "returns": "Easy 15-day returns after delivery."
+    },
     "crossSellTitle": "Continue exploring",
     "addToCart": "Add to cart",
     "freeShipping": "Free shipping",

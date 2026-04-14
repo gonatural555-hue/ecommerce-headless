@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductImageGallery from "@/components/ProductImageGallery";
-import ProductImageGridDesktop from "@/components/ProductImageGridDesktop";
+import ProductDesktopGallery from "@/components/ProductDesktopGallery";
 import VariantSelector from "@/components/VariantSelector";
 import type {
   ProductImages,
@@ -23,8 +23,23 @@ type ProductSummary = {
   price: number;
   category: string;
   description: string;
+  shortDescription?: string;
   images: string[];
   freeShipping?: boolean;
+};
+
+export type PdpDesktopContent = {
+  benefitsTitle: string;
+  specsToggle: string;
+  idealForLabel: string;
+  trustMicrocopy: string;
+  shippingHeading: string;
+  shippingEurope: string;
+  shippingLatam: string;
+  returns: string;
+  benefits: string[];
+  specBullets: string[];
+  idealForLine: string;
 };
 
 type Props = {
@@ -35,6 +50,7 @@ type Props = {
   ctaLabel: string;
   noImageLabel: string;
   freeShippingLabel?: string;
+  pdpDesktop: PdpDesktopContent;
 };
 
 function getDefaultSelections(variants: VariantDefinition[]) {
@@ -68,9 +84,9 @@ export default function ProductDetailClient({
   ctaLabel,
   noImageLabel,
   freeShippingLabel,
+  pdpDesktop,
 }: Props) {
-  const showFullImage =
-    product.id === "gn-ski-snow-pants-001";
+  const showFullImage = product.id === "gn-ski-snow-pants-001";
   const baseFeatured =
     productImages.featured || product.images[0] || "";
   const baseGallery =
@@ -208,6 +224,12 @@ export default function ProductDetailClient({
 
   const cartImage = activeImages.featured || product.images[0];
 
+  const desktopLead =
+    product.shortDescription?.trim() || product.description;
+
+  const ctaDesktopClassName =
+    "w-full lg:rounded-lg lg:py-3.5 lg:px-8 lg:text-[0.95rem] lg:font-semibold lg:tracking-wide lg:shadow-[0_10px_32px_rgba(0,0,0,0.35)] lg:transition-all lg:duration-200 lg:ease-out lg:hover:-translate-y-0.5 lg:hover:shadow-[0_14px_36px_rgba(200,155,60,0.32)]";
+
   return (
     <>
       {/* Mobile Layout (<1024px) - Mantener exactamente igual */}
@@ -271,70 +293,145 @@ export default function ProductDetailClient({
         </div>
       </section>
 
-      {/* Desktop Layout (>=1024px) - Layout tipo Patagonia */}
-      <section className="hidden lg:grid lg:grid-cols-[1.65fr_1fr] lg:gap-12 items-start max-w-full">
-        {/* Columna izquierda: Grid de imágenes (60-65%) */}
-        <div className="relative z-0">
-          <ProductImageGridDesktop
-            featured={activeImages.featured}
-            gallery={activeImages.gallery}
-            title={product.title}
-            noImageLabel={noImageLabel}
-          />
+      {/* Desktop Layout (>=1024px) — galería ~35% / contenido ~65% */}
+      <section className="hidden lg:grid lg:grid-cols-[7fr_13fr] lg:gap-x-12 xl:gap-x-16 lg:gap-y-10 items-start max-w-full">
+        <div className="relative z-0 min-w-0 pr-1 xl:pr-2">
+          <div className="rounded-2xl bg-dark-surface/30 p-4 xl:p-5 ring-1 ring-white/[0.06]">
+            <ProductDesktopGallery
+              featured={activeImages.featured}
+              gallery={activeImages.gallery}
+              title={product.title}
+              noImageLabel={noImageLabel}
+              showFullImage={showFullImage}
+            />
+          </div>
         </div>
 
-        {/* Columna derecha: Info sticky (35-40%) */}
-        <div className="relative z-10">
-          <div className="sticky top-24 flex flex-col gap-6 min-w-0">
-            {/* Título */}
-            <div>
-              <h1 className="text-4xl font-semibold text-text-primary break-words">
+        <div className="relative z-10 min-w-0">
+          <div className="sticky top-24 flex flex-col gap-8 xl:gap-10 min-w-0">
+            <header className="space-y-4">
+              <h1 className="text-3xl xl:text-[2rem] font-semibold text-text-primary tracking-tight break-words leading-snug text-balance">
                 {seoH1}
               </h1>
-            </div>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1 border-t border-white/[0.08]">
+                <p className="text-2xl xl:text-[1.65rem] font-semibold text-text-primary tabular-nums">
+                  ${resolvedPrice.toFixed(2)}
+                </p>
+                {product.freeShipping && freeShippingLabel && (
+                  <span className="text-[11px] uppercase tracking-[0.14em] text-text-muted/85">
+                    {freeShippingLabel}
+                  </span>
+                )}
+              </div>
+            </header>
 
-            {/* Precio */}
-            <div className="flex items-center gap-3 pb-1.5">
-              <p className="text-2xl font-bold text-text-primary">
-                ${resolvedPrice.toFixed(2)}
-              </p>
-              {product.freeShipping && freeShippingLabel && (
-                <span className="text-xs uppercase tracking-[0.12em] text-text-muted/80">
-                  {freeShippingLabel}
-                </span>
-              )}
-            </div>
-
-            {/* Descripción corta */}
             <div className="min-w-0">
-              <p className="text-lg text-text-muted break-words">
-                {product.description}
+              <p className="text-base xl:text-[1.05rem] text-text-primary/85 leading-relaxed break-words">
+                {desktopLead}
               </p>
             </div>
 
-            {/* Variantes */}
-            {productVariants && (
-              <div className="pt-1">
+            {pdpDesktop.benefits.length > 0 ? (
+              <section
+                className="rounded-xl border border-white/[0.08] bg-dark-surface/25 px-4 py-4 xl:px-5 xl:py-5"
+                aria-labelledby="pdp-benefits-heading"
+              >
+                <h2
+                  id="pdp-benefits-heading"
+                  className="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted mb-3"
+                >
+                  {pdpDesktop.benefitsTitle}
+                </h2>
+                <ul className="space-y-2.5">
+                  {pdpDesktop.benefits.map((line) => (
+                    <li
+                      key={line}
+                      className="flex gap-3 text-sm text-text-primary/90 leading-snug"
+                    >
+                      <span
+                        className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent-gold/90"
+                        aria-hidden
+                      />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {productVariants ? (
+              <div className="pt-0.5">
                 <VariantSelector
                   variants={productVariants}
                   onChange={setSelections}
                   value={selections}
+                  appearance="premium"
                 />
               </div>
-            )}
+            ) : null}
 
-            {/* CTA */}
-            <div className="pt-1">
+            {pdpDesktop.specBullets.length > 0 ? (
+              <details className="group rounded-xl border border-white/[0.08] bg-dark-surface/20 px-4 py-3 xl:px-5 open:pb-4 transition-[padding] duration-200">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-text-primary select-none marker:content-none [&::-webkit-details-marker]:hidden">
+                  <span>{pdpDesktop.specsToggle}</span>
+                  <span
+                    className="text-text-muted transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden
+                  >
+                    ▼
+                  </span>
+                </summary>
+                <div className="mt-4 space-y-4 border-t border-white/[0.06] pt-4">
+                  <ul className="space-y-2 text-sm text-text-primary/80 leading-relaxed">
+                    {pdpDesktop.specBullets.map((spec) => (
+                      <li key={spec} className="flex gap-2.5">
+                        <span
+                          className="mt-2 h-px w-3 shrink-0 bg-accent-gold/50 self-start"
+                          aria-hidden
+                        />
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {pdpDesktop.idealForLine ? (
+                    <p className="text-xs text-text-muted leading-relaxed">
+                      <span className="font-medium text-text-primary/70">
+                        {pdpDesktop.idealForLabel}
+                      </span>{" "}
+                      {pdpDesktop.idealForLine}
+                    </p>
+                  ) : null}
+                </div>
+              </details>
+            ) : null}
+
+            <div className="space-y-3 pt-1">
               <AddToCartButton
                 id={product.id}
                 title={product.title}
-                price={product.price}
+                price={resolvedPrice}
                 image={cartImage}
                 variantSelections={variantSelections}
                 label={ctaLabel}
-                className="w-full"
+                className={ctaDesktopClassName}
               />
+              <p className="text-center text-[11px] leading-relaxed text-text-muted/75 tracking-wide">
+                {pdpDesktop.trustMicrocopy}
+              </p>
             </div>
+
+            <aside className="rounded-xl border border-white/[0.07] bg-dark-surface/30 px-4 py-4 xl:px-5 text-sm text-text-primary/80 leading-relaxed space-y-3">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
+                {pdpDesktop.shippingHeading}
+              </h2>
+              <ul className="space-y-1.5 text-text-muted/90">
+                <li>{pdpDesktop.shippingEurope}</li>
+                <li>{pdpDesktop.shippingLatam}</li>
+              </ul>
+              <p className="text-text-muted/90 border-t border-white/[0.06] pt-3">
+                {pdpDesktop.returns}
+              </p>
+            </aside>
           </div>
         </div>
       </section>
@@ -348,12 +445,12 @@ export default function ProductDetailClient({
               ${resolvedPrice.toFixed(2)}
             </p>
           </div>
-          
+
           {/* CTA Button */}
           <AddToCartButton
             id={product.id}
             title={product.title}
-            price={product.price}
+            price={resolvedPrice}
             image={cartImage}
             variantSelections={variantSelections}
             label={ctaLabel}
@@ -373,4 +470,3 @@ export default function ProductDetailClient({
     </>
   );
 }
-

@@ -174,7 +174,8 @@ export default async function ProductPage({ params }: Props) {
     features: localized?.features ?? product.features,
   };
 
-  const { useCase, whyBetter, benefits } = getProductCopy(localizedProduct);
+  const { useCase, whyBetter, benefits, idealFor } =
+    getProductCopy(localizedProduct);
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
   const productImages = await getProductImages(product.id);
@@ -238,6 +239,29 @@ export default async function ProductPage({ params }: Props) {
     ? product.features
     : benefits;
 
+  const specSource =
+    localizedProduct.features && localizedProduct.features.length > 0
+      ? localizedProduct.features
+      : benefits;
+  const pdpDesktop = {
+    benefitsTitle: t("productPage.pdpDesktop.benefitsTitle"),
+    specsToggle: t("productPage.pdpDesktop.specsToggle"),
+    idealForLabel: t("productPage.pdpDesktop.idealForLabel"),
+    trustMicrocopy: t("productPage.pdpDesktop.trustMicrocopy"),
+    shippingHeading: t("productPage.pdpDesktop.shippingHeading"),
+    shippingEurope:
+      product.pdpTrust?.shippingEurope ??
+      t("productPage.pdpDesktop.shippingEurope"),
+    shippingLatam:
+      product.pdpTrust?.shippingLatam ??
+      t("productPage.pdpDesktop.shippingLatam"),
+    returns:
+      product.pdpTrust?.returns ?? t("productPage.pdpDesktop.returns"),
+    benefits: benefits.slice(0, 4),
+    specBullets: specSource.slice(0, 8),
+    idealForLine: idealFor.join(" · "),
+  };
+
   return (
     <main className="bg-dark-base overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-32 md:py-20 max-w-full md:pb-20">
@@ -249,6 +273,7 @@ export default async function ProductPage({ params }: Props) {
           ctaLabel={t("productPage.addToCart")}
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}
+          pdpDesktop={pdpDesktop}
         />
       </div>
 

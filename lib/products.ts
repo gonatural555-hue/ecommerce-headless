@@ -39,6 +39,12 @@ export type Product = {
   longDescription?: string[];
   features?: string[];
   freeShipping?: boolean;
+  /** Overrides PDP trust copy (desktop). If omitted, site i18n defaults are used. */
+  pdpTrust?: {
+    shippingEurope?: string;
+    shippingLatam?: string;
+    returns?: string;
+  };
   translations?: Partial<Record<Locale, ProductTranslation>>;
   variants?: ProductVariants | ProductVariants[];
 };

@@ -164,6 +164,16 @@
   "productPage": {
     "storyTitle": "Pensato per un movimento silenzioso",
     "specsTitle": "Specifiche tecniche",
+    "pdpDesktop": {
+      "benefitsTitle": "Il punto chiave",
+      "specsToggle": "Materiali e dettagli",
+      "idealForLabel": "Ideale per:",
+      "trustMicrocopy": "Checkout sicuro · Protezione PayPal",
+      "shippingHeading": "Tempi di consegna stimati",
+      "shippingEurope": "Europa: 5–10 giorni lavorativi",
+      "shippingLatam": "America Latina: 7–15 giorni lavorativi",
+      "returns": "Resi semplici entro 15 giorni dalla consegna."
+    },
     "crossSellTitle": "Continua a esplorare",
     "addToCart": "Aggiungi al carrello",
     "freeShipping": "Spedizione gratuita",

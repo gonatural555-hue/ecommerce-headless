@@ -11,6 +11,8 @@ type VariantSelectorProps = {
   variants: ProductVariants;
   value?: Record<string, string>;
   onChange?: (selections: Record<string, string>) => void;
+  /** Refined styling for desktop PDP; mobile should use default. */
+  appearance?: "default" | "premium";
 };
 
 /**
@@ -75,6 +77,7 @@ export default function VariantSelector({
   variants,
   value,
   onChange,
+  appearance = "default",
 }: VariantSelectorProps) {
   const { variants: variantDefinitions, variantMatrix } = variants;
 
@@ -138,8 +141,10 @@ export default function VariantSelector({
     return null;
   }
 
+  const isPremium = appearance === "premium";
+
   return (
-    <div className="space-y-6">
+    <div className={isPremium ? "space-y-5" : "space-y-6"}>
       {variantDefinitions.map((variant) => {
         const currentValue = selections[variant.type];
         const isSelected = (option: { label: string; value?: string }) => {
@@ -148,9 +153,18 @@ export default function VariantSelector({
         };
 
         return (
-          <section key={variant.type} className="space-y-3">
+          <section
+            key={variant.type}
+            className={isPremium ? "space-y-2.5" : "space-y-3"}
+          >
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-semibold text-text-primary">
+              <h3
+                className={
+                  isPremium
+                    ? "text-sm font-semibold tracking-wide text-text-primary"
+                    : "text-base font-semibold text-text-primary"
+                }
+              >
                 {variant.label}
               </h3>
               {currentValue && (
@@ -163,7 +177,13 @@ export default function VariantSelector({
               )}
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div
+              className={
+                isPremium
+                  ? "grid grid-cols-2 sm:grid-cols-3 gap-2.5"
+                  : "grid grid-cols-2 sm:grid-cols-3 gap-2"
+              }
+            >
               {variant.options.map((option) => {
                 const optionKey = option.value || option.label;
                 const isActive = isSelected(option);
@@ -174,6 +194,21 @@ export default function VariantSelector({
                   variantMatrix
                 );
 
+                const baseFocus =
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base";
+
+                const premiumClasses = !isValid
+                  ? "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/30 text-text-muted"
+                  : isActive
+                  ? "border-accent-gold/85 bg-dark-surface text-text-primary ring-1 ring-accent-gold shadow-[0_0_0_1px_rgba(212,175,55,0.22)]"
+                  : "border-white/12 bg-dark-surface/50 text-text-primary hover:border-accent-gold/40 hover:shadow-[0_0_14px_rgba(200,155,60,0.07)]";
+
+                const defaultClasses = !isValid
+                  ? "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
+                  : isActive
+                  ? "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
+                  : "border-white/15 bg-dark-surface/60 text-text-primary hover:border-white/30";
+
                 return (
                   <button
                     key={optionKey}
@@ -183,13 +218,12 @@ export default function VariantSelector({
                     }
                     disabled={!isValid}
                     className={[
-                      "w-full rounded-lg border px-3 py-2 text-sm font-medium transition-colors duration-200 ease-out",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-dark-base",
-                      !isValid
-                        ? "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
-                        : isActive
-                        ? "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
-                        : "border-white/15 bg-dark-surface/60 text-text-primary hover:border-white/30",
+                      "w-full rounded-lg border px-3 py-2 text-sm font-medium ease-out",
+                      isPremium
+                        ? "transition-all duration-200"
+                        : "transition-colors duration-200",
+                      baseFocus,
+                      isPremium ? premiumClasses : defaultClasses,
                     ].join(" ")}
                     aria-pressed={isActive}
                     aria-disabled={!isValid}
