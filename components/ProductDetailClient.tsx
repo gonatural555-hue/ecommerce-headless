@@ -15,6 +15,7 @@ import type {
   ProductVariants,
   VariantDefinition,
 } from "@/lib/product-variants";
+import { trackViewItem } from "@/lib/analytics/ga4";
 
 type ProductSummary = {
   id: string;
@@ -89,6 +90,16 @@ export default function ProductDetailClient({
   useEffect(() => {
     setSelections(initialSelections);
   }, [initialSelections]);
+
+  useEffect(() => {
+    trackViewItem({
+      item_id: product.id,
+      item_name: seoH1,
+      price: product.price,
+      item_category: product.category,
+      quantity: 1,
+    });
+  }, [product.id, product.category, product.price, seoH1]);
 
   const activeImages = useMemo(() => {
     const defaultImages = {

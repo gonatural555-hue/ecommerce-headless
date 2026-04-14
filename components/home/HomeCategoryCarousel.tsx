@@ -18,6 +18,8 @@ type Props = {
     addToCart: string;
     noImage: string;
   };
+  /** Lista GA4 para `select_item` en el carrusel home. */
+  analyticsListName?: string;
 };
 
 const CARD_MIN = "min-w-[min(88vw,340px)] max-w-[340px] sm:min-w-[360px] sm:max-w-[380px]";
@@ -29,6 +31,7 @@ export default function HomeCategoryCarousel({
   categoryHref,
   viewCategoryLabel,
   labels,
+  analyticsListName = "home_category_carousel",
 }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -91,6 +94,7 @@ export default function HomeCategoryCarousel({
                     <ProductCardSimple
                       product={product}
                       locale={locale}
+                      analyticsListName={analyticsListName}
                       labels={labels}
                     />
                   </div>

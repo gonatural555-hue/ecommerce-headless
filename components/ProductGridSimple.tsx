@@ -10,9 +10,16 @@ type Props = {
     noImage?: string;
     addToCart?: string;
   };
+  /** Lista GA4 para `select_item` en esta rejilla. */
+  analyticsListName?: string;
 };
 
-export default function ProductGridSimple({ products, locale, labels }: Props) {
+export default function ProductGridSimple({
+  products,
+  locale,
+  labels,
+  analyticsListName = "product_grid",
+}: Props) {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
       {products.map((product) => (
@@ -21,6 +28,7 @@ export default function ProductGridSimple({ products, locale, labels }: Props) {
           product={product}
           locale={locale}
           labels={labels}
+          analyticsListName={analyticsListName}
         />
       ))}
     </section>

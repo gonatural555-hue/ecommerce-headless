@@ -349,6 +349,8 @@ export default async function ProductPage({ params }: Props) {
                   key={item.id}
                   product={item}
                   locale={locale}
+                  analyticsListId="related_products"
+                  analyticsListName="related_products"
                   labels={{
                     viewProduct: t("common.viewProduct"),
                     addToCart: t("common.addToCart"),

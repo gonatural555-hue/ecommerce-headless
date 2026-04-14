@@ -4,6 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import { UserProvider } from "@/context/UserContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { defaultLocale } from "@/lib/i18n/config";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 export default async function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body>
+        <GoogleAnalytics />
         <UserProvider>
           <AuthProvider>
             <CartProvider>{children}</CartProvider>

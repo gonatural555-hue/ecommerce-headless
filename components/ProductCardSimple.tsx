@@ -7,6 +7,7 @@ import { Product } from "@/lib/products";
 import { defaultLocale, type Locale } from "@/lib/i18n/config";
 import { useCart } from "@/context/CartContext";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
+import { trackSelectItem } from "@/lib/analytics/ga4";
 
 type Props = {
   product: Product;
@@ -16,6 +17,9 @@ type Props = {
     noImage?: string;
     addToCart?: string;
   };
+  /** Origen del listado para GA4 `select_item` (p. ej. categoría, destacados). */
+  analyticsListId?: string;
+  analyticsListName?: string;
 };
 
 function isValidImageSrc(src?: string | null) {
@@ -29,6 +33,8 @@ export default function ProductCardSimple({
   product,
   locale = defaultLocale,
   labels,
+  analyticsListId,
+  analyticsListName = "product_list",
 }: Props) {
   const localized = product.translations?.[locale];
   const title = localized?.title || product.title;
@@ -52,7 +58,21 @@ export default function ProductCardSimple({
   const { addItem } = useCart();
 
   return (
-    <Link href={`/${locale}/products/${product.id}`}>
+    <Link
+      href={`/${locale}/products/${product.id}`}
+      onClick={() => {
+        trackSelectItem({
+          item: {
+            item_id: product.id,
+            item_name: title,
+            price: product.price,
+            item_category: product.category,
+          },
+          itemListId: analyticsListId,
+          itemListName: analyticsListName,
+        });
+      }}
+    >
       <article className="group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
         
         {/* IMAGE */}

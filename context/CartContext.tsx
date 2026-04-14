@@ -8,6 +8,11 @@ import {
   useReducer,
   ReactNode,
 } from "react";
+import {
+  cartLineToGa4Item,
+  trackAddToCart,
+  trackRemoveFromCart,
+} from "@/lib/analytics/ga4";
 
 type CartItem = {
   id: string;
@@ -158,14 +163,38 @@ export function CartProvider({ children }: { children: ReactNode }) {
       items: state.items,
       totalItems,
       subtotal,
-      addItem: (item) =>
-        dispatch({ type: "ADD_ITEM", payload: item }),
-      removeItem: (id) =>
-        dispatch({ type: "REMOVE_ITEM", payload: { id } }),
-      increaseQty: (id) =>
-        dispatch({ type: "INCREASE_QTY", payload: { id } }),
-      decreaseQty: (id) =>
-        dispatch({ type: "DECREASE_QTY", payload: { id } }),
+      addItem: (item) => {
+        dispatch({ type: "ADD_ITEM", payload: item });
+        trackAddToCart([
+          cartLineToGa4Item(
+            { id: item.id, title: item.title, price: item.price },
+            1
+          ),
+        ]);
+      },
+      removeItem: (id) => {
+        const existing = state.items.find((row) => row.id === id);
+        if (existing) {
+          trackRemoveFromCart([
+            cartLineToGa4Item(existing, existing.quantity),
+          ]);
+        }
+        dispatch({ type: "REMOVE_ITEM", payload: { id } });
+      },
+      increaseQty: (id) => {
+        const existing = state.items.find((row) => row.id === id);
+        if (existing) {
+          trackAddToCart([cartLineToGa4Item(existing, 1)]);
+        }
+        dispatch({ type: "INCREASE_QTY", payload: { id } });
+      },
+      decreaseQty: (id) => {
+        const existing = state.items.find((row) => row.id === id);
+        if (existing && existing.quantity > 0) {
+          trackRemoveFromCart([cartLineToGa4Item(existing, 1)]);
+        }
+        dispatch({ type: "DECREASE_QTY", payload: { id } });
+      },
       clearCart: () =>
         dispatch({ type: "CLEAR_CART" }),
     };

@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import CartSuggestedProductsRail from "@/components/cart/CartSuggestedProductsRail";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
+import {
+  cartLineToGa4Item,
+  trackViewCart,
+} from "@/lib/analytics/ga4";
 
 const FREE_SHIPPING_THRESHOLD_USD = 100;
 
@@ -19,6 +23,19 @@ export default function CartPage() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations();
+  const viewCartTracked = useRef(false);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      viewCartTracked.current = false;
+      return;
+    }
+    if (viewCartTracked.current) return;
+    viewCartTracked.current = true;
+    trackViewCart(
+      items.map((item) => cartLineToGa4Item(item, item.quantity))
+    );
+  }, [items, subtotal]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat(

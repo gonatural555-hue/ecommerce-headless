@@ -4,11 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { useUser, type Address, type Order } from "@/context/UserContext";
 import PayPalButton from "@/components/PayPalButton";
 import { isSupabaseConfigured } from "@/lib/supabase/browser";
+import {
+  cartLineToGa4Item,
+  trackBeginCheckout,
+  trackPurchase,
+} from "@/lib/analytics/ga4";
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
@@ -24,6 +29,19 @@ export default function CheckoutPage() {
     isLoggedIn,
   } = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const beginCheckoutTracked = useRef(false);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      beginCheckoutTracked.current = false;
+      return;
+    }
+    if (beginCheckoutTracked.current) return;
+    beginCheckoutTracked.current = true;
+    trackBeginCheckout(
+      items.map((item) => cartLineToGa4Item(item, item.quantity))
+    );
+  }, [items, subtotal]);
 
   const defaultAddress =
     addresses.find((address) => address.isDefault) || addresses[0];
@@ -117,6 +135,15 @@ export default function CheckoutPage() {
       setIsLoading(false);
       return;
     }
+
+    trackPurchase({
+      transaction_id: orderId,
+      value: subtotal,
+      currency: "USD",
+      items: items.map((item) =>
+        cartLineToGa4Item(item, item.quantity)
+      ),
+    });
 
     const order: Order = {
       id: orderId,

@@ -301,6 +301,8 @@ export default async function CategoryPage({ params }: Props) {
                   key={product.id}
                   product={product}
                   locale={locale}
+                  analyticsListId={slug}
+                  analyticsListName={`category:${slug}`}
                   labels={{
                     viewProduct: t("common.viewProduct"),
                     addToCart: t("common.addToCart"),

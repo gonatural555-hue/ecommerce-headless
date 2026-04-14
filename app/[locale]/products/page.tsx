@@ -134,6 +134,7 @@ export default async function ProductsPage({
           <ProductGridSimple
             products={filteredProducts}
             locale={locale}
+            analyticsListName="all_products"
             labels={{
               viewProduct: t("common.viewProduct"),
               addToCart: t("common.addToCart"),

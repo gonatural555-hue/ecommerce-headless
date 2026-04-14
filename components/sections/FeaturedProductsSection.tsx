@@ -81,6 +81,8 @@ export default function FeaturedProductsSection({
               key={product.id}
               product={product}
               locale={locale}
+              analyticsListId="featured"
+              analyticsListName="featured"
               labels={labels}
             />
           ))}

@@ -123,6 +123,8 @@ export default function CartSuggestedProductsRail({
                 <ProductCardSimple
                   product={product}
                   locale={locale}
+                  analyticsListId="cart_suggestions"
+                  analyticsListName="cart_suggestions"
                   labels={labels}
                 />
               </div>
