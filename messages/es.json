@@ -25,7 +25,11 @@
   "authForm": {
     "confirmEmailTitle": "Revisá tu correo",
     "confirmEmailDescription": "Te enviamos un enlace de confirmación a {email}. Abrí el mensaje y tocá el enlace para activar tu cuenta (revisá también spam).",
-    "goToLogin": "Ir a iniciar sesión"
+    "goToLogin": "Ir a iniciar sesión",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden."
   },
   "seo": {
     "home": {
