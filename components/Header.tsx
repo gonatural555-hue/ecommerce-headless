@@ -143,15 +143,15 @@ export default function Header() {
   const megaProductsPanel = [
     "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
     isProductDetailPage
-      ? "border border-neutral-200/90 bg-white/98 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.1)]"
-      : "border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)]",
+      ? "border border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
+      : "border border-white/10 bg-dark-base shadow-[0_16px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06]",
   ].join(" ");
 
   const megaBlogPanel = [
     "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
     isProductDetailPage
-      ? "border border-neutral-200/90 bg-white/98 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.1)]"
-      : "border border-white/10 bg-dark-base/95 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.35)]",
+      ? "border border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
+      : "border border-white/10 bg-dark-base shadow-[0_16px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06]",
   ].join(" ");
 
   const megaCatTitle = isProductDetailPage
@@ -159,8 +159,8 @@ export default function Header() {
     : "text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
 
   const megaCatSub = isProductDetailPage
-    ? "mb-2 block break-inside-avoid text-sm text-neutral-600 hover:text-neutral-900 transition-colors duration-200"
-    : "mb-2 block break-inside-avoid text-sm text-white/75 hover:text-white transition-colors duration-200";
+    ? "mb-2 block break-inside-avoid text-sm text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
+    : "mb-2 block break-inside-avoid text-sm text-white/90 hover:text-white transition-colors duration-200";
 
   return (
     <header
@@ -168,8 +168,8 @@ export default function Header() {
         "fixed top-0 z-50 w-full transition-all duration-300 ease-out",
         isScrolled
           ? isProductDetailPage
-            ? "bg-white/92 backdrop-blur-md border-b border-neutral-200/80"
-            : "bg-dark-base/80 backdrop-blur-md"
+            ? "bg-white border-b border-neutral-200 shadow-sm"
+            : "bg-dark-base border-b border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           : "bg-transparent",
       ].join(" ")}
     >
@@ -432,10 +432,10 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("common.searchPlaceholder")}
-                  className={
+                    className={
                     isProductDetailPage
-                      ? "w-full rounded-full border border-neutral-200 bg-white/90 py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
-                      : "w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                      ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                      : "w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
                   }
                 />
               </div>
@@ -557,8 +557,8 @@ export default function Header() {
           <nav
             className={
               isProductDetailPage
-                ? "md:hidden pb-4 mt-2 pt-4 bg-white/95 backdrop-blur-md rounded-b-2xl border border-neutral-200/80 shadow-sm"
-                : "md:hidden pb-4 mt-2 pt-4 bg-dark-base/95 backdrop-blur-md rounded-b-2xl"
+                ? "md:hidden pb-4 mt-2 pt-4 bg-white rounded-b-2xl border border-neutral-200 shadow-md ring-1 ring-black/[0.04]"
+                : "md:hidden pb-4 mt-2 pt-4 bg-dark-base rounded-b-2xl border border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.06]"
             }
           >
             <div className="flex flex-col gap-3">
@@ -606,7 +606,7 @@ export default function Header() {
                     className={
                       isProductDetailPage
                         ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
-                        : "w-full rounded-full border border-white/15 bg-dark-base/80 py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                        : "w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
                     }
                   />
                 </div>
@@ -668,8 +668,8 @@ export default function Header() {
                                   href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
                                   className={
                                     isProductDetailPage
-                                      ? "text-sm text-neutral-600 transition-colors hover:text-neutral-900"
-                                      : "text-sm text-white/75 transition-colors hover:text-white"
+                                      ? "text-sm text-neutral-700 transition-colors hover:text-neutral-900"
+                                      : "text-sm text-white/90 transition-colors hover:text-white"
                                   }
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
