@@ -325,10 +325,7 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
             <div className="max-w-2xl">
-              <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
-                {t("productPage.storyTitle")}
-              </h2>
-              <p className="mt-5 text-base md:text-lg text-neutral-600 leading-relaxed">
+              <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
                 {useCase}
               </p>
               <p className="mt-4 text-base md:text-lg text-neutral-600 leading-relaxed">
