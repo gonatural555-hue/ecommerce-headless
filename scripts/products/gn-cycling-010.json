@@ -2,7 +2,20 @@
   "id": "gn-cycling-010",
   "images": {
     "featured": [],
-    "gallery": [],
+    "gallery": [
+      "/assets/images/products/gn-cycling-010/model-01/image.webp",
+      "/assets/images/products/gn-cycling-010/model-02/image.webp",
+      "/assets/images/products/gn-cycling-010/model-03/image.webp",
+      "/assets/images/products/gn-cycling-010/model-04/image.webp",
+      "/assets/images/products/gn-cycling-010/model-05/image.webp",
+      "/assets/images/products/gn-cycling-010/model-06/image.webp",
+      "/assets/images/products/gn-cycling-010/model-07/image.webp",
+      "/assets/images/products/gn-cycling-010/model-08/image.webp",
+      "/assets/images/products/gn-cycling-010/model-09/image.webp",
+      "/assets/images/products/gn-cycling-010/model-10/image.webp",
+      "/assets/images/products/gn-cycling-010/model-11/image.webp",
+      "/assets/images/products/gn-cycling-010/model-12/image.webp"
+    ],
     "lifestyle": [
       "https://ae01.alicdn.com/kf/S8f3c0a594f714e3bb49002f79af05800L.jpg?width=800&height=799&hash=1599",
       "https://ae01.alicdn.com/kf/S7cc98852899840b292ecd324aa10e6a8U.jpg?width=800&height=808&hash=1608"
@@ -20,215 +33,62 @@
     "model-01": { "featured": [
       "/assets/images/products/gn-cycling-010/model-01/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-02": { "featured": [
       "/assets/images/products/gn-cycling-010/model-02/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-03": { "featured": [
       "/assets/images/products/gn-cycling-010/model-03/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-04": { "featured": [
       "/assets/images/products/gn-cycling-010/model-04/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-05": { "featured": [
       "/assets/images/products/gn-cycling-010/model-05/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-06": { "featured": [
       "/assets/images/products/gn-cycling-010/model-06/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-07": { "featured": [
       "/assets/images/products/gn-cycling-010/model-07/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-08": { "featured": [
       "/assets/images/products/gn-cycling-010/model-08/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-09": { "featured": [
       "/assets/images/products/gn-cycling-010/model-09/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-10": { "featured": [
       "/assets/images/products/gn-cycling-010/model-10/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+      "gallery": []
      },
     "model-11": { "featured": [
       "/assets/images/products/gn-cycling-010/model-11/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-    ]
+    "gallery": []
      },
     "model-12": { "featured": [
         "/assets/images/products/gn-cycling-010/model-12/image.webp"
     ],
-    "gallery": [
-      "/assets/images/products/gn-cycling-010/model-01/image.webp",
-      "/assets/images/products/gn-cycling-010/model-02/image.webp",
-      "/assets/images/products/gn-cycling-010/model-03/image.webp",
-      "/assets/images/products/gn-cycling-010/model-04/image.webp",
-      "/assets/images/products/gn-cycling-010/model-05/image.webp",
-      "/assets/images/products/gn-cycling-010/model-06/image.webp",
-      "/assets/images/products/gn-cycling-010/model-07/image.webp",
-      "/assets/images/products/gn-cycling-010/model-08/image.webp",
-      "/assets/images/products/gn-cycling-010/model-09/image.webp",
-      "/assets/images/products/gn-cycling-010/model-10/image.webp",
-      "/assets/images/products/gn-cycling-010/model-11/image.webp",
-      "/assets/images/products/gn-cycling-010/model-12/image.webp"
-      ]
+    "gallery": []
      }
   }
 }
