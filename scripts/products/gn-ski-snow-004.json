@@ -22,25 +22,60 @@
     "negro": {
       "featured": [
         "/assets/images/products/gn-ski-snow-004/negro/image.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-ski-snow-004/negro/image.webp",
+        "/assets/images/products/gn-ski-snow-004/gris/image.webp",
+        "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/rojo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
       ]
     },
     "gris": {
       "featured": [
         "/assets/images/products/gn-ski-snow-004/gris/image.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-ski-snow-004/negro/image.webp",
+        "/assets/images/products/gn-ski-snow-004/gris/image.webp",
+        "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/rojo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
       ]
     },
     "azul-cielo": {
       "featured": [
         "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-ski-snow-004/negro/image.webp",
+        "/assets/images/products/gn-ski-snow-004/gris/image.webp",
+        "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/rojo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
       ]
     },
     "rojo": {
       "featured": [
           "/assets/images/products/gn-ski-snow-004/rojo/image.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-ski-snow-004/negro/image.webp",
+        "/assets/images/products/gn-ski-snow-004/gris/image.webp",
+        "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/rojo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
       ]
     },
     "caqui": {
       "featured": [
+        "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
+      ],
+      "gallery": [
+        "/assets/images/products/gn-ski-snow-004/negro/image.webp",
+        "/assets/images/products/gn-ski-snow-004/gris/image.webp",
+        "/assets/images/products/gn-ski-snow-004/azul-cielo/image.webp",
+        "/assets/images/products/gn-ski-snow-004/rojo/image.webp",
         "/assets/images/products/gn-ski-snow-004/caqui/image.webp"
       ]
     }
