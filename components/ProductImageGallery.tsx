@@ -77,8 +77,8 @@ export default function ProductImageGallery({
       <div
         className={
           light
-            ? "aspect-square bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
-            : "aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
+            ? "flex aspect-square items-center justify-center overflow-hidden rounded-none border-0 bg-transparent"
+            : "flex aspect-square items-center justify-center overflow-hidden rounded-none border-0 bg-transparent"
         }
       >
         <span className={light ? "text-neutral-500" : "text-text-muted"}>
@@ -94,8 +94,8 @@ export default function ProductImageGallery({
       <div
         className={[
           light
-            ? "relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
-            : "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+            ? "relative w-full max-w-full aspect-square overflow-hidden mb-4 rounded-none border-0 bg-transparent"
+            : "relative w-full max-w-full aspect-square overflow-hidden mb-4 rounded-none border-0 bg-transparent",
           "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
           featuredContainerClassName,
         ]
@@ -148,12 +148,14 @@ export default function ProductImageGallery({
               key={img}
               type="button"
               onClick={() => setCurrentIndex(index)}
-              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl border overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 ${
+              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 overflow-hidden rounded-md transition-shadow duration-200 ease-out ${
                 selectedImage === img
-                  ? "border-accent-gold ring-1 ring-accent-gold/60"
+                  ? `ring-2 ring-accent-gold ring-offset-2 ${
+                      light ? "ring-offset-neutral-100" : "ring-offset-dark-base"
+                    }`
                   : light
-                    ? "border-neutral-200 hover:border-neutral-400"
-                    : "border-white/15 hover:border-white/30"
+                    ? "ring-1 ring-inset ring-neutral-200/70 hover:ring-neutral-300/90"
+                    : "ring-1 ring-inset ring-white/15 hover:ring-white/25"
               }`}
             >
               <Image

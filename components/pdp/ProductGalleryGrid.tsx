@@ -36,19 +36,12 @@ export default function ProductGalleryGrid({
     );
   }
 
-  const cellBorder = L
-    ? "border border-neutral-200/90 bg-neutral-100"
-    : "border border-white/10 bg-dark-surface/35";
-
   return (
     <div className="grid grid-cols-2 gap-4 xl:gap-5">
       {images.map((src, index) => (
         <div
           key={`${src}-${index}`}
-          className={[
-            "group relative aspect-[4/5] w-full overflow-hidden rounded-xl",
-            cellBorder,
-          ].join(" ")}
+          className="relative aspect-[4/5] w-full overflow-hidden bg-transparent"
         >
           <Image
             src={src}
@@ -59,7 +52,7 @@ export default function ProductGalleryGrid({
             placeholder="blur"
             blurDataURL={PRODUCT_BLUR_DATA_URL}
             sizes="(min-width: 1024px) 30vw, 100vw"
-            className="object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+            className="object-contain object-center"
           />
         </div>
       ))}
