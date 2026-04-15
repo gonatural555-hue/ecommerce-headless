@@ -379,31 +379,29 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {/* Cross-sell: mismo contexto visual que /products (fondo oscuro + tarjetas dark) */}
+      {/* Cross-sell: tarjetas dark sobre fondo blanco del PDP (sin caja oscura envolvente) */}
       {relatedProducts.length > 0 && (
         <section className="py-16 md:py-20 border-t border-neutral-200/90">
           <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
             <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
               {t("productPage.crossSellTitle")}
             </h2>
-            <div className="mt-8 rounded-2xl border border-white/10 bg-dark-base p-6 sm:p-8 md:p-10 text-text-primary isolate shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-              <div className="grid gap-8 md:grid-cols-3">
-                {relatedProducts.map((item) => (
-                  <ProductCardSimple
-                    key={item.id}
-                    product={item}
-                    locale={locale}
-                    surface="dark"
-                    analyticsListId="related_products"
-                    analyticsListName="related_products"
-                    labels={{
-                      viewProduct: t("common.viewProduct"),
-                      addToCart: t("common.addToCart"),
-                      noImage: t("common.noImage"),
-                    }}
-                  />
-                ))}
-              </div>
+            <div className="mt-8 grid gap-8 md:grid-cols-3">
+              {relatedProducts.map((item) => (
+                <ProductCardSimple
+                  key={item.id}
+                  product={item}
+                  locale={locale}
+                  surface="dark"
+                  analyticsListId="related_products"
+                  analyticsListName="related_products"
+                  labels={{
+                    viewProduct: t("common.viewProduct"),
+                    addToCart: t("common.addToCart"),
+                    noImage: t("common.noImage"),
+                  }}
+                />
+              ))}
             </div>
           </div>
         </section>
