@@ -23,6 +23,7 @@ import type {
   VariantDefinition,
 } from "@/lib/product-variants";
 import { trackViewItem } from "@/lib/analytics/ga4";
+import { PDP_HERO_WIDE_PRODUCT_IDS } from "@/lib/pdp-star-products";
 import type { UISurface } from "@/lib/ui-surface";
 
 type ProductSummary = {
@@ -111,7 +112,10 @@ export default function ProductDetailClient({
   sizeGuideHref,
 }: Props) {
   const L = surface === "light";
-  const showFullImage = product.id === "gn-ski-snow-pants-001";
+  /** Gafas / horizontales: ver `lib/pdp-star-products.ts`. Pantalón ski: solo móvil legacy. */
+  const useWideHeroGallery = PDP_HERO_WIDE_PRODUCT_IDS.has(product.id);
+  const showFullImage =
+    product.id === "gn-ski-snow-pants-001" || useWideHeroGallery;
   const baseFeatured =
     productImages.featured || product.images[0] || "";
   const baseGallery =
@@ -277,6 +281,9 @@ export default function ProductDetailClient({
     return list;
   }, [activeImages, productImages.lifestyle, productImages.extras]);
 
+  const heroGalleryFeatured = gridDesktopImages[0] ?? null;
+  const heroGalleryRest = gridDesktopImages.slice(1);
+
   const { color: colorDef, size: sizeDef, other: otherVariantDefs } =
     useMemo(
       () => splitVariantDefinitions(productVariants?.variants ?? []),
@@ -378,8 +385,13 @@ export default function ProductDetailClient({
         </div>
       </section>
 
-      {/* Desktop (lg+): galería rejilla 60% + panel sticky 40% */}
-      <section className="hidden lg:grid lg:grid-cols-[3fr_2fr] lg:items-start lg:gap-x-10 xl:gap-x-14 max-w-full">
+      {/* Desktop (lg+): galería (60% o ~67% si hero ancho) + panel sticky */}
+      <section
+        className={[
+          "hidden lg:grid lg:items-start lg:gap-x-10 xl:gap-x-14 max-w-full",
+          useWideHeroGallery ? "lg:grid-cols-[4fr_2fr]" : "lg:grid-cols-[3fr_2fr]",
+        ].join(" ")}
+      >
         <div className="min-w-0">
           <div
             className={
@@ -388,12 +400,23 @@ export default function ProductDetailClient({
                 : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-4 xl:p-5 ring-1 ring-white/[0.04]"
             }
           >
-            <ProductGalleryGrid
-              images={gridDesktopImages}
-              title={product.title}
-              noImageLabel={noImageLabel}
-              surface={surface}
-            />
+            {useWideHeroGallery ? (
+              <ProductImageGallery
+                featured={heroGalleryFeatured}
+                gallery={heroGalleryRest}
+                title={product.title}
+                noImageLabel={noImageLabel}
+                surface={surface}
+                heroWide
+              />
+            ) : (
+              <ProductGalleryGrid
+                images={gridDesktopImages}
+                title={product.title}
+                noImageLabel={noImageLabel}
+                surface={surface}
+              />
+            )}
           </div>
         </div>
         <div className="min-w-0">

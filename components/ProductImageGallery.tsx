@@ -13,6 +13,11 @@ type Props = {
   featuredContainerClassName?: string;
   featuredImageClassName?: string;
   surface?: UISurface;
+  /**
+   * Stage más ancho y ratio horizontal (16:10), sin tope 520px en lg;
+   * para productos en `PDP_HERO_WIDE_PRODUCT_IDS`.
+   */
+  heroWide?: boolean;
 };
 
 export default function ProductImageGallery({
@@ -23,6 +28,7 @@ export default function ProductImageGallery({
   featuredContainerClassName,
   featuredImageClassName,
   surface = "dark",
+  heroWide = false,
 }: Props) {
   const light = surface === "light";
   const allImages = useMemo(() => {
@@ -76,9 +82,13 @@ export default function ProductImageGallery({
     return (
       <div
         className={
-          light
-            ? "aspect-square bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
-            : "aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
+          heroWide
+            ? light
+              ? "aspect-[16/10] max-h-[min(560px,72vh)] bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
+              : "aspect-[16/10] max-h-[min(560px,72vh)] bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
+            : light
+              ? "aspect-square bg-neutral-100 rounded-2xl overflow-hidden flex items-center justify-center border border-neutral-200"
+              : "aspect-square bg-dark-surface rounded-2xl overflow-hidden flex items-center justify-center border border-white/10"
         }
       >
         <span className={light ? "text-neutral-500" : "text-text-muted"}>
@@ -93,10 +103,16 @@ export default function ProductImageGallery({
       {/* Featured / Main Image */}
       <div
         className={[
-          light
-            ? "relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
-            : "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
-          "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
+          heroWide
+            ? light
+              ? "relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
+              : "relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10"
+            : light
+              ? "relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
+              : "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+          heroWide
+            ? "mx-auto w-full max-w-full md:mx-0 lg:mx-0 lg:max-w-full"
+            : "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
           featuredContainerClassName,
         ]
           .filter(Boolean)
@@ -133,7 +149,11 @@ export default function ProductImageGallery({
                 ]
                   .filter(Boolean)
                   .join(" ")}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 60vw"
+                sizes={
+                  heroWide
+                    ? "(max-width: 1024px) 100vw, 55vw"
+                    : "(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 60vw"
+                }
               />
             </div>
           ))}
