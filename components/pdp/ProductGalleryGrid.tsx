@@ -59,7 +59,7 @@ export default function ProductGalleryGrid({
             placeholder="blur"
             blurDataURL={PRODUCT_BLUR_DATA_URL}
             sizes="(min-width: 1024px) 30vw, 100vw"
-            className="object-cover object-center transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+            className="object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           />
         </div>
       ))}

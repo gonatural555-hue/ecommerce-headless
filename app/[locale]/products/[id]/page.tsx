@@ -318,7 +318,7 @@ export default async function ProductPage({ params }: Props) {
                   fill
                   placeholder="blur"
                   blurDataURL={PRODUCT_BLUR_DATA_URL}
-                  className="object-cover object-center"
+                  className="object-contain object-center"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/25" />

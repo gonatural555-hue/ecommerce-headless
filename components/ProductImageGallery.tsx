@@ -164,7 +164,7 @@ export default function ProductImageGallery({
                 loading="lazy"
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain object-center"
               />
             </button>
           ))}
