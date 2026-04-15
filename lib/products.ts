@@ -910,8 +910,7 @@ const PRODUCTS: Product[] = [
         { value: "model-05", label: "Modelo 5", priceModifier: 0 },
         { value: "model-06", label: "Modelo 6", priceModifier: 0 },
         { value: "model-07", label: "Modelo 7", priceModifier: 0 },
-        { value: "model-08", label: "Modelo 8", priceModifier: 0 },
-        { value: "model-09", label: "Modelo 9", priceModifier: 0 }
+        { value: "model-08", label: "Modelo 8", priceModifier: 0 }
       ],
     },
   },
