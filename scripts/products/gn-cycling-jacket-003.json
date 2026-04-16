@@ -4,11 +4,7 @@
     "featured": [
         "/assets/images/products/gn-cycling-jacket-003/image.webp"
     ],
-    "gallery": [
-        "/assets/images/products/gn-cycling-jacket-003/image1.webp",
-        "/assets/images/products/gn-cycling-jacket-003/image2.webp",
-        "/assets/images/products/gn-cycling-jacket-003/image3.webp"
-    ],  
+    "gallery": [],  
     "lifestyle": [],
     "extras": []
   }
