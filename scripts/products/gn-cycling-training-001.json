@@ -10,7 +10,11 @@
       "/assets/images/products/gn-cycling-training-001/smart-bike-compatible.webp",
       "/assets/images/products/gn-cycling-training-001/smart-bike-included.webp"
     ],
-    "lifestyle": [],
-    "extras": []
+    "lifestyle": [
+      "/assets/images/products/gn-cycling-training-001/smart-bike-specification-01.webp"
+    ],
+    "extras": [
+      "/assets/images/products/gn-cycling-training-001/smart-bike-specification.webp"
+    ]
   }
 }
