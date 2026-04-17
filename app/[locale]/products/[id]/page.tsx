@@ -250,11 +250,10 @@ export default async function ProductPage({ params }: Props) {
     trustMicrocopy: t("productPage.pdpDesktop.trustMicrocopy"),
     shippingHeading: t("productPage.pdpDesktop.shippingHeading"),
     shippingEurope:
-      product.pdpTrust?.shippingEurope ??
-      t("productPage.pdpDesktop.shippingEurope"),
-    shippingLatam:
-      product.pdpTrust?.shippingLatam ??
-      t("productPage.pdpDesktop.shippingLatam"),
+      product.id === "gn-cycling-training-001"
+        ? t("productPage.pdpDesktop.shippingEuropeTraining001")
+        : product.pdpTrust?.shippingEurope ??
+          t("productPage.pdpDesktop.shippingEurope"),
     returns:
       product.pdpTrust?.returns ?? t("productPage.pdpDesktop.returns"),
     benefits: benefits.slice(0, 4),

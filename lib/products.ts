@@ -42,7 +42,6 @@ export type Product = {
   /** Overrides PDP trust copy (desktop). If omitted, site i18n defaults are used. */
   pdpTrust?: {
     shippingEurope?: string;
-    shippingLatam?: string;
     returns?: string;
   };
   translations?: Partial<Record<Locale, ProductTranslation>>;

@@ -360,28 +360,35 @@ export default function ProductInfoPanel({
         <aside
           className={
             L
-              ? "rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4 text-sm text-neutral-600"
-              : "rounded-xl border border-white/[0.07] bg-dark-surface/30 px-4 py-4 text-sm text-text-primary/80"
+              ? "rounded-xl border-2 border-accent-gold/45 bg-gradient-to-br from-amber-50/95 via-white to-neutral-50 px-5 py-4 text-sm shadow-md shadow-amber-900/10 ring-1 ring-amber-200/50"
+              : "rounded-xl border-2 border-accent-gold/35 bg-gradient-to-br from-dark-surface/90 via-dark-base/80 to-dark-surface/70 px-5 py-4 text-sm shadow-lg shadow-black/25 ring-1 ring-accent-gold/25"
           }
         >
           <p
             className={
               L
-                ? "text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500"
-                : "text-xs font-semibold uppercase tracking-[0.14em] text-text-muted"
+                ? "text-[0.7rem] font-bold uppercase tracking-[0.2em] text-amber-900/90"
+                : "text-[0.7rem] font-bold uppercase tracking-[0.2em] text-accent-gold"
             }
           >
             {pdpDesktop.shippingHeading}
           </p>
-          <ul className="mt-2 space-y-1">
-            <li>{pdpDesktop.shippingEurope}</li>
-            <li>{pdpDesktop.shippingLatam}</li>
+          <ul className="mt-3 space-y-0">
+            <li
+              className={
+                L
+                  ? "text-base font-semibold leading-snug text-neutral-900"
+                  : "text-base font-semibold leading-snug text-text-primary"
+              }
+            >
+              {pdpDesktop.shippingEurope}
+            </li>
           </ul>
           <p
             className={
               L
-                ? "mt-3 border-t border-neutral-200 pt-3 text-neutral-600"
-                : "mt-3 border-t border-white/[0.06] pt-3 text-text-muted/90"
+                ? "mt-3 border-t border-amber-200/80 pt-3 text-sm font-medium text-neutral-700"
+                : "mt-3 border-t border-white/10 pt-3 text-sm font-medium text-text-muted/95"
             }
           >
             {pdpDesktop.returns}

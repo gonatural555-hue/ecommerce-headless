@@ -44,7 +44,6 @@ export type PdpDesktopContent = {
   trustMicrocopy: string;
   shippingHeading: string;
   shippingEurope: string;
-  shippingLatam: string;
   returns: string;
   benefits: string[];
   specBullets: string[];
