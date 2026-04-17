@@ -27,19 +27,17 @@ const CATEGORY_HERO_IMAGES: Record<string, string> = {
   "mountain-snow": "/assets/images/categories/mountain-snow.webp",
   "water-sports": "/assets/images/categories/water-sports.webp",
   "outdoor-adventure": "/assets/images/hero/storysection.webp",
-  cycling: "/assets/images/categories/cycling.webp",
+  "cycling-running": "/assets/images/categories/cycling.webp",
   fishing: "/assets/images/hero/fishin-hero.webp",
   "fishing-equipment": "/assets/images/hero/equipo-pesca.webp",
   "fishing-gadgets": "/assets/images/hero/accesorios-pesca.webp",
   "active-sports": "/assets/images/categories/active-sports.webp",
-  trekking: "/assets/images/products/gn-outdoor-002/featured02.webp",
-  "camping-survival-gear": "/assets/images/products/gn-outdoor-002/featured03.webp",
-  "outdoor-lighting": "/assets/images/products/gn-outdoor-003/featured01.webp",
-  "sleeping-systems": "/assets/images/products/gn-outdoor-005/featured-white.webp",
+  trekking: "/assets/images/hero/trekking.webp",
+  "camping-survival-gear": "/assets/images/hero/camping-outdoor.webp",
+  "outdoor-lighting": "/assets/images/hero/iluminacion-outdoor.webp",
   "ski-snowboard":
     "/assets/images/categories/mountain-snow.webp",
   "diving-swimming-equipment": "/assets/images/hero/scuba-diving.webp",
-  running: "/assets/images/products/gn-cycling-015/featured03.webp",
 };
 
 
@@ -104,7 +102,7 @@ function getCategorySEOContent(slug: string, categoryName: string) {
       "Deportes activos y fitness requieren equipamiento que mejore rendimiento sin complicaciones. Productos probados en uso real, sin marketing exagerado.";
     seoContent =
       "Los deportes activos y el fitness tienen necesidades específicas: comodidad durante movimiento, resistencia al sudor, y durabilidad en uso constante. Esta categoría incluye equipamiento para diferentes actividades: running, ciclismo, entrenamiento funcional, y deportes de equipo. La diferencia entre equipamiento genérico y específico para deportes activos está en cómo se comporta durante el uso real. Si practicás running, buscá productos que reduzcan impacto y mejoren comodidad. Para ciclismo, priorizá aerodinámica y protección. En entrenamiento funcional, la versatilidad es clave. En todos los casos, la calidad del material determina si un producto mejora tu rendimiento o te limita. Elegí según tu nivel de actividad: principiante puede empezar con opciones básicas, mientras que avanzado requiere especialización y calidad superior.";
-    relatedCategories = ["cycling", "running", "outdoor-adventure"];
+    relatedCategories = ["cycling-running", "outdoor-adventure"];
   } else if (
     slugLower.includes("trekking") ||
     nameLower.includes("trekking") ||
@@ -136,7 +134,7 @@ function getCategorySEOContent(slug: string, categoryName: string) {
       "Equipamiento para ciclistas. Productos que mejoran rendimiento, comodidad y seguridad. Probados en uso real, desde paseos urbanos hasta rutas de montaña.";
     seoContent =
       "El ciclismo requiere equipamiento específico que mejore rendimiento sin sacrificar comodidad. Esta categoría incluye productos para diferentes tipos de ciclismo: urbano, de montaña, de ruta, y recreativo. La diferencia entre equipamiento genérico y específico para ciclismo está en cómo se comporta durante pedaleo prolongado. Si practicás ciclismo urbano, buscá productos que mejoren visibilidad y comodidad. Para montaña, priorizá protección y resistencia. En ruta, la aerodinámica es clave. En todos los casos, la calidad del material determina si un producto mejora tu experiencia o te limita. La comodidad durante horas de pedaleo es crucial: un producto incómodo puede arruinar un paseo. Elegí según tu tipo de ciclismo: recreativo permite opciones más económicas, mientras que competitivo exige especialización.";
-    relatedCategories = ["active-sports", "running", "outdoor-adventure"];
+    relatedCategories = ["active-sports", "cycling-running", "outdoor-adventure"];
   } else if (
     slugLower.includes("running") ||
     nameLower.includes("running") ||
@@ -146,7 +144,7 @@ function getCategorySEOContent(slug: string, categoryName: string) {
       "Equipamiento para runners. Productos que mejoran rendimiento, reducen impacto y aumentan comodidad. Probados en kilómetros reales, no en laboratorio.";
     seoContent =
       "El running requiere equipamiento que funcione durante kilómetros de carrera, reduciendo impacto y mejorando comodidad. Esta categoría incluye productos específicos para corredores: calzado, ropa técnica, accesorios de hidratación, y equipamiento de entrenamiento. La diferencia entre equipamiento genérico y específico para running está en cómo se comporta durante carrera prolongada. Si corrés ocasionalmente, buscá productos versátiles y cómodos. Para entrenamiento intensivo, priorizá soporte y amortiguación. En todos los casos, la comodidad es crucial: un producto incómodo puede causar lesiones. La calidad del material y la construcción determinan si un producto mejora tu rendimiento o te limita. La amortiguación y el soporte son especialmente importantes para reducir impacto en articulaciones. Elegí según tu tipo de running: recreativo permite opciones más económicas, mientras que competitivo exige especialización y calidad superior.";
-    relatedCategories = ["active-sports", "cycling", "outdoor-adventure"];
+    relatedCategories = ["active-sports", "cycling-running", "outdoor-adventure"];
   } else {
     // Fallback genérico
     introText =

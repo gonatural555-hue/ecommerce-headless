@@ -14,7 +14,16 @@ const CATEGORY_KEYWORDS: Record<string, string[]> = {
   snow: ["ski", "snow", "snowboard", "ski-snowboard", "nieve"],
   camping: ["camp", "camping", "carpa", "campamento"],
   trekking: ["trekking", "trail", "hike", "sendero"],
-  cycling: ["cycling", "bike", "cicl", "bici", "bikepacking"],
+  cycling: [
+    "cycling",
+    "bike",
+    "cicl",
+    "bici",
+    "bikepacking",
+    "running",
+    "run",
+    "correr",
+  ],
   fishing: ["fishing", "pesca"],
 };
 
@@ -25,7 +34,7 @@ const CATEGORY_TO_BLOG_SLUGS: Record<string, string[]> = {
   "mountain-snow": ["winter-lines", "ski-snowboard-centros-sin-limite"],
   "ski-snowboard": ["winter-lines", "ski-snowboard-centros-sin-limite"],
   "outdoor-adventure": ["quiet-morning-at-camp", "salir-sin-complicarse"],
-  cycling: ["calm-motion", "quiet-journeys"],
+  "cycling-running": ["calm-motion", "quiet-journeys"],
   "active-sports": ["calm-motion", "quiet-journeys"],
 };
 

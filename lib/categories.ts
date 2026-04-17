@@ -87,23 +87,11 @@ export const CATEGORIES: Category[] = [
     description: "Iluminación para camping y actividades outdoor.",
     parentSlug: "outdoor-adventure",
   },
-  {
-    slug: "sleeping-systems",
-    name: "Sleeping Systems",
-    description: "Sistemas de descanso para camping y aventuras.",
-    parentSlug: "outdoor-adventure",
-  },
   // Active Sports subcategorías
   {
-    slug: "cycling",
-    name: "Cycling",
-    description: "Accesorios y equipamiento para ciclismo.",
-    parentSlug: "active-sports",
-  },
-  {
-    slug: "running",
-    name: "Running",
-    description: "Equipamiento y accesorios para running.",
+    slug: "cycling-running",
+    name: "Cycling / Running",
+    description: "Equipamiento para ciclismo y running.",
     parentSlug: "active-sports",
   },
 ];
@@ -113,9 +101,9 @@ export const CATEGORIES: Category[] = [
 // Si no hay subcategoría específica, se asigna a la categoría principal (padre)
 const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   // Productos genéricos - asignados a categorías principales
-  "1": ["cycling", "active-sports"], // Gafas deportivas
+  "1": ["cycling-running", "active-sports"], // Gafas deportivas
   "2": ["trekking", "camping-survival-gear", "outdoor-adventure"], // Mochila táctica
-  "3": ["running", "active-sports"], // Smartwatch
+  "3": ["cycling-running", "active-sports"], // Smartwatch
   // Fishing - asignados a subcategorías
   "gn-fishing-001": ["fishing-equipment"], // Caña de Pescar Telescópica de Carbono Ultraligera
   "gn-fishing-002": ["fishing-equipment"], // PHISHGER Caña de Pescar de Viaje en Carbono
@@ -134,17 +122,17 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-ski-snow-006": ["ski-snowboard"], // Chaqueta Calefactable USB – 21 Zonas de Calor
   "gn-ski-snow-jacket-001": ["ski-snowboard"], // Alpine Shell Jacket — Quiet Winter Layer
   "gn-ski-snow-pants-001": ["ski-snowboard"], // Alpine Snow Pants — Quiet Winter Protection
-  // Cycling - asignados a subcategoría
-  "gn-cycling-010": ["cycling"], // Gafas de Ciclismo KAPVOE UV400 – Lente Polarizada Deportiva (Unisex)
-  "gn-cycling-011": ["cycling"], // Gafas de Ciclismo KAPVOE Fotocromáticas UV400 – Lente Adaptativa (Unisex)
-  "gn-cycling-012": ["cycling"], // Pasamontañas / Balaclava Térmica ROCKBROS – Cortaviento y Transpirable
-  "gn-cycling-013": ["cycling"], // Cuello / Braga Polar ROCKBROS – Protección Térmica Multifunción
-  "gn-cycling-014": ["cycling"], // Guantes de Ciclismo ROCKBROS Medio Dedo – Antideslizantes (Verano)
-  "gn-cycling-015": ["cycling"], // Luz Trasera de Bicicleta ROCKBROS USB – IPX6 / IPX7
-  "gn-cycling-016": ["cycling"], // Luz Trasera ROCKBROS con Sensor de Freno Inteligente (USB-C)
-  "gn-cycling-training-001": ["cycling"], // ThinkRider X2 Max — rodillo inteligente indoor
-  "gn-cycling-clothes-001": ["cycling"], // Thermal Cycling Jacket – All-Season Performance Layer
-  "gn-cycling-clothes-002": ["cycling"], // Thermal Cycling Jacket – Long-Ride Weather Layer
+  // Ciclismo & Running (subcategoría unificada)
+  "gn-cycling-010": ["cycling-running"], // Gafas de Ciclismo KAPVOE UV400 – Lente Polarizada Deportiva (Unisex)
+  "gn-cycling-011": ["cycling-running"], // Gafas de Ciclismo KAPVOE Fotocromáticas UV400 – Lente Adaptativa (Unisex)
+  "gn-cycling-012": ["cycling-running"], // Pasamontañas / Balaclava Térmica ROCKBROS – Cortaviento y Transpirable
+  "gn-cycling-013": ["cycling-running"], // Cuello / Braga Polar ROCKBROS – Protección Térmica Multifunción
+  "gn-cycling-014": ["cycling-running"], // Guantes de Ciclismo ROCKBROS Medio Dedo – Antideslizantes (Verano)
+  "gn-cycling-015": ["cycling-running"], // Luz Trasera de Bicicleta ROCKBROS USB – IPX6 / IPX7
+  "gn-cycling-016": ["cycling-running"], // Luz Trasera ROCKBROS con Sensor de Freno Inteligente (USB-C)
+  "gn-cycling-training-001": ["cycling-running"], // ThinkRider X2 Max — rodillo inteligente indoor
+  "gn-cycling-clothes-001": ["cycling-running"], // Thermal Cycling Jacket – All-Season Performance Layer
+  "gn-cycling-clothes-002": ["cycling-running"], // Thermal Cycling Jacket – Long-Ride Weather Layer
   // Water Sports - Diving & Swimming Equipment
   "gn-water-001": ["diving-swimming-equipment"], // Máscara de Snorkel Full Face con Soporte para Cámara
   "gn-water-002": ["diving-swimming-equipment"], // Calcetines de Agua de Neopreno 3 mm
@@ -158,8 +146,8 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-outdoor-002": ["camping-survival-gear"], // Tienda Naturehike Cloud Up (Premium)
   "gn-outdoor-003": ["outdoor-lighting"], // Linterna LED Táctica Recargable 2000 LM
   "gn-outdoor-004": ["outdoor-lighting"], // Linterna LED Compacta Mini
-  "gn-outdoor-005": ["sleeping-systems"], // Cama Plegable de Camping 300 lb
-  "gn-outdoor-006": ["sleeping-systems"], // Cuna Plegable Ultraligera WESTTUNE
+  "gn-outdoor-005": ["camping-survival-gear"], // Cama Plegable de Camping 300 lb
+  "gn-outdoor-006": ["camping-survival-gear"], // Cuna Plegable Ultraligera WESTTUNE
   "gn-outdoor-007": ["camping-survival-gear"], // Saco de Dormir PACOONE (4 Estaciones)
   "gn-outdoor-008": ["camping-survival-gear"], // Colchoneta / Colchón Inflable TARKA – Autoinflable
   "gn-outdoor-009": ["camping-survival-gear"], // Nevera Portátil Rígida (22–25 L)
