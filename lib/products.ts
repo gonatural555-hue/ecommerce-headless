@@ -1323,7 +1323,7 @@ const PRODUCTS: Product[] = [
       "ThinkRider X2 Max — Rodillo inteligente (MTB/carretera, potenciómetro integrado)",
     price: 235,
     category: "Cycling",
-    images: ["/assets/images/products/gn-cycling-training-001/image.webp"],
+    images: ["/assets/images/products/gn-cycling-training-001/smart-bike-01.webp"],
     shortDescription:
       "Rodillo de transmisión directa para entrenamiento indoor serio, con medición de potencia integrada.",
     description:
