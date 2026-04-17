@@ -148,6 +148,7 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-cycling-014": ["cycling"], // Guantes de Ciclismo ROCKBROS Medio Dedo – Antideslizantes (Verano)
   "gn-cycling-015": ["cycling"], // Luz Trasera de Bicicleta ROCKBROS USB – IPX6 / IPX7
   "gn-cycling-016": ["cycling"], // Luz Trasera ROCKBROS con Sensor de Freno Inteligente (USB-C)
+  "gn-cycling-training-001": ["cycling"], // ThinkRider X2 Max — rodillo inteligente indoor
   "gn-cycling-clothes-001": ["cycling"], // Thermal Cycling Jacket – All-Season Performance Layer
   "gn-cycling-clothes-002": ["cycling"], // Thermal Cycling Jacket – Long-Ride Weather Layer
   // Water Sports - Diving & Swimming Equipment

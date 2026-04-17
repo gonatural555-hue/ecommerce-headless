@@ -115,6 +115,111 @@ export const REVIEWS_SEED: ReviewSeed[] = [
     date: "2024-03-27",
     verified: false,
   },
+  // gn-cycling-training-001 — media semilla ~4.9 (9×5 + 1×4)
+  {
+    id: "review-gn-cycling-training-001-01",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "M. A.",
+    title: "Estable en intervalos",
+    comment:
+      "Muy sólido cuando subo la cadencia. La sensación de pedaleo es homogénea y el ruido es contenido.",
+    date: "2024-11-02",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-02",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "L. F.",
+    comment:
+      "Llevo semanas con sesiones estructuradas; los datos de potencia me sirven para seguir el plan sin salir.",
+    date: "2024-11-18",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-03",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "R. C.",
+    title: "Buena inversión para invierno",
+    comment:
+      "Montaje claro y base estable. En sprints noto que la bici no baila.",
+    date: "2024-12-05",
+    verified: false,
+  },
+  {
+    id: "review-gn-cycling-training-001-04",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "P. S.",
+    comment:
+      "Uso en piso y no molesta a los vecinos. La asa ayuda mucho a guardarlo.",
+    date: "2024-12-14",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-05",
+    productSlug: "gn-cycling-training-001",
+    rating: 4,
+    author: "Anónimo",
+    comment:
+      "Muy buen feeling general; solo tuve que ajustar detalles del cassette al montar la bici de carretera.",
+    date: "2025-01-08",
+    verified: false,
+  },
+  {
+    id: "review-gn-cycling-training-001-06",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "D. V.",
+    title: "Conecta sin drama",
+    comment:
+      "En casa lo enlacé con mi app habitual en pocos minutos. Entrenos largos sin vibraciones raras.",
+    date: "2025-01-22",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-07",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "E. N.",
+    comment:
+      "Para MTB el agarre es firme. Recomendable si buscas calidad de pedaleo y no solo un rodillo barato.",
+    date: "2025-02-03",
+    verified: false,
+  },
+  {
+    id: "review-gn-cycling-training-001-08",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "I. K.",
+    comment:
+      "Llevo años en rodillo; este se nota más silencioso y estable que mi equipo anterior.",
+    date: "2025-02-19",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-09",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "H. M.",
+    title: "Potencia coherente",
+    comment:
+      "Los bloques de umbral me salen más parejos porque la lectura responde bien al cambio de ritmo.",
+    date: "2025-03-01",
+    verified: true,
+  },
+  {
+    id: "review-gn-cycling-training-001-10",
+    productSlug: "gn-cycling-training-001",
+    rating: 5,
+    author: "G. T.",
+    comment:
+      "Embalaje serio y acabado cuidado. Para entrenar en salón cumple sin parecer un juguete.",
+    date: "2025-03-12",
+    verified: false,
+  },
 ];
 
 export function getReviewsByProductSlug(productSlug: string): ReviewSeed[] {

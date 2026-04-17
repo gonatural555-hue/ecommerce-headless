@@ -1318,6 +1318,97 @@ const PRODUCTS: Product[] = [
     },
   },
   {
+    id: "gn-cycling-training-001",
+    title:
+      "ThinkRider X2 Max — Rodillo inteligente (MTB/carretera, potenciómetro integrado)",
+    price: 204.56,
+    category: "Cycling",
+    images: ["/assets/images/products/gn-cycling-training-001/image.webp"],
+    shortDescription:
+      "Rodillo de transmisión directa para entrenamiento indoor serio, con medición de potencia integrada.",
+    description:
+      "El ThinkRider X2 Max está pensado para quien quiere entrenar en casa con sensación de pedaleo firme y datos fiables. Su arquitectura de transmisión directa reduce holguras y mantiene la bicicleta estable en intervalos y sprints. Compatible con montaje de MTB y carretera según tu tren trasero, integra medición de potencia para planificar cargas y seguir tu evolución sin salir de casa.",
+    features: [
+      "Transmisión directa (direct drive) para sensación de pedaleo consistente",
+      "Potenciómetro integrado para estructurar series y controlar la intensidad",
+      "Compatible con bicicletas de montaña y carretera (según cassette y eje)",
+      "Base amplia y geometría estable para esfuerzos altos",
+      "Funcionamiento silencioso para entrenar en espacios habitados",
+      "Asa integrada para mover o guardar el equipo con menos esfuerzo",
+      "Preparado para conectar con apps y entornos de entrenamiento indoor habituales",
+    ],
+    translations: {
+      en: {
+        title:
+          "ThinkRider X2 Max — Smart trainer (MTB/road, built-in power meter)",
+        shortDescription:
+          "Direct-drive indoor trainer with integrated power for structured training at home.",
+        description:
+          "The ThinkRider X2 Max is built for riders who want serious indoor sessions with a solid road feel and dependable metrics. Its direct-drive layout minimizes slack and keeps the bike planted during intervals and sprints. Suitable for MTB and road setups depending on your drivetrain, it features integrated power measurement so you can plan workouts and track progress without leaving home.",
+        features: [
+          "Direct-drive architecture for consistent pedaling feel",
+          "Built-in power meter for structured intervals and intensity control",
+          "MTB and road compatible (cassette and axle dependent)",
+          "Wide footprint for stability under hard efforts",
+          "Low-noise operation for apartment and shared spaces",
+          "Integrated carry handle for easier storage and transport",
+          "Ready for common indoor training apps and ecosystems",
+        ],
+      },
+      es: {
+        title:
+          "ThinkRider X2 Max — Rodillo inteligente (MTB/carretera, potenciómetro integrado)",
+        shortDescription:
+          "Rodillo de transmisión directa para entrenamiento indoor serio, con medición de potencia integrada.",
+        description:
+          "El ThinkRider X2 Max está pensado para quien quiere entrenar en casa con sensación de pedaleo firme y datos fiables. Su arquitectura de transmisión directa reduce holguras y mantiene la bicicleta estable en intervalos y sprints. Compatible con montaje de MTB y carretera según tu tren trasero, integra medición de potencia para planificar cargas y seguir tu evolución sin salir de casa.",
+        features: [
+          "Transmisión directa (direct drive) para sensación de pedaleo consistente",
+          "Potenciómetro integrado para estructurar series y controlar la intensidad",
+          "Compatible con bicicletas de montaña y carretera (según cassette y eje)",
+          "Base amplia y geometría estable para esfuerzos altos",
+          "Funcionamiento silencioso para entrenar en espacios habitados",
+          "Asa integrada para mover o guardar el equipo con menos esfuerzo",
+          "Preparado para conectar con apps y entornos de entrenamiento indoor habituales",
+        ],
+      },
+      fr: {
+        title:
+          "ThinkRider X2 Max — Home trainer intelligent (VTT/route, capteur de puissance intégré)",
+        shortDescription:
+          "Home trainer à transmission directe pour séances indoor sérieuses avec mesure de puissance intégrée.",
+        description:
+          "Le ThinkRider X2 Max s’adresse aux cyclistes qui veulent s’entraîner chez eux avec une sensation de pédalage nette et des données fiables. Son architecture direct drive limite le jeu et maintient le vélo stable pendant les intervalles et les sprints. Compatible VTT et route selon votre transmission, il intègre la mesure de puissance pour structurer l’entraînement et suivre vos progrès sans quitter la maison.",
+        features: [
+          "Transmission directe pour une sensation de pédalage homogène",
+          "Capteur de puissance intégré pour structurer le travail en intensité",
+          "Compatible VTT et route (selon cassette et axe)",
+          "Base large pour la stabilité sous gros efforts",
+          "Fonctionnement discret pour l’usage en appartement",
+          "Poignée intégrée pour déplacer ou ranger l’équipement",
+          "Prêt pour les applications d’entraînement indoor courantes",
+        ],
+      },
+      it: {
+        title:
+          "ThinkRider X2 Max — Rullo smart (MTB/strada, potenziometro integrato)",
+        shortDescription:
+          "Rullo a trasmissione diretta per allenamenti indoor seri con misura di potenza integrata.",
+        description:
+          "Il ThinkRider X2 Max è pensato per chi vuole allenarsi in casa con sensazione di pedalata solida e dati affidabili. L’architettura a trasmissione diretta riduce i giochi e mantiene la bici stabile in interval e sprint. Compatibile con MTB e strada in base al gruppo, integra la misura di potenza per pianificare il carico e seguire i progressi senza uscire di casa.",
+        features: [
+          "Trasmissione diretta per sensazione di pedalata uniforme",
+          "Potenziometro integrato per strutturare le serie e l’intensità",
+          "Compatibile MTB e strada (a seconda di pacco pignoni e perno)",
+          "Base ampia e stabilità sotto sforzo elevato",
+          "Rumorosità contenuta per ambienti domestici",
+          "Maniglia integrata per spostare o riporre il rullo",
+          "Pronto per app ed ecosistemi di indoor training comuni",
+        ],
+      },
+    },
+  },
+  {
     id: "gn-cycling-clothing-002",
     title: "ROCKBROS Pantalón de Ciclismo Invierno Acolchado 3D",
     price: 41.99,
