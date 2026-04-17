@@ -1,16 +1,10 @@
 {
   "id": "gn-camping-survival-001",
   "images": {
-    "featured": [
-      "/assets/images/products/gn-camping-survival-001/featured.webp"
-    ],
+    "featured": [],
     "gallery": [],
-    "lifestyle": [
-      "/assets/images/products/gn-camping-survival-001/gallery.webp"
-    ],
-    "extras": [
-      "/assets/images/products/gn-camping-survival-001/gallery2.webp"
-    ]
+    "lifestyle": [],
+    "extras": []
   },
   "variantImages": {
     "6L": {
