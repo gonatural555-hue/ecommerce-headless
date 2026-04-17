@@ -114,6 +114,8 @@ export default function ProductDetailClient({
   const L = surface === "light";
   /** Gafas / horizontales: ver `lib/pdp-star-products.ts`. Pantalón ski: solo móvil legacy. */
   const useWideHeroGallery = PDP_HERO_WIDE_PRODUCT_IDS.has(product.id);
+  /** Evita que la columna de galería estire la fila y deje hueco enorme sobre el vídeo (solo este PDP). */
+  const tightGalleryToVideo = product.id === "gn-cycling-training-001";
   const showFullImage =
     product.id === "gn-ski-snow-pants-001" || useWideHeroGallery;
   const baseFeatured =
@@ -390,14 +392,28 @@ export default function ProductDetailClient({
         className={[
           "hidden lg:grid lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20 max-w-full",
           useWideHeroGallery ? "lg:grid-cols-[5fr_2.5fr]" : "lg:grid-cols-[5fr_3fr]",
-        ].join(" ")}
+          tightGalleryToVideo ? "lg:content-start" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
-        <div className="min-w-0">
+        <div
+          className={[
+            "min-w-0",
+            tightGalleryToVideo ? "lg:self-start" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
           <div
             className={
               L
-                ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-5 xl:p-7 2xl:p-8"
-                : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-5 xl:p-7 2xl:p-8 ring-1 ring-white/[0.04]"
+                ? tightGalleryToVideo
+                  ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-4 xl:p-5 2xl:p-6"
+                  : "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-5 xl:p-7 2xl:p-8"
+                : tightGalleryToVideo
+                  ? "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-4 xl:p-5 2xl:p-6 ring-1 ring-white/[0.04]"
+                  : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-5 xl:p-7 2xl:p-8 ring-1 ring-white/[0.04]"
             }
           >
             {useWideHeroGallery ? (
@@ -408,6 +424,7 @@ export default function ProductDetailClient({
                 noImageLabel={noImageLabel}
                 surface={surface}
                 heroWide
+                compactVerticalSpacing={tightGalleryToVideo}
               />
             ) : (
               <ProductGalleryGrid

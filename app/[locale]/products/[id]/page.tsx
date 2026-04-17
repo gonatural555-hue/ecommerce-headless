@@ -271,9 +271,17 @@ export default async function ProductPage({ params }: Props) {
         }`
       : undefined;
 
+  const isCyclingTraining001 = product.id === "gn-cycling-training-001";
+
   return (
     <main className="bg-[#FFFFFF] overflow-x-hidden text-neutral-900">
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-32 md:py-20 max-w-full md:pb-20">
+      <div
+        className={
+          isCyclingTraining001
+            ? "max-w-6xl mx-auto max-w-full px-6 pt-24 pb-3 sm:px-10 md:pt-20 lg:px-16 lg:pb-2"
+            : "max-w-6xl mx-auto max-w-full px-6 pt-24 pb-32 sm:px-10 md:py-20 md:pb-20 lg:px-16"
+        }
+      >
         <ProductDetailClient
           product={localizedProduct}
           seoH1={seoH1}
@@ -294,8 +302,8 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      {product.id === "gn-cycling-training-001" && (
-        <div className="max-w-6xl mx-auto max-w-full px-6 sm:px-10 lg:px-16 -mt-4 pb-10 md:-mt-6 md:pb-12">
+      {isCyclingTraining001 && (
+        <div className="max-w-6xl mx-auto max-w-full px-6 pt-1 pb-10 sm:px-10 lg:px-16 lg:pt-0 lg:pb-12">
           <div className="grid lg:grid-cols-[5fr_2.5fr] lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20">
             <div className="min-w-0">
               <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/50 shadow-sm ring-1 ring-neutral-200/60">

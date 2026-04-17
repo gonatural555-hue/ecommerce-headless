@@ -19,6 +19,8 @@ type Props = {
    * para productos en `PDP_HERO_WIDE_PRODUCT_IDS`.
    */
   heroWide?: boolean;
+  /** Menos margen bajo el stage y las miniaturas (PDP con vídeo justo debajo). */
+  compactVerticalSpacing?: boolean;
 };
 
 export default function ProductImageGallery({
@@ -30,8 +32,11 @@ export default function ProductImageGallery({
   featuredImageClassName,
   surface = "dark",
   heroWide = false,
+  compactVerticalSpacing = false,
 }: Props) {
   const light = surface === "light";
+  const heroMb =
+    compactVerticalSpacing && heroWide ? "mb-2" : "mb-4";
   const allImages = useMemo(() => {
     return featured
       ? [featured, ...gallery.filter((img) => img !== featured)]
@@ -107,11 +112,11 @@ export default function ProductImageGallery({
         className={[
           heroWide
             ? light
-              ? "relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
-              : "relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10"
+              ? `relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-neutral-100 rounded-2xl overflow-hidden ${heroMb} border border-neutral-200`
+              : `relative w-full max-w-full aspect-[16/10] max-h-[min(560px,72vh)] bg-dark-surface rounded-2xl overflow-hidden ${heroMb} border border-white/10`
             : light
-              ? "relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-neutral-200"
-              : "relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden mb-4 border border-white/10",
+              ? `relative w-full max-w-full aspect-square bg-neutral-100 rounded-2xl overflow-hidden ${heroMb} border border-neutral-200`
+              : `relative w-full max-w-full aspect-square bg-dark-surface rounded-2xl overflow-hidden ${heroMb} border border-white/10`,
           heroWide
             ? "mx-auto w-full max-w-full md:mx-0 lg:mx-0 lg:max-w-full"
             : "mx-auto max-w-[80vw] max-h-[80vw] md:mx-0 md:max-w-none md:max-h-none lg:mx-auto lg:max-w-[520px] lg:max-h-[520px]",
@@ -185,7 +190,13 @@ export default function ProductImageGallery({
 
       {/* Gallery Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 max-w-full overflow-x-auto pb-2 scrollbar-rail-premium md:justify-center">
+        <div
+          className={
+            compactVerticalSpacing && heroWide
+              ? "flex gap-3 max-w-full overflow-x-auto pb-0.5 scrollbar-rail-premium md:justify-center"
+              : "flex gap-3 max-w-full overflow-x-auto pb-2 scrollbar-rail-premium md:justify-center"
+          }
+        >
           {allImages.map((img, index) => (
             <button
               key={img}
