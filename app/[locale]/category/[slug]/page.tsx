@@ -29,6 +29,8 @@ const CATEGORY_HERO_IMAGES: Record<string, string> = {
   "outdoor-adventure": "/assets/images/hero/storysection.webp",
   cycling: "/assets/images/categories/cycling.webp",
   fishing: "/assets/images/hero/fishin-hero.webp",
+  "fishing-equipment": "/assets/images/hero/equipo-pesca.webp",
+  "fishing-gadgets": "/assets/images/hero/accesorios-pesca.webp",
   "active-sports": "/assets/images/categories/active-sports.webp",
   trekking: "/assets/images/products/gn-outdoor-002/featured02.webp",
   "camping-survival-gear": "/assets/images/products/gn-outdoor-002/featured03.webp",
