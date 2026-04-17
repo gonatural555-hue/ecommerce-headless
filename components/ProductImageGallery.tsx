@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import ProductImageLightbox from "@/components/pdp/ProductImageLightbox";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
 import type { UISurface } from "@/lib/ui-surface";
 
@@ -40,6 +41,7 @@ export default function ProductImageGallery({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const startXRef = useRef(0);
 
   useEffect(() => {
@@ -122,6 +124,27 @@ export default function ProductImageGallery({
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
       >
+        {heroWide && allImages.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(true)}
+            className={
+              light
+                ? "absolute right-3 top-3 z-10 rounded-full border border-neutral-200/90 bg-white/90 p-2.5 text-neutral-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70"
+                : "absolute right-3 top-3 z-10 rounded-full border border-white/15 bg-black/45 p-2.5 text-white/95 shadow-sm backdrop-blur-sm transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70"
+            }
+            aria-label={`${title} — ampliar imagen`}
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.6}
+                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+              />
+            </svg>
+          </button>
+        )}
         <div
           className={[
             "flex h-full w-full",
@@ -191,6 +214,15 @@ export default function ProductImageGallery({
         </div>
       )}
 
+      {heroWide && allImages.length > 0 && (
+        <ProductImageLightbox
+          open={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          images={allImages}
+          initialIndex={currentIndex}
+          title={title}
+        />
+      )}
     </div>
   );
 }

@@ -144,7 +144,7 @@ export default function ProductInfoPanel({
     ) : null;
 
   return (
-    <div className="sticky top-24 flex min-w-0 flex-col gap-8 xl:gap-10">
+    <div className="sticky top-24 flex min-w-0 max-w-[26rem] flex-col gap-8 xl:max-w-[28rem] xl:gap-10 2xl:max-w-[30rem]">
       <header className="space-y-4">
         <h1
           className={

@@ -388,16 +388,16 @@ export default function ProductDetailClient({
       {/* Desktop (lg+): galería (60% o ~67% si hero ancho) + panel sticky */}
       <section
         className={[
-          "hidden lg:grid lg:items-start lg:gap-x-10 xl:gap-x-14 max-w-full",
-          useWideHeroGallery ? "lg:grid-cols-[4fr_2fr]" : "lg:grid-cols-[3fr_2fr]",
+          "hidden lg:grid lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20 max-w-full",
+          useWideHeroGallery ? "lg:grid-cols-[5fr_2.5fr]" : "lg:grid-cols-[5fr_3fr]",
         ].join(" ")}
       >
         <div className="min-w-0">
           <div
             className={
               L
-                ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-4 xl:p-5"
-                : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-4 xl:p-5 ring-1 ring-white/[0.04]"
+                ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-5 xl:p-7 2xl:p-8"
+                : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-5 xl:p-7 2xl:p-8 ring-1 ring-white/[0.04]"
             }
           >
             {useWideHeroGallery ? (
