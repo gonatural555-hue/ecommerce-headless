@@ -1317,6 +1317,114 @@ const PRODUCTS: Product[] = [
     },
   },
   {
+    id: "gn-cyling-eq-002",
+    slug: "gn-cyling-eq-002",
+    title:
+      "ThinkRider — Pack de 10 cartuchos CO2 16 g (roscados, inflado rápido)",
+    price: 11.34,
+    category: "Cycling",
+    images: [
+      "/assets/images/products/gn-cyling-eq-002/1.webp",
+      "/assets/images/products/gn-cyling-eq-002/2.webp",
+      "/assets/images/products/gn-cyling-eq-002/3.webp",
+    ],
+    shortDescription:
+      "Pack de 10 cartuchos CO2 de 16 g con rosca para inflar neumáticos de bicicleta al instante. Compactos, prácticos y compatibles con infladores CO2 roscados.",
+    description:
+      "El pack ThinkRider de cartuchos CO2 de 16 g está pensado para ciclistas que necesitan inflar de forma rápida y eficiente en ruta o en sendero. Cada cartucho incorpora conexión roscada, compatible con infladores CO2 roscados habituales. Compactos y fáciles de llevar, este pack de 10 unidades es ideal para ciclismo de carretera, MTB, gravel y kits de emergencia ante pinchazos.",
+    features: [
+      "Pack de 10 cartuchos CO2 de 16 g con rosca",
+      "Compatible con infladores CO2 con rosca estándar",
+      "Inflado rápido para carretera, gravel y MTB",
+      "Formato compacto y fácil de transportar",
+      "Ideal para kits de reparación y pinchazos de emergencia",
+    ],
+    translations: {
+      en: {
+        title: "ThinkRider 16g CO2 Cartridge 10 Pack",
+        shortDescription:
+          "10-pack of 16g threaded CO2 cartridges for fast bicycle tire inflation. Compact, practical, and compatible with threaded CO2 inflators.",
+        description:
+          "ThinkRider 16g CO2 Cartridge 10 Pack is designed for cyclists who need fast and efficient tire inflation on the road or trail. Each cartridge features a threaded connection for compatibility with standard threaded CO2 inflators. Compact and easy to carry, this 10-pack is ideal for road cycling, MTB, gravel, and emergency flat repair kits.",
+        features: [
+          "10-pack of 16g threaded CO2 cartridges",
+          "Compatible with threaded CO2 inflators",
+          "Fast tire inflation for road, gravel, and MTB",
+          "Compact and easy to carry",
+          "Ideal for emergency flat repair kits",
+        ],
+        seo: {
+          title: "ThinkRider 16g CO2 Cartridge 10 Pack | Go Natural",
+          description:
+            "Shop ThinkRider 16g threaded CO2 cartridges, 10-pack. Fast bicycle tire inflation for road, gravel, and MTB riders.",
+        },
+      },
+      es: {
+        title:
+          "ThinkRider — Pack de 10 cartuchos CO2 16 g (roscados, inflado rápido)",
+        shortDescription:
+          "Pack de 10 cartuchos CO2 de 16 g con rosca para inflar neumáticos al instante. Compactos y compatibles con infladores CO2 roscados.",
+        description:
+          "El pack ThinkRider de cartuchos CO2 de 16 g está pensado para ciclistas que necesitan inflar de forma rápida y eficiente en ruta o en sendero. Cada cartucho incorpora conexión roscada, compatible con infladores CO2 roscados habituales. Compactos y fáciles de llevar, este pack de 10 unidades es ideal para ciclismo de carretera, MTB, gravel y kits de emergencia ante pinchazos.",
+        features: [
+          "Pack de 10 cartuchos CO2 de 16 g con rosca",
+          "Compatible con infladores CO2 con rosca estándar",
+          "Inflado rápido para carretera, gravel y MTB",
+          "Formato compacto y fácil de transportar",
+          "Ideal para kits de reparación y pinchazos de emergencia",
+        ],
+        seo: {
+          title:
+            "ThinkRider cartuchos CO2 16 g (pack 10) | Go Natural",
+          description:
+            "Cartuchos CO2 roscados 16 g en pack de 10. Inflado rápido para bici de carretera, gravel y MTB. ThinkRider en Go Natural.",
+        },
+      },
+      fr: {
+        title:
+          "ThinkRider — Lot de 10 cartouches CO2 16 g (filetées)",
+        shortDescription:
+          "Lot de 10 cartouches CO2 16 g filetées pour gonfler rapidement. Compactes, compatibles avec les gonfleurs CO2 filetés.",
+        description:
+          "Le lot de cartouches CO2 ThinkRider 16 g s’adresse aux cyclistes qui veulent gonfler efficacement sur la route ou les sentiers. Chaque cartouche offre une connexion filetée compatible avec les gonfleurs CO2 standards. Compact et facile à transporter, ce lot de 10 convient au route, gravel, VTT et aux kits de dépannage.",
+        features: [
+          "Lot de 10 cartouches CO2 16 g filetées",
+          "Compatible avec les gonfleurs CO2 filetés",
+          "Gonflage rapide route, gravel et VTT",
+          "Format compact et transport facile",
+          "Idéal pour kits d’urgence crevaison",
+        ],
+        seo: {
+          title:
+            "ThinkRider cartouches CO2 16 g (lot 10) | Go Natural",
+          description:
+            "Cartouches CO2 filetées 16 g, lot de 10. Gonflage rapide vélo route, gravel et VTT — ThinkRider chez Go Natural.",
+        },
+      },
+      it: {
+        title:
+          "ThinkRider — 10 cartucce CO2 16 g (filettate)",
+        shortDescription:
+          "Confezione da 10 cartucce CO2 da 16 g filettate per gonfiare in fretta. Compatte e compatibili con gonfiatori CO2 filettati.",
+        description:
+          "Il pack di cartucce CO2 ThinkRider da 16 g è pensato per chi vuole gonfiare in modo rapido ed efficiente su strada o su sentiero. Ogni cartuccia ha attacco filettato compatibile con i gonfiatori CO2 standard. Compatte e facili da portare, la confezione da 10 è ideale per strada, gravel, MTB e kit anti-foratura.",
+        features: [
+          "10 cartucce CO2 da 16 g filettate",
+          "Compatibili con gonfiatori CO2 filettati",
+          "Gonfiaggio rapido per strada, gravel e MTB",
+          "Compatte e facili da trasportare",
+          "Ideali per kit di emergenza forature",
+        ],
+        seo: {
+          title:
+            "ThinkRider cartucce CO2 16 g (pack 10) | Go Natural",
+          description:
+            "Cartucce CO2 filettate 16 g, pack da 10. Gonfiaggio rapido bici da strada, gravel e MTB — ThinkRider su Go Natural.",
+        },
+      },
+    },
+  },
+  {
     id: "gn-cycling-training-001",
     title:
       "ThinkRider X2 Max — Rodillo inteligente (MTB/carretera, potenciómetro integrado)",

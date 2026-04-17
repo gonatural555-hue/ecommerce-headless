@@ -220,6 +220,37 @@ export const REVIEWS_SEED: ReviewSeed[] = [
     date: "2025-03-12",
     verified: false,
   },
+  {
+    id: "review-gn-cyling-eq-002-01",
+    productSlug: "gn-cyling-eq-002",
+    rating: 5,
+    author: "K. V.",
+    title: "Siempre en la mochila",
+    comment:
+      "Rosca estándar y buen caudal. Para salidas largas llevo dos en el portabidón y el resto en casa.",
+    date: "2025-04-02",
+    verified: true,
+  },
+  {
+    id: "review-gn-cyling-eq-002-02",
+    productSlug: "gn-cyling-eq-002",
+    rating: 5,
+    author: "D. L.",
+    comment:
+      "Pack cómodo: no ocupa nada y en gravel me salvó dos veces con pinchazo fino.",
+    date: "2025-04-08",
+    verified: true,
+  },
+  {
+    id: "review-gn-cyling-eq-002-03",
+    productSlug: "gn-cyling-eq-002",
+    rating: 4,
+    author: "Anónimo",
+    comment:
+      "Funcionan bien con mi inflador roscado. El precio del pack ayuda a reponer sin drama.",
+    date: "2025-04-11",
+    verified: false,
+  },
 ];
 
 export function getReviewsByProductSlug(productSlug: string): ReviewSeed[] {

@@ -1,0 +1,26 @@
+{
+  "id": "gn-cyling-eq-002",
+  "images": {
+    "featured": [
+      "/assets/images/products/gn-cyling-eq-002/1.webp"
+    ],
+    "gallery": [
+      "/assets/images/products/gn-cyling-eq-002/1.webp",
+      "/assets/images/products/gn-cyling-eq-002/2.webp",
+      "/assets/images/products/gn-cyling-eq-002/3.webp"
+    ],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variants": {
+    "type": "pack",
+    "label": "Formato",
+    "default": "16g x 10 Pack",
+    "options": [
+      {
+        "label": "16g x 10 Pack",
+        "value": "16g x 10 Pack"
+      }
+    ]
+  }
+}

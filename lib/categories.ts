@@ -131,6 +131,7 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-cycling-015": ["cycling-running"], // Luz Trasera de Bicicleta ROCKBROS USB – IPX6 / IPX7
   "gn-cycling-016": ["cycling-running"], // Luz Trasera ROCKBROS con Sensor de Freno Inteligente (USB-C)
   "gn-cycling-training-001": ["cycling-running"], // ThinkRider X2 Max — rodillo inteligente indoor
+  "gn-cyling-eq-002": ["cycling-running"], // ThinkRider 16g CO2 — pack 10 cartuchos roscados
   "gn-cycling-clothes-001": ["cycling-running"], // Thermal Cycling Jacket – All-Season Performance Layer
   "gn-cycling-clothes-002": ["cycling-running"], // Thermal Cycling Jacket – Long-Ride Weather Layer
   // Water Sports - Diving & Swimming Equipment
