@@ -36,8 +36,9 @@ const CATEGORY_HERO_IMAGES: Record<string, string> = {
   "camping-survival-gear": "/assets/images/products/gn-outdoor-002/featured03.webp",
   "outdoor-lighting": "/assets/images/products/gn-outdoor-003/featured01.webp",
   "sleeping-systems": "/assets/images/products/gn-outdoor-005/featured-white.webp",
-  ski: "/assets/images/products/gn-ski-snow-001/model-1/featured.webp",
-  snowboard: "/assets/images/products/gn-ski-snow-001/model-2/featured.webp",
+  "ski-snowboard":
+    "/assets/images/categories/mountain-snow.webp",
+  "diving-swimming-equipment": "/assets/images/hero/scuba-diving.webp",
   running: "/assets/images/products/gn-cycling-015/featured03.webp",
 };
 

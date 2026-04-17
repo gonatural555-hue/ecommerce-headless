@@ -11,7 +11,7 @@ type BlogPost = {
 
 const CATEGORY_KEYWORDS: Record<string, string[]> = {
   water: ["water", "snorkel", "diving", "buceo", "agua"],
-  snow: ["ski", "snow", "snowboard", "nieve"],
+  snow: ["ski", "snow", "snowboard", "ski-snowboard", "nieve"],
   camping: ["camp", "camping", "carpa", "campamento"],
   trekking: ["trekking", "trail", "hike", "sendero"],
   cycling: ["cycling", "bike", "cicl", "bici", "bikepacking"],
@@ -20,8 +20,10 @@ const CATEGORY_KEYWORDS: Record<string, string[]> = {
 
 const CATEGORY_TO_BLOG_SLUGS: Record<string, string[]> = {
   "water-sports": ["edge-of-water", "snorkel-diving-familia-europa"],
+  "diving-swimming-equipment": ["edge-of-water", "snorkel-diving-familia-europa"],
   fishing: ["pesca-recreativa-apps-equipo", "salir-sin-complicarse"],
   "mountain-snow": ["winter-lines", "ski-snowboard-centros-sin-limite"],
+  "ski-snowboard": ["winter-lines", "ski-snowboard-centros-sin-limite"],
   "outdoor-adventure": ["quiet-morning-at-camp", "salir-sin-complicarse"],
   cycling: ["calm-motion", "quiet-journeys"],
   "active-sports": ["calm-motion", "quiet-journeys"],

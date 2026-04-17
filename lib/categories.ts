@@ -50,15 +50,9 @@ export const CATEGORIES: Category[] = [
   },
   // Mountain & Snow subcategorías
   {
-    slug: "ski",
-    name: "Ski",
-    description: "Equipamiento y accesorios para esquí.",
-    parentSlug: "mountain-snow",
-  },
-  {
-    slug: "snowboard",
-    name: "Snowboard",
-    description: "Equipamiento y accesorios para snowboard.",
+    slug: "ski-snowboard",
+    name: "Ski / Snowboard",
+    description: "Equipamiento y accesorios para esquí y snowboard.",
     parentSlug: "mountain-snow",
   },
   // Water Sports subcategorías
@@ -132,14 +126,14 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-fishing-eq-007": ["fishing-equipment"], // KastKing Sharky III Carrete Giratorio Spinning
   "gn-fishing-eq-008": ["fishing-equipment"], // BEARKING BKT Carrete Giratorio Spinning
   // Mountain & Snow - asignados a subcategorías
-  "gn-ski-snow-001": ["ski"], // Gafas de Esquí & Snowboard KAPVOE Fotocromáticas Magnéticas UV400
-  "gn-ski-snow-002": ["ski"], // Parka Técnica de Invierno con Capucha – Outdoor Military Anorak
-  "gn-ski-snow-003": ["ski"], // Chaqueta Impermeable Unisex JNLN – Cortaviento Térmica
-  "gn-ski-snow-004": ["ski"], // Chaqueta Polar con Capucha – Lana Sintética
-  "gn-ski-snow-005": ["ski"], // Chaqueta Softshell de Invierno – Resistente al Viento
-  "gn-ski-snow-006": ["ski"], // Chaqueta Calefactable USB – 21 Zonas de Calor
-  "gn-ski-snow-jacket-001": ["ski"], // Alpine Shell Jacket — Quiet Winter Layer
-  "gn-ski-snow-pants-001": ["ski"], // Alpine Snow Pants — Quiet Winter Protection
+  "gn-ski-snow-001": ["ski-snowboard"], // Gafas de Esquí & Snowboard KAPVOE Fotocromáticas Magnéticas UV400
+  "gn-ski-snow-002": ["ski-snowboard"], // Parka Técnica de Invierno con Capucha – Outdoor Military Anorak
+  "gn-ski-snow-003": ["ski-snowboard"], // Chaqueta Impermeable Unisex JNLN – Cortaviento Térmica
+  "gn-ski-snow-004": ["ski-snowboard"], // Chaqueta Polar con Capucha – Lana Sintética
+  "gn-ski-snow-005": ["ski-snowboard"], // Chaqueta Softshell de Invierno – Resistente al Viento
+  "gn-ski-snow-006": ["ski-snowboard"], // Chaqueta Calefactable USB – 21 Zonas de Calor
+  "gn-ski-snow-jacket-001": ["ski-snowboard"], // Alpine Shell Jacket — Quiet Winter Layer
+  "gn-ski-snow-pants-001": ["ski-snowboard"], // Alpine Snow Pants — Quiet Winter Protection
   // Cycling - asignados a subcategoría
   "gn-cycling-010": ["cycling"], // Gafas de Ciclismo KAPVOE UV400 – Lente Polarizada Deportiva (Unisex)
   "gn-cycling-011": ["cycling"], // Gafas de Ciclismo KAPVOE Fotocromáticas UV400 – Lente Adaptativa (Unisex)
