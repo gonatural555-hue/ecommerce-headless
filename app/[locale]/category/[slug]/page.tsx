@@ -253,21 +253,29 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <main className="bg-dark-base">
-      {/* Category Hero */}
-      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-end">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt={`${category.name} hero`}
-            className="h-full w-full object-cover object-center"
+      {/* Category Hero: imagen completa (object-contain), sin recorte tipo cover */}
+      <section className="relative bg-dark-base">
+        <div className="relative">
+          <div className="flex min-h-[min(42vh,420px)] justify-center px-4 pt-8 pb-36 sm:px-6 sm:pb-40 md:pb-44">
+            <img
+              src={heroImage}
+              alt={`${category.name} hero`}
+              className="block h-auto w-full max-w-[min(100%,1400px)] max-h-[min(75vh,900px)] object-contain object-center"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </div>
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark-base/60 via-dark-base/30 to-dark-base/95"
+            aria-hidden
           />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/60 via-dark-base/40 to-dark-base/90" />
-        <div className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-16 md:pb-20">
-            <h1 className="text-4xl md:text-5xl font-semibold text-text-primary">
-              {seoH1}
-            </h1>
+          <div className="absolute inset-x-0 bottom-0 z-10">
+            <div className="mx-auto max-w-7xl px-6 pb-12 sm:px-10 md:pb-16 lg:px-16">
+              <h1 className="text-4xl font-semibold text-text-primary drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
+                {seoH1}
+              </h1>
+            </div>
           </div>
         </div>
       </section>
