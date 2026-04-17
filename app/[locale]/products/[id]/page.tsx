@@ -294,6 +294,32 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
+      {product.id === "gn-cycling-training-001" && (
+        <div className="max-w-6xl mx-auto max-w-full px-6 sm:px-10 lg:px-16 -mt-4 pb-10 md:-mt-6 md:pb-12">
+          <div className="grid lg:grid-cols-[5fr_2.5fr] lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20">
+            <div className="min-w-0">
+              <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/50 shadow-sm ring-1 ring-neutral-200/60">
+                <div className="relative aspect-video w-full bg-neutral-100">
+                  <video
+                    className="absolute inset-0 h-full w-full object-contain"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label={`Video — ${localizedProduct.title}`}
+                  >
+                    <source
+                      src="/assets/images/products/gn-cycling-training-001/smart-bike-video.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div className="hidden min-w-0 lg:block" aria-hidden="true" />
+          </div>
+        </div>
+      )}
+
       <ProductReviews
         productSlug={productSlug}
         reviews={REVIEWS_SEED}
