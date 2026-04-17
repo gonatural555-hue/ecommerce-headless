@@ -1,6 +1,5 @@
 import Link from "next/link";
 import FeaturedProductsSection from "@/components/sections/FeaturedProductsSection";
-import FinalCTASection from "@/components/sections/FinalCTASection";
 import FeaturedJournalSection from "@/components/sections/FeaturedJournalSection";
 import HomeImmersiveHero from "@/components/home/HomeImmersiveHero";
 import HomeCategoryCarousel from "@/components/home/HomeCategoryCarousel";
@@ -70,7 +69,6 @@ export default async function HomePage({
   const featuredProduct = products.find(
     (product) => product.id === "gn-outdoor-shoes-002"
   );
-  const ctaHref = `/${locale}/products`;
   const journalCtaHref = `/${locale}/blog`;
   const featuredSlugs = [
     "camping-fin-de-semana-basico",
@@ -356,12 +354,6 @@ export default async function HomePage({
           </div>
         </div>
       </section>
-
-      <FinalCTASection
-        title={t("finalCta.title")}
-        ctaLabel={t("finalCta.cta")}
-        ctaHref={ctaHref}
-      />
     </main>
   );
 }
