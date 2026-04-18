@@ -4,7 +4,8 @@ import ProductCardSimple from "@/components/ProductCardSimple";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import EditorialBreak from "@/components/products/EditorialBreak";
 
-const CHUNK = 6;
+/** Tamaño de bloque entre pausas editoriales (múltiplo de 4 = filas completas en desktop) */
+const CHUNK = 8;
 
 type Labels = {
   viewProduct?: string;
@@ -36,7 +37,7 @@ function chunkProducts(list: Product[], size: number): Product[][] {
 }
 
 /**
- * Rejilla con ritmo editorial: primer producto destacado si hay volumen, pausas entre bloques.
+ * Rejilla uniforme (4 columnas en xl): mismas dimensiones por tarjeta, pausas editoriales entre bloques.
  */
 export default function ProductsEditorialGrid({
   products,
@@ -55,29 +56,17 @@ export default function ProductsEditorialGrid({
       {chunks.map((chunk, chunkIdx) => (
         <div key={`chunk-${chunkIdx}`}>
           <ScrollReveal>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
-              {chunk.map((product, j) => {
-                const isFeatured =
-                  chunkIdx === 0 && j === 0 && chunk.length >= 4;
-                return (
-                  <div
-                    key={product.id}
-                    className={
-                      isFeatured
-                        ? "sm:col-span-2 xl:col-span-2 xl:max-w-none"
-                        : undefined
-                    }
-                  >
-                    <ProductCardSimple
-                      product={product}
-                      locale={locale}
-                      labels={labels}
-                      analyticsListName={analyticsListName}
-                      editorial
-                    />
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {chunk.map((product) => (
+                <ProductCardSimple
+                  key={product.id}
+                  product={product}
+                  locale={locale}
+                  labels={labels}
+                  analyticsListName={analyticsListName}
+                  editorial
+                />
+              ))}
             </div>
           </ScrollReveal>
 
