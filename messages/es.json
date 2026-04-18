@@ -638,6 +638,25 @@
     "title": "Journal",
     "subtitle": "Historias sobre exploración, equipo y viajes silenciosos.",
     "intro": "Pensamientos e ideas para quienes se mueven con intención.",
+    "journal": {
+      "tagline": "Movete con intención",
+      "manifesto": "La naturaleza no es decorado. Es donde el cuerpo recuerda el ritmo, el aire y el silencio que adentro ya no alcanzaba.",
+      "featuredLabel": "Historia destacada",
+      "sectionsLabel": "Explorá por tema",
+      "quotes": [
+        "No te encierres.",
+        "Salí afuera.",
+        "Volvé a lo esencial.",
+        "El movimiento no se negocia."
+      ],
+      "communityTitle": "Unite a la comunidad",
+      "communityBody": "Historias, encuentros y decisiones simples. Un espacio para quienes eligen el aire libre antes que la pantalla.",
+      "communityCta": "Sumarte",
+      "imageCaptionTrail": "Donde el camino se alarga.",
+      "imageCaptionDawn": "Antes del ruido.",
+      "imageAria1": "Paisaje y horizonte al amanecer",
+      "imageAria2": "Sendero y bosque"
+    },
     "fieldGear": {
       "title": "Equipo usado en campo",
       "caption": "Elegido para un uso calmo y confiable en condiciones reales."

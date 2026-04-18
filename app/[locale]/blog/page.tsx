@@ -1,11 +1,19 @@
 import BlogHero from "@/components/blog/BlogHero";
-import BlogGrid from "@/components/blog/BlogGrid";
+import FeaturedStory from "@/components/blog/FeaturedStory";
+import EditorialGrid from "@/components/blog/EditorialGrid";
+import ImageSection from "@/components/blog/ImageSection";
+import QuoteBlock from "@/components/blog/QuoteBlock";
+import CommunityCTA from "@/components/blog/CommunityCTA";
+import ScrollReveal from "@/components/blog/ScrollReveal";
 import BlogSectionLinks from "@/components/blog/BlogSectionLinks";
 import { blogSections } from "@/lib/blog-sections";
 import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
+
+const FEATURED_SLUG = "quiet-journeys";
+const FALLBACK_IMAGE = "/assets/images/blog/blog-hero.webp";
 
 export async function generateMetadata({
   params,
@@ -30,6 +38,21 @@ export async function generateMetadata({
   });
 }
 
+type JournalCopy = {
+  tagline: string;
+  manifesto: string;
+  featuredLabel: string;
+  sectionsLabel: string;
+  quotes: string[];
+  communityTitle: string;
+  communityBody: string;
+  communityCta: string;
+  imageCaptionTrail: string;
+  imageCaptionDawn: string;
+  imageAria1: string;
+  imageAria2: string;
+};
+
 export default async function BlogPage({
   params,
 }: {
@@ -38,32 +61,107 @@ export default async function BlogPage({
   const { locale } = await params;
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
-  const posts = Object.entries(messages.blog.posts).map(([slug, post]: any) => ({
-    href: `/${locale}/blog/${slug}`,
-    title: post.title,
-    excerpt: post.excerpt,
-    image: post.sections?.[0]?.image || "/assets/images/blog/blog-hero.webp",
-  }));
+
+  const journal = (messages.blog as { journal?: JournalCopy } | undefined)
+    ?.journal;
+  const quotes = Array.isArray(journal?.quotes) ? journal!.quotes : [];
+
+  const entries = Object.entries(messages.blog.posts).map(([slug, post]) => {
+    const p = post as {
+      title?: string;
+      excerpt?: string;
+      sections?: { image?: string }[];
+    };
+    return {
+      slug,
+      href: `/${locale}/blog/${slug}`,
+      title: String(p.title ?? ""),
+      excerpt: String(p.excerpt ?? ""),
+      image: p.sections?.[0]?.image || FALLBACK_IMAGE,
+    };
+  });
+
+  const featured =
+    entries.find((e) => e.slug === FEATURED_SLUG) ?? entries[0] ?? null;
+  const rest = featured
+    ? entries.filter((e) => e.slug !== featured.slug)
+    : entries;
+
+  const tagline = journal?.tagline ?? "";
+  const manifesto = journal?.manifesto ?? t("blog.intro");
 
   return (
     <main className="bg-dark-base">
       <BlogHero
         title={t("blog.title")}
         subtitle={t("blog.subtitle")}
-        image="/assets/images/blog/blog-hero.webp"
+        tagline={tagline}
+        imageSrc="/assets/images/blog/blog-hero.webp"
+        imageAlt={`${t("blog.title")} — Go Natural`}
       />
 
-      <section className="py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
-          <p className="text-lg text-text-muted">{t("blog.intro")}</p>
-          <div className="mt-8">
-            <BlogSectionLinks sections={blogSections} locale={locale} />
-          </div>
+      <section className="border-b border-white/[0.06] bg-dark-base py-20 md:py-28 lg:py-32">
+        <ScrollReveal>
+          <p className="mx-auto max-w-2xl px-6 text-center text-lg font-light leading-relaxed text-text-muted md:text-xl md:leading-relaxed">
+            {manifesto}
+          </p>
+        </ScrollReveal>
+      </section>
+
+      {featured ? (
+        <FeaturedStory
+          post={{
+            href: featured.href,
+            title: featured.title,
+            excerpt: featured.excerpt,
+            image: featured.image,
+          }}
+          eyebrow={journal?.featuredLabel ?? ""}
+          ctaLabel={t("common.readArticle")}
+        />
+      ) : null}
+
+      {quotes[0] ? <QuoteBlock text={quotes[0]} /> : null}
+
+      <ImageSection
+        imageSrc="/assets/images/hero/storysection.webp"
+        caption={journal?.imageCaptionTrail}
+        imageAlt={journal?.imageAria1 ?? ""}
+      />
+
+      <EditorialGrid posts={rest} ctaLabel={t("common.readArticle")} />
+
+      {quotes[1] ? <QuoteBlock text={quotes[1]} /> : null}
+
+      <section className="border-y border-white/[0.06] bg-[#0a0e0d] py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12">
+          <ScrollReveal>
+            <p className="text-center text-[0.65rem] font-medium uppercase tracking-[0.38em] text-accent-gold/85">
+              {journal?.sectionsLabel ?? ""}
+            </p>
+            <div className="mt-10 flex justify-center">
+              <BlogSectionLinks sections={blogSections} locale={locale} />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      <BlogGrid posts={posts} ctaLabel={t("common.readArticle")} />
+      <ImageSection
+        imageSrc="/assets/images/hero/trekking.webp"
+        caption={journal?.imageCaptionDawn}
+        imageAlt={journal?.imageAria2 ?? ""}
+      />
+
+      {quotes[2] ? <QuoteBlock text={quotes[2]} /> : null}
+
+      {quotes[3] ? <QuoteBlock text={quotes[3]} /> : null}
+
+      <CommunityCTA
+        title={journal?.communityTitle ?? ""}
+        body={journal?.communityBody ?? ""}
+        ctaLabel={journal?.communityCta ?? ""}
+        href={`/${locale}/contact`}
+      />
     </main>
   );
 }
-

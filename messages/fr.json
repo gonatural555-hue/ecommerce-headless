@@ -638,6 +638,25 @@
     "title": "Journal",
     "subtitle": "Histoires d’exploration, d’équipement et de voyages silencieux.",
     "intro": "Pensées et récits pour ceux qui avancent avec intention.",
+    "journal": {
+      "tagline": "Avance avec intention",
+      "manifesto": "La nature n’est pas un décor. C’est là que le souffle, le rythme et l’appartenance reviennent.",
+      "featuredLabel": "Récit principal",
+      "sectionsLabel": "Explorer par thème",
+      "quotes": [
+        "Ne reste pas enfermé.",
+        "Sors dehors.",
+        "Reviens à l’essentiel.",
+        "Le mouvement ne se négocie pas."
+      ],
+      "communityTitle": "Rejoins la communauté",
+      "communityBody": "Récits, rencontres et décisions simples. Un espace pour ceux qui choisissent l’air libre avant l’écran.",
+      "communityCta": "T’inscrire",
+      "imageCaptionTrail": "Là où le chemin continue.",
+      "imageCaptionDawn": "Avant le bruit.",
+      "imageAria1": "Paysage à l’aube",
+      "imageAria2": "Sentier en forêt"
+    },
     "fieldGear": {
       "title": "Équipement utilisé sur le terrain",
       "caption": "Sélectionné pour un usage calme et fiable en conditions réelles."

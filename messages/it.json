@@ -638,6 +638,25 @@
     "title": "Journal",
     "subtitle": "Storie di esplorazione, gear e viaggi silenziosi.",
     "intro": "Pensieri e racconti per chi si muove con intenzione.",
+    "journal": {
+      "tagline": "Muoviti con intenzione",
+      "manifesto": "La natura non è uno sfondo. È dove respirazione, ritmo e appartenenza tornano veri.",
+      "featuredLabel": "Storia in evidenza",
+      "sectionsLabel": "Esplora per tema",
+      "quotes": [
+        "Non restare dentro.",
+        "Esci fuori.",
+        "Torna all’essenziale.",
+        "Il movimento non si negozia."
+      ],
+      "communityTitle": "Unisciti alla community",
+      "communityBody": "Storie, incontri e decisioni semplici. Uno spazio per chi sceglie l’aria aperta prima dello schermo.",
+      "communityCta": "Entra",
+      "imageCaptionTrail": "Dove il sentiero continua.",
+      "imageCaptionDawn": "Prima del rumore.",
+      "imageAria1": "Paesaggio all’alba",
+      "imageAria2": "Sentiero nel bosco"
+    },
     "fieldGear": {
       "title": "Attrezzatura usata sul campo",
       "caption": "Scelta per un uso calmo e affidabile in condizioni reali."

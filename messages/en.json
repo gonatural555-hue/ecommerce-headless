@@ -638,6 +638,25 @@
     "title": "Journal",
     "subtitle": "Stories about exploration, gear, and quiet journeys.",
     "intro": "Thoughts, stories, and insights for those who move with intention.",
+    "journal": {
+      "tagline": "Move with intention",
+      "manifesto": "Nature isn’t scenery. It’s where breath, rhythm, and belonging come back online.",
+      "featuredLabel": "Featured story",
+      "sectionsLabel": "Browse by theme",
+      "quotes": [
+        "Don’t stay inside.",
+        "Go outside.",
+        "Return to what matters.",
+        "Movement isn’t negotiable."
+      ],
+      "communityTitle": "Join the community",
+      "communityBody": "Stories, meetups, and quiet decisions. A home for people who choose open air over endless scrolling.",
+      "communityCta": "Connect",
+      "imageCaptionTrail": "Where the line keeps going.",
+      "imageCaptionDawn": "Before the noise starts.",
+      "imageAria1": "Landscape at dawn",
+      "imageAria2": "Forest trail and soft light"
+    },
     "fieldGear": {
       "title": "Field Gear Used",
       "caption": "Selected for calm, reliable use in real conditions."
