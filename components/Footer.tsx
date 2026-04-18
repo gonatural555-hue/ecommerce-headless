@@ -71,9 +71,16 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link
               href={`/${locale}`}
-              className="inline-block mb-4 text-2xl font-semibold text-text-primary hover:text-accent-gold transition-colors duration-200"
+              className="group mb-4 inline-flex shrink-0 items-center transition-opacity duration-200 hover:opacity-90"
+              aria-label="Go Natural"
             >
-              Go Natural
+              <img
+                src="/assets/images/logo/logo.webp"
+                alt="Go Natural"
+                className="h-10 w-auto transition-transform duration-300 ease-out group-hover:scale-[1.03] sm:h-11 md:h-12"
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
             <p className="text-sm text-text-muted leading-relaxed max-w-xs">
               {t("footer.brandBlurb")}
