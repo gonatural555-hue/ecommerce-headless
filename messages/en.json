@@ -85,19 +85,20 @@
     "essentialSubtitle": "Built for real ground: quiet, capable, nothing extra.",
     "imageStoryTitle": "Movement is medicine",
     "imageStoryAria": "Trail and open horizon",
-    "categoriesTitle": "Explore by world",
-    "categoriesSubtitle": "Four doorways out. One rule: intention.",
+    "categoriesTitle": "Browse with intention",
+    "categoriesSubtitle": "Men, women, outdoor, and gear — large touch targets, same calm decisions.",
     "categoryCards": [
-      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
-      { "label": "Mountain & snow", "slug": "mountain-snow" },
-      { "label": "Water", "slug": "water-sports" },
-      { "label": "Active & motion", "slug": "active-sports" }
+      { "label": "Men", "path": "/products", "imageKey": "active-sports" },
+      { "label": "Women", "path": "/products", "imageKey": "water-sports" },
+      { "label": "Outdoor", "slug": "outdoor-adventure" },
+      { "label": "Equipment", "path": "/products", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Field notes in the same voice as the shop floor.",
     "journalCta": "Explore stories",
     "communityTitle": "Join the community",
-    "communityBody": "Move with intention. Choose open air before the scroll.",
+    "communityTagline": "Move with intention",
+    "communityBody": "Stories, meetups, quiet decisions. Open air before endless scrolling.",
     "communityCta": "Contact us",
     "heroImageAlt": "Open landscape at dusk"
   },

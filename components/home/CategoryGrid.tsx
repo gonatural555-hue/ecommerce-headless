@@ -8,7 +8,12 @@ import ScrollReveal from "@/components/blog/ScrollReveal";
 
 export type CategoryCard = {
   label: string;
-  slug: string;
+  /** Navega a /{locale}/category/[slug] */
+  slug?: string;
+  /** Ruta sin locale, p. ej. /products */
+  path?: string;
+  /** Clave en HOME_CATEGORY_IMAGE para la imagen (si no hay slug útil) */
+  imageKey?: string;
 };
 
 type CategoryGridProps = {
@@ -38,13 +43,21 @@ export default function CategoryGrid({
 
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {cards.map((card, i) => {
+            const href =
+              card.path != null && card.path !== ""
+                ? `/${locale}${card.path.startsWith("/") ? card.path : `/${card.path}`}`
+                : card.slug
+                  ? `/${locale}/category/${card.slug}`
+                  : `/${locale}/products`;
+            const imageLookupKey =
+              card.imageKey ?? card.slug ?? "outdoor-adventure";
             const src =
-              HOME_CATEGORY_IMAGE[card.slug] ??
+              HOME_CATEGORY_IMAGE[imageLookupKey] ??
               "/assets/images/hero/trekking.webp";
             return (
-              <ScrollReveal key={card.slug} delayMs={i * 70}>
+              <ScrollReveal key={`${card.label}-${i}`} delayMs={i * 70}>
                 <Link
-                  href={`/${locale}/category/${card.slug}`}
+                  href={href}
                   className="group relative block aspect-[4/5] min-h-[200px] overflow-hidden rounded-sm sm:min-h-[240px]"
                 >
                   <Image

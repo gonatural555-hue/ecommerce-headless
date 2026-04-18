@@ -85,19 +85,20 @@
     "essentialSubtitle": "Scelto per il terreno reale: silenzioso, affidabile, senza rumore in più.",
     "imageStoryTitle": "Il movimento è medicina",
     "imageStoryAria": "Sentiero e orizzonte",
-    "categoriesTitle": "Esplora per mondo",
-    "categoriesSubtitle": "Quattro porte verso fuori. Una regola: intenzione.",
+    "categoriesTitle": "Naviga con intenzione",
+    "categoriesSubtitle": "Uomo, donna, outdoor e equipaggiamento — aree ampie, stesse scelte calme.",
     "categoryCards": [
-      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
-      { "label": "Montagna & neve", "slug": "mountain-snow" },
-      { "label": "Acqua", "slug": "water-sports" },
-      { "label": "Attivo & movimento", "slug": "active-sports" }
+      { "label": "Uomo", "path": "/products", "imageKey": "active-sports" },
+      { "label": "Donna", "path": "/products", "imageKey": "water-sports" },
+      { "label": "Outdoor", "slug": "outdoor-adventure" },
+      { "label": "Equipaggiamento", "path": "/products", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Note dal campo — la stessa voce del negozio.",
     "journalCta": "Leggi le storie",
     "communityTitle": "Unisciti alla community",
-    "communityBody": "Muoviti con intenzione. Scegli l’aria aperta prima dello schermo.",
+    "communityTagline": "Muoviti con intenzione",
+    "communityBody": "Storie, incontri, decisioni semplici. Aria aperta prima dello scroll infinito.",
     "communityCta": "Scrivici",
     "heroImageAlt": "Paesaggio aperto al tramonto"
   },

@@ -85,19 +85,20 @@
     "essentialSubtitle": "Choisi pour le terrain réel : discret, fiable, sans le superflu.",
     "imageStoryTitle": "Le mouvement est un remède",
     "imageStoryAria": "Sentier et horizon",
-    "categoriesTitle": "Explorer par univers",
-    "categoriesSubtitle": "Quatre portes vers l’extérieur. Une règle : l’intention.",
+    "categoriesTitle": "Naviguer avec intention",
+    "categoriesSubtitle": "Homme, femme, outdoor et équipement — grandes zones cliquables, mêmes choix posés.",
     "categoryCards": [
-      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
-      { "label": "Montagne & neige", "slug": "mountain-snow" },
-      { "label": "Eau", "slug": "water-sports" },
-      { "label": "Actif & mouvement", "slug": "active-sports" }
+      { "label": "Homme", "path": "/products", "imageKey": "active-sports" },
+      { "label": "Femme", "path": "/products", "imageKey": "water-sports" },
+      { "label": "Outdoor", "slug": "outdoor-adventure" },
+      { "label": "Équipement", "path": "/products", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Récits de terrain — la même voix que dans la boutique.",
     "journalCta": "Lire les histoires",
     "communityTitle": "Rejoins la communauté",
-    "communityBody": "Avance avec intention. Choisis l’air libre avant l’écran.",
+    "communityTagline": "Avance avec intention",
+    "communityBody": "Récits, rencontres, décisions simples. L’air libre avant l’écran.",
     "communityCta": "Nous écrire",
     "heroImageAlt": "Paysage ouvert au crépuscule"
   },

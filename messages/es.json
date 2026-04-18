@@ -85,19 +85,20 @@
     "essentialSubtitle": "Piezas pensadas para terreno real: firmes, silenciosas, sin ruido de más.",
     "imageStoryTitle": "El movimiento es la medicina",
     "imageStoryAria": "Sendero y horizonte",
-    "categoriesTitle": "Explorá por terruño",
-    "categoriesSubtitle": "Cuatro puertas hacia afuera. Una regla: intención.",
+    "categoriesTitle": "Navegá por intención",
+    "categoriesSubtitle": "Hombre, mujer, outdoor y equipamiento — grandes áreas táctiles, mismas decisiones tranquilas.",
     "categoryCards": [
-      { "label": "Outdoor & campamento", "slug": "outdoor-adventure" },
-      { "label": "Montaña & nieve", "slug": "mountain-snow" },
-      { "label": "Agua", "slug": "water-sports" },
-      { "label": "Activo & movimiento", "slug": "active-sports" }
+      { "label": "Hombre", "path": "/products", "imageKey": "active-sports" },
+      { "label": "Mujer", "path": "/products", "imageKey": "water-sports" },
+      { "label": "Outdoor", "slug": "outdoor-adventure" },
+      { "label": "Equipamiento", "path": "/products", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Historias desde el terreno — el mismo silencio que en la tienda.",
     "journalCta": "Explorar historias",
     "communityTitle": "Unite a la comunidad",
-    "communityBody": "Movete con intención. Elegí aire antes que pantalla.",
+    "communityTagline": "Movete con intención",
+    "communityBody": "Historias, encuentros y decisiones simples. Elegí aire antes que pantalla.",
     "communityCta": "Escribinos",
     "heroImageAlt": "Paisaje abierto al atardecer"
   },

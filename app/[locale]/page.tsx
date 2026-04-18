@@ -24,11 +24,17 @@ type HomePageMessages = {
   imageStoryAria: string;
   categoriesTitle: string;
   categoriesSubtitle: string;
-  categoryCards: { label: string; slug: string }[];
+  categoryCards: {
+    label: string;
+    slug?: string;
+    path?: string;
+    imageKey?: string;
+  }[];
   journalTitle: string;
   journalIntro: string;
   journalCta: string;
   communityTitle: string;
+  communityTagline?: string;
   communityBody: string;
   communityCta: string;
   heroImageAlt: string;
@@ -154,6 +160,7 @@ export default async function HomePage({
 
       <CommunityCTA
         title={h.communityTitle ?? t("blog.journal.communityTitle")}
+        tagline={h.communityTagline}
         body={h.communityBody ?? t("blog.journal.communityBody")}
         ctaLabel={h.communityCta ?? t("blog.journal.communityCta")}
         href={`/${locale}/contact`}

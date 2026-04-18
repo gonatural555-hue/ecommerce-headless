@@ -3,6 +3,8 @@ import ScrollReveal from "@/components/blog/ScrollReveal";
 
 type CommunityCTAProps = {
   title: string;
+  /** Línea breve bajo el título (p. ej. “Move with intention”) */
+  tagline?: string;
   body: string;
   ctaLabel: string;
   href: string;
@@ -13,6 +15,7 @@ type CommunityCTAProps = {
  */
 export default function CommunityCTA({
   title,
+  tagline,
   body,
   ctaLabel,
   href,
@@ -24,6 +27,11 @@ export default function CommunityCTA({
           <h2 className="font-semibold tracking-tight text-text-primary text-[clamp(1.85rem,4vw,2.75rem)] leading-tight">
             {title}
           </h2>
+          {tagline ? (
+            <p className="mx-auto mt-5 max-w-lg text-[0.7rem] font-medium uppercase tracking-[0.32em] text-accent-gold/90 sm:text-xs">
+              {tagline}
+            </p>
+          ) : null}
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-muted md:text-lg">
             {body}
           </p>
