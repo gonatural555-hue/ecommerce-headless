@@ -86,12 +86,12 @@
     "imageStoryTitle": "El movimiento es la medicina",
     "imageStoryAria": "Sendero y horizonte",
     "categoriesTitle": "Navegá por intención",
-    "categoriesSubtitle": "Hombre, mujer, outdoor y equipamiento — grandes áreas táctiles, mismas decisiones tranquilas.",
+    "categoriesSubtitle": "Pesca, montaña y nieve, outdoor y deportes acuáticos — grandes áreas táctiles, mismas decisiones tranquilas.",
     "categoryCards": [
-      { "label": "Hombre", "path": "/products", "imageKey": "active-sports" },
-      { "label": "Mujer", "path": "/products", "imageKey": "water-sports" },
-      { "label": "Outdoor", "slug": "outdoor-adventure" },
-      { "label": "Equipamiento", "path": "/products", "imageKey": "mountain-snow" }
+      { "label": "Pesca", "path": "/products?category=fishing", "imageKey": "active-sports" },
+      { "label": "Montaña y nieve", "path": "/products?category=mountain-snow", "imageKey": "water-sports" },
+      { "label": "Outdoor y aventura", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
+      { "label": "Deportes acuáticos", "path": "/products?category=water-sports", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Historias desde el terreno — el mismo silencio que en la tienda.",

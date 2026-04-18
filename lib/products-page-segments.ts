@@ -1,4 +1,7 @@
-import { getProductsByCategorySlug } from "@/lib/categories";
+import {
+  getProductsByCategorySlug,
+  resolveProductsCategoryParam,
+} from "@/lib/categories";
 import type { Product } from "@/lib/products";
 import type { Locale } from "@/lib/i18n/config";
 
@@ -69,10 +72,16 @@ export function buildProductsListHref(
     q?: string;
     segment?: ProductSegment;
     sort?: string;
+    /** Conservar filtro por categoría (slug o alias, p. ej. `outdoor`) */
+    category?: string;
   }
 ): string {
   const params = new URLSearchParams();
   if (opts.q?.trim()) params.set("q", opts.q.trim());
+  if (opts.category?.trim()) {
+    const resolved = resolveProductsCategoryParam(opts.category.trim());
+    if (resolved) params.set("category", opts.category.trim());
+  }
   if (opts.segment && opts.segment !== "all") params.set("segment", opts.segment);
   if (opts.sort && opts.sort !== "featured") params.set("sort", opts.sort);
   const qs = params.toString();

@@ -7,6 +7,8 @@ type SortingBarProps = {
   segment: string;
   q?: string;
   sort: string;
+  /** Conserva filtro por categoría al ordenar */
+  category?: string;
   options: SortOption[];
   label: string;
 };
@@ -19,6 +21,7 @@ export default function SortingBar({
   segment,
   q,
   sort,
+  category,
   options,
   label,
 }: SortingBarProps) {
@@ -31,6 +34,9 @@ export default function SortingBar({
       className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-end"
     >
       {q?.trim() ? <input type="hidden" name="q" value={q.trim()} /> : null}
+      {category?.trim() ? (
+        <input type="hidden" name="category" value={category.trim()} />
+      ) : null}
       {segment && segment !== "all" ? (
         <input type="hidden" name="segment" value={segment} />
       ) : null}

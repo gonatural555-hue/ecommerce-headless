@@ -165,6 +165,22 @@ export function getCategoryBySlug(slug: string): Category | undefined {
   return CATEGORIES.find((cat) => cat.slug === slug);
 }
 
+/** Alias cortos en `?category=` → slug real (p. ej. home → productos) */
+const PRODUCTS_CATEGORY_QUERY_ALIASES: Record<string, string> = {
+  outdoor: "outdoor-adventure",
+};
+
+/**
+ * Valida y resuelve `?category=` de /products a un slug de categoría existente.
+ * Devuelve null si el valor no corresponde a ninguna categoría.
+ */
+export function resolveProductsCategoryParam(raw: string | undefined): string | null {
+  if (!raw?.trim()) return null;
+  const key = raw.trim().toLowerCase();
+  const slug = PRODUCTS_CATEGORY_QUERY_ALIASES[key] ?? key;
+  return getCategoryBySlug(slug) ? slug : null;
+}
+
 export function getCategorySlugs(): string[] {
   return CATEGORIES.map((cat) => cat.slug);
 }

@@ -86,12 +86,12 @@
     "imageStoryTitle": "Le mouvement est un remède",
     "imageStoryAria": "Sentier et horizon",
     "categoriesTitle": "Naviguer avec intention",
-    "categoriesSubtitle": "Homme, femme, outdoor et équipement — grandes zones cliquables, mêmes choix posés.",
+    "categoriesSubtitle": "Pêche, montagne et neige, outdoor et sports nautiques — grandes zones cliquables, mêmes choix posés.",
     "categoryCards": [
-      { "label": "Homme", "path": "/products", "imageKey": "active-sports" },
-      { "label": "Femme", "path": "/products", "imageKey": "water-sports" },
-      { "label": "Outdoor", "slug": "outdoor-adventure" },
-      { "label": "Équipement", "path": "/products", "imageKey": "mountain-snow" }
+      { "label": "Pêche", "path": "/products?category=fishing", "imageKey": "active-sports" },
+      { "label": "Montagne et neige", "path": "/products?category=mountain-snow", "imageKey": "water-sports" },
+      { "label": "Outdoor et aventure", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
+      { "label": "Sports nautiques", "path": "/products?category=water-sports", "imageKey": "mountain-snow" }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Récits de terrain — la même voix que dans la boutique.",

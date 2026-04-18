@@ -9,6 +9,10 @@ import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
 import {
+  getProductsByCategorySlug,
+  resolveProductsCategoryParam,
+} from "@/lib/categories";
+import {
   getProductsForSegment,
   parseSegment,
   sortProductsList,
@@ -90,7 +94,12 @@ export default async function ProductsPage({
   searchParams,
 }: {
   params: Promise<{ locale: Locale }>;
-  searchParams?: Promise<{ q?: string; segment?: string; sort?: string }>;
+  searchParams?: Promise<{
+    q?: string;
+    segment?: string;
+    sort?: string;
+    category?: string;
+  }>;
 }) {
   const { locale } = await params;
   const messages = await getMessages(locale);
@@ -102,8 +111,16 @@ export default async function ProductsPage({
   const segment = parseSegment(sp.segment);
   const sort = parseSort(typeof sp.sort === "string" ? sp.sort : undefined);
 
+  const categoryQuery =
+    typeof sp.category === "string" ? sp.category.trim() : "";
+  const categorySlug = resolveProductsCategoryParam(
+    categoryQuery || undefined
+  );
+
   const allProducts = getProducts();
-  const scoped = getProductsForSegment(segment as ProductSegment, allProducts);
+  const scoped = categorySlug
+    ? getProductsByCategorySlug(categorySlug)
+    : getProductsForSegment(segment as ProductSegment, allProducts);
   const filteredBySearch = query
     ? scoped.filter((product) =>
         productMatchesQuery(product, locale, query, normalizeText)
@@ -195,6 +212,7 @@ export default async function ProductsPage({
                 segment={segment}
                 q={rawQuery.trim() || undefined}
                 sort={sort}
+                category={categorySlug ? categoryQuery || undefined : undefined}
                 label={t("productsPage.sortLabel")}
                 options={sortOptions}
               />
