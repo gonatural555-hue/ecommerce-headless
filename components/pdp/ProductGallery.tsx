@@ -148,9 +148,9 @@ export default function ProductGallery({
         </div>
       ) : null}
 
-      <div className="relative order-1 min-w-0 flex-1 lg:order-none lg:max-w-[min(100%,480px)]">
+      <div className="relative order-1 min-h-0 min-w-0 w-full flex-1 self-start lg:order-none lg:max-w-[min(100%,480px)]">
         <div
-          className={`group relative w-full overflow-hidden ${stageAspect} ${stageShell}`}
+          className={`group relative isolate w-full overflow-hidden ${stageAspect} ${stageShell}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -165,17 +165,25 @@ export default function ProductGallery({
             aria-hidden
           />
 
-          <Image
-            key={`pdp-main-${list[safeIndex]}-${safeIndex}`}
-            src={list[safeIndex]}
-            alt={`${title} — ${safeIndex + 1}`}
-            fill
-            priority={safeIndex === 0}
-            placeholder="blur"
-            blurDataURL={PRODUCT_BLUR_DATA_URL}
-            className={`z-[1] ${imgClass}`}
-            sizes="(max-width: 1024px) 92vw, 480px"
-          />
+          {/*
+            next/image + fill: el padre directo debe ser position relative con altura definida.
+            Capa absolute inset-0 + hijo relative h-full w-full evita img con tamaño 0 en layout flex.
+          */}
+          <div className="absolute inset-0 z-[2] overflow-hidden rounded-[inherit]">
+            <div className="relative h-full min-h-0 w-full">
+              <Image
+                key={`pdp-main-${list[safeIndex]}-${safeIndex}`}
+                src={list[safeIndex] ?? list[0]}
+                alt={`${title} — ${safeIndex + 1}`}
+                fill
+                priority={safeIndex === 0}
+                placeholder="blur"
+                blurDataURL={PRODUCT_BLUR_DATA_URL}
+                className={imgClass}
+                sizes="(max-width: 1024px) 90vw, 480px"
+              />
+            </div>
+          </div>
 
           <button
             type="button"
