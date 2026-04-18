@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 
 type HomeHeroProps = {
@@ -15,8 +15,10 @@ type HomeHeroProps = {
   /** Poster / fallback estático (LCP y prefers-reduced-motion) */
   imageSrc?: string;
   imageAlt?: string;
-  /** Vídeo en loop como banner principal */
+  /** Vídeo en loop en desktop (desde 768px, breakpoint `md`) */
   videoSrc?: string;
+  /** Vídeo en loop en móvil (por debajo de 768px) */
+  videoSrcMobile?: string;
 };
 
 /**
@@ -32,9 +34,20 @@ export default function HomeHero({
   imageSrc = "/assets/images/hero/hero.webp",
   imageAlt = "",
   videoSrc = "/assets/images/hero/hero-home.mp4",
+  videoSrcMobile = "/assets/images/hero/hero-home-mobile.mp4",
 }: HomeHeroProps) {
   const [scroll, setScroll] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  /** Alineado con Tailwind `md` (768px): móvil si el ancho es menor */
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+
+  useLayoutEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobileViewport(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -43,6 +56,8 @@ export default function HomeHero({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const activeVideoSrc = isMobileViewport ? videoSrcMobile : videoSrc;
 
   const fade = reduceMotion ? 1 : Math.max(0.35, 1 - scroll / 520);
   const lift = reduceMotion ? 0 : scroll * 0.12;
