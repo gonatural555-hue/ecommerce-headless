@@ -66,23 +66,33 @@ export function sortProductsList(
   }
 }
 
+/** Valores de `?category=` en /products (misma convención que la home) */
+export const PRODUCT_PAGE_CATEGORY_PARAMS = [
+  "fishing",
+  "mountain-snow",
+  "outdoor",
+  "water-sports",
+] as const;
+
+export type ProductPageCategoryParam =
+  (typeof PRODUCT_PAGE_CATEGORY_PARAMS)[number];
+
 export function buildProductsListHref(
   locale: string,
   opts: {
     q?: string;
-    segment?: ProductSegment;
     sort?: string;
-    /** Conservar filtro por categoría (slug o alias, p. ej. `outdoor`) */
+    /** Slug o alias (p. ej. `outdoor` → outdoor-adventure) */
     category?: string;
   }
 ): string {
   const params = new URLSearchParams();
   if (opts.q?.trim()) params.set("q", opts.q.trim());
   if (opts.category?.trim()) {
-    const resolved = resolveProductsCategoryParam(opts.category.trim());
-    if (resolved) params.set("category", opts.category.trim());
+    if (resolveProductsCategoryParam(opts.category.trim())) {
+      params.set("category", opts.category.trim());
+    }
   }
-  if (opts.segment && opts.segment !== "all") params.set("segment", opts.segment);
   if (opts.sort && opts.sort !== "featured") params.set("sort", opts.sort);
   const qs = params.toString();
   return `/${locale}/products${qs ? `?${qs}` : ""}`;

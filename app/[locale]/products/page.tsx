@@ -12,12 +12,7 @@ import {
   getProductsByCategorySlug,
   resolveProductsCategoryParam,
 } from "@/lib/categories";
-import {
-  getProductsForSegment,
-  parseSegment,
-  sortProductsList,
-  type ProductSegment,
-} from "@/lib/products-page-segments";
+import { sortProductsList } from "@/lib/products-page-segments";
 
 export const dynamic = "force-dynamic";
 
@@ -96,7 +91,6 @@ export default async function ProductsPage({
   params: Promise<{ locale: Locale }>;
   searchParams?: Promise<{
     q?: string;
-    segment?: string;
     sort?: string;
     category?: string;
   }>;
@@ -108,7 +102,6 @@ export default async function ProductsPage({
 
   const rawQuery = typeof sp.q === "string" ? sp.q : "";
   const query = normalizeText(rawQuery.trim());
-  const segment = parseSegment(sp.segment);
   const sort = parseSort(typeof sp.sort === "string" ? sp.sort : undefined);
 
   const categoryQuery =
@@ -120,7 +113,7 @@ export default async function ProductsPage({
   const allProducts = getProducts();
   const scoped = categorySlug
     ? getProductsByCategorySlug(categorySlug)
-    : getProductsForSegment(segment as ProductSegment, allProducts);
+    : allProducts;
   const filteredBySearch = query
     ? scoped.filter((product) =>
         productMatchesQuery(product, locale, query, normalizeText)
@@ -140,12 +133,12 @@ export default async function ProductsPage({
       })
     : null;
 
-  const categoryItems: { id: ProductSegment; label: string }[] = [
+  const categoryItems = [
     { id: "all", label: t("productsPage.segmentAll") },
-    { id: "hombre", label: t("productsPage.segmentHombre") },
-    { id: "mujer", label: t("productsPage.segmentMujer") },
-    { id: "outdoor", label: t("productsPage.segmentOutdoor") },
-    { id: "equipamiento", label: t("productsPage.segmentEquipamiento") },
+    { id: "fishing", label: t("productsPage.segmentFishing") },
+    { id: "mountain-snow", label: t("productsPage.segmentMountainSnow") },
+    { id: "outdoor", label: t("productsPage.segmentOutdoorAdventure") },
+    { id: "water-sports", label: t("productsPage.segmentWaterSports") },
   ];
 
   const sortOptions = [
@@ -199,14 +192,13 @@ export default async function ProductsPage({
             <CategorySelector
               locale={locale}
               items={categoryItems}
-              active={segment}
+              activeResolvedCategorySlug={categorySlug}
               q={rawQuery.trim() || undefined}
               sort={sort === "featured" ? undefined : sort}
             />
             <div className="shrink-0 lg:min-w-[240px]">
               <SortingBar
                 locale={locale}
-                segment={segment}
                 q={rawQuery.trim() || undefined}
                 sort={sort}
                 category={categorySlug ? categoryQuery || undefined : undefined}

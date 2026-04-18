@@ -1,19 +1,18 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/blog/ScrollReveal";
-import {
-  buildProductsListHref,
-  type ProductSegment,
-} from "@/lib/products-page-segments";
+import { resolveProductsCategoryParam } from "@/lib/categories";
+import { buildProductsListHref } from "@/lib/products-page-segments";
 
 export type CategorySelectorItem = {
-  id: ProductSegment;
+  id: string;
   label: string;
 };
 
 type CategorySelectorProps = {
   locale: string;
   items: CategorySelectorItem[];
-  active: ProductSegment;
+  /** `null` = vista “Todo”; si no, slug resuelto (p. ej. outdoor-adventure) */
+  activeResolvedCategorySlug: string | null;
   q?: string;
   sort?: string;
 };
@@ -24,7 +23,7 @@ type CategorySelectorProps = {
 export default function CategorySelector({
   locale,
   items,
-  active,
+  activeResolvedCategorySlug,
   q,
   sort,
 }: CategorySelectorProps) {
@@ -32,12 +31,19 @@ export default function CategorySelector({
     <ScrollReveal className="w-full">
       <div className="flex flex-wrap justify-center gap-3 md:gap-4">
         {items.map((item) => {
-          const isActive = active === item.id;
-          const href = buildProductsListHref(locale, {
-            q,
-            segment: item.id,
-            sort,
-          });
+          const isActive =
+            item.id === "all"
+              ? activeResolvedCategorySlug === null
+              : resolveProductsCategoryParam(item.id) ===
+                activeResolvedCategorySlug;
+          const href =
+            item.id === "all"
+              ? buildProductsListHref(locale, { q, sort })
+              : buildProductsListHref(locale, {
+                  q,
+                  sort,
+                  category: item.id,
+                });
           return (
             <Link
               key={item.id}

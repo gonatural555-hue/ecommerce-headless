@@ -4,7 +4,6 @@ type SortOption = { value: string; label: string };
 
 type SortingBarProps = {
   locale: string;
-  segment: string;
   q?: string;
   sort: string;
   /** Conserva filtro por categoría al ordenar */
@@ -14,11 +13,10 @@ type SortingBarProps = {
 };
 
 /**
- * Ordenación mínima via GET — sin JS obligatorio, mantiene q + segment.
+ * Ordenación mínima via GET — sin JS obligatorio, mantiene q + category.
  */
 export default function SortingBar({
   locale,
-  segment,
   q,
   sort,
   category,
@@ -36,9 +34,6 @@ export default function SortingBar({
       {q?.trim() ? <input type="hidden" name="q" value={q.trim()} /> : null}
       {category?.trim() ? (
         <input type="hidden" name="category" value={category.trim()} />
-      ) : null}
-      {segment && segment !== "all" ? (
-        <input type="hidden" name="segment" value={segment} />
       ) : null}
       <label className="sr-only" htmlFor="products-sort">
         {label}
