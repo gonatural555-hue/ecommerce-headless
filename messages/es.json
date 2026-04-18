@@ -74,6 +74,33 @@
     "subtitle": "Equipo pensado para quienes viajan con intención.",
     "cta": "Explorar la colección"
   },
+  "homePage": {
+    "heroTagline": "Go Natural",
+    "heroTitle": "Movete con intención",
+    "heroSubtitle": "La naturaleza no es un lugar. Es lo que somos cuando nos permitimos salir.",
+    "ctaProducts": "Explorar productos",
+    "ctaJournal": "Descubrir el Journal",
+    "brandStatement": "No te encierres. Volvé a lo esencial.",
+    "essentialTitle": "Equipamiento esencial",
+    "essentialSubtitle": "Piezas pensadas para terreno real: firmes, silenciosas, sin ruido de más.",
+    "imageStoryTitle": "El movimiento es la medicina",
+    "imageStoryAria": "Sendero y horizonte",
+    "categoriesTitle": "Explorá por terruño",
+    "categoriesSubtitle": "Cuatro puertas hacia afuera. Una regla: intención.",
+    "categoryCards": [
+      { "label": "Outdoor & campamento", "slug": "outdoor-adventure" },
+      { "label": "Montaña & nieve", "slug": "mountain-snow" },
+      { "label": "Agua", "slug": "water-sports" },
+      { "label": "Activo & movimiento", "slug": "active-sports" }
+    ],
+    "journalTitle": "Journal",
+    "journalIntro": "Historias desde el terreno — el mismo silencio que en la tienda.",
+    "journalCta": "Explorar historias",
+    "communityTitle": "Unite a la comunidad",
+    "communityBody": "Movete con intención. Elegí aire antes que pantalla.",
+    "communityCta": "Escribinos",
+    "heroImageAlt": "Paisaje abierto al atardecer"
+  },
   "homeImmersive": {
     "heroHeading": "Muévete, explora, vive",
     "scrollHint": "Descubrir",

@@ -74,6 +74,33 @@
     "subtitle": "Gear pensato per chi viaggia con intenzione.",
     "cta": "Esplora la collezione"
   },
+  "homePage": {
+    "heroTagline": "Go Natural",
+    "heroTitle": "Muoviti con intenzione",
+    "heroSubtitle": "La natura non è un luogo. È ciò che diventiamo quando usciamo.",
+    "ctaProducts": "Esplora i prodotti",
+    "ctaJournal": "Apri il Journal",
+    "brandStatement": "Non restare dentro. Torna all’essenziale.",
+    "essentialTitle": "Equipaggiamento essenziale",
+    "essentialSubtitle": "Scelto per il terreno reale: silenzioso, affidabile, senza rumore in più.",
+    "imageStoryTitle": "Il movimento è medicina",
+    "imageStoryAria": "Sentiero e orizzonte",
+    "categoriesTitle": "Esplora per mondo",
+    "categoriesSubtitle": "Quattro porte verso fuori. Una regola: intenzione.",
+    "categoryCards": [
+      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
+      { "label": "Montagna & neve", "slug": "mountain-snow" },
+      { "label": "Acqua", "slug": "water-sports" },
+      { "label": "Attivo & movimento", "slug": "active-sports" }
+    ],
+    "journalTitle": "Journal",
+    "journalIntro": "Note dal campo — la stessa voce del negozio.",
+    "journalCta": "Leggi le storie",
+    "communityTitle": "Unisciti alla community",
+    "communityBody": "Muoviti con intenzione. Scegli l’aria aperta prima dello schermo.",
+    "communityCta": "Scrivici",
+    "heroImageAlt": "Paesaggio aperto al tramonto"
+  },
   "homeImmersive": {
     "heroHeading": "Muoviti, esplora, vivi",
     "scrollHint": "Scopri",

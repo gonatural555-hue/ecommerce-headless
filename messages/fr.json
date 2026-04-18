@@ -74,6 +74,33 @@
     "subtitle": "Équipement pensé pour ceux qui voyagent avec intention.",
     "cta": "Explorer la collection"
   },
+  "homePage": {
+    "heroTagline": "Go Natural",
+    "heroTitle": "Avance avec intention",
+    "heroSubtitle": "La nature n’est pas un lieu. C’est ce que nous redevenons quand on sort.",
+    "ctaProducts": "Voir les produits",
+    "ctaJournal": "Ouvrir le Journal",
+    "brandStatement": "Ne reste pas enfermé. Reviens à l’essentiel.",
+    "essentialTitle": "Équipement essentiel",
+    "essentialSubtitle": "Choisi pour le terrain réel : discret, fiable, sans le superflu.",
+    "imageStoryTitle": "Le mouvement est un remède",
+    "imageStoryAria": "Sentier et horizon",
+    "categoriesTitle": "Explorer par univers",
+    "categoriesSubtitle": "Quatre portes vers l’extérieur. Une règle : l’intention.",
+    "categoryCards": [
+      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
+      { "label": "Montagne & neige", "slug": "mountain-snow" },
+      { "label": "Eau", "slug": "water-sports" },
+      { "label": "Actif & mouvement", "slug": "active-sports" }
+    ],
+    "journalTitle": "Journal",
+    "journalIntro": "Récits de terrain — la même voix que dans la boutique.",
+    "journalCta": "Lire les histoires",
+    "communityTitle": "Rejoins la communauté",
+    "communityBody": "Avance avec intention. Choisis l’air libre avant l’écran.",
+    "communityCta": "Nous écrire",
+    "heroImageAlt": "Paysage ouvert au crépuscule"
+  },
   "homeImmersive": {
     "heroHeading": "Bouge, explore, vis",
     "scrollHint": "Découvrir",

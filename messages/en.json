@@ -74,6 +74,33 @@
     "subtitle": "Gear designed for those who travel with intention.",
     "cta": "Explore the collection"
   },
+  "homePage": {
+    "heroTagline": "Go Natural",
+    "heroTitle": "Move with intention",
+    "heroSubtitle": "Nature is not a place. It's who we are when we step outside.",
+    "ctaProducts": "Explore products",
+    "ctaJournal": "Open the Journal",
+    "brandStatement": "Don't stay inside. Return to what matters.",
+    "essentialTitle": "Essential gear",
+    "essentialSubtitle": "Built for real ground: quiet, capable, nothing extra.",
+    "imageStoryTitle": "Movement is medicine",
+    "imageStoryAria": "Trail and open horizon",
+    "categoriesTitle": "Explore by world",
+    "categoriesSubtitle": "Four doorways out. One rule: intention.",
+    "categoryCards": [
+      { "label": "Outdoor & camping", "slug": "outdoor-adventure" },
+      { "label": "Mountain & snow", "slug": "mountain-snow" },
+      { "label": "Water", "slug": "water-sports" },
+      { "label": "Active & motion", "slug": "active-sports" }
+    ],
+    "journalTitle": "Journal",
+    "journalIntro": "Field notes in the same voice as the shop floor.",
+    "journalCta": "Explore stories",
+    "communityTitle": "Join the community",
+    "communityBody": "Move with intention. Choose open air before the scroll.",
+    "communityCta": "Contact us",
+    "heroImageAlt": "Open landscape at dusk"
+  },
   "homeImmersive": {
     "heroHeading": "Move, explore, live",
     "scrollHint": "Discover",
