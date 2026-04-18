@@ -210,20 +210,25 @@ export default function ProductGallery({
                   key={`${src}-layer-${i}`}
                   className={[
                     "absolute inset-0 transition-opacity duration-300 ease-out motion-reduce:transition-none",
-                    i === safeIndex ? "z-[1] opacity-100" : "z-0 opacity-0",
+                    i === safeIndex
+                      ? "z-[1] opacity-100"
+                      : "pointer-events-none z-0 opacity-0",
                   ].join(" ")}
                 >
-                  <Image
-                    src={src}
-                    alt={`${title} — ${i + 1}`}
-                    fill
-                    priority={i === 0}
-                    loading={i === safeIndex ? "eager" : "lazy"}
-                    placeholder="blur"
-                    blurDataURL={PRODUCT_BLUR_DATA_URL}
-                    className={imgClass}
-                    sizes="(max-width: 1024px) 92vw, 420px"
-                  />
+                  {/* `fill` exige un ancestro `relative` con tamaño — sin esto la imagen no pinta */}
+                  <div className="relative h-full w-full min-h-0">
+                    <Image
+                      src={src}
+                      alt={`${title} — ${i + 1}`}
+                      fill
+                      priority={i === 0}
+                      loading={i === safeIndex ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL={PRODUCT_BLUR_DATA_URL}
+                      className={imgClass}
+                      sizes="(max-width: 1024px) 92vw, 420px"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

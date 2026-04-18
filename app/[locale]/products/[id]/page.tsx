@@ -161,7 +161,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) {
     return (
-      <main className="max-w-6xl mx-auto px-4 py-20">
+      <main className="mx-auto max-w-6xl bg-[#FFFFFF] px-4 py-20 text-neutral-900">
         <h1 className="text-2xl font-semibold">Producto no encontrado</h1>
       </main>
     );
@@ -299,7 +299,7 @@ export default async function ProductPage({ params }: Props) {
   const isCyclingTraining001 = product.id === "gn-cycling-training-001";
 
   return (
-    <main className="overflow-x-hidden bg-dark-base text-text-primary">
+    <main className="overflow-x-hidden bg-[#FFFFFF] text-neutral-900">
       <div
         className={
           isCyclingTraining001
@@ -316,7 +316,7 @@ export default async function ProductPage({ params }: Props) {
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}
           pdpDesktop={pdpDesktop}
-          surface="dark"
+          surface="light"
           reviewsAverage={reviewsAverage}
           reviewsCount={reviews.length}
           reviewsLinkLabel={reviewsLinkLabel}
@@ -336,8 +336,8 @@ export default async function ProductPage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-6 pb-10 pt-1 sm:px-10 lg:px-16 lg:pb-12 lg:pt-0">
           <div className="grid lg:grid-cols-[5fr_2.5fr] lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20">
             <div className="min-w-0">
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-dark-surface/35 shadow-[0_24px_60px_-32px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.06]">
-                <div className="relative aspect-video w-full bg-dark-surface/50">
+              <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/80 shadow-sm ring-1 ring-neutral-200/60">
+                <div className="relative aspect-video w-full bg-neutral-100">
                   <video
                     className="absolute inset-0 h-full w-full object-contain"
                     controls
@@ -361,7 +361,7 @@ export default async function ProductPage({ params }: Props) {
       <ProductReviews
         productSlug={productSlug}
         reviews={REVIEWS_SEED}
-        surface="dark"
+        surface="light"
       />
       {reviewsSchema && (
         <script
@@ -374,7 +374,7 @@ export default async function ProductPage({ params }: Props) {
         <PdpBenefitsSection
           title={t("productPage.pdpDesktop.benefitsSectionHeading")}
           bullets={pdpDesktop.benefits}
-          surface="dark"
+          surface="light"
         />
       ) : null}
 
@@ -383,22 +383,22 @@ export default async function ProductPage({ params }: Props) {
           imageSrc={productImages.lifestyle[0]}
           imageAlt={`${localizedProduct.title} — lifestyle`}
           overlayText={t("homePage.imageStoryTitle")}
-          surface="dark"
+          surface="light"
         />
       ) : null}
 
       {accordionItems.length > 0 ? (
-        <PdpSpecsAccordion items={accordionItems} surface="dark" />
+        <PdpSpecsAccordion items={accordionItems} surface="light" />
       ) : null}
 
       {productImages.extras.length > 0 ? (
-        <section className="border-t border-white/[0.07] py-14 md:py-16">
+        <section className="border-t border-neutral-200/90 py-14 md:py-16">
           <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {productImages.extras.map((img, index) => (
                 <div
                   key={img}
-                  className="overflow-hidden rounded-2xl border border-white/[0.08] bg-dark-surface/30 ring-1 ring-white/[0.05]"
+                  className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/50 ring-1 ring-neutral-200/50"
                 >
                   <Image
                     src={img}
@@ -427,13 +427,13 @@ export default async function ProductPage({ params }: Props) {
             addToCart: t("common.addToCart"),
             noImage: t("common.noImage"),
           }}
-          surface="dark"
+          surface="light"
         />
       ) : null}
 
       <PdpMiniBrandBlock
         message={t("homePage.brandStatement")}
-        surface="dark"
+        surface="light"
       />
     </main>
   );
