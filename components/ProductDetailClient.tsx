@@ -7,8 +7,7 @@ import AddedToCartModal, {
 import AddToCartButton, {
   type AddToCartLinePayload,
 } from "@/components/AddToCartButton";
-import ProductImageGallery from "@/components/ProductImageGallery";
-import ProductGalleryGrid from "@/components/pdp/ProductGalleryGrid";
+import ProductGallery from "@/components/pdp/ProductGallery";
 import ProductInfoPanel from "@/components/pdp/ProductInfoPanel";
 import VariantSelector from "@/components/VariantSelector";
 import { splitVariantDefinitions } from "@/lib/pdp-variant-utils";
@@ -44,6 +43,8 @@ export type PdpDesktopContent = {
   trustMicrocopy: string;
   shippingHeading: string;
   shippingEurope: string;
+  shippingLatam: string;
+  secureAndWarranty: string;
   returns: string;
   benefits: string[];
   specBullets: string[];
@@ -67,6 +68,8 @@ type Props = {
   selectSizeLabel: string;
   sizeGuideLabel: string;
   sizeGuideHref?: string;
+  /** Textos bajo CTA móvil (confianza) */
+  mobileStickyTrustLines: [string, string, string];
 };
 
 function getDefaultSelections(variants: VariantDefinition[]) {
@@ -109,6 +112,7 @@ export default function ProductDetailClient({
   selectSizeLabel,
   sizeGuideLabel,
   sizeGuideHref,
+  mobileStickyTrustLines,
 }: Props) {
   const L = surface === "light";
   /** Gafas / horizontales: ver `lib/pdp-star-products.ts`. Pantalón ski: solo móvil legacy. */
@@ -270,20 +274,16 @@ export default function ProductDetailClient({
   const desktopDescription =
     product.shortDescription?.trim() || product.description;
 
-  const gridDesktopImages = useMemo(() => {
+  /** Solo fotos de producto en la galería principal; lifestyle / extras van abajo en la página. */
+  const pdpGalleryImages = useMemo(() => {
     const list: string[] = [];
     const push = (url: string) => {
       if (url && !list.includes(url)) list.push(url);
     };
     if (activeImages.featured) push(activeImages.featured);
     activeImages.gallery.forEach(push);
-    productImages.lifestyle.forEach(push);
-    productImages.extras.forEach(push);
     return list;
-  }, [activeImages, productImages.lifestyle, productImages.extras]);
-
-  const heroGalleryFeatured = gridDesktopImages[0] ?? null;
-  const heroGalleryRest = gridDesktopImages.slice(1);
+  }, [activeImages]);
 
   const { color: colorDef, size: sizeDef, other: otherVariantDefs } =
     useMemo(
@@ -291,106 +291,61 @@ export default function ProductDetailClient({
       [productVariants]
     );
 
+  const galleryAspect = useWideHeroGallery ? "cinematic" : "square";
+  const galleryFit =
+    showFullImage && !useWideHeroGallery ? "contain" : "cover";
+
   return (
     <>
-      {/* Mobile Layout (<1024px) - Mantener exactamente igual */}
-      <section className="lg:hidden grid gap-6 md:gap-8 items-start max-w-full pb-20">
-        {/* Galería Mobile */}
-        <div
-          className={
-            L
-              ? "relative z-0 bg-neutral-100 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden border border-neutral-200/80"
-              : "relative z-0 bg-dark-surface/40 rounded-2xl p-3 md:p-6 max-w-full overflow-x-hidden"
-          }
-        >
-          <ProductImageGallery
-            featured={activeImages.featured}
-            gallery={activeImages.gallery}
-            title={product.title}
-            noImageLabel={noImageLabel}
-            surface={surface}
-            featuredContainerClassName={
-              showFullImage ? "aspect-auto overflow-visible" : undefined
-            }
-            featuredImageClassName={
-              showFullImage ? "object-contain h-auto mx-auto p-2 md:p-3" : undefined
-            }
-          />
-        </div>
-
-        {/* Info principal Mobile */}
-        <div className="relative z-10 flex flex-col gap-4 md:gap-7 min-w-0">
-          {/* Mobile: Precio primero (más grande que título) */}
-          <div className="order-1">
-            <div className="flex items-baseline gap-2">
-              <p
-                className={
-                  L
-                    ? "text-4xl font-bold text-neutral-900"
-                    : "text-4xl font-bold text-text-primary"
-                }
-              >
-                ${resolvedPrice.toFixed(2)}
-              </p>
-              {product.freeShipping && freeShippingLabel && (
-                <span
-                  className={
-                    L
-                      ? "text-xs uppercase tracking-[0.12em] text-neutral-500"
-                      : "text-xs uppercase tracking-[0.12em] text-text-muted/80"
-                  }
-                >
-                  {freeShippingLabel}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Título - más pequeño en mobile */}
-          <div className="order-2">
-            <h1
-              className={
-                L
-                  ? "text-xl font-semibold text-neutral-900 break-words"
-                  : "text-xl font-semibold text-text-primary break-words"
-              }
-            >
-              {seoH1}
-            </h1>
-          </div>
-
-          {/* Variantes */}
-          {productVariants && (
-            <div className="order-3 pt-1">
-              <VariantSelector
-                variants={productVariants}
-                onChange={setSelections}
-                value={selections}
-                surface={surface}
-              />
-            </div>
-          )}
-
-          {/* Descripción - visible arriba en mobile */}
-          <div className="order-4 min-w-0">
-            <p
-              className={
-                L
-                  ? "text-sm text-neutral-600 break-words line-clamp-3"
-                  : "text-sm text-text-muted break-words line-clamp-3"
-              }
-            >
-              {product.description}
-            </p>
-          </div>
-        </div>
+      {/* Mobile: galería + mismo panel editorial que desktop */}
+      <section className="mx-auto grid max-w-full gap-8 pb-24 pt-2 lg:hidden md:gap-10">
+        <ProductGallery
+          images={pdpGalleryImages}
+          title={product.title}
+          noImageLabel={noImageLabel}
+          surface={surface}
+          aspectMode={galleryAspect}
+          imageFit={galleryFit}
+        />
+        <ProductInfoPanel
+          productId={product.id}
+          surface={surface}
+          seoH1={seoH1}
+          description={desktopDescription}
+          resolvedPrice={resolvedPrice}
+          freeShipping={product.freeShipping}
+          freeShippingLabel={freeShippingLabel}
+          taxNote={taxNote}
+          reviewsAverage={reviewsAverage}
+          reviewsCount={reviewsCount}
+          reviewsLinkLabel={reviewsLinkLabel}
+          productVariants={productVariants}
+          colorDef={colorDef}
+          sizeDef={sizeDef}
+          otherVariantDefs={otherVariantDefs}
+          selections={selections}
+          onSelectionsChange={setSelections}
+          sizeGuideHref={sizeGuideHref}
+          sizeGuideLabel={sizeGuideLabel}
+          selectSizeLabel={selectSizeLabel}
+          ctaLabel={ctaLabel}
+          trustMicrocopy={pdpDesktop.trustMicrocopy}
+          pdpDesktop={pdpDesktop}
+          cartPayload={{
+            id: product.id,
+            title: product.title,
+            price: resolvedPrice,
+            image: cartImage,
+            variantSelections,
+          }}
+          onAfterAdd={handleAfterAddToCart}
+        />
       </section>
 
-      {/* Desktop (lg+): galería (60% o ~67% si hero ancho) + panel sticky */}
+      {/* Desktop: dos columnas equilibradas — galería contenida + info */}
       <section
         className={[
-          "hidden lg:grid lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20 max-w-full",
-          useWideHeroGallery ? "lg:grid-cols-[5fr_2.5fr]" : "lg:grid-cols-[5fr_3fr]",
+          "hidden max-w-full gap-x-12 gap-y-10 lg:grid lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] xl:gap-x-16 2xl:gap-x-20",
           tightGalleryToVideo ? "lg:content-start" : "",
         ]
           .filter(Boolean)
@@ -398,42 +353,20 @@ export default function ProductDetailClient({
       >
         <div
           className={[
-            "min-w-0",
+            "min-w-0 justify-self-start",
             tightGalleryToVideo ? "lg:self-start" : "",
           ]
             .filter(Boolean)
             .join(" ")}
         >
-          <div
-            className={
-              L
-                ? tightGalleryToVideo
-                  ? "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-4 xl:p-5 2xl:p-6"
-                  : "rounded-2xl border border-neutral-200/90 bg-neutral-100/80 p-5 xl:p-7 2xl:p-8"
-                : tightGalleryToVideo
-                  ? "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-4 xl:p-5 2xl:p-6 ring-1 ring-white/[0.04]"
-                  : "rounded-2xl border border-white/[0.08] bg-dark-surface/25 p-5 xl:p-7 2xl:p-8 ring-1 ring-white/[0.04]"
-            }
-          >
-            {useWideHeroGallery ? (
-              <ProductImageGallery
-                featured={heroGalleryFeatured}
-                gallery={heroGalleryRest}
-                title={product.title}
-                noImageLabel={noImageLabel}
-                surface={surface}
-                heroWide
-                compactVerticalSpacing={tightGalleryToVideo}
-              />
-            ) : (
-              <ProductGalleryGrid
-                images={gridDesktopImages}
-                title={product.title}
-                noImageLabel={noImageLabel}
-                surface={surface}
-              />
-            )}
-          </div>
+          <ProductGallery
+            images={pdpGalleryImages}
+            title={product.title}
+            noImageLabel={noImageLabel}
+            surface={surface}
+            aspectMode={galleryAspect}
+            imageFit={galleryFit}
+          />
         </div>
         <div className="min-w-0">
           <ProductInfoPanel
@@ -476,12 +409,11 @@ export default function ProductDetailClient({
       <div
         className={
           L
-            ? "md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-neutral-200 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] pt-3 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
-            : "md:hidden fixed bottom-0 left-0 right-0 z-50 bg-dark-base/98 backdrop-blur-md border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pt-3 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
+            ? "fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-neutral-200 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] pt-3 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+            : "fixed bottom-0 left-0 right-0 z-50 bg-dark-base/98 backdrop-blur-md border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pt-3 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
         }
       >
-        <div className="max-w-full mx-auto">
-          {/* Precio siempre visible en sticky */}
+        <div className="mx-auto max-w-full">
           <div className="mb-2 text-center">
             <p
               className={
@@ -494,7 +426,6 @@ export default function ProductDetailClient({
             </p>
           </div>
 
-          {/* CTA Button */}
           <AddToCartButton
             id={product.id}
             title={product.title}
@@ -502,24 +433,33 @@ export default function ProductDetailClient({
             image={cartImage}
             variantSelections={variantSelections}
             label={ctaLabel}
-            className="w-full mt-0 py-3.5 text-base"
+            className="mt-0 w-full rounded-full py-3.5 text-base transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
             surface={surface}
             onAfterAdd={handleAfterAddToCart}
           />
 
-          {/* Microcopy de confianza */}
           <div
             className={
               L
-                ? "mt-2.5 flex items-center justify-center gap-3 text-[10px] text-neutral-500 leading-tight"
-                : "mt-2.5 flex items-center justify-center gap-3 text-[10px] text-text-muted/70 leading-tight"
+                ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] text-neutral-500 leading-tight"
+                : "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] text-text-muted/70 leading-tight"
             }
           >
-            <span>Envíos internacionales</span>
-            <span>•</span>
-            <span>Devolución sin costo</span>
-            <span>•</span>
-            <span>Compra segura</span>
+            <span>{mobileStickyTrustLines[0]}</span>
+            <span
+              aria-hidden
+              className={L ? "text-neutral-300" : "text-white/25"}
+            >
+              ·
+            </span>
+            <span>{mobileStickyTrustLines[1]}</span>
+            <span
+              aria-hidden
+              className={L ? "text-neutral-300" : "text-white/25"}
+            >
+              ·
+            </span>
+            <span>{mobileStickyTrustLines[2]}</span>
           </div>
         </div>
       </div>

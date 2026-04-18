@@ -1,16 +1,19 @@
-import Link from "next/link";
 import Image from "next/image";
 import { getProducts, getProductById } from "@/lib/products";
 import { getProductImages } from "@/lib/product-images";
 import { getProductVariants } from "@/lib/product-variants";
 import type { Product } from "@/lib/products";
-import ProductCardSimple from "@/components/ProductCardSimple";
 import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { buildMetadata, formatTemplate } from "@/lib/seo";
 import ProductDetailClient from "@/components/ProductDetailClient";
 import ProductReviews from "@/components/ProductReviews";
+import PdpBenefitsSection from "@/components/pdp/PdpBenefitsSection";
+import PdpImageStorySection from "@/components/pdp/PdpImageStorySection";
+import PdpSpecsAccordion from "@/components/pdp/PdpSpecsAccordion";
+import PdpRelatedProductsRail from "@/components/pdp/PdpRelatedProductsRail";
+import PdpMiniBrandBlock from "@/components/pdp/PdpMiniBrandBlock";
 import { REVIEWS_SEED, getReviewsByProductSlug } from "@/lib/reviews-data";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
 
@@ -234,11 +237,7 @@ export default async function ProductPage({ params }: Props) {
 
   const relatedProducts = getProducts()
     .filter((item) => item.category === product.category && item.id !== product.id)
-    .slice(0, 3);
-  const specs = product.features && product.features.length > 0
-    ? product.features
-    : benefits;
-
+    .slice(0, 8);
   const specSource =
     localizedProduct.features && localizedProduct.features.length > 0
       ? localizedProduct.features
@@ -254,12 +253,39 @@ export default async function ProductPage({ params }: Props) {
         ? t("productPage.pdpDesktop.shippingEuropeTraining001")
         : product.pdpTrust?.shippingEurope ??
           t("productPage.pdpDesktop.shippingEurope"),
+    shippingLatam:
+      product.pdpTrust?.shippingLatam ??
+      t("productPage.pdpDesktop.shippingLatam"),
+    secureAndWarranty: t("productPage.pdpDesktop.secureAndWarranty"),
     returns:
       product.pdpTrust?.returns ?? t("productPage.pdpDesktop.returns"),
     benefits: benefits.slice(0, 4),
     specBullets: specSource.slice(0, 8),
     idealForLine: idealFor.join(" · "),
   };
+
+  const detailLines = [
+    useCase,
+    whyBetter,
+    `${t("productPage.pdpDesktop.idealForLabel")} ${idealFor.join(" · ")}`,
+    ...(localizedProduct.longDescription ?? []),
+  ].filter((line) => line && line.trim().length > 0);
+
+  const accordionItems: { id: string; title: string; lines: string[] }[] = [];
+  if (specSource.length > 0) {
+    accordionItems.push({
+      id: "specs",
+      title: t("productPage.pdpDesktop.specsAccordionTitle"),
+      lines: specSource.slice(0, 12),
+    });
+  }
+  if (detailLines.length > 0) {
+    accordionItems.push({
+      id: "details",
+      title: t("productPage.pdpDesktop.detailsAccordionTitle"),
+      lines: detailLines,
+    });
+  }
 
   const reviewsLinkLabel =
     reviews.length > 0
@@ -273,12 +299,12 @@ export default async function ProductPage({ params }: Props) {
   const isCyclingTraining001 = product.id === "gn-cycling-training-001";
 
   return (
-    <main className="bg-[#FFFFFF] overflow-x-hidden text-neutral-900">
+    <main className="overflow-x-hidden bg-dark-base text-text-primary">
       <div
         className={
           isCyclingTraining001
-            ? "max-w-6xl mx-auto max-w-full px-6 pt-24 pb-3 sm:px-10 md:pt-20 lg:px-16 lg:pb-2"
-            : "max-w-6xl mx-auto max-w-full px-6 pt-24 pb-32 sm:px-10 md:py-20 md:pb-20 lg:px-16"
+            ? "mx-auto max-w-7xl px-6 pb-3 pt-24 sm:px-10 md:pt-20 lg:px-16 lg:pb-2"
+            : "mx-auto max-w-7xl px-6 pb-24 pt-24 sm:px-10 md:py-20 md:pb-28 lg:px-16"
         }
       >
         <ProductDetailClient
@@ -290,7 +316,7 @@ export default async function ProductPage({ params }: Props) {
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}
           pdpDesktop={pdpDesktop}
-          surface="light"
+          surface="dark"
           reviewsAverage={reviewsAverage}
           reviewsCount={reviews.length}
           reviewsLinkLabel={reviewsLinkLabel}
@@ -298,15 +324,20 @@ export default async function ProductPage({ params }: Props) {
           selectSizeLabel={t("productPage.pdpDesktop.selectSize")}
           sizeGuideLabel={t("productPage.pdpDesktop.sizeGuide")}
           sizeGuideHref={`/${locale}/contact`}
+          mobileStickyTrustLines={[
+            t("productPage.pdpDesktop.mobileStickyLine1"),
+            t("productPage.pdpDesktop.mobileStickyLine2"),
+            t("productPage.pdpDesktop.mobileStickyLine3"),
+          ]}
         />
       </div>
 
       {isCyclingTraining001 && (
-        <div className="max-w-6xl mx-auto max-w-full px-6 pt-1 pb-10 sm:px-10 lg:px-16 lg:pt-0 lg:pb-12">
+        <div className="mx-auto max-w-7xl px-6 pb-10 pt-1 sm:px-10 lg:px-16 lg:pb-12 lg:pt-0">
           <div className="grid lg:grid-cols-[5fr_2.5fr] lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20">
             <div className="min-w-0">
-              <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/50 shadow-sm ring-1 ring-neutral-200/60">
-                <div className="relative aspect-video w-full bg-neutral-100">
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-dark-surface/35 shadow-[0_24px_60px_-32px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.06]">
+                <div className="relative aspect-video w-full bg-dark-surface/50">
                   <video
                     className="absolute inset-0 h-full w-full object-contain"
                     controls
@@ -330,7 +361,7 @@ export default async function ProductPage({ params }: Props) {
       <ProductReviews
         productSlug={productSlug}
         reviews={REVIEWS_SEED}
-        surface="light"
+        surface="dark"
       />
       {reviewsSchema && (
         <script
@@ -339,104 +370,71 @@ export default async function ProductPage({ params }: Props) {
         />
       )}
 
-      {/* Story / uso del producto */}
-      <section className="py-16 md:py-20 border-t border-neutral-200/90">
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] items-center">
-            {productImages.lifestyle.length > 0 && (
-              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-neutral-200 shadow-sm">
-                <Image
-                  src={productImages.lifestyle[0]}
-                  alt={`${localizedProduct.title} lifestyle`}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={PRODUCT_BLUR_DATA_URL}
-                  className="object-cover object-center"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/25" />
-              </div>
-            )}
-            <div className="max-w-2xl">
-              <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
-                {useCase}
-              </p>
-              <p className="mt-4 text-base md:text-lg text-neutral-600 leading-relaxed">
-                {whyBetter}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {pdpDesktop.benefits.length > 0 ? (
+        <PdpBenefitsSection
+          title={t("productPage.pdpDesktop.benefitsSectionHeading")}
+          bullets={pdpDesktop.benefits}
+          surface="dark"
+        />
+      ) : null}
 
-      {/* Specs técnicas */}
-      {specs.length > 0 && (
-        <section className="py-16 md:py-20 border-t border-neutral-200/90 bg-neutral-50/70">
-          <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
-                {t("productPage.specsTitle")}
-              </h2>
-              <ul className="mt-6 space-y-3 text-neutral-600">
-                {specs.map((spec) => (
-                  <li key={spec} className="flex items-start gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent-gold" />
-                    <span>{spec}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {productImages.lifestyle.length > 0 ? (
+        <PdpImageStorySection
+          imageSrc={productImages.lifestyle[0]}
+          imageAlt={`${localizedProduct.title} — lifestyle`}
+          overlayText={t("homePage.imageStoryTitle")}
+          surface="dark"
+        />
+      ) : null}
 
-            {productImages.extras.length > 0 && (
-              <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-                {productImages.extras.map((img, index) => (
-                  <div
-                    key={img}
-                    className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm"
-                  >
-                    <Image
-                      src={img}
-                      alt={`${localizedProduct.title} detalle técnico ${index + 1}`}
-                      width={1200}
-                      height={900}
-                      placeholder="blur"
-                      blurDataURL={PRODUCT_BLUR_DATA_URL}
-                      className="h-full w-full object-contain"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+      {accordionItems.length > 0 ? (
+        <PdpSpecsAccordion items={accordionItems} surface="dark" />
+      ) : null}
 
-      {/* Cross-sell: mismas props que ProductGridSimple (/products); isolate evita herencia de color desde <main> */}
-      {relatedProducts.length > 0 && (
-        <section className="py-16 md:py-20 border-t border-neutral-200/90">
-          <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900">
-              {t("productPage.crossSellTitle")}
-            </h2>
-            <div className="mt-8 grid gap-8 md:grid-cols-3 isolate">
-              {relatedProducts.map((item) => (
-                <ProductCardSimple
-                  key={item.id}
-                  product={item}
-                  locale={locale}
-                  labels={{
-                    viewProduct: t("common.viewProduct"),
-                    addToCart: t("common.addToCart"),
-                    noImage: t("common.noImage"),
-                  }}
-                  analyticsListName="related_products"
-                />
+      {productImages.extras.length > 0 ? (
+        <section className="border-t border-white/[0.07] py-14 md:py-16">
+          <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {productImages.extras.map((img, index) => (
+                <div
+                  key={img}
+                  className="overflow-hidden rounded-2xl border border-white/[0.08] bg-dark-surface/30 ring-1 ring-white/[0.05]"
+                >
+                  <Image
+                    src={img}
+                    alt={`${localizedProduct.title} detalle ${index + 1}`}
+                    width={1200}
+                    height={900}
+                    placeholder="blur"
+                    blurDataURL={PRODUCT_BLUR_DATA_URL}
+                    className="h-full w-full object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               ))}
             </div>
           </div>
         </section>
-      )}
+      ) : null}
+
+      {relatedProducts.length > 0 ? (
+        <PdpRelatedProductsRail
+          title={t("productPage.crossSellTitle")}
+          products={relatedProducts}
+          locale={locale}
+          labels={{
+            viewProduct: t("common.viewProduct"),
+            addToCart: t("common.addToCart"),
+            noImage: t("common.noImage"),
+          }}
+          surface="dark"
+        />
+      ) : null}
+
+      <PdpMiniBrandBlock
+        message={t("homePage.brandStatement")}
+        surface="dark"
+      />
     </main>
   );
 }

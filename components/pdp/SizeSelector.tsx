@@ -77,7 +77,7 @@ export default function SizeSelector({
               }}
               aria-pressed={active}
               className={[
-                "min-w-[2.75rem] rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-200 ease-out",
+                "min-w-[2.75rem] rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 ease-out",
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2",
                 L ? "focus-visible:ring-offset-white" : "focus-visible:ring-offset-dark-base",
                 !valid
