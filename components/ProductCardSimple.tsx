@@ -23,6 +23,8 @@ type Props = {
   analyticsListName?: string;
   /** Tarjeta sobre fondo claro (p. ej. cross-sell en PDP). */
   surface?: UISurface;
+  /** Listado editorial (/productos): imagen dominante, menos chrome. */
+  editorial?: boolean;
 };
 
 function isValidImageSrc(src?: string | null) {
@@ -39,8 +41,10 @@ export default function ProductCardSimple({
   analyticsListId,
   analyticsListName = "product_list",
   surface = "dark",
+  editorial = false,
 }: Props) {
   const L = surface === "light";
+  const E = editorial && !L;
   const localized = product.translations?.[locale];
   const title = localized?.title || product.title;
   const description =
@@ -81,17 +85,21 @@ export default function ProductCardSimple({
     >
       <article
         className={
-          L
-            ? "group overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 hover:shadow-md"
-            : "group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
+          E
+            ? "group overflow-hidden rounded-sm border border-white/[0.08] bg-[#0f1412]/80 transition-all duration-500 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:border-white/[0.12] hover:shadow-[0_32px_64px_-28px_rgba(0,0,0,0.65)]"
+            : L
+              ? "group overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 hover:shadow-md"
+              : "group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
         }
       >
         {/* IMAGE */}
         <div
           className={
-            L
-              ? "relative w-full bg-neutral-100 overflow-hidden"
-              : "relative w-full bg-dark-surface overflow-hidden"
+            E
+              ? "relative aspect-[4/5] w-full overflow-hidden bg-[#0a0d0c]"
+              : L
+                ? "relative w-full bg-neutral-100 overflow-hidden"
+                : "relative w-full bg-dark-surface overflow-hidden"
           }
         >
           {hasValidImage ? (
@@ -101,19 +109,35 @@ export default function ProductCardSimple({
                 alt={title}
                 loading="lazy"
                 decoding="async"
-                className="block w-full h-auto object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                className={
+                  E
+                    ? "absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[520ms] ease-out group-hover:scale-[1.05]"
+                    : "block w-full h-auto object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                }
               />
             ) : isLocal ? (
-              <Image
-                src={activeImage!}
-                alt={title}
-                width={1200}
-                height={900}
-                className="block w-full h-auto object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
-                placeholder="blur"
-                blurDataURL={PRODUCT_BLUR_DATA_URL}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              E ? (
+                <Image
+                  src={activeImage!}
+                  alt={title}
+                  fill
+                  className="object-cover object-center transition-transform duration-[520ms] ease-out group-hover:scale-[1.05]"
+                  placeholder="blur"
+                  blurDataURL={PRODUCT_BLUR_DATA_URL}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
+              ) : (
+                <Image
+                  src={activeImage!}
+                  alt={title}
+                  width={1200}
+                  height={900}
+                  className="block w-full h-auto object-contain object-center transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                  placeholder="blur"
+                  blurDataURL={PRODUCT_BLUR_DATA_URL}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              )
             ) : (
               <div
                 className={
@@ -137,11 +161,16 @@ export default function ProductCardSimple({
             </div>
           )}
           <div className="absolute inset-0 pointer-events-none">
+            {E ? (
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/15" />
+            ) : null}
             <div
               className={
                 L
                   ? "absolute inset-0 bg-gradient-to-t from-neutral-900/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-                  : "absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+                  : E
+                    ? "absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+                    : "absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
               }
             />
             <div className="absolute inset-x-0 bottom-4 flex items-center justify-center">
@@ -169,7 +198,7 @@ export default function ProductCardSimple({
             </div>
           </div>
         </div>
-        {imageList.length > 1 && (
+        {imageList.length > 1 && !E && (
           <div
             className="px-4 md:px-5 pb-4 md:pb-5"
             onClick={(event) => event.preventDefault()}
@@ -200,21 +229,25 @@ export default function ProductCardSimple({
         )}
 
         {/* INFO */}
-        <div className="p-4 md:p-5 space-y-2">
+        <div className={E ? "space-y-2 p-4 md:p-5" : "p-4 md:p-5 space-y-2"}>
           <h2
             className={
-              L
-                ? "text-base font-semibold text-neutral-900 line-clamp-2"
-                : "text-base font-semibold text-text-primary line-clamp-2"
+              E
+                ? "text-[0.95rem] font-medium leading-snug tracking-tight text-text-primary line-clamp-2 md:text-base"
+                : L
+                  ? "text-base font-semibold text-neutral-900 line-clamp-2"
+                  : "text-base font-semibold text-text-primary line-clamp-2"
             }
           >
             {title}
           </h2>
           <p
             className={
-              L
-                ? "text-xs text-neutral-600 line-clamp-2"
-                : "text-xs text-text-muted line-clamp-2"
+              E
+                ? "text-[0.7rem] leading-relaxed text-text-muted/85 line-clamp-2 md:text-xs"
+                : L
+                  ? "text-xs text-neutral-600 line-clamp-2"
+                  : "text-xs text-text-muted line-clamp-2"
             }
           >
             {description}
@@ -222,7 +255,11 @@ export default function ProductCardSimple({
           <div className="flex items-center justify-between pt-1.5">
             <span
               className={
-                L ? "text-sm text-neutral-900" : "text-sm text-text-primary"
+                E
+                  ? "text-xs tabular-nums text-text-muted/90"
+                  : L
+                    ? "text-sm text-neutral-900"
+                    : "text-sm text-text-primary"
               }
             >
               ${product.price.toFixed(2)}

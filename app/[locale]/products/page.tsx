@@ -1,12 +1,19 @@
 import Link from "next/link";
 import { getProducts, type Product } from "@/lib/products";
-import ProductGridSimple from "@/components/ProductGridSimple";
-import { getCategoryBySlug } from "@/lib/categories";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import ProductsHero from "@/components/products/ProductsHero";
+import CategorySelector from "@/components/products/CategorySelector";
+import SortingBar from "@/components/products/SortingBar";
+import ProductsEditorialGrid from "@/components/products/ProductsEditorialGrid";
 import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
+import {
+  getProductsForSegment,
+  parseSegment,
+  sortProductsList,
+  type ProductSegment,
+} from "@/lib/products-page-segments";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +53,15 @@ function productMatchesQuery(
   return haystack.includes(query);
 }
 
+const SORT_KEYS = ["featured", "price-asc", "price-desc", "name-asc"] as const;
+
+function parseSort(raw: string | undefined): (typeof SORT_KEYS)[number] {
+  if (raw && SORT_KEYS.includes(raw as (typeof SORT_KEYS)[number])) {
+    return raw as (typeof SORT_KEYS)[number];
+  }
+  return "featured";
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -69,137 +85,149 @@ export async function generateMetadata({
   });
 }
 
-const MAIN_CATEGORIES = [
-  "fishing",
-  "water-sports",
-  "mountain-snow",
-  "outdoor-adventure",
-  "active-sports",
-];
-
 export default async function ProductsPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: Locale }>;
-  searchParams?: Promise<{ q?: string }>;
+  searchParams?: Promise<{ q?: string; segment?: string; sort?: string }>;
 }) {
   const { locale } = await params;
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
   const sp = searchParams != null ? await searchParams : {};
+
   const rawQuery = typeof sp.q === "string" ? sp.q : "";
   const query = normalizeText(rawQuery.trim());
+  const segment = parseSegment(sp.segment);
+  const sort = parseSort(typeof sp.sort === "string" ? sp.sort : undefined);
 
-  const products = getProducts();
-  const filteredProducts = query
-    ? products.filter((product) =>
+  const allProducts = getProducts();
+  const scoped = getProductsForSegment(segment as ProductSegment, allProducts);
+  const filteredBySearch = query
+    ? scoped.filter((product) =>
         productMatchesQuery(product, locale, query, normalizeText)
       )
-    : products;
-
-  const categories = MAIN_CATEGORIES.map((slug) => getCategoryBySlug(slug)).filter(
-    (cat): cat is NonNullable<typeof cat> => cat !== undefined
+    : scoped;
+  const displayProducts = sortProductsList(
+    filteredBySearch,
+    sort === "featured" ? undefined : sort,
+    locale
   );
 
   const hasActiveSearch = rawQuery.trim().length > 0;
 
+  const searchHint = hasActiveSearch
+    ? interpolate(t("productsPage.searchResultsFor", ""), {
+        query: rawQuery.trim(),
+      })
+    : null;
+
+  const categoryItems: { id: ProductSegment; label: string }[] = [
+    { id: "all", label: t("productsPage.segmentAll") },
+    { id: "hombre", label: t("productsPage.segmentHombre") },
+    { id: "mujer", label: t("productsPage.segmentMujer") },
+    { id: "outdoor", label: t("productsPage.segmentOutdoor") },
+    { id: "equipamiento", label: t("productsPage.segmentEquipamiento") },
+  ];
+
+  const sortOptions = [
+    { value: "featured", label: t("productsPage.sortFeatured") },
+    { value: "price-asc", label: t("productsPage.sortPriceAsc") },
+    { value: "price-desc", label: t("productsPage.sortPriceDesc") },
+    { value: "name-asc", label: t("productsPage.sortNameAsc") },
+  ];
+
+  const breaks: [
+    {
+      variant: "image";
+      title: string;
+      imageSrc: string;
+      imageAlt: string;
+    } | null,
+    { variant: "text"; title: string } | null,
+  ] = [
+    {
+      variant: "image",
+      title: t("productsPage.breakImageTitle"),
+      imageSrc: "/assets/images/hero/trekking.webp",
+      imageAlt: t("productsPage.breakImageAlt"),
+    },
+    {
+      variant: "text",
+      title: t("productsPage.breakTextTitle"),
+    },
+  ];
+
+  const cardLabels = {
+    viewProduct: t("common.viewProduct"),
+    addToCart: t("common.addToCart"),
+    noImage: t("common.noImage"),
+  };
+
   return (
     <main className="min-h-screen bg-dark-base text-text-primary">
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0">
-          <img
-            src="/assets/images/hero/productsbanner.webp"
-            alt={t("productsPage.title")}
-            className="h-full min-h-[280px] w-full object-cover object-center scale-[1.02] motion-reduce:scale-100"
-          />
-        </div>
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark-base/40 via-transparent to-dark-base"
-          aria-hidden
-        />
+      <ProductsHero
+        locale={locale}
+        title={t("productsPage.heroTitle")}
+        subtitle={t("productsPage.heroSubtitle")}
+        tagline={t("productsPage.heroTagline")}
+        imageSrc="/assets/images/hero/productsbanner.webp"
+        imageAlt={t("productsPage.heroImageAlt")}
+        homeLabel={t("header.nav.home")}
+        productsLabel={t("header.nav.products")}
+        searchHint={searchHint}
+      />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pt-20 md:pb-24 lg:pt-24 lg:pb-28 min-h-[min(48vh,560px)] flex flex-col justify-end">
-          <Breadcrumbs
-            variant="darkHero"
-            items={[
-              { label: t("header.nav.home"), href: `/${locale}` },
-              { label: t("header.nav.products") },
-            ]}
-          />
-          <header className="mt-8 md:mt-10 max-w-2xl">
-            <h1 className="text-2xl sm:text-3xl md:text-[2rem] font-semibold tracking-tight text-white leading-tight">
-              {t("productsPage.title")}
-            </h1>
-            <p className="mt-5 text-base md:text-lg text-white/70 leading-relaxed">
-              {t("productsPage.subtitle")}
-            </p>
-            {hasActiveSearch ? (
-              <p className="mt-4 text-sm font-medium text-white/90">
-                {interpolate(t("productsPage.searchResultsFor", ""), {
-                  query: rawQuery.trim(),
-                })}
-              </p>
-            ) : null}
-            <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#C2A27A]/30 bg-[#C2A27A]/20 px-4 py-2 text-sm font-medium text-[#E6E2D8]">
-              <span
-                className="h-1 w-1 shrink-0 rounded-full bg-[#C2A27A]/80"
-                aria-hidden
+      <section className="border-b border-white/[0.05] bg-[#0a0e0d] py-12 md:py-16">
+        <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+            <CategorySelector
+              locale={locale}
+              items={categoryItems}
+              active={segment}
+              q={rawQuery.trim() || undefined}
+              sort={sort === "featured" ? undefined : sort}
+            />
+            <div className="shrink-0 lg:min-w-[240px]">
+              <SortingBar
+                locale={locale}
+                segment={segment}
+                q={rawQuery.trim() || undefined}
+                sort={sort}
+                label={t("productsPage.sortLabel")}
+                options={sortOptions}
               />
-              {t("home.shippingHighlight")}
-            </p>
-          </header>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 lg:pt-20 pb-16 md:pb-20 lg:pb-24">
-        <div className="border-b border-white/5 pb-10 md:pb-12">
-          <div className="flex flex-wrap gap-2.5 sm:gap-3 overflow-x-auto pb-2 scrollbar-rail-premium -mx-1 px-1">
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/${locale}/category/${category.slug}`}
-                className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/70 transition-colors duration-200 whitespace-nowrap hover:border-white/15 hover:bg-white/10 hover:text-white"
-              >
-                {t(`categories.names.${category.slug}`, category.name)}
-              </Link>
-            ))}
+      <div className="mx-auto max-w-[1400px] px-6 py-16 sm:px-10 md:py-20 lg:px-12 lg:py-24">
+        {hasActiveSearch && displayProducts.length === 0 ? (
+          <div className="rounded-sm border border-white/10 bg-[#0f1412]/80 px-6 py-14 text-center">
+            <p className="text-lg font-medium text-text-primary">
+              {t("productsPage.searchNoResults", "")}
+            </p>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-text-muted">
+              {t("productsPage.searchNoResultsHint", "")}
+            </p>
+            <Link
+              href={`/${locale}/products`}
+              className="mt-10 inline-flex items-center justify-center border border-accent-gold/50 px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-gold transition hover:bg-accent-gold/10"
+            >
+              {t("productsPage.searchViewAll", "")}
+            </Link>
           </div>
-        </div>
-
-        <div className="mt-16 md:mt-20">
-          {hasActiveSearch && filteredProducts.length === 0 ? (
-            <div className="rounded-2xl border border-white/10 bg-dark-surface/60 px-6 py-12 text-center">
-              <p className="text-lg font-semibold text-text-primary">
-                {t("productsPage.searchNoResults", "")}
-              </p>
-              <p className="mt-3 text-sm text-text-muted leading-relaxed max-w-md mx-auto">
-                {t("productsPage.searchNoResultsHint", "")}
-              </p>
-              <Link
-                href={`/${locale}/products`}
-                className="mt-8 inline-flex items-center justify-center rounded-xl bg-accent-gold px-6 py-3 text-sm font-semibold text-dark-base transition hover:bg-accent-gold/90"
-              >
-                {t("productsPage.searchViewAll", "")}
-              </Link>
-            </div>
-          ) : (
-            <ProductGridSimple
-              products={filteredProducts}
-              locale={locale}
-              analyticsListName="all_products"
-              labels={{
-                viewProduct: t("common.viewProduct"),
-                addToCart: t("common.addToCart"),
-                noImage: t("common.noImage"),
-              }}
-            />
-          )}
-        </div>
+        ) : (
+          <ProductsEditorialGrid
+            products={displayProducts}
+            locale={locale}
+            labels={cardLabels}
+            analyticsListName="all_products"
+            breaks={breaks}
+          />
+        )}
       </div>
     </main>
   );
