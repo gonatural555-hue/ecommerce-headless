@@ -150,12 +150,40 @@ export default function ProductGallery({
 
       <div className="relative order-1 min-w-0 flex-1 lg:order-none lg:max-w-[min(100%,480px)]">
         <div
-          className={`group relative w-full overflow-hidden will-change-transform ${stageAspect} ${stageShell}`}
+          className={`group relative w-full overflow-hidden ${stageAspect} ${stageShell}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
         >
+          <div
+            className={
+              light
+                ? "pointer-events-none absolute inset-0 z-0 bg-neutral-100/90"
+                : "pointer-events-none absolute inset-0 z-0 bg-dark-surface/30"
+            }
+            aria-hidden
+          />
+
+          <Image
+            key={`pdp-main-${list[safeIndex]}-${safeIndex}`}
+            src={list[safeIndex]}
+            alt={`${title} — ${safeIndex + 1}`}
+            fill
+            priority={safeIndex === 0}
+            placeholder="blur"
+            blurDataURL={PRODUCT_BLUR_DATA_URL}
+            className={`z-[1] ${imgClass}`}
+            sizes="(max-width: 1024px) 92vw, 480px"
+          />
+
+          <button
+            type="button"
+            className="absolute inset-0 z-[5] m-0 cursor-zoom-in border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-gold/70"
+            onClick={() => setLightboxOpen(true)}
+            aria-label={`${title} — ampliar galería`}
+          />
+
           <div
             className={
               light
@@ -189,49 +217,6 @@ export default function ProductGallery({
                 />
               </svg>
             </button>
-          </div>
-
-          <div
-            className="absolute inset-0 z-10 cursor-zoom-in p-3 sm:p-4"
-            onClick={() => setLightboxOpen(true)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setLightboxOpen(true);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={`${title} — ampliar galería`}
-          >
-            <div className="relative h-full min-h-[200px] w-full overflow-hidden rounded-xl">
-              {list.map((src, i) => (
-                <div
-                  key={`${src}-layer-${i}`}
-                  className={[
-                    "absolute inset-0 transition-opacity duration-300 ease-out motion-reduce:transition-none",
-                    i === safeIndex
-                      ? "z-[1] opacity-100"
-                      : "pointer-events-none z-0 opacity-0",
-                  ].join(" ")}
-                >
-                  {/* `fill` exige un ancestro `relative` con tamaño — sin esto la imagen no pinta */}
-                  <div className="relative h-full w-full min-h-0">
-                    <Image
-                      src={src}
-                      alt={`${title} — ${i + 1}`}
-                      fill
-                      priority={i === 0}
-                      loading={i === safeIndex ? "eager" : "lazy"}
-                      placeholder="blur"
-                      blurDataURL={PRODUCT_BLUR_DATA_URL}
-                      className={imgClass}
-                      sizes="(max-width: 1024px) 92vw, 420px"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
