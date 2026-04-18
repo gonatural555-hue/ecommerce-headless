@@ -86,7 +86,8 @@ export default function HomeHero({
             />
           ) : (
             <video
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              key={activeVideoSrc}
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-90"
               autoPlay
               muted
               loop
@@ -95,12 +96,14 @@ export default function HomeHero({
               poster={imageSrc}
               aria-hidden
             >
-              <source src={videoSrc} type="video/mp4" />
+              <source src={activeVideoSrc} type="video/mp4" />
             </video>
           )}
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/78 via-dark-base/48 to-dark-base/93" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.5)_100%)]" />
+        {/* Scrim uniforme + gradiente + viñeta: más contraste para texto y CTAs sobre vídeos claros */}
+        <div className="absolute inset-0 bg-black/22" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/88 via-dark-base/62 to-dark-base/[0.96]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.62)_100%)]" />
       </div>
 
       <div
