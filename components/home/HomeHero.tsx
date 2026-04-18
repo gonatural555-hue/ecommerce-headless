@@ -12,8 +12,11 @@ type HomeHeroProps = {
   subtitle: string;
   ctaProducts: string;
   ctaJournal: string;
+  /** Poster / fallback estático (LCP y prefers-reduced-motion) */
   imageSrc?: string;
   imageAlt?: string;
+  /** Vídeo en loop como banner principal */
+  videoSrc?: string;
 };
 
 /**
@@ -28,6 +31,7 @@ export default function HomeHero({
   ctaJournal,
   imageSrc = "/assets/images/hero/hero.webp",
   imageAlt = "",
+  videoSrc = "/assets/images/hero/hero-home.mp4",
 }: HomeHeroProps) {
   const [scroll, setScroll] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -46,13 +50,8 @@ export default function HomeHero({
   return (
     <section className="relative h-[100dvh] min-h-[28rem] w-full overflow-hidden bg-dark-base">
       <div className="absolute inset-0">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
+        <div
+          className="absolute inset-0 overflow-hidden"
           style={
             reduceMotion
               ? undefined
@@ -60,7 +59,31 @@ export default function HomeHero({
                   transform: `scale(1.06) translateY(${scroll * 0.1}px)`,
                 }
           }
-        />
+        >
+          {reduceMotion ? (
+            <Image
+              src={imageSrc}
+              alt={imageAlt || ""}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          ) : (
+            <video
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster={imageSrc}
+              aria-hidden
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+          )}
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-dark-base/78 via-dark-base/48 to-dark-base/93" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.5)_100%)]" />
       </div>
