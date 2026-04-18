@@ -100,10 +100,15 @@ export default function HomeHero({
             </video>
           )}
         </div>
-        {/* Scrim uniforme + gradiente + viñeta: más contraste para texto y CTAs sobre vídeos claros */}
-        <div className="absolute inset-0 bg-black/22" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/88 via-dark-base/62 to-dark-base/[0.96]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.62)_100%)]" />
+        {/* Gradiente legible: más oscuro arriba, suave abajo; la imagen sigue visible */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.4) 48%, rgba(0,0,0,0.22) 100%)",
+          }}
+          aria-hidden
+        />
       </div>
 
       <div
@@ -113,26 +118,26 @@ export default function HomeHero({
           transform: reduceMotion ? undefined : `translateY(${lift}px)`,
         }}
       >
-        <p className="text-[0.7rem] font-medium uppercase tracking-[0.35em] text-accent-gold/90 sm:text-xs">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-accent-gold drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] sm:text-xs">
           {tagline}
         </p>
-        <h1 className="mt-5 max-w-4xl font-semibold tracking-tight text-text-primary text-[clamp(2.35rem,6.5vw,4.25rem)] leading-[1.06]">
+        <h1 className="mt-5 max-w-4xl font-bold tracking-tight text-text-primary text-[clamp(2.35rem,6.5vw,4.25rem)] leading-[1.06] [text-shadow:0_2px_32px_rgba(0,0,0,0.55),0_1px_3px_rgba(0,0,0,0.45)]">
           {title}
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/92 drop-shadow-[0_1px_14px_rgba(0,0,0,0.45)] sm:text-lg">
           {subtitle}
         </p>
 
         <div className="mt-10 flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
           <Link
             href={`/${locale}/products`}
-            className="inline-flex items-center justify-center border border-accent-gold/45 bg-transparent px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.22em] text-accent-gold transition duration-300 hover:border-accent-gold hover:bg-accent-gold/10"
+            className="inline-flex items-center justify-center rounded-sm border border-accent-gold/55 bg-accent-gold/25 px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.22em] text-accent-gold shadow-[0_10px_28px_-6px_rgba(0,0,0,0.45)] backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-accent-gold/80 hover:bg-accent-gold/35 hover:shadow-[0_14px_36px_-8px_rgba(0,0,0,0.5)] motion-reduce:hover:translate-y-0"
           >
             {ctaProducts}
           </Link>
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center justify-center border border-white/15 bg-white/[0.04] px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-primary transition duration-300 hover:border-white/25 hover:bg-white/[0.07]"
+            className="inline-flex items-center justify-center rounded-sm border border-white/28 bg-white/[0.12] px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-primary shadow-[0_6px_20px_-8px_rgba(0,0,0,0.35)] backdrop-blur-md transition duration-300 hover:border-white/40 hover:bg-white/[0.18]"
           >
             {ctaJournal}
           </Link>
@@ -144,8 +149,8 @@ export default function HomeHero({
         style={{ opacity: fade }}
         aria-hidden
       >
-        <div className="flex h-11 w-6 justify-center rounded-full border border-white/18">
-          <div className="mt-2 h-1.5 w-px animate-pulse rounded-full bg-white/45" />
+        <div className="flex h-11 w-6 justify-center rounded-full border border-white/35 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-[2px]">
+          <div className="mt-2 h-1.5 w-px animate-pulse rounded-full bg-white/65" />
         </div>
       </div>
     </section>

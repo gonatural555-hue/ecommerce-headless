@@ -136,6 +136,12 @@ export default function Header() {
     );
   }, [pathname, locale]);
 
+  /** Home con hero a pantalla: barra legible sin rediseñar el header */
+  const isHomePage = useMemo(() => {
+    const segments = pathname.split("/").filter(Boolean);
+    return segments.length === 1 && segments[0] === locale;
+  }, [pathname, locale]);
+
   const navLinkClass = isProductDetailPage
     ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"
     : "text-sm font-medium text-white hover:text-white/80 transition-colors duration-200";
@@ -170,7 +176,11 @@ export default function Header() {
           ? isProductDetailPage
             ? "bg-white border-b border-neutral-200 shadow-sm"
             : "bg-dark-base border-b border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
-          : "bg-transparent",
+          : isProductDetailPage
+            ? "bg-transparent"
+            : isHomePage
+              ? "border-b border-white/[0.08] bg-dark-base/50 shadow-[0_4px_28px_rgba(0,0,0,0.22)] backdrop-blur-md supports-[backdrop-filter]:bg-dark-base/[0.42]"
+              : "bg-transparent",
       ].join(" ")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
