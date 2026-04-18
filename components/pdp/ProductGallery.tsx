@@ -87,15 +87,16 @@ export default function ProductGallery({
     else if (d >= threshold) go(safeIndex - 1);
   };
 
+  /** Contenedor principal: móvil más compacto; desktop más presencia (rounded-2xl, profundidad suave). */
   const stageShell = light
-    ? "rounded-xl border border-neutral-200/90 bg-neutral-100/95 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.15)] ring-1 ring-black/[0.04]"
-    : "rounded-xl border border-white/[0.1] bg-dark-surface/50 shadow-[0_20px_48px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06]";
+    ? "rounded-xl border border-neutral-200/85 bg-neutral-100/95 shadow-[0_10px_32px_-18px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] lg:rounded-2xl lg:border-neutral-200/70 lg:shadow-[0_4px_28px_-12px_rgba(0,0,0,0.1)]"
+    : "rounded-xl border border-white/[0.1] bg-dark-surface/72 shadow-[0_14px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.07] lg:rounded-2xl lg:border-white/[0.12] lg:bg-[linear-gradient(168deg,rgba(255,255,255,0.07)_0%,rgba(18,24,22,0.96)_42%,#0b0f0e_100%)] lg:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_56px_-30px_rgba(0,0,0,0.58)] lg:ring-white/[0.09]";
 
-  /** Marco principal: altura definida por aspect-ratio; max-width fija equilibrio con la columna de info */
+  /** Desktop: marco más ancho (hero); móvil sin cambios de tamaño máximo base */
   const stageFrameClass =
     aspectMode === "cinematic"
-      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)]`
-      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square`;
+      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)] lg:max-w-[min(100%,680px)] xl:max-w-[min(100%,720px)] 2xl:max-w-[min(100%,760px)] lg:max-h-[min(460px,78vh)]`
+      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square lg:max-w-[min(100%,640px)] xl:max-w-[min(100%,700px)] 2xl:max-w-[min(100%,720px)]`;
 
   const imgObject =
     imageFit === "contain"
@@ -110,7 +111,7 @@ export default function ProductGallery({
   if (list.length === 0) {
     return (
       <div
-        className={`flex min-h-[280px] w-full max-w-[560px] items-center justify-center rounded-xl border border-dashed ${
+        className={`flex min-h-[280px] w-full max-w-[560px] items-center justify-center rounded-xl border border-dashed lg:max-w-[min(100%,640px)] xl:max-w-[min(100%,700px)] 2xl:max-w-[min(100%,720px)] ${
           light
             ? "border-neutral-300 bg-neutral-100 text-neutral-500"
             : "border-white/15 bg-dark-surface/40 text-text-muted"
@@ -122,13 +123,13 @@ export default function ProductGallery({
   }
 
   return (
-    <div className="flex w-full max-w-full flex-col gap-4 lg:flex-row lg:items-start lg:gap-6">
-      {/* Miniaturas: debajo en móvil, columna fija a la izquierda en desktop */}
+    <div className="flex w-full max-w-full flex-col gap-4 lg:flex-row lg:items-start lg:gap-7 xl:gap-8">
+      {/* Miniaturas: debajo en móvil; desktop: columna más ancha + hit area claro */}
       {list.length > 1 ? (
         <div
           className={
-            "order-2 flex shrink-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 scrollbar-rail-premium lg:order-1 lg:w-16 lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0 " +
-            "lg:max-h-[min(560px,80vh)]"
+            "order-2 flex shrink-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 scrollbar-rail-premium lg:order-1 lg:w-[4.75rem] lg:flex-col lg:gap-3 lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0 " +
+            "lg:max-h-[min(720px,88vh)] xl:w-20"
           }
           aria-label="Miniaturas"
         >
@@ -141,11 +142,12 @@ export default function ProductGallery({
               aria-current={i === safeIndex ? "true" : undefined}
               className={[
                 "relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border transition-all duration-200 ease-out",
+                "lg:h-[4.75rem] lg:w-[4.75rem] lg:rounded-xl xl:h-20 xl:w-20",
                 i === safeIndex
-                  ? "border-accent-gold ring-2 ring-accent-gold/40 scale-[1.03] z-[1]"
+                  ? "border-accent-gold ring-2 ring-accent-gold/45 scale-[1.03] z-[1] lg:ring-[3px] lg:ring-accent-gold/50 lg:shadow-[0_0_28px_-6px_rgba(212,175,55,0.45)]"
                   : light
-                    ? "border-neutral-200 hover:border-neutral-400 hover:scale-[1.02]"
-                    : "border-white/15 hover:border-white/35 hover:scale-[1.02]",
+                    ? "border-neutral-200 hover:border-neutral-400 hover:scale-[1.02] lg:hover:border-neutral-500"
+                    : "border-white/15 hover:border-white/40 hover:scale-[1.02] lg:border-white/18 lg:hover:border-white/45 lg:hover:shadow-[0_0_20px_-8px_rgba(255,255,255,0.12)]",
               ].join(" ")}
             >
               <Image
@@ -163,8 +165,8 @@ export default function ProductGallery({
         </div>
       ) : null}
 
-      {/* Columna principal: evita colapso a 0px en flex (min-width + max-width del bloque) */}
-      <div className="order-1 flex min-h-0 min-w-[240px] w-full flex-1 flex-col items-stretch lg:order-2 lg:max-w-[560px]">
+      {/* Columna principal: desktop ancho alineado al grid PDP (hero) */}
+      <div className="order-1 flex min-h-0 min-w-[240px] w-full flex-1 flex-col items-stretch lg:order-2 lg:min-w-[300px] lg:max-w-[min(100%,720px)] 2xl:max-w-[min(100%,760px)]">
         <div
           className={`group mx-auto w-full lg:mx-0 ${stageFrameClass}`}
           onTouchStart={handleTouchStart}
@@ -172,15 +174,26 @@ export default function ProductGallery({
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
         >
-          {/* Fondo detrás de object-contain (letterboxing limpio) */}
+          {/* Fondo + viñeta suave (desktop: más profundidad sin sombras baratas) */}
           <div
             className={
               light
                 ? "pointer-events-none absolute inset-0 bg-neutral-100"
-                : "pointer-events-none absolute inset-0 bg-dark-surface/40"
+                : "pointer-events-none absolute inset-0 bg-dark-surface/35"
             }
             aria-hidden
           />
+          {!light ? (
+            <div
+              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_85%_70%_at_50%_42%,rgba(255,255,255,0.07)_0%,transparent_58%)] opacity-90 lg:opacity-100"
+              aria-hidden
+            />
+          ) : (
+            <div
+              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_80%_65%_at_50%_45%,rgba(255,255,255,0.35)_0%,transparent_55%)] opacity-70"
+              aria-hidden
+            />
+          )}
 
           {mainError || !currentSrc ? (
             <div
@@ -194,7 +207,7 @@ export default function ProductGallery({
           ) : (
             <div
               key={`${currentSrc}-${safeIndex}`}
-              className="animate-fade-in absolute inset-0 z-[2]"
+              className="animate-fade-in absolute inset-0 z-[2] p-1 lg:p-1.5 xl:p-2"
             >
               <Image
                 src={currentSrc}
@@ -204,7 +217,7 @@ export default function ProductGallery({
                 loading={safeIndex === 0 ? "eager" : "lazy"}
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
-                sizes="(max-width: 1024px) 100vw, 560px"
+                sizes="(max-width: 1024px) 100vw, (max-width: 1536px) min(700px, 58vw), 720px"
                 onError={() => setMainError(true)}
                 className={`${imgObject} ${imgMotion}`}
               />
@@ -221,15 +234,15 @@ export default function ProductGallery({
           <div
             className={
               light
-                ? "pointer-events-none absolute right-3 top-3 z-20 rounded-full border border-neutral-200/80 bg-white/90 px-2.5 py-1 text-[11px] font-medium tabular-nums text-neutral-800 backdrop-blur-sm"
-                : "pointer-events-none absolute right-3 top-3 z-20 rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[11px] font-medium tabular-nums text-white/90 backdrop-blur-sm"
+                ? "pointer-events-none absolute right-3 top-3 z-20 rounded-full border border-neutral-200/80 bg-white/92 px-2.5 py-1 text-[11px] font-medium tabular-nums tracking-wide text-neutral-800 backdrop-blur-sm lg:right-4 lg:top-4"
+                : "pointer-events-none absolute right-3 top-3 z-20 rounded-full border border-white/12 bg-black/50 px-2.5 py-1 text-[11px] font-medium tabular-nums tracking-wide text-white/92 backdrop-blur-md lg:right-4 lg:top-4"
             }
           >
             {String(safeIndex + 1).padStart(2, "0")} /{" "}
             {String(list.length).padStart(2, "0")}
           </div>
 
-          <div className="absolute left-3 top-3 z-20">
+          <div className="absolute left-3 top-3 z-20 lg:left-auto lg:right-4 lg:top-auto lg:bottom-4">
             <button
               type="button"
               onClick={(e) => {
@@ -238,13 +251,13 @@ export default function ProductGallery({
               }}
               className={
                 light
-                  ? "rounded-full border border-neutral-200/90 bg-white/90 p-2 text-neutral-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70"
-                  : "rounded-full border border-white/15 bg-black/45 p-2 text-white/95 shadow-sm backdrop-blur-sm transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70"
+                  ? "rounded-full border border-neutral-200/90 bg-white/92 p-2 text-neutral-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70 lg:p-2.5"
+                  : "rounded-full border border-white/16 bg-black/55 p-2 text-white/95 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)] backdrop-blur-md transition hover:border-white/25 hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/70 lg:p-2.5"
               }
               aria-label={`${title} — pantalla completa`}
             >
               <svg
-                className="h-4 w-4"
+                className="h-4 w-4 lg:h-[1.05rem] lg:w-[1.05rem]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

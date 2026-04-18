@@ -152,8 +152,8 @@ export default function ProductInfoPanel({
     ) : null;
 
   return (
-    <div className="flex w-full min-w-0 max-w-xl flex-col gap-8 lg:sticky lg:top-28 xl:max-w-[26rem] xl:gap-9">
-      <header className="space-y-5">
+    <div className="flex w-full min-w-0 max-w-xl flex-col gap-8 lg:max-w-[22rem] lg:gap-7 lg:sticky lg:top-28 xl:max-w-[23rem] xl:gap-8 2xl:max-w-[24rem]">
+      <header className="space-y-5 lg:space-y-4">
         <h1
           className={
             L
@@ -235,7 +235,7 @@ export default function ProductInfoPanel({
         ) : null}
       </header>
 
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-7 lg:gap-6">
         {colorDef ? (
           <ColorSwatchSelector
             variant={colorDef}
@@ -288,8 +288,8 @@ export default function ProductInfoPanel({
         <p
           className={
             L
-              ? "line-clamp-3 text-sm leading-relaxed text-neutral-600"
-              : "line-clamp-3 text-sm leading-relaxed text-text-muted"
+              ? "line-clamp-3 text-sm leading-relaxed text-neutral-600 lg:leading-[1.55]"
+              : "line-clamp-3 text-sm leading-relaxed text-text-muted lg:leading-[1.55]"
           }
         >
           {description}

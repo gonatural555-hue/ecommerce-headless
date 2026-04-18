@@ -337,10 +337,10 @@ export default function ProductDetailClient({
         />
       </section>
 
-      {/* Desktop: dos columnas equilibradas — galería contenida + info */}
+      {/* Desktop: proporción hero (galería) vs apoyo (info); fr evita overflow en ~1024px */}
       <section
         className={[
-          "hidden max-w-full gap-x-12 gap-y-10 lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] xl:gap-x-16 2xl:gap-x-20",
+          "hidden max-w-full items-start gap-y-10 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-x-10 lg:gap-y-10 xl:grid-cols-[minmax(0,1.38fr)_minmax(0,0.62fr)] xl:gap-x-12 2xl:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)] 2xl:gap-x-14",
           tightGalleryToVideo ? "lg:content-start" : "",
         ]
           .filter(Boolean)
