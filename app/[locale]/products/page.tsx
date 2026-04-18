@@ -185,14 +185,11 @@ export default async function ProductsPage({
   return (
     <main className="min-h-screen bg-dark-base text-text-primary">
       <ProductsHero
-        locale={locale}
         title={t("productsPage.heroTitle")}
         subtitle={t("productsPage.heroSubtitle")}
         tagline={t("productsPage.heroTagline")}
         imageSrc="/assets/images/hero/productsbanner.webp"
         imageAlt={t("productsPage.heroImageAlt")}
-        homeLabel={t("header.nav.home")}
-        productsLabel={t("header.nav.products")}
         searchHint={searchHint}
       />
 
