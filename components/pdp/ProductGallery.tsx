@@ -20,9 +20,9 @@ type Props = {
 };
 
 /**
- * Galería PDP: miniaturas + imagen principal con marco estable (aspect-ratio + max-width).
- * - `fill` solo dentro de un único contenedor `relative` con altura definida por aspect-ratio.
- * - Por defecto `object-contain` para assets 1:1 (sin recorte ni estiramientos).
+ * Galería PDP: miniaturas + imagen principal con marco estable (aspect-ratio).
+ * - Móvil: ancho máximo razonable; desktop (`lg+`): el hero usa todo el ancho de la columna (`max-w-none`).
+ * - `fill` solo dentro de un contenedor `relative` con altura definida por aspect-ratio.
  */
 export default function ProductGallery({
   images,
@@ -92,11 +92,11 @@ export default function ProductGallery({
     ? "rounded-xl border border-neutral-200/85 bg-neutral-100/95 shadow-[0_10px_32px_-18px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] lg:rounded-2xl lg:border-neutral-200/70 lg:shadow-[0_4px_28px_-12px_rgba(0,0,0,0.1)]"
     : "rounded-xl border border-white/[0.1] bg-dark-surface/72 shadow-[0_14px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.07] lg:rounded-2xl lg:border-white/[0.12] lg:bg-[linear-gradient(168deg,rgba(255,255,255,0.07)_0%,rgba(18,24,22,0.96)_42%,#0b0f0e_100%)] lg:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_56px_-30px_rgba(0,0,0,0.58)] lg:ring-white/[0.09]";
 
-  /** Desktop: marco más ancho (hero); móvil sin cambios de tamaño máximo base */
+  /** Móvil: tope opcional; desktop: sin tope artificial — crece con la columna del grid */
   const stageFrameClass =
     aspectMode === "cinematic"
-      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)] lg:max-w-[min(100%,680px)] xl:max-w-[min(100%,720px)] 2xl:max-w-[min(100%,760px)] lg:max-h-[min(460px,78vh)]`
-      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square lg:max-w-[min(100%,640px)] xl:max-w-[min(100%,700px)] 2xl:max-w-[min(100%,720px)]`;
+      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)] lg:max-w-none lg:max-h-[min(520px,82vh)] xl:max-h-[min(560px,85vh)]`
+      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square lg:max-w-none`;
 
   const imgObject =
     imageFit === "contain"
@@ -111,7 +111,7 @@ export default function ProductGallery({
   if (list.length === 0) {
     return (
       <div
-        className={`flex min-h-[280px] w-full max-w-[560px] items-center justify-center rounded-xl border border-dashed lg:max-w-[min(100%,640px)] xl:max-w-[min(100%,700px)] 2xl:max-w-[min(100%,720px)] ${
+        className={`flex min-h-[280px] w-full max-w-[560px] items-center justify-center rounded-xl border border-dashed lg:max-w-none ${
           light
             ? "border-neutral-300 bg-neutral-100 text-neutral-500"
             : "border-white/15 bg-dark-surface/40 text-text-muted"
@@ -123,7 +123,7 @@ export default function ProductGallery({
   }
 
   return (
-    <div className="flex w-full max-w-full flex-col gap-4 lg:flex-row lg:items-start lg:gap-7 xl:gap-8">
+    <div className="flex w-full max-w-full flex-col gap-4 lg:w-full lg:flex-row lg:items-start lg:gap-7 xl:gap-8">
       {/* Miniaturas: debajo en móvil; desktop: columna más ancha + hit area claro */}
       {list.length > 1 ? (
         <div
@@ -165,10 +165,10 @@ export default function ProductGallery({
         </div>
       ) : null}
 
-      {/* Columna principal: desktop ancho alineado al grid PDP (hero) */}
-      <div className="order-1 flex min-h-0 min-w-[240px] w-full flex-1 flex-col items-stretch lg:order-2 lg:min-w-[300px] lg:max-w-[min(100%,720px)] 2xl:max-w-[min(100%,760px)]">
+      {/* Columna principal: ocupa el resto del ancho en la fila; en desktop sin max-width que encoja el hero */}
+      <div className="order-1 flex min-h-0 w-full min-w-0 flex-1 flex-col items-stretch lg:order-2 lg:max-w-none">
         <div
-          className={`group mx-auto w-full lg:mx-0 ${stageFrameClass}`}
+          className={`group mx-auto w-full max-w-full lg:mx-0 ${stageFrameClass}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -217,7 +217,7 @@ export default function ProductGallery({
                 loading={safeIndex === 0 ? "eager" : "lazy"}
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
-                sizes="(max-width: 1024px) 100vw, (max-width: 1536px) min(700px, 58vw), 720px"
+                sizes="(max-width: 1023px) 100vw, min(960px, 58vw)"
                 onError={() => setMainError(true)}
                 className={`${imgObject} ${imgMotion}`}
               />

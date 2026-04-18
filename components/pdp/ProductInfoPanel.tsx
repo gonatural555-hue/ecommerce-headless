@@ -152,7 +152,7 @@ export default function ProductInfoPanel({
     ) : null;
 
   return (
-    <div className="flex w-full min-w-0 max-w-xl flex-col gap-8 lg:max-w-[22rem] lg:gap-7 lg:sticky lg:top-28 xl:max-w-[23rem] xl:gap-8 2xl:max-w-[24rem]">
+    <div className="flex w-full min-w-0 max-w-xl flex-col gap-8 lg:max-w-[23rem] lg:gap-7 lg:sticky lg:top-28 xl:max-w-[24rem] xl:gap-8 2xl:max-w-[25rem]">
       <header className="space-y-5 lg:space-y-4">
         <h1
           className={

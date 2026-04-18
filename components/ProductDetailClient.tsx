@@ -337,10 +337,10 @@ export default function ProductDetailClient({
         />
       </section>
 
-      {/* Desktop: proporción hero (galería) vs apoyo (info); fr evita overflow en ~1024px */}
+      {/* Desktop: galería estirada en columna 1 + menos hueco horizontal entre columnas */}
       <section
         className={[
-          "hidden max-w-full items-start gap-y-10 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-x-10 lg:gap-y-10 xl:grid-cols-[minmax(0,1.38fr)_minmax(0,0.62fr)] xl:gap-x-12 2xl:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)] 2xl:gap-x-14",
+          "hidden max-w-full items-start gap-y-10 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:gap-x-7 lg:gap-y-10 xl:grid-cols-[minmax(0,1.38fr)_minmax(0,0.62fr)] xl:gap-x-9 2xl:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)] 2xl:gap-x-10",
           tightGalleryToVideo ? "lg:content-start" : "",
         ]
           .filter(Boolean)
@@ -348,7 +348,7 @@ export default function ProductDetailClient({
       >
         <div
           className={[
-            "min-w-0 justify-self-start",
+            "min-w-0 w-full justify-self-stretch lg:w-full",
             tightGalleryToVideo ? "lg:self-start" : "",
           ]
             .filter(Boolean)
