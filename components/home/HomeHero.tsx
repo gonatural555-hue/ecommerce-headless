@@ -87,7 +87,7 @@ export default function HomeHero({
           ) : (
             <video
               key={activeVideoSrc}
-              className="absolute inset-0 h-full w-full object-cover object-center opacity-90"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-90 grayscale"
               autoPlay
               muted
               loop
