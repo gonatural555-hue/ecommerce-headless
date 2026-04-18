@@ -13,15 +13,16 @@ type Props = {
   title: string;
   noImageLabel?: string;
   surface?: UISurface;
-  /** Productos con fotos horizontales (gafas, etc.) */
+  /** Productos con franja más ancha (gafas, etc.) */
   aspectMode?: AspectMode;
-  /** Contener imagen (p. ej. pantalón ski) en lugar de cover */
+  /** Fotos 1:1 → `contain` evita recorte; `cover` solo si hiciera falta llenar el marco */
   imageFit?: "cover" | "contain";
 };
 
 /**
- * Galería PDP premium: miniaturas (vertical desktop / inferior móvil), fade entre fotos,
- * contador, zoom suave al hover, lightbox al clic.
+ * Galería PDP: miniaturas + imagen principal con marco estable (aspect-ratio + max-width).
+ * - `fill` solo dentro de un único contenedor `relative` con altura definida por aspect-ratio.
+ * - Por defecto `object-contain` para assets 1:1 (sin recorte ni estiramientos).
  */
 export default function ProductGallery({
   images,
@@ -29,28 +30,32 @@ export default function ProductGallery({
   noImageLabel = "Sin imagen",
   surface = "dark",
   aspectMode = "square",
-  imageFit = "cover",
+  imageFit = "contain",
 }: Props) {
   const light = surface === "light";
-  const list = useMemo(
-    () => images.filter(Boolean),
-    [images]
-  );
+  const list = useMemo(() => images.filter(Boolean), [images]);
 
   const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [mainError, setMainError] = useState(false);
   const startXRef = useRef(0);
 
   useEffect(() => {
     setIndex(0);
     setDragOffset(0);
     setIsDragging(false);
+    setMainError(false);
   }, [list]);
 
   const safeIndex = Math.min(index, Math.max(0, list.length - 1));
   const canSwipe = list.length > 1;
+  const currentSrc = list[safeIndex] ?? list[0] ?? "";
+
+  useEffect(() => {
+    setMainError(false);
+  }, [safeIndex, currentSrc]);
 
   const go = useCallback(
     (next: number) => {
@@ -82,40 +87,50 @@ export default function ProductGallery({
     else if (d >= threshold) go(safeIndex - 1);
   };
 
-  const stageAspect =
-    aspectMode === "cinematic"
-      ? "aspect-[16/10] max-h-[min(420px,52vh)]"
-      : "aspect-square max-h-[min(480px,62vh)]";
-
   const stageShell = light
-    ? "rounded-2xl border border-neutral-200/90 bg-gradient-to-b from-neutral-100 to-neutral-100/80 shadow-[0_18px_48px_-24px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04]"
-    : "rounded-2xl border border-white/[0.08] bg-dark-surface/40 shadow-[0_24px_56px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.05]";
+    ? "rounded-xl border border-neutral-200/90 bg-neutral-100/95 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.15)] ring-1 ring-black/[0.04]"
+    : "rounded-xl border border-white/[0.1] bg-dark-surface/50 shadow-[0_20px_48px_-28px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06]";
+
+  /** Marco principal: altura definida por aspect-ratio; max-width fija equilibrio con la columna de info */
+  const stageFrameClass =
+    aspectMode === "cinematic"
+      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)]`
+      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square`;
+
+  const imgObject =
+    imageFit === "contain"
+      ? "object-contain object-center"
+      : "object-cover object-center";
+
+  const imgMotion =
+    imageFit === "contain"
+      ? "transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
+      : "transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100";
 
   if (list.length === 0) {
     return (
       <div
-        className={`flex min-h-[280px] items-center justify-center ${stageAspect} ${stageShell}`}
+        className={`flex min-h-[280px] w-full max-w-[560px] items-center justify-center rounded-xl border border-dashed ${
+          light
+            ? "border-neutral-300 bg-neutral-100 text-neutral-500"
+            : "border-white/15 bg-dark-surface/40 text-text-muted"
+        }`}
       >
-        <span className={light ? "text-neutral-500" : "text-text-muted"}>
-          {noImageLabel}
-        </span>
+        <span>{noImageLabel}</span>
       </div>
     );
   }
 
-  const imgClass =
-    imageFit === "contain"
-      ? "object-contain object-center transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
-      : "object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100";
-
   return (
-    <div className="flex w-full max-w-full flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-5">
-      {/* Miniaturas: abajo en móvil, izquierda en desktop */}
+    <div className="flex w-full max-w-full flex-col gap-4 lg:flex-row lg:items-start lg:gap-6">
+      {/* Miniaturas: debajo en móvil, columna fija a la izquierda en desktop */}
       {list.length > 1 ? (
         <div
           className={
-            "order-2 flex shrink-0 gap-2 overflow-x-auto pb-1 scrollbar-rail-premium lg:order-none lg:max-h-[min(480px,62vh)] lg:w-[4.25rem] lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0"
+            "order-2 flex shrink-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 scrollbar-rail-premium lg:order-1 lg:w-16 lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0 " +
+            "lg:max-h-[min(560px,80vh)]"
           }
+          aria-label="Miniaturas"
         >
           {list.map((src, i) => (
             <button
@@ -125,20 +140,20 @@ export default function ProductGallery({
               aria-label={`${title} — ${i + 1} / ${list.length}`}
               aria-current={i === safeIndex ? "true" : undefined}
               className={[
-                "relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border transition-all duration-200 ease-out md:h-[4.5rem] md:w-[4.5rem]",
+                "relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border transition-all duration-200 ease-out",
                 i === safeIndex
-                  ? "border-accent-gold ring-1 ring-accent-gold/50"
+                  ? "border-accent-gold ring-2 ring-accent-gold/40 scale-[1.03] z-[1]"
                   : light
-                    ? "border-neutral-200 hover:border-neutral-400"
-                    : "border-white/12 hover:border-white/30",
+                    ? "border-neutral-200 hover:border-neutral-400 hover:scale-[1.02]"
+                    : "border-white/15 hover:border-white/35 hover:scale-[1.02]",
               ].join(" ")}
             >
               <Image
                 src={src}
                 alt=""
-                width={72}
-                height={72}
-                loading="lazy"
+                width={64}
+                height={64}
+                loading={i < 4 ? "eager" : "lazy"}
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
                 className="h-full w-full object-cover"
@@ -148,42 +163,53 @@ export default function ProductGallery({
         </div>
       ) : null}
 
-      <div className="relative order-1 min-h-0 min-w-0 w-full flex-1 self-start lg:order-none lg:max-w-[min(100%,480px)]">
+      {/* Columna principal: evita colapso a 0px en flex (min-width + max-width del bloque) */}
+      <div className="order-1 flex min-h-0 min-w-[240px] w-full flex-1 flex-col items-stretch lg:order-2 lg:max-w-[560px]">
         <div
-          className={`group relative isolate w-full overflow-hidden ${stageAspect} ${stageShell}`}
+          className={`group mx-auto w-full lg:mx-0 ${stageFrameClass}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
         >
+          {/* Fondo detrás de object-contain (letterboxing limpio) */}
           <div
             className={
               light
-                ? "pointer-events-none absolute inset-0 z-0 bg-neutral-100/90"
-                : "pointer-events-none absolute inset-0 z-0 bg-dark-surface/30"
+                ? "pointer-events-none absolute inset-0 bg-neutral-100"
+                : "pointer-events-none absolute inset-0 bg-dark-surface/40"
             }
             aria-hidden
           />
 
-          {/*
-            next/image + fill: el padre directo debe ser position relative con altura definida.
-            Capa absolute inset-0 + hijo relative h-full w-full evita img con tamaño 0 en layout flex.
-          */}
-          <div className="absolute inset-0 z-[2] overflow-hidden rounded-[inherit]">
-            <div className="relative h-full min-h-0 w-full">
+          {mainError || !currentSrc ? (
+            <div
+              className={
+                "absolute inset-0 z-[2] flex items-center justify-center px-4 text-center text-sm " +
+                (light ? "text-neutral-500" : "text-text-muted")
+              }
+            >
+              {noImageLabel}
+            </div>
+          ) : (
+            <div
+              key={`${currentSrc}-${safeIndex}`}
+              className="animate-fade-in absolute inset-0 z-[2]"
+            >
               <Image
-                key={`pdp-main-${list[safeIndex]}-${safeIndex}`}
-                src={list[safeIndex] ?? list[0]}
+                src={currentSrc}
                 alt={`${title} — ${safeIndex + 1}`}
                 fill
                 priority={safeIndex === 0}
+                loading={safeIndex === 0 ? "eager" : "lazy"}
                 placeholder="blur"
                 blurDataURL={PRODUCT_BLUR_DATA_URL}
-                className={imgClass}
-                sizes="(max-width: 1024px) 90vw, 480px"
+                sizes="(max-width: 1024px) 100vw, 560px"
+                onError={() => setMainError(true)}
+                className={`${imgObject} ${imgMotion}`}
               />
             </div>
-          </div>
+          )}
 
           <button
             type="button"
@@ -199,7 +225,8 @@ export default function ProductGallery({
                 : "pointer-events-none absolute right-3 top-3 z-20 rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[11px] font-medium tabular-nums text-white/90 backdrop-blur-sm"
             }
           >
-            {String(safeIndex + 1).padStart(2, "0")} / {String(list.length).padStart(2, "0")}
+            {String(safeIndex + 1).padStart(2, "0")} /{" "}
+            {String(list.length).padStart(2, "0")}
           </div>
 
           <div className="absolute left-3 top-3 z-20">
@@ -216,7 +243,13 @@ export default function ProductGallery({
               }
               aria-label={`${title} — pantalla completa`}
             >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

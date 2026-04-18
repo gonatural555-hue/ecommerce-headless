@@ -1,6 +1,6 @@
 /**
  * PDP “star” / hero ancho: fotos horizontales (gafas, zapatillas, ski, etc.) sin recorte agresivo.
- * Desktop: más columna de galería + ProductImageGallery heroWide; móvil: showFullImage (ver ProductDetailClient).
+ * Desktop: columna de galería algo más ancha + modo cinematic en la galería (ver ProductDetailClient).
  */
 export const PDP_HERO_WIDE_PRODUCT_IDS = new Set<string>([
   "gn-cycling-010",

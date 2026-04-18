@@ -119,8 +119,6 @@ export default function ProductDetailClient({
   const useWideHeroGallery = PDP_HERO_WIDE_PRODUCT_IDS.has(product.id);
   /** Evita que la columna de galería estire la fila y deje hueco enorme sobre el vídeo (solo este PDP). */
   const tightGalleryToVideo = product.id === "gn-cycling-training-001";
-  const showFullImage =
-    product.id === "gn-ski-snow-pants-001" || useWideHeroGallery;
   const baseFeatured =
     productImages.featured || product.images[0] || "";
   const baseGallery =
@@ -292,8 +290,6 @@ export default function ProductDetailClient({
     );
 
   const galleryAspect = useWideHeroGallery ? "cinematic" : "square";
-  const galleryFit =
-    showFullImage && !useWideHeroGallery ? "contain" : "cover";
 
   return (
     <>
@@ -305,7 +301,6 @@ export default function ProductDetailClient({
           noImageLabel={noImageLabel}
           surface={surface}
           aspectMode={galleryAspect}
-          imageFit={galleryFit}
         />
         <ProductInfoPanel
           productId={product.id}
@@ -345,7 +340,7 @@ export default function ProductDetailClient({
       {/* Desktop: dos columnas equilibradas — galería contenida + info */}
       <section
         className={[
-          "hidden max-w-full gap-x-12 gap-y-10 lg:grid lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)] xl:gap-x-16 2xl:gap-x-20",
+          "hidden max-w-full gap-x-12 gap-y-10 lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] xl:gap-x-16 2xl:gap-x-20",
           tightGalleryToVideo ? "lg:content-start" : "",
         ]
           .filter(Boolean)
@@ -365,7 +360,6 @@ export default function ProductDetailClient({
             noImageLabel={noImageLabel}
             surface={surface}
             aspectMode={galleryAspect}
-            imageFit={galleryFit}
           />
         </div>
         <div className="min-w-0">
