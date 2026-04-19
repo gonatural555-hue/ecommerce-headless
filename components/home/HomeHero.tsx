@@ -4,6 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
+import {
+  premiumPrimaryCtaClass,
+  premiumSecondaryCtaClass,
+} from "@/lib/ui/premium-cta-classes";
 
 type HomeHeroProps = {
   locale: Locale;
@@ -100,15 +105,7 @@ export default function HomeHero({
             </video>
           )}
         </div>
-        {/* Gradiente legible: más oscuro arriba, suave abajo; la imagen sigue visible */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.4) 48%, rgba(0,0,0,0.22) 100%)",
-          }}
-          aria-hidden
-        />
+        <PremiumImageOverlay />
       </div>
 
       <div
@@ -129,16 +126,10 @@ export default function HomeHero({
         </p>
 
         <div className="mt-10 flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
-          <Link
-            href={`/${locale}/products`}
-            className="inline-flex items-center justify-center rounded-sm border border-accent-gold/55 bg-accent-gold/25 px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.22em] text-accent-gold shadow-[0_10px_28px_-6px_rgba(0,0,0,0.45)] backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-accent-gold/80 hover:bg-accent-gold/35 hover:shadow-[0_14px_36px_-8px_rgba(0,0,0,0.5)] motion-reduce:hover:translate-y-0"
-          >
+          <Link href={`/${locale}/products`} className={premiumPrimaryCtaClass}>
             {ctaProducts}
           </Link>
-          <Link
-            href={`/${locale}/blog`}
-            className="inline-flex items-center justify-center rounded-sm border border-white/28 bg-white/[0.12] px-8 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-primary shadow-[0_6px_20px_-8px_rgba(0,0,0,0.35)] backdrop-blur-md transition duration-300 hover:border-white/40 hover:bg-white/[0.18]"
-          >
+          <Link href={`/${locale}/blog`} className={premiumSecondaryCtaClass}>
             {ctaJournal}
           </Link>
         </div>

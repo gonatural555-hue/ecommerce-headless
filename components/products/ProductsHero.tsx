@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
 
 type ProductsHeroProps = {
   title: string;
@@ -40,8 +41,7 @@ export default function ProductsHero({
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/80 via-dark-base/50 to-dark-base/92" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.45)_100%)]" />
+        <PremiumImageOverlay />
       </div>
 
       <div
@@ -49,17 +49,17 @@ export default function ProductsHero({
           mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }         motion-reduce:opacity-100 motion-reduce:translate-y-0 transition-all duration-[900ms] ease-out`}
       >
-        <p className="text-[0.65rem] font-medium uppercase tracking-[0.38em] text-accent-gold/90 sm:text-xs">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-accent-gold drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] sm:text-xs">
           {tagline}
         </p>
-        <h1 className="mt-5 font-semibold tracking-tight text-text-primary text-[clamp(1.85rem,4.5vw,2.85rem)] leading-tight">
+        <h1 className="mt-5 font-bold tracking-tight text-text-primary text-[clamp(1.85rem,4.5vw,2.85rem)] leading-tight [text-shadow:0_2px_24px_rgba(0,0,0,0.5),0_1px_3px_rgba(0,0,0,0.4)]">
           {title}
         </h1>
-        <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-text-muted md:text-base">
+        <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/[0.92] drop-shadow-[0_1px_14px_rgba(0,0,0,0.45)] md:text-base">
           {subtitle}
         </p>
         {searchHint ? (
-          <p className="mt-5 text-xs font-medium text-text-primary/90 md:text-sm">
+          <p className="mt-5 text-xs font-medium text-white/90 md:text-sm [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]">
             {searchHint}
           </p>
         ) : null}

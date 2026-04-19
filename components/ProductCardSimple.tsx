@@ -86,7 +86,7 @@ export default function ProductCardSimple({
       <article
         className={
           E
-            ? "group overflow-hidden rounded-sm border border-white/[0.08] bg-[#0f1412]/80 transition-all duration-500 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:border-white/[0.12] hover:shadow-[0_32px_64px_-28px_rgba(0,0,0,0.65)]"
+            ? "group overflow-hidden rounded-sm border border-white/[0.08] bg-[#0f1412]/80 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 hover:-translate-y-1 hover:scale-[1.02] hover:border-white/[0.14] hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.6)]"
             : L
               ? "group overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 hover:shadow-md"
               : "group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
@@ -162,7 +162,7 @@ export default function ProductCardSimple({
           )}
           <div className="absolute inset-0 pointer-events-none">
             {E ? (
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/15" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-black/10 to-black/18" />
             ) : null}
             <div
               className={
@@ -188,8 +188,8 @@ export default function ProductCardSimple({
                 }}
                 className={
                   L
-                    ? "pointer-events-auto rounded-full border border-neutral-300 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 backdrop-blur-sm opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/60 hover:text-accent-gold active:scale-[0.98]"
-                    : "pointer-events-auto rounded-full border border-white/20 bg-black/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/60 hover:text-accent-gold/90 active:scale-[0.98]"
+                    ? "pointer-events-auto rounded-full border border-neutral-300 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.2)] backdrop-blur-sm opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/60 hover:text-accent-gold active:scale-[0.98]"
+                    : "pointer-events-auto rounded-full border border-white/28 bg-black/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/95 shadow-[0_8px_22px_-8px_rgba(0,0,0,0.45)] backdrop-blur-md opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/55 hover:text-accent-gold/95 active:scale-[0.98]"
                 }
                 aria-label={addToCartLabel}
               >
@@ -233,7 +233,7 @@ export default function ProductCardSimple({
           <h2
             className={
               E
-                ? "text-[0.95rem] font-medium leading-snug tracking-tight text-text-primary line-clamp-2 md:text-base"
+                ? "text-[0.95rem] font-semibold leading-snug tracking-tight text-text-primary line-clamp-2 md:text-base"
                 : L
                   ? "text-base font-semibold text-neutral-900 line-clamp-2"
                   : "text-base font-semibold text-text-primary line-clamp-2"
@@ -244,7 +244,7 @@ export default function ProductCardSimple({
           <p
             className={
               E
-                ? "text-[0.7rem] leading-relaxed text-text-muted/85 line-clamp-2 md:text-xs"
+                ? "text-[0.7rem] leading-relaxed text-white/[0.78] line-clamp-2 md:text-xs"
                 : L
                   ? "text-xs text-neutral-600 line-clamp-2"
                   : "text-xs text-text-muted line-clamp-2"
@@ -256,7 +256,7 @@ export default function ProductCardSimple({
             <span
               className={
                 E
-                  ? "text-xs tabular-nums text-text-muted/90"
+                  ? "text-sm font-medium tabular-nums text-text-primary"
                   : L
                     ? "text-sm text-neutral-900"
                     : "text-sm text-text-primary"

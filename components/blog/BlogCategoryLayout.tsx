@@ -18,10 +18,10 @@ export default function BlogCategoryLayout({
     <main className="bg-dark-base">
       <section className="py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-text-muted">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-gold/95">
             Blog
           </p>
-          <h1 className="mt-4 text-3xl md:text-4xl font-semibold text-text-primary">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
             {section.title}
           </h1>
         </div>
@@ -33,7 +33,7 @@ export default function BlogCategoryLayout({
             line ? (
               <p
                 key={`${section.slug}-line-${index}`}
-                className="text-base md:text-lg text-text-muted leading-relaxed"
+                className="text-base leading-relaxed text-white/[0.86] md:text-lg"
               >
                 {line}
               </p>
@@ -52,7 +52,7 @@ export default function BlogCategoryLayout({
               <div
                 key={subtopic.slug}
                 id={subtopic.slug}
-                className="scroll-mt-28 rounded-2xl border border-white/10 bg-dark-surface/30 px-5 py-4"
+                className="scroll-mt-28 rounded-sm border border-white/[0.1] bg-[#0f1412]/70 px-5 py-4 backdrop-blur-[2px] transition-colors duration-200 hover:border-white/[0.16]"
               >
                 <p className="text-sm font-semibold text-text-primary">
                   {subtopic.label}
@@ -71,12 +71,12 @@ export default function BlogCategoryLayout({
               <Link
                 key={post.href}
                 href={post.href}
-                className="block rounded-2xl border border-white/10 bg-dark-surface/30 px-5 py-4 hover:border-accent-gold/50 transition-colors duration-200"
+                className="block rounded-sm border border-white/[0.1] bg-[#0f1412]/70 px-5 py-4 backdrop-blur-[2px] transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-gold/40 hover:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.45)]"
               >
                 <p className="text-base font-semibold text-text-primary">
                   {post.title}
                 </p>
-                <p className="mt-2 text-sm text-text-muted">{post.excerpt}</p>
+                <p className="mt-2 text-sm text-white/[0.78]">{post.excerpt}</p>
               </Link>
             ))}
           </div>

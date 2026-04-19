@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/blog/ScrollReveal";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
 
 type ImageSectionProps = {
   imageSrc: string;
@@ -27,11 +28,11 @@ export default function ImageSection({
             loading="lazy"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-dark-base/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-base/80 via-transparent to-dark-base/30" />
+          <PremiumImageOverlay />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-base/50 via-transparent to-dark-base/20" />
         </div>
         {caption ? (
-          <p className="mx-auto max-w-3xl px-6 py-8 text-center text-xs font-medium uppercase tracking-[0.28em] text-text-muted sm:px-10 md:py-10">
+          <p className="mx-auto max-w-3xl px-6 py-8 text-center text-xs font-medium uppercase tracking-[0.28em] text-white/[0.82] sm:px-10 md:py-10">
             {caption}
           </p>
         ) : null}

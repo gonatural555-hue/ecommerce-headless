@@ -102,7 +102,7 @@ export default async function BlogPage({
 
       <section className="border-b border-white/[0.06] bg-dark-base py-20 md:py-28 lg:py-32">
         <ScrollReveal>
-          <p className="mx-auto max-w-2xl px-6 text-center text-lg font-light leading-relaxed text-text-muted md:text-xl md:leading-relaxed">
+          <p className="mx-auto max-w-2xl px-6 text-center text-lg font-normal leading-relaxed text-white/[0.88] md:text-xl md:leading-relaxed">
             {manifesto}
           </p>
         </ScrollReveal>
@@ -136,7 +136,7 @@ export default async function BlogPage({
       <section className="border-y border-white/[0.06] bg-[#0a0e0d] py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12">
           <ScrollReveal>
-            <p className="text-center text-[0.65rem] font-medium uppercase tracking-[0.38em] text-accent-gold/85">
+            <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-accent-gold drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
               {journal?.sectionsLabel ?? ""}
             </p>
             <div className="mt-10 flex justify-center">

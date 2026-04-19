@@ -1,3 +1,5 @@
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
+
 type BlogPostHeroProps = {
   title: string;
   subtitle?: string;
@@ -18,14 +20,16 @@ export default function BlogPostHero({
           className="h-full w-full object-cover object-center"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-base/70 via-dark-base/45 to-dark-base/85" />
+      <PremiumImageOverlay />
       <div className="relative z-10 w-full">
         <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-14 md:pb-18">
-          <h1 className="text-4xl md:text-5xl font-semibold text-text-primary">
+          <h1 className="text-4xl md:text-5xl font-bold text-text-primary [text-shadow:0_2px_28px_rgba(0,0,0,0.5),0_1px_2px_rgba(0,0,0,0.4)]">
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-3 text-lg text-text-muted">{subtitle}</p>
+            <p className="mt-3 text-lg text-white/[0.88] drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]">
+              {subtitle}
+            </p>
           )}
         </div>
       </div>

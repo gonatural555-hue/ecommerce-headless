@@ -136,11 +136,19 @@ export default function Header() {
     );
   }, [pathname, locale]);
 
-  /** Home con hero a pantalla: barra legible sin rediseñar el header */
-  const isHomePage = useMemo(() => {
+  /** Home, listado de productos, blog y contacto: misma barra semitransparente que el hero. */
+  const isDarkHeroHeader = useMemo(() => {
     const segments = pathname.split("/").filter(Boolean);
-    return segments.length === 1 && segments[0] === locale;
-  }, [pathname, locale]);
+    if (segments.length === 0) return false;
+    if (segments[0] !== locale) return false;
+    if (isProductDetailPage) return false;
+    if (segments.length === 1) return true;
+    const section = segments[1];
+    if (section === "products" && segments.length === 2) return true;
+    if (section === "blog") return true;
+    if (section === "contact" && segments.length === 2) return true;
+    return false;
+  }, [pathname, locale, isProductDetailPage]);
 
   const navLinkClass = isProductDetailPage
     ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"
@@ -178,7 +186,7 @@ export default function Header() {
             : "bg-dark-base border-b border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
           : isProductDetailPage
             ? "bg-transparent"
-            : isHomePage
+            : isDarkHeroHeader
               ? "border-b border-white/[0.08] bg-dark-base/50 shadow-[0_4px_28px_rgba(0,0,0,0.22)] backdrop-blur-md supports-[backdrop-filter]:bg-dark-base/[0.42]"
               : "bg-transparent",
       ].join(" ")}

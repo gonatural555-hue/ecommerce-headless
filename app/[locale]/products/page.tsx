@@ -12,6 +12,7 @@ import {
   getProductsByCategorySlug,
   resolveProductsCategoryParam,
 } from "@/lib/categories";
+import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 import { sortProductsList } from "@/lib/products-page-segments";
 
 export const dynamic = "force-dynamic";
@@ -221,7 +222,7 @@ export default async function ProductsPage({
             </p>
             <Link
               href={`/${locale}/products`}
-              className="mt-10 inline-flex items-center justify-center border border-accent-gold/50 px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-gold transition hover:bg-accent-gold/10"
+              className={`${premiumPrimaryCtaClass} mt-10`}
             >
               {t("productsPage.searchViewAll", "")}
             </Link>

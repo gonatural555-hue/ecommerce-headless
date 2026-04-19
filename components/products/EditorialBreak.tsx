@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/blog/ScrollReveal";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
 
 type EditorialBreakProps = {
   variant: "image" | "text";
@@ -27,9 +28,9 @@ export default function EditorialBreak({
               loading="lazy"
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-dark-base/45" />
+            <PremiumImageOverlay />
             <div className="absolute inset-0 flex items-center justify-center px-6">
-              <p className="max-w-2xl text-center font-light leading-tight tracking-tight text-text-primary text-[clamp(1.25rem,3.5vw,2rem)] drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+              <p className="max-w-2xl text-center font-medium leading-tight tracking-tight text-text-primary text-[clamp(1.25rem,3.5vw,2rem)] [text-shadow:0_2px_28px_rgba(0,0,0,0.55),0_1px_2px_rgba(0,0,0,0.45)]">
                 {title}
               </p>
             </div>
@@ -42,7 +43,7 @@ export default function EditorialBreak({
   return (
     <section className="border-y border-white/[0.05] bg-[#0a0e0d] py-14 md:py-20">
       <ScrollReveal>
-        <p className="mx-auto max-w-2xl px-6 text-center font-light leading-snug tracking-tight text-text-primary text-[clamp(1.2rem,3vw,1.85rem)]">
+        <p className="mx-auto max-w-2xl px-6 text-center font-medium leading-snug tracking-tight text-text-primary text-[clamp(1.2rem,3vw,1.85rem)]">
           {title}
         </p>
       </ScrollReveal>

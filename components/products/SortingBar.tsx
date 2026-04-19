@@ -43,7 +43,7 @@ export default function SortingBar({
         name="sort"
         defaultValue={sort || "featured"}
         onChange={(e) => e.currentTarget.form?.requestSubmit()}
-        className="w-full cursor-pointer rounded-sm border border-white/10 bg-[#0f1412]/90 px-4 py-2.5 text-xs text-text-muted outline-none transition hover:border-white/18 focus:border-accent-gold/40 focus:ring-1 focus:ring-accent-gold/30 sm:max-w-[240px] sm:text-[0.7rem] sm:uppercase sm:tracking-[0.14em]"
+        className="w-full cursor-pointer rounded-sm border border-white/16 bg-[#0f1412]/85 px-4 py-2.5 text-xs text-white/[0.88] shadow-[0_4px_16px_-6px_rgba(0,0,0,0.35)] outline-none backdrop-blur-sm transition duration-200 hover:border-white/24 focus:border-accent-gold/50 focus:ring-2 focus:ring-accent-gold/25 sm:max-w-[240px] sm:text-[0.7rem] sm:uppercase sm:tracking-[0.14em]"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>

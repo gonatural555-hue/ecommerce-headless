@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
 
 type BlogHeroProps = {
   title: string;
@@ -54,8 +55,7 @@ export default function BlogHero({
                 }
           }
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/75 via-dark-base/45 to-dark-base/92" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(11,15,14,0.55)_100%)]" />
+        <PremiumImageOverlay />
       </div>
 
       <div
@@ -81,8 +81,8 @@ export default function BlogHero({
         style={{ opacity: fade }}
         aria-hidden
       >
-        <div className="flex h-12 w-7 justify-center rounded-full border border-white/20">
-          <div className="mt-2 h-2 w-0.5 animate-pulse rounded-full bg-white/50" />
+        <div className="flex h-11 w-6 justify-center rounded-full border border-white/35 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-[2px]">
+          <div className="mt-2 h-1.5 w-px animate-pulse rounded-full bg-white/65" />
         </div>
       </div>
     </section>

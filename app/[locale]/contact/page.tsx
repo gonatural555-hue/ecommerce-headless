@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState, FormEvent } from "react";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
+import PremiumImageOverlay from "@/components/ui/PremiumImageOverlay";
+import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 
 export default function ContactPage() {
   const t = useTranslations();
@@ -27,7 +29,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-[100dvh] bg-black">
+    <div className="relative min-h-[100dvh] bg-dark-base">
       <div className="absolute inset-0">
         <Image
           src="/assets/images/hero/contact.webp"
@@ -36,35 +38,37 @@ export default function ContactPage() {
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <PremiumImageOverlay />
       </div>
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-32 md:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-20">
+      <main className="relative mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 md:pb-20 md:pt-32 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
         {/* Columna izquierda - Información de contacto */}
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h1 className="mb-8 text-3xl font-bold tracking-tight text-text-primary [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] md:text-4xl">
             {t("contactPage.title")}
           </h1>
-          <div className="space-y-6 text-white leading-relaxed">
-            <p>{t("contactPage.intro")}</p>
+          <div className="space-y-7 leading-relaxed text-white/[0.9]">
+            <p className="text-base md:text-[1.05rem]">
+              {t("contactPage.intro")}
+            </p>
 
-            <div className="pt-4">
-              <h2 className="text-lg font-semibold text-white mb-2">
+            <div className="pt-1">
+              <h2 className="mb-2 text-lg font-semibold text-text-primary">
                 {t("contactPage.emailTitle")}
               </h2>
               <a
                 href="mailto:go.natural.555@gmail.com"
-                className="text-white hover:text-white/80 transition-colors duration-200 underline"
+                className="text-accent-gold underline decoration-accent-gold/40 underline-offset-4 transition-colors duration-200 hover:text-accent-gold/90"
               >
                 go.natural.555@gmail.com
               </a>
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold text-white mb-2">
+              <h2 className="mb-2 text-lg font-semibold text-text-primary">
                 {t("contactPage.hoursTitle")}
               </h2>
-              <p className="text-white">
+              <p className="text-white/[0.88]">
                 {t("contactPage.hoursLine1")}
                 <br />
                 {t("contactPage.hoursLine2")}
@@ -73,9 +77,9 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="pt-4 border-t border-gray-200">
-              <p className="text-sm text-white">
-                <strong className="text-white">
+            <div className="border-t border-white/12 pt-6">
+              <p className="text-sm leading-relaxed text-white/[0.82]">
+                <strong className="font-semibold text-text-primary">
                   {t("contactPage.quickTitle")}
                 </strong>{" "}
                 {t("contactPage.quickText")}
@@ -90,7 +94,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-white mb-2"
+                className="mb-2 block text-sm font-medium text-text-primary"
               >
                 {t("contactPage.form.nameLabel")}
               </label>
@@ -101,7 +105,7 @@ export default function ContactPage() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-md bg-dark-surface text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
+                className="w-full rounded-sm border border-white/20 bg-black/35 px-4 py-3 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-all duration-200 placeholder:text-white/45 focus:border-accent-gold/55 focus:outline-none focus:ring-2 focus:ring-accent-gold/35"
                 placeholder={t("contactPage.form.namePlaceholder")}
               />
             </div>
@@ -109,7 +113,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-white mb-2"
+                className="mb-2 block text-sm font-medium text-text-primary"
               >
                 {t("contactPage.form.emailLabel")}
               </label>
@@ -120,7 +124,7 @@ export default function ContactPage() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-md bg-dark-surface text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
+                className="w-full rounded-sm border border-white/20 bg-black/35 px-4 py-3 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-all duration-200 placeholder:text-white/45 focus:border-accent-gold/55 focus:outline-none focus:ring-2 focus:ring-accent-gold/35"
                 placeholder={t("contactPage.form.emailPlaceholder")}
               />
             </div>
@@ -128,7 +132,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-white mb-2"
+                className="mb-2 block text-sm font-medium text-text-primary"
               >
                 {t("contactPage.form.messageLabel")}
               </label>
@@ -139,15 +143,12 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md bg-dark-surface text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 resize-none"
+                className="w-full resize-none rounded-sm border border-white/20 bg-black/35 px-4 py-3 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm transition-all duration-200 placeholder:text-white/45 focus:border-accent-gold/55 focus:outline-none focus:ring-2 focus:ring-accent-gold/35"
                 placeholder={t("contactPage.form.messagePlaceholder")}
               />
             </div>
 
-            <button
-              type="submit"
-              className="w-full px-8 py-3 bg-white text-black font-medium rounded-md hover:bg-gray-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
-            >
+            <button type="submit" className={`${premiumPrimaryCtaClass} w-full`}>
               {t("contactPage.form.submit")}
             </button>
           </form>
