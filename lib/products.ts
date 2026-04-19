@@ -1325,7 +1325,7 @@ const PRODUCTS: Product[] = [
     price: 15.99,
     category: "Cycling",
     images: [
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp"
     ],
     shortDescription:
       "Pack de 10 cartuchos CO2 de 16 g con rosca para inflar neumáticos de bicicleta al instante. Compactos, prácticos y compatibles con infladores CO2 roscados.",

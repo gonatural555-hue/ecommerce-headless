@@ -1,13 +1,15 @@
 {
-  "id": "gn-cyling-eq-002",
+  "id": "gn-cycling-eq-002",
   "images": {
-    "featured": ["/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"],
+    "featured": [
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp"
+    ],
     "gallery": [
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp",
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp",
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp",
-      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp",
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes-01.webp",
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes-10pack.webp",
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes-20pack.webp",
+      "/assets/images/products/gn-cycling-eq-002/CO2-tubes-30pack.webp"
     ],
     "lifestyle": [],
     "extras": []
@@ -38,32 +40,38 @@
     "pack": {
       "16g-x10-pack": {
         "featured": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-10pack.webp"
         ],
         "gallery": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-10pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-20pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-30pack.webp"
         ]
       },
       "16g-x20-pack": {
         "featured": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-20pack.webp"
         ],
         "gallery": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-20pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-10pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-30pack.webp"
         ]
       },
       "16g-x30-pack": {
         "featured": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-30pack.webp"
         ],
         "gallery": [
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
-          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-30pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-10pack.webp",
+          "/assets/images/products/gn-cycling-eq-002/CO2-tubes-20pack.webp"
         ]
       }
     }

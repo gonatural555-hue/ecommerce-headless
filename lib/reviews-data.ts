@@ -222,7 +222,7 @@ export const REVIEWS_SEED: ReviewSeed[] = [
   },
   {
     id: "review-gn-cyling-eq-002-01",
-    productSlug: "gn-cyling-eq-002",
+    productSlug: "gn-cycling-eq-002",
     rating: 5,
     author: "K. V.",
     title: "Siempre en la mochila",
@@ -233,7 +233,7 @@ export const REVIEWS_SEED: ReviewSeed[] = [
   },
   {
     id: "review-gn-cyling-eq-002-02",
-    productSlug: "gn-cyling-eq-002",
+    productSlug: "gn-cycling-eq-002",
     rating: 5,
     author: "D. L.",
     comment:
@@ -243,7 +243,7 @@ export const REVIEWS_SEED: ReviewSeed[] = [
   },
   {
     id: "review-gn-cyling-eq-002-03",
-    productSlug: "gn-cyling-eq-002",
+    productSlug: "gn-cycling-eq-002",
     rating: 4,
     author: "Anónimo",
     comment:
