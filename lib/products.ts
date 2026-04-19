@@ -1318,11 +1318,11 @@ const PRODUCTS: Product[] = [
     },
   },
   {
-    id: "gn-cyling-eq-002",
-    slug: "gn-cyling-eq-002",
+    id: "gn-cycling-eq-002",
+    slug: "gn-cycling-eq-002",
     title:
-      "ThinkRider — Pack de 10 cartuchos CO2 16 g (roscados, inflado rápido)",
-    price: 11.34,
+      "ThinkRider — Pack de 10/20/30 cartuchos CO2 16 g (roscados, inflado rápido)",
+    price: 15.99,
     category: "Cycling",
     images: [
       "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"
@@ -1419,6 +1419,124 @@ const PRODUCTS: Product[] = [
             "ThinkRider cartucce CO2 16 g (pack 10) | Go Natural",
           description:
             "Cartucce CO2 filettate 16 g, pack da 10. Gonfiaggio rapido bici da strada, gravel e MTB — ThinkRider su Go Natural.",
+        },
+      },
+    },
+  },
+  {
+    id: "gn-cycling-eq-003",
+    slug: "gn-cycling-eq-003",
+    title:
+      "ThinkRider — Cámara interior TPU 28 g 700C (Presta, anti-pinchazos)",
+    price: 10.99,
+    category: "Cycling",
+    images: [
+      "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
+    ],
+    shortDescription:
+      "Cámara ultraligera ~28 g en TPU de 2.ª generación, válvula Presta y compatibilidad 700×18–28C. Mayor resistencia al pinchazo y estanqueidad reforzada frente al caucho tradicional.",
+    description:
+      "La cámara ThinkRider en TPU de segunda generación está pensada para ciclismo de carretera en 700C: menos peso, mejor resistencia al pinchazo y tacto más predecible que muchas cámaras de caucho clásicas. La válvula Presta incorpora cuerpo en aleación de aluminio con núcleo de cobre y refuerzo de goma en la zona de unión con la cámara para reducir rozamiento y fugas. Ideal para neumáticos 700×18C, 23C, 25C y 28C (rangos ISO típicos ~18–622 a 32–622 según montaje). Elegí la longitud de válvula que mejor encaje con tu perfil de llanta (45, 65 u 85 mm) y el pack de 1 o 2 unidades según tu kit de ruta o taller.",
+    features: [
+      "TPU 2.ª gen.: más dureza y resistencia anti-pinchazo vs. caucho butilo habitual",
+      "Peso ultraligero ~28 g (referencia de producto)",
+      "700C — compatible con anchos 700×18C / 23C / 25C / 28C (ISO 18–622 … 32–622 según cubierta)",
+      "Válvula Presta con boquilla en aleación y núcleo de cobre",
+      "Refuerzo de goma en la base de válvula para mejor estanqueidad y menos rozamiento",
+      "Opciones de válvula 45 mm, 65 mm u 85 mm",
+      "Disponible en 1 o 2 unidades por pedido",
+    ],
+    translations: {
+      en: {
+        title:
+          "ThinkRider — 28g TPU 700C Inner Tube (Presta, anti-puncture)",
+        shortDescription:
+          "Ultralight ~28g second-gen TPU tube with Presta valve for 700×18–28C road tires. Stronger puncture resistance and reliable airtight performance vs. traditional butyl.",
+        description:
+          "The ThinkRider second-generation TPU inner tube is built for 700C road riding: lighter weight, improved puncture resistance, and predictable feel compared with many classic butyl tubes. The Presta valve uses an aluminum alloy body with a copper core and reinforced rubber at the valve base to reduce friction and leaks. Fits common road tire widths 700×18C through 700×28C (typical ISO ranges ~18–622 to 32–622 depending on tire). Choose valve length (45, 65, or 85 mm) to match your rim depth, and pick a single tube or a 2-pack for your ride kit.",
+        features: [
+          "2nd-gen TPU: tougher, more puncture-resistant than typical butyl",
+          "Ultralight ~28g (product reference weight)",
+          "700C — fits 700×18C / 23C / 25C / 28C (ISO 18–622 … 32–622 depending on tire)",
+          "Presta valve with aluminum body and copper core",
+          "Rubber reinforcement at the valve base for airtightness and less friction",
+          "Valve lengths 45 mm, 65 mm, or 85 mm",
+          "Sold as 1 tube or 2-pack",
+        ],
+        seo: {
+          title:
+            "ThinkRider 28g TPU 700C Presta inner tube | Go Natural",
+          description:
+            "Shop ThinkRider ultralight TPU road tubes: 700C, Presta 45/65/85 mm, 1 or 2 pack. Anti-puncture 2nd-gen TPU at Go Natural.",
+        },
+      },
+      es: {
+        title:
+          "ThinkRider — Cámara interior TPU 28 g 700C (Presta, anti-pinchazos)",
+        shortDescription:
+          "Cámara ultraligera ~28 g en TPU de 2.ª generación, válvula Presta y compatibilidad 700×18–28C. Mayor resistencia al pinchazo y estanqueidad reforzada frente al caucho tradicional.",
+        description:
+          "La cámara ThinkRider en TPU de segunda generación está pensada para ciclismo de carretera en 700C: menos peso, mejor resistencia al pinchazo y tacto más predecible que muchas cámaras de caucho clásicas. La válvula Presta incorpora cuerpo en aleación de aluminio con núcleo de cobre y refuerzo de goma en la zona de unión con la cámara para reducir rozamiento y fugas. Ideal para neumáticos 700×18C, 23C, 25C y 28C (rangos ISO típicos ~18–622 a 32–622 según montaje). Elegí la longitud de válvula que mejor encaje con tu perfil de llanta (45, 65 u 85 mm) y el pack de 1 o 2 unidades según tu kit de ruta o taller.",
+        features: [
+          "TPU 2.ª gen.: más dureza y resistencia anti-pinchazo vs. caucho butilo habitual",
+          "Peso ultraligero ~28 g (referencia de producto)",
+          "700C — compatible con anchos 700×18C / 23C / 25C / 28C (ISO 18–622 … 32–622 según cubierta)",
+          "Válvula Presta con boquilla en aleación y núcleo de cobre",
+          "Refuerzo de goma en la base de válvula para mejor estanqueidad y menos rozamiento",
+          "Opciones de válvula 45 mm, 65 mm u 85 mm",
+          "Disponible en 1 o 2 unidades por pedido",
+        ],
+        seo: {
+          title:
+            "ThinkRider cámara TPU 28 g 700C Presta | Go Natural",
+          description:
+            "Cámara interior TPU ThinkRider 28 g, 700C, válvula Presta 45/65/85 mm, pack 1 o 2. Anti-pinchazos 2.ª gen. en Go Natural.",
+        },
+      },
+      fr: {
+        title:
+          "ThinkRider — Chambre à air TPU 28 g 700C (Presta, anti-crevaison)",
+        shortDescription:
+          "Chambre ultralégère ~28 g en TPU 2e génération, valve Presta, compatibilité 700×18–28C. Meilleure résistance à la crevaison qu’un butyle classique.",
+        description:
+          "La chambre à air ThinkRider en TPU de deuxième génération cible le vélo route en 700C : moins de poids, meilleure résistance à la crevaison et sensation plus stable que beaucoup de chambres butyl classiques. La valve Presta combine un corps en alliage d’aluminium, un cœur en cuivre et un renfort caoutchouc à la base pour limiter frottements et fuites. Compatible avec des pneus 700×18C à 700×28C (plages ISO typiques ~18–622 à 32–622 selon le pneu). Choisissez la longueur de valve (45, 65 ou 85 mm) et l’unité seule ou le lot de 2.",
+        features: [
+          "TPU 2e gén. : meilleure tenue et anti-crevaison vs butyle classique",
+          "Ultralégère ~28 g (référence produit)",
+          "700C — 700×18C / 23C / 25C / 28C (ISO 18–622 … 32–622 selon pneu)",
+          "Valve Presta : corps alu et cœur cuivre",
+          "Renfort caoutchouc à la base de valve pour l’étanchéité",
+          "Longueurs de valve 45, 65 ou 85 mm",
+          "Vendue à l’unité ou par lot de 2",
+        ],
+        seo: {
+          title:
+            "ThinkRider chambre TPU 28 g 700C Presta | Go Natural",
+          description:
+            "Chambre à air TPU ThinkRider 28 g, 700C, Presta 45/65/85 mm, 1 ou 2 pièces. Anti-crevaison 2e gén. chez Go Natural.",
+        },
+      },
+      it: {
+        title:
+          "ThinkRider — Camera d’aria TPU 28 g 700C (Presta, anti-foratura)",
+        shortDescription:
+          "Camera ultraleggera ~28 g in TPU di 2ª generazione, valvola Presta, compatibilità 700×18–28C. Maggiore resistenza alle forature rispetto al butile tradizionale.",
+        description:
+          "La camera d’aria ThinkRider in TPU di seconda generazione è pensata per il ciclismo su strada in 700C: meno peso, migliore resistenza alle forature e sensazione più stabile rispetto a molte camere in butile. La valvola Presta ha corpo in lega di alluminio, anima in rame e rinforzo in gomma alla base per ridurre attriti e perdite. Adatta a pneumatici 700×18C, 23C, 25C e 28C (range ISO tipici ~18–622 … 32–622 a seconda del copertone). Scegli la lunghezza valvola (45, 65 o 85 mm) e la confezione da 1 o 2 camere.",
+        features: [
+          "TPU 2ª gen.: più tenuta e anti-foratura vs butile classico",
+          "Ultraleggera ~28 g (riferimento prodotto)",
+          "700C — compatibile 700×18C / 23C / 25C / 28C (ISO 18–622 … 32–622)",
+          "Valvola Presta con corpo in lega e anima in rame",
+          "Rinforzo in gomma alla base valvola per tenuta e meno attrito",
+          "Lunghezze valvola 45, 65 o 85 mm",
+          "Disponibile singola o confezione da 2",
+        ],
+        seo: {
+          title:
+            "ThinkRider camera TPU 28 g 700C Presta | Go Natural",
+          description:
+            "Camera d’aria TPU ThinkRider 28 g, 700C, Presta 45/65/85 mm, 1 o 2 pezzi. Anti-foratura 2ª gen. su Go Natural.",
         },
       },
     },
