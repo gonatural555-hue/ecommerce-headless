@@ -1431,7 +1431,7 @@ const PRODUCTS: Product[] = [
     price: 4.99,
     category: "Cycling",
     images: [
-      "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos.webp",
     ],
     shortDescription:
       "Cámara ultraligera ~28 g en TPU de 2.ª generación, válvula Presta y compatibilidad 700×18–28C. Mayor resistencia al pinchazo y estanqueidad reforzada frente al caucho tradicional.",
