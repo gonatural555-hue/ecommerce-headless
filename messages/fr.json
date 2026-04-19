@@ -715,31 +715,6 @@
       "caption": "Sélectionné pour un usage calme et fiable en conditions réelles."
     },
     "posts": {
-      "quiet-journeys": {
-        "title": "Voyages silencieux, horizons clairs",
-        "excerpt": "Trouver un élan dans le silence et la distance, un sentier à la fois.",
-        "subtitle": "Sur la distance, le silence et la valeur d’un mouvement sans hâte.",
-        "intro": "L’exploration commence bien avant le sentier. Elle commence par l’intention, par une décision calme d’avancer dans le monde à un rythme plus lent et plus réfléchi.",
-        "sections": [
-          {
-            "heading": "Le son du moins",
-            "paragraphs": [
-              "Quand le bruit s’efface, l’attention s’affine. Les plus petites textures du paysage deviennent nettes : la forme de la lumière, le poids du vent, le rythme des pas.",
-              "Dans cet espace, l’équipement doit devenir invisible. Rien de dur. Rien de bruyant. Juste l’essentiel pour avancer."
-            ],
-            "image": "/assets/images/products/gn-outdoor-009/gallery.webp"
-          },
-          {
-            "heading": "Le mouvement avec intention",
-            "paragraphs": [
-              "La distance ne se mesure pas en kilomètres, mais en moments. Le rythme que tu choisis définit l’histoire que tu te racontes en chemin.",
-              "Nous cherchons des objets qui soutiennent ce rythme : des outils fiables, minimalistes et pensés pour l’horizon long."
-            ],
-            "image": "/assets/images/products/gn-outdoor-002/featured01.webp"
-          }
-        ],
-        "closing": "Dans le silence entre le départ et l’arrivée, tu découvres que le voyage n’a jamais été une question de vitesse. Il s’agissait de présence."
-      },
       "edge-of-water": {
         "title": "Au bord de l’eau",
         "excerpt": "Rythme, respiration et calme de l’eau ouverte.",

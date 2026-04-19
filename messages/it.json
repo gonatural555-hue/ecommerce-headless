@@ -715,31 +715,6 @@
       "caption": "Scelta per un uso calmo e affidabile in condizioni reali."
     },
     "posts": {
-      "quiet-journeys": {
-        "title": "Viaggi silenziosi, orizzonti chiari",
-        "excerpt": "Trovare ritmo nel silenzio e nella distanza, un sentiero alla volta.",
-        "subtitle": "Su distanza, silenzio e il valore di un movimento senza fretta.",
-        "intro": "L’esplorazione inizia molto prima del sentiero. Inizia con l’intenzione, con una decisione calma di muoversi nel mondo a un ritmo più lento e consapevole.",
-        "sections": [
-          {
-            "heading": "Il suono del meno",
-            "paragraphs": [
-              "Quando il rumore si attenua, l’attenzione si affina. Le texture più piccole del paesaggio diventano chiare: la forma della luce, il peso del vento, il ritmo dei passi.",
-              "In quello spazio, l’attrezzatura dovrebbe risultare invisibile. Niente duro. Niente rumoroso. Solo l’essenziale per andare avanti."
-            ],
-            "image": "/assets/images/products/gn-outdoor-009/gallery.webp"
-          },
-          {
-            "heading": "Movimento con intenzione",
-            "paragraphs": [
-              "La distanza non si misura in chilometri ma in momenti. Il ritmo che scegli definisce la storia che ti racconti lungo il cammino.",
-              "Cerchiamo oggetti che sostengano questo ritmo: strumenti affidabili, minimi e pensati per un orizzonte lungo."
-            ],
-            "image": "/assets/images/products/gn-outdoor-002/featured01.webp"
-          }
-        ],
-        "closing": "Nel silenzio tra partenza e arrivo, scopri che il viaggio non è mai stato una questione di velocità. Era una questione di presenza."
-      },
       "edge-of-water": {
         "title": "Al bordo dell’acqua",
         "excerpt": "Ritmo, respiro e calma dell’acqua aperta.",

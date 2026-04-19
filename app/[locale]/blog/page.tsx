@@ -12,7 +12,7 @@ import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
 
-const FEATURED_SLUG = "quiet-journeys";
+const FEATURED_SLUG = "edge-of-water";
 const FALLBACK_IMAGE = "/assets/images/blog/blog-hero.webp";
 
 export async function generateMetadata({

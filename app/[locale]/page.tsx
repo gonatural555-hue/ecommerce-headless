@@ -41,9 +41,9 @@ type HomePageMessages = {
 };
 
 const JOURNAL_PREVIEW_SLUGS = [
-  "quiet-journeys",
   "edge-of-water",
   "winter-lines",
+  "calm-motion",
 ] as const;
 
 export async function generateMetadata({

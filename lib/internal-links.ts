@@ -34,8 +34,8 @@ const CATEGORY_TO_BLOG_SLUGS: Record<string, string[]> = {
   "mountain-snow": ["winter-lines", "ski-snowboard-centros-sin-limite"],
   "ski-snowboard": ["winter-lines", "ski-snowboard-centros-sin-limite"],
   "outdoor-adventure": ["quiet-morning-at-camp", "salir-sin-complicarse"],
-  "cycling-running": ["calm-motion", "quiet-journeys"],
-  "active-sports": ["calm-motion", "quiet-journeys"],
+  "cycling-running": ["calm-motion", "edge-of-water"],
+  "active-sports": ["calm-motion", "edge-of-water"],
 };
 
 function normalizeText(text: string) {

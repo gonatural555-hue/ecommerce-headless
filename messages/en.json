@@ -715,31 +715,6 @@
       "caption": "Selected for calm, reliable use in real conditions."
     },
     "posts": {
-      "quiet-journeys": {
-        "title": "Quiet journeys, clear horizons",
-        "excerpt": "Finding momentum in silence and distance, one trail at a time.",
-        "subtitle": "On distance, silence, and the value of unhurried movement.",
-        "intro": "Exploration begins long before the trail. It starts with intention, with a quiet decision to move through the world at a slower, more deliberate pace.",
-        "sections": [
-          {
-            "heading": "The sound of less",
-            "paragraphs": [
-              "When noise fades, attention sharpens. The smallest textures of landscape become clear — the shape of light, the weight of wind, the rhythm of steps.",
-              "In that space, gear should feel invisible. Nothing sharp. Nothing loud. Just the essentials that keep you moving forward."
-            ],
-            "image": "/assets/images/categories/mountain-snow.webp"
-          },
-          {
-            "heading": "Movement with intention",
-            "paragraphs": [
-              "Distance is not measured in miles but in moments. The pace you choose defines the story you tell yourself on the way.",
-              "We look for objects that support this rhythm — tools that are reliable, minimal, and built for the long horizon."
-            ],
-            "image": "/assets/images/hero/storysection.webp"
-          }
-        ],
-        "closing": "In the quiet between departure and arrival, you discover the journey was never about speed. It was about presence."
-      },
       "edge-of-water": {
         "title": "At the edge of water",
         "excerpt": "On rhythm, breath, and the calm of open water.",
