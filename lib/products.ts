@@ -1428,7 +1428,7 @@ const PRODUCTS: Product[] = [
     slug: "gn-cycling-eq-003",
     title:
       "ThinkRider — Cámara interior TPU 28 g 700C (Presta, anti-pinchazos)",
-    price: 10.99,
+    price: 4.99,
     category: "Cycling",
     images: [
       "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",

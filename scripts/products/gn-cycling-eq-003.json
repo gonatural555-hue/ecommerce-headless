@@ -2,15 +2,13 @@
   "id": "gn-cycling-eq-003",
   "images": {
     "featured": [
-      "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp"
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos.webp"
     ],
     "gallery": [
-      "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
-      "/assets/images/products/gn-cycling-eq-003/02-stretch.webp",
-      "/assets/images/products/gn-cycling-eq-003/03-kit.webp",
-      "/assets/images/products/gn-cycling-eq-003/04-scale-28g.webp",
-      "/assets/images/products/gn-cycling-eq-003/05-tpu-vs-butyl.webp",
-      "/assets/images/products/gn-cycling-eq-003/06-rolled-compact.webp"
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-01.webp",
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-02.webp",
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-03.webp",
+      "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-04.webp"
     ],
     "lifestyle": [],
     "extras": []
@@ -62,42 +60,21 @@
     "valve-length": {
       "valve-45mm": {
         "featured": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp"
+          "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-03"
         ],
-        "gallery": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
-          "/assets/images/products/gn-cycling-eq-003/02-stretch.webp",
-          "/assets/images/products/gn-cycling-eq-003/03-kit.webp",
-          "/assets/images/products/gn-cycling-eq-003/04-scale-28g.webp",
-          "/assets/images/products/gn-cycling-eq-003/05-tpu-vs-butyl.webp",
-          "/assets/images/products/gn-cycling-eq-003/06-rolled-compact.webp"
-        ]
+        "gallery": []
       },
       "valve-65mm": {
         "featured": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp"
+          "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-03.webp"
         ],
-        "gallery": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
-          "/assets/images/products/gn-cycling-eq-003/02-stretch.webp",
-          "/assets/images/products/gn-cycling-eq-003/03-kit.webp",
-          "/assets/images/products/gn-cycling-eq-003/04-scale-28g.webp",
-          "/assets/images/products/gn-cycling-eq-003/05-tpu-vs-butyl.webp",
-          "/assets/images/products/gn-cycling-eq-003/06-rolled-compact.webp"
-        ]
+        "gallery": []
       },
       "valve-85mm": {
         "featured": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp"
+          "/assets/images/products/gn-cycling-eq-003/camara-antipinchasos-03.webp"
         ],
-        "gallery": [
-          "/assets/images/products/gn-cycling-eq-003/01-anti-puncture.webp",
-          "/assets/images/products/gn-cycling-eq-003/02-stretch.webp",
-          "/assets/images/products/gn-cycling-eq-003/03-kit.webp",
-          "/assets/images/products/gn-cycling-eq-003/04-scale-28g.webp",
-          "/assets/images/products/gn-cycling-eq-003/05-tpu-vs-butyl.webp",
-          "/assets/images/products/gn-cycling-eq-003/06-rolled-compact.webp"
-        ]
+        "gallery": []
       }
     }
   }
