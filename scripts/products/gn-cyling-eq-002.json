@@ -17,27 +17,55 @@
     "label": "Formato",
     "default": "16g-x10-pack",
     "options": [
-      { "label": "16g x 10 Pack", "value": "16g-x10-pack" },
-      { "label": "16g x 20 Pack", "value": "16g-x20-pack" },
-      { "label": "16g x 30 Pack", "value": "16g-x30-pack" }
+      {
+        "label": "16g x 10 Pack",
+        "value": "16g-x10-pack",
+        "priceModifier": 0
+      },
+      {
+        "label": "16g x 20 Pack",
+        "value": "16g-x20-pack",
+        "priceModifier": 12
+      },
+      {
+        "label": "16g x 30 Pack",
+        "value": "16g-x30-pack",
+        "priceModifier": 22
+      }
     ]
   },
   "variantImages": {
-    "16g-x10-pack": {
-      "featured": ["/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"],
-      "gallery": []
-    },
-    "16g-x20-pack": {
-      "featured": [
-        "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp"
-      ],
-      "gallery": []
-    },
-    "16g-x30-pack": {
-      "featured": [
-        "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
-      ],
-      "gallery": []
+    "pack": {
+      "16g-x10-pack": {
+        "featured": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"
+        ]
+      },
+      "16g-x20-pack": {
+        "featured": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"
+        ]
+      },
+      "16g-x30-pack": {
+        "featured": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
+        ],
+        "gallery": [
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
+          "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"
+        ]
+      }
     }
   }
 }

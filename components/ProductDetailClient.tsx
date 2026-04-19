@@ -211,11 +211,21 @@ export default function ProductDetailClient({
       };
     }
 
+    const featArr = variant.featured;
+    const galArr = variant.gallery;
+    const featuredUrls = Array.isArray(featArr)
+      ? featArr.filter((u): u is string => Boolean(u))
+      : [];
+    const galleryUrls = Array.isArray(galArr)
+      ? galArr.filter((u): u is string => Boolean(u))
+      : [];
+
+    const fallbackThumbs =
+      featuredUrls.length > 0 ? featuredUrls : defaultImages.gallery;
+
     return {
-      featured: variant.featured?.[0] ?? defaultImages.featured,
-      gallery: variant.gallery?.length
-        ? variant.gallery
-        : variant.featured ?? defaultImages.gallery,
+      featured: featuredUrls[0] ?? defaultImages.featured,
+      gallery: galleryUrls.length > 0 ? galleryUrls : fallbackThumbs,
     };
   }, [
     baseFeatured,
@@ -279,7 +289,8 @@ export default function ProductDetailClient({
       if (url && !list.includes(url)) list.push(url);
     };
     if (activeImages.featured) push(activeImages.featured);
-    activeImages.gallery.forEach(push);
+    const gal = Array.isArray(activeImages.gallery) ? activeImages.gallery : [];
+    gal.forEach(push);
     return list;
   }, [activeImages]);
 
