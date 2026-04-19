@@ -1,11 +1,13 @@
 {
   "id": "gn-cyling-eq-002",
   "images": {
-    "featured": ["/assets/images/products/gn-cyling-eq-002/1.webp"],
+    "featured": ["/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp"],
     "gallery": [
-      "/assets/images/products/gn-cyling-eq-002/1.webp",
-      "/assets/images/products/gn-cyling-eq-002/2.webp",
-      "/assets/images/products/gn-cyling-eq-002/3.webp"
+      "/assets/images/products/gn-cyling-eq-002/CO2-tubes.webp",
+      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-01.webp",
+      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp",
+      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp",
+      "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
     ],
     "lifestyle": [],
     "extras": []
@@ -22,32 +24,20 @@
   },
   "variantImages": {
     "16g-x10-pack": {
-      "featured": ["/assets/images/products/gn-cyling-eq-002/1.webp"],
-      "gallery": [
-        "/assets/images/products/gn-cyling-eq-002/1.webp",
-        "/assets/images/products/gn-cyling-eq-002/2.webp",
-        "/assets/images/products/gn-cyling-eq-002/3.webp"
-      ]
+      "featured": ["/assets/images/products/gn-cyling-eq-002/CO2-tubes-10pack.webp"],
+      "gallery": []
     },
     "16g-x20-pack": {
       "featured": [
-        "/assets/images/products/gn-cyling-eq-002/16g-x20-pack/1.webp"
+        "/assets/images/products/gn-cyling-eq-002/CO2-tubes-20pack.webp"
       ],
-      "gallery": [
-        "/assets/images/products/gn-cyling-eq-002/16g-x20-pack/1.webp",
-        "/assets/images/products/gn-cyling-eq-002/16g-x20-pack/2.webp",
-        "/assets/images/products/gn-cyling-eq-002/16g-x20-pack/3.webp"
-      ]
+      "gallery": []
     },
     "16g-x30-pack": {
       "featured": [
-        "/assets/images/products/gn-cyling-eq-002/16g-x30-pack/1.webp"
+        "/assets/images/products/gn-cyling-eq-002/CO2-tubes-30pack.webp"
       ],
-      "gallery": [
-        "/assets/images/products/gn-cyling-eq-002/16g-x30-pack/1.webp",
-        "/assets/images/products/gn-cyling-eq-002/16g-x30-pack/2.webp",
-        "/assets/images/products/gn-cyling-eq-002/16g-x30-pack/3.webp"
-      ]
+      "gallery": []
     }
   }
 }
