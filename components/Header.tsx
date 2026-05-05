@@ -64,6 +64,23 @@ export default function Header() {
     }, 200);
   };
 
+  const closeCategoriesMenu = () => {
+    if (categoriesCloseTimeout.current) {
+      clearTimeout(categoriesCloseTimeout.current);
+      categoriesCloseTimeout.current = null;
+    }
+    setCategoriesOpen(false);
+  };
+
+  useEffect(() => {
+    if (!categoriesOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [categoriesOpen]);
+
   const { mainCategories, subCategoriesByParent } = useMemo(() => {
     const all = getAllCategories();
     const mains = all.filter((cat) => !cat.parentSlug);
@@ -129,6 +146,10 @@ export default function Header() {
     ? `${NAV_TEXT} text-neutral-900 hover:text-neutral-600`
     : `${NAV_TEXT} text-white hover:text-white/80`;
 
+  const mobileNavLinkClass = isProductDetailPage
+    ? `${NAV_TEXT} rounded-md py-2 px-2 text-neutral-900 transition-colors hover:text-neutral-600`
+    : `${NAV_TEXT} rounded-md py-2 px-2 text-white transition-colors hover:text-white/85`;
+
   const megaCatTitle = isProductDetailPage
     ? "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-neutral-900 hover:text-accent-gold transition-colors duration-200"
     : "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
@@ -137,9 +158,13 @@ export default function Header() {
     ? "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
     : "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-white/90 hover:text-white transition-colors duration-200";
 
+  const categoriesBackdropClass = isProductDetailPage
+    ? "bg-neutral-900/35 backdrop-blur-[2px]"
+    : "bg-black/55 backdrop-blur-sm";
+
   const categoriesPanelShell = isProductDetailPage
-    ? "border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
-    : "border-white/10 bg-dark-base/96 shadow-[0_20px_56px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06] backdrop-blur-md supports-[backdrop-filter]:bg-dark-base/92";
+    ? "border-neutral-200 bg-white/96 shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] backdrop-blur-md supports-[backdrop-filter]:bg-white/92"
+    : "border-white/10 bg-dark-base/88 shadow-[0_20px_56px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06] backdrop-blur-xl supports-[backdrop-filter]:bg-dark-base/82";
 
   return (
     <header
@@ -159,7 +184,7 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6">
         <div
           className={[
-            "grid h-16 items-center gap-x-2 sm:gap-x-3",
+            "relative z-[45] grid h-16 items-center gap-x-2 sm:gap-x-3",
             "grid-cols-[auto_minmax(0,1fr)_auto]",
             "md:h-20 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 lg:gap-x-5",
           ].join(" ")}
@@ -309,8 +334,8 @@ export default function Header() {
                   placeholder={t("common.searchPlaceholder")}
                   className={
                     isProductDetailPage
-                      ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
-                      : "w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                      ? `w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
+                      : `w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 ${NAV_TEXT} text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
                   }
                 />
               </div>
@@ -321,7 +346,7 @@ export default function Header() {
                 <Link
                   key={lang}
                   href={buildLocaleHref(lang)}
-                  className={`text-xs font-semibold tracking-[0.12em] transition-colors duration-200 ${
+                  className={`${NAV_TEXT} font-semibold tracking-[0.12em] transition-colors duration-200 ${
                     lang === locale
                       ? "text-accent-gold"
                       : isProductDetailPage
@@ -336,11 +361,7 @@ export default function Header() {
             {isLoggedIn && user ? (
               <Link
                 href={`/${locale}/account`}
-                className={
-                  isProductDetailPage
-                    ? "hidden text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold md:inline"
-                    : "hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
-                }
+                className={`hidden md:inline ${navLinkClass} font-semibold hover:text-accent-gold`}
               >
                 {t("header.greeting")}, {user.name}
               </Link>
@@ -349,21 +370,13 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => openAuthModal("login")}
-                  className={
-                    isProductDetailPage
-                      ? "hidden text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold md:inline"
-                      : "hidden text-sm font-semibold text-white transition-colors hover:text-accent-gold md:inline"
-                  }
+                  className={`hidden md:inline ${navLinkClass} font-semibold hover:text-accent-gold`}
                 >
                   {t("header.account")}
                 </button>
                 <Link
                   href={`/${locale}/auth?tab=login`}
-                  className={
-                    isProductDetailPage
-                      ? "md:hidden text-xs font-semibold text-neutral-900 transition-colors hover:text-neutral-600"
-                      : "md:hidden text-xs font-semibold text-white transition-colors hover:text-white/80"
-                  }
+                  className={`md:hidden ${navLinkClass} font-semibold`}
                 >
                   {t("header.account")}
                 </Link>
@@ -427,14 +440,25 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mega categorías: ancho completo del viewport, hover (panel hermano con misma lógica de cierre) */}
+        {/* Scrim a pantalla completa; el panel de categorías va encima (z-40) */}
+        <div
+          className={[
+            "fixed inset-0 z-[38] transition-all duration-200 ease-out",
+            categoriesBackdropClass,
+            categoriesOpen
+              ? "pointer-events-auto opacity-100"
+              : "pointer-events-none invisible opacity-0",
+          ].join(" ")}
+          aria-hidden={!categoriesOpen}
+          onClick={closeCategoriesMenu}
+        />
+
+        {/* Mega categorías: fondo ancho completo del viewport bajo el header */}
         <div
           id="header-categories-mega"
           className={[
-            "fixed left-0 right-0 z-40 border-t transition-all duration-200 ease-out",
+            "fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
             "top-16 md:top-20",
-            "min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)]",
-            "max-h-[calc(100dvh-4rem)] md:max-h-[calc(100dvh-5rem)]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen
@@ -455,7 +479,7 @@ export default function Header() {
                   <Link
                     href={`/${locale}/category/${category.slug}`}
                     className={megaCatTitle}
-                    onClick={() => setCategoriesOpen(false)}
+                    onClick={closeCategoriesMenu}
                   >
                     {t(`categories.names.${category.slug}`, category.name)}
                   </Link>
@@ -465,7 +489,7 @@ export default function Header() {
                         key={sub.slug}
                         href={`/${locale}/category/${sub.slug}`}
                         className={megaCatSub}
-                        onClick={() => setCategoriesOpen(false)}
+                        onClick={closeCategoriesMenu}
                       >
                         {t(`categories.names.${sub.slug}`, sub.name)}
                       </Link>
@@ -530,41 +554,29 @@ export default function Header() {
                     placeholder={t("common.searchPlaceholder")}
                     className={
                       isProductDetailPage
-                        ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
-                        : "w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
+                        ? `w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-neutral-900 placeholder:text-neutral-400 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
+                        : `w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 ${NAV_TEXT} text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
                     }
                   />
                 </div>
               </form>
               <Link
                 href={`/${locale}`}
-                className={
-                  isProductDetailPage
-                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
-                }
+                className={mobileNavLinkClass}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t("header.nav.home")}
               </Link>
               <Link
                 href={`/${locale}/products`}
-                className={
-                  isProductDetailPage
-                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
-                }
+                className={mobileNavLinkClass}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t("header.nav.products")}
               </Link>
               <Link
                 href={`/${locale}/blog`}
-                className={
-                  isProductDetailPage
-                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
-                }
+                className={mobileNavLinkClass}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t("header.nav.blog")}
@@ -572,11 +584,7 @@ export default function Header() {
               <div className="flex flex-col gap-2">
                 <button
                   type="button"
-                  className={
-                    isProductDetailPage
-                      ? "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                      : "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
-                  }
+                  className={`flex w-full items-center justify-between ${mobileNavLinkClass}`}
                   onClick={() => setMobileCategoriesOpen((open) => !open)}
                   aria-expanded={mobileCategoriesOpen}
                   aria-controls="mobile-categories-menu"
@@ -585,8 +593,8 @@ export default function Header() {
                   <span
                     className={
                       isProductDetailPage
-                        ? "text-sm text-neutral-500"
-                        : "text-sm text-white/60"
+                        ? `${NAV_TEXT} text-neutral-500`
+                        : `${NAV_TEXT} text-white/60`
                     }
                   >
                     {mobileCategoriesOpen ? "−" : "+"}
@@ -605,11 +613,11 @@ export default function Header() {
                       <div key={category.slug} className="space-y-2">
                         <Link
                           href={`/${locale}/category/${category.slug}`}
-                          className={
+                          className={`${NAV_TEXT} font-semibold ${
                             isProductDetailPage
-                              ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
-                              : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
-                          }
+                              ? "text-neutral-900 hover:text-accent-gold"
+                              : "text-white hover:text-accent-gold"
+                          }`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {t(`categories.names.${category.slug}`, category.name)}
@@ -622,8 +630,8 @@ export default function Header() {
                                 href={`/${locale}/category/${sub.slug}`}
                                 className={
                                   isProductDetailPage
-                                    ? "text-sm text-neutral-700 transition-colors hover:text-neutral-900"
-                                    : "text-sm text-white/90 transition-colors hover:text-white"
+                                    ? `${NAV_TEXT} text-neutral-700 hover:text-neutral-900`
+                                    : `${NAV_TEXT} text-white/90 hover:text-white`
                                 }
                                 onClick={() => setMobileMenuOpen(false)}
                               >
@@ -648,7 +656,7 @@ export default function Header() {
                   <Link
                     key={lang}
                     href={buildLocaleHref(lang)}
-                    className={`text-sm font-medium transition-colors duration-200 ${
+                    className={`${NAV_TEXT} font-semibold transition-colors duration-200 ${
                       lang === locale
                         ? "text-accent-gold"
                         : isProductDetailPage
@@ -662,11 +670,7 @@ export default function Header() {
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
-                    className={
-                      isProductDetailPage
-                        ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
-                        : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
-                    }
+                    className={`${navLinkClass} font-semibold hover:text-accent-gold`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.greeting")}, {user.name}
@@ -675,11 +679,7 @@ export default function Header() {
                   <Link
                     href={`/${locale}/auth?tab=login`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={
-                      isProductDetailPage
-                        ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
-                        : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
-                    }
+                    className={`${navLinkClass} font-semibold hover:text-accent-gold`}
                   >
                     {t("header.account")}
                   </Link>
