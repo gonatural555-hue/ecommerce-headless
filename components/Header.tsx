@@ -7,10 +7,13 @@ import { useAuth } from "@/context/AuthContext";
 import AuthModal from "@/components/AuthModal";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCategories } from "@/lib/categories";
-import { blogSections } from "@/lib/blog-sections";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+/** ~15 % más grande que `text-sm` (0.875rem) */
+const NAV_TEXT =
+  "text-[calc(0.875rem*1.15)] font-medium transition-colors duration-200";
 
 export default function Header() {
   const { totalItems } = useCart();
@@ -18,11 +21,9 @@ export default function Header() {
   const { authOpen, setAuthOpen, openAuthModal, initialTab } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
-  const productsCloseTimeout = useRef<NodeJS.Timeout | null>(null);
-  const [blogOpen, setBlogOpen] = useState(false);
-  const blogCloseTimeout = useRef<NodeJS.Timeout | null>(null);
-  const [mobileBlogOpen, setMobileBlogOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const categoriesCloseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations();
   const pathname = usePathname();
@@ -46,48 +47,22 @@ export default function Header() {
     setSearchQuery(currentQuery);
   }, [searchParams]);
 
-  const openProductsMenu = () => {
-    if (productsCloseTimeout.current) {
-      clearTimeout(productsCloseTimeout.current);
-      productsCloseTimeout.current = null;
+  const openCategoriesMenu = () => {
+    if (categoriesCloseTimeout.current) {
+      clearTimeout(categoriesCloseTimeout.current);
+      categoriesCloseTimeout.current = null;
     }
-    setProductsOpen(true);
+    setCategoriesOpen(true);
   };
 
-  const closeProductsMenu = () => {
-    if (productsCloseTimeout.current) {
-      clearTimeout(productsCloseTimeout.current);
+  const scheduleCloseCategories = () => {
+    if (categoriesCloseTimeout.current) {
+      clearTimeout(categoriesCloseTimeout.current);
     }
-    productsCloseTimeout.current = setTimeout(() => {
-      setProductsOpen(false);
+    categoriesCloseTimeout.current = setTimeout(() => {
+      setCategoriesOpen(false);
     }, 200);
   };
-
-  const openBlogMenu = () => {
-    if (blogCloseTimeout.current) {
-      clearTimeout(blogCloseTimeout.current);
-      blogCloseTimeout.current = null;
-    }
-    setBlogOpen(true);
-  };
-
-  const closeBlogMenu = () => {
-    if (blogCloseTimeout.current) {
-      clearTimeout(blogCloseTimeout.current);
-    }
-    blogCloseTimeout.current = setTimeout(() => {
-      setBlogOpen(false);
-    }, 200);
-  };
-
-  const navLinks = [
-    { href: `/${locale}`, label: t("header.nav.home") },
-    { href: `/${locale}/products`, label: t("header.nav.products") },
-    { href: `/${locale}/blog`, label: t("header.nav.blog") },
-    { href: `/${locale}/cart`, label: t("header.nav.cart") },
-    { href: `/${locale}/about`, label: t("header.nav.about") },
-    { href: `/${locale}/contact`, label: t("header.nav.contact") },
-  ];
 
   const { mainCategories, subCategoriesByParent } = useMemo(() => {
     const all = getAllCategories();
@@ -151,30 +126,20 @@ export default function Header() {
   }, [pathname, locale, isProductDetailPage]);
 
   const navLinkClass = isProductDetailPage
-    ? "text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors duration-200"
-    : "text-sm font-medium text-white hover:text-white/80 transition-colors duration-200";
-
-  const megaProductsPanel = [
-    "absolute left-0 top-full mt-4 w-[900px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
-    isProductDetailPage
-      ? "border border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
-      : "border border-white/10 bg-dark-base shadow-[0_16px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06]",
-  ].join(" ");
-
-  const megaBlogPanel = [
-    "absolute left-0 top-full mt-4 w-[760px] max-w-[92vw] rounded-2xl transition-all duration-200 ease-out",
-    isProductDetailPage
-      ? "border border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
-      : "border border-white/10 bg-dark-base shadow-[0_16px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/[0.06]",
-  ].join(" ");
+    ? `${NAV_TEXT} text-neutral-900 hover:text-neutral-600`
+    : `${NAV_TEXT} text-white hover:text-white/80`;
 
   const megaCatTitle = isProductDetailPage
-    ? "text-sm font-semibold tracking-[0.02em] text-neutral-900 hover:text-accent-gold transition-colors duration-200"
-    : "text-sm font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
+    ? "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-neutral-900 hover:text-accent-gold transition-colors duration-200"
+    : "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
 
   const megaCatSub = isProductDetailPage
-    ? "mb-2 block break-inside-avoid text-sm text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
-    : "mb-2 block break-inside-avoid text-sm text-white/90 hover:text-white transition-colors duration-200";
+    ? "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
+    : "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-white/90 hover:text-white transition-colors duration-200";
+
+  const categoriesPanelShell = isProductDetailPage
+    ? "border-neutral-200 bg-white shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04]"
+    : "border-white/10 bg-dark-base/96 shadow-[0_20px_56px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06] backdrop-blur-md supports-[backdrop-filter]:bg-dark-base/92";
 
   return (
     <header
@@ -191,7 +156,7 @@ export default function Header() {
               : "bg-transparent",
       ].join(" ")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6">
         <div
           className={[
             "grid h-16 items-center gap-x-2 sm:gap-x-3",
@@ -199,8 +164,8 @@ export default function Header() {
             "md:h-20 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 lg:gap-x-5",
           ].join(" ")}
         >
-          {/* Columna izquierda: hamburguesa (móvil) + nav pegado al centro / logo */}
-          <div className="flex min-w-0 items-center justify-start gap-2 md:justify-end md:pr-2 lg:pr-3">
+          {/* Izquierda: hamburguesa (móvil) + nav pegado al borde izquierdo */}
+          <div className="flex min-w-0 items-center justify-start gap-1 sm:gap-2 md:gap-3 md:pl-0">
             <button
               type="button"
               className={[
@@ -246,151 +211,43 @@ export default function Header() {
               )}
             </button>
 
-            <nav className="hidden min-w-0 items-center justify-end gap-3 md:flex lg:gap-4 xl:gap-5">
-            {navLinks.map((link) => {
-              if (link.href === `/${locale}/products`) {
-                return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={openProductsMenu}
-                    onMouseLeave={closeProductsMenu}
-                  >
-                    <Link
-                      href={link.href}
-                      className={navLinkClass}
-                      onFocus={openProductsMenu}
-                      onBlur={closeProductsMenu}
-                      aria-haspopup="true"
-                      aria-expanded={productsOpen}
-                    >
-                      {link.label}
-                    </Link>
-                    <div
-                      className={[
-                        megaProductsPanel,
-                        productsOpen
-                          ? "opacity-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 translate-y-2 pointer-events-none",
-                      ].join(" ")}
-                    >
-                      <div className="p-10 columns-2 gap-16">
-                        {mainCategories.map((category) => (
-                          <div
-                            key={category.slug}
-                            className="mb-10 break-inside-avoid"
-                          >
-                            <Link
-                              href={`/${locale}/category/${category.slug}`}
-                              className={megaCatTitle}
-                              onClick={() => setProductsOpen(false)}
-                            >
-                              {t(
-                                `categories.names.${category.slug}`,
-                                category.name
-                              )}
-                            </Link>
-                            <div className="mt-3 columns-2 gap-10">
-                              {(subCategoriesByParent[category.slug] || []).map(
-                                (sub) => (
-                                  <Link
-                                    key={sub.slug}
-                                    href={`/${locale}/category/${sub.slug}`}
-                                    className={megaCatSub}
-                                    onClick={() => setProductsOpen(false)}
-                                  >
-                                    {t(`categories.names.${sub.slug}`, sub.name)}
-                                  </Link>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              if (link.href === `/${locale}/blog`) {
-                return (
-                  <div
-                    key={link.href}
-                    className="relative"
-                    onMouseEnter={openBlogMenu}
-                    onMouseLeave={closeBlogMenu}
-                  >
-                    <Link
-                      href={link.href}
-                      className={navLinkClass}
-                      onFocus={openBlogMenu}
-                      onBlur={closeBlogMenu}
-                      aria-haspopup="true"
-                      aria-expanded={blogOpen}
-                    >
-                      {link.label}
-                    </Link>
-                    <div
-                      className={[
-                        megaBlogPanel,
-                        blogOpen
-                          ? "opacity-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 translate-y-2 pointer-events-none",
-                      ].join(" ")}
-                    >
-                      <div className="p-10 columns-2 gap-16">
-                        {blogSections.map((section) => (
-                          <div
-                            key={section.slug}
-                            className="mb-10 break-inside-avoid"
-                          >
-                            <Link
-                              href={`/${locale}/blog/${section.slug}`}
-                              className={megaCatTitle}
-                              onClick={() => setBlogOpen(false)}
-                            >
-                              {t(
-                                `blogSections.${section.slug}.title`,
-                                section.title
-                              )}
-                            </Link>
-                            <div className="mt-3 columns-2 gap-10">
-                              {section.subtopics.map((subtopic) => (
-                                <Link
-                                  key={subtopic.slug}
-                                  href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className={megaCatSub}
-                                  onClick={() => setBlogOpen(false)}
-                                >
-                                  {t(
-                                    `blogSections.${section.slug}.subtopics.${subtopic.slug}`,
-                                    subtopic.label
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={navLinkClass}
+            <nav
+              className="hidden min-w-0 items-center justify-start gap-4 md:flex lg:gap-5 xl:gap-6"
+              aria-label="Principal"
+            >
+              <Link href={`/${locale}`} className={navLinkClass}>
+                {t("header.nav.home")}
+              </Link>
+              <Link href={`/${locale}/products`} className={navLinkClass}>
+                {t("header.nav.products")}
+              </Link>
+              <Link href={`/${locale}/blog`} className={navLinkClass}>
+                {t("header.nav.blog")}
+              </Link>
+              <div
+                className="relative"
+                onMouseEnter={openCategoriesMenu}
+                onMouseLeave={scheduleCloseCategories}
+              >
+                <button
+                  type="button"
+                  className={[
+                    navLinkClass,
+                    "cursor-pointer border-0 bg-transparent p-0 text-left",
+                  ].join(" ")}
+                  aria-expanded={categoriesOpen}
+                  aria-haspopup="true"
+                  aria-controls="header-categories-mega"
+                  onFocus={openCategoriesMenu}
+                  onBlur={scheduleCloseCategories}
                 >
-                  {link.label}
-                </Link>
-              );
-            })}
+                  {t("header.nav.categories")}
+                </button>
+              </div>
             </nav>
           </div>
 
-          {/* Columna central: logo (celda propia = sin solaparse con nav ni buscador) */}
+          {/* Centro: logo */}
           <div className="flex min-w-0 justify-center justify-self-center px-1 sm:px-2">
             <Link
               href={`/${locale}`}
@@ -407,7 +264,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Columna derecha: búsqueda acotada (md+) + idiomas + cuenta + carrito, pegados al logo */}
+          {/* Derecha: búsqueda + idiomas + cuenta + carrito */}
           <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-2.5 md:justify-start md:gap-3 md:pl-2 lg:gap-4">
             <form
               className="hidden w-[min(100%,11rem)] shrink-0 sm:w-[min(100%,12.5rem)] md:flex md:w-[min(100%,13rem)] md:items-center lg:w-[min(100%,14rem)]"
@@ -450,7 +307,7 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("common.searchPlaceholder")}
-                    className={
+                  className={
                     isProductDetailPage
                       ? "w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 text-sm text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
                       : "w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
@@ -542,15 +399,15 @@ export default function Header() {
               )}
             </Link>
             {!isLoggedIn && (
-                <Link
-                  href={`/${locale}/auth?tab=login`}
-                  className={
-                    isProductDetailPage
-                      ? "flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 md:hidden"
-                      : "flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
-                  }
-                  aria-label={t("header.account")}
-                >
+              <Link
+                href={`/${locale}/auth?tab=login`}
+                className={
+                  isProductDetailPage
+                    ? "flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 md:hidden"
+                    : "flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
+                }
+                aria-label={t("header.account")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -567,6 +424,56 @@ export default function Header() {
                 </svg>
               </Link>
             )}
+          </div>
+        </div>
+
+        {/* Mega categorías: ancho completo del viewport, hover (panel hermano con misma lógica de cierre) */}
+        <div
+          id="header-categories-mega"
+          className={[
+            "fixed left-0 right-0 z-40 border-t transition-all duration-200 ease-out",
+            "top-16 md:top-20",
+            "min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)]",
+            "max-h-[calc(100dvh-4rem)] md:max-h-[calc(100dvh-5rem)]",
+            "overflow-y-auto overscroll-contain",
+            categoriesPanelShell,
+            categoriesOpen
+              ? "pointer-events-auto opacity-100"
+              : "pointer-events-none invisible opacity-0",
+          ].join(" ")}
+          onMouseEnter={openCategoriesMenu}
+          onMouseLeave={scheduleCloseCategories}
+          aria-hidden={!categoriesOpen}
+        >
+          <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
+            <div className="columns-1 gap-x-16 gap-y-10 sm:columns-2 lg:columns-3 xl:columns-4">
+              {mainCategories.map((category) => (
+                <div
+                  key={category.slug}
+                  className="mb-10 break-inside-avoid"
+                >
+                  <Link
+                    href={`/${locale}/category/${category.slug}`}
+                    className={megaCatTitle}
+                    onClick={() => setCategoriesOpen(false)}
+                  >
+                    {t(`categories.names.${category.slug}`, category.name)}
+                  </Link>
+                  <div className="mt-3 space-y-2">
+                    {(subCategoriesByParent[category.slug] || []).map((sub) => (
+                      <Link
+                        key={sub.slug}
+                        href={`/${locale}/category/${sub.slug}`}
+                        className={megaCatSub}
+                        onClick={() => setCategoriesOpen(false)}
+                      >
+                        {t(`categories.names.${sub.slug}`, sub.name)}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -629,95 +536,107 @@ export default function Header() {
                   />
                 </div>
               </form>
-              {navLinks.map((link) =>
-                link.href === `/${locale}/blog` ? (
-                  <div key={link.href} className="flex flex-col gap-2">
-                    <button
-                      type="button"
-                      className={
-                        isProductDetailPage
-                          ? "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                          : "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
-                      }
-                      onClick={() => setMobileBlogOpen((open) => !open)}
-                      aria-expanded={mobileBlogOpen}
-                      aria-controls="mobile-blog-menu"
-                    >
-                      <span>{link.label}</span>
-                      <span
-                        className={
-                          isProductDetailPage
-                            ? "text-sm text-neutral-500"
-                            : "text-sm text-white/60"
-                        }
-                      >
-                        {mobileBlogOpen ? "−" : "+"}
-                      </span>
-                    </button>
-                    {mobileBlogOpen && (
-                      <div
-                        id="mobile-blog-menu"
-                        className={
-                          isProductDetailPage
-                            ? "pl-3 border-l border-neutral-200 space-y-3"
-                            : "pl-3 border-l border-white/10 space-y-3"
-                        }
-                      >
-                        {blogSections.map((section) => (
-                          <div key={section.slug} className="space-y-2">
-                            <Link
-                              href={`/${locale}/blog/${section.slug}`}
-                              className={
-                                isProductDetailPage
-                                  ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
-                                  : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
-                              }
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {t(
-                                `blogSections.${section.slug}.title`,
-                                section.title
-                              )}
-                            </Link>
-                            <div className="flex flex-col gap-1">
-                              {section.subtopics.map((subtopic) => (
-                                <Link
-                                  key={subtopic.slug}
-                                  href={`/${locale}/blog/${section.slug}#${subtopic.slug}`}
-                                  className={
-                                    isProductDetailPage
-                                      ? "text-sm text-neutral-700 transition-colors hover:text-neutral-900"
-                                      : "text-sm text-white/90 transition-colors hover:text-white"
-                                  }
-                                  onClick={() => setMobileMenuOpen(false)}
-                                >
-                                  {t(
-                                    `blogSections.${section.slug}.subtopics.${subtopic.slug}`,
-                                    subtopic.label
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    key={link.href}
-                    href={link.href}
+              <Link
+                href={`/${locale}`}
+                className={
+                  isProductDetailPage
+                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                }
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.home")}
+              </Link>
+              <Link
+                href={`/${locale}/products`}
+                className={
+                  isProductDetailPage
+                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                }
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.products")}
+              </Link>
+              <Link
+                href={`/${locale}/blog`}
+                className={
+                  isProductDetailPage
+                    ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                    : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                }
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.blog")}
+              </Link>
+              <div className="flex flex-col gap-2">
+                <button
+                  type="button"
+                  className={
+                    isProductDetailPage
+                      ? "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
+                      : "flex items-center justify-between rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                  }
+                  onClick={() => setMobileCategoriesOpen((open) => !open)}
+                  aria-expanded={mobileCategoriesOpen}
+                  aria-controls="mobile-categories-menu"
+                >
+                  <span>{t("header.nav.categories")}</span>
+                  <span
                     className={
                       isProductDetailPage
-                        ? "rounded-md py-2 px-2 text-base font-medium text-neutral-900 transition-colors hover:text-neutral-600"
-                        : "rounded-md py-2 px-2 text-base font-medium text-white transition-colors hover:text-white/85"
+                        ? "text-sm text-neutral-500"
+                        : "text-sm text-white/60"
                     }
-                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    {link.label}
-                  </Link>
-                )
-              )}
+                    {mobileCategoriesOpen ? "−" : "+"}
+                  </span>
+                </button>
+                {mobileCategoriesOpen && (
+                  <div
+                    id="mobile-categories-menu"
+                    className={
+                      isProductDetailPage
+                        ? "pl-3 border-l border-neutral-200 space-y-4"
+                        : "pl-3 border-l border-white/10 space-y-4"
+                    }
+                  >
+                    {mainCategories.map((category) => (
+                      <div key={category.slug} className="space-y-2">
+                        <Link
+                          href={`/${locale}/category/${category.slug}`}
+                          className={
+                            isProductDetailPage
+                              ? "text-sm font-semibold text-neutral-900 transition-colors hover:text-accent-gold"
+                              : "text-sm font-semibold text-white transition-colors hover:text-accent-gold"
+                          }
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {t(`categories.names.${category.slug}`, category.name)}
+                        </Link>
+                        <div className="flex flex-col gap-1">
+                          {(subCategoriesByParent[category.slug] || []).map(
+                            (sub) => (
+                              <Link
+                                key={sub.slug}
+                                href={`/${locale}/category/${sub.slug}`}
+                                className={
+                                  isProductDetailPage
+                                    ? "text-sm text-neutral-700 transition-colors hover:text-neutral-900"
+                                    : "text-sm text-white/90 transition-colors hover:text-white"
+                                }
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {t(`categories.names.${sub.slug}`, sub.name)}
+                              </Link>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <div
                 className={
                   isProductDetailPage
