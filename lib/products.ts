@@ -3627,6 +3627,108 @@ const PRODUCTS: Product[] = [
       },
     },
   },
+  {
+    id: "gn-water-008",
+    title: "Kayak Inflable SUP 320 cm con Accesorios",
+    price: 150.00,
+    freeShipping: true,
+    category: "Water & Exploration Gear",
+    images: [
+      "/assets/images/products/gn-water-008/image.webp",
+      "/assets/images/products/gn-water-008/accessories.webp",
+    ],
+    description:
+      "Kayak/SUP inflable de 320 cm en PVC ligero y resistente. Incluye set completo de accesorios para salir al agua de inmediato, con envio incluido en el precio.",
+    shortDescription:
+      "Tabla/kayak inflable 320 cm para deportes acuaticos con pack completo de accesorios y envio incluido.",
+    longDescription: [
+      "Disenado para uso recreativo en mar en calma, lagos y rios tranquilos, con estructura inflable estable y facil de transportar.",
+      "Su formato de 320 cm ofrece buen equilibrio entre deslizamiento, maniobrabilidad y comodidad para sesiones de paseo o iniciacion.",
+      "El producto llega listo para usar con un kit completo de accesorios, ideal para quienes buscan una opcion todo en uno.",
+    ],
+    features: [
+      "Longitud: 320 cm (10.6 pies)",
+      "Material: PVC ligero y resistente",
+      "Uso recomendado: deportes acuaticos recreativos",
+      "Envio incluido (precio final: 150 EUR)",
+      "Incluye mochila de transporte",
+      "Incluye bomba manual",
+      "Incluye leash de seguridad (3 m)",
+      "Incluye 3 quillas",
+      "Incluye kit de reparacion",
+      "Incluye pala de aluminio",
+    ],
+    translations: {
+      en: {
+        title: "320 cm Inflatable Kayak SUP with Accessories",
+        description:
+          "320 cm inflatable kayak/SUP in lightweight durable PVC. Includes a complete accessory set and shipping is included in the price.",
+        features: [
+          "Length: 320 cm (10.6 ft)",
+          "Material: Lightweight durable PVC",
+          "Recommended use: recreational watersports",
+          "Shipping included (final price: EUR 150)",
+          "Includes transport backpack",
+          "Includes hand pump",
+          "Includes safety leash (3 m)",
+          "Includes 3 fins",
+          "Includes repair kit",
+          "Includes aluminum paddle",
+        ],
+      },
+      es: {
+        title: "Kayak Inflable SUP 320 cm con Accesorios",
+        description:
+          "Kayak/SUP inflable de 320 cm en PVC ligero y resistente. Incluye set completo de accesorios para salir al agua de inmediato, con envio incluido en el precio.",
+        features: [
+          "Longitud: 320 cm (10.6 pies)",
+          "Material: PVC ligero y resistente",
+          "Uso recomendado: deportes acuaticos recreativos",
+          "Envio incluido (precio final: 150 EUR)",
+          "Incluye mochila de transporte",
+          "Incluye bomba manual",
+          "Incluye leash de seguridad (3 m)",
+          "Incluye 3 quillas",
+          "Incluye kit de reparacion",
+          "Incluye pala de aluminio",
+        ],
+      },
+      fr: {
+        title: "Kayak SUP gonflable 320 cm avec accessoires",
+        description:
+          "Kayak/SUP gonflable de 320 cm en PVC leger et resistant. Livré avec un kit complet d'accessoires, expedition incluse dans le prix.",
+        features: [
+          "Longueur : 320 cm (10,6 pieds)",
+          "Materiau : PVC leger et resistant",
+          "Usage recommande : sports nautiques recreatifs",
+          "Expedition incluse (prix final : 150 EUR)",
+          "Sac a dos de transport inclus",
+          "Pompe manuelle incluse",
+          "Leash de securite (3 m) inclus",
+          "3 ailerons inclus",
+          "Kit de reparation inclus",
+          "Pagaie en aluminium incluse",
+        ],
+      },
+      it: {
+        title: "Kayak SUP gonfiabile 320 cm con accessori",
+        description:
+          "Kayak/SUP gonfiabile da 320 cm in PVC leggero e resistente. Include kit completo di accessori, spedizione inclusa nel prezzo.",
+        features: [
+          "Lunghezza: 320 cm (10,6 piedi)",
+          "Materiale: PVC leggero e resistente",
+          "Uso consigliato: sport acquatici ricreativi",
+          "Spedizione inclusa (prezzo finale: 150 EUR)",
+          "Zaino da trasporto incluso",
+          "Pompa manuale inclusa",
+          "Leash di sicurezza (3 m) incluso",
+          "3 pinne incluse",
+          "Kit di riparazione incluso",
+          "Pagaia in alluminio inclusa",
+        ],
+      },
+    },
+  },
   // ===== OUTDOOR & ADVENTURE =====
   {
     id: "gn-camping-survival-001",
