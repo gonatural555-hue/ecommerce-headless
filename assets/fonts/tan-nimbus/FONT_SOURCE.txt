@@ -1,0 +1,8 @@
+Archivos en esta carpeta:
+- TANNimbus-Regular.woff2 (peso 400)
+- TANNimbus-Semibold.woff2 (peso 600)
+- TANNimbus-Bold.woff2 (peso 700)
+
+Para construir el proyecto sin licencia TAN Nimbus todavía, se incluyen temporalmente archivos WOFF2 latin de la familia "Cormorant Garamond" (SIL Open Font License 1.1), renombrados como arriba.
+
+Cuando dispongas de TAN Nimbus en formato web, reemplaza estos tres archivos por tus variantes licenciadas y mantén los mismos nombres de archivo (o actualiza src en lib/fonts.ts).

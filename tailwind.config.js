@@ -7,6 +7,21 @@ const config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "var(--font-inter)",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
+        display: [
+          "var(--font-tan-nimbus)",
+          "Georgia",
+          "Times New Roman",
+          "serif",
+        ],
+      },
       colors: {
         // Cinematic Dark Outdoor - Paleta base
         "dark-base": "#0B0F0E",

@@ -34,7 +34,7 @@ export default function CategoryGrid({
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <header className="mx-auto max-w-2xl text-center">
-            <h2 className="font-semibold tracking-tight text-text-primary text-[clamp(1.65rem,3.2vw,2.25rem)]">
+            <h2 className="font-display font-semibold tracking-tight text-text-primary text-[clamp(1.65rem,3.2vw,2.25rem)]">
               {title}
             </h2>
             <p className="mt-3 text-sm text-text-muted md:text-base">{subtitle}</p>
@@ -72,7 +72,7 @@ export default function CategoryGrid({
                     <span className="text-[0.65rem] font-medium uppercase tracking-[0.28em] text-accent-gold/85">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="mt-2 font-medium leading-snug tracking-tight text-text-primary text-lg md:text-xl">
+                    <p className="font-display mt-2 font-medium leading-snug tracking-tight text-text-primary text-lg md:text-xl">
                       {card.label}
                     </p>
                   </div>

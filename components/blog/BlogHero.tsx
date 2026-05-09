@@ -68,7 +68,7 @@ export default function BlogHero({
         <p className="text-[0.7rem] font-medium uppercase tracking-[0.35em] text-accent-gold/90 sm:text-xs">
           {tagline}
         </p>
-        <h1 className="mt-6 max-w-4xl font-semibold tracking-tight text-text-primary text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05]">
+        <h1 className="font-display mt-6 max-w-4xl font-semibold tracking-tight text-text-primary text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05]">
           {title}
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">

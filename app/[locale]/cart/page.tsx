@@ -91,7 +91,7 @@ export default function CartPage() {
           <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
             Go Natural
           </p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-4">
+          <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-4">
             {t("cartPage.emptyTitle")}
           </h1>
           <p className="text-text-muted mb-10 leading-relaxed">
@@ -117,7 +117,7 @@ export default function CartPage() {
         <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-3">
           {t("cartPage.summaryTitle")}
         </p>
-        <h1 className="text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-3">
+        <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-3">
           {t("cartPage.heroTitle")}
         </h1>
         <p className="text-text-muted text-base md:text-lg leading-relaxed">

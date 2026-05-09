@@ -69,6 +69,7 @@ body {
   background: var(--bg-primary);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-feature-settings: "kern" 1;
   /* Ensure content is above background */
   z-index: 1;
   /* Smooth scrolling con momentum pesado */
@@ -304,4 +305,23 @@ main[data-route="checkout"] .bg-gray-50 {
 main[data-route="order-success"] .bg-white,
 main[data-route="order-success"] .bg-gray-50 {
   background-color: #CCD0CF !important;
+}
+
+/* Tipografía dual: display (TAN Nimbus) solo en titulares / editorial grande; UI y cuerpo = Inter (font-sans) */
+@layer components {
+  .typography-display-hero {
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+  }
+  .typography-display-section {
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+  }
+  .typography-display-editorial {
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+  }
+  .typography-body {
+    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .typography-ui {
+    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
 }
