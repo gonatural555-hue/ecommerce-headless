@@ -136,6 +136,7 @@ export default function Header() {
     if (isProductDetailPage) return false;
     if (segments.length === 1) return true;
     const section = segments[1];
+    if (section === "home-2" && segments.length === 2) return true;
     if (section === "products" && segments.length === 2) return true;
     if (section === "blog") return true;
     if (section === "contact" && segments.length === 2) return true;
@@ -242,6 +243,9 @@ export default function Header() {
             >
               <Link href={`/${locale}`} className={navLinkClass}>
                 {t("header.nav.home")}
+              </Link>
+              <Link href={`/${locale}/home-2`} className={navLinkClass}>
+                {t("header.nav.home2")}
               </Link>
               <Link href={`/${locale}/products`} className={navLinkClass}>
                 {t("header.nav.products")}
@@ -566,6 +570,13 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t("header.nav.home")}
+              </Link>
+              <Link
+                href={`/${locale}/home-2`}
+                className={mobileNavLinkClass}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.home2")}
               </Link>
               <Link
                 href={`/${locale}/products`}
