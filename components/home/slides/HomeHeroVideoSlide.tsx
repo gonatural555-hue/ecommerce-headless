@@ -106,6 +106,13 @@ export default function HomeHeroVideoSlide({
       <PremiumImageOverlay />
 
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-5 pb-8 pt-12 text-center sm:px-10 sm:pb-10 sm:pt-14">
+        <img
+          src="/assets/images/logo/GONATURAL-LOGO.svg"
+          alt="Go Natural"
+          className="mb-5 h-16 w-auto max-w-[min(88vw,22rem)] opacity-[0.98] drop-shadow-[0_4px_28px_rgba(0,0,0,0.45)] sm:mb-6 sm:h-[4.75rem] md:h-[5.5rem] lg:h-[6rem]"
+          loading="eager"
+          decoding="async"
+        />
         <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-accent-gold drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] sm:text-xs">
           {tagline}
         </p>

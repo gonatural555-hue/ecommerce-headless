@@ -15,9 +15,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const NAV_LINK =
   "font-sans text-[12px] font-medium tracking-[0.02em] text-charcoal transition-colors duration-200 hover:text-mountain-green xl:text-[13px]";
 
-/** Contenedor principal del header — barra ancha tipo píldora, glass (referencia Nitec-style). */
-const HEADER_BAR =
-  "rounded-full border border-black/[0.07] bg-white/65 shadow-[0_18px_56px_-24px_rgba(17,23,19,0.22)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/52";
+/** Mismo redondeo que el contenedor del carrusel Hero (`HomeHeroCarousel`). */
+const HEADER_BAR_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
+
+/** Contenedor principal del header — glass, alineado visualmente con el Hero. */
+const HEADER_BAR = `${HEADER_BAR_RADIUS} border border-black/[0.07] bg-white/65 shadow-[0_18px_56px_-24px_rgba(17,23,19,0.22)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/52`;
 
 /** Superficie blanca interior (search, iconos, perfil). */
 const INNER_SOLID =
@@ -173,10 +175,11 @@ export default function Header() {
 
   return (
     <header className="pointer-events-none fixed left-0 right-0 top-0 z-50 font-sans">
-      <div className="mx-auto max-w-[min(96vw,1400px)] px-3 pt-3 sm:px-5 sm:pt-4">
+      {/* Misma caja horizontal que el Hero: max-w, padding lateral y ancho del carrusel */}
+      <div className="mx-auto w-full max-w-[min(92vw,72rem)] px-5 pt-3 sm:px-8 sm:pt-4 md:px-6 lg:px-10 lg:pt-4">
         {/* Desktop — una barra ancha tipo píldora */}
         <div
-          className={`pointer-events-auto hidden w-full items-center gap-2 px-3 py-2 sm:gap-3 sm:px-5 sm:py-2.5 md:flex lg:gap-4 lg:px-6 lg:py-3 ${HEADER_BAR}`}
+          className={`pointer-events-auto mx-auto hidden w-full items-center gap-2 px-3 py-2 sm:gap-3 sm:px-5 sm:py-2.5 md:flex lg:w-[min(76vw,1120px)] lg:gap-4 lg:px-6 lg:py-3 ${HEADER_BAR}`}
         >
           <Link
             href={`/${locale}`}
@@ -186,7 +189,7 @@ export default function Header() {
             <img
               src="/assets/images/logo/GONATURAL-LOGO.svg"
               alt="Go Natural"
-              className="h-9 w-auto max-h-10 opacity-[0.97] transition-transform duration-300 ease-out group-hover:scale-[1.03] sm:h-10 md:max-h-11"
+              className="h-11 w-auto opacity-[0.97] transition-transform duration-300 ease-out group-hover:scale-[1.03] sm:h-12 md:h-[3.45rem] lg:h-[3.85rem]"
               loading="eager"
               decoding="async"
             />
@@ -316,9 +319,9 @@ export default function Header() {
           )}
         </div>
 
-        {/* Mobile — misma línea visual: píldora ancha */}
+        {/* Mobile — mismo ancho útil que la franja del Hero */}
         <div
-          className={`pointer-events-auto flex md:hidden ${HEADER_BAR} items-center justify-between gap-2 px-3 py-2`}
+          className={`pointer-events-auto mx-auto flex w-full md:hidden ${HEADER_BAR} items-center justify-between gap-2 px-3 py-2`}
         >
           <button
             type="button"
@@ -345,7 +348,7 @@ export default function Header() {
             <img
               src="/assets/images/logo/GONATURAL-LOGO.svg"
               alt="Go Natural"
-              className="mx-auto h-9 w-auto max-w-[min(46vw,11rem)] opacity-[0.97] transition-transform group-hover:scale-[1.02]"
+              className="mx-auto h-11 w-auto max-w-[min(52vw,13rem)] opacity-[0.97] transition-transform group-hover:scale-[1.02] sm:h-12 sm:max-w-[min(48vw,14rem)]"
               loading="eager"
               decoding="async"
             />
@@ -381,7 +384,7 @@ export default function Header() {
 
         {mobileSearchOpen ? (
           <form
-            className={`pointer-events-auto mt-2 flex px-3 py-2 md:hidden ${HEADER_BAR}`}
+            className={`pointer-events-auto mx-auto mt-2 flex w-full px-3 py-2 md:hidden ${HEADER_BAR}`}
             onSubmit={(e) => {
               e.preventDefault();
               submitSearch();
