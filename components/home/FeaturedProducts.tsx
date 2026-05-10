@@ -43,15 +43,15 @@ export default function FeaturedProducts({
   return (
     <section
       id="essential-gear"
-      className="scroll-mt-4 border-t border-white/[0.05] bg-[#0a0e0d] py-20 md:py-28 lg:py-32"
+      className="scroll-mt-4 border-t border-earth-brown/15 bg-warm-sand py-20 md:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <header className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display font-semibold tracking-tight text-text-primary text-[clamp(1.75rem,3.5vw,2.5rem)]">
+            <h2 className="font-display font-semibold tracking-tight text-dark-base text-[clamp(1.75rem,3.5vw,2.5rem)]">
               {title}
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-text-muted md:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-muted-gray md:text-base">
               {subtitle}
             </p>
           </header>

@@ -30,14 +30,14 @@ export default function CategoryGrid({
   cards,
 }: CategoryGridProps) {
   return (
-    <section className="border-t border-white/[0.05] bg-dark-base py-20 md:py-28">
+    <section className="border-t border-earth-brown/15 bg-soft-stone py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <header className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display font-semibold tracking-tight text-text-primary text-[clamp(1.65rem,3.2vw,2.25rem)]">
+            <h2 className="font-display font-semibold tracking-tight text-dark-base text-[clamp(1.65rem,3.2vw,2.25rem)]">
               {title}
             </h2>
-            <p className="mt-3 text-sm text-text-muted md:text-base">{subtitle}</p>
+            <p className="mt-3 text-sm text-muted-gray md:text-base">{subtitle}</p>
           </header>
         </ScrollReveal>
 
@@ -67,12 +67,12 @@ export default function CategoryGrid({
                     sizes="(max-width:640px)100vw,25vw"
                     className="object-cover object-center transition duration-[900ms] ease-out group-hover:scale-[1.06]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/35 to-transparent opacity-95 transition duration-500 group-hover:from-dark-base/95" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/40 to-transparent opacity-90 transition duration-500 group-hover:from-dark-base/90" />
                   <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                    <span className="text-[0.65rem] font-medium uppercase tracking-[0.28em] text-accent-gold/85">
+                    <span className="text-[0.65rem] font-medium uppercase tracking-[0.28em] text-accent-gold/90">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="font-display mt-2 font-medium leading-snug tracking-tight text-text-primary text-lg md:text-xl">
+                    <p className="font-display mt-2 text-lg font-medium leading-snug tracking-tight text-white md:text-xl">
                       {card.label}
                     </p>
                   </div>

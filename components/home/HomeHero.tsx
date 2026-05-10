@@ -118,7 +118,7 @@ export default function HomeHero({
         <p className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-accent-gold drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] sm:text-xs">
           {tagline}
         </p>
-        <h1 className="font-display mt-5 max-w-4xl font-bold tracking-tight text-text-primary text-[clamp(2.35rem,6.5vw,4.25rem)] leading-[1.06] [text-shadow:0_2px_32px_rgba(0,0,0,0.55),0_1px_3px_rgba(0,0,0,0.45)]">
+        <h1 className="font-display mt-5 max-w-4xl font-bold tracking-tight text-white text-[clamp(2.35rem,6.5vw,4.25rem)] leading-[1.06] [text-shadow:0_2px_32px_rgba(0,0,0,0.55),0_1px_3px_rgba(0,0,0,0.45)]">
           {title}
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/92 drop-shadow-[0_1px_14px_rgba(0,0,0,0.45)] sm:text-lg">

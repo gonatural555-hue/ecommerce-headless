@@ -22,18 +22,18 @@ export default function CommunityCTA({
   href,
 }: CommunityCTAProps) {
   return (
-    <section className="border-t border-white/[0.07] bg-[#0a0e0d] py-20 md:py-28 lg:py-32">
+    <section className="border-t border-earth-brown/15 bg-soft-stone py-20 md:py-28 lg:py-32">
       <div className="mx-auto max-w-3xl px-6 text-center sm:px-10">
         <ScrollReveal>
-          <h2 className="font-display font-bold tracking-tight text-text-primary text-[clamp(1.85rem,4vw,2.75rem)] leading-tight">
+          <h2 className="font-display font-bold tracking-tight text-dark-base text-[clamp(1.85rem,4vw,2.75rem)] leading-tight">
             {title}
           </h2>
           {tagline ? (
-            <p className="mx-auto mt-5 max-w-lg text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-accent-gold drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)] sm:text-xs">
+            <p className="mx-auto mt-5 max-w-lg text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-accent-gold sm:text-xs">
               {tagline}
             </p>
           ) : null}
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/[0.88] md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-gray md:text-lg">
             {body}
           </p>
           <Link href={href} className={`${premiumPrimaryCtaClass} mt-10`}>

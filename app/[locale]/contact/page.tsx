@@ -44,7 +44,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
         {/* Columna izquierda - Información de contacto */}
         <div>
-          <h1 className="font-display mb-8 text-3xl font-bold tracking-tight text-text-primary [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] md:text-4xl">
+          <h1 className="font-display mb-8 text-3xl font-bold tracking-tight text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] md:text-4xl">
             {t("contactPage.title")}
           </h1>
           <div className="space-y-7 leading-relaxed text-white/[0.9]">
@@ -53,7 +53,7 @@ export default function ContactPage() {
             </p>
 
             <div className="pt-1">
-              <h2 className="mb-2 text-lg font-semibold text-text-primary">
+              <h2 className="mb-2 text-lg font-semibold text-white">
                 {t("contactPage.emailTitle")}
               </h2>
               <a
@@ -65,7 +65,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <h2 className="mb-2 text-lg font-semibold text-text-primary">
+              <h2 className="mb-2 text-lg font-semibold text-white">
                 {t("contactPage.hoursTitle")}
               </h2>
               <p className="text-white/[0.88]">
@@ -79,7 +79,7 @@ export default function ContactPage() {
 
             <div className="border-t border-white/12 pt-6">
               <p className="text-sm leading-relaxed text-white/[0.82]">
-                <strong className="font-semibold text-text-primary">
+                <strong className="font-semibold text-white">
                   {t("contactPage.quickTitle")}
                 </strong>{" "}
                 {t("contactPage.quickText")}
@@ -94,7 +94,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="name"
-                className="mb-2 block text-sm font-medium text-text-primary"
+                className="mb-2 block text-sm font-medium text-white"
               >
                 {t("contactPage.form.nameLabel")}
               </label>
@@ -113,7 +113,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="email"
-                className="mb-2 block text-sm font-medium text-text-primary"
+                className="mb-2 block text-sm font-medium text-white"
               >
                 {t("contactPage.form.emailLabel")}
               </label>
@@ -132,7 +132,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="message"
-                className="mb-2 block text-sm font-medium text-text-primary"
+                className="mb-2 block text-sm font-medium text-white"
               >
                 {t("contactPage.form.messageLabel")}
               </label>

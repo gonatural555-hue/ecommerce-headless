@@ -40,7 +40,7 @@ export default function ProductCardSimple({
   labels,
   analyticsListId,
   analyticsListName = "product_list",
-  surface = "dark",
+  surface = "light",
   editorial = false,
 }: Props) {
   const L = surface === "light";
@@ -69,7 +69,7 @@ export default function ProductCardSimple({
   return (
     <Link
       href={`/${locale}/products/${product.id}`}
-      className={L ? "block text-neutral-900" : "block text-text-primary"}
+      className={L ? "block text-dark-base" : "block text-white"}
       onClick={() => {
         trackSelectItem({
           item: {
@@ -86,20 +86,20 @@ export default function ProductCardSimple({
       <article
         className={
           E
-            ? "group overflow-hidden rounded-sm border border-white/[0.08] bg-[#0f1412]/80 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 hover:-translate-y-1 hover:scale-[1.02] hover:border-white/[0.14] hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.6)]"
+            ? "group overflow-hidden rounded-sm border border-earth-brown/18 bg-dark-base/92 transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 hover:-translate-y-1 hover:scale-[1.02] hover:border-earth-brown/30 hover:shadow-[0_28px_56px_-24px_rgba(17,23,19,0.35)]"
             : L
-              ? "group overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 hover:shadow-md"
-              : "group overflow-hidden rounded-xl border border-white/5 bg-dark-surface/70 shadow-[0_6px_16px_rgba(0,0,0,0.24)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
+              ? "group overflow-hidden rounded-xl border border-earth-brown/15 bg-soft-stone shadow-[0_8px_28px_-14px_rgba(17,23,19,0.12)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 hover:border-earth-brown/25 hover:shadow-[0_14px_36px_-18px_rgba(17,23,19,0.16)]"
+              : "group overflow-hidden rounded-xl border border-earth-brown/22 bg-dark-surface shadow-[0_10px_28px_-14px_rgba(17,23,19,0.45)] transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-1 hover:border-earth-brown/35 hover:shadow-xl"
         }
       >
         {/* IMAGE */}
         <div
           className={
             E
-              ? "relative aspect-[4/5] w-full overflow-hidden bg-[#0a0d0c]"
+              ? "relative aspect-[4/5] w-full overflow-hidden bg-dark-base"
               : L
-                ? "relative w-full bg-neutral-100 overflow-hidden"
-                : "relative w-full bg-dark-surface overflow-hidden"
+                ? "relative w-full overflow-hidden bg-soft-stone"
+                : "relative w-full overflow-hidden bg-dark-surface"
           }
         >
           {hasValidImage ? (
@@ -188,7 +188,7 @@ export default function ProductCardSimple({
                 }}
                 className={
                   L
-                    ? "pointer-events-auto rounded-full border border-neutral-300 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.2)] backdrop-blur-sm opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/60 hover:text-accent-gold active:scale-[0.98]"
+                    ? "pointer-events-auto rounded-full border border-earth-brown/25 bg-white/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-dark-base opacity-0 shadow-[0_8px_22px_-10px_rgba(17,23,19,0.15)] backdrop-blur-sm transition-all duration-300 ease-out translate-y-2 group-hover:translate-y-0 group-hover:opacity-100 hover:border-accent-gold/55 hover:text-accent-gold active:scale-[0.98]"
                     : "pointer-events-auto rounded-full border border-white/28 bg-black/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/95 shadow-[0_8px_22px_-8px_rgba(0,0,0,0.45)] backdrop-blur-md opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 hover:border-accent-gold/55 hover:text-accent-gold/95 active:scale-[0.98]"
                 }
                 aria-label={addToCartLabel}
@@ -218,8 +218,8 @@ export default function ProductCardSimple({
                       isActive
                         ? "border-accent-gold bg-accent-gold"
                         : L
-                          ? "border-neutral-300 bg-transparent hover:border-neutral-500"
-                          : "border-white/20 bg-transparent hover:border-white/40",
+                          ? "border-earth-brown/30 bg-transparent hover:border-earth-brown/55"
+                          : "border-white/25 bg-transparent hover:border-white/45",
                     ].join(" ")}
                   />
                 );
@@ -233,10 +233,10 @@ export default function ProductCardSimple({
           <h2
             className={
               E
-                ? "text-[0.95rem] font-semibold leading-snug tracking-tight text-text-primary line-clamp-2 md:text-base"
+                ? "text-[0.95rem] font-semibold leading-snug tracking-tight text-white line-clamp-2 md:text-base"
                 : L
-                  ? "text-base font-semibold text-neutral-900 line-clamp-2"
-                  : "text-base font-semibold text-text-primary line-clamp-2"
+                  ? "text-base font-semibold text-dark-base line-clamp-2"
+                  : "text-base font-semibold text-white line-clamp-2"
             }
           >
             {title}
@@ -246,8 +246,8 @@ export default function ProductCardSimple({
               E
                 ? "text-[0.7rem] leading-relaxed text-white/[0.78] line-clamp-2 md:text-xs"
                 : L
-                  ? "text-xs text-neutral-600 line-clamp-2"
-                  : "text-xs text-text-muted line-clamp-2"
+                  ? "text-xs text-muted-gray line-clamp-2"
+                  : "text-xs text-white/75 line-clamp-2"
             }
           >
             {description}
@@ -256,10 +256,10 @@ export default function ProductCardSimple({
             <span
               className={
                 E
-                  ? "text-sm font-medium tabular-nums text-text-primary"
+                  ? "text-sm font-medium tabular-nums text-white"
                   : L
-                    ? "text-sm text-neutral-900"
-                    : "text-sm text-text-primary"
+                    ? "text-sm font-medium tabular-nums text-dark-base"
+                    : "text-sm font-medium tabular-nums text-white"
               }
             >
               ${product.price.toFixed(2)}

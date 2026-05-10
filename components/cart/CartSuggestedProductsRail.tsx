@@ -82,11 +82,11 @@ export default function CartSuggestedProductsRail({
       aria-busy={loading}
     >
       {loading && (
-        <div className="flex gap-4 overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-4">
+        <div className="flex gap-4 overflow-hidden rounded-xl border border-earth-brown/15 bg-soft-stone/80 p-4">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="h-52 min-w-[200px] flex-1 animate-pulse rounded-lg bg-white/5 motion-reduce:animate-none"
+              className="h-52 min-w-[200px] flex-1 animate-pulse rounded-lg bg-earth-brown/10 motion-reduce:animate-none"
               aria-hidden
             />
           ))}
@@ -94,7 +94,7 @@ export default function CartSuggestedProductsRail({
       )}
 
       {!loading && error && (
-        <p className="text-sm text-text-muted py-4" role="alert">
+        <p className="py-4 text-sm text-muted-gray" role="alert">
           {suggestError}
         </p>
       )}
@@ -118,7 +118,7 @@ export default function CartSuggestedProductsRail({
             {products.map((product) => (
               <div
                 key={product.id}
-                className="snap-start shrink-0 min-w-[min(78vw,260px)] max-w-[280px] sm:min-w-[240px] sm:max-w-[300px] rounded-2xl transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none hover:scale-[1.03] hover:z-10 hover:shadow-[0_20px_44px_-12px_rgba(0,0,0,0.5)] motion-reduce:hover:scale-100 motion-reduce:hover:shadow-none"
+                className="snap-start shrink-0 min-w-[min(78vw,260px)] max-w-[280px] rounded-2xl transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none hover:z-10 hover:scale-[1.03] hover:shadow-[0_18px_40px_-14px_rgba(17,23,19,0.18)] motion-reduce:hover:scale-100 motion-reduce:hover:shadow-none sm:min-w-[240px] sm:max-w-[300px]"
               >
                 <ProductCardSimple
                   product={product}

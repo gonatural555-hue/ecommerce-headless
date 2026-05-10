@@ -177,7 +177,7 @@ export default async function ProductsPage({
   };
 
   return (
-    <main className="min-h-screen bg-dark-base text-text-primary">
+    <main className="min-h-screen bg-warm-sand text-dark-base">
       <ProductsHero
         title={t("productsPage.heroTitle")}
         subtitle={t("productsPage.heroSubtitle")}

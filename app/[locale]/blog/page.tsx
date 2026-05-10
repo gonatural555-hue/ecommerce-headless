@@ -91,7 +91,7 @@ export default async function BlogPage({
   const manifesto = journal?.manifesto ?? t("blog.intro");
 
   return (
-    <main className="bg-dark-base">
+    <main className="bg-warm-sand text-dark-base">
       <BlogHero
         title={t("blog.title")}
         subtitle={t("blog.subtitle")}
@@ -100,9 +100,9 @@ export default async function BlogPage({
         imageAlt={`${t("blog.title")} — Go Natural`}
       />
 
-      <section className="border-b border-white/[0.06] bg-dark-base py-20 md:py-28 lg:py-32">
+      <section className="border-b border-earth-brown/12 bg-soft-stone py-20 md:py-28 lg:py-32">
         <ScrollReveal>
-          <p className="mx-auto max-w-2xl px-6 text-center text-lg font-normal leading-relaxed text-white/[0.88] md:text-xl md:leading-relaxed">
+          <p className="mx-auto max-w-2xl px-6 text-center text-lg font-normal leading-relaxed text-dark-base md:text-xl md:leading-relaxed">
             {manifesto}
           </p>
         </ScrollReveal>
@@ -133,10 +133,10 @@ export default async function BlogPage({
 
       {quotes[1] ? <QuoteBlock text={quotes[1]} /> : null}
 
-      <section className="border-y border-white/[0.06] bg-[#0a0e0d] py-16 md:py-24">
+      <section className="border-y border-earth-brown/12 bg-warm-sand py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12">
           <ScrollReveal>
-            <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-accent-gold drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
+            <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-accent-gold">
               {journal?.sectionsLabel ?? ""}
             </p>
             <div className="mt-10 flex justify-center">

@@ -23,27 +23,37 @@ const config = {
         ],
       },
       colors: {
-        // Cinematic Dark Outdoor - Paleta base
-        "dark-base": "#0B0F0E",
-        "dark-surface": "#121917",
-        "text-primary": "#E6ECE9",
-        "text-muted": "#9BA6A1",
-        "accent-gold": "#C89B3C",
-        "accent-moss": "#3A5F4A",
+        /* Go Natural — marca */
+        forest: "#111713",
+        "warm-sand": "#E8E1D3",
+        "soft-stone": "#F5F2EC",
+        "mountain-green": "#2F4A3A",
+        "moss-green": "#6F7F5A",
+        "earth-brown": "#8A6A4F",
+        "sun-amber": "#D98A24",
+        charcoal: "#1A1A1A",
+        "muted-gray": "#6B6B6B",
 
-        // Aliases semánticos para uso común
+        /* Semántica (compatibilidad con utilidades existentes) */
+        "dark-base": "#111713",
+        "dark-surface": "#1e2823",
+        "text-primary": "#111713",
+        "text-muted": "#6B6B6B",
+        "accent-gold": "#D98A24",
+        "accent-moss": "#6F7F5A",
+
         background: {
-          DEFAULT: "#0B0F0E",
-          surface: "#121917",
-          primary: "#122220",
+          DEFAULT: "#E8E1D3",
+          surface: "#F5F2EC",
+          primary: "#E8E1D3",
         },
         text: {
-          primary: "#E6ECE9",
-          muted: "#9BA6A1",
+          primary: "#111713",
+          muted: "#6B6B6B",
         },
         accent: {
-          DEFAULT: "#C89B3C",
-          moss: "#3A5F4A",
+          DEFAULT: "#D98A24",
+          moss: "#6F7F5A",
         },
       },
     },
@@ -52,4 +62,3 @@ const config = {
 };
 
 export default config;
-  

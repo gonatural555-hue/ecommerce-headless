@@ -34,15 +34,15 @@ export default function BlogPreview({
   const shown = posts.slice(0, 3);
 
   return (
-    <section className="border-t border-white/[0.05] bg-[#0a0e0d] py-20 md:py-28">
+    <section className="border-t border-earth-brown/15 bg-warm-sand py-20 md:py-28">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-2xl space-y-4">
-              <h2 className="font-display font-semibold tracking-tight text-text-primary text-[clamp(1.75rem,3.5vw,2.5rem)]">
+              <h2 className="font-display font-semibold tracking-tight text-dark-base text-[clamp(1.75rem,3.5vw,2.5rem)]">
                 {title}
               </h2>
-              <p className="text-sm leading-relaxed text-text-muted md:text-base">
+              <p className="text-sm leading-relaxed text-muted-gray md:text-base">
                 {intro}
               </p>
             </div>

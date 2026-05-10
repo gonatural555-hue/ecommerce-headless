@@ -227,13 +227,13 @@ export default function CheckoutPage() {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-white/15 bg-dark-base/50 px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted/60 transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/30 focus-visible:border-accent-gold focus-visible:ring-2 focus-visible:ring-accent-gold/35 max-w-full";
+    "max-w-full rounded-lg border border-earth-brown/22 bg-white px-3 py-2.5 text-sm text-dark-base placeholder:text-muted-gray/65 transition focus:border-accent-gold focus:outline-none focus:ring-2 focus:ring-accent-gold/25 focus-visible:border-accent-gold focus-visible:ring-2 focus-visible:ring-accent-gold/30";
 
   if (items.length === 0) {
     return (
       <main
         data-route="checkout"
-        className="max-w-xl mx-auto px-4 py-20 md:py-28 text-center"
+        className="mx-auto max-w-xl bg-warm-sand px-4 py-20 text-center md:py-28"
       >
         <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
           Checkout
@@ -258,9 +258,9 @@ export default function CheckoutPage() {
     return (
       <main
         data-route="checkout"
-        className="max-w-xl mx-auto px-4 py-24 text-center"
+        className="mx-auto max-w-xl bg-warm-sand px-4 py-24 text-center"
       >
-        <p className="text-text-muted">{t("checkoutPage.supabaseMissing")}</p>
+        <p className="text-muted-gray">{t("checkoutPage.supabaseMissing")}</p>
       </main>
     );
   }
@@ -269,9 +269,9 @@ export default function CheckoutPage() {
     return (
       <main
         data-route="checkout"
-        className="max-w-xl mx-auto px-4 py-24 text-center"
+        className="mx-auto max-w-xl bg-warm-sand px-4 py-24 text-center"
       >
-        <p className="text-text-muted">{t("checkoutPage.loadingAuth")}</p>
+        <p className="text-muted-gray">{t("checkoutPage.loadingAuth")}</p>
       </main>
     );
   }
@@ -280,9 +280,9 @@ export default function CheckoutPage() {
     return (
       <main
         data-route="checkout"
-        className="max-w-xl mx-auto px-4 py-24 text-center"
+        className="mx-auto max-w-xl bg-warm-sand px-4 py-24 text-center"
       >
-        <p className="text-text-muted mb-6">{t("checkoutPage.loginRequired")}</p>
+        <p className="mb-6 text-muted-gray">{t("checkoutPage.loginRequired")}</p>
         <Link
           href={`/${locale}/auth?redirect=/${locale}/checkout`}
           className="inline-flex rounded-xl bg-accent-gold px-6 py-3 text-sm font-semibold text-dark-base"
@@ -296,14 +296,14 @@ export default function CheckoutPage() {
   return (
     <main
       data-route="checkout"
-      className="max-w-6xl mx-auto px-3 sm:px-4 pt-28 md:pt-32 min-h-[100dvh] md:min-h-0 overflow-x-hidden pb-12"
+      className="mx-auto min-h-[100dvh] max-w-6xl overflow-x-hidden bg-warm-sand px-3 pb-12 pt-28 sm:px-4 md:min-h-0 md:pt-32"
     >
       <header className="mb-8 md:mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-xl">
           <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight">
             {t("checkoutPage.title")}
           </h1>
-          <p className="mt-2 text-text-muted text-sm md:text-base leading-relaxed">
+          <p className="mt-2 text-sm leading-relaxed text-muted-gray md:text-base">
             {isCheckoutWhatsappEnabled()
               ? t(
                   "checkoutPage.subtitleWithWhatsapp",
@@ -312,7 +312,7 @@ export default function CheckoutPage() {
               : t("checkoutPage.subtitlePayPalOnly")}
           </p>
           {user?.email ? (
-            <p className="mt-3 text-sm text-text-muted/90">
+            <p className="mt-3 text-sm text-muted-gray">
               {t("checkoutPage.emailNote")}
             </p>
           ) : null}
@@ -327,8 +327,8 @@ export default function CheckoutPage() {
 
       <div className="grid gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1fr)_min(100%,400px)] lg:items-start">
         <div className="order-2 lg:order-1 space-y-6 md:space-y-8 min-w-0">
-          <section className="rounded-2xl border border-white/10 bg-[#1F2D26]/90 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.22)]">
-            <h2 className="text-lg md:text-xl font-semibold text-text-primary mb-5">
+          <section className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-5 shadow-[0_12px_40px_-24px_rgba(17,23,19,0.14)] sm:p-7 md:p-8">
+            <h2 className="mb-5 text-lg font-semibold text-dark-base md:text-xl">
               {t("checkoutPage.shippingAddress")}
             </h2>
             {defaultAddress ? (
@@ -460,7 +460,7 @@ export default function CheckoutPage() {
                         await upsertAddress(next);
                       })();
                     }}
-                    className="inline-flex items-center justify-center rounded-xl bg-accent-gold px-5 py-3 text-sm font-semibold text-dark-base transition hover:bg-accent-gold/90 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1F2D26]"
+                    className="inline-flex items-center justify-center rounded-xl bg-dark-base px-5 py-3 text-sm font-semibold text-white transition hover:bg-mountain-green active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-soft-stone"
                   >
                     {t("checkoutPage.saveAddress")}
                   </button>
@@ -475,11 +475,11 @@ export default function CheckoutPage() {
             )}
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#1F2D26]/90 backdrop-blur-sm p-5 sm:p-7 md:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.22)]">
-            <h2 className="text-lg md:text-xl font-semibold text-text-primary mb-5">
+          <section className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-5 shadow-[0_12px_40px_-24px_rgba(17,23,19,0.14)] sm:p-7 md:p-8">
+            <h2 className="mb-5 text-lg font-semibold text-dark-base md:text-xl">
               {t("checkoutPage.paymentMethod")}
             </h2>
-            <p className="text-sm text-text-muted mb-4">
+            <p className="mb-4 text-sm text-muted-gray">
               {isCheckoutWhatsappEnabled()
                 ? t(
                     "checkoutPage.paymentHintPaypalAndWhatsapp",
@@ -489,8 +489,8 @@ export default function CheckoutPage() {
             </p>
 
             {isCheckoutWhatsappEnabled() ? (
-              <div className="mb-6 rounded-xl border border-emerald-500/25 bg-emerald-950/20 px-4 py-4 text-sm text-text-muted leading-relaxed">
-                <h3 className="font-semibold text-text-primary mb-2">
+              <div className="mb-6 rounded-xl border border-moss-green/30 bg-moss-green/10 px-4 py-4 text-sm leading-relaxed text-muted-gray">
+                <h3 className="mb-2 font-semibold text-dark-base">
                   {t("checkoutPage.whatsappCoordinarTitle", "")}
                 </h3>
                 <p className="text-xs sm:text-sm mb-4">
@@ -500,7 +500,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={handleWhatsappCoordinate}
-                    className="w-full rounded-xl border border-emerald-500/40 bg-emerald-900/30 px-4 py-3 text-sm font-semibold text-emerald-100/95 transition hover:bg-emerald-900/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+                    className="w-full rounded-xl border border-mountain-green/35 bg-mountain-green px-4 py-3 text-sm font-semibold text-white transition hover:bg-mountain-green/92 focus:outline-none focus-visible:ring-2 focus-visible:ring-moss-green/40"
                   >
                     {t("checkoutPage.whatsappCoordinarCta", "")}
                   </button>
@@ -514,16 +514,16 @@ export default function CheckoutPage() {
 
             {isCheckoutWhatsappEnabled() ? (
               <div className="relative mb-6 flex items-center gap-3">
-                <span className="h-px flex-1 bg-white/10" aria-hidden />
-                <span className="text-[0.65rem] uppercase tracking-[0.2em] text-text-muted shrink-0">
+                <span className="h-px flex-1 bg-earth-brown/20" aria-hidden />
+                <span className="shrink-0 text-[0.65rem] uppercase tracking-[0.2em] text-muted-gray">
                   {t("checkoutPage.paymentDividerOr", "")}
                 </span>
-                <span className="h-px flex-1 bg-white/10" aria-hidden />
+                <span className="h-px flex-1 bg-earth-brown/20" aria-hidden />
               </div>
             ) : null}
 
-            <div className="rounded-xl border border-accent-gold/30 bg-dark-base/70 px-4 py-3 text-xs text-text-muted leading-relaxed mb-4">
-              <span className="font-semibold text-text-primary">PayPal · </span>
+            <div className="mb-4 rounded-xl border border-accent-gold/35 bg-warm-sand/80 px-4 py-3 text-xs leading-relaxed text-muted-gray">
+              <span className="font-semibold text-dark-base">PayPal · </span>
               {t("checkoutPage.paymentPayPalHighlight")}{" "}
               <span className="text-text-muted/95">
                 {t("checkoutPage.trustPayPalProtection")}
@@ -547,20 +547,20 @@ export default function CheckoutPage() {
         </div>
 
         <aside className="order-1 lg:order-2 lg:sticky lg:top-28 space-y-4 min-w-0">
-          <div className="rounded-2xl border border-accent-gold/25 bg-gradient-to-b from-dark-surface to-dark-base p-5 sm:p-7 shadow-[0_24px_80px_-28px_rgba(0,0,0,0.7)] overflow-x-hidden">
-            <div className="flex flex-wrap gap-2 mb-6 text-[0.7rem] uppercase tracking-[0.12em] text-text-muted">
-              <span className="rounded-full border border-white/15 px-2.5 py-1">
+          <div className="overflow-x-hidden rounded-2xl border border-earth-brown/18 bg-soft-stone p-5 shadow-[0_20px_56px_-28px_rgba(17,23,19,0.18)] sm:p-7">
+            <div className="mb-6 flex flex-wrap gap-2 text-[0.7rem] uppercase tracking-[0.12em] text-muted-gray">
+              <span className="rounded-full border border-earth-brown/22 px-2.5 py-1">
                 {t("checkoutPage.trustSecureCheckout")}
               </span>
               {isCheckoutWhatsappEnabled() ? (
-                <span className="rounded-full border border-white/15 px-2.5 py-1">
+                <span className="rounded-full border border-earth-brown/22 px-2.5 py-1">
                   WhatsApp
                 </span>
               ) : null}
-              <span className="rounded-full border border-white/15 px-2.5 py-1">
+              <span className="rounded-full border border-earth-brown/22 px-2.5 py-1">
                 PayPal
               </span>
-              <span className="rounded-full border border-white/15 px-2.5 py-1">
+              <span className="rounded-full border border-earth-brown/22 px-2.5 py-1">
                 {t("checkoutPage.trustEasyReturns")}
               </span>
             </div>
@@ -576,9 +576,9 @@ export default function CheckoutPage() {
               {items.map((item) => (
                 <li
                   key={item.id}
-                  className="flex gap-3 pb-5 border-b border-white/10 last:border-0 last:pb-0"
+                  className="flex gap-3 border-b border-earth-brown/12 pb-5 last:border-0 last:pb-0"
                 >
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-dark-base ring-1 ring-white/10">
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-warm-sand ring-1 ring-earth-brown/15">
                     {item.image ? (
                       <Image
                         src={item.image}
@@ -613,13 +613,13 @@ export default function CheckoutPage() {
                   {formatPrice(subtotal)}
                 </span>
               </div>
-              <div className="flex justify-between gap-4 text-xs text-text-muted pt-2 border-t border-white/10">
+              <div className="flex justify-between gap-4 border-t border-earth-brown/12 pt-2 text-xs text-muted-gray">
                 <span>{t("checkoutPage.shipping")}</span>
                 <span>{t("checkoutPage.shippingCalculated")}</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/15 mb-6">
+            <div className="mb-6 border-t border-earth-brown/15 pt-4">
               <div className="flex justify-between items-baseline gap-4">
                 <span className="text-base font-semibold text-text-primary">
                   {t("checkoutPage.total")}

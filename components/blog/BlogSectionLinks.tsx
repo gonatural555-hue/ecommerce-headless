@@ -23,7 +23,7 @@ export default function BlogSectionLinks({
         <Link
           key={section.slug}
           href={`/${locale}/blog/${section.slug}`}
-          className="inline-flex items-center px-4 py-2 text-sm font-medium text-text-primary border border-white/10 rounded-full hover:border-accent-gold/60 hover:text-accent-gold transition-colors duration-200"
+          className="inline-flex items-center rounded-full border border-earth-brown/25 px-4 py-2 text-sm font-medium text-dark-base transition-colors duration-200 hover:border-accent-gold/60 hover:text-accent-gold"
         >
           {section.title}
         </Link>

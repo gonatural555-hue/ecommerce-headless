@@ -106,14 +106,14 @@ export default function AccountAddresses() {
         <button
           type="button"
           onClick={startNew}
-          className="rounded-xl border border-white/10 bg-dark-surface/50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-primary transition-colors duration-200 ease-out hover:border-accent-gold/60 hover:text-accent-gold/90"
+          className="rounded-xl border border-earth-brown/18 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-primary transition-colors duration-200 ease-out hover:border-accent-gold/60 hover:text-accent-gold/90"
         >
           {t("accountAddresses.addNew")}
         </button>
       </div>
 
       {!hasAddresses && !isEditing && (
-        <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
+        <div className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-6">
           <p className="text-sm text-text-muted">
             {t("accountAddresses.noAddresses")}
           </p>
@@ -125,7 +125,7 @@ export default function AccountAddresses() {
           {sortedAddresses.map((address) => (
             <div
               key={address.id}
-              className="rounded-2xl border border-white/10 bg-dark-surface/30 p-5"
+              className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-5"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -180,7 +180,7 @@ export default function AccountAddresses() {
 
       {isEditing && (
         <form
-          className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6 space-y-4"
+          className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-6 space-y-4"
           onSubmit={handleSubmit}
         >
           <div className="grid gap-4 sm:grid-cols-2">
@@ -195,7 +195,7 @@ export default function AccountAddresses() {
                 }
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
                 placeholder={t("accountAddresses.form.fullNamePlaceholder")}
               />
             </div>
@@ -210,7 +210,7 @@ export default function AccountAddresses() {
                 }
                 type="tel"
                 required
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
                 placeholder={t("accountAddresses.form.phonePlaceholder")}
               />
             </div>
@@ -227,7 +227,7 @@ export default function AccountAddresses() {
               }
               type="text"
               required
-              className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+              className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
               placeholder={t("accountAddresses.form.addressPlaceholder")}
             />
           </div>
@@ -242,7 +242,7 @@ export default function AccountAddresses() {
                 setForm((prev) => ({ ...prev, addressLine2: event.target.value }))
               }
               type="text"
-              className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+              className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
               placeholder={t("accountAddresses.form.addressLine2Placeholder")}
             />
           </div>
@@ -259,7 +259,7 @@ export default function AccountAddresses() {
                 }
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
                 placeholder={t("accountAddresses.form.cityPlaceholder")}
               />
             </div>
@@ -274,7 +274,7 @@ export default function AccountAddresses() {
                 }
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
                 placeholder={t("accountAddresses.form.postalCodePlaceholder")}
               />
             </div>
@@ -289,7 +289,7 @@ export default function AccountAddresses() {
                 }
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/10 bg-dark-surface/70 px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
+                className="w-full rounded-xl border border-earth-brown/20 bg-white px-4 py-3 text-sm text-text-primary focus:border-accent-gold/60 focus:outline-none"
                 placeholder={t("accountAddresses.form.countryPlaceholder")}
               />
             </div>
@@ -302,7 +302,7 @@ export default function AccountAddresses() {
               onChange={(event) =>
                 setForm((prev) => ({ ...prev, isDefault: event.target.checked }))
               }
-              className="h-4 w-4 rounded border border-white/20 bg-dark-surface/70 text-accent-gold focus:ring-accent-gold/60"
+              className="h-4 w-4 rounded border border-earth-brown/30 bg-white text-accent-gold focus:ring-accent-gold/60"
             />
             {t("accountAddresses.form.setAsDefault")}
           </label>
@@ -321,7 +321,7 @@ export default function AccountAddresses() {
                 setEditingId(null);
                 setForm(emptyForm);
               }}
-              className="rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold text-text-muted transition-colors duration-200 ease-out hover:text-text-primary"
+              className="rounded-xl border border-earth-brown/20 px-5 py-3 text-sm font-semibold text-muted-gray transition-colors duration-200 ease-out hover:text-dark-base"
             >
               {t("accountAddresses.form.cancel")}
             </button>

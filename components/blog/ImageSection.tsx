@@ -17,7 +17,7 @@ export default function ImageSection({
   imageAlt,
 }: ImageSectionProps) {
   return (
-    <section className="bg-dark-base">
+    <section className="bg-warm-sand">
       <ScrollReveal className="w-full">
         <div className="relative min-h-[48vh] w-full md:min-h-[56vh] lg:min-h-[62vh]">
           <Image
@@ -32,7 +32,7 @@ export default function ImageSection({
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-base/50 via-transparent to-dark-base/20" />
         </div>
         {caption ? (
-          <p className="mx-auto max-w-3xl px-6 py-8 text-center text-xs font-medium uppercase tracking-[0.28em] text-white/[0.82] sm:px-10 md:py-10">
+          <p className="mx-auto max-w-3xl px-6 py-8 text-center text-xs font-medium uppercase tracking-[0.28em] text-muted-gray sm:px-10 md:py-10">
             {caption}
           </p>
         ) : null}

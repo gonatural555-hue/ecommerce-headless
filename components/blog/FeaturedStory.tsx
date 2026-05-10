@@ -25,7 +25,7 @@ export default function FeaturedStory({
   ctaLabel,
 }: FeaturedStoryProps) {
   return (
-    <section className="bg-dark-base py-16 md:py-24 lg:py-28">
+    <section className="bg-mountain-green py-16 md:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <p className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-accent-gold drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
@@ -50,10 +50,10 @@ export default function FeaturedStory({
             </div>
 
             <div className="relative z-[1] -mt-16 px-2 text-center sm:-mt-20 md:-mt-24 md:px-8">
-              <h2 className="font-display mx-auto max-w-4xl font-bold tracking-tight text-text-primary text-[clamp(1.75rem,4vw,3rem)] leading-[1.12]">
+              <h2 className="font-display mx-auto max-w-4xl font-bold tracking-tight text-white text-[clamp(1.75rem,4vw,3rem)] leading-[1.12]">
                 {post.title}
               </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/[0.88] sm:text-base">
+              <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">
                 {post.excerpt}
               </p>
               <span className="mt-8 inline-flex text-sm font-medium text-accent-gold transition duration-300 group-hover:text-accent-gold/85">

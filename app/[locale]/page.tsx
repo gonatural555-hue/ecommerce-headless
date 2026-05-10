@@ -112,7 +112,7 @@ export default async function HomePage({
     : [];
 
   return (
-    <main className="flex min-h-screen flex-col bg-dark-base text-text-primary">
+    <main className="flex min-h-screen flex-col bg-warm-sand text-dark-base">
       <HomeHero
         locale={locale}
         tagline={h.heroTagline ?? "Go Natural"}

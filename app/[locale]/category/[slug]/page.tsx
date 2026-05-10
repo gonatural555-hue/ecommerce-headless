@@ -252,7 +252,7 @@ export default async function CategoryPage({ params }: Props) {
     );
 
   return (
-    <main className="bg-dark-base">
+    <main className="bg-warm-sand text-dark-base">
       {/* Category Hero */}
       <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-end">
         <div className="absolute inset-0">

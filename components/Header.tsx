@@ -117,68 +117,29 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  /** Solo ficha de producto `/[locale]/products/[id]` — header claro para leer sobre fondo blanco. */
-  const isProductDetailPage = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    return (
-      segments.length === 3 &&
-      segments[0] === locale &&
-      segments[1] === "products" &&
-      segments[2].length > 0
-    );
-  }, [pathname, locale]);
+  const navLinkClass = `${NAV_TEXT} text-warm-sand/90 hover:text-white`;
 
-  /** Home, listado de productos, blog y contacto: misma barra semitransparente que el hero. */
-  const isDarkHeroHeader = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    if (segments.length === 0) return false;
-    if (segments[0] !== locale) return false;
-    if (isProductDetailPage) return false;
-    if (segments.length === 1) return true;
-    const section = segments[1];
-    if (section === "products" && segments.length === 2) return true;
-    if (section === "blog") return true;
-    if (section === "contact" && segments.length === 2) return true;
-    return false;
-  }, [pathname, locale, isProductDetailPage]);
+  const mobileNavLinkClass = `${NAV_TEXT} rounded-md py-2 px-2 text-dark-base transition-colors hover:text-mountain-green`;
 
-  const navLinkClass = isProductDetailPage
-    ? `${NAV_TEXT} text-neutral-900 hover:text-neutral-600`
-    : `${NAV_TEXT} text-white hover:text-white/80`;
+  const megaCatTitle =
+    "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-dark-base hover:text-accent-gold transition-colors duration-200";
 
-  const mobileNavLinkClass = isProductDetailPage
-    ? `${NAV_TEXT} rounded-md py-2 px-2 text-neutral-900 transition-colors hover:text-neutral-600`
-    : `${NAV_TEXT} rounded-md py-2 px-2 text-white transition-colors hover:text-white/85`;
+  const megaCatSub =
+    "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-muted-gray hover:text-dark-base transition-colors duration-200";
 
-  const megaCatTitle = isProductDetailPage
-    ? "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-neutral-900 hover:text-accent-gold transition-colors duration-200"
-    : "text-[calc(1rem*1.15)] font-semibold tracking-[0.02em] text-white hover:text-accent-gold transition-colors duration-200";
+  const categoriesBackdropClass = "bg-black/45 backdrop-blur-sm";
 
-  const megaCatSub = isProductDetailPage
-    ? "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
-    : "mb-2 block break-inside-avoid text-[calc(0.875rem*1.15)] text-white/90 hover:text-white transition-colors duration-200";
-
-  const categoriesBackdropClass = isProductDetailPage
-    ? "bg-neutral-900/35 backdrop-blur-[2px]"
-    : "bg-black/55 backdrop-blur-sm";
-
-  const categoriesPanelShell = isProductDetailPage
-    ? "border-neutral-200 bg-white/96 shadow-[0_14px_44px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] backdrop-blur-md supports-[backdrop-filter]:bg-white/92"
-    : "border-white/10 bg-dark-base/88 shadow-[0_20px_56px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06] backdrop-blur-xl supports-[backdrop-filter]:bg-dark-base/82";
+  const categoriesPanelShell =
+    "border-earth-brown/15 bg-soft-stone/98 shadow-[0_24px_56px_-20px_rgba(17,23,19,0.18)] ring-1 ring-earth-brown/10 backdrop-blur-md supports-[backdrop-filter]:bg-soft-stone/95";
 
   return (
     <header
       className={[
         "fixed top-0 z-50 w-full font-sans transition-all duration-300 ease-out",
+        "border-b border-mountain-green/25 bg-dark-base",
         isScrolled
-          ? isProductDetailPage
-            ? "bg-white border-b border-neutral-200 shadow-sm"
-            : "bg-dark-base border-b border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
-          : isProductDetailPage
-            ? "bg-transparent"
-            : isDarkHeroHeader
-              ? "border-b border-white/[0.08] bg-dark-base/50 shadow-[0_4px_28px_rgba(0,0,0,0.22)] backdrop-blur-md supports-[backdrop-filter]:bg-dark-base/[0.42]"
-              : "bg-transparent",
+          ? "shadow-[0_12px_36px_rgba(17,23,19,0.22)]"
+          : "shadow-[0_4px_24px_rgba(17,23,19,0.14)]",
       ].join(" ")}
     >
       <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6">
@@ -195,9 +156,7 @@ export default function Header() {
               type="button"
               className={[
                 "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/50 md:hidden",
-                isProductDetailPage
-                  ? "text-neutral-900 hover:text-neutral-600"
-                  : "text-white hover:text-white/80",
+                "text-warm-sand/90 hover:text-white",
               ].join(" ")}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
@@ -303,13 +262,7 @@ export default function Header() {
                 {t("common.searchLabel")}
               </label>
               <div className="relative w-full">
-                <span
-                  className={
-                    isProductDetailPage
-                      ? "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
-                      : "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50"
-                  }
-                >
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-warm-sand/45">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -332,11 +285,7 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("common.searchPlaceholder")}
-                  className={
-                    isProductDetailPage
-                      ? `w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
-                      : `w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 ${NAV_TEXT} text-white placeholder:text-white/45 transition-colors duration-200 ease-out focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
-                  }
+                  className={`w-full rounded-full border border-white/12 bg-white/10 py-2.5 pl-9 pr-3 ${NAV_TEXT} text-warm-sand placeholder:text-warm-sand/45 transition-colors duration-200 ease-out focus:border-accent-gold/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/35`}
                 />
               </div>
             </form>
@@ -349,9 +298,7 @@ export default function Header() {
                   className={`${NAV_TEXT} font-semibold tracking-[0.12em] transition-colors duration-200 ${
                     lang === locale
                       ? "text-accent-gold"
-                      : isProductDetailPage
-                        ? "text-neutral-500 hover:text-neutral-800"
-                        : "text-white/70 hover:text-white"
+                      : "text-warm-sand/70 hover:text-white"
                   }`}
                 >
                   {lang.toUpperCase()}
@@ -384,11 +331,7 @@ export default function Header() {
             )}
             <Link
               href={`/${locale}/cart`}
-              className={
-                isProductDetailPage
-                  ? "relative flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600"
-                  : "relative flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80"
-              }
+              className="relative flex h-10 w-10 shrink-0 items-center justify-center text-warm-sand/90 transition-colors hover:text-white"
               aria-label={`Cart with ${totalItems} items`}
             >
               <svg
@@ -406,7 +349,7 @@ export default function Header() {
                 />
               </svg>
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent-gold px-1.5 text-xs font-medium text-dark-base">
+                <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent-gold px-1.5 text-xs font-medium text-white">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}
@@ -414,11 +357,7 @@ export default function Header() {
             {!isLoggedIn && (
               <Link
                 href={`/${locale}/auth?tab=login`}
-                className={
-                  isProductDetailPage
-                    ? "flex h-10 w-10 shrink-0 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 md:hidden"
-                    : "flex h-10 w-10 shrink-0 items-center justify-center text-white transition-colors hover:text-white/80 md:hidden"
-                }
+                className="flex h-10 w-10 shrink-0 items-center justify-center text-warm-sand/90 transition-colors hover:text-white md:hidden"
                 aria-label={t("header.account")}
               >
                 <svg
@@ -503,13 +442,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav
-            className={
-              isProductDetailPage
-                ? "md:hidden pb-4 mt-2 pt-4 bg-white rounded-b-2xl border border-neutral-200 shadow-md ring-1 ring-black/[0.04]"
-                : "md:hidden pb-4 mt-2 pt-4 bg-dark-base rounded-b-2xl border border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.06]"
-            }
-          >
+          <nav className="md:hidden pb-4 mt-2 pt-4 rounded-b-2xl border border-earth-brown/20 bg-soft-stone shadow-lg ring-1 ring-earth-brown/10">
             <div className="flex flex-col gap-3">
               <form
                 className="flex items-center gap-2 px-1"
@@ -523,13 +456,7 @@ export default function Header() {
                   {t("common.searchLabel")}
                 </label>
                 <div className="relative flex-1">
-                  <span
-                    className={
-                      isProductDetailPage
-                        ? "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
-                        : "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/50"
-                    }
-                  >
+                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-gray">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -552,11 +479,7 @@ export default function Header() {
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                     placeholder={t("common.searchPlaceholder")}
-                    className={
-                      isProductDetailPage
-                        ? `w-full rounded-full border border-neutral-200 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-neutral-900 placeholder:text-neutral-400 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
-                        : `w-full rounded-full border border-white/15 bg-dark-base py-2.5 pl-9 pr-3 ${NAV_TEXT} text-white placeholder:text-white/45 focus:border-accent-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40`
-                    }
+                    className={`w-full rounded-full border border-earth-brown/25 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-dark-base placeholder:text-muted-gray focus:border-accent-gold/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/35`}
                   />
                 </div>
               </form>
@@ -590,34 +513,20 @@ export default function Header() {
                   aria-controls="mobile-categories-menu"
                 >
                   <span>{t("header.nav.categories")}</span>
-                  <span
-                    className={
-                      isProductDetailPage
-                        ? `${NAV_TEXT} text-neutral-500`
-                        : `${NAV_TEXT} text-white/60`
-                    }
-                  >
+                  <span className={`${NAV_TEXT} text-muted-gray`}>
                     {mobileCategoriesOpen ? "−" : "+"}
                   </span>
                 </button>
                 {mobileCategoriesOpen && (
                   <div
                     id="mobile-categories-menu"
-                    className={
-                      isProductDetailPage
-                        ? "pl-3 border-l border-neutral-200 space-y-4"
-                        : "pl-3 border-l border-white/10 space-y-4"
-                    }
+                    className="pl-3 border-l border-earth-brown/20 space-y-4"
                   >
                     {mainCategories.map((category) => (
                       <div key={category.slug} className="space-y-2">
                         <Link
                           href={`/${locale}/category/${category.slug}`}
-                          className={`${NAV_TEXT} font-semibold ${
-                            isProductDetailPage
-                              ? "text-neutral-900 hover:text-accent-gold"
-                              : "text-white hover:text-accent-gold"
-                          }`}
+                          className={`${NAV_TEXT} font-semibold text-dark-base hover:text-accent-gold`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {t(`categories.names.${category.slug}`, category.name)}
@@ -628,11 +537,7 @@ export default function Header() {
                               <Link
                                 key={sub.slug}
                                 href={`/${locale}/category/${sub.slug}`}
-                                className={
-                                  isProductDetailPage
-                                    ? `${NAV_TEXT} text-neutral-700 hover:text-neutral-900`
-                                    : `${NAV_TEXT} text-white/90 hover:text-white`
-                                }
+                                className={`${NAV_TEXT} text-muted-gray hover:text-dark-base`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 {t(`categories.names.${sub.slug}`, sub.name)}
@@ -645,13 +550,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <div
-                className={
-                  isProductDetailPage
-                    ? "flex flex-wrap items-center gap-3 border-t border-neutral-200 pt-3"
-                    : "flex flex-wrap items-center gap-3 border-t border-white/10 pt-3"
-                }
-              >
+              <div className="flex flex-wrap items-center gap-3 border-t border-earth-brown/20 pt-3">
                 {locales.map((lang) => (
                   <Link
                     key={lang}
@@ -659,9 +558,7 @@ export default function Header() {
                     className={`${NAV_TEXT} font-semibold transition-colors duration-200 ${
                       lang === locale
                         ? "text-accent-gold"
-                        : isProductDetailPage
-                          ? "text-neutral-500 hover:text-neutral-800"
-                          : "text-white/70 hover:text-white"
+                        : "text-muted-gray hover:text-dark-base"
                     }`}
                   >
                     {lang.toUpperCase()}
@@ -670,7 +567,7 @@ export default function Header() {
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
-                    className={`${navLinkClass} font-semibold hover:text-accent-gold`}
+                    className={`${mobileNavLinkClass} font-semibold hover:text-accent-gold`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.greeting")}, {user.name}
@@ -679,7 +576,7 @@ export default function Header() {
                   <Link
                     href={`/${locale}/auth?tab=login`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`${navLinkClass} font-semibold hover:text-accent-gold`}
+                    className={`${mobileNavLinkClass} font-semibold hover:text-accent-gold`}
                   >
                     {t("header.account")}
                   </Link>

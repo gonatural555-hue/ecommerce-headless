@@ -39,8 +39,8 @@ export default function AccountPage() {
     if (activeSection === "orders") {
       if (userOrders.length === 0) {
         return (
-          <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
-            <p className="text-sm text-text-muted">
+          <div className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-6">
+            <p className="text-sm text-muted-gray">
               {t("accountPage.noOrders")}
             </p>
           </div>
@@ -51,7 +51,7 @@ export default function AccountPage() {
           {userOrders.map((order) => (
             <div
               key={order.id}
-              className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-dark-surface/30 p-5 md:flex-row md:items-center md:justify-between"
+              className="flex flex-col gap-2 rounded-2xl border border-earth-brown/15 bg-soft-stone p-5 md:flex-row md:items-center md:justify-between"
             >
               <div>
                 <p className="text-sm font-semibold text-text-primary">
@@ -93,15 +93,15 @@ export default function AccountPage() {
     }
 
     return (
-      <div className="rounded-2xl border border-white/10 bg-dark-surface/30 p-6">
-        <p className="text-sm text-text-muted">
+      <div className="rounded-2xl border border-earth-brown/15 bg-soft-stone p-6">
+        <p className="text-sm text-muted-gray">
           {t("accountPage.welcomeText")}
         </p>
         <div className="mt-4 space-y-2">
-          <p className="text-sm text-text-primary">
+          <p className="text-sm font-semibold text-dark-base">
             {user?.name || t("accountPage.userLabel")}
           </p>
-          <p className="text-sm text-text-muted">{user?.email}</p>
+          <p className="text-sm text-muted-gray">{user?.email}</p>
         </div>
       </div>
     );
@@ -109,8 +109,8 @@ export default function AccountPage() {
 
   if (authLoading) {
     return (
-      <main className="min-h-[100dvh] bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16 flex items-center justify-center">
-        <p className="text-sm text-text-muted">{t("checkoutPage.loadingAuth")}</p>
+      <main className="flex min-h-[100dvh] items-center justify-center bg-warm-sand px-6 pb-16 pt-24 sm:px-10 lg:px-16">
+        <p className="text-sm text-muted-gray">{t("checkoutPage.loadingAuth")}</p>
       </main>
     );
   }
@@ -141,13 +141,13 @@ export default function AccountPage() {
   }
 
   return (
-      <main className="min-h-[100dvh] bg-dark-base px-6 pb-16 pt-24 sm:px-10 lg:px-16">
+      <main className="min-h-[100dvh] bg-warm-sand px-6 pb-16 pt-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
-          <h1 className="font-display text-3xl font-semibold text-text-primary">
+          <h1 className="font-display text-3xl font-semibold text-dark-base">
             {t("accountPage.title")}
           </h1>
-          <p className="mt-2 text-sm text-text-muted">
+          <p className="mt-2 text-sm text-muted-gray">
             {t("accountPage.subtitle")}
           </p>
         </div>
@@ -168,8 +168,8 @@ export default function AccountPage() {
                   className={[
                     "w-full rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors duration-200 ease-out",
                     isActive
-                      ? "border-accent-gold bg-dark-surface/60 text-text-primary"
-                      : "border-white/10 bg-dark-surface/30 text-text-muted hover:text-text-primary",
+                      ? "border-accent-gold bg-warm-sand text-dark-base shadow-sm"
+                      : "border-earth-brown/15 bg-soft-stone text-muted-gray hover:text-dark-base",
                   ].join(" ")}
                 >
                   {item.label}
@@ -185,7 +185,7 @@ export default function AccountPage() {
                   router.push(`/${locale}`);
                 })();
               }}
-              className="w-full rounded-xl border border-white/10 px-4 py-3 text-left text-sm font-semibold text-text-muted transition-colors duration-200 ease-out hover:text-text-primary"
+              className="w-full rounded-xl border border-earth-brown/15 bg-soft-stone px-4 py-3 text-left text-sm font-semibold text-muted-gray transition-colors duration-200 ease-out hover:text-dark-base"
             >
               {t("accountPage.logout")}
             </button>

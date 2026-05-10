@@ -8,7 +8,7 @@ type CategoryItem = {
 
 export default function CategoriesSection({ items }: { items: CategoryItem[] }) {
   return (
-    <section className="bg-dark-base py-24 md:py-32">
+    <section className="bg-soft-stone py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div className="grid gap-6 md:gap-8 md:grid-cols-2">
           {items.map((category) => (
@@ -29,7 +29,7 @@ export default function CategoriesSection({ items }: { items: CategoryItem[] }) 
               <div className="absolute inset-0 bg-gradient-to-b from-dark-base/30 via-dark-base/55 to-dark-base/85 transition-colors duration-300 ease-out group-hover:from-dark-base/40 group-hover:via-dark-base/65 group-hover:to-dark-base/90" />
               <div className="relative z-10 h-full flex items-end">
                 <div className="p-8 sm:p-10">
-                  <h3 className="text-2xl sm:text-3xl font-semibold text-text-primary">
+                  <h3 className="text-2xl font-semibold text-white sm:text-3xl">
                     {category.title}
                   </h3>
                 </div>

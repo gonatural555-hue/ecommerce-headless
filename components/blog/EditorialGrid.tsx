@@ -40,7 +40,7 @@ export default function EditorialGrid({ posts, ctaLabel }: EditorialGridProps) {
   if (posts.length === 0) return null;
 
   return (
-    <section className="bg-dark-base py-8 md:py-14">
+    <section className="bg-soft-stone py-8 md:py-14">
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <div className="grid grid-cols-1 gap-10 gap-y-14 md:grid-cols-12 md:gap-x-6 md:gap-y-16 lg:gap-x-8 lg:gap-y-20">
           {posts.map((post, i) => (

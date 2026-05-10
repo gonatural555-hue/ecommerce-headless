@@ -91,10 +91,10 @@ export default function CartPage() {
           <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-4">
             Go Natural
           </p>
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-4">
+          <h1 className="font-display mb-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
             {t("cartPage.emptyTitle")}
           </h1>
-          <p className="text-text-muted mb-10 leading-relaxed">
+          <p className="mb-10 leading-relaxed text-white/80">
             {t("cartPage.emptyText")}
           </p>
           <Link
@@ -111,16 +111,16 @@ export default function CartPage() {
   return (
     <main
       data-route="cart"
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-20"
+      className="mx-auto max-w-7xl bg-warm-sand px-4 pb-16 pt-28 sm:px-6 md:pb-20 md:pt-32 lg:px-8"
     >
       <header className="mb-10 md:mb-12 max-w-2xl">
         <p className="text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90 mb-3">
           {t("cartPage.summaryTitle")}
         </p>
-        <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight mb-3">
+        <h1 className="font-display mb-3 text-3xl font-semibold tracking-tight text-dark-base md:text-4xl">
           {t("cartPage.heroTitle")}
         </h1>
-        <p className="text-text-muted text-base md:text-lg leading-relaxed">
+        <p className="text-base leading-relaxed text-muted-gray md:text-lg">
           {t("cartPage.heroSubtitle")}
         </p>
       </header>
@@ -129,15 +129,15 @@ export default function CartPage() {
         <div className="space-y-8 min-w-0">
           {/* Free shipping progress */}
           <section
-            className="rounded-2xl border border-accent-gold/25 bg-dark-surface/80 p-5 md:p-6 shadow-[0_0_0_1px_rgba(200,155,60,0.08)] backdrop-blur-sm"
+            className="rounded-2xl border border-earth-brown/18 bg-soft-stone p-5 shadow-[0_10px_36px_-18px_rgba(17,23,19,0.12)] md:p-6"
             aria-label={t("cartPage.freeShippingLabel")}
           >
             <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
               <div>
-                <h2 className="text-sm font-semibold text-text-primary">
+                <h2 className="text-sm font-semibold text-dark-base">
                   {t("cartPage.freeShippingLabel")}
                 </h2>
-                <p className="text-xs text-text-muted mt-1">
+                <p className="mt-1 text-xs text-muted-gray">
                   {interpolate(t("cartPage.freeShippingThresholdHint"), {
                     amount: thresholdLabel,
                   })}
@@ -152,7 +152,7 @@ export default function CartPage() {
               )}
             </div>
             <div
-              className="h-2 rounded-full bg-white/10 overflow-hidden"
+              className="h-2 overflow-hidden rounded-full bg-earth-brown/15"
               role="progressbar"
               aria-valuenow={Math.round(shippingPct)}
               aria-valuemin={0}
@@ -171,19 +171,19 @@ export default function CartPage() {
           </section>
 
           {/* Line items */}
-          <section className="rounded-2xl border border-white/10 bg-dark-surface/60 overflow-hidden">
-            <ul className="divide-y divide-white/10">
+          <section className="overflow-hidden rounded-2xl border border-earth-brown/15 bg-soft-stone">
+            <ul className="divide-y divide-earth-brown/12">
               {items.map((item) => {
                 const itemSubtotal = item.price * item.quantity;
                 const variantText = formatVariantSummary(item);
                 return (
                   <li
                     key={item.id}
-                    className="p-4 sm:p-6 transition-colors hover:bg-white/[0.03]"
+                    className="p-4 transition-colors hover:bg-warm-sand/60 sm:p-6"
                   >
                     <div className="flex flex-col sm:flex-row gap-5 sm:gap-6">
                       {item.image ? (
-                        <div className="relative w-[104px] h-[104px] sm:w-[120px] sm:h-[120px] shrink-0 overflow-hidden rounded-xl ring-1 ring-white/10 bg-dark-base">
+                        <div className="relative h-[104px] w-[104px] shrink-0 overflow-hidden rounded-xl bg-warm-sand ring-1 ring-earth-brown/15 sm:h-[120px] sm:w-[120px]">
                           <Image
                             src={item.image}
                             alt={item.title}
@@ -193,7 +193,7 @@ export default function CartPage() {
                         </div>
                       ) : (
                         <div
-                          className="w-[104px] h-[104px] sm:w-[120px] sm:h-[120px] shrink-0 rounded-xl border border-dashed border-white/20 bg-white/5"
+                          className="h-[104px] w-[104px] shrink-0 rounded-xl border border-dashed border-earth-brown/25 bg-warm-sand/80 sm:h-[120px] sm:w-[120px]"
                           aria-hidden
                         />
                       )}
@@ -208,30 +208,30 @@ export default function CartPage() {
                               {variantText}
                             </p>
                           ) : null}
-                          <p className="mt-2 text-sm text-text-muted">
+                          <p className="mt-2 text-sm text-muted-gray">
                             {t("cartPage.unitPrice")}{" "}
-                            <span className="text-text-primary font-medium tabular-nums">
+                            <span className="font-medium tabular-nums text-dark-base">
                               {formatPrice(item.price)}
                             </span>
                           </p>
 
                           <div className="mt-4 flex flex-wrap items-center gap-3">
-                            <div className="inline-flex items-center rounded-lg border border-white/15 bg-dark-base/60 shadow-inner">
+                            <div className="inline-flex items-center rounded-lg border border-earth-brown/20 bg-white shadow-inner">
                               <button
                                 type="button"
                                 onClick={() => decreaseQty(item.id)}
-                                className="px-3.5 py-2 text-text-primary hover:bg-white/10 active:scale-95 transition motion-reduce:transform-none rounded-l-lg"
+                                className="rounded-l-lg px-3.5 py-2 text-dark-base transition hover:bg-warm-sand active:scale-95 motion-reduce:transform-none"
                                 aria-label={t("cartPage.decreaseQty")}
                               >
                                 −
                               </button>
-                              <span className="min-w-[2.75rem] px-2 py-2 text-center text-sm font-semibold tabular-nums text-text-primary border-x border-white/15">
+                              <span className="min-w-[2.75rem] border-x border-earth-brown/20 px-2 py-2 text-center text-sm font-semibold tabular-nums text-dark-base">
                                 {item.quantity}
                               </span>
                               <button
                                 type="button"
                                 onClick={() => increaseQty(item.id)}
-                                className="px-3.5 py-2 text-text-primary hover:bg-white/10 active:scale-95 transition motion-reduce:transform-none rounded-r-lg"
+                                className="rounded-r-lg px-3.5 py-2 text-dark-base transition hover:bg-warm-sand active:scale-95 motion-reduce:transform-none"
                                 aria-label={t("cartPage.increaseQty")}
                               >
                                 +
@@ -241,7 +241,7 @@ export default function CartPage() {
                             <button
                               type="button"
                               onClick={() => removeItem(item.id)}
-                              className="text-sm font-medium text-text-muted hover:text-red-400/90 underline-offset-4 hover:underline transition-colors"
+                              className="text-sm font-medium text-muted-gray transition-colors hover:text-red-600 hover:underline underline-offset-4"
                             >
                               {t("cartPage.remove")}
                             </button>
@@ -249,10 +249,10 @@ export default function CartPage() {
                         </div>
 
                         <div className="sm:text-right shrink-0">
-                          <p className="text-xs uppercase tracking-wider text-text-muted">
+                          <p className="text-xs uppercase tracking-wider text-muted-gray">
                             {t("cartPage.itemSubtotal")}
                           </p>
-                          <p className="text-xl font-semibold tabular-nums text-text-primary mt-1">
+                          <p className="mt-1 text-xl font-semibold tabular-nums text-dark-base">
                             {formatPrice(itemSubtotal)}
                           </p>
                         </div>
@@ -265,11 +265,11 @@ export default function CartPage() {
           </section>
 
           {/* Completá tu equipo: sugerencias vía /api/cart/suggestions (lógica en getCartSuggestedProducts). */}
-          <section className="rounded-2xl border border-dashed border-white/15 bg-dark-base/40 p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-text-primary">
+          <section className="rounded-2xl border border-dashed border-earth-brown/25 bg-warm-sand/70 p-6 md:p-8">
+            <h2 className="text-lg font-semibold text-dark-base">
               {t("cartPage.completeGearTitle")}
             </h2>
-            <p className="mt-2 text-sm text-text-muted leading-relaxed max-w-xl">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-gray">
               {t("cartPage.completeGearBody")}
             </p>
             <CartSuggestedProductsRail
@@ -286,7 +286,7 @@ export default function CartPage() {
           </section>
 
           {/* Trust */}
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm text-text-muted justify-center sm:justify-start">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-gray sm:justify-start md:text-sm">
             <span className="inline-flex items-center gap-2">
               <span
                 className="h-1.5 w-1.5 rounded-full bg-accent-gold"
@@ -294,11 +294,11 @@ export default function CartPage() {
               />
               {t("cartPage.trustSecure")}
             </span>
-            <span className="text-white/20 hidden sm:inline" aria-hidden>
+            <span className="hidden text-earth-brown/35 sm:inline" aria-hidden>
               ·
             </span>
             <span>{t("cartPage.trustPayPal")}</span>
-            <span className="text-white/20 hidden sm:inline" aria-hidden>
+            <span className="hidden text-earth-brown/35 sm:inline" aria-hidden>
               ·
             </span>
             <span>{t("cartPage.trustReturns")}</span>
@@ -307,26 +307,26 @@ export default function CartPage() {
 
         {/* Summary */}
         <aside className="lg:sticky lg:top-28 space-y-6">
-          <div className="rounded-2xl border border-accent-gold/20 bg-gradient-to-b from-dark-surface to-dark-base p-6 md:p-8 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.65)]">
-            <h2 className="text-lg font-semibold text-text-primary mb-6">
+          <div className="rounded-2xl border border-earth-brown/18 bg-soft-stone p-6 shadow-[0_20px_56px_-28px_rgba(17,23,19,0.18)] md:p-8">
+            <h2 className="mb-6 text-lg font-semibold text-dark-base">
               {t("cartPage.summaryTitle")}
             </h2>
 
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between items-baseline gap-4 text-sm">
-                <span className="text-text-muted">{t("cartPage.summarySubtotal")}</span>
-                <span className="font-semibold tabular-nums text-text-primary">
+            <div className="mb-6 space-y-4">
+              <div className="flex items-baseline justify-between gap-4 text-sm">
+                <span className="text-muted-gray">{t("cartPage.summarySubtotal")}</span>
+                <span className="font-semibold tabular-nums text-dark-base">
                   {formatPrice(subtotal)}
                 </span>
               </div>
-              <p className="text-xs text-text-muted leading-relaxed border-t border-white/10 pt-4">
+              <p className="border-t border-earth-brown/15 pt-4 text-xs leading-relaxed text-muted-gray">
                 {t("cartPage.summaryNote")}
               </p>
             </div>
 
-            <div className="pt-2 border-t border-white/10">
-              <div className="flex justify-between items-baseline gap-4 mb-8">
-                <span className="text-base font-semibold text-text-primary">
+            <div className="border-t border-earth-brown/15 pt-2">
+              <div className="mb-8 flex items-baseline justify-between gap-4">
+                <span className="text-base font-semibold text-dark-base">
                   {t("cartPage.summaryTotal")}
                 </span>
                 <span className="text-2xl font-semibold tabular-nums text-accent-gold">
@@ -337,7 +337,7 @@ export default function CartPage() {
               <button
                 type="button"
                 onClick={handleCheckout}
-                className="group relative w-full overflow-hidden rounded-xl bg-accent-gold px-6 py-4 text-sm font-semibold text-dark-base shadow-lg shadow-accent-gold/25 transition hover:shadow-xl hover:shadow-accent-gold/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] motion-reduce:transform-none"
+                className="group relative w-full overflow-hidden rounded-xl bg-dark-base px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-dark-base/20 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-dark-base/25 active:translate-y-0 active:scale-[0.99] motion-reduce:transform-none"
               >
                 <span className="relative z-10">{t("cartPage.checkout")}</span>
                 <span
@@ -346,7 +346,7 @@ export default function CartPage() {
                 />
               </button>
 
-              <p className="mt-4 text-center text-xs text-text-muted leading-relaxed">
+              <p className="mt-4 text-center text-xs leading-relaxed text-muted-gray">
                 {t("cartPage.ctaReassurance")}
               </p>
 

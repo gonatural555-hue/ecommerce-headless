@@ -53,7 +53,7 @@ export default function BlogCard({
 
   return (
     <Link href={href} className="group block">
-      <article className="flex h-full flex-col overflow-hidden rounded-sm border border-white/[0.08] bg-[#0f1412]/80 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-white/[0.12] hover:shadow-[0_20px_48px_-20px_rgba(0,0,0,0.5)] motion-reduce:hover:scale-100">
+      <article className="flex h-full flex-col overflow-hidden rounded-sm border border-earth-brown/15 bg-soft-stone shadow-[0_8px_28px_-16px_rgba(17,23,19,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-earth-brown/28 hover:shadow-[0_22px_48px_-22px_rgba(17,23,19,0.18)] motion-reduce:hover:scale-100">
         <div
           className={`relative w-full overflow-hidden rounded-sm ${s.aspect}`}
         >
@@ -64,15 +64,15 @@ export default function BlogCard({
             sizes={s.imageSizes}
             className="object-cover object-center transition duration-[520ms] ease-out group-hover:scale-[1.04]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/52 via-transparent to-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-base/35 via-transparent to-transparent" />
         </div>
         <div className="flex flex-1 flex-col px-4 pb-5 pt-5 md:px-5">
           <h2
-            className={`${size === "xl" ? "font-display" : ""} font-semibold leading-snug tracking-tight text-text-primary ${s.title} line-clamp-3`}
+            className={`${size === "xl" ? "font-display" : ""} font-semibold leading-snug tracking-tight text-dark-base ${s.title} line-clamp-3`}
           >
             {title}
           </h2>
-          <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-white/[0.78]">
+          <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-gray">
             {excerpt}
           </p>
           <span className="mt-4 inline-flex text-xs font-medium uppercase tracking-[0.2em] text-accent-gold transition duration-300 group-hover:text-accent-gold">
