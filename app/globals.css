@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Titulares (h1–h6): TAN Nimbus en todo el sitio. Usa `font-sans` en el elemento si necesitas Inter. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+  }
+}
+
 :root {
   /* Go Natural — paleta premium outdoor */
   --forest-black: #111713;

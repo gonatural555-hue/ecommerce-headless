@@ -68,7 +68,7 @@ export default function BlogCard({
         </div>
         <div className="flex flex-1 flex-col px-4 pb-5 pt-5 md:px-5">
           <h2
-            className={`${size === "xl" ? "font-display" : ""} font-semibold leading-snug tracking-tight text-dark-base ${s.title} line-clamp-3`}
+            className={`font-semibold leading-snug tracking-tight text-dark-base ${s.title} line-clamp-3`}
           >
             {title}
           </h2>
