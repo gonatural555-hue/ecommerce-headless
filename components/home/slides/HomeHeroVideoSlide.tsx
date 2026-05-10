@@ -31,7 +31,7 @@ export default function HomeHeroVideoSlide({
   locale,
   tagline: _tagline,
   title,
-  subtitle,
+  subtitle: _subtitle,
   ctaProducts,
   ctaJournal,
   imageSrc,
@@ -105,8 +105,8 @@ export default function HomeHeroVideoSlide({
       </div>
       <PremiumImageOverlay />
 
-      {/* Bloque único en flujo vertical: título → subtítulo → CTAs (sin solapes entre idiomas). */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center overflow-x-hidden overflow-y-auto px-5 py-10 text-center sm:px-10 sm:py-12 md:py-14">
+      {/* Bloque único en flujo vertical: título → CTAs (sin scroll en overlay). */}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center overflow-hidden px-5 py-10 text-center sm:px-10 sm:py-12 md:py-14">
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center">
           <img
             src="/assets/images/logo/logo-blanco.svg"
@@ -118,11 +118,6 @@ export default function HomeHeroVideoSlide({
           <h1 className="font-display max-w-full shrink-0 font-bold leading-[1.08] tracking-tight text-white text-[clamp(1.85rem,5.2vw,3.35rem)] [text-shadow:0_2px_32px_rgba(0,0,0,0.55),0_1px_3px_rgba(0,0,0,0.45)] sm:max-w-3xl md:text-[clamp(2.1rem,4.2vw,3.75rem)]">
             {title}
           </h1>
-          <p className="mx-auto mt-6 max-w-xl shrink-0 text-sm font-semibold leading-relaxed tracking-[0.04em] text-accent-gold sm:mt-8 sm:max-w-2xl sm:text-base md:mt-10 md:text-[1.05rem] md:leading-relaxed">
-            <span className="inline-block rounded-xl bg-black/35 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] ring-1 ring-white/10 backdrop-blur-[6px] sm:px-5 sm:py-3.5 [text-shadow:0_1px_3px_rgba(0,0,0,0.85),0_0_20px_rgba(0,0,0,0.45)]">
-              {subtitle}
-            </span>
-          </p>
           <div className="pointer-events-auto mt-8 flex w-full max-w-md shrink-0 flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4 md:mt-12">
             <Link href={`/${locale}/products`} className={premiumPrimaryCtaClass}>
               {ctaProducts}
