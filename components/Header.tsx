@@ -117,7 +117,7 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  const navLinkClass = `${NAV_TEXT} text-warm-sand/90 hover:text-white`;
+  const navLinkClass = `${NAV_TEXT} text-dark-base hover:text-mountain-green`;
 
   const mobileNavLinkClass = `${NAV_TEXT} rounded-md py-2 px-2 text-dark-base transition-colors hover:text-mountain-green`;
 
@@ -136,10 +136,10 @@ export default function Header() {
     <header
       className={[
         "fixed top-0 z-50 w-full font-sans transition-all duration-300 ease-out",
-        "border-b border-mountain-green/25 bg-dark-base",
+        "border-b border-earth-brown/15 bg-warm-sand",
         isScrolled
-          ? "shadow-[0_12px_36px_rgba(17,23,19,0.22)]"
-          : "shadow-[0_4px_24px_rgba(17,23,19,0.14)]",
+          ? "shadow-[0_10px_32px_-12px_rgba(17,23,19,0.12)]"
+          : "shadow-[0_2px_16px_-8px_rgba(17,23,19,0.06)]",
       ].join(" ")}
     >
       <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6">
@@ -262,7 +262,7 @@ export default function Header() {
                 {t("common.searchLabel")}
               </label>
               <div className="relative w-full">
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-warm-sand/45">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-gray">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -285,7 +285,7 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("common.searchPlaceholder")}
-                  className={`w-full rounded-full border border-white/12 bg-white/10 py-2.5 pl-9 pr-3 ${NAV_TEXT} text-warm-sand placeholder:text-warm-sand/45 transition-colors duration-200 ease-out focus:border-accent-gold/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/35`}
+                  className={`w-full rounded-full border border-earth-brown/25 bg-white py-2.5 pl-9 pr-3 ${NAV_TEXT} text-dark-base placeholder:text-muted-gray transition-colors duration-200 ease-out focus:border-accent-gold/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/35`}
                 />
               </div>
             </form>
@@ -298,7 +298,7 @@ export default function Header() {
                   className={`${NAV_TEXT} font-semibold tracking-[0.12em] transition-colors duration-200 ${
                     lang === locale
                       ? "text-accent-gold"
-                      : "text-warm-sand/70 hover:text-white"
+                      : "text-muted-gray hover:text-dark-base"
                   }`}
                 >
                   {lang.toUpperCase()}
@@ -331,7 +331,7 @@ export default function Header() {
             )}
             <Link
               href={`/${locale}/cart`}
-              className="relative flex h-10 w-10 shrink-0 items-center justify-center text-warm-sand/90 transition-colors hover:text-white"
+              className="relative flex h-10 w-10 shrink-0 items-center justify-center text-dark-base transition-colors hover:text-mountain-green"
               aria-label={`Cart with ${totalItems} items`}
             >
               <svg
@@ -349,7 +349,7 @@ export default function Header() {
                 />
               </svg>
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent-gold px-1.5 text-xs font-medium text-white">
+                <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent-gold px-1.5 text-xs font-medium text-dark-base">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}
@@ -357,7 +357,7 @@ export default function Header() {
             {!isLoggedIn && (
               <Link
                 href={`/${locale}/auth?tab=login`}
-                className="flex h-10 w-10 shrink-0 items-center justify-center text-warm-sand/90 transition-colors hover:text-white md:hidden"
+                className="flex h-10 w-10 shrink-0 items-center justify-center text-dark-base transition-colors hover:text-mountain-green md:hidden"
                 aria-label={t("header.account")}
               >
                 <svg

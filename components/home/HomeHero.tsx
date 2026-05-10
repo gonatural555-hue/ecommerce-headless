@@ -68,7 +68,7 @@ export default function HomeHero({
   const lift = reduceMotion ? 0 : scroll * 0.12;
 
   return (
-    <section className="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-dark-base px-4 py-24 sm:px-6 sm:py-28 md:py-24">
+    <section className="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-warm-sand px-4 py-24 sm:px-6 sm:py-28 md:py-24">
       {/* Marco único: vídeo + overlay + titular y CTAs */}
       <div
         className="relative w-full max-w-5xl overflow-hidden rounded-2xl shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] ring-1 ring-white/10 lg:max-w-6xl"
@@ -143,8 +143,8 @@ export default function HomeHero({
         style={{ opacity: fade }}
         aria-hidden
       >
-        <div className="flex h-11 w-6 justify-center rounded-full border border-white/35 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-[2px]">
-          <div className="mt-2 h-1.5 w-px animate-pulse rounded-full bg-white/65" />
+        <div className="flex h-11 w-6 justify-center rounded-full border border-earth-brown/35 bg-soft-stone/80 shadow-[0_4px_16px_rgba(17,23,19,0.08)] backdrop-blur-[2px]">
+          <div className="mt-2 h-1.5 w-px animate-pulse rounded-full bg-earth-brown/55" />
         </div>
       </div>
     </section>
