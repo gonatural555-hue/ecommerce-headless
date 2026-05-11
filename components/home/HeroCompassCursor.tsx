@@ -115,7 +115,7 @@ export default function HeroCompassCursor({
       ref={rootRef}
       type="button"
       aria-label={ariaLabel}
-      className="relative isolate shrink-0 px-9 pb-10 pt-9 transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-sand md:px-10 md:pb-11 md:pt-10"
+      className="relative isolate shrink-0 px-[2.43rem] pb-[2.7rem] pt-[2.43rem] transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-sand md:px-[2.7rem] md:pb-[2.97rem] md:pt-[2.7rem]"
     >
       <span className={`${labelClass} left-1/2 top-0 -translate-x-1/2`} aria-hidden>
         {north}
@@ -130,7 +130,7 @@ export default function HeroCompassCursor({
         {east}
       </span>
 
-      <div className="relative mx-auto flex h-[clamp(7.25rem,14vw,10.5rem)] w-[clamp(7.25rem,14vw,10.5rem)] items-center justify-center rounded-full border border-earth-brown/25 bg-white/75 shadow-[0_12px_40px_-12px_rgba(17,23,19,0.18)] backdrop-blur-md transition-[box-shadow,border-color] duration-300 hover:border-earth-brown/40 hover:shadow-[0_18px_48px_-14px_rgba(17,23,19,0.22)] motion-reduce:hover:shadow-[0_12px_40px_-12px_rgba(17,23,19,0.18)]">
+      <div className="relative mx-auto flex h-[clamp(9.8rem,18.9vw,14.2rem)] w-[clamp(9.8rem,18.9vw,14.2rem)] items-center justify-center rounded-full border border-earth-brown/25 bg-white/75 shadow-[0_12px_40px_-12px_rgba(17,23,19,0.18)] backdrop-blur-md transition-[box-shadow,border-color] duration-300 hover:border-earth-brown/40 hover:shadow-[0_18px_48px_-14px_rgba(17,23,19,0.22)] motion-reduce:hover:shadow-[0_12px_40px_-12px_rgba(17,23,19,0.18)]">
         <svg
           className="pointer-events-none absolute inset-[10%] text-earth-brown/35"
           viewBox="0 0 100 100"

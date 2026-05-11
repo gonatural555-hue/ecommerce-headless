@@ -11,6 +11,13 @@ import type { HeroCategoryCard } from "@/components/home/slides/HomeHeroCategory
 
 const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 
+/** Mismo shell que las tarjetas del hero bento (`HeroBentoSection`). */
+const BENTO_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
+const BENTO_CARD =
+  `${BENTO_RADIUS} relative overflow-hidden border border-earth-brown/12 bg-white/95 shadow-[0_16px_48px_-28px_rgba(17,23,19,0.16)] ring-1 ring-black/[0.04] transition-all duration-500 ease-out motion-reduce:transition-none`;
+const BENTO_HOVER =
+  "hover:z-[1] hover:-translate-y-0.5 hover:border-accent-gold/28 hover:shadow-[0_22px_56px_-24px_rgba(17,23,19,0.22)] motion-reduce:hover:translate-y-0";
+
 type Props = {
   locale: Locale;
   /** Cuatro categorías en orden: arriba-izq, arriba-der, abajo-izq, abajo-der */
@@ -33,13 +40,13 @@ function CornerCard({
   return (
     <Link
       href={`/${locale}/category/${card.slug}`}
-      className={`group relative flex min-h-[140px] flex-col overflow-hidden rounded-2xl border border-earth-brown/15 bg-dark-base shadow-[0_14px_44px_-20px_rgba(17,23,19,0.35)] ring-1 ring-black/[0.06] transition-[transform,box-shadow,border-color] duration-500 ease-out hover:z-[1] hover:scale-[1.02] hover:border-accent-gold/30 hover:shadow-[0_22px_56px_-22px_rgba(17,23,19,0.42)] motion-reduce:transition-none motion-reduce:hover:scale-100 sm:min-h-[160px] md:min-h-[168px] md:max-w-[280px] lg:min-h-[176px] lg:max-w-[300px] ${gridClass}`}
+      className={`group ${BENTO_CARD} ${BENTO_HOVER} pointer-events-auto relative flex min-h-[189px] flex-col overflow-hidden sm:min-h-[216px] md:min-h-[227px] md:max-w-[378px] lg:min-h-[238px] lg:max-w-[405px] ${gridClass}`}
     >
       <Image
         src={src}
         alt=""
         fill
-        sizes="(max-width:768px) 45vw, 240px"
+        sizes="(max-width:768px) 45vw, 324px"
         className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         onError={() => setSrc(FALLBACK_IMG)}
       />
@@ -81,9 +88,9 @@ export default function HomeCompassCategories({
 
   return (
     <section className="relative bg-soft-stone/80 py-14 sm:py-20 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 md:grid md:min-h-[min(72vh,620px)] md:grid-cols-3 md:grid-rows-3 md:items-stretch md:gap-5 lg:min-h-[560px] lg:gap-6">
-          <div className="grid grid-cols-2 gap-3 md:contents">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 md:grid md:min-h-[min(72vh,837px)] md:grid-cols-3 md:grid-rows-3 md:items-stretch md:gap-7 lg:min-h-[756px] lg:gap-8">
+          <div className="grid grid-cols-2 gap-4 md:contents">
             <CornerCard
               card={tl}
               locale={locale}
@@ -100,7 +107,7 @@ export default function HomeCompassCategories({
             <HeroCompassCursor ariaLabel={compassAriaLabel} cardinalLabels={cardinalLabels} />
           </div>
 
-          <div className="grid grid-cols-2 gap-3 md:contents">
+          <div className="grid grid-cols-2 gap-4 md:contents">
             <CornerCard
               card={bl}
               locale={locale}
