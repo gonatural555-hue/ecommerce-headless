@@ -9,8 +9,9 @@ import {
   useTransform,
 } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
+import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
 
-const easePremium = [0.22, 1, 0.36, 1] as const;
+const easePremium = GN_EASE_PREMIUM;
 
 const BASE = "/assets/brand/mountains";
 
@@ -171,14 +172,14 @@ function MountainLayer({
       }}
     >
       <motion.div
-        className={`pointer-events-auto relative ${spec.wClasses} opacity-[0.82] will-change-transform md:opacity-[0.86] lg:opacity-[0.9]`}
+        className={`pointer-events-auto relative ${spec.wClasses} opacity-[0.62] will-change-transform md:opacity-[0.68] lg:opacity-[0.76]`}
         initial={
           reduceMotion ? false : { opacity: 0, x: fromX, y: 20, scale: 0.92 }
         }
         whileInView={
           reduceMotion
-            ? { opacity: 0.88, x: 0, y: 0, scale: 1 }
-            : { opacity: 0.9, x: 0, y: 0, scale: 1 }
+            ? { opacity: 0.72, x: 0, y: 0, scale: 1 }
+            : { opacity: 0.78, x: 0, y: 0, scale: 1 }
         }
         viewport={{ once: true, amount: 0.14, margin: "0px 0px -12% 0px" }}
         transition={{
@@ -190,11 +191,11 @@ function MountainLayer({
           reduceMotion
             ? undefined
             : {
-                scale: 1.035,
-                y: -8,
+                scale: 1.03,
+                y: -6,
                 rotate: rotateHover,
-                opacity: 0.96,
-                filter: "drop-shadow(0 22px 44px rgba(46, 74, 54, 0.16))",
+                opacity: 0.82,
+                filter: "drop-shadow(0 16px 48px rgba(46, 74, 54, 0.12))",
                 transition: { duration: 0.5, ease: easePremium },
               }
         }
@@ -208,7 +209,7 @@ function MountainLayer({
           width={480}
           height={560}
           sizes="(min-width: 1280px) 28vw, (min-width: 1024px) 24vw, (min-width: 768px) 20vw, 0px"
-          className="h-auto w-full max-w-none object-contain object-bottom [filter:drop-shadow(0_14px_28px_rgba(17,23,19,0.06))] md:[filter:drop-shadow(0_16px_32px_rgba(17,23,19,0.07))]"
+          className="max-h-[28vh] h-auto w-full max-w-none object-contain object-bottom [filter:drop-shadow(0_10px_32px_rgba(0,0,0,0.06))] md:[filter:drop-shadow(0_12px_36px_rgba(0,0,0,0.07))]"
           draggable={false}
           priority={false}
           aria-hidden

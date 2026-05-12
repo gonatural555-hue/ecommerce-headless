@@ -19,9 +19,9 @@ const HEADER_ISLAND =
 const NAV_LINK =
   "font-inter text-[0.8125rem] font-semibold tracking-[0.04em] text-charcoal transition-opacity duration-200 hover:opacity-80 sm:text-[0.875rem]";
 
-/** Base desktop: enlaces de página (color por ruta). */
+/** Base desktop: enlaces de página (color por ruta) — sistema GN: 12–14px, tracking 0.18em. */
 const NAV_LINK_HEADER_BASE =
-  "font-inter whitespace-nowrap rounded-full px-2.5 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] transition-[opacity,transform] duration-200 hover:opacity-90 sm:px-3 sm:text-[11px] sm:tracking-[0.22em]";
+  "font-inter whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition-[opacity,transform] duration-200 hover:opacity-90 md:px-3 md:text-sm";
 
 const NAV_HEADER_HOME = `${NAV_LINK_HEADER_BASE} text-[#2A2E4B]`;
 const NAV_HEADER_PRODUCTS = `${NAV_LINK_HEADER_BASE} text-[#6E1F28]`;
@@ -30,7 +30,7 @@ const NAV_HEADER_CATEGORIES = `${NAV_LINK_HEADER_BASE} text-[#D9A441]`;
 
 /** Enlaces de idioma. */
 const LOCALE_LINK =
-  "rounded-full px-2 py-1.5 font-inter text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors sm:px-2.5 sm:text-[11px]";
+  "rounded-full px-2 py-1.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] transition-colors md:px-2.5";
 
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -148,10 +148,10 @@ export default function Header() {
   );
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-3 font-inter sm:pt-3 md:pt-3.5">
-      <div className="mx-auto w-full max-w-3xl px-5 sm:max-w-4xl sm:px-8 lg:max-w-5xl">
-      {/* Desktop — rejilla simétrica (alineada con el hero) | idiomas | nav centrado | utilidades */}
-      <div className="pointer-events-auto hidden w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 md:grid lg:gap-x-3">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 font-inter">
+      <div className="mx-auto w-full max-w-gn-content px-8 pb-1 pt-3 lg:px-12 md:pt-4">
+      {/* Desktop — rejilla simétrica | idiomas | nav centrado | utilidades */}
+      <div className="pointer-events-auto hidden min-h-[72px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 md:grid md:min-h-[76px] lg:min-h-[80px] lg:gap-x-3">
         <nav
           className={`${HEADER_ISLAND} justify-self-start flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
           aria-label={t("header.localeNavAria")}
@@ -241,7 +241,7 @@ export default function Header() {
       </div>
 
       {/* Mobile — idiomas | menú | carrito */}
-      <div className="pointer-events-auto flex w-full items-center gap-2 md:hidden">
+      <div className="pointer-events-auto flex min-h-16 w-full items-center gap-gn-s md:hidden">
         <nav
           className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
           aria-label={t("header.localeNavAria")}
@@ -314,7 +314,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[5.85rem] sm:top-[6.1rem] md:top-[6.35rem]",
+            "top-[5.5rem] sm:top-[5.75rem] md:top-[6.5rem]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",

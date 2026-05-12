@@ -7,6 +7,18 @@ const config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        "gn-xs": "var(--gn-space-xs)",
+        "gn-s": "var(--gn-space-s)",
+        "gn-m": "var(--gn-space-m)",
+        "gn-l": "var(--gn-space-l)",
+        "gn-xl": "var(--gn-space-xl)",
+        "gn-xxl": "var(--gn-space-xxl)",
+        "gn-hero": "clamp(var(--gn-space-hero-min), 12vw, var(--gn-space-hero-max))",
+      },
+      maxWidth: {
+        "gn-content": "1440px",
+      },
       fontFamily: {
         sans: [
           "system-ui",
@@ -35,6 +47,14 @@ const config = {
         ],
       },
       colors: {
+        /* Go Natural — sistema editorial (globals :root --gn-*) */
+        "gn-forest": "#2E4A36",
+        "gn-cream": "#F4EBDD",
+        "gn-burgundy": "#6E1F28",
+        "gn-burnt": "#C9622B",
+        "gn-mustard": "#D9A441",
+        "gn-navy": "#2A2E4B",
+
         /* Go Natural — marca */
         forest: "#111713",
         "warm-sand": "#E8E1D3",

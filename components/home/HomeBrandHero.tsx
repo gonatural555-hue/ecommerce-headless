@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import HeroCompassCursor, { type CompassCardinalLabels } from "@/components/home/HeroCompassCursor";
 import type { Locale } from "@/lib/i18n/config";
+import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
 
 export type HomeBrandHeroProps = {
   locale: Locale;
@@ -17,13 +18,13 @@ export type HomeBrandHeroProps = {
   compassAriaLabel: string;
 };
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
+const easeOut = GN_EASE_PREMIUM;
 
 const primaryCtaClass =
-  "group inline-flex h-[58px] min-h-[58px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-[38px] text-center font-sans text-[13px] font-bold uppercase tracking-[0.16em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_32px_-10px_rgba(31,53,39,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_44px_-12px_rgba(31,53,39,0.62)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-sans text-[13px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),var(--gn-shadow-default)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),var(--gn-shadow-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 const secondaryCtaClass =
-  "group inline-flex h-[58px] min-h-[58px] items-center justify-center rounded-full border-[1.5px] border-[rgba(46,74,54,0.35)] bg-transparent px-[38px] text-center font-sans text-[13px] font-bold uppercase tracking-[0.16em] text-[#2E4A36] shadow-none transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[rgba(46,74,54,0.55)] hover:bg-[#F4EBDD]/90 hover:shadow-[0_10px_28px_-14px_rgba(46,74,54,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9622B]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full border-[1.5px] border-gn-forest/35 bg-transparent px-9 text-center font-sans text-[13px] font-bold uppercase tracking-[0.18em] text-gn-forest shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/55 hover:bg-gn-cream/90 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 export default function HomeBrandHero({
   locale,
@@ -64,7 +65,7 @@ export default function HomeBrandHero({
 
   return (
     <section
-      className="relative isolate flex min-h-[100dvh] min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-[#F4EBDD] px-5 py-[calc(env(safe-area-inset-top,0px)+5rem)] sm:px-8 sm:py-24 md:px-10 md:py-28"
+      className="relative isolate flex min-h-[100dvh] min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-gn-cream px-8 py-[calc(env(safe-area-inset-top,0px)+var(--gn-space-xxl))] lg:px-12 lg:py-gn-xxl"
       aria-label="Hero"
     >
       <div
@@ -73,22 +74,19 @@ export default function HomeBrandHero({
       />
 
       <motion.div
-        className="relative z-[1] mx-auto flex w-full max-w-[min(100%,56rem)] flex-col items-center text-center"
+        className="relative z-[1] mx-auto flex w-full max-w-gn-content flex-col items-center px-0 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
         <motion.p
           variants={itemVariants}
-          className="font-sans text-[clamp(11px,1.15vw,13.5px)] font-semibold uppercase tracking-[0.35em] text-[#C9622B] mb-6 sm:mb-7"
+          className="mb-gn-m font-sans text-[clamp(11px,1.15vw,13.5px)] font-semibold uppercase tracking-[0.35em] text-gn-burnt"
         >
           {eyebrow}
         </motion.p>
 
-        <motion.h1
-          variants={itemVariants}
-          className="hero-display max-w-[min(100%,900px)] text-balance text-[clamp(3rem,12vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-[#2E4A36] md:text-[clamp(4.25rem,8vw,8.75rem)] md:leading-[0.92] md:tracking-[-0.035em]"
-        >
+        <motion.h1 variants={itemVariants} className="gn-hero-title text-center">
           {titleLines.map((line, i) => (
             <span key={i} className="block">
               {line}
@@ -96,16 +94,13 @@ export default function HomeBrandHero({
           ))}
         </motion.h1>
 
-        <motion.p
-          variants={itemVariants}
-          className="font-sans mt-9 max-w-[620px] text-pretty text-base leading-[1.7] text-[rgba(46,74,54,0.82)] sm:text-lg md:mt-10 md:text-[20px]"
-        >
+        <motion.p variants={itemVariants} className="gn-hero-subtitle mx-auto mt-gn-l text-center">
           {subtitle}
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-6 sm:mt-10 sm:max-w-none sm:flex-row sm:gap-6 md:mt-11"
+          className="mt-gn-l flex w-full max-w-md flex-col items-stretch justify-center gap-gn-m sm:max-w-none sm:flex-row md:mt-[calc(var(--gn-space-l)+var(--gn-space-xs))]"
         >
           <Link href={`/${locale}/products`} className={primaryCtaClass}>
             {ctaPrimary}
@@ -115,7 +110,7 @@ export default function HomeBrandHero({
           </Link>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="mt-14 sm:mt-16 md:mt-[4.5rem]">
+        <motion.div variants={itemVariants} className="mt-[calc(var(--gn-space-xl)+var(--gn-space-s))] md:mt-gn-xxl">
           <HeroCompassCursor
             variant="brand"
             ariaLabel={compassAriaLabel}
@@ -125,14 +120,14 @@ export default function HomeBrandHero({
 
         <motion.div
           variants={itemVariants}
-          className="mt-10 flex flex-col items-center gap-3 sm:mt-12 md:mt-14"
+          className="mt-gn-m flex flex-col items-center gap-gn-s md:mt-gn-l"
         >
-          <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.22em] text-[#2E4A36]">
+          <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.22em] text-gn-forest">
             {scrollHint}
           </p>
           {!off ? (
             <motion.div
-              className="flex flex-col items-center gap-1.5"
+              className="flex flex-col items-center gap-gn-xs"
               animate={{ y: [0, 7, 0] }}
               transition={{
                 duration: 2.4,
@@ -141,13 +136,13 @@ export default function HomeBrandHero({
               }}
               aria-hidden
             >
-              <span className="block h-8 w-5 rounded-full border border-[#2E4A36]/35 bg-[#F4EBDD]/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.65)]" />
-              <span className="block h-1.5 w-1 rounded-full bg-[#2E4A36]/45" />
+              <span className="block h-8 w-5 rounded-full border border-gn-forest/35 bg-gn-cream/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.65)]" />
+              <span className="block h-1.5 w-1 rounded-full bg-gn-forest/45" />
             </motion.div>
           ) : (
-            <div className="flex flex-col items-center gap-1.5" aria-hidden>
-              <span className="block h-8 w-5 rounded-full border border-[#2E4A36]/35 bg-[#F4EBDD]/60" />
-              <span className="block h-1.5 w-1 rounded-full bg-[#2E4A36]/45" />
+            <div className="flex flex-col items-center gap-gn-xs" aria-hidden>
+              <span className="block h-8 w-5 rounded-full border border-gn-forest/35 bg-gn-cream/60" />
+              <span className="block h-1.5 w-1 rounded-full bg-gn-forest/45" />
             </div>
           )}
         </motion.div>

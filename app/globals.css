@@ -35,6 +35,31 @@
 
   /* Texto legible sobre fondos oscuros (hero video, PDP dark) */
   --text-on-dark: var(--soft-stone);
+
+  /* —— Go Natural — sistema editorial global (mandatory) —— */
+  --gn-forest: #2e4a36;
+  --gn-burgundy: #6e1f28;
+  --gn-burnt-orange: #c9622b;
+  --gn-mustard: #d9a441;
+  --gn-cream: #f4ebdd;
+  --gn-navy: #2a2e4b;
+
+  --gn-space-xs: 8px;
+  --gn-space-s: 16px;
+  --gn-space-m: 24px;
+  --gn-space-l: 40px;
+  --gn-space-xl: 64px;
+  --gn-space-xxl: 96px;
+  --gn-space-hero-min: 140px;
+  --gn-space-hero-max: 220px;
+
+  --gn-shadow-default: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --gn-shadow-hover: 0 16px 60px rgba(46, 74, 54, 0.14);
+
+  --gn-radius-card: 32px;
+  --gn-radius-panel: 32px;
+
+  --gn-ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
@@ -53,6 +78,14 @@
   --color-sun-amber: var(--sun-amber);
   --color-charcoal: var(--charcoal);
   --color-muted-gray: var(--muted-gray);
+
+  /* Sistema editorial GN (alias para utilidades futuras) */
+  --color-gn-forest: var(--gn-forest);
+  --color-gn-cream: var(--gn-cream);
+  --color-gn-burgundy: var(--gn-burgundy);
+  --color-gn-burnt: var(--gn-burnt-orange);
+  --color-gn-mustard: var(--gn-mustard);
+  --color-gn-navy: var(--gn-navy);
 
   /* Semántica / compatibilidad */
   --color-dark-base: var(--color-dark-base);
@@ -375,5 +408,54 @@ main[data-route="order-success"] .bg-gray-50 {
   }
   .typography-ui {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  /**
+   * Hero marca (home): escala display vs. cuerpo según sistema GN.
+   * Referencia visual dominante; no sustituye .hero-display en otras rutas.
+   */
+  .gn-hero-title {
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--gn-forest);
+    font-weight: 600;
+    text-wrap: balance;
+    text-rendering: optimizeLegibility;
+    max-width: min(100%, 40rem);
+  }
+
+  @media (min-width: 768px) {
+    .gn-hero-title {
+      font-size: clamp(4.5rem, 8vw, 8.75rem);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+    }
+  }
+
+  .gn-hero-subtitle {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
+    line-height: 1.7;
+    color: rgba(46, 74, 54, 0.82);
+    text-wrap: pretty;
+    max-width: min(100%, 42.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .gn-hero-subtitle {
+      font-size: clamp(1.25rem, 1.08rem + 0.45vw, 1.5rem);
+      line-height: 1.65;
+      max-width: min(100%, 42.5rem);
+    }
+  }
+
+  .gn-shadow-soft {
+    box-shadow: var(--gn-shadow-default);
+  }
+
+  .gn-shadow-soft-hover {
+    box-shadow: var(--gn-shadow-hover);
   }
 }

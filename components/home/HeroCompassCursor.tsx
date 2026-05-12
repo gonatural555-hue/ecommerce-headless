@@ -110,7 +110,7 @@ export default function HeroCompassCursor({
     "pointer-events-none absolute font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2E4A36]/72 md:text-[11px]";
 
   const dialLuxury =
-    "relative mx-auto flex h-[clamp(13.75rem,34vmin,23.75rem)] w-[clamp(13.75rem,34vmin,23.75rem)] items-center justify-center";
+    "relative mx-auto flex h-[clamp(12.5rem,52vmin,15rem)] w-[clamp(12.5rem,52vmin,15rem)] items-center justify-center md:h-[clamp(16.25rem,26vmin,18.75rem)] md:w-[clamp(16.25rem,26vmin,18.75rem)] lg:h-[clamp(20rem,26vmin,23.75rem)] lg:w-[clamp(20rem,26vmin,23.75rem)]";
 
   const focusLuxury =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/45 focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4EBDD]";
