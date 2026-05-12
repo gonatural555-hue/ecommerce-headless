@@ -39,8 +39,15 @@ export default function HomeBrandHero({
 
   const titleWords = title.trim().split(/\s+/).filter(Boolean);
 
-  const wordPopClass =
-    "relative z-0 inline-block origin-[center_85%] cursor-default rounded-sm px-[0.06em] py-0.5 transition-[transform,color,filter] duration-200 ease-[cubic-bezier(0.34,1.45,0.64,1)] will-change-transform hover:z-10 hover:-translate-y-2 hover:scale-[1.12] hover:text-[#1a2e22] hover:drop-shadow-[0_10px_20px_rgba(46,74,54,0.22)] motion-reduce:transition-none motion-reduce:hover:z-0 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:drop-shadow-none";
+  /** Hover “popup” compartido (título por palabra, subtítulo entero, brújula). */
+  const heroPopHover =
+    "relative z-0 rounded-sm transition-[transform,color,filter] duration-200 ease-[cubic-bezier(0.34,1.45,0.64,1)] will-change-transform hover:z-10 hover:-translate-y-2 hover:scale-[1.12] hover:drop-shadow-[0_10px_20px_rgba(46,74,54,0.22)] motion-reduce:transition-none motion-reduce:hover:z-0 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:drop-shadow-none";
+
+  const wordPopClass = `${heroPopHover} inline-block origin-[center_85%] cursor-default px-[0.06em] py-0.5 hover:text-[#1a2e22]`;
+
+  const subtitlePopClass = `${heroPopHover} mt-5 inline-block max-w-xl origin-center cursor-default text-pretty px-1 py-0.5 font-sans text-[0.95rem] leading-relaxed text-[#D9A441] hover:text-[#a67822] sm:mt-6 sm:max-w-2xl sm:text-lg md:text-[1.05rem]`;
+
+  const compassPopWrapClass = `${heroPopHover} inline-flex origin-center justify-center rounded-md p-1 sm:p-1.5`;
 
   return (
     <section
@@ -86,9 +93,7 @@ export default function HomeBrandHero({
           ))}
         </h1>
 
-        <p className="mt-5 max-w-xl text-pretty font-sans text-[0.95rem] leading-relaxed text-[#D9A441] sm:mt-6 sm:max-w-2xl sm:text-lg md:text-[1.05rem]">
-          {subtitle}
-        </p>
+        <p className={subtitlePopClass}>{subtitle}</p>
 
         <motion.div
           className="relative mt-10 flex justify-center sm:mt-12 md:mt-14"
@@ -96,11 +101,13 @@ export default function HomeBrandHero({
           animate={{ opacity: 1, scale: 1 }}
           transition={tCompass}
         >
-          <HeroCompassCursor
-            variant="brand"
-            ariaLabel={compassAriaLabel}
-            cardinalLabels={cardinalLabels}
-          />
+          <div className={compassPopWrapClass}>
+            <HeroCompassCursor
+              variant="brand"
+              ariaLabel={compassAriaLabel}
+              cardinalLabels={cardinalLabels}
+            />
+          </div>
         </motion.div>
 
         <motion.div
