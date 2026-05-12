@@ -1,9 +1,11 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
+import CompassSnowflakeFollower from "@/components/home/CompassSnowflakeFollower";
 import HeroCompassCursor, {
   type CompassCardinalLabels,
 } from "@/components/home/HeroCompassCursor";
@@ -11,16 +13,35 @@ import type { HeroCategoryCard } from "@/components/home/slides/HomeHeroCategory
 
 const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 
-/** Mismo shell que las tarjetas del hero bento (`HeroBentoSection`). */
-const BENTO_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
-const BENTO_CARD =
-  `${BENTO_RADIUS} relative overflow-hidden border border-earth-brown/12 bg-white/95 shadow-[0_16px_48px_-28px_rgba(17,23,19,0.16)] ring-1 ring-black/[0.04] transition-all duration-500 ease-out motion-reduce:transition-none`;
-const BENTO_HOVER =
-  "hover:z-[1] hover:-translate-y-0.5 hover:border-accent-gold/28 hover:shadow-[0_22px_56px_-24px_rgba(17,23,19,0.22)] motion-reduce:hover:translate-y-0";
+const CARD_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
+
+const luxuryEase = [0.19, 1, 0.22, 1] as const;
+const hoverTransition = { duration: 0.72, ease: luxuryEase };
+
+function ExpeditionOrb() {
+  return (
+    <div
+      className="pointer-events-none flex h-11 w-11 items-center justify-center rounded-full border border-white/26 bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-black/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_32px_-6px_rgba(0,0,0,0.42)] backdrop-blur-[6px] transition-[transform,box-shadow,border-color,background-color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-translate-y-0.5 group-hover/card:scale-[1.06] group-hover/card:border-accent-gold/45 group-hover/card:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_0_0_1px_rgba(217,138,36,0.22),0_14px_40px_-4px_rgba(0,0,0,0.48),0_0_36px_-6px_rgba(217,138,36,0.18)]"
+      aria-hidden
+    >
+      <svg
+        viewBox="0 0 24 24"
+        className="h-[15px] w-[15px] translate-x-[0.5px] text-white/90 transition-[transform,color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-rotate-[15deg] group-hover/card:text-accent-gold"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M7 17 17 7" />
+        <path d="M8 7h9v9" />
+      </svg>
+    </div>
+  );
+}
 
 type Props = {
   locale: Locale;
-  /** Cuatro categorías en orden: arriba-izq, arriba-der, abajo-izq, abajo-der */
   cards: HeroCategoryCard[];
   cardinalLabels: CompassCardinalLabels;
   compassAriaLabel: string;
@@ -30,35 +51,80 @@ function CornerCard({
   card,
   locale,
   gridClass,
+  onCardEnter,
+  onCardLeave,
 }: {
   card: HeroCategoryCard;
   locale: Locale;
   gridClass: string;
+  onCardEnter: () => void;
+  onCardLeave: () => void;
 }) {
   const [src, setSrc] = useState(card.image);
+  const reduceMotion = useReducedMotion();
 
   return (
     <Link
       href={`/${locale}/category/${card.slug}`}
-      className={`group ${BENTO_CARD} ${BENTO_HOVER} pointer-events-auto relative flex min-h-[189px] flex-col overflow-hidden sm:min-h-[216px] md:min-h-[227px] md:max-w-[378px] lg:min-h-[238px] lg:max-w-[405px] ${gridClass}`}
+      onMouseEnter={onCardEnter}
+      onMouseLeave={onCardLeave}
+      className={`group/card relative block w-full max-w-[405px] outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-4 focus-visible:ring-offset-[#ebe4d8] md:max-w-[378px] lg:max-w-[405px] ${gridClass}`}
     >
-      <Image
-        src={src}
-        alt=""
-        fill
-        sizes="(max-width:768px) 45vw, 324px"
-        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        onError={() => setSrc(FALLBACK_IMG)}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/6 to-transparent" />
-      <div className="relative z-[1] mt-auto p-3 sm:p-4">
-        <p className="font-sans text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-accent-gold/95">
-          {card.title}
-        </p>
-        <p className="mt-1 line-clamp-2 font-sans text-xs leading-snug text-white/88 sm:text-[13px]">
-          {card.subtitle}
-        </p>
-      </div>
+      <motion.div
+        className={`relative flex min-h-[189px] w-full flex-col overflow-hidden sm:min-h-[216px] md:min-h-[227px] lg:min-h-[238px] ${CARD_RADIUS} border border-white/16 bg-white/[0.04] shadow-[0_20px_56px_-28px_rgba(17,23,19,0.42),0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_48px_rgba(255,255,255,0.03)] ring-1 ring-black/[0.05]`}
+        initial={false}
+        whileHover={
+          reduceMotion
+            ? undefined
+            : {
+                y: -6,
+                boxShadow:
+                  "0 28px 64px -22px rgba(17,23,19,0.48), 0 0 0 1px rgba(217,138,36,0.18), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -24px 48px rgba(217,138,36,0.07), 0 0 52px -12px rgba(217,138,36,0.14)",
+              }
+        }
+        transition={hoverTransition}
+      >
+        <div className="absolute inset-0 overflow-hidden rounded-[inherit]">
+          <Image
+            src={src}
+            alt=""
+            fill
+            sizes="(max-width:768px) 45vw, 324px"
+            className="object-cover object-center brightness-[1.07] contrast-[1.03] saturate-[1.06] transition-[transform,filter] duration-[900ms] ease-[cubic-bezier(0.19,1,0.22,1)] will-change-transform group-hover/card:scale-[1.045] group-hover/card:brightness-[1.16] group-hover/card:contrast-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100 motion-reduce:group-hover/card:brightness-[1.07]"
+            onError={() => setSrc(FALLBACK_IMG)}
+          />
+          {/* Calidez editorial superior */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-100/15 via-transparent to-transparent opacity-80 mix-blend-soft-light"
+            aria-hidden
+          />
+          {/* Profundidad cinematográfica */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/50 to-dark-base/10 transition-opacity duration-[900ms] ease-out group-hover/card:from-dark-base/92 group-hover/card:via-dark-base/42"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.12),inset_0_-32px_64px_rgba(217,138,36,0.07)] transition-shadow duration-[900ms] group-hover/card:shadow-[inset_0_0_50px_rgba(0,0,0,0.08),inset_0_-28px_56px_rgba(217,138,36,0.12)]"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/10"
+            aria-hidden
+          />
+        </div>
+
+        <div className="relative z-[2] mt-auto flex items-end justify-between gap-3 border-t border-white/10 bg-gradient-to-t from-black/50 via-black/28 to-transparent px-4 pb-4 pt-10 backdrop-blur-[10px] sm:px-5 sm:pb-5 sm:pt-12 supports-[backdrop-filter]:from-black/40 supports-[backdrop-filter]:via-black/18">
+          <div className="min-w-0 flex-1 pr-2 text-left">
+            <p className="font-display line-clamp-2 text-[0.7rem] font-semibold uppercase leading-snug tracking-[0.36em] text-accent-gold sm:text-[0.74rem] sm:tracking-[0.38em]">
+              {card.title}
+            </p>
+            <p className="mt-2 line-clamp-2 font-sans text-[0.8125rem] font-normal leading-relaxed tracking-[0.01em] text-white/78 transition-colors duration-[720ms] group-hover/card:text-white/90 sm:text-[0.875rem]">
+              {card.subtitle}
+            </p>
+          </div>
+          <ExpeditionOrb />
+        </div>
+      </motion.div>
     </Link>
   );
 }
@@ -69,6 +135,11 @@ export default function HomeCompassCategories({
   cardinalLabels,
   compassAriaLabel,
 }: Props) {
+  const [cardHoverDepth, setCardHoverDepth] = useState(0);
+  const onCardEnter = useCallback(() => setCardHoverDepth((d) => d + 1), []);
+  const onCardLeave = useCallback(() => setCardHoverDepth((d) => Math.max(0, d - 1)), []);
+  const overCategoryCard = cardHoverDepth > 0;
+
   const ordered: HeroCategoryCard[] = cards.slice(0, 4);
   while (ordered.length < 4) {
     ordered.push({
@@ -87,19 +158,45 @@ export default function HomeCompassCategories({
   ];
 
   return (
-    <section className="relative bg-soft-stone/80 py-14 sm:py-20 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-[#ebe4d8] py-16 sm:py-20 md:py-28">
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#f3ede3] via-transparent to-[#dcd4c8]/70"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_70%_at_50%_-5%,rgba(255,252,246,0.85),transparent_52%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_85%_95%,rgba(217,138,36,0.07),transparent_50%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.038] mix-blend-multiply"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+        aria-hidden
+      />
+
+      <CompassSnowflakeFollower overCategoryCard={overCategoryCard} />
+
+      <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 md:grid md:min-h-[min(72vh,837px)] md:grid-cols-3 md:grid-rows-3 md:items-stretch md:gap-7 lg:min-h-[756px] lg:gap-8">
           <div className="grid grid-cols-2 gap-4 md:contents">
             <CornerCard
               card={tl}
               locale={locale}
               gridClass="md:col-start-1 md:row-start-1 md:justify-self-start"
+              onCardEnter={onCardEnter}
+              onCardLeave={onCardLeave}
             />
             <CornerCard
               card={tr}
               locale={locale}
               gridClass="md:col-start-3 md:row-start-1 md:justify-self-end"
+              onCardEnter={onCardEnter}
+              onCardLeave={onCardLeave}
             />
           </div>
 
@@ -112,11 +209,15 @@ export default function HomeCompassCategories({
               card={bl}
               locale={locale}
               gridClass="md:col-start-1 md:row-start-3 md:self-end md:justify-self-start"
+              onCardEnter={onCardEnter}
+              onCardLeave={onCardLeave}
             />
             <CornerCard
               card={br}
               locale={locale}
               gridClass="md:col-start-3 md:row-start-3 md:self-end md:justify-self-end"
+              onCardEnter={onCardEnter}
+              onCardLeave={onCardLeave}
             />
           </div>
         </div>
