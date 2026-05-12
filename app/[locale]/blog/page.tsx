@@ -7,10 +7,12 @@ import CommunityCTA from "@/components/blog/CommunityCTA";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import BlogSectionLinks from "@/components/blog/BlogSectionLinks";
 import { blogSections } from "@/lib/blog-sections";
+import { buildHomeHeroCarouselProps } from "@/lib/build-home-hero-carousel-props";
 import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
+import { getProducts } from "@/lib/products";
 
 const FEATURED_SLUG = "edge-of-water";
 const FALLBACK_IMAGE = "/assets/images/blog/blog-hero.webp";
@@ -90,15 +92,20 @@ export default async function BlogPage({
   const tagline = journal?.tagline ?? "";
   const manifesto = journal?.manifesto ?? t("blog.intro");
 
+  const products = getProducts();
+  const blogHeroProps = buildHomeHeroCarouselProps(locale, t, products, {
+    tagline,
+    title: t("blog.title"),
+    subtitle: t("blog.subtitle"),
+    ctaProducts: t("hero.cta"),
+    ctaJournal: t("homeJournal.cta"),
+    imageSrc: "/assets/images/blog/blog-hero.webp",
+    imageAlt: `${t("blog.title")} — Go Natural`,
+  });
+
   return (
     <main className="bg-warm-sand text-dark-base">
-      <BlogHero
-        title={t("blog.title")}
-        subtitle={t("blog.subtitle")}
-        tagline={tagline}
-        imageSrc="/assets/images/blog/blog-hero.webp"
-        imageAlt={`${t("blog.title")} — Go Natural`}
-      />
+      <BlogHero {...blogHeroProps} />
 
       <section className="border-b border-earth-brown/12 bg-soft-stone py-20 md:py-28 lg:py-32">
         <ScrollReveal>
