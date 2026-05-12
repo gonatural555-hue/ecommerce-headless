@@ -10,9 +10,6 @@ import { getAllCategories } from "@/lib/categories";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-/** Controles (búsqueda, carrito, etc.) — cristal suave. */
-const INNER_SOLID =
-  "rounded-full border border-[#2E4A36]/10 bg-white/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_4px_18px_-8px_rgba(46,74,54,0.12)] backdrop-blur-md transition hover:border-[#2E4A36]/18 hover:bg-white";
 
 /** Isla flotante del header (crema / vidrio). */
 const HEADER_ISLAND =
@@ -175,71 +172,70 @@ export default function Header() {
   );
 
   return (
-    <header className="pointer-events-none fixed left-0 right-0 top-0 z-50 mx-auto w-full max-w-none px-4 pt-2.5 sm:px-5 sm:pt-3 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0 lg:pt-3">
-      {/* Desktop — isla flotante: nav | búsqueda + idioma + carrito */}
-      <div className="pointer-events-auto hidden w-full md:block">
-          <div className={`relative flex items-center justify-between gap-2 py-2.5 pl-4 pr-2.5 sm:pl-5 sm:pr-3 lg:gap-3 lg:pl-7 lg:pr-4 ${HEADER_ISLAND}`}>
-            <nav
-              className="relative z-10 flex min-w-0 shrink-0 flex-wrap items-center gap-0.5 lg:gap-1"
-              aria-label="Principal"
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-3 md:px-5 md:pt-3.5">
+      {/* Desktop — piezas flotantes */}
+      <div className="pointer-events-auto hidden w-full items-center justify-between gap-2 md:flex lg:gap-3">
+        <nav
+          className={`${HEADER_ISLAND} relative z-10 flex min-w-0 shrink-0 flex-wrap items-center gap-0.5 px-2.5 py-1.5 sm:gap-1 sm:px-3 sm:py-2`}
+          aria-label="Principal"
+        >
+          <Link href={`/${locale}`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+            {t("header.nav.home")}
+          </Link>
+          <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+            {t("header.nav.products")}
+          </Link>
+          <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+            {t("header.nav.blog")}
+          </Link>
+          <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
+            <button
+              type="button"
+              className={`${NAV_LINK_HEADER} cursor-pointer whitespace-nowrap rounded-full border-0 bg-transparent px-2 py-2 text-left`}
+              aria-expanded={categoriesOpen}
+              aria-haspopup="true"
+              aria-controls="header-categories-mega"
+              onFocus={openCategoriesMenu}
+              onBlur={scheduleCloseCategories}
             >
-              <Link href={`/${locale}`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-                {t("header.nav.home")}
-              </Link>
-              <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-                {t("header.nav.products")}
-              </Link>
-              <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-                {t("header.nav.blog")}
-              </Link>
-              <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
-                <button
-                  type="button"
-                  className={`${NAV_LINK_HEADER} cursor-pointer whitespace-nowrap rounded-full border-0 bg-transparent px-2 py-2 text-left`}
-                  aria-expanded={categoriesOpen}
-                  aria-haspopup="true"
-                  aria-controls="header-categories-mega"
-                  onFocus={openCategoriesMenu}
-                  onBlur={scheduleCloseCategories}
-                >
-                  {t("header.nav.categories")}
-                </button>
-              </div>
-            </nav>
+              {t("header.nav.categories")}
+            </button>
+          </div>
+        </nav>
 
-            <div className="relative z-10 flex min-w-0 flex-1 items-center justify-end gap-2 lg:gap-2.5">
-              <form
-                className="hidden min-w-0 max-w-[11rem] flex-1 md:block lg:max-w-[14rem] xl:max-w-[16rem]"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  submitSearch();
-                }}
-                role="search"
+        <div className="relative z-10 flex min-w-0 flex-1 items-center justify-end gap-2 lg:gap-2.5">
+          <form
+            className={`${HEADER_ISLAND} hidden min-w-0 max-w-[11rem] flex-1 flex-row items-stretch py-1 pl-3 pr-1 md:flex lg:max-w-[14rem] xl:max-w-[16rem]`}
+            onSubmit={(e) => {
+              e.preventDefault();
+              submitSearch();
+            }}
+            role="search"
+          >
+            <label htmlFor="header-search" className="sr-only">
+              {t("common.searchLabel")}
+            </label>
+            <div className="flex w-full min-h-[36px] items-center gap-1">
+              <input
+                id="header-search"
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t("common.searchPlaceholder")}
+                className="font-sans min-h-[36px] min-w-0 flex-1 border-0 bg-transparent text-[12px] text-[#2E4A36] placeholder:text-[#2E4A36]/45 outline-none focus:ring-0"
+              />
+              <button
+                type="submit"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2E4A36] text-[#F4EBDD] transition hover:bg-[#6E1F28] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9622B]/45"
+                aria-label={t("common.searchLabel")}
               >
-                <label htmlFor="header-search" className="sr-only">
-                  {t("common.searchLabel")}
-                </label>
-                <div className={`flex w-full items-center gap-1 pl-3 ${INNER_SOLID} py-1 pr-1`}>
-                  <input
-                    id="header-search"
-                    type="search"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={t("common.searchPlaceholder")}
-                    className="font-sans min-h-[36px] min-w-0 flex-1 border-0 bg-transparent text-[12px] text-[#2E4A36] placeholder:text-[#2E4A36]/45 outline-none focus:ring-0"
-                  />
-                  <button
-                    type="submit"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2E4A36] text-[#F4EBDD] transition hover:bg-[#6E1F28] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9622B]/45"
-                    aria-label={t("common.searchLabel")}
-                  >
-                    {magnifierIcon}
-                  </button>
-                </div>
-              </form>
+                {magnifierIcon}
+              </button>
+            </div>
+          </form>
 
-              <div className={`flex shrink-0 items-center gap-0.5 px-1 py-0.5 ${INNER_SOLID}`}>
-                {locales.map((lang) => (
+          <div className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}>
+            {locales.map((lang) => (
                   <Link
                     key={lang}
                     href={buildLocaleHref(lang)}
@@ -251,62 +247,61 @@ export default function Header() {
                   >
                     {lang.toUpperCase()}
                   </Link>
-                ))}
-              </div>
-
-              <Link
-                href={`/${locale}/cart`}
-                className={`relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
-                aria-label={`Cart with ${totalItems} items`}
-              >
-                {cartIcon}
-                {totalItems > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
-                    {totalItems > 99 ? "99+" : totalItems}
-                  </span>
-                )}
-              </Link>
-
-              {isLoggedIn && user ? (
-                <Link
-                  href={`/${locale}/account`}
-                  className={`flex max-w-[10rem] shrink-0 items-center gap-2 pl-2.5 pr-1.5 py-1 ${INNER_SOLID}`}
-                >
-                  <span className="truncate font-sans text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
-                    {user.name}
-                  </span>
-                  <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-sans text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
-                    aria-hidden
-                  >
-                    {userInitials(user.name)}
-                  </span>
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => openAuthModal("login")}
-                  className={`shrink-0 px-3.5 py-2 font-sans text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/95 sm:px-4 sm:text-[12px] ${INNER_SOLID}`}
-                >
-                  {t("header.account")}
-                </button>
-              )}
-            </div>
+            ))}
           </div>
-        </div>
 
-        {/* Mobile — isla: menú | búsqueda + carrito */}
-        <div className={`pointer-events-auto mx-auto flex w-full items-center justify-between gap-2 px-3 py-2 md:hidden ${HEADER_ISLAND}`}>
-          <button
-            type="button"
-            className={`flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
-            onClick={() => {
-              setMobileMenuOpen((o) => !o);
-              setMobileSearchOpen(false);
-            }}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
+          <Link
+            href={`/${locale}/cart`}
+            className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
+            aria-label={`Cart with ${totalItems} items`}
           >
+            {cartIcon}
+            {totalItems > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
+                {totalItems > 99 ? "99+" : totalItems}
+              </span>
+            )}
+          </Link>
+
+          {isLoggedIn && user ? (
+            <Link
+              href={`/${locale}/account`}
+              className={`${HEADER_ISLAND} flex max-w-[10rem] shrink-0 items-center gap-2 pl-2.5 pr-1.5 py-1`}
+            >
+              <span className="truncate font-sans text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
+                {user.name}
+              </span>
+              <span
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-sans text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                aria-hidden
+              >
+                {userInitials(user.name)}
+              </span>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => openAuthModal("login")}
+              className={`${HEADER_ISLAND} shrink-0 px-3.5 py-2 font-sans text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/40 sm:px-4 sm:text-[12px]`}
+            >
+              {t("header.account")}
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Mobile — piezas flotantes */}
+      <div className="pointer-events-auto flex w-full items-center justify-between gap-2 md:hidden">
+        <button
+          type="button"
+          className={`${HEADER_ISLAND} flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
+          onClick={() => {
+            setMobileMenuOpen((o) => !o);
+            setMobileSearchOpen(false);
+          }}
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+        >
             {mobileMenuOpen ? (
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -316,71 +311,71 @@ export default function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             )}
-          </button>
+        </button>
 
-          <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            className={`${HEADER_ISLAND} flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
+            onClick={() => {
+              setMobileSearchOpen((o) => !o);
+              setMobileMenuOpen(false);
+            }}
+            aria-label={t("common.searchLabel")}
+            aria-expanded={mobileSearchOpen}
+          >
+            {magnifierIcon}
+          </button>
+          <Link
+            href={`/${locale}/cart`}
+            className={`${HEADER_ISLAND} relative flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
+            aria-label={`Cart with ${totalItems} items`}
+          >
+            {cartIcon}
+            {totalItems > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
+                {totalItems > 99 ? "99+" : totalItems}
+              </span>
+            )}
+          </Link>
+        </div>
+      </div>
+
+      {mobileSearchOpen ? (
+        <form
+          className={`${HEADER_ISLAND} pointer-events-auto mt-2 flex w-full flex-col gap-0 py-1 pl-3 pr-1 md:hidden`}
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitSearch();
+          }}
+          role="search"
+        >
+          <label htmlFor="header-search-mobile-bar" className="sr-only">
+            {t("common.searchLabel")}
+          </label>
+          <div className="flex w-full items-center gap-1">
+            <input
+              id="header-search-mobile-bar"
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t("common.searchPlaceholder")}
+              className="font-sans min-h-[40px] min-w-0 flex-1 border-0 bg-transparent text-sm text-charcoal placeholder:text-muted-gray outline-none"
+              autoFocus
+            />
             <button
-              type="button"
-              className={`flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
-              onClick={() => {
-                setMobileSearchOpen((o) => !o);
-                setMobileMenuOpen(false);
-              }}
+              type="submit"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
               aria-label={t("common.searchLabel")}
-              aria-expanded={mobileSearchOpen}
             >
               {magnifierIcon}
             </button>
-            <Link
-              href={`/${locale}/cart`}
-              className={`relative flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
-              aria-label={`Cart with ${totalItems} items`}
-            >
-              {cartIcon}
-              {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
-                  {totalItems > 99 ? "99+" : totalItems}
-                </span>
-              )}
-            </Link>
           </div>
-        </div>
+        </form>
+      ) : null}
 
-        {mobileSearchOpen ? (
-          <form
-            className="pointer-events-auto mx-auto mt-2 flex w-full px-1 py-1 md:hidden"
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitSearch();
-            }}
-            role="search"
-          >
-            <label htmlFor="header-search-mobile-bar" className="sr-only">
-              {t("common.searchLabel")}
-            </label>
-            <div className={`flex w-full items-center gap-1 pl-3 ${INNER_SOLID} py-1 pr-1`}>
-              <input
-                id="header-search-mobile-bar"
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t("common.searchPlaceholder")}
-                className="font-sans min-h-[40px] min-w-0 flex-1 border-0 bg-transparent text-sm text-charcoal placeholder:text-muted-gray outline-none"
-                autoFocus
-              />
-              <button
-                type="submit"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40"
-                aria-label={t("common.searchLabel")}
-              >
-                {magnifierIcon}
-              </button>
-            </div>
-          </form>
-        ) : null}
-
-        {/* Mega menu backdrop */}
-        <div
+      {/* Mega menu backdrop */}
+      <div
           className={[
             "pointer-events-auto fixed inset-0 z-[38] transition-all duration-200 ease-out",
             categoriesBackdropClass,
