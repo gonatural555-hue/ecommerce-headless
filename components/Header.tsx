@@ -16,9 +16,13 @@ import { LUMINOUS_INNER_CHROME } from "@/lib/ui/luminous-edge";
 const NAV_LINK =
   "font-sans text-[0.8125rem] font-semibold tracking-[0.06em] text-charcoal transition-colors duration-200 hover:text-mountain-green sm:text-[0.875rem]";
 
-/** Navegación principal flotante sobre el hero — alineada con tipografía display del sitio. */
+/** Navegación principal sobre hero oscuro / video. */
 const NAV_LINK_TOP =
   "font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-white [text-shadow:0_1px_14px_rgba(0,0,0,0.7),0_0_1px_rgba(0,0,0,0.85)] transition-colors duration-200 hover:text-white/90 sm:text-[11px] sm:tracking-[0.26em] md:text-xs md:tracking-[0.28em]";
+
+/** Misma navegación sobre hero claro (home con fondo #F4EBDD). */
+const NAV_LINK_TOP_LIGHT =
+  "font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-[#2E4A36] transition-colors duration-200 hover:text-[#2E4A36]/75 sm:text-[11px] sm:tracking-[0.26em] md:text-xs md:tracking-[0.28em]";
 
 /** Superficie blanca interior (search, iconos, perfil). */
 const INNER_SOLID = `rounded-full bg-white ${LUMINOUS_INNER_CHROME} ring-1 ring-black/[0.05]`;
@@ -111,6 +115,11 @@ export default function Header() {
     return `/${segments.join("/")}${query ? `?${query}` : ""}`;
   };
 
+  const pathnameSegments = pathname.split("/").filter(Boolean);
+  const isLocaleHome =
+    pathnameSegments.length === 1 && locales.includes(pathnameSegments[0] as Locale);
+  const desktopTopNavClass = isLocaleHome ? NAV_LINK_TOP_LIGHT : NAV_LINK_TOP;
+
   const submitSearch = () => {
     const trimmed = searchQuery.trim();
     router.push(
@@ -181,16 +190,16 @@ export default function Header() {
             className="hidden min-w-0 shrink-0 items-center gap-0 md:flex md:gap-0.5 lg:gap-1"
             aria-label="Principal"
           >
-            <Link href={`/${locale}`} className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
+            <Link href={`/${locale}`} className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
               {t("header.nav.home")}
             </Link>
             <Link
               href={`/${locale}/products`}
-              className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}
+              className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}
             >
               {t("header.nav.products")}
             </Link>
-            <Link href={`/${locale}/blog`} className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
+            <Link href={`/${locale}/blog`} className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
               {t("header.nav.blog")}
             </Link>
             <div
@@ -200,7 +209,7 @@ export default function Header() {
             >
               <button
                 type="button"
-                className={`${NAV_LINK_TOP} cursor-pointer whitespace-nowrap border-0 bg-transparent px-1 py-1.5 text-left md:px-1.5 xl:px-2`}
+                className={`${desktopTopNavClass} cursor-pointer whitespace-nowrap border-0 bg-transparent px-1 py-1.5 text-left md:px-1.5 xl:px-2`}
                 aria-expanded={categoriesOpen}
                 aria-haspopup="true"
                 aria-controls="header-categories-mega"

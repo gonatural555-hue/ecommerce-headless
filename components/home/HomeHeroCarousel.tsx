@@ -81,18 +81,23 @@ function CarouselArrow({
   onClick,
   label,
   className,
+  light = false,
 }: {
   direction: "prev" | "next";
   onClick: () => void;
   label: string;
   className?: string;
+  light?: boolean;
 }) {
+  const surface = light
+    ? "border-earth-brown/30 bg-[#F4EBDD]/95 text-[#2E4A36] shadow-[0_6px_24px_-8px_rgba(46,74,54,0.18)] backdrop-blur-sm hover:border-earth-brown/45 hover:bg-white hover:shadow-[0_8px_28px_-8px_rgba(46,74,54,0.12)]"
+    : "border-white/18 bg-white/12 text-white shadow-[0_8px_28px_-8px_rgba(0,0,0,0.45)] backdrop-blur-md hover:border-white/35 hover:bg-white/22";
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={`pointer-events-auto absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/18 bg-white/12 text-white shadow-[0_8px_28px_-8px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:border-white/35 hover:bg-white/22 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/55 md:h-11 md:w-11 ${className ?? ""}`}
+      className={`pointer-events-auto absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/55 md:h-11 md:w-11 ${surface} ${className ?? ""}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -192,12 +197,14 @@ export default function HomeHeroCarousel({
           direction="prev"
           label="Previous slide"
           onClick={() => go(-1)}
+          light={index === 0}
           className={embedded ? "left-3 sm:left-3" : "left-10 sm:left-3 md:left-4"}
         />
         <CarouselArrow
           direction="next"
           label="Next slide"
           onClick={() => go(1)}
+          light={index === 0}
           className={embedded ? "right-3 sm:right-3" : "right-10 sm:right-3 md:right-4"}
         />
 
@@ -288,7 +295,7 @@ export default function HomeHeroCarousel({
   }
 
   return (
-    <section className={`relative flex min-h-[100dvh] w-full items-center justify-center overflow-x-hidden bg-[#FFFFFF] px-4 py-24 sm:px-5 sm:py-28 md:px-6 md:py-24 lg:px-8 ${LUMINOUS_EDGE_LIGHT}`}>
+    <section className={`relative flex min-h-[100dvh] w-full items-center justify-center overflow-x-hidden bg-[#F4EBDD] px-4 py-24 sm:px-5 sm:py-28 md:px-6 md:py-24 lg:px-8 ${LUMINOUS_EDGE_LIGHT}`}>
       <div
         className="relative w-full transition-[opacity,transform] duration-300 ease-out"
         style={{
