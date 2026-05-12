@@ -225,7 +225,7 @@ export default async function HomePage({
         };
 
   return (
-    <main className="flex min-h-screen flex-col bg-warm-sand text-dark-base">
+    <main className="flex min-h-screen flex-col bg-[#FFFFFF] text-dark-base">
       <HomeHero
         locale={locale}
         tagline={h.heroTagline ?? "Go Natural"}
