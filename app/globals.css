@@ -416,38 +416,38 @@ main[data-route="order-success"] .bg-gray-50 {
    */
   .gn-hero-title {
     font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
-    font-size: clamp(3rem, 12vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.25rem, 9.5vw, 3.35rem);
+    line-height: 0.96;
+    letter-spacing: -0.032em;
     color: var(--gn-forest);
     font-weight: 600;
     text-wrap: balance;
     text-rendering: optimizeLegibility;
-    max-width: min(100%, 40rem);
+    max-width: min(100%, 38rem);
   }
 
   @media (min-width: 768px) {
     .gn-hero-title {
-      font-size: clamp(4.5rem, 8vw, 8.75rem);
-      line-height: 0.92;
-      letter-spacing: -0.04em;
+      font-size: clamp(3.25rem, 6.25vw, 5.75rem);
+      line-height: 0.94;
+      letter-spacing: -0.038em;
     }
   }
 
   .gn-hero-subtitle {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
-    line-height: 1.7;
+    font-size: clamp(0.9375rem, 0.88rem + 0.2vw, 1.0625rem);
+    line-height: 1.65;
     color: rgba(46, 74, 54, 0.82);
     text-wrap: pretty;
-    max-width: min(100%, 42.5rem);
+    max-width: min(100%, 40rem);
   }
 
   @media (min-width: 768px) {
     .gn-hero-subtitle {
-      font-size: clamp(1.25rem, 1.08rem + 0.45vw, 1.5rem);
-      line-height: 1.65;
-      max-width: min(100%, 42.5rem);
+      font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
+      line-height: 1.62;
+      max-width: min(100%, 40rem);
     }
   }
 

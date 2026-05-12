@@ -2,9 +2,10 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { useMemo } from "react";
 import HeroCompassCursor, { type CompassCardinalLabels } from "@/components/home/HeroCompassCursor";
 import type { Locale } from "@/lib/i18n/config";
-import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
+import { GN_EASE_PREMIUM, GN_HEADER_TITLE_WORD_COLORS } from "@/lib/ui/gonatural-design";
 
 export type HomeBrandHeroProps = {
   locale: Locale;
@@ -21,10 +22,30 @@ export type HomeBrandHeroProps = {
 const easeOut = GN_EASE_PREMIUM;
 
 const primaryCtaClass =
-  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-sans text-[13px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),var(--gn-shadow-default)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),var(--gn-shadow-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-7 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),var(--gn-shadow-default)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),var(--gn-shadow-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 const secondaryCtaClass =
-  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full border-[1.5px] border-gn-forest/35 bg-transparent px-9 text-center font-sans text-[13px] font-bold uppercase tracking-[0.18em] text-gn-forest shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/55 hover:bg-gn-cream/90 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full border-[1.5px] border-gn-forest/35 bg-transparent px-7 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-gn-forest shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/55 hover:bg-gn-cream/90 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+
+function buildTitleRows(title: string) {
+  const titleLines = title.includes("\n")
+    ? title.split("\n").map((l) => l.trim()).filter(Boolean)
+    : [title.trim()].filter(Boolean);
+
+  let colorCursor = 0;
+  return titleLines.map((line, lineIdx) => ({
+    key: lineIdx,
+    words: line.split(/\s+/).filter(Boolean).map((word) => {
+      const ci = colorCursor++;
+      return {
+        word,
+        colorKey: ci,
+        color:
+          GN_HEADER_TITLE_WORD_COLORS[ci % GN_HEADER_TITLE_WORD_COLORS.length],
+      };
+    }),
+  }));
+}
 
 export default function HomeBrandHero({
   locale,
@@ -40,9 +61,7 @@ export default function HomeBrandHero({
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
 
-  const titleLines = title.includes("\n")
-    ? title.split("\n").map((l) => l.trim()).filter(Boolean)
-    : [title.trim()].filter(Boolean);
+  const titleRows = useMemo(() => buildTitleRows(title), [title]);
 
   const containerVariants = {
     hidden: off ? { opacity: 1 } : { opacity: 0 },
@@ -50,22 +69,22 @@ export default function HomeBrandHero({
       opacity: 1,
       transition: off
         ? { duration: 0 }
-        : { staggerChildren: 0.11, delayChildren: 0.06, ease: easeOut },
+        : { staggerChildren: 0.09, delayChildren: 0.05, ease: easeOut },
     },
   };
 
   const itemVariants = {
-    hidden: off ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 },
+    hidden: off ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.72, ease: easeOut },
+      transition: { duration: 0.65, ease: easeOut },
     },
   };
 
   return (
     <section
-      className="relative isolate flex min-h-[100dvh] min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-gn-cream px-8 py-[calc(env(safe-area-inset-top,0px)+var(--gn-space-xxl))] lg:px-12 lg:py-gn-xxl"
+      className="relative isolate flex w-full min-h-[100dvh] min-h-[100svh] flex-col items-center justify-center overflow-x-clip overflow-y-visible bg-gn-cream px-4 py-[calc(env(safe-area-inset-top,0px)+var(--gn-space-l))] sm:px-6 md:px-8 lg:px-12 lg:py-gn-xl"
       aria-label="Hero"
     >
       <div
@@ -74,33 +93,59 @@ export default function HomeBrandHero({
       />
 
       <motion.div
-        className="relative z-[1] mx-auto flex w-full max-w-gn-content flex-col items-center px-0 text-center"
+        className="relative z-[1] mx-auto flex w-full min-w-0 max-w-gn-content flex-col items-center overflow-x-clip px-0 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
         <motion.p
           variants={itemVariants}
-          className="mb-gn-m font-sans text-[clamp(11px,1.15vw,13.5px)] font-semibold uppercase tracking-[0.35em] text-gn-burnt"
+          className="mb-gn-m font-sans text-[clamp(10px,1.05vw,12.5px)] font-semibold uppercase tracking-[0.32em] text-gn-burnt"
         >
           {eyebrow}
         </motion.p>
 
-        <motion.h1 variants={itemVariants} className="gn-hero-title text-center">
-          {titleLines.map((line, i) => (
-            <span key={i} className="block">
-              {line}
+        <motion.h1 variants={itemVariants} className="gn-hero-title w-full min-w-0 text-center">
+          {titleRows.map((row) => (
+            <span key={row.key} className="block w-full min-w-0 py-px">
+              <span className="inline-flex max-w-full flex-wrap justify-center gap-x-[0.14em] gap-y-1">
+                {row.words.map(({ word, color, colorKey }) => (
+                  <motion.span
+                    key={`${row.key}-${colorKey}`}
+                    className="inline-block cursor-default rounded-md px-[0.05em] [-webkit-tap-highlight-color:transparent]"
+                    style={{
+                      color,
+                      transformOrigin: "50% 90%",
+                    }}
+                    whileHover={
+                      off
+                        ? undefined
+                        : {
+                            y: -8,
+                            scale: 1.055,
+                            textShadow: "0 12px 32px rgba(46, 74, 54, 0.12), 0 4px 14px rgba(46, 74, 54, 0.08)",
+                            transition: {
+                              duration: 0.52,
+                              ease: easeOut,
+                            },
+                          }
+                    }
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
             </span>
           ))}
         </motion.h1>
 
-        <motion.p variants={itemVariants} className="gn-hero-subtitle mx-auto mt-gn-l text-center">
+        <motion.p variants={itemVariants} className="gn-hero-subtitle mx-auto mt-gn-m text-center md:mt-gn-m">
           {subtitle}
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="mt-gn-l flex w-full max-w-md flex-col items-stretch justify-center gap-gn-m sm:max-w-none sm:flex-row md:mt-[calc(var(--gn-space-l)+var(--gn-space-xs))]"
+          className="mt-gn-m flex w-full max-w-md flex-col items-stretch justify-center gap-gn-s sm:max-w-none sm:flex-row sm:gap-gn-m"
         >
           <Link href={`/${locale}/products`} className={primaryCtaClass}>
             {ctaPrimary}
@@ -110,7 +155,7 @@ export default function HomeBrandHero({
           </Link>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="mt-[calc(var(--gn-space-xl)+var(--gn-space-s))] md:mt-gn-xxl">
+        <motion.div variants={itemVariants} className="mt-gn-m md:mt-gn-l">
           <HeroCompassCursor
             variant="brand"
             ariaLabel={compassAriaLabel}
@@ -120,15 +165,15 @@ export default function HomeBrandHero({
 
         <motion.div
           variants={itemVariants}
-          className="mt-gn-m flex flex-col items-center gap-gn-s md:mt-gn-l"
+          className="mt-gn-s flex flex-col items-center gap-gn-xs md:mt-gn-m"
         >
-          <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.22em] text-gn-forest">
+          <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-gn-forest md:text-[12px] md:tracking-[0.22em]">
             {scrollHint}
           </p>
           {!off ? (
             <motion.div
               className="flex flex-col items-center gap-gn-xs"
-              animate={{ y: [0, 7, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{
                 duration: 2.4,
                 repeat: Infinity,
@@ -136,13 +181,13 @@ export default function HomeBrandHero({
               }}
               aria-hidden
             >
-              <span className="block h-8 w-5 rounded-full border border-gn-forest/35 bg-gn-cream/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.65)]" />
-              <span className="block h-1.5 w-1 rounded-full bg-gn-forest/45" />
+              <span className="block h-7 w-[1.125rem] rounded-full border border-gn-forest/35 bg-gn-cream/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.65)]" />
+              <span className="block h-1 w-1 rounded-full bg-gn-forest/45" />
             </motion.div>
           ) : (
             <div className="flex flex-col items-center gap-gn-xs" aria-hidden>
-              <span className="block h-8 w-5 rounded-full border border-gn-forest/35 bg-gn-cream/60" />
-              <span className="block h-1.5 w-1 rounded-full bg-gn-forest/45" />
+              <span className="block h-7 w-[1.125rem] rounded-full border border-gn-forest/35 bg-gn-cream/60" />
+              <span className="block h-1 w-1 rounded-full bg-gn-forest/45" />
             </div>
           )}
         </motion.div>

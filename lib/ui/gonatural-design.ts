@@ -23,3 +23,11 @@ export const GN_COLORS = {
   cream: "#F4EBDD",
   navy: "#2A2E4B",
 } as const;
+
+/** Misma secuencia que enlaces Header: Inicio → Productos → Blog → Categorías (cicla en el título). */
+export const GN_HEADER_TITLE_WORD_COLORS = [
+  GN_COLORS.navy,
+  GN_COLORS.burgundy,
+  GN_COLORS.burntOrange,
+  GN_COLORS.mustard,
+] as const;
