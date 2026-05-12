@@ -9,7 +9,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCategories } from "@/lib/categories";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 /** Isla flotante del header (crema / vidrio). */
 const HEADER_ISLAND =
@@ -32,16 +32,6 @@ const NAV_HEADER_CATEGORIES = `${NAV_LINK_HEADER_BASE} text-[#D9A441]`;
 const LOCALE_LINK =
   "rounded-full px-2 py-1.5 font-inter text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors sm:px-2.5 sm:text-[11px]";
 
-/** Buscador desktop — borde degradado + cristal. */
-const SEARCH_PREMIUM_SHELL =
-  "rounded-full bg-gradient-to-r from-[#D9A441] via-[#C9622B] to-[#6E1F28] p-[1.5px] shadow-[0_14px_44px_-14px_rgba(42,46,75,0.35),0_6px_20px_-8px_rgba(110,31,40,0.22)]";
-const SEARCH_PREMIUM_INNER =
-  "flex min-h-[42px] items-center gap-2 rounded-full bg-white/95 px-3.5 py-1 pr-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.95)] backdrop-blur-md sm:min-h-[44px] sm:px-4";
-const SEARCH_PREMIUM_INPUT =
-  "font-inter min-h-[38px] min-w-0 flex-1 border-0 bg-transparent text-[13px] text-[#2A2E4B] outline-none placeholder:italic placeholder:text-[#2A2E4B]/40 focus:ring-0 sm:text-[13.5px]";
-const SEARCH_PREMIUM_BTN =
-  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2A2E4B] to-[#1a1f38] text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_4px_14px_-4px_rgba(42,46,75,0.45)] transition duration-200 hover:scale-[1.05] hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/55 active:scale-[0.98] sm:h-10 sm:w-10";
-
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   const a = parts[0]?.[0] ?? "?";
@@ -54,7 +44,6 @@ export default function Header() {
   const { isLoggedIn, user } = useUser();
   const { authOpen, setAuthOpen, openAuthModal, initialTab } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const categoriesCloseTimeout = useRef<NodeJS.Timeout | null>(null);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
@@ -62,13 +51,6 @@ export default function Header() {
   const t = useTranslations();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    const currentQuery = searchParams.get("q") || "";
-    setSearchQuery(currentQuery);
-  }, [searchParams]);
 
   const openCategoriesMenu = () => {
     if (categoriesCloseTimeout.current) {
@@ -130,17 +112,6 @@ export default function Header() {
     return `/${segments.join("/")}${query ? `?${query}` : ""}`;
   };
 
-  const submitSearch = () => {
-    const trimmed = searchQuery.trim();
-    router.push(
-      trimmed
-        ? `/${locale}/products?q=${encodeURIComponent(trimmed)}`
-        : `/${locale}/products`
-    );
-    setMobileMenuOpen(false);
-    setMobileSearchOpen(false);
-  };
-
   const mobileNavLinkClass = `${NAV_LINK} rounded-md py-2 px-2 text-charcoal`;
   const mobileNavHome = `${NAV_LINK} rounded-md py-2 px-2 text-[#2A2E4B]`;
   const mobileNavProducts = `${NAV_LINK} rounded-md py-2 px-2 text-[#6E1F28]`;
@@ -157,24 +128,6 @@ export default function Header() {
 
   const categoriesPanelShell =
     "border-earth-brown/15 bg-soft-stone/98 shadow-[0_24px_56px_-20px_rgba(17,23,19,0.18)] ring-1 ring-earth-brown/10 backdrop-blur-md supports-[backdrop-filter]:bg-soft-stone/95";
-
-  const magnifierIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="h-5 w-5"
-      aria-hidden
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.65 6.65a7.5 7.5 0 0 0 10.6 10.6Z"
-      />
-    </svg>
-  );
 
   const cartIcon = (
     <svg
@@ -247,38 +200,6 @@ export default function Header() {
         </nav>
 
         <div className="relative z-10 justify-self-end flex min-w-0 shrink-0 items-center justify-end gap-2 lg:gap-2.5">
-          <form
-            className="group relative hidden min-w-0 w-full max-w-[min(100%,19rem)] shrink-0 md:block lg:max-w-[22rem]"
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitSearch();
-            }}
-            role="search"
-          >
-            <label htmlFor="header-search" className="sr-only">
-              {t("common.searchLabel")}
-            </label>
-            <div className={SEARCH_PREMIUM_SHELL}>
-              <div className={SEARCH_PREMIUM_INNER}>
-                <input
-                  id="header-search"
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t("common.searchPlaceholder")}
-                  className={SEARCH_PREMIUM_INPUT}
-                />
-                <button
-                  type="submit"
-                  className={SEARCH_PREMIUM_BTN}
-                  aria-label={t("common.searchLabel")}
-                >
-                  {magnifierIcon}
-                </button>
-              </div>
-            </div>
-          </form>
-
           <Link
             href={`/${locale}/cart`}
             className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
@@ -319,7 +240,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile — idiomas izquierda | menú | búsqueda + carrito a la derecha */}
+      {/* Mobile — idiomas | menú | carrito */}
       <div className="pointer-events-auto flex w-full items-center gap-2 md:hidden">
         <nav
           className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
@@ -347,7 +268,6 @@ export default function Header() {
           className={`${HEADER_ISLAND} flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
           onClick={() => {
             setMobileMenuOpen((o) => !o);
-            setMobileSearchOpen(false);
           }}
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
@@ -363,68 +283,19 @@ export default function Header() {
             )}
         </button>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <button
-            type="button"
-            className={`${HEADER_ISLAND} flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
-            onClick={() => {
-              setMobileSearchOpen((o) => !o);
-              setMobileMenuOpen(false);
-            }}
-            aria-label={t("common.searchLabel")}
-            aria-expanded={mobileSearchOpen}
-          >
-            {magnifierIcon}
-          </button>
-          <Link
-            href={`/${locale}/cart`}
-            className={`${HEADER_ISLAND} relative flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
-            aria-label={`Cart with ${totalItems} items`}
-          >
-            {cartIcon}
-            {totalItems > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
-                {totalItems > 99 ? "99+" : totalItems}
-              </span>
-            )}
-          </Link>
-        </div>
-      </div>
-
-      {mobileSearchOpen ? (
-        <form
-          className="pointer-events-auto mt-2 w-full md:hidden"
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitSearch();
-          }}
-          role="search"
+        <Link
+          href={`/${locale}/cart`}
+          className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
+          aria-label={`Cart with ${totalItems} items`}
         >
-          <label htmlFor="header-search-mobile-bar" className="sr-only">
-            {t("common.searchLabel")}
-          </label>
-          <div className={SEARCH_PREMIUM_SHELL}>
-            <div className={SEARCH_PREMIUM_INNER}>
-              <input
-                id="header-search-mobile-bar"
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t("common.searchPlaceholder")}
-                className={SEARCH_PREMIUM_INPUT}
-                autoFocus
-              />
-              <button
-                type="submit"
-                className={SEARCH_PREMIUM_BTN}
-                aria-label={t("common.searchLabel")}
-              >
-                {magnifierIcon}
-              </button>
-            </div>
-          </div>
-        </form>
-      ) : null}
+          {cartIcon}
+          {totalItems > 0 && (
+            <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
+              {totalItems > 99 ? "99+" : totalItems}
+            </span>
+          )}
+        </Link>
+      </div>
 
       </div>
 
