@@ -15,13 +15,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const HEADER_ISLAND =
   "rounded-full border border-[#2E4A36]/12 bg-[#F4EBDD]/74 shadow-[0_14px_48px_-22px_rgba(46,74,54,0.2),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-[18px]";
 
-/** Enlaces en panel claro (móvil / mega). */
+/** Enlaces en panel claro (móvil / mega) — TAN Nimbus (`font-display`). */
 const NAV_LINK =
-  "font-sans text-[0.8125rem] font-semibold tracking-[0.06em] text-charcoal transition-colors duration-200 hover:text-[#C9622B] sm:text-[0.875rem]";
+  "font-display text-[0.8125rem] font-semibold tracking-[0.05em] text-charcoal transition-colors duration-200 hover:text-[#C9622B] sm:text-[0.875rem]";
 
-/** Navegación desktop — forest + hover quemado. */
+/** Navegación principal desktop — TAN Nimbus. */
 const NAV_LINK_HEADER =
-  "font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2E4A36] transition-colors duration-200 hover:text-[#C9622B] sm:text-[11px] sm:tracking-[0.22em] md:text-[11px]";
+  "font-display text-[10px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] transition-colors duration-200 hover:text-[#C9622B] sm:text-[11px] sm:tracking-[0.16em] md:text-[11px]";
+
+/** Enlaces de idioma en islas del header. */
+const LOCALE_LINK =
+  "rounded-full px-2 py-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors sm:px-2.5 sm:text-[11px]";
 
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -125,10 +129,10 @@ export default function Header() {
   const mobileNavLinkClass = `${NAV_LINK} rounded-md py-2 px-2`;
 
   const megaCatTitle =
-    "font-sans text-[calc(1rem*1.05)] font-semibold tracking-[0.06em] text-dark-base hover:text-accent-gold transition-colors duration-200";
+    "font-display text-[calc(1rem*1.05)] font-semibold tracking-[0.05em] text-dark-base hover:text-accent-gold transition-colors duration-200";
 
   const megaCatSub =
-    "mb-2 block break-inside-avoid font-sans text-[calc(0.875rem*1.05)] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base transition-colors duration-200";
+    "mb-2 block break-inside-avoid font-display text-[calc(0.875rem*1.05)] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base transition-colors duration-200";
 
   const categoriesBackdropClass = "bg-black/45 backdrop-blur-sm";
 
@@ -173,39 +177,60 @@ export default function Header() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-3 md:px-5 md:pt-3.5">
-      {/* Desktop — piezas flotantes */}
-      <div className="pointer-events-auto hidden w-full items-center justify-between gap-2 md:flex lg:gap-3">
+      {/* Desktop — idiomas izquierda | páginas centradas | búsqueda + carrito + cuenta */}
+      <div className="pointer-events-auto hidden w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 md:grid lg:gap-3">
         <nav
-          className={`${HEADER_ISLAND} relative z-10 flex min-w-0 shrink-0 flex-wrap items-center gap-0.5 px-2.5 py-1.5 sm:gap-1 sm:px-3 sm:py-2`}
-          aria-label="Principal"
+          className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
+          aria-label={t("header.localeNavAria")}
         >
-          <Link href={`/${locale}`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-            {t("header.nav.home")}
-          </Link>
-          <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-            {t("header.nav.products")}
-          </Link>
-          <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
-            {t("header.nav.blog")}
-          </Link>
-          <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
-            <button
-              type="button"
-              className={`${NAV_LINK_HEADER} cursor-pointer whitespace-nowrap rounded-full border-0 bg-transparent px-2 py-2 text-left`}
-              aria-expanded={categoriesOpen}
-              aria-haspopup="true"
-              aria-controls="header-categories-mega"
-              onFocus={openCategoriesMenu}
-              onBlur={scheduleCloseCategories}
+          {locales.map((lang) => (
+            <Link
+              key={lang}
+              href={buildLocaleHref(lang)}
+              className={`${LOCALE_LINK} ${
+                lang === locale
+                  ? "bg-[#2E4A36] text-[#F4EBDD]"
+                  : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
+              }`}
             >
-              {t("header.nav.categories")}
-            </button>
-          </div>
+              {lang.toUpperCase()}
+            </Link>
+          ))}
         </nav>
 
-        <div className="relative z-10 flex min-w-0 flex-1 items-center justify-end gap-2 lg:gap-2.5">
+        <div className="flex min-w-0 justify-center px-1">
+          <nav
+            className={`${HEADER_ISLAND} relative z-10 flex max-w-full flex-wrap items-center justify-center gap-0.5 px-2.5 py-1.5 sm:gap-1 sm:px-3 sm:py-2`}
+            aria-label="Principal"
+          >
+            <Link href={`/${locale}`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+              {t("header.nav.home")}
+            </Link>
+            <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+              {t("header.nav.products")}
+            </Link>
+            <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+              {t("header.nav.blog")}
+            </Link>
+            <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
+              <button
+                type="button"
+                className={`${NAV_LINK_HEADER} cursor-pointer whitespace-nowrap rounded-full border-0 bg-transparent px-2 py-2 text-left`}
+                aria-expanded={categoriesOpen}
+                aria-haspopup="true"
+                aria-controls="header-categories-mega"
+                onFocus={openCategoriesMenu}
+                onBlur={scheduleCloseCategories}
+              >
+                {t("header.nav.categories")}
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <div className="relative z-10 flex min-w-0 shrink-0 items-center justify-end gap-2 lg:gap-2.5">
           <form
-            className={`${HEADER_ISLAND} hidden min-w-0 max-w-[11rem] flex-1 flex-row items-stretch py-1 pl-3 pr-1 md:flex lg:max-w-[14rem] xl:max-w-[16rem]`}
+            className={`${HEADER_ISLAND} hidden min-w-0 max-w-[12rem] shrink-0 flex-row items-stretch py-1 pl-3 pr-1 md:flex lg:max-w-[15rem] xl:max-w-[17rem]`}
             onSubmit={(e) => {
               e.preventDefault();
               submitSearch();
@@ -222,7 +247,7 @@ export default function Header() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t("common.searchPlaceholder")}
-                className="font-sans min-h-[36px] min-w-0 flex-1 border-0 bg-transparent text-[12px] text-[#2E4A36] placeholder:text-[#2E4A36]/45 outline-none focus:ring-0"
+                className="min-h-[36px] min-w-0 flex-1 border-0 bg-transparent font-sans text-[12px] text-[#2E4A36] placeholder:text-[#2E4A36]/45 outline-none focus:ring-0"
               />
               <button
                 type="submit"
@@ -233,22 +258,6 @@ export default function Header() {
               </button>
             </div>
           </form>
-
-          <div className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}>
-            {locales.map((lang) => (
-                  <Link
-                    key={lang}
-                    href={buildLocaleHref(lang)}
-                    className={`rounded-full px-2 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors sm:text-[11px] ${
-                      lang === locale
-                        ? "bg-[#2E4A36] text-[#F4EBDD]"
-                        : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </Link>
-            ))}
-          </div>
 
           <Link
             href={`/${locale}/cart`}
@@ -268,11 +277,11 @@ export default function Header() {
               href={`/${locale}/account`}
               className={`${HEADER_ISLAND} flex max-w-[10rem] shrink-0 items-center gap-2 pl-2.5 pr-1.5 py-1`}
             >
-              <span className="truncate font-sans text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
+              <span className="truncate font-display text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
                 {user.name}
               </span>
               <span
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-sans text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-display text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
                 aria-hidden
               >
                 {userInitials(user.name)}
@@ -282,7 +291,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => openAuthModal("login")}
-              className={`${HEADER_ISLAND} shrink-0 px-3.5 py-2 font-sans text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/40 sm:px-4 sm:text-[12px]`}
+              className={`${HEADER_ISLAND} shrink-0 px-3.5 py-2 font-display text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/40 sm:px-4 sm:text-[12px]`}
             >
               {t("header.account")}
             </button>
@@ -290,8 +299,29 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile — piezas flotantes */}
-      <div className="pointer-events-auto flex w-full items-center justify-between gap-2 md:hidden">
+      {/* Mobile — idiomas izquierda | menú | búsqueda + carrito a la derecha */}
+      <div className="pointer-events-auto flex w-full items-center gap-2 md:hidden">
+        <nav
+          className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
+          aria-label={t("header.localeNavAria")}
+        >
+          {locales.map((lang) => (
+            <Link
+              key={lang}
+              href={buildLocaleHref(lang)}
+              className={`${LOCALE_LINK} ${
+                lang === locale
+                  ? "bg-[#2E4A36] text-[#F4EBDD]"
+                  : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
+              }`}
+            >
+              {lang.toUpperCase()}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="min-w-0 flex-1" aria-hidden />
+
         <button
           type="button"
           className={`${HEADER_ISLAND} flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
@@ -449,7 +479,7 @@ export default function Header() {
                   aria-controls="mobile-categories-menu"
                 >
                   <span>{t("header.nav.categories")}</span>
-                  <span className="font-sans text-[13px] font-semibold tracking-[0.04em] text-muted-gray">{mobileCategoriesOpen ? "−" : "+"}</span>
+                  <span className="font-display text-[13px] font-semibold tracking-[0.04em] text-muted-gray">{mobileCategoriesOpen ? "−" : "+"}</span>
                 </button>
                 {mobileCategoriesOpen ? (
                   <div id="mobile-categories-menu" className="space-y-4 border-l border-earth-brown/20 pl-3">
@@ -457,7 +487,7 @@ export default function Header() {
                       <div key={category.slug} className="space-y-2">
                         <Link
                           href={`/${locale}/category/${category.slug}`}
-                          className="font-sans text-[13px] font-semibold tracking-[0.04em] text-dark-base hover:text-accent-gold"
+                          className="font-display text-[13px] font-semibold tracking-[0.04em] text-dark-base hover:text-accent-gold"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {t(`categories.names.${category.slug}`, category.name)}
@@ -467,7 +497,7 @@ export default function Header() {
                             <Link
                               key={sub.slug}
                               href={`/${locale}/category/${sub.slug}`}
-                              className="font-sans text-[13px] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base"
+                              className="font-display text-[13px] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base"
                               onClick={() => setMobileMenuOpen(false)}
                             >
                               {t(`categories.names.${sub.slug}`, sub.name)}
@@ -484,7 +514,7 @@ export default function Header() {
                   <Link
                     key={lang}
                     href={buildLocaleHref(lang)}
-                    className={`font-sans text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                    className={`font-display text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors ${
                       lang === locale ? "text-accent-gold" : "text-muted-gray hover:text-dark-base"
                     }`}
                   >

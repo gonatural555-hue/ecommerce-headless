@@ -10,7 +10,8 @@
       "contact": "Contact"
     },
     "greeting": "Bonjour",
-    "account": "Compte"
+    "account": "Compte",
+    "localeNavAria": "Choisir la langue"
   },
   "common": {
     "viewProduct": "Voir le produit",
