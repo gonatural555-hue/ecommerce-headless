@@ -1,3 +1,4 @@
+import MountainSideDecorations from "@/components/brand/MountainSideDecorations";
 import HomeBrandHero from "@/components/home/HomeBrandHero";
 import BrandStatement from "@/components/home/BrandStatement";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
@@ -119,63 +120,69 @@ export default async function HomePage({
   const categoryCards = Array.isArray(h.categoryCards) ? h.categoryCards : [];
 
   return (
-    <main className={`flex min-h-screen flex-col bg-[#F4EBDD] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}>
-      <HomeBrandHero
-        locale={locale}
-        title={t("homeBrandHero.title")}
-        subtitle={t("homeBrandHero.subtitle")}
-        ctaPrimary={t("homeBrandHero.ctaPrimary")}
-        ctaSecondary={t("homeBrandHero.ctaSecondary")}
-        cardinalLabels={{
-          north: t("homeCompass.north"),
-          south: t("homeCompass.south"),
-          east: t("homeCompass.east"),
-          west: t("homeCompass.west"),
-        }}
-        compassAriaLabel={t("homeCompass.compassAria")}
-      />
+    <main
+      className={`relative overflow-x-hidden flex min-h-screen flex-col bg-[#F4EBDD] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}
+    >
+      <MountainSideDecorations />
 
-      <BrandStatement text={h.brandStatement ?? t("story.title")} />
-
-      <FeaturedProducts
-        products={products}
-        locale={locale}
-        title={h.essentialTitle ?? t("featured.title")}
-        subtitle={h.essentialSubtitle ?? t("featured.subtitle")}
-        labels={cardLabels}
-      />
-
-      <ImageStorySection
-        imageSrc="/assets/images/hero/trekking.webp"
-        imageAlt={h.imageStoryAria ?? ""}
-        title={h.imageStoryTitle ?? t("story.lines.0")}
-      />
-
-      {categoryCards.length > 0 ? (
-        <CategoryGrid
+      <div className="relative z-10 flex flex-1 flex-col">
+        <HomeBrandHero
           locale={locale}
-          title={h.categoriesTitle ?? t("homePage.categoriesTitle")}
-          subtitle={h.categoriesSubtitle ?? t("homePage.categoriesSubtitle")}
-          cards={categoryCards}
+          title={t("homeBrandHero.title")}
+          subtitle={t("homeBrandHero.subtitle")}
+          ctaPrimary={t("homeBrandHero.ctaPrimary")}
+          ctaSecondary={t("homeBrandHero.ctaSecondary")}
+          cardinalLabels={{
+            north: t("homeCompass.north"),
+            south: t("homeCompass.south"),
+            east: t("homeCompass.east"),
+            west: t("homeCompass.west"),
+          }}
+          compassAriaLabel={t("homeCompass.compassAria")}
         />
-      ) : null}
 
-      <BlogPreview
-        title={h.journalTitle ?? t("homeJournal.title")}
-        intro={h.journalIntro ?? t("homeJournal.intro")}
-        ctaLabel={h.journalCta ?? t("homeJournal.cta")}
-        ctaHref={journalCtaHref}
-        readLabel={t("common.readArticle")}
-        posts={featuredPosts}
-      />
+        <BrandStatement text={h.brandStatement ?? t("story.title")} />
 
-      <CommunityCTA
-        title={h.communityTitle ?? t("blog.journal.communityTitle")}
-        tagline={h.communityTagline}
-        body={h.communityBody ?? t("blog.journal.communityBody")}
-        ctaLabel={h.communityCta ?? t("blog.journal.communityCta")}
-        href={`/${locale}/contact`}
-      />
+        <FeaturedProducts
+          products={products}
+          locale={locale}
+          title={h.essentialTitle ?? t("featured.title")}
+          subtitle={h.essentialSubtitle ?? t("featured.subtitle")}
+          labels={cardLabels}
+        />
+
+        <ImageStorySection
+          imageSrc="/assets/images/hero/trekking.webp"
+          imageAlt={h.imageStoryAria ?? ""}
+          title={h.imageStoryTitle ?? t("story.lines.0")}
+        />
+
+        {categoryCards.length > 0 ? (
+          <CategoryGrid
+            locale={locale}
+            title={h.categoriesTitle ?? t("homePage.categoriesTitle")}
+            subtitle={h.categoriesSubtitle ?? t("homePage.categoriesSubtitle")}
+            cards={categoryCards}
+          />
+        ) : null}
+
+        <BlogPreview
+          title={h.journalTitle ?? t("homeJournal.title")}
+          intro={h.journalIntro ?? t("homeJournal.intro")}
+          ctaLabel={h.journalCta ?? t("homeJournal.cta")}
+          ctaHref={journalCtaHref}
+          readLabel={t("common.readArticle")}
+          posts={featuredPosts}
+        />
+
+        <CommunityCTA
+          title={h.communityTitle ?? t("blog.journal.communityTitle")}
+          tagline={h.communityTagline}
+          body={h.communityBody ?? t("blog.journal.communityBody")}
+          ctaLabel={h.communityCta ?? t("blog.journal.communityCta")}
+          href={`/${locale}/contact`}
+        />
+      </div>
     </main>
   );
 }

@@ -59,7 +59,7 @@ export default function HomeBrandHero({
 
   return (
     <section
-      className="relative isolate min-h-[min(100dvh,44rem)] w-full overflow-hidden bg-[#F4EBDD]"
+      className="relative isolate min-h-[min(100dvh,44rem)] w-full overflow-hidden bg-transparent"
       aria-label="Hero"
     >
       <div
