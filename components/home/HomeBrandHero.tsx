@@ -82,9 +82,18 @@ export default function HomeBrandHero({
     },
   };
 
+  const compassReveal = {
+    hidden: off ? { opacity: 1, y: 0 } : { opacity: 0, y: 52 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: off ? { duration: 0 } : { duration: 1.08, ease: easeOut },
+    },
+  };
+
   return (
     <section
-      className="relative isolate flex w-full min-h-[100dvh] min-h-[100svh] flex-col items-center justify-center overflow-x-clip overflow-y-visible bg-gn-cream px-4 py-[calc(env(safe-area-inset-top,0px)+var(--gn-space-l))] sm:px-6 md:px-8 lg:px-12 lg:py-gn-xl"
+      className="relative isolate flex w-full flex-col overflow-x-clip overflow-y-visible bg-gn-cream"
       aria-label="Hero"
     >
       <div
@@ -92,81 +101,74 @@ export default function HomeBrandHero({
         aria-hidden
       />
 
+      {/* Primera pantalla: sin brújula; más aire bajo el header fijo */}
       <motion.div
-        className="relative z-[1] mx-auto flex w-full min-w-0 max-w-gn-content flex-col items-center overflow-x-clip px-0 text-center"
+        className="relative z-[1] mx-auto flex min-h-[100svh] min-h-[100dvh] w-full min-w-0 max-w-gn-content flex-col px-4 pb-gn-l pt-[calc(env(safe-area-inset-top,0px)+6.75rem)] sm:px-6 sm:pt-[calc(env(safe-area-inset-top,0px)+7rem)] md:px-8 md:pt-[calc(env(safe-area-inset-top,0px)+7.25rem)] lg:px-12 lg:pb-gn-xl lg:pt-[calc(env(safe-area-inset-top,0px)+7.5rem)]"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        <motion.p
-          variants={itemVariants}
-          className="mb-gn-m font-sans text-[clamp(10px,1.05vw,12.5px)] font-semibold uppercase tracking-[0.32em] text-gn-burnt"
-        >
-          {eyebrow}
-        </motion.p>
+        <div className="flex min-h-0 flex-1 flex-col justify-center">
+          <motion.p
+            variants={itemVariants}
+            className="mb-gn-m font-sans text-[clamp(10px,1.05vw,12.5px)] font-semibold uppercase tracking-[0.32em] text-gn-burnt"
+          >
+            {eyebrow}
+          </motion.p>
 
-        <motion.h1 variants={itemVariants} className="gn-hero-title w-full min-w-0 text-center">
-          {titleRows.map((row) => (
-            <span key={row.key} className="block w-full min-w-0 py-px">
-              <span className="inline-flex max-w-full flex-wrap justify-center gap-x-[0.14em] gap-y-1">
-                {row.words.map(({ word, color, colorKey }) => (
-                  <motion.span
-                    key={`${row.key}-${colorKey}`}
-                    className="inline-block cursor-default rounded-md px-[0.05em] [-webkit-tap-highlight-color:transparent]"
-                    style={{
-                      color,
-                      transformOrigin: "50% 90%",
-                    }}
-                    whileHover={
-                      off
-                        ? undefined
-                        : {
-                            y: -8,
-                            scale: 1.055,
-                            textShadow: "0 12px 32px rgba(46, 74, 54, 0.12), 0 4px 14px rgba(46, 74, 54, 0.08)",
-                            transition: {
-                              duration: 0.52,
-                              ease: easeOut,
-                            },
-                          }
-                    }
-                  >
-                    {word}
-                  </motion.span>
-                ))}
+          <motion.h1 variants={itemVariants} className="gn-hero-title w-full min-w-0 text-center">
+            {titleRows.map((row) => (
+              <span key={row.key} className="block w-full min-w-0 py-px">
+                <span className="inline-flex max-w-full flex-wrap justify-center gap-x-[0.14em] gap-y-1">
+                  {row.words.map(({ word, color, colorKey }) => (
+                    <motion.span
+                      key={`${row.key}-${colorKey}`}
+                      className="inline-block cursor-default rounded-md px-[0.05em] [-webkit-tap-highlight-color:transparent]"
+                      style={{
+                        color,
+                        transformOrigin: "50% 90%",
+                      }}
+                      whileHover={
+                        off
+                          ? undefined
+                          : {
+                              y: -8,
+                              scale: 1.055,
+                              textShadow:
+                                "0 12px 32px rgba(46, 74, 54, 0.12), 0 4px 14px rgba(46, 74, 54, 0.08)",
+                              transition: {
+                                duration: 0.52,
+                                ease: easeOut,
+                              },
+                            }
+                      }
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </span>
               </span>
-            </span>
-          ))}
-        </motion.h1>
+            ))}
+          </motion.h1>
 
-        <motion.p variants={itemVariants} className="gn-hero-subtitle mx-auto mt-gn-m text-center md:mt-gn-m">
-          {subtitle}
-        </motion.p>
+          <motion.p variants={itemVariants} className="gn-hero-subtitle mx-auto mt-gn-m text-center">
+            {subtitle}
+          </motion.p>
 
-        <motion.div
-          variants={itemVariants}
-          className="mt-gn-m flex w-full max-w-md flex-col items-stretch justify-center gap-gn-s sm:max-w-none sm:flex-row sm:gap-gn-m"
-        >
-          <Link href={`/${locale}/products`} className={primaryCtaClass}>
-            {ctaPrimary}
-          </Link>
-          <Link href={`/${locale}/blog`} className={secondaryCtaClass}>
-            {ctaSecondary}
-          </Link>
-        </motion.div>
+          <motion.div
+            variants={itemVariants}
+            className="mt-gn-m flex w-full max-w-md flex-col items-stretch justify-center gap-gn-s sm:max-w-none sm:flex-row sm:gap-gn-m"
+          >
+            <Link href={`/${locale}/products`} className={primaryCtaClass}>
+              {ctaPrimary}
+            </Link>
+            <Link href={`/${locale}/blog`} className={secondaryCtaClass}>
+              {ctaSecondary}
+            </Link>
+          </motion.div>
+        </div>
 
-        <motion.div variants={itemVariants} className="mt-gn-m md:mt-gn-l">
-          <HeroCompassCursor
-            variant="brand"
-            ariaLabel={compassAriaLabel}
-            cardinalLabels={cardinalLabels}
-          />
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="mt-gn-s flex flex-col items-center gap-gn-xs md:mt-gn-m"
-        >
+        <motion.div variants={itemVariants} className="mt-auto flex flex-col items-center gap-gn-xs pt-gn-m">
           <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-gn-forest md:text-[12px] md:tracking-[0.22em]">
             {scrollHint}
           </p>
@@ -191,6 +193,21 @@ export default function HomeBrandHero({
             </div>
           )}
         </motion.div>
+      </motion.div>
+
+      {/* Brújula: solo tras scroll; entrada slide-up premium */}
+      <motion.div
+        className="relative z-[1] mx-auto flex w-full min-w-0 max-w-gn-content justify-center px-4 pb-gn-xxl pt-gn-l sm:px-6 md:px-8 lg:px-12"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.22, margin: "0px 0px -10% 0px" }}
+        variants={compassReveal}
+      >
+        <HeroCompassCursor
+          variant="brand"
+          ariaLabel={compassAriaLabel}
+          cardinalLabels={cardinalLabels}
+        />
       </motion.div>
     </section>
   );

@@ -11,7 +11,8 @@
     },
     "greeting": "Ciao",
     "account": "Account",
-    "localeNavAria": "Scegli la lingua"
+    "localeNavAria": "Scegli la lingua",
+    "logoAlt": "Go Natural"
   },
   "common": {
     "viewProduct": "Vedi prodotto",

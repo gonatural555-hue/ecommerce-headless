@@ -11,7 +11,8 @@
     },
     "greeting": "Hola",
     "account": "Cuenta",
-    "localeNavAria": "Elegir idioma"
+    "localeNavAria": "Elegir idioma",
+    "logoAlt": "Go Natural"
   },
   "common": {
     "viewProduct": "Ver producto",

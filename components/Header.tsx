@@ -1,5 +1,7 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
@@ -31,6 +33,48 @@ const NAV_HEADER_CATEGORIES = `${NAV_LINK_HEADER_BASE} text-[#D9A441]`;
 /** Enlaces de idioma. */
 const LOCALE_LINK =
   "rounded-full px-2 py-1.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] transition-colors md:px-2.5";
+
+const logoEase = [0.22, 1, 0.36, 1] as const;
+
+function BrandLogoLink({
+  locale,
+  alt,
+  imageClassName,
+}: {
+  locale: Locale;
+  alt: string;
+  imageClassName: string;
+}) {
+  const reduceMotion = useReducedMotion() ?? false;
+  return (
+    <motion.div
+      className="flex shrink-0 justify-center"
+      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.85,
+        ease: logoEase,
+        delay: reduceMotion ? 0 : 0.06,
+      }}
+    >
+      <Link
+        href={`/${locale}`}
+        className="relative block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]"
+        aria-label={alt}
+      >
+        <Image
+          src="/assets/images/logo/LOG-GONATURAL.png"
+          alt={alt}
+          width={320}
+          height={96}
+          priority
+          draggable={false}
+          className={imageClassName}
+        />
+      </Link>
+    </motion.div>
+  );
+}
 
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -150,41 +194,61 @@ export default function Header() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 font-inter">
       <div className="mx-auto w-full max-w-gn-content px-8 pb-1 pt-3 lg:px-12 md:pt-4">
-      {/* Desktop — rejilla simétrica | idiomas | nav centrado | utilidades */}
-      <div className="pointer-events-auto hidden min-h-[72px] w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 md:grid md:min-h-[76px] lg:min-h-[80px] lg:gap-x-3">
-        <nav
-          className={`${HEADER_ISLAND} justify-self-start flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
-          aria-label={t("header.localeNavAria")}
-        >
-          {locales.map((lang) => (
-            <Link
-              key={lang}
-              href={buildLocaleHref(lang)}
-              className={`${LOCALE_LINK} ${
-                lang === locale
-                  ? "bg-[#2E4A36] text-[#F4EBDD]"
-                  : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
-              }`}
-            >
-              {lang.toUpperCase()}
-            </Link>
-          ))}
-        </nav>
-
-        <nav
-          className={`${HEADER_ISLAND} relative z-10 justify-self-center flex max-w-full flex-wrap items-center justify-center gap-0.5 px-2.5 py-1.5 sm:gap-1 sm:px-3 sm:py-2`}
-          aria-label="Principal"
-        >
+      {/* Desktop — idiomas + Home/Blog | logo centrado | Products/Categorías + utilidades */}
+      <div className="pointer-events-auto hidden w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 md:grid md:min-h-[76px] lg:min-h-[80px] lg:gap-x-4">
+        <div className="flex min-w-0 items-center justify-start gap-2">
+          <nav
+            className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
+            aria-label={t("header.localeNavAria")}
+          >
+            {locales.map((lang) => (
+              <Link
+                key={lang}
+                href={buildLocaleHref(lang)}
+                className={`${LOCALE_LINK} ${
+                  lang === locale
+                    ? "bg-[#2E4A36] text-[#F4EBDD]"
+                    : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
+                }`}
+              >
+                {lang.toUpperCase()}
+              </Link>
+            ))}
+          </nav>
+          <nav
+            className={`${HEADER_ISLAND} relative z-10 flex max-w-full flex-wrap items-center gap-0.5 px-2 py-1.5 sm:gap-1 sm:px-2.5 sm:py-2`}
+            aria-label="Principal"
+          >
             <Link href={`/${locale}`} className={NAV_HEADER_HOME}>
               {t("header.nav.home")}
-            </Link>
-            <Link href={`/${locale}/products`} className={NAV_HEADER_PRODUCTS}>
-              {t("header.nav.products")}
             </Link>
             <Link href={`/${locale}/blog`} className={NAV_HEADER_BLOG}>
               {t("header.nav.blog")}
             </Link>
-            <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
+          </nav>
+        </div>
+
+        <div className="flex shrink-0 justify-center px-2">
+          <BrandLogoLink
+            locale={locale}
+            alt={t("header.logoAlt")}
+            imageClassName="h-8 w-auto max-w-[min(46vw,11rem)] object-contain object-center md:h-9 md:max-w-[min(36vw,13rem)] lg:h-10 lg:max-w-[15rem]"
+          />
+        </div>
+
+        <div className="relative z-10 flex min-w-0 shrink-0 items-center justify-end gap-2 lg:gap-2.5">
+          <nav
+            className={`${HEADER_ISLAND} flex max-w-full flex-wrap items-center justify-center gap-0.5 px-2 py-1.5 sm:gap-1 sm:px-2.5 sm:py-2`}
+            aria-label={`${t("header.nav.products")}, ${t("header.nav.categories")}`}
+          >
+            <Link href={`/${locale}/products`} className={NAV_HEADER_PRODUCTS}>
+              {t("header.nav.products")}
+            </Link>
+            <div
+              className="relative"
+              onMouseEnter={openCategoriesMenu}
+              onMouseLeave={scheduleCloseCategories}
+            >
               <button
                 type="button"
                 className={`${NAV_HEADER_CATEGORIES} cursor-pointer border-0 bg-transparent text-left`}
@@ -197,9 +261,7 @@ export default function Header() {
                 {t("header.nav.categories")}
               </button>
             </div>
-        </nav>
-
-        <div className="relative z-10 justify-self-end flex min-w-0 shrink-0 items-center justify-end gap-2 lg:gap-2.5">
+          </nav>
           <Link
             href={`/${locale}/cart`}
             className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
@@ -240,8 +302,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile — idiomas | menú | carrito */}
-      <div className="pointer-events-auto flex min-h-16 w-full items-center gap-gn-s md:hidden">
+      {/* Mobile — idiomas | logo | menú | carrito */}
+      <div className="pointer-events-auto flex min-h-16 w-full items-center gap-2 md:hidden">
         <nav
           className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
           aria-label={t("header.localeNavAria")}
@@ -261,7 +323,13 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="min-w-0 flex-1" aria-hidden />
+        <div className="flex min-w-0 flex-1 justify-center px-1">
+          <BrandLogoLink
+            locale={locale}
+            alt={t("header.logoAlt")}
+            imageClassName="h-7 w-auto max-w-[min(42vw,9.5rem)] object-contain object-center"
+          />
+        </div>
 
         <button
           type="button"
@@ -272,15 +340,15 @@ export default function Header() {
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
         >
-            {mobileMenuOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            )}
+          {mobileMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          )}
         </button>
 
         <Link
@@ -314,7 +382,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[5.5rem] sm:top-[5.75rem] md:top-[6.5rem]",
+            "top-[6.75rem] sm:top-[7rem] md:top-[7.25rem]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
