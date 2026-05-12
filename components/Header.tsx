@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
@@ -10,22 +11,21 @@ import { getAllCategories } from "@/lib/categories";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { LUMINOUS_INNER_CHROME } from "@/lib/ui/luminous-edge";
+/** Controles (búsqueda, carrito, etc.) — cristal suave. */
+const INNER_SOLID =
+  "rounded-full border border-[#2E4A36]/10 bg-white/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_4px_18px_-8px_rgba(46,74,54,0.12)] backdrop-blur-md transition hover:border-[#2E4A36]/18 hover:bg-white";
+
+/** Isla flotante del header (crema / vidrio). */
+const HEADER_ISLAND =
+  "rounded-full border border-[#2E4A36]/12 bg-[#F4EBDD]/74 shadow-[0_14px_48px_-22px_rgba(46,74,54,0.2),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-[18px]";
 
 /** Enlaces en panel claro (móvil / mega). */
 const NAV_LINK =
-  "font-sans text-[0.8125rem] font-semibold tracking-[0.06em] text-charcoal transition-colors duration-200 hover:text-mountain-green sm:text-[0.875rem]";
+  "font-sans text-[0.8125rem] font-semibold tracking-[0.06em] text-charcoal transition-colors duration-200 hover:text-[#C9622B] sm:text-[0.875rem]";
 
-/** Navegación principal sobre hero oscuro / video. */
-const NAV_LINK_TOP =
-  "font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-white [text-shadow:0_1px_14px_rgba(0,0,0,0.7),0_0_1px_rgba(0,0,0,0.85)] transition-colors duration-200 hover:text-white/90 sm:text-[11px] sm:tracking-[0.26em] md:text-xs md:tracking-[0.28em]";
-
-/** Misma navegación sobre hero claro (home con fondo #F4EBDD). */
-const NAV_LINK_TOP_LIGHT =
-  "font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-[#2E4A36] transition-colors duration-200 hover:text-[#2E4A36]/75 sm:text-[11px] sm:tracking-[0.26em] md:text-xs md:tracking-[0.28em]";
-
-/** Superficie blanca interior (search, iconos, perfil). */
-const INNER_SOLID = `rounded-full bg-white ${LUMINOUS_INNER_CHROME} ring-1 ring-black/[0.05]`;
+/** Navegación desktop — forest + hover quemado. */
+const NAV_LINK_HEADER =
+  "font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2E4A36] transition-colors duration-200 hover:text-[#C9622B] sm:text-[11px] sm:tracking-[0.22em] md:text-[11px]";
 
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -115,11 +115,6 @@ export default function Header() {
     return `/${segments.join("/")}${query ? `?${query}` : ""}`;
   };
 
-  const pathnameSegments = pathname.split("/").filter(Boolean);
-  const isLocaleHome =
-    pathnameSegments.length === 1 && locales.includes(pathnameSegments[0] as Locale);
-  const desktopTopNavClass = isLocaleHome ? NAV_LINK_TOP_LIGHT : NAV_LINK_TOP;
-
   const submitSearch = () => {
     const trimmed = searchQuery.trim();
     router.push(
@@ -184,137 +179,145 @@ export default function Header() {
     <header className="pointer-events-none fixed left-0 right-0 top-0 z-50">
       {/* Casi ancho completo: calc(100% - 48px) en desktop + márgenes seguros en móvil */}
       <div className="mx-auto w-full max-w-none px-4 pt-2.5 sm:px-5 sm:pt-3 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0 lg:pt-3">
-        {/* Desktop — elementos flotantes (sin contenedor tipo píldora) */}
-        <div className="pointer-events-auto mx-auto hidden w-full items-center gap-3 px-1 py-2 sm:gap-4 sm:px-2 sm:py-2.5 md:flex lg:gap-5 lg:px-3 lg:py-3">
-          <nav
-            className="hidden min-w-0 shrink-0 items-center gap-0 md:flex md:gap-0.5 lg:gap-1"
-            aria-label="Principal"
-          >
-            <Link href={`/${locale}`} className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
-              {t("header.nav.home")}
-            </Link>
-            <Link
-              href={`/${locale}/products`}
-              className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}
+        {/* Desktop — isla flotante: nav | logo centrado | búsqueda + idioma + carrito */}
+        <div className="pointer-events-auto mx-auto hidden w-full md:block">
+          <div className={`relative flex items-center gap-2 py-2.5 pl-4 pr-2.5 sm:pl-5 sm:pr-3 lg:gap-3 lg:pl-7 lg:pr-4 ${HEADER_ISLAND}`}>
+            <nav
+              className="relative z-10 flex min-w-0 shrink-0 flex-wrap items-center gap-0.5 lg:gap-1"
+              aria-label="Principal"
             >
-              {t("header.nav.products")}
-            </Link>
-            <Link href={`/${locale}/blog`} className={`${desktopTopNavClass} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
-              {t("header.nav.blog")}
-            </Link>
-            <div
-              className="relative"
-              onMouseEnter={openCategoriesMenu}
-              onMouseLeave={scheduleCloseCategories}
-            >
-              <button
-                type="button"
-                className={`${desktopTopNavClass} cursor-pointer whitespace-nowrap border-0 bg-transparent px-1 py-1.5 text-left md:px-1.5 xl:px-2`}
-                aria-expanded={categoriesOpen}
-                aria-haspopup="true"
-                aria-controls="header-categories-mega"
-                onFocus={openCategoriesMenu}
-                onBlur={scheduleCloseCategories}
-              >
-                {t("header.nav.categories")}
-              </button>
-            </div>
-          </nav>
-
-          <form
-            className="flex min-w-0 flex-1 items-center justify-end"
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitSearch();
-            }}
-            role="search"
-          >
-            <label htmlFor="header-search" className="sr-only">
-              {t("common.searchLabel")}
-            </label>
-            <div
-              className={`flex w-full max-w-xl min-w-[8rem] items-center gap-1 pl-3 sm:pl-4 ${INNER_SOLID} py-1 pr-1 lg:max-w-2xl`}
-            >
-              <input
-                id="header-search"
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t("common.searchPlaceholder")}
-                className="font-sans min-h-[38px] min-w-0 flex-1 border-0 bg-transparent text-[13px] text-charcoal placeholder:text-muted-gray/75 outline-none focus:ring-0"
-              />
-              <button
-                type="submit"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-charcoal text-white transition hover:bg-dark-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/40 focus-visible:ring-offset-2"
-                aria-label={t("common.searchLabel")}
-              >
-                {magnifierIcon}
-              </button>
-            </div>
-          </form>
-
-          <div
-            className={`hidden shrink-0 items-center gap-0.5 px-1 py-0.5 md:flex ${INNER_SOLID}`}
-          >
-            {locales.map((lang) => (
-              <Link
-                key={lang}
-                href={buildLocaleHref(lang)}
-                className={`rounded-full px-2 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors sm:text-[11px] sm:tracking-[0.22em] ${
-                  lang === locale
-                    ? "bg-soft-stone text-charcoal"
-                    : "text-muted-gray hover:bg-soft-stone/70 hover:text-charcoal"
-                }`}
-              >
-                {lang.toUpperCase()}
+              <Link href={`/${locale}`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+                {t("header.nav.home")}
               </Link>
-            ))}
-          </div>
+              <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+                {t("header.nav.products")}
+              </Link>
+              <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER} whitespace-nowrap rounded-full px-2 py-2`}>
+                {t("header.nav.blog")}
+              </Link>
+              <div className="relative" onMouseEnter={openCategoriesMenu} onMouseLeave={scheduleCloseCategories}>
+                <button
+                  type="button"
+                  className={`${NAV_LINK_HEADER} cursor-pointer whitespace-nowrap rounded-full border-0 bg-transparent px-2 py-2 text-left`}
+                  aria-expanded={categoriesOpen}
+                  aria-haspopup="true"
+                  aria-controls="header-categories-mega"
+                  onFocus={openCategoriesMenu}
+                  onBlur={scheduleCloseCategories}
+                >
+                  {t("header.nav.categories")}
+                </button>
+              </div>
+            </nav>
 
-          <Link
-            href={`/${locale}/cart`}
-            className={`relative flex h-10 w-10 shrink-0 items-center justify-center text-charcoal transition hover:text-mountain-green ${INNER_SOLID}`}
-            aria-label={`Cart with ${totalItems} items`}
-          >
-            {cartIcon}
-            {totalItems > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-accent-gold px-0.5 font-sans text-[9px] font-semibold text-dark-base">
-                {totalItems > 99 ? "99+" : totalItems}
-              </span>
-            )}
-          </Link>
-
-          {isLoggedIn && user ? (
             <Link
-              href={`/${locale}/account`}
-              className={`flex max-w-[11rem] shrink-0 items-center gap-2 pl-3 pr-1.5 py-1 transition hover:ring-black/10 ${INNER_SOLID}`}
+              href={`/${locale}`}
+              className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-md outline-none transition duration-300 hover:opacity-[0.9] focus-visible:ring-2 focus-visible:ring-[#C9622B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]"
+              aria-label="Go Natural — inicio"
             >
-              <span className="truncate font-sans text-[12px] font-semibold tracking-[0.04em] text-charcoal sm:text-[13px]">
-                {user.name}
-              </span>
-              <span
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-mountain-green to-moss-green font-sans text-[10px] font-semibold uppercase tracking-wide text-white shadow-inner"
-                aria-hidden
-              >
-                {userInitials(user.name)}
-              </span>
+              <Image
+                src="/assets/images/logo/LOGO.png"
+                alt="Go Natural"
+                width={220}
+                height={88}
+                className="h-9 w-auto sm:h-10 lg:h-11"
+                priority
+              />
             </Link>
-          ) : (
-            <button
-              type="button"
-              onClick={() => openAuthModal("login")}
-              className={`shrink-0 px-4 py-2 font-sans text-[12px] font-semibold tracking-[0.05em] text-charcoal transition hover:bg-soft-stone sm:text-[13px] ${INNER_SOLID}`}
-            >
-              {t("header.account")}
-            </button>
-          )}
+
+            <div className="relative z-10 ml-auto flex min-w-0 flex-1 items-center justify-end gap-2 lg:gap-2.5">
+              <form
+                className="mx-auto hidden min-w-0 max-w-[11rem] flex-1 md:block lg:max-w-[14rem] xl:max-w-[16rem]"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  submitSearch();
+                }}
+                role="search"
+              >
+                <label htmlFor="header-search" className="sr-only">
+                  {t("common.searchLabel")}
+                </label>
+                <div className={`flex w-full items-center gap-1 pl-3 ${INNER_SOLID} py-1 pr-1`}>
+                  <input
+                    id="header-search"
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("common.searchPlaceholder")}
+                    className="font-sans min-h-[36px] min-w-0 flex-1 border-0 bg-transparent text-[12px] text-[#2E4A36] placeholder:text-[#2E4A36]/45 outline-none focus:ring-0"
+                  />
+                  <button
+                    type="submit"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2E4A36] text-[#F4EBDD] transition hover:bg-[#6E1F28] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9622B]/45"
+                    aria-label={t("common.searchLabel")}
+                  >
+                    {magnifierIcon}
+                  </button>
+                </div>
+              </form>
+
+              <div className={`flex shrink-0 items-center gap-0.5 px-1 py-0.5 ${INNER_SOLID}`}>
+                {locales.map((lang) => (
+                  <Link
+                    key={lang}
+                    href={buildLocaleHref(lang)}
+                    className={`rounded-full px-2 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors sm:text-[11px] ${
+                      lang === locale
+                        ? "bg-[#2E4A36] text-[#F4EBDD]"
+                        : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href={`/${locale}/cart`}
+                className={`relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
+                aria-label={`Cart with ${totalItems} items`}
+              >
+                {cartIcon}
+                {totalItems > 0 && (
+                  <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
+                    {totalItems > 99 ? "99+" : totalItems}
+                  </span>
+                )}
+              </Link>
+
+              {isLoggedIn && user ? (
+                <Link
+                  href={`/${locale}/account`}
+                  className={`flex max-w-[10rem] shrink-0 items-center gap-2 pl-2.5 pr-1.5 py-1 ${INNER_SOLID}`}
+                >
+                  <span className="truncate font-sans text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
+                    {user.name}
+                  </span>
+                  <span
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-sans text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                    aria-hidden
+                  >
+                    {userInitials(user.name)}
+                  </span>
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openAuthModal("login")}
+                  className={`shrink-0 px-3.5 py-2 font-sans text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/95 sm:px-4 sm:text-[12px] ${INNER_SOLID}`}
+                >
+                  {t("header.account")}
+                </button>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Mobile — iconos flotantes */}
-        <div className="pointer-events-auto mx-auto flex w-full items-center justify-between gap-2 px-1 py-2 md:hidden">
+        {/* Mobile — isla con logo centrado */}
+        <div className={`pointer-events-auto mx-auto flex w-full items-center justify-between gap-2 px-3 py-2 md:hidden ${HEADER_ISLAND}`}>
           <button
             type="button"
-            className={`flex h-10 w-10 shrink-0 items-center justify-center text-charcoal transition hover:bg-soft-stone/80 ${INNER_SOLID}`}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
             onClick={() => {
               setMobileMenuOpen((o) => !o);
               setMobileSearchOpen(false);
@@ -333,12 +336,25 @@ export default function Header() {
             )}
           </button>
 
-          <div className="min-w-0 flex-1" aria-hidden />
+          <Link
+            href={`/${locale}`}
+            className="flex min-w-0 max-w-[48%] shrink-0 items-center justify-center"
+            aria-label="Go Natural — inicio"
+          >
+            <Image
+              src="/assets/images/logo/LOGO.png"
+              alt="Go Natural"
+              width={200}
+              height={80}
+              className="h-8 w-auto max-w-full object-contain object-center"
+              priority
+            />
+          </Link>
 
           <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
-              className={`flex h-10 w-10 items-center justify-center text-charcoal ${INNER_SOLID}`}
+              className={`flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
               onClick={() => {
                 setMobileSearchOpen((o) => !o);
                 setMobileMenuOpen(false);
@@ -346,16 +362,16 @@ export default function Header() {
               aria-label={t("common.searchLabel")}
               aria-expanded={mobileSearchOpen}
             >
-              <span className="text-charcoal">{magnifierIcon}</span>
+              {magnifierIcon}
             </button>
             <Link
               href={`/${locale}/cart`}
-              className={`relative flex h-10 w-10 items-center justify-center text-charcoal ${INNER_SOLID}`}
+              className={`relative flex h-10 w-10 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B] ${INNER_SOLID}`}
               aria-label={`Cart with ${totalItems} items`}
             >
               {cartIcon}
               {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-accent-gold px-0.5 font-sans text-[9px] font-semibold text-dark-base">
+                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-sans text-[9px] font-semibold text-[#2E4A36]">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}
@@ -411,7 +427,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[4.75rem] sm:top-[5rem] md:top-[5.5rem]",
+            "top-[5.85rem] sm:top-[6.1rem] md:top-[6.35rem]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",

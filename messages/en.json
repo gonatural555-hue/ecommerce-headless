@@ -121,6 +121,13 @@
     "east": "E",
     "west": "W"
   },
+  "homeBrandHero": {
+    "eyebrow": "Go Natural",
+    "title": "Go Back To Essentials",
+    "subtitle": "Gear designed for movement, nature and the moments that bring you back outside.",
+    "ctaPrimary": "Shop Outdoor Gear",
+    "ctaSecondary": "Explore Journal"
+  },
   "homeImmersive": {
     "heroHeading": "Move, explore, live",
     "scrollHint": "Discover",

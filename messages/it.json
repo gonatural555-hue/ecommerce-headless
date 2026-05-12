@@ -121,6 +121,13 @@
     "east": "E",
     "west": "O"
   },
+  "homeBrandHero": {
+    "eyebrow": "Go Natural",
+    "title": "Ritorna all’essenziale",
+    "subtitle": "Attrezzatura pensata per muoverti, riconnetterti alla natura e tornare fuori.",
+    "ctaPrimary": "Acquista attrezzatura outdoor",
+    "ctaSecondary": "Esplora il journal"
+  },
   "homeImmersive": {
     "heroHeading": "Muoviti, esplora, vivi",
     "scrollHint": "Scopri",

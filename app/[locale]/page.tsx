@@ -1,5 +1,4 @@
-import HomeHero from "@/components/home/HomeHero";
-import HomeCompassCategories from "@/components/home/HomeCompassCategories";
+import HomeBrandHero from "@/components/home/HomeBrandHero";
 import BrandStatement from "@/components/home/BrandStatement";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ImageStorySection from "@/components/home/ImageStorySection";
@@ -11,8 +10,6 @@ import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { buildMetadata } from "@/lib/seo";
-import type { HeroCategoryCard } from "@/components/home/slides/HomeHeroCategorySlide";
-import { buildHomeHeroCarouselProps } from "@/lib/build-home-hero-carousel-props";
 import { LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 type HomePageMessages = {
@@ -42,7 +39,6 @@ type HomePageMessages = {
   communityBody: string;
   communityCta: string;
   heroImageAlt: string;
-  /** Carrusel hero — slide categorías / productos (opcional, hay fallback en página) */
   heroSlide2Eyebrow?: string;
   heroSlide2Headline?: string;
   heroSlide2TrekkingTitle?: string;
@@ -58,8 +54,6 @@ const JOURNAL_PREVIEW_SLUGS = [
   "winter-lines",
   "calm-motion",
 ] as const;
-
-const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 
 export async function generateMetadata({
   params,
@@ -122,44 +116,17 @@ export default async function HomePage({
     image: string;
   }[];
 
-  const categoryCards = Array.isArray(h.categoryCards)
-    ? h.categoryCards
-    : [];
-
-  const heroProps = buildHomeHeroCarouselProps(
-    locale,
-    t,
-    products,
-    {
-      tagline: h.heroTagline ?? "Go Natural",
-      title: h.heroTitle ?? t("homeImmersive.heroHeading"),
-      subtitle: h.heroSubtitle ?? t("hero.subtitle"),
-      ctaProducts: h.ctaProducts ?? t("hero.cta"),
-      ctaJournal: h.ctaJournal ?? t("homeJournal.cta"),
-      imageSrc: "/assets/images/hero/hero.webp",
-      imageAlt: h.heroImageAlt ?? "",
-    },
-    {
-      heroSlide2Eyebrow: h.heroSlide2Eyebrow,
-      heroSlide2Headline: h.heroSlide2Headline,
-      heroSlide2TrekkingTitle: h.heroSlide2TrekkingTitle,
-      heroSlide3Eyebrow: h.heroSlide3Eyebrow,
-      heroSlide3Headline: h.heroSlide3Headline,
-      heroSlide3Subline: h.heroSlide3Subline,
-      heroSlide3Cta: h.heroSlide3Cta,
-      heroSlide3StripLabel: h.heroSlide3StripLabel,
-    }
-  );
-
-  const heroCategoryCards: HeroCategoryCard[] = heroProps.categorySlide.cards;
+  const categoryCards = Array.isArray(h.categoryCards) ? h.categoryCards : [];
 
   return (
-    <main className={`flex min-h-screen flex-col bg-[#FFFFFF] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}>
-      <HomeHero {...heroProps} />
-
-      <HomeCompassCategories
+    <main className={`flex min-h-screen flex-col bg-[#F4EBDD] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}>
+      <HomeBrandHero
         locale={locale}
-        cards={heroCategoryCards}
+        eyebrow={t("homeBrandHero.eyebrow")}
+        title={t("homeBrandHero.title")}
+        subtitle={t("homeBrandHero.subtitle")}
+        ctaPrimary={t("homeBrandHero.ctaPrimary")}
+        ctaSecondary={t("homeBrandHero.ctaSecondary")}
         cardinalLabels={{
           north: t("homeCompass.north"),
           south: t("homeCompass.south"),
