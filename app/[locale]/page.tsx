@@ -122,7 +122,6 @@ export default async function HomePage({
     <main className={`flex min-h-screen flex-col bg-[#F4EBDD] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}>
       <HomeBrandHero
         locale={locale}
-        eyebrow={t("homeBrandHero.eyebrow")}
         title={t("homeBrandHero.title")}
         subtitle={t("homeBrandHero.subtitle")}
         ctaPrimary={t("homeBrandHero.ctaPrimary")}

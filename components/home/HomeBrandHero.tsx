@@ -7,7 +7,6 @@ import type { Locale } from "@/lib/i18n/config";
 
 export type HomeBrandHeroProps = {
   locale: Locale;
-  eyebrow: string;
   title: string;
   subtitle: string;
   ctaPrimary: string;
@@ -26,7 +25,6 @@ const secondaryCtaClass =
 
 export default function HomeBrandHero({
   locale,
-  eyebrow,
   title,
   subtitle,
   ctaPrimary,
@@ -38,6 +36,11 @@ export default function HomeBrandHero({
   const off = reduceMotion ?? false;
   const tEnter = { duration: off ? 0 : 0.7, ease: easeOut };
   const tCompass = { duration: off ? 0 : 0.85, ease: easeOut, delay: off ? 0 : 0.18 };
+
+  const titleWords = title.trim().split(/\s+/).filter(Boolean);
+
+  const wordPopClass =
+    "relative z-0 inline-block origin-[center_85%] cursor-default rounded-sm px-[0.06em] py-0.5 transition-[transform,color,filter] duration-200 ease-[cubic-bezier(0.34,1.45,0.64,1)] will-change-transform hover:z-10 hover:-translate-y-2 hover:scale-[1.12] hover:text-[#1a2e22] hover:drop-shadow-[0_10px_20px_rgba(46,74,54,0.22)] motion-reduce:transition-none motion-reduce:hover:z-0 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:drop-shadow-none";
 
   return (
     <section
@@ -75,12 +78,12 @@ export default function HomeBrandHero({
         animate={{ opacity: 1, y: 0 }}
         transition={tEnter}
       >
-        <p className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[#C9622B] sm:text-[0.7rem]">
-          {eyebrow}
-        </p>
-
-        <h1 className="hero-display mt-5 max-w-[22ch] text-balance text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-[#2E4A36] sm:mt-6 sm:max-w-none md:text-[clamp(2.35rem,4.8vw,4rem)]">
-          {title}
+        <h1 className="hero-display flex max-w-[22ch] flex-wrap justify-center gap-x-[0.22em] gap-y-1 text-balance text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.12] tracking-tight text-[#2E4A36] sm:max-w-none md:text-[clamp(2.35rem,4.8vw,4rem)] md:leading-[1.1]">
+          {titleWords.map((word, i) => (
+            <span key={`${i}-${word}`} className={wordPopClass}>
+              {word}
+            </span>
+          ))}
         </h1>
 
         <p className="mt-5 max-w-xl text-pretty font-sans text-[0.95rem] leading-relaxed text-[#D9A441] sm:mt-6 sm:max-w-2xl sm:text-lg md:text-[1.05rem]">
