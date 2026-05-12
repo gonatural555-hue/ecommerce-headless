@@ -23,6 +23,14 @@ const primaryCtaClass =
 const secondaryCtaClass =
   "group inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-[#2E4A36]/90 bg-transparent px-7 py-3 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2E4A36] transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#2E4A36] hover:text-[#F4EBDD] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9622B]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:px-9 sm:text-[11px]";
 
+/** Misma paleta que los enlaces del header (inicio → productos → blog → categorías). */
+const HERO_TITLE_WORD_COLOR_CLASS: readonly string[] = [
+  "text-[#2A2E4B]",
+  "text-[#6E1F28]",
+  "text-[#C9622B]",
+  "text-[#D9A441]",
+];
+
 export default function HomeBrandHero({
   locale,
   title,
@@ -41,9 +49,9 @@ export default function HomeBrandHero({
 
   /** Hover “popup” compartido (título por palabra, subtítulo entero, brújula). */
   const heroPopHover =
-    "relative z-0 rounded-sm transition-[transform,color,filter] duration-200 ease-[cubic-bezier(0.34,1.45,0.64,1)] will-change-transform hover:z-10 hover:-translate-y-2 hover:scale-[1.12] hover:drop-shadow-[0_10px_20px_rgba(46,74,54,0.22)] motion-reduce:transition-none motion-reduce:hover:z-0 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:drop-shadow-none";
+    "relative z-0 rounded-sm transition-[transform,opacity,filter] duration-200 ease-[cubic-bezier(0.34,1.45,0.64,1)] will-change-transform hover:z-10 hover:-translate-y-2 hover:scale-[1.12] hover:opacity-90 hover:drop-shadow-[0_10px_20px_rgba(46,74,54,0.22)] motion-reduce:transition-none motion-reduce:hover:z-0 motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:opacity-100 motion-reduce:hover:drop-shadow-none";
 
-  const wordPopClass = `${heroPopHover} inline-block origin-[center_85%] cursor-default px-[0.06em] py-0.5 hover:text-[#1a2e22]`;
+  const wordPopClass = `${heroPopHover} inline-block origin-[center_85%] cursor-default px-[0.06em] py-0.5`;
 
   const subtitlePopClass = `${heroPopHover} mt-5 inline-block max-w-xl origin-center cursor-default text-pretty px-1 py-0.5 font-sans text-[0.95rem] leading-relaxed text-[#D9A441] hover:text-[#a67822] sm:mt-6 sm:max-w-2xl sm:text-lg md:text-[1.05rem]`;
 
@@ -85,9 +93,12 @@ export default function HomeBrandHero({
         animate={{ opacity: 1, y: 0 }}
         transition={tEnter}
       >
-        <h1 className="hero-display flex max-w-[22ch] flex-wrap justify-center gap-x-[0.22em] gap-y-1 text-balance text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.12] tracking-tight text-[#2E4A36] sm:max-w-none md:text-[clamp(2.35rem,4.8vw,4rem)] md:leading-[1.1]">
+        <h1 className="hero-display flex max-w-[22ch] flex-wrap justify-center gap-x-[0.22em] gap-y-1 text-balance text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.12] tracking-tight sm:max-w-none md:text-[clamp(2.35rem,4.8vw,4rem)] md:leading-[1.1]">
           {titleWords.map((word, i) => (
-            <span key={`${i}-${word}`} className={wordPopClass}>
+            <span
+              key={`${i}-${word}`}
+              className={`${wordPopClass} ${HERO_TITLE_WORD_COLOR_CLASS[i % HERO_TITLE_WORD_COLOR_CLASS.length]}`}
+            >
               {word}
             </span>
           ))}
