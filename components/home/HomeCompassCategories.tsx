@@ -21,12 +21,12 @@ const hoverTransition = { duration: 0.72, ease: luxuryEase };
 function ExpeditionOrb() {
   return (
     <div
-      className="pointer-events-none flex h-11 w-11 items-center justify-center rounded-full border border-white/26 bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-black/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_32px_-6px_rgba(0,0,0,0.42)] backdrop-blur-[6px] transition-[transform,box-shadow,border-color,background-color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-translate-y-0.5 group-hover/card:scale-[1.06] group-hover/card:border-accent-gold/45 group-hover/card:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_0_0_1px_rgba(217,138,36,0.22),0_14px_40px_-4px_rgba(0,0,0,0.48),0_0_36px_-6px_rgba(217,138,36,0.18)]"
+      className="pointer-events-none flex h-[5.5rem] w-[5.5rem] shrink-0 items-center justify-center rounded-full border border-white/26 bg-gradient-to-br from-white/[0.14] via-white/[0.06] to-black/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_32px_-6px_rgba(0,0,0,0.42)] backdrop-blur-[6px] transition-[transform,box-shadow,border-color,background-color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-translate-y-0.5 group-hover/card:scale-[1.06] group-hover/card:border-accent-gold/45 group-hover/card:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_0_0_1px_rgba(217,138,36,0.22),0_14px_40px_-4px_rgba(0,0,0,0.48),0_0_36px_-6px_rgba(217,138,36,0.18)]"
       aria-hidden
     >
       <svg
         viewBox="0 0 24 24"
-        className="h-[15px] w-[15px] translate-x-[0.5px] text-white/90 transition-[transform,color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-rotate-[15deg] group-hover/card:text-accent-gold"
+        className="h-[30px] w-[30px] translate-x-[0.5px] text-white/90 transition-[transform,color] duration-[720ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/card:-rotate-[15deg] group-hover/card:text-accent-gold"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.35"
@@ -68,16 +68,16 @@ function CornerCard({
       href={`/${locale}/category/${card.slug}`}
       onMouseEnter={onCardEnter}
       onMouseLeave={onCardLeave}
-      className={`group/card relative block w-full max-w-[405px] outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-4 focus-visible:ring-offset-[#ebe4d8] md:max-w-[378px] lg:max-w-[405px] ${gridClass}`}
+      className={`group/card relative block w-full max-w-[810px] outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-4 focus-visible:ring-offset-[#ebe4d8] md:max-w-[756px] lg:max-w-[810px] ${gridClass}`}
     >
       <motion.div
-        className={`relative flex min-h-[189px] w-full flex-col overflow-hidden sm:min-h-[216px] md:min-h-[227px] lg:min-h-[238px] ${CARD_RADIUS} border border-white/16 bg-white/[0.04] shadow-[0_20px_56px_-28px_rgba(17,23,19,0.42),0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_48px_rgba(255,255,255,0.03)] ring-1 ring-black/[0.05]`}
+        className={`relative flex min-h-[378px] w-full flex-col overflow-hidden sm:min-h-[432px] md:min-h-[454px] lg:min-h-[476px] ${CARD_RADIUS} border border-white/16 bg-white/[0.04] shadow-[0_20px_56px_-28px_rgba(17,23,19,0.42),0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_48px_rgba(255,255,255,0.03)] ring-1 ring-black/[0.05]`}
         initial={false}
         whileHover={
           reduceMotion
             ? undefined
             : {
-                y: -6,
+                y: -12,
                 boxShadow:
                   "0 28px 64px -22px rgba(17,23,19,0.48), 0 0 0 1px rgba(217,138,36,0.18), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -24px 48px rgba(217,138,36,0.07), 0 0 52px -12px rgba(217,138,36,0.14)",
               }
@@ -89,7 +89,7 @@ function CornerCard({
             src={src}
             alt=""
             fill
-            sizes="(max-width:768px) 45vw, 324px"
+            sizes="(max-width:768px) 45vw, 648px"
             className="object-cover object-center brightness-[1.07] contrast-[1.03] saturate-[1.06] transition-[transform,filter] duration-[900ms] ease-[cubic-bezier(0.19,1,0.22,1)] will-change-transform group-hover/card:scale-[1.045] group-hover/card:brightness-[1.16] group-hover/card:contrast-[1.04] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100 motion-reduce:group-hover/card:brightness-[1.07]"
             onError={() => setSrc(FALLBACK_IMG)}
           />
@@ -113,12 +113,12 @@ function CornerCard({
           />
         </div>
 
-        <div className="relative z-[2] mt-auto flex items-end justify-between gap-3 border-t border-white/10 bg-gradient-to-t from-black/50 via-black/28 to-transparent px-4 pb-4 pt-10 backdrop-blur-[10px] sm:px-5 sm:pb-5 sm:pt-12 supports-[backdrop-filter]:from-black/40 supports-[backdrop-filter]:via-black/18">
-          <div className="min-w-0 flex-1 pr-2 text-left">
-            <p className="font-display line-clamp-2 text-[0.7rem] font-semibold uppercase leading-snug tracking-[0.36em] text-accent-gold sm:text-[0.74rem] sm:tracking-[0.38em]">
+        <div className="relative z-[2] mt-auto flex items-end justify-between gap-6 border-t border-white/10 bg-gradient-to-t from-black/50 via-black/28 to-transparent px-8 pb-8 pt-20 backdrop-blur-[10px] sm:px-10 sm:pb-8 sm:pt-24 supports-[backdrop-filter]:from-black/40 supports-[backdrop-filter]:via-black/18">
+          <div className="min-w-0 flex-1 pr-4 text-left">
+            <p className="font-display line-clamp-2 text-[0.875rem] font-semibold uppercase leading-snug tracking-[0.32em] text-accent-gold sm:text-[0.95rem] sm:tracking-[0.34em]">
               {card.title}
             </p>
-            <p className="mt-2 line-clamp-2 font-sans text-[0.8125rem] font-normal leading-relaxed tracking-[0.01em] text-white/78 transition-colors duration-[720ms] group-hover/card:text-white/90 sm:text-[0.875rem]">
+            <p className="mt-3 line-clamp-3 font-sans text-[0.9375rem] font-normal leading-relaxed tracking-[0.01em] text-white/78 transition-colors duration-[720ms] group-hover/card:text-white/90 sm:text-base">
               {card.subtitle}
             </p>
           </div>
@@ -181,9 +181,9 @@ export default function HomeCompassCategories({
 
       <CompassSnowflakeFollower overCategoryCard={overCategoryCard} />
 
-      <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-8 md:grid md:min-h-[min(72vh,837px)] md:grid-cols-3 md:grid-rows-3 md:items-stretch md:gap-7 lg:min-h-[756px] lg:gap-8">
-          <div className="grid grid-cols-2 gap-4 md:contents">
+      <div className="relative z-[1] mx-auto max-w-[min(100%,1680px)] px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-16 md:grid md:min-h-[min(72vh,1674px)] md:grid-cols-[minmax(0,1.42fr)_minmax(0,0.58fr)_minmax(0,1.42fr)] md:grid-rows-3 md:items-stretch md:gap-14 lg:min-h-[1512px] lg:gap-16">
+          <div className="grid grid-cols-2 gap-8 md:contents">
             <CornerCard
               card={tl}
               locale={locale}
@@ -204,7 +204,7 @@ export default function HomeCompassCategories({
             <HeroCompassCursor ariaLabel={compassAriaLabel} cardinalLabels={cardinalLabels} />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 md:contents">
+          <div className="grid grid-cols-2 gap-8 md:contents">
             <CornerCard
               card={bl}
               locale={locale}
