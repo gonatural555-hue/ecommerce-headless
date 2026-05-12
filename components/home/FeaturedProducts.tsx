@@ -4,6 +4,7 @@ import type { Product } from "@/lib/products";
 import ProductCardSimple from "@/components/ProductCardSimple";
 import type { Locale } from "@/lib/i18n/config";
 import ScrollReveal from "@/components/blog/ScrollReveal";
+import { LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 type Props = {
   products: Product[];
@@ -43,7 +44,7 @@ export default function FeaturedProducts({
   return (
     <section
       id="essential-gear"
-      className="scroll-mt-4 border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28 lg:py-32"
+      className={`scroll-mt-4 border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28 lg:py-32 ${LUMINOUS_EDGE_LIGHT}`}
     >
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>

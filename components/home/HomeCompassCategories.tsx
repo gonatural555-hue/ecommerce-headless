@@ -10,6 +10,7 @@ import HeroCompassCursor, {
   type CompassCardinalLabels,
 } from "@/components/home/HeroCompassCursor";
 import type { HeroCategoryCard } from "@/components/home/slides/HomeHeroCategorySlide";
+import { LUMINOUS_EDGE_CARD, LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 
@@ -71,7 +72,7 @@ function CornerCard({
       className={`group/card relative block w-full max-w-[810px] outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/45 focus-visible:ring-offset-4 focus-visible:ring-offset-white md:max-w-[756px] lg:max-w-[810px] ${gridClass}`}
     >
       <motion.div
-        className={`relative flex min-h-[378px] w-full flex-col overflow-hidden sm:min-h-[432px] md:min-h-[454px] lg:min-h-[476px] ${CARD_RADIUS} border border-white/16 bg-white/[0.04] shadow-[0_20px_56px_-28px_rgba(17,23,19,0.42),0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_48px_rgba(255,255,255,0.03)] ring-1 ring-black/[0.05]`}
+        className={`relative flex min-h-[378px] w-full flex-col overflow-hidden sm:min-h-[432px] md:min-h-[454px] lg:min-h-[476px] ${CARD_RADIUS} border border-white/16 bg-white/[0.04] ${LUMINOUS_EDGE_CARD}`}
         initial={false}
         whileHover={
           reduceMotion
@@ -79,7 +80,7 @@ function CornerCard({
             : {
                 y: -12,
                 boxShadow:
-                  "0 28px 64px -22px rgba(17,23,19,0.48), 0 0 0 1px rgba(217,138,36,0.18), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -24px 48px rgba(217,138,36,0.07), 0 0 52px -12px rgba(217,138,36,0.14)",
+                  "inset 0 1px 0 rgba(255,255,255,0.22), 0 28px 64px -22px rgba(17,23,19,0.48), 0 0 0 1px rgba(217,138,36,0.18), inset 0 -24px 48px rgba(217,138,36,0.07), 0 0 52px -12px rgba(217,138,36,0.14)",
               }
         }
         transition={hoverTransition}
@@ -158,7 +159,7 @@ export default function HomeCompassCategories({
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FFFFFF] py-16 sm:py-20 md:py-28">
+    <section className={`relative overflow-x-hidden bg-[#FFFFFF] py-16 sm:py-20 md:py-28 ${LUMINOUS_EDGE_LIGHT}`}>
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-transparent to-neutral-100/40"
         aria-hidden

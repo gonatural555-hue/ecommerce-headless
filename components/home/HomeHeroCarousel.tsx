@@ -9,6 +9,8 @@ import HomeHeroCategorySlide, {
 import HomeHeroProductsSlide, {
   type HeroProductPayload,
 } from "@/components/home/slides/HomeHeroProductsSlide";
+import { LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
+
 const SLIDE_COUNT = 3;
 
 export type HomeHeroCarouselProps = {
@@ -202,8 +204,8 @@ export default function HomeHeroCarousel({
         <div
           className={
             embedded
-              ? "relative flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-[inherit] shadow-[0_20px_64px_-28px_rgba(0,0,0,0.45)] ring-0"
-              : "relative w-full overflow-hidden rounded-[1.35rem] shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] ring-1 ring-black/[0.08] md:rounded-[1.75rem]"
+              ? "relative flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-[inherit] shadow-[inset_0_1px_0_rgba(255,255,255,0.38),0_20px_64px_-28px_rgba(0,0,0,0.48),0_0_0_1px_rgba(0,0,0,0.12)] ring-0"
+              : "relative w-full overflow-hidden rounded-[1.35rem] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_24px_80px_-20px_rgba(0,0,0,0.52),0_0_0_1px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.08] md:rounded-[1.75rem]"
           }
         >
           <CarouselDots
@@ -286,7 +288,7 @@ export default function HomeHeroCarousel({
   }
 
   return (
-    <section className="relative flex min-h-[100dvh] w-full items-center justify-center overflow-x-hidden bg-[#FFFFFF] px-4 py-24 sm:px-5 sm:py-28 md:px-6 md:py-24 lg:px-8">
+    <section className={`relative flex min-h-[100dvh] w-full items-center justify-center overflow-x-hidden bg-[#FFFFFF] px-4 py-24 sm:px-5 sm:py-28 md:px-6 md:py-24 lg:px-8 ${LUMINOUS_EDGE_LIGHT}`}>
       <div
         className="relative w-full transition-[opacity,transform] duration-300 ease-out"
         style={{

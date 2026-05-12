@@ -6,14 +6,15 @@ import { useState } from "react";
 import HomeHeroCarousel from "@/components/home/HomeHeroCarousel";
 import type { HomeHeroCarouselProps } from "@/components/home/HomeHeroCarousel";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
+import { LUMINOUS_EDGE_CARD, LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 const BENTO_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
 
 const BENTO_CARD =
-  `${BENTO_RADIUS} relative overflow-hidden border border-earth-brown/12 bg-white/95 shadow-[0_16px_48px_-28px_rgba(17,23,19,0.16)] ring-1 ring-black/[0.04] transition-all duration-500 ease-out motion-reduce:transition-none`;
+  `${BENTO_RADIUS} relative overflow-hidden border border-earth-brown/12 bg-white/95 ${LUMINOUS_EDGE_CARD} ring-1 ring-inset ring-white/45 transition-all duration-500 ease-out motion-reduce:transition-none`;
 
 const BENTO_HOVER =
-  "hover:-translate-y-0.5 hover:border-accent-gold/28 hover:shadow-[0_22px_56px_-24px_rgba(17,23,19,0.22)] motion-reduce:hover:translate-y-0";
+  "hover:-translate-y-0.5 hover:border-accent-gold/28 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_22px_56px_-24px_rgba(17,23,19,0.2),0_10px_28px_-14px_rgba(0,0,0,0.08)] motion-reduce:hover:translate-y-0";
 
 const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 
@@ -43,7 +44,7 @@ export default function HeroBentoSection(props: HomeHeroCarouselProps) {
 
   return (
     <section
-      className="relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+4.75rem+1rem)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+5rem+1rem)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+5.25rem+1rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+5.5rem+1.25rem)]"
+      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+4.75rem+1rem)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+5rem+1rem)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+5.25rem+1rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+5.5rem+1.25rem)] ${LUMINOUS_EDGE_LIGHT}`}
       aria-label="Hero"
     >
       <div className="mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0">

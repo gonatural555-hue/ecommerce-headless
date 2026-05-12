@@ -19,15 +19,16 @@ const NAV_LINK =
 const NAV_LINK_TOP =
   "font-sans text-[12px] font-medium tracking-[0.02em] text-[#FFFFFF] transition-colors duration-200 hover:text-white/85 xl:text-[13px]";
 
+import { LUMINOUS_HEADER_BAR, LUMINOUS_INNER_CHROME } from "@/lib/ui/luminous-edge";
+
 /** Mismo redondeo que el contenedor del carrusel Hero (`HomeHeroCarousel`). */
 const HEADER_BAR_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
 
-/** Contenedor principal del header — fondo marca, alineado con el Hero. */
-const HEADER_BAR = `${HEADER_BAR_RADIUS} border border-white/[0.1] bg-[#2A2E4B] shadow-[0_18px_48px_-20px_rgba(0,0,0,0.45)]`;
+/** Contenedor principal del header — fondo marca, relieve e iluminación en bordes. */
+const HEADER_BAR = `${HEADER_BAR_RADIUS} border border-white/[0.14] bg-[#2A2E4B] ${LUMINOUS_HEADER_BAR}`;
 
 /** Superficie blanca interior (search, iconos, perfil). */
-const INNER_SOLID =
-  "rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.05]";
+const INNER_SOLID = `rounded-full bg-white ${LUMINOUS_INNER_CHROME} ring-1 ring-black/[0.05]`;
 
 function userInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);

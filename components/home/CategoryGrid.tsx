@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { HOME_CATEGORY_IMAGE } from "@/lib/home-category-visuals";
 import ScrollReveal from "@/components/blog/ScrollReveal";
+import { LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 export type CategoryCard = {
   label: string;
@@ -30,7 +31,7 @@ export default function CategoryGrid({
   cards,
 }: CategoryGridProps) {
   return (
-    <section className="border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28">
+    <section className={`border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28 ${LUMINOUS_EDGE_LIGHT}`}>
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
           <header className="mx-auto max-w-2xl text-center">

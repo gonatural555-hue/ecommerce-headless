@@ -16,6 +16,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { HOME_CATEGORY_IMAGE } from "@/lib/home-category-visuals";
 import type { HeroCategoryCard } from "@/components/home/slides/HomeHeroCategorySlide";
 import type { HeroProductPayload } from "@/components/home/slides/HomeHeroProductsSlide";
+import { LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 
 type HomePageMessages = {
   heroTagline: string;
@@ -225,7 +226,7 @@ export default async function HomePage({
         };
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#FFFFFF] text-dark-base">
+    <main className={`flex min-h-screen flex-col bg-[#FFFFFF] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}>
       <HomeHero
         locale={locale}
         tagline={h.heroTagline ?? "Go Natural"}

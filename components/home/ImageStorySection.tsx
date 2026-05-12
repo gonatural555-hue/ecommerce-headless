@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/blog/ScrollReveal";
+import { LUMINOUS_EDGE_DARK } from "@/lib/ui/luminous-edge";
 
 type ImageStorySectionProps = {
   imageSrc: string;
@@ -16,7 +17,7 @@ export default function ImageStorySection({
   title,
 }: ImageStorySectionProps) {
   return (
-    <section className="relative bg-dark-base">
+    <section className={`relative bg-dark-base ${LUMINOUS_EDGE_DARK}`}>
       <div className="relative min-h-[52vh] w-full md:min-h-[58vh] lg:min-h-[62vh]">
         <Image
           src={imageSrc}
