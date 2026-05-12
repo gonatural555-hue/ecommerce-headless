@@ -11,15 +11,19 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-/** Navegación inline (sans, compacta). */
+/** Navegación secundaria / hojas móvil (sobre fondos claros). */
 const NAV_LINK =
   "font-sans text-[12px] font-medium tracking-[0.02em] text-charcoal transition-colors duration-200 hover:text-mountain-green xl:text-[13px]";
+
+/** Enlaces de primer nivel en la barra oscura (inicio, productos, blog, categorías). */
+const NAV_LINK_TOP =
+  "font-sans text-[12px] font-medium tracking-[0.02em] text-[#FFFFFF] transition-colors duration-200 hover:text-white/85 xl:text-[13px]";
 
 /** Mismo redondeo que el contenedor del carrusel Hero (`HomeHeroCarousel`). */
 const HEADER_BAR_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
 
-/** Contenedor principal del header — glass, alineado visualmente con el Hero. */
-const HEADER_BAR = `${HEADER_BAR_RADIUS} border border-black/[0.07] bg-white/65 shadow-[0_18px_56px_-24px_rgba(17,23,19,0.22)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/52`;
+/** Contenedor principal del header — fondo marca, alineado con el Hero. */
+const HEADER_BAR = `${HEADER_BAR_RADIUS} border border-white/[0.1] bg-[#2A2E4B] shadow-[0_18px_48px_-20px_rgba(0,0,0,0.45)]`;
 
 /** Superficie blanca interior (search, iconos, perfil). */
 const INNER_SOLID =
@@ -185,16 +189,16 @@ export default function Header() {
             className="hidden min-w-0 shrink-0 items-center gap-0 md:flex md:gap-0.5 lg:gap-1"
             aria-label="Principal"
           >
-            <Link href={`/${locale}`} className={`${NAV_LINK} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
+            <Link href={`/${locale}`} className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
               {t("header.nav.home")}
             </Link>
             <Link
               href={`/${locale}/products`}
-              className={`${NAV_LINK} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}
+              className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}
             >
               {t("header.nav.products")}
             </Link>
-            <Link href={`/${locale}/blog`} className={`${NAV_LINK} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
+            <Link href={`/${locale}/blog`} className={`${NAV_LINK_TOP} whitespace-nowrap px-1 py-1.5 md:px-1.5 xl:px-2`}>
               {t("header.nav.blog")}
             </Link>
             <div
@@ -204,7 +208,7 @@ export default function Header() {
             >
               <button
                 type="button"
-                className={`${NAV_LINK} cursor-pointer whitespace-nowrap border-0 bg-transparent px-1 py-1.5 text-left md:px-1.5 xl:px-2`}
+                className={`${NAV_LINK_TOP} cursor-pointer whitespace-nowrap border-0 bg-transparent px-1 py-1.5 text-left md:px-1.5 xl:px-2`}
                 aria-expanded={categoriesOpen}
                 aria-haspopup="true"
                 aria-controls="header-categories-mega"
