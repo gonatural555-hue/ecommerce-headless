@@ -449,15 +449,15 @@ main[data-route="order-success"] .bg-gray-50 {
 
   .gn-hero-editorial-two-line > span {
     display: block;
-    font-size: clamp(46px, 12vw, 68px);
-    line-height: 0.92;
+    font-size: clamp(38px, 9.5vw, 56px);
+    line-height: 0.9;
     letter-spacing: -0.02em;
   }
 
   @media (min-width: 768px) {
     .gn-hero-editorial-two-line > span {
-      font-size: clamp(76px, 8vw, 128px);
-      line-height: 0.9;
+      font-size: clamp(58px, 6.5vw, 102px);
+      line-height: 0.88;
     }
   }
 
@@ -467,7 +467,7 @@ main[data-route="order-success"] .bg-gray-50 {
 
   .gn-hero-editorial-line-mustard {
     color: #d9a441;
-    margin-top: 0.04em;
+    margin-top: 0;
   }
 
   .gn-hero-scroll-dot {

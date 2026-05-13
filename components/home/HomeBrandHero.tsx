@@ -70,11 +70,11 @@ export default function HomeBrandHero({
   };
 
   const heroTopPad =
-    "pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11.5rem+6px)] sm:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11.75rem+8px)] md:pt-[calc(env(safe-area-inset-top,0px)+1rem+12rem+8px)]";
+    "pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.5rem+6px)] sm:pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.75rem+6px)] md:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+6px)]";
 
   return (
     <section
-      className="relative isolate flex w-full flex-col overflow-x-clip bg-[#F4EBDD]"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-[#F4EBDD]"
       aria-label="Hero"
     >
       <div
@@ -82,41 +82,43 @@ export default function HomeBrandHero({
         aria-hidden
       />
       <motion.div
-        className={`relative z-[1] mx-auto flex w-full min-w-0 max-w-[1080px] flex-col items-center px-[18px] pb-10 md:px-[28px] md:pb-14 lg:px-[48px] lg:pb-16 ${heroTopPad}`}
+        className={`relative z-[1] mx-auto flex min-h-[100svh] w-full min-w-0 max-w-[1080px] flex-col px-[18px] pb-3 md:px-[28px] md:pb-4 lg:px-[48px] ${heroTopPad}`}
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        <div className="flex w-full max-w-[980px] flex-col items-center">
-          <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
-            <span className="gn-hero-editorial-line-forest text-balance">{line1}</span>
-            {line2 ? (
-              <span className="gn-hero-editorial-line-mustard text-balance">{line2}</span>
-            ) : null}
-          </motion.h1>
+        <div className="flex min-h-0 flex-1 flex-col justify-between gap-3 md:gap-4">
+          <div className="flex w-full max-w-[980px] flex-col items-center">
+            <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
+              <span className="gn-hero-editorial-line-forest text-balance">{line1}</span>
+              {line2 ? (
+                <span className="gn-hero-editorial-line-mustard text-balance">{line2}</span>
+              ) : null}
+            </motion.h1>
 
-          <motion.p variants={itemVariants} className="gn-hero-subtitle mt-6 text-center">
-            {subtitle}
-          </motion.p>
+            <motion.p variants={itemVariants} className="gn-hero-subtitle mt-4 text-center md:mt-5">
+              {subtitle}
+            </motion.p>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-6 flex w-full max-w-md flex-col items-stretch justify-center gap-4 sm:max-w-none sm:flex-row sm:justify-center md:mt-7"
+            >
+              <Link href={`/${locale}/products`} className={primaryCtaClass}>
+                {ctaPrimary}
+              </Link>
+              <Link href={`/${locale}/blog`} className={secondaryCtaClass}>
+                {ctaSecondary}
+              </Link>
+            </motion.div>
+          </div>
 
           <motion.div
             variants={itemVariants}
-            className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-5 sm:max-w-none sm:flex-row sm:justify-center md:mt-10"
-          >
-            <Link href={`/${locale}/products`} className={primaryCtaClass}>
-              {ctaPrimary}
-            </Link>
-            <Link href={`/${locale}/blog`} className={secondaryCtaClass}>
-              {ctaSecondary}
-            </Link>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 flex flex-col items-center gap-2 text-center md:mt-12"
+            className="flex shrink-0 flex-col items-center gap-1.5 pb-1 text-center pt-2"
           >
             <div
-              className="flex h-7 w-[18px] items-start justify-center rounded-full border border-[rgba(46,74,54,0.32)] pt-1.5"
+              className="flex h-6 w-4 items-start justify-center rounded-full border border-[rgba(46,74,54,0.32)] pt-1"
               aria-hidden
             >
               <span className="gn-hero-scroll-dot block h-1.5 w-[3px] rounded-full bg-[rgba(46,74,54,0.42)]" />
