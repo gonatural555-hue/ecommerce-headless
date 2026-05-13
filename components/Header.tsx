@@ -206,9 +206,9 @@ export default function Header() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 font-inter">
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-6 md:px-7 lg:px-12">
-        {/* Desktop: sin pastilla — idiomas + Home/Blog agrupados a la izquierda; logo centro; Products/Categories + utilidades */}
+        {/* Desktop: idiomas a la izquierda; Home/Blog al borde interior (junto al logo); Products/Categories + utilidades */}
         <div className={`${HEADER_FLOAT_ROW} pointer-events-auto hidden w-full md:flex`}>
-          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-4 pr-[calc(4.75rem+8px)] md:gap-5 md:pr-[calc(5rem+10px)] lg:gap-6 lg:pr-[calc(5.25rem+12px)]">
+          <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(4.75rem+8px)] md:pr-[calc(5rem+10px)] lg:pr-[calc(5.25rem+12px)]">
             <nav
               className="flex shrink-0 items-center gap-0.5"
               aria-label={t("header.localeNavAria")}
@@ -225,17 +225,19 @@ export default function Header() {
                 </Link>
               ))}
             </nav>
-            <nav
-              className="flex min-w-0 shrink-0 items-center gap-4 md:gap-5 lg:gap-6"
-              aria-label={`${t("header.nav.home")}, ${t("header.nav.blog")}`}
-            >
-              <Link href={`/${locale}`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
-                {t("header.nav.home")}
-              </Link>
-              <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
-                {t("header.nav.blog")}
-              </Link>
-            </nav>
+            <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end">
+              <nav
+                className="flex shrink-0 items-center gap-4 md:gap-5 lg:gap-6"
+                aria-label={`${t("header.nav.home")}, ${t("header.nav.blog")}`}
+              >
+                <Link href={`/${locale}`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
+                  {t("header.nav.home")}
+                </Link>
+                <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
+                  {t("header.nav.blog")}
+                </Link>
+              </nav>
+            </div>
           </div>
 
           <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
