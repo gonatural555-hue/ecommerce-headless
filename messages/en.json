@@ -1,6 +1,8 @@
 {
   "header": {
     "nav": {
+      "outdoorKnowledge": "This is Outdoor Knowledge",
+      "shopByCategories": "Shop By Categories",
       "home": "Home",
       "products": "Products",
       "blog": "Blog",

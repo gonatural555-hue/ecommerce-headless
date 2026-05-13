@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
@@ -14,27 +14,88 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useSearchParams } from "next/navigation";
 
-/** Fila interior de la pastilla (altura la marca el logo + alineación). */
+const PREMIUM_EASE = [0.22, 1, 0.36, 1] as const;
+const PREMIUM_MS = 0.58;
+const MEGA_CLOSE_MS = 480;
+
+/** Orden editorial del mega menú (coincide con categorías padre). */
+const MAIN_CATEGORY_ORDER = [
+  "fishing",
+  "water-sports",
+  "outdoor-adventure",
+  "active-sports",
+  "mountain-snow",
+] as const;
+
 const HEADER_TOOLBAR_ROW =
   "relative flex w-full max-w-[1440px] items-center gap-2 py-1.5 md:gap-3 md:py-2";
 
 const HEADER_PILL =
   "pointer-events-auto relative mx-auto w-full rounded-full border border-[rgba(46,74,54,0.10)] bg-[rgba(244,235,221,0.72)] px-2 shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-[16px] supports-[backdrop-filter]:bg-[rgba(244,235,221,0.62)] sm:px-3 md:px-4";
 
-const NAV_LINK_HEADER_DESKTOP =
-  "whitespace-nowrap font-inter text-[13px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors duration-200 hover:text-[#2E4A36]";
-
 const LOCALE_FLOAT =
-  "rounded-full px-2 py-1 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36] md:text-[12px] md:tracking-[0.12em]";
+  "rounded-full px-2 py-1 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36] md:text-[12px] md:tracking-[0.12em]";
 
 const ICON_GHOST =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[rgba(46,74,54,0.65)] transition-colors hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36]";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[rgba(46,74,54,0.65)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36]";
 
-/** Hoja menú móvil — enlaces con jerarquía cromática existente. */
-const NAV_LINK =
-  "font-inter text-[0.8125rem] font-semibold tracking-[0.04em] text-charcoal transition-opacity duration-200 hover:opacity-80 sm:text-[0.875rem]";
+const MOBILE_DRAWER =
+  "pointer-events-auto mt-2 overflow-hidden rounded-[1.35rem] border border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.06)] md:hidden";
 
-const logoEase = [0.22, 1, 0.36, 1] as const;
+const MOBILE_PRIMARY_LINK =
+  "font-inter text-[13px] font-medium uppercase tracking-[0.12em] text-[rgba(46,74,54,0.78)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#2E4A36]";
+
+const logoEase = PREMIUM_EASE;
+
+function PremiumNavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  const reduceMotion = useReducedMotion() ?? false;
+  return (
+    <motion.span
+      className="inline-flex will-change-transform"
+      whileHover={reduceMotion ? undefined : { y: -2 }}
+      transition={{ duration: PREMIUM_MS, ease: PREMIUM_EASE }}
+    >
+      <Link
+        href={href}
+        className="relative inline-block whitespace-nowrap rounded-full px-1.5 py-1 font-inter text-[13px] font-medium uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-[color,box-shadow,opacity] duration-[580ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#2E4A36] hover:shadow-[0_0_36px_rgba(217,164,65,0.16),0_10px_32px_-14px_rgba(46,74,54,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(244,235,221,0.85)] md:text-[14px]"
+      >
+        {children}
+      </Link>
+    </motion.span>
+  );
+}
+
+function MegaSubLink({
+  href,
+  label,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onNavigate}
+      className="group relative flex items-center gap-3 py-1.5 font-inter text-[15px] font-normal leading-snug text-[rgba(46,74,54,0.62)] transition-[color,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#2E4A36] md:text-[16px]"
+    >
+      <span
+        className="flex h-2 w-2 shrink-0 items-center justify-center"
+        aria-hidden
+      >
+        <span className="h-1.5 w-1.5 translate-x-[-4px] rounded-full bg-[#D9A441] opacity-0 shadow-[0_0_10px_rgba(217,164,65,0.45)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 group-hover:opacity-100" />
+      </span>
+      <span>{label}</span>
+    </Link>
+  );
+}
 
 function BrandLogoLink({
   locale,
@@ -60,9 +121,10 @@ function BrandLogoLink({
         reduceMotion
           ? undefined
           : {
-              scale: 1.06,
-              y: -3,
-              transition: { duration: 0.3, ease: logoEase },
+              scale: 1.04,
+              y: -2,
+              filter: "drop-shadow(0 0 22px rgba(217, 164, 65, 0.22)) drop-shadow(0 12px 28px rgba(46, 74, 54, 0.12))",
+              transition: { duration: 0.55, ease: logoEase },
             }
       }
       whileTap={reduceMotion ? undefined : { scale: 0.98, transition: { duration: 0.15, ease: logoEase } }}
@@ -97,9 +159,10 @@ export default function Header() {
   const { totalItems } = useCart();
   const { isLoggedIn, user } = useUser();
   const { authOpen, setAuthOpen, openAuthModal, initialTab } = useAuth();
+  const reduceMotion = useReducedMotion() ?? false;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const categoriesCloseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const categoriesCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations();
@@ -120,7 +183,7 @@ export default function Header() {
     }
     categoriesCloseTimeout.current = setTimeout(() => {
       setCategoriesOpen(false);
-    }, 200);
+    }, MEGA_CLOSE_MS);
   };
 
   const closeCategoriesMenu = () => {
@@ -140,7 +203,6 @@ export default function Header() {
     };
   }, [categoriesOpen]);
 
-  /** Ancla el bloque al viewport (encima del hero): evita que un ancestro con transform rompa `fixed`. */
   const [headerPortalRoot, setHeaderPortalRoot] = useState<HTMLElement | null>(null);
   useLayoutEffect(() => {
     const id = "gn-header-fixed-root";
@@ -150,14 +212,18 @@ export default function Header() {
       el.id = id;
       document.body.insertAdjacentElement("afterbegin", el);
     }
-    // Portal: un único setState tras crear el nodo en body (patrón createPortal).
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- sincronizar nodo DOM para portal del header
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- portal root sync
     setHeaderPortalRoot(el);
   }, []);
 
   const { mainCategories, subCategoriesByParent } = useMemo(() => {
     const all = getAllCategories();
     const mains = all.filter((cat) => !cat.parentSlug);
+    const orderRank = (slug: string) => {
+      const i = MAIN_CATEGORY_ORDER.indexOf(slug as (typeof MAIN_CATEGORY_ORDER)[number]);
+      return i === -1 ? 999 : i;
+    };
+    mains.sort((a, b) => orderRank(a.slug) - orderRank(b.slug));
     const subsByParent: Record<string, typeof all> = {};
     all.filter((cat) => cat.parentSlug).forEach((sub) => {
       const key = sub.parentSlug || "";
@@ -181,24 +247,6 @@ export default function Header() {
     return `/${segments.join("/")}${query ? `?${query}` : ""}`;
   };
 
-  const mobileNavLinkClass = `${NAV_LINK} rounded-md py-2 px-2 text-charcoal`;
-  const mobileNavHome = `${NAV_LINK} rounded-md py-2 px-2 text-[#2A2E4B]`;
-  const mobileNavProducts = `${NAV_LINK} rounded-md py-2 px-2 text-[#6E1F28]`;
-  const mobileNavBlog = `${NAV_LINK} rounded-md py-2 px-2 text-[#C9622B]`;
-  const mobileNavCategories = `${NAV_LINK} rounded-md py-2 px-2 text-[#D9A441]`;
-
-  const megaCatTitle =
-    "font-inter text-[calc(1rem*1.05)] font-semibold tracking-[0.05em] text-dark-base hover:text-accent-gold transition-colors duration-200";
-
-  const megaCatSub =
-    "mb-2 block break-inside-avoid font-inter text-[calc(0.875rem*1.05)] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base transition-colors duration-200";
-
-  const categoriesBackdropClass = "bg-black/45 backdrop-blur-sm";
-
-  const categoriesPanelShell =
-    "border-earth-brown/15 bg-soft-stone/98 shadow-[0_24px_56px_-20px_rgba(17,23,19,0.18)] ring-1 ring-earth-brown/10 backdrop-blur-md supports-[backdrop-filter]:bg-soft-stone/95";
-
-  /** Carrito reconocible (cesta + ruedas), trazo clásico tipo carrito de compras */
   const cartIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -219,13 +267,124 @@ export default function Header() {
     </svg>
   );
 
+  const megaTopClass =
+    "top-[calc(env(safe-area-inset-top,0px)+0.75rem+11.25rem)] md:top-[calc(env(safe-area-inset-top,0px)+1rem+12rem)]";
+
   const headerUi = (
     <header className="pointer-events-none !fixed inset-x-0 top-0 z-50 w-full font-inter">
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-4 md:px-7 md:pt-5 lg:px-12">
         <div className={HEADER_PILL}>
-        {/* Desktop */}
-        <div className={`${HEADER_TOOLBAR_ROW} hidden w-full md:flex`}>
-          <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(11.5rem+6px)] md:pr-[calc(12rem+8px)] lg:pr-[calc(12.75rem+10px)]">
+          <div className={`${HEADER_TOOLBAR_ROW} hidden w-full md:flex`}>
+            <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(11.5rem+6px)] md:pr-[calc(12rem+8px)] lg:pr-[calc(12.75rem+10px)]">
+              <nav
+                className="flex shrink-0 items-center gap-0.5"
+                aria-label={t("header.localeNavAria")}
+              >
+                {locales.map((lang) => (
+                  <Link
+                    key={lang}
+                    href={buildLocaleHref(lang)}
+                    className={`${LOCALE_FLOAT} ${
+                      lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </Link>
+                ))}
+              </nav>
+              <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end">
+                <nav
+                  className="flex shrink-0 items-center"
+                  aria-label={t("header.nav.outdoorKnowledge")}
+                >
+                  <PremiumNavLink href={`/${locale}/blog`}>
+                    {t("header.nav.outdoorKnowledge")}
+                  </PremiumNavLink>
+                </nav>
+              </div>
+            </div>
+
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+              <div className="pointer-events-auto">
+                <BrandLogoLink
+                  locale={locale}
+                  alt={t("header.logoAlt")}
+                  imageClassName="h-[9.375rem] w-auto max-h-[10rem] max-w-[min(30vw,20.5rem)] object-contain object-center md:h-[10rem] md:max-h-[10.5rem] md:max-w-[22.5rem] lg:max-h-[11.25rem] lg:max-w-[23.75rem]"
+                />
+              </div>
+            </div>
+
+            <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(11.5rem+6px)] md:gap-2 md:pl-[calc(12rem+8px)] lg:pl-[calc(12.75rem+10px)]">
+              <nav
+                className="flex min-w-0 shrink-0 items-center"
+                aria-label={t("header.nav.shopByCategories")}
+              >
+                <div
+                  className="relative"
+                  onMouseEnter={openCategoriesMenu}
+                  onMouseLeave={scheduleCloseCategories}
+                >
+                  <motion.span
+                    className="inline-flex will-change-transform"
+                    whileHover={reduceMotion ? undefined : { y: -2 }}
+                    transition={{ duration: PREMIUM_MS, ease: PREMIUM_EASE }}
+                  >
+                    <Link
+                      href={`/${locale}/products`}
+                      className="relative inline-block whitespace-nowrap rounded-full border-0 bg-transparent px-1.5 py-1 text-left font-inter text-[13px] font-medium uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-[color,box-shadow] duration-[580ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#2E4A36] hover:shadow-[0_0_36px_rgba(217,164,65,0.16),0_10px_32px_-14px_rgba(46,74,54,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(244,235,221,0.85)] md:text-[14px]"
+                      aria-expanded={categoriesOpen}
+                      aria-haspopup="dialog"
+                      aria-controls="header-categories-mega"
+                      onFocus={openCategoriesMenu}
+                      onBlur={scheduleCloseCategories}
+                    >
+                      {t("header.nav.shopByCategories")}
+                    </Link>
+                  </motion.span>
+                </div>
+              </nav>
+
+              <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
+                <Link
+                  href={`/${locale}/cart`}
+                  className={`${ICON_GHOST} relative`}
+                  aria-label={`Cart with ${totalItems} items`}
+                >
+                  {cartIcon}
+                  {totalItems > 0 && (
+                    <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
+                      {totalItems > 99 ? "99+" : totalItems}
+                    </span>
+                  )}
+                </Link>
+
+                {isLoggedIn && user ? (
+                  <Link
+                    href={`/${locale}/account`}
+                    className="flex max-w-[9.5rem] shrink-0 items-center gap-2 rounded-full border border-transparent py-1.5 pl-2.5 pr-1.5 font-inter text-[12px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36]"
+                  >
+                    <span className="truncate">{user.name}</span>
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                      aria-hidden
+                    >
+                      {userInitials(user.name)}
+                    </span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("login")}
+                    className="shrink-0 rounded-full border border-transparent px-3 py-2 font-inter text-[12px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36] lg:px-4"
+                  >
+                    {t("header.account")}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className={`${HEADER_TOOLBAR_ROW} flex w-full items-center justify-between gap-2 md:hidden`}>
             <nav
               className="flex shrink-0 items-center gap-0.5"
               aria-label={t("header.localeNavAria")}
@@ -234,7 +393,7 @@ export default function Header() {
                 <Link
                   key={lang}
                   href={buildLocaleHref(lang)}
-                  className={`${LOCALE_FLOAT} ${
+                  className={`${LOCALE_FLOAT} px-1.5 py-1 text-[10px] ${
                     lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
                   }`}
                 >
@@ -242,64 +401,37 @@ export default function Header() {
                 </Link>
               ))}
             </nav>
-            <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end">
-              <nav
-                className="flex shrink-0 items-center gap-3 md:gap-4"
-                aria-label={`${t("header.nav.home")}, ${t("header.nav.blog")}`}
-              >
-                <Link href={`/${locale}`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
-                  {t("header.nav.home")}
-                </Link>
-                <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
-                  {t("header.nav.blog")}
-                </Link>
-              </nav>
-            </div>
-          </div>
 
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-            <div className="pointer-events-auto">
+            <div className="flex min-w-0 flex-1 justify-center px-1">
               <BrandLogoLink
                 locale={locale}
                 alt={t("header.logoAlt")}
-                imageClassName="h-[9.375rem] w-auto max-h-[10rem] max-w-[min(30vw,20.5rem)] object-contain object-center md:h-[10rem] md:max-h-[10.5rem] md:max-w-[22.5rem] lg:max-h-[11.25rem] lg:max-w-[23.75rem]"
+                imageClassName="h-[10.625rem] w-auto max-w-[min(52vw,25rem)] object-contain object-center"
               />
             </div>
-          </div>
 
-          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(11.5rem+6px)] md:gap-2 md:pl-[calc(12rem+8px)] lg:pl-[calc(12.75rem+10px)]">
-            <nav
-              className="flex min-w-0 shrink-0 items-center gap-3 md:gap-4"
-              aria-label={`${t("header.nav.products")}, ${t("header.nav.categories")}`}
-            >
-              <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
-                {t("header.nav.products")}
-              </Link>
-              <div
-                className="relative"
-                onMouseEnter={openCategoriesMenu}
-                onMouseLeave={scheduleCloseCategories}
+            <div className="flex shrink-0 items-center gap-1">
+              <button
+                type="button"
+                className={ICON_GHOST}
+                onClick={() => {
+                  setMobileMenuOpen((o) => !o);
+                }}
+                aria-label="Toggle menu"
+                aria-expanded={mobileMenuOpen}
               >
-                <button
-                  type="button"
-                  className={`${NAV_LINK_HEADER_DESKTOP} cursor-pointer border-0 bg-transparent font-inter text-left`}
-                  aria-expanded={categoriesOpen}
-                  aria-haspopup="true"
-                  aria-controls="header-categories-mega"
-                  onFocus={openCategoriesMenu}
-                  onBlur={scheduleCloseCategories}
-                >
-                  {t("header.nav.categories")}
-                </button>
-              </div>
-            </nav>
+                {mobileMenuOpen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+                )}
+              </button>
 
-            <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
-              <Link
-                href={`/${locale}/cart`}
-                className={`${ICON_GHOST} relative`}
-                aria-label={`Cart with ${totalItems} items`}
-              >
+              <Link href={`/${locale}/cart`} className={`${ICON_GHOST} relative`} aria-label={`Cart with ${totalItems} items`}>
                 {cartIcon}
                 {totalItems > 0 && (
                   <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
@@ -311,11 +443,11 @@ export default function Header() {
               {isLoggedIn && user ? (
                 <Link
                   href={`/${locale}/account`}
-                  className="flex max-w-[9.5rem] shrink-0 items-center gap-2 rounded-full border border-transparent py-1.5 pl-2.5 pr-1.5 font-inter text-[12px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36]"
+                  className={`${ICON_GHOST} relative`}
+                  aria-label={t("header.account")}
                 >
-                  <span className="truncate">{user.name}</span>
                   <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD]"
                     aria-hidden
                   >
                     {userInitials(user.name)}
@@ -324,163 +456,120 @@ export default function Header() {
               ) : (
                 <button
                   type="button"
+                  className={ICON_GHOST}
                   onClick={() => openAuthModal("login")}
-                  className="shrink-0 rounded-full border border-transparent px-3 py-2 font-inter text-[12px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36] lg:px-4"
+                  aria-label={t("header.account")}
                 >
-                  {t("header.account")}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.65} stroke="currentColor" className="h-5 w-5" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                  </svg>
                 </button>
               )}
             </div>
           </div>
         </div>
 
-        {/* Mobile */}
-        <div
-          className={`${HEADER_TOOLBAR_ROW} flex w-full items-center justify-between gap-2 md:hidden`}
-        >
-          <nav
-            className="flex shrink-0 items-center gap-0.5"
-            aria-label={t("header.localeNavAria")}
-          >
-            {locales.map((lang) => (
-              <Link
-                key={lang}
-                href={buildLocaleHref(lang)}
-                className={`${LOCALE_FLOAT} px-1.5 py-1 text-[10px] ${
-                  lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
-                }`}
-              >
-                {lang.toUpperCase()}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex min-w-0 flex-1 justify-center px-1">
-            <BrandLogoLink
-              locale={locale}
-              alt={t("header.logoAlt")}
-              imageClassName="h-[10.625rem] w-auto max-w-[min(52vw,25rem)] object-contain object-center"
-            />
-          </div>
-
-          <div className="flex shrink-0 items-center gap-1">
-            <button
-              type="button"
-              className={ICON_GHOST}
-              onClick={() => {
-                setMobileMenuOpen((o) => !o);
-              }}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-              )}
-            </button>
-
-            <Link href={`/${locale}/cart`} className={`${ICON_GHOST} relative`} aria-label={`Cart with ${totalItems} items`}>
-              {cartIcon}
-              {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
-                  {totalItems > 99 ? "99+" : totalItems}
-                </span>
-              )}
-            </Link>
-
-            {isLoggedIn && user ? (
-              <Link
-                href={`/${locale}/account`}
-                className={`${ICON_GHOST} relative`}
-                aria-label={t("header.account")}
-              >
-                <span
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD]"
-                  aria-hidden
-                >
-                  {userInitials(user.name)}
-                </span>
-              </Link>
-            ) : (
-              <button
-                type="button"
-                className={ICON_GHOST}
-                onClick={() => openAuthModal("login")}
-                aria-label={t("header.account")}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.65} stroke="currentColor" className="h-5 w-5" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-              </button>
-            )}
-          </div>
-        </div>
-        </div>
-
-        {/* Mobile sheet — debajo de la pastilla */}
         {mobileMenuOpen ? (
-          <nav className="pointer-events-auto mt-2 rounded-2xl border border-earth-brown/18 bg-soft-stone/98 p-4 shadow-[0_20px_50px_-24px_rgba(17,23,19,0.2)] ring-1 ring-earth-brown/10 backdrop-blur-md md:hidden">
-            <div className="flex flex-col gap-3">
-              <Link href={`/${locale}`} className={mobileNavHome} onClick={() => setMobileMenuOpen(false)}>
-                {t("header.nav.home")}
+          <motion.nav
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: PREMIUM_EASE }}
+            className={MOBILE_DRAWER}
+          >
+            <div className="flex flex-col gap-4">
+              <Link
+                href={`/${locale}/blog`}
+                className={MOBILE_PRIMARY_LINK}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.outdoorKnowledge")}
               </Link>
-              <Link href={`/${locale}/products`} className={mobileNavProducts} onClick={() => setMobileMenuOpen(false)}>
-                {t("header.nav.products")}
+              <Link
+                href={`/${locale}/products`}
+                className={MOBILE_PRIMARY_LINK}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.shopByCategories")}
               </Link>
-              <Link href={`/${locale}/blog`} className={mobileNavBlog} onClick={() => setMobileMenuOpen(false)}>
-                {t("header.nav.blog")}
-              </Link>
-              <div className="flex flex-col gap-2">
+
+              <div className="border-t border-[rgba(46,74,54,0.08)] pt-4">
                 <button
                   type="button"
-                  className={`flex w-full items-center justify-between ${mobileNavCategories}`}
+                  className="flex w-full items-center justify-between py-1 font-inter text-[13px] font-medium uppercase tracking-[0.12em] text-[rgba(46,74,54,0.82)] transition-opacity duration-500 hover:opacity-80"
                   onClick={() => setMobileCategoriesOpen((open) => !open)}
                   aria-expanded={mobileCategoriesOpen}
                   aria-controls="mobile-categories-menu"
                 >
                   <span>{t("header.nav.categories")}</span>
-                  <span className="font-inter text-[13px] font-semibold tracking-[0.04em] text-muted-gray">{mobileCategoriesOpen ? "−" : "+"}</span>
+                  <span className="font-inter text-[12px] font-medium tracking-[0.16em] text-[rgba(46,74,54,0.45)]">
+                    {mobileCategoriesOpen ? "−" : "+"}
+                  </span>
                 </button>
-                {mobileCategoriesOpen ? (
-                  <div id="mobile-categories-menu" className="space-y-4 border-l border-earth-brown/20 pl-3">
-                    {mainCategories.map((category) => (
-                      <div key={category.slug} className="space-y-2">
-                        <Link
-                          href={`/${locale}/category/${category.slug}`}
-                          className="font-inter text-[13px] font-semibold tracking-[0.04em] text-dark-base hover:text-accent-gold"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {t(`categories.names.${category.slug}`, category.name)}
-                        </Link>
-                        <div className="flex flex-col gap-1">
-                          {(subCategoriesByParent[category.slug] || []).map((sub) => (
+                <AnimatePresence initial={false}>
+                  {mobileCategoriesOpen ? (
+                    <motion.div
+                      id="mobile-categories-menu"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.55, ease: PREMIUM_EASE }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-3 space-y-5 border-l border-[rgba(46,74,54,0.1)] pl-3">
+                        {mainCategories.map((category, colIdx) => (
+                          <motion.div
+                            key={category.slug}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              delay: colIdx * 0.05,
+                              duration: 0.5,
+                              ease: PREMIUM_EASE,
+                            }}
+                            className="space-y-2"
+                          >
                             <Link
-                              key={sub.slug}
-                              href={`/${locale}/category/${sub.slug}`}
-                              className="font-inter text-[13px] font-medium tracking-[0.02em] text-muted-gray hover:text-dark-base"
+                              href={`/${locale}/category/${category.slug}`}
+                              className="block font-inter text-[clamp(1.1rem,3.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-[#2E4A36]"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-                              {t(`categories.names.${sub.slug}`, sub.name)}
+                              {t(`categories.names.${category.slug}`, category.name)}
                             </Link>
-                          ))}
-                        </div>
+                            <div className="flex flex-col gap-1">
+                              {(subCategoriesByParent[category.slug] || []).map((sub, si) => (
+                                <motion.div
+                                  key={sub.slug}
+                                  initial={{ opacity: 0, x: -4 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{
+                                    delay: 0.06 + colIdx * 0.04 + si * 0.03,
+                                    duration: 0.45,
+                                    ease: PREMIUM_EASE,
+                                  }}
+                                >
+                                  <MegaSubLink
+                                    href={`/${locale}/category/${sub.slug}`}
+                                    label={t(`categories.names.${sub.slug}`, sub.name)}
+                                    onNavigate={() => setMobileMenuOpen(false)}
+                                  />
+                                </motion.div>
+                              ))}
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                ) : null}
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </div>
-              <div className="flex flex-wrap items-center gap-3 border-t border-earth-brown/20 pt-3">
+
+              <div className="flex flex-wrap items-center gap-3 border-t border-[rgba(46,74,54,0.08)] pt-4">
                 {locales.map((lang) => (
                   <Link
                     key={lang}
                     href={buildLocaleHref(lang)}
-                    className={`font-inter text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors ${
-                      lang === locale ? "text-accent-gold" : "text-muted-gray hover:text-dark-base"
+                    className={`font-inter text-[12px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 ${
+                      lang === locale ? "text-[#D9A441]" : "text-[rgba(46,74,54,0.55)] hover:text-[#2E4A36]"
                     }`}
                   >
                     {lang.toUpperCase()}
@@ -489,7 +578,7 @@ export default function Header() {
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
-                    className={`${mobileNavLinkClass} font-semibold`}
+                    className="font-inter text-[13px] font-medium text-[#2E4A36]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.greeting")}, {user.name}
@@ -497,7 +586,7 @@ export default function Header() {
                 ) : (
                   <Link
                     href={`/${locale}/auth?tab=login`}
-                    className={`${mobileNavLinkClass} font-semibold`}
+                    className="font-inter text-[13px] font-medium text-[#2E4A36]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("header.account")}
@@ -505,62 +594,107 @@ export default function Header() {
                 )}
               </div>
             </div>
-          </nav>
+          </motion.nav>
         ) : null}
       </div>
 
-      {/* Mega menu backdrop */}
-      <div
-          className={[
-            "pointer-events-auto fixed inset-0 z-[38] transition-all duration-200 ease-out",
-            categoriesBackdropClass,
-            categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
-          ].join(" ")}
-          aria-hidden={!categoriesOpen}
-          onClick={closeCategoriesMenu}
-        />
-
-        <div
-          id="header-categories-mega"
-          className={[
-            "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[calc(1rem+14rem+8px)] md:top-[calc(1.25rem+14.25rem+10px)]",
-            "overflow-y-auto overscroll-contain",
-            categoriesPanelShell,
-            categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
-          ].join(" ")}
-          onMouseEnter={openCategoriesMenu}
-          onMouseLeave={scheduleCloseCategories}
-          aria-hidden={!categoriesOpen}
-        >
-          <div className="mx-auto w-full max-w-[min(100%,1600px)] px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
-            <div className="columns-1 gap-x-16 gap-y-10 sm:columns-2 lg:columns-3 xl:columns-4">
-              {mainCategories.map((category) => (
-                <div key={category.slug} className="mb-10 break-inside-avoid">
-                  <Link
-                    href={`/${locale}/category/${category.slug}`}
-                    className={megaCatTitle}
-                    onClick={closeCategoriesMenu}
+      <AnimatePresence>
+        {categoriesOpen ? (
+          <>
+            <motion.div
+              key="mega-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.48, ease: PREMIUM_EASE }}
+              className="pointer-events-auto fixed inset-0 z-[38] bg-black/22"
+              aria-hidden
+              onClick={closeCategoriesMenu}
+            />
+            <motion.div
+              key="mega-shell"
+              id="header-categories-mega"
+              role="dialog"
+              aria-modal="true"
+              aria-label={t("header.nav.shopByCategories")}
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.68, ease: PREMIUM_EASE }}
+              className={[
+                "pointer-events-auto fixed left-1/2 z-40 w-[min(84vw,1240px)] max-w-[1240px] -translate-x-1/2",
+                "-mt-1 max-h-[min(72vh,calc(100dvh-10rem))] overflow-y-auto overscroll-contain rounded-[28px]",
+                "border border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] px-10 py-12 shadow-[0_20px_60px_rgba(0,0,0,0.06)] sm:px-12 md:px-14 md:py-14",
+                megaTopClass,
+              ].join(" ")}
+              onMouseEnter={openCategoriesMenu}
+              onMouseLeave={scheduleCloseCategories}
+            >
+              <div className="grid grid-cols-1 gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+                {mainCategories.map((category, colIdx) => (
+                  <motion.div
+                    key={category.slug}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.1 + colIdx * 0.065,
+                      duration: 0.62,
+                      ease: PREMIUM_EASE,
+                    }}
+                    className={
+                      colIdx === mainCategories.length - 1 && mainCategories.length === 5
+                        ? "sm:col-span-2 lg:col-span-4 lg:flex lg:justify-center"
+                        : ""
+                    }
                   >
-                    {t(`categories.names.${category.slug}`, category.name)}
-                  </Link>
-                  <div className="mt-3 space-y-2">
-                    {(subCategoriesByParent[category.slug] || []).map((sub) => (
+                    <div
+                      className={
+                        colIdx === mainCategories.length - 1 && mainCategories.length === 5
+                          ? "w-full max-w-md lg:text-center"
+                          : ""
+                      }
+                    >
                       <Link
-                        key={sub.slug}
-                        href={`/${locale}/category/${sub.slug}`}
-                        className={megaCatSub}
+                        href={`/${locale}/category/${category.slug}`}
                         onClick={closeCategoriesMenu}
+                        className="inline-block font-inter text-[clamp(1.35rem,1.9vw,1.65rem)] font-semibold tracking-[-0.02em] text-[#2E4A36] transition-[color,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#243d2e] hover:drop-shadow-[0_0_14px_rgba(46,74,54,0.12)]"
                       >
-                        {t(`categories.names.${sub.slug}`, sub.name)}
+                        {t(`categories.names.${category.slug}`, category.name)}
                       </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                      <div
+                        className={`mt-4 flex flex-col gap-0.5 ${
+                          colIdx === mainCategories.length - 1 && mainCategories.length === 5
+                            ? "lg:mx-auto lg:max-w-sm lg:items-start lg:text-left"
+                            : ""
+                        }`}
+                      >
+                        {(subCategoriesByParent[category.slug] || []).map((sub, si) => (
+                          <motion.div
+                            key={sub.slug}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              delay: 0.22 + colIdx * 0.05 + si * 0.045,
+                              duration: 0.52,
+                              ease: PREMIUM_EASE,
+                            }}
+                          >
+                            <MegaSubLink
+                              href={`/${locale}/category/${sub.slug}`}
+                              label={t(`categories.names.${sub.slug}`, sub.name)}
+                              onNavigate={closeCategoriesMenu}
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        ) : null}
+      </AnimatePresence>
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} initialTab={initialTab} />
     </header>

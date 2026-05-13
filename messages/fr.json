@@ -1,6 +1,8 @@
 {
   "header": {
     "nav": {
+      "outdoorKnowledge": "Savoir-faire outdoor",
+      "shopByCategories": "Acheter par catégories",
       "home": "Accueil",
       "products": "Produits",
       "blog": "Blog",
