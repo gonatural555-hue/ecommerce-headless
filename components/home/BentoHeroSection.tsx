@@ -45,7 +45,7 @@ export default function BentoHeroSection(props: HomeHeroCarouselProps) {
 
   return (
     <section
-      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+9.5rem+1rem)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+10rem+1rem)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+10.5rem+1rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+11rem+1.25rem)] ${LUMINOUS_EDGE_LIGHT}`}
+      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.5rem+6px)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.75rem+6px)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+6px)] lg:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+8px)] ${LUMINOUS_EDGE_LIGHT}`}
       aria-label="Hero"
     >
       <div className="mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0">

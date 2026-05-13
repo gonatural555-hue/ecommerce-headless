@@ -176,14 +176,28 @@ export default async function ProductsPage({
     noImage: t("common.noImage"),
   };
 
+  const heroFeatured = displayProducts.slice(0, 12);
+
   return (
-    <main className="min-h-screen bg-warm-sand text-dark-base">
+    <main className="min-h-screen bg-[#F4EBDD] text-[#2E4A36]">
       <ProductsHero
-        title={t("productsPage.heroTitle")}
-        subtitle={t("productsPage.heroSubtitle")}
-        tagline={t("productsPage.heroTagline")}
-        imageSrc="/assets/images/hero/productsbanner.webp"
-        imageAlt={t("productsPage.heroImageAlt")}
+        locale={locale}
+        featuredProducts={heroFeatured}
+        labels={cardLabels}
+        eyebrow={t("productsPage.heroShopEyebrow")}
+        title={t("productsPage.heroEssentialTitle")}
+        subtitle={t("productsPage.heroEditorialSubtitle")}
+        freeShippingBadge={t("productsPage.heroFreeShippingBadge")}
+        compassAria={t("homeCompass.compassAria")}
+        compassLabels={{
+          north: t("homeCompass.north"),
+          south: t("homeCompass.south"),
+          east: t("homeCompass.east"),
+          west: t("homeCompass.west"),
+        }}
+        featuredRailLabel={t("productsPage.heroCarouselRail")}
+        carouselPrevAria={t("productsPage.heroCarouselPrevAria")}
+        carouselNextAria={t("productsPage.heroCarouselNextAria")}
         searchHint={searchHint}
       />
 
@@ -211,7 +225,7 @@ export default async function ProductsPage({
         </div>
       </section>
 
-      <div className="mx-auto max-w-[1400px] px-6 py-16 sm:px-10 md:py-20 lg:px-12 lg:py-24">
+      <div className="mx-auto max-w-[1400px] px-6 py-12 sm:px-10 md:py-16 lg:px-12 lg:py-20">
         {hasActiveSearch && displayProducts.length === 0 ? (
           <div className="rounded-sm border border-white/10 bg-[#0f1412]/80 px-6 py-14 text-center">
             <p className="text-lg font-medium text-text-primary">

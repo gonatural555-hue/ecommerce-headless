@@ -305,7 +305,7 @@ export default function ProductDetailClient({
   return (
     <>
       {/* Mobile: galería + mismo panel editorial que desktop */}
-      <section className="mx-auto grid max-w-full gap-8 pb-24 pt-2 lg:hidden md:gap-10">
+      <section className="mx-auto grid max-w-full gap-8 pb-24 pt-0 lg:hidden md:gap-10">
         <ProductGallery
           images={pdpGalleryImages}
           title={product.title}

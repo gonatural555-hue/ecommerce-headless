@@ -4,8 +4,8 @@ import ProductCardSimple from "@/components/ProductCardSimple";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import EditorialBreak from "@/components/products/EditorialBreak";
 
-/** Tamaño de bloque entre pausas editoriales (múltiplo de 4 = filas completas en desktop) */
-const CHUNK = 8;
+/** Tamaño de bloque entre pausas editoriales (múltiplo de 3 = filas completas en desktop) */
+const CHUNK = 9;
 
 type Labels = {
   viewProduct?: string;
@@ -37,7 +37,7 @@ function chunkProducts(list: Product[], size: number): Product[][] {
 }
 
 /**
- * Rejilla uniforme (4 columnas en xl): mismas dimensiones por tarjeta, pausas editoriales entre bloques.
+ * Rejilla uniforme (3 columnas desktop): tarjetas alineadas con Essential Gear (home).
  */
 export default function ProductsEditorialGrid({
   products,
@@ -56,7 +56,7 @@ export default function ProductsEditorialGrid({
       {chunks.map((chunk, chunkIdx) => (
         <div key={`chunk-${chunkIdx}`}>
           <ScrollReveal>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-14">
               {chunk.map((product) => (
                 <ProductCardSimple
                   key={product.id}
@@ -64,7 +64,7 @@ export default function ProductsEditorialGrid({
                   locale={locale}
                   labels={labels}
                   analyticsListName={analyticsListName}
-                  editorial
+                  surface="light"
                 />
               ))}
             </div>

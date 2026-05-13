@@ -169,6 +169,16 @@ export default function Header() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  /** PDP: header en flujo (no fixed) para que el contenido no quede bajo barra flotante. */
+  const isPdp = useMemo(() => {
+    const s = pathname.split("/").filter(Boolean);
+    return (
+      s.length >= 3 &&
+      s[1] === "products" &&
+      locales.includes(s[0] as Locale)
+    );
+  }, [pathname]);
+
   const openCategoriesMenu = () => {
     if (categoriesCloseTimeout.current) {
       clearTimeout(categoriesCloseTimeout.current);
@@ -205,6 +215,13 @@ export default function Header() {
 
   const [headerPortalRoot, setHeaderPortalRoot] = useState<HTMLElement | null>(null);
   useLayoutEffect(() => {
+    if (typeof document === "undefined") return;
+    if (isPdp) {
+      const orphan = document.getElementById("gn-header-fixed-root");
+      if (orphan) orphan.remove();
+      setHeaderPortalRoot(null);
+      return;
+    }
     const id = "gn-header-fixed-root";
     let el = document.getElementById(id) as HTMLElement | null;
     if (!el) {
@@ -214,7 +231,7 @@ export default function Header() {
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect -- portal root sync
     setHeaderPortalRoot(el);
-  }, []);
+  }, [isPdp]);
 
   const { mainCategories, subCategoriesByParent } = useMemo(() => {
     const all = getAllCategories();
@@ -270,8 +287,12 @@ export default function Header() {
   const megaTopClass =
     "top-[calc(env(safe-area-inset-top,0px)+0.75rem+11.25rem)] md:top-[calc(env(safe-area-inset-top,0px)+1rem+12rem)]";
 
+  const headerShellClass = isPdp
+    ? "pointer-events-auto relative z-50 w-full font-inter"
+    : "pointer-events-none !fixed inset-x-0 top-0 z-50 w-full font-inter";
+
   const headerUi = (
-    <header className="pointer-events-none !fixed inset-x-0 top-0 z-50 w-full font-inter">
+    <header className={headerShellClass}>
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-4 md:px-7 md:pt-5 lg:px-12">
         <div className={HEADER_PILL}>
           <div className={`${HEADER_TOOLBAR_ROW} hidden w-full md:flex`}>
@@ -700,5 +721,6 @@ export default function Header() {
     </header>
   );
 
+  if (isPdp) return headerUi;
   return headerPortalRoot ? createPortal(headerUi, headerPortalRoot) : headerUi;
 }

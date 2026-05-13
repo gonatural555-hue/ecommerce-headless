@@ -303,8 +303,8 @@ export default async function ProductPage({ params }: Props) {
       <div
         className={
           isCyclingTraining001
-            ? "mx-auto max-w-7xl px-6 pb-3 pt-24 sm:px-10 md:pt-20 lg:px-16 lg:pb-2"
-            : "mx-auto max-w-7xl px-6 pb-24 pt-24 sm:px-10 md:py-20 md:pb-28 lg:px-16"
+            ? "mx-auto max-w-7xl px-6 pb-3 pt-10 sm:px-10 sm:pt-12 md:pt-14 lg:px-16 lg:pb-2 lg:pt-16"
+            : "mx-auto max-w-7xl px-6 pb-24 pt-12 sm:px-10 sm:pt-14 md:pb-28 md:pt-16 lg:px-16 lg:pt-[4.5rem]"
         }
       >
         <ProductDetailClient

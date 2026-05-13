@@ -92,11 +92,17 @@ export default function ProductGallery({
     ? "rounded-xl border border-neutral-200/85 bg-neutral-100/95 shadow-[0_10px_32px_-18px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] lg:rounded-2xl lg:border-neutral-200/70 lg:shadow-[0_4px_28px_-12px_rgba(0,0,0,0.1)]"
     : "rounded-xl border border-white/[0.1] bg-dark-surface/72 shadow-[0_14px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.07] lg:rounded-2xl lg:border-white/[0.12] lg:bg-[linear-gradient(168deg,rgba(255,255,255,0.07)_0%,rgba(18,24,22,0.96)_42%,#0b0f0e_100%)] lg:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_56px_-30px_rgba(0,0,0,0.58)] lg:ring-white/[0.09]";
 
+  /** Móvil: superficie clara + cuadrado → marco más compacto para no tapar título/CTA. */
+  const squareMobileWidthCap =
+    light && aspectMode === "square"
+      ? "mx-auto max-w-[min(100%,min(92vw,300px))] sm:max-w-[min(100%,360px)] md:max-w-[min(100%,420px)] lg:mx-0 lg:max-w-none"
+      : "max-w-[min(100%,560px)]";
+
   /** Móvil: tope opcional; desktop: sin tope artificial — crece con la columna del grid */
   const stageFrameClass =
     aspectMode === "cinematic"
-      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(420px,72vh)] lg:max-w-none lg:max-h-[min(520px,82vh)] xl:max-h-[min(560px,85vh)]`
-      : `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-square lg:max-w-none`;
+      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(380px,62vh)] sm:max-h-[min(420px,68vh)] lg:max-w-none lg:max-h-[min(520px,82vh)] xl:max-h-[min(560px,85vh)]`
+      : `relative w-full ${squareMobileWidthCap} overflow-hidden ${stageShell} aspect-square lg:max-w-none`;
 
   const imgObject =
     imageFit === "contain"
