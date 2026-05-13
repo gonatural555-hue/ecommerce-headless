@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useMemo } from "react";
-import HeroCompassCursor, { type CompassCardinalLabels } from "@/components/home/HeroCompassCursor";
 import type { Locale } from "@/lib/i18n/config";
 import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
 
@@ -14,17 +13,15 @@ export type HomeBrandHeroProps = {
   ctaPrimary: string;
   ctaSecondary: string;
   scrollHint: string;
-  cardinalLabels: CompassCardinalLabels;
-  compassAriaLabel: string;
 };
 
 const easeOut = GN_EASE_PREMIUM;
 
 const primaryCtaClass =
-  "group inline-flex h-[58px] min-h-[58px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-[42px]";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
 
 const secondaryCtaClass =
-  "group inline-flex h-[58px] min-h-[58px] items-center justify-center rounded-full border border-gn-forest/22 bg-transparent px-9 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-gn-forest/90 shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/40 hover:bg-gn-cream/85 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-[42px]";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full border border-gn-forest/22 bg-transparent px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-gn-forest/90 shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/40 hover:bg-gn-cream/85 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-gn-cream motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
 
 function splitTitleLines(title: string): string[] {
   if (title.includes("\n")) {
@@ -42,8 +39,6 @@ export default function HomeBrandHero({
   ctaPrimary,
   ctaSecondary,
   scrollHint,
-  cardinalLabels,
-  compassAriaLabel,
 }: HomeBrandHeroProps) {
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
@@ -70,7 +65,7 @@ export default function HomeBrandHero({
   };
 
   const heroTopPad =
-    "pt-[calc(env(safe-area-inset-top,0px)+10rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+10.25rem)] md:pt-[calc(env(safe-area-inset-top,0px)+10.5rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+10.75rem)]";
+    "pt-[calc(env(safe-area-inset-top,0px)+9.25rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+9.5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+9.75rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+10rem)]";
 
   return (
     <section
@@ -78,12 +73,12 @@ export default function HomeBrandHero({
       aria-label="Hero"
     >
       <motion.div
-        className={`relative z-[1] mx-auto flex min-h-[100svh] min-h-[100dvh] w-full min-w-0 max-w-[1200px] flex-col px-[18px] pb-10 md:px-[28px] lg:px-[48px] ${heroTopPad}`}
+        className={`relative z-[1] mx-auto flex min-h-[88svh] min-h-[88dvh] w-full min-w-0 max-w-[1040px] flex-col px-[18px] pb-8 md:px-[28px] md:pb-10 lg:px-[48px] ${heroTopPad}`}
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        <div className="flex min-h-0 flex-1 flex-col items-center justify-center pt-6 md:pt-8">
+        <div className="flex min-h-0 flex-1 flex-col items-center justify-center pt-4 md:pt-6">
           <motion.h1 variants={itemVariants} className="gn-hero-editorial w-full">
             {lines.map((line, lineIdx) => {
               const isFirst = lineIdx === 0;
@@ -184,14 +179,14 @@ export default function HomeBrandHero({
 
           <motion.p
             variants={itemVariants}
-            className="gn-hero-subtitle mx-auto mt-7 text-center md:mt-9"
+            className="gn-hero-subtitle mx-auto mt-6 text-center md:mt-7"
           >
             {subtitle}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex w-full max-w-md flex-col items-stretch justify-center gap-5 sm:max-w-none sm:flex-row sm:justify-center"
+            className="mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-4 sm:max-w-none sm:flex-row sm:justify-center md:mt-9"
           >
             <Link href={`/${locale}/products`} className={primaryCtaClass}>
               {ctaPrimary}
@@ -201,21 +196,7 @@ export default function HomeBrandHero({
             </Link>
           </motion.div>
 
-          <motion.div
-            initial={off ? { opacity: 1, y: 0 } : { opacity: 0, y: 52 }}
-            whileInView={off ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.22, margin: "0px 0px -10% 0px" }}
-            transition={off ? { duration: 0 } : { duration: 1.08, ease: easeOut }}
-            className="mt-14 flex w-full flex-col items-center"
-          >
-            <HeroCompassCursor
-              variant="brand"
-              ariaLabel={compassAriaLabel}
-              cardinalLabels={cardinalLabels}
-            />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="mt-[18px] flex flex-col items-center gap-gn-xs md:mt-5">
+          <motion.div variants={itemVariants} className="mt-12 flex flex-col items-center gap-gn-xs md:mt-14">
             <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-gn-forest md:text-[12px] md:tracking-[0.22em]">
               {scrollHint}
             </p>

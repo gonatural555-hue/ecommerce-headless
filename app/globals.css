@@ -414,7 +414,7 @@ main[data-route="order-success"] .bg-gray-50 {
    * Hero marca home — bloque editorial (3 líneas + subtítulo refinados).
    */
   .gn-hero-editorial {
-    max-width: 920px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
@@ -519,18 +519,18 @@ main[data-route="order-success"] .bg-gray-50 {
 
   .gn-hero-subtitle {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.65;
     color: rgba(46, 74, 54, 0.82);
     text-wrap: pretty;
-    max-width: min(100%, 720px);
+    max-width: min(100%, 640px);
   }
 
   @media (min-width: 768px) {
     .gn-hero-subtitle {
-      font-size: 22px;
-      line-height: 1.7;
-      max-width: min(100%, 720px);
+      font-size: 19px;
+      line-height: 1.65;
+      max-width: min(100%, 640px);
     }
   }
 

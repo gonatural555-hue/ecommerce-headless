@@ -133,13 +133,6 @@ export default async function HomePage({
           ctaPrimary={t("homeBrandHero.ctaPrimary")}
           ctaSecondary={t("homeBrandHero.ctaSecondary")}
           scrollHint={t("homeBrandHero.scrollHint")}
-          cardinalLabels={{
-            north: t("homeCompass.north"),
-            south: t("homeCompass.south"),
-            east: t("homeCompass.east"),
-            west: t("homeCompass.west"),
-          }}
-          compassAriaLabel={t("homeCompass.compassAria")}
         />
 
         <BrandStatement text={h.brandStatement ?? t("story.title")} />
