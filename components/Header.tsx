@@ -13,13 +13,12 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useSearchParams } from "next/navigation";
 
-/** Pastilla flotante desktop — cristal editorial. */
-const HEADER_PILL_BAR =
-  "relative flex h-[76px] w-full max-w-[1440px] items-center rounded-full border border-[rgba(46,74,54,0.08)] bg-[rgba(255,255,255,0.55)] shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-[18px]";
-
-/** Móvil: misma lectura de marca; altura táctil cómoda. */
-const HEADER_MOBILE_BAR =
-  "relative flex h-[76px] w-full max-w-[1440px] items-center rounded-full border border-[rgba(46,74,54,0.08)] bg-[rgba(255,255,255,0.55)] shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-[18px]";
+/**
+ * Barra flotante **sin** pastilla contenedora (sin fondo/borde/sombra envolviendo todo el header).
+ * Criterio de producto: no reintroducir un envoltorio tipo píldora alrededor de la fila del header.
+ */
+const HEADER_FLOAT_ROW =
+  "relative flex min-h-[80px] w-full max-w-[1440px] items-center py-2 md:min-h-[84px] md:py-2.5";
 
 const NAV_LINK_HEADER_DESKTOP =
   "whitespace-nowrap text-[12px] font-semibold uppercase tracking-[0.18em] text-[rgba(46,74,54,0.65)] transition-colors duration-200 hover:text-[#2E4A36]";
@@ -207,30 +206,27 @@ export default function Header() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 font-inter">
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-6 md:px-7 lg:px-12">
-        {/* Desktop: pastilla | idiomas | Home Blog | LOGO | Products Categories | … | cart cuenta */}
-        <div
-          className={`${HEADER_PILL_BAR} pointer-events-auto hidden w-full gap-3 md:flex md:px-5 md:gap-4 lg:px-8 lg:gap-5`}
-        >
-          <nav
-            className="flex shrink-0 items-center gap-0.5"
-            aria-label={t("header.localeNavAria")}
-          >
-            {locales.map((lang) => (
-              <Link
-                key={lang}
-                href={buildLocaleHref(lang)}
-                className={`${LOCALE_FLOAT} ${
-                  lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
-                }`}
-              >
-                {lang.toUpperCase()}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end pr-[calc(5.25rem+12px)] md:pr-[calc(5.5rem+14px)] lg:pr-[calc(5.75rem+16px)]">
+        {/* Desktop: sin pastilla — idiomas + Home/Blog agrupados a la izquierda; logo centro; Products/Categories + utilidades */}
+        <div className={`${HEADER_FLOAT_ROW} pointer-events-auto hidden w-full md:flex`}>
+          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-4 pr-[calc(4.75rem+8px)] md:gap-5 md:pr-[calc(5rem+10px)] lg:gap-6 lg:pr-[calc(5.25rem+12px)]">
             <nav
-              className="flex min-w-0 shrink-0 items-center gap-5 md:gap-6 lg:gap-8"
+              className="flex shrink-0 items-center gap-0.5"
+              aria-label={t("header.localeNavAria")}
+            >
+              {locales.map((lang) => (
+                <Link
+                  key={lang}
+                  href={buildLocaleHref(lang)}
+                  className={`${LOCALE_FLOAT} ${
+                    lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
+                  }`}
+                >
+                  {lang.toUpperCase()}
+                </Link>
+              ))}
+            </nav>
+            <nav
+              className="flex min-w-0 shrink-0 items-center gap-4 md:gap-5 lg:gap-6"
               aria-label={`${t("header.nav.home")}, ${t("header.nav.blog")}`}
             >
               <Link href={`/${locale}`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
@@ -252,9 +248,9 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(5.25rem+12px)] md:gap-3 md:pl-[calc(5.5rem+14px)] lg:pl-[calc(5.75rem+16px)]">
+          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(4.75rem+8px)] md:gap-3 md:pl-[calc(5rem+10px)] lg:pl-[calc(5.25rem+12px)]">
             <nav
-              className="flex min-w-0 shrink-0 items-center gap-5 md:gap-6 lg:gap-8"
+              className="flex min-w-0 shrink-0 items-center gap-4 md:gap-5 lg:gap-6"
               aria-label={`${t("header.nav.products")}, ${t("header.nav.categories")}`}
             >
               <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
@@ -319,9 +315,9 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile — pastilla compacta */}
+        {/* Mobile — sin pastilla contenedora */}
         <div
-          className={`${HEADER_MOBILE_BAR} pointer-events-auto flex w-full items-center justify-between gap-2 px-3 md:hidden`}
+          className={`${HEADER_FLOAT_ROW} pointer-events-auto flex w-full items-center justify-between gap-2 md:hidden`}
         >
           <nav
             className="flex shrink-0 items-center gap-0.5"
@@ -422,7 +418,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[calc(1.5rem+76px+8px)] md:top-[calc(1.5rem+76px+10px)]",
+            "top-[calc(1.5rem+5.25rem+10px)] md:top-[calc(1.5rem+5.25rem+12px)]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
