@@ -72,10 +72,10 @@ function BrandLogoLink({
         aria-label={alt}
       >
         <Image
-          src="/assets/images/logo/LOG-GONATURAL.png"
+          src="/assets/images/logo/LOGO.png"
           alt={alt}
-          width={960}
-          height={288}
+          width={640}
+          height={256}
           priority
           draggable={false}
           className={`${imageClassName} drop-shadow-[0_6px_20px_rgba(46,74,54,0.08)]`}
