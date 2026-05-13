@@ -64,7 +64,7 @@ export default function HeroBentoSection({
       </div>
 
       <div
-        className="relative z-10 flex min-h-[min(100dvh,40rem)] flex-col items-center justify-center px-6 pb-16 pt-[calc(env(safe-area-inset-top,0px)+5.25rem)] text-center sm:px-10 sm:pb-20 sm:pt-[calc(env(safe-area-inset-top,0px)+5.5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+5.75rem)]"
+        className="relative z-10 flex min-h-[min(100dvh,40rem)] flex-col items-center justify-center px-6 pb-16 pt-[calc(env(safe-area-inset-top,0px)+10.5rem)] text-center sm:px-10 sm:pb-20 sm:pt-[calc(env(safe-area-inset-top,0px)+11rem)] md:pt-[calc(env(safe-area-inset-top,0px)+11.5rem)]"
         style={{
           opacity: fade,
           transform: reduceMotion ? undefined : `translateY(${lift}px)`,

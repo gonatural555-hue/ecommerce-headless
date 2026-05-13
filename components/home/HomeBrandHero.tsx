@@ -64,7 +64,7 @@ export default function HomeBrandHero({
 
   /* Espacio bajo header fijo (pt-6 + fila ~84px) sin crear contenedor extra de scroll */
   const heroTopPad =
-    "pt-[calc(env(safe-area-inset-top,0px)+1.5rem+5.25rem+8px)] sm:pt-[calc(env(safe-area-inset-top,0px)+1.5rem+5.25rem+10px)] md:pt-[calc(env(safe-area-inset-top,0px)+1.5rem+5.25rem+12px)]";
+    "pt-[calc(env(safe-area-inset-top,0px)+1.5rem+10.5rem+8px)] sm:pt-[calc(env(safe-area-inset-top,0px)+1.5rem+10.5rem+10px)] md:pt-[calc(env(safe-area-inset-top,0px)+1.5rem+10.5rem+12px)]";
 
   return (
     <section

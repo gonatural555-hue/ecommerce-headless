@@ -45,11 +45,11 @@ export default function BentoHeroSection(props: HomeHeroCarouselProps) {
 
   return (
     <section
-      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+4.75rem+1rem)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+5rem+1rem)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+5.25rem+1rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+5.5rem+1.25rem)] ${LUMINOUS_EDGE_LIGHT}`}
+      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+9.5rem+1rem)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+10rem+1rem)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+10.5rem+1rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+11rem+1.25rem)] ${LUMINOUS_EDGE_LIGHT}`}
       aria-label="Hero"
     >
       <div className="mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0">
-        <div className="flex flex-col gap-4 lg:min-h-[min(calc(100svh-7.25rem),820px)] lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:grid-rows-[1fr_1fr] lg:items-stretch lg:gap-5">
+        <div className="flex flex-col gap-4 lg:min-h-[min(calc(100svh-14.5rem),820px)] lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:grid-rows-[1fr_1fr] lg:items-stretch lg:gap-5">
           <div className="flex min-h-0 w-full flex-col gap-4 lg:col-start-1 lg:row-span-2 lg:min-h-0">
             <div className={`${BENTO_CARD} ${BENTO_HOVER} flex min-h-[min(68vh,560px)] flex-1 flex-col lg:min-h-0`}>
               <div className="relative min-h-0 flex-1">

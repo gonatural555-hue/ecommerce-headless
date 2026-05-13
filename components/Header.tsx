@@ -18,7 +18,7 @@ import { usePathname, useSearchParams } from "next/navigation";
  * Criterio de producto: no reintroducir un envoltorio tipo píldora alrededor de la fila del header.
  */
 const HEADER_FLOAT_ROW =
-  "relative flex min-h-[80px] w-full max-w-[1440px] items-center py-2 md:min-h-[84px] md:py-2.5";
+  "relative flex min-h-[10rem] w-full max-w-[1440px] items-center py-2 md:min-h-[10.5rem] md:py-2.5";
 
 const NAV_LINK_HEADER_DESKTOP =
   "whitespace-nowrap text-[12px] font-semibold uppercase tracking-[0.18em] text-[rgba(46,74,54,0.65)] transition-colors duration-200 hover:text-[#2E4A36]";
@@ -208,7 +208,7 @@ export default function Header() {
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-6 md:px-7 lg:px-12">
         {/* Desktop: idiomas a la izquierda; Home/Blog al borde interior (junto al logo); Products/Categories + utilidades */}
         <div className={`${HEADER_FLOAT_ROW} pointer-events-auto hidden w-full md:flex`}>
-          <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(4.75rem+8px)] md:pr-[calc(5rem+10px)] lg:pr-[calc(5.25rem+12px)]">
+          <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(9.5rem+8px)] md:pr-[calc(10rem+10px)] lg:pr-[calc(10.5rem+12px)]">
             <nav
               className="flex shrink-0 items-center gap-0.5"
               aria-label={t("header.localeNavAria")}
@@ -245,12 +245,12 @@ export default function Header() {
               <BrandLogoLink
                 locale={locale}
                 alt={t("header.logoAlt")}
-                imageClassName="h-[3.75rem] w-auto max-h-[4rem] max-w-[min(28vw,8.25rem)] object-contain object-center md:h-[4rem] md:max-h-[4.25rem] md:max-w-[9rem] lg:max-h-[4.5rem] lg:max-w-[9.5rem]"
+                imageClassName="h-[7.5rem] w-auto max-h-[8rem] max-w-[min(28vw,16.5rem)] object-contain object-center md:h-[8rem] md:max-h-[8.5rem] md:max-w-[18rem] lg:max-h-[9rem] lg:max-w-[19rem]"
               />
             </div>
           </div>
 
-          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(4.75rem+8px)] md:gap-3 md:pl-[calc(5rem+10px)] lg:pl-[calc(5.25rem+12px)]">
+          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[calc(9.5rem+8px)] md:gap-3 md:pl-[calc(10rem+10px)] lg:pl-[calc(10.5rem+12px)]">
             <nav
               className="flex min-w-0 shrink-0 items-center gap-4 md:gap-5 lg:gap-6"
               aria-label={`${t("header.nav.products")}, ${t("header.nav.categories")}`}
@@ -342,7 +342,7 @@ export default function Header() {
             <BrandLogoLink
               locale={locale}
               alt={t("header.logoAlt")}
-              imageClassName="h-[4.25rem] w-auto max-w-[min(48vw,10rem)] object-contain object-center"
+              imageClassName="h-[8.5rem] w-auto max-w-[min(48vw,20rem)] object-contain object-center"
             />
           </div>
 
@@ -420,7 +420,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[calc(1.5rem+5.25rem+10px)] md:top-[calc(1.5rem+5.25rem+12px)]",
+            "top-[calc(1.5rem+10.5rem+10px)] md:top-[calc(1.5rem+10.5rem+12px)]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
