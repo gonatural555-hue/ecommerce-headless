@@ -161,7 +161,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) {
     return (
-      <main className="mx-auto max-w-6xl bg-[#FFFFFF] px-4 py-20 text-neutral-900">
+      <main className="mx-auto max-w-6xl bg-[#F4EBDD] px-4 py-20 text-neutral-900">
         <h1 className="font-sans text-2xl font-semibold">Producto no encontrado</h1>
       </main>
     );
@@ -299,12 +299,12 @@ export default async function ProductPage({ params }: Props) {
   const isCyclingTraining001 = product.id === "gn-cycling-training-001";
 
   return (
-    <main className="overflow-x-hidden bg-[#FFFFFF] text-neutral-900">
+      <main className="overflow-x-hidden bg-[#F4EBDD] text-neutral-900">
       <div
         className={
           isCyclingTraining001
-            ? "mx-auto max-w-7xl px-6 pb-3 pt-10 sm:px-10 sm:pt-12 md:pt-14 lg:px-16 lg:pb-2 lg:pt-16"
-            : "mx-auto max-w-7xl px-6 pb-24 pt-12 sm:px-10 sm:pt-14 md:pb-28 md:pt-16 lg:px-16 lg:pt-[4.5rem]"
+            ? "mx-auto max-w-7xl bg-transparent px-6 pb-3 pt-10 sm:px-10 sm:pt-12 md:pt-14 lg:px-16 lg:pb-2 lg:pt-16"
+            : "mx-auto max-w-7xl bg-transparent px-6 pb-24 pt-12 sm:px-10 sm:pt-14 md:pb-28 md:pt-16 lg:px-16 lg:pt-[4.5rem]"
         }
       >
         <ProductDetailClient

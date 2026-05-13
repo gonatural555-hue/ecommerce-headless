@@ -31,7 +31,7 @@ const HEADER_TOOLBAR_ROW =
   "relative flex w-full max-w-[1440px] items-center gap-2 py-1.5 md:gap-3 md:py-2";
 
 const HEADER_PILL =
-  "pointer-events-auto relative mx-auto w-full rounded-full border border-[rgba(46,74,54,0.10)] bg-[rgba(244,235,221,0.72)] px-2 shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-[16px] supports-[backdrop-filter]:bg-[rgba(244,235,221,0.62)] sm:px-3 md:px-4";
+  "pointer-events-auto relative w-full rounded-none border-0 border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] px-3 py-2.5 shadow-none sm:px-4 md:rounded-full md:border md:border-[rgba(46,74,54,0.10)] md:bg-[rgba(244,235,221,0.72)] md:px-4 md:py-0 md:shadow-[0_10px_40px_rgba(0,0,0,0.05)] md:backdrop-blur-[16px] md:supports-[backdrop-filter]:bg-[rgba(244,235,221,0.62)]";
 
 const LOCALE_FLOAT =
   "rounded-full px-2 py-1 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36] md:text-[12px] md:tracking-[0.12em]";
@@ -288,12 +288,12 @@ export default function Header() {
     "top-[calc(env(safe-area-inset-top,0px)+0.75rem+11.25rem)] md:top-[calc(env(safe-area-inset-top,0px)+1rem+12rem)]";
 
   const headerShellClass = isPdp
-    ? "pointer-events-auto relative z-50 w-full font-inter"
-    : "pointer-events-none !fixed inset-x-0 top-0 z-50 w-full font-inter";
+    ? "pointer-events-auto relative z-50 w-full overflow-x-hidden font-inter"
+    : "pointer-events-none !fixed inset-x-0 top-0 z-50 w-full overflow-x-hidden font-inter";
 
   const headerUi = (
     <header className={headerShellClass}>
-      <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-4 md:px-7 md:pt-5 lg:px-12">
+      <div className="mx-auto w-full max-w-[1440px] px-0 pt-3 md:px-7 md:pt-5 lg:px-12">
         <div className={HEADER_PILL}>
           <div className={`${HEADER_TOOLBAR_ROW} hidden w-full md:flex`}>
             <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(11.5rem+6px)] md:pr-[calc(12rem+8px)] lg:pr-[calc(12.75rem+10px)]">
@@ -423,13 +423,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="flex min-w-0 flex-1 justify-center px-1">
-              <BrandLogoLink
-                locale={locale}
-                alt={t("header.logoAlt")}
-                imageClassName="h-[10.625rem] w-auto max-w-[min(52vw,25rem)] object-contain object-center"
-              />
-            </div>
+            <div className="min-w-0 flex-1" aria-hidden="true" />
 
             <div className="flex shrink-0 items-center gap-1">
               <button

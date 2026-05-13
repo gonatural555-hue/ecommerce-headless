@@ -7,6 +7,7 @@ import type { Locale } from "@/lib/i18n/config";
 import ProductCardSimple from "@/components/ProductCardSimple";
 import HeroCompassCursor from "@/components/home/HeroCompassCursor";
 import { LUMINOUS_EDGE_CARD } from "@/lib/ui/luminous-edge";
+import { GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -111,7 +112,7 @@ export default function ProductsHero({
 
   return (
     <section
-      className="relative overflow-x-clip border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD]"
+      className="relative overflow-x-hidden border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD]"
       aria-label={title}
     >
       <div
@@ -120,13 +121,13 @@ export default function ProductsHero({
       />
 
       <motion.div
-        className="relative z-[1] mx-auto w-full max-w-[1400px] px-[18px] pb-12 pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.5rem+6px)] sm:px-7 sm:pb-14 sm:pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.75rem+6px)] md:px-10 md:pb-16 md:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+6px)] lg:px-12"
+        className={`relative z-[1] mx-auto w-full max-w-[1400px] px-[18px] pb-12 sm:px-7 sm:pb-14 md:px-10 md:pb-16 lg:px-12 ${GN_HERO_TOP_PAD}`}
         variants={container}
         initial="hidden"
         animate="show"
       >
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 xl:gap-16">
-          <div className="flex min-w-0 flex-col">
+        <div className="grid grid-cols-1 items-center justify-items-center gap-10 text-center lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-12 lg:text-left xl:gap-16">
+          <div className="flex min-w-0 max-w-xl flex-col items-center lg:max-w-none lg:items-start">
             <motion.p
               variants={item}
               className="font-inter text-[11px] font-semibold uppercase tracking-[0.28em] text-[#C9622B] sm:text-xs"
@@ -135,17 +136,17 @@ export default function ProductsHero({
             </motion.p>
             <motion.h1
               variants={item}
-              className="mt-4 max-w-xl font-[family-name:var(--font-tan-nimbus),Georgia,serif] text-[clamp(1.85rem,4.2vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#2E4A36]"
+              className="mt-4 max-w-xl font-[family-name:var(--font-tan-nimbus),Georgia,serif] text-[clamp(1.85rem,4.2vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-[#2E4A36] lg:mx-0"
             >
               {title}
             </motion.h1>
             <motion.p
               variants={item}
-              className="mt-4 max-w-md font-inter text-sm leading-relaxed text-[rgba(46,74,54,0.82)] md:text-[15px] md:leading-relaxed"
+              className="mt-4 max-w-md font-inter text-sm leading-relaxed text-[rgba(46,74,54,0.82)] md:text-[15px] md:leading-relaxed lg:mx-0"
             >
               {subtitle}
             </motion.p>
-            <motion.div variants={item} className="mt-6">
+            <motion.div variants={item} className="mt-6 flex justify-center lg:justify-start">
               <span className="inline-flex rounded-full border border-[#2E4A36]/25 bg-[#2E4A36] px-4 py-2 font-inter text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F4EBDD] shadow-[0_8px_28px_-14px_rgba(46,74,54,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 md:text-xs">
                 {freeShippingBadge}
               </span>
@@ -153,7 +154,7 @@ export default function ProductsHero({
 
             <motion.div
               variants={item}
-              className="mt-8 flex items-end justify-start gap-6 md:mt-10"
+              className="mt-8 flex items-end justify-center gap-6 md:mt-10 lg:justify-start"
             >
               <div className="origin-top scale-[0.72] sm:scale-[0.78] md:scale-[0.85]">
                 <HeroCompassCursor
@@ -165,13 +166,13 @@ export default function ProductsHero({
             </motion.div>
           </div>
 
-          <motion.div variants={item} className="min-w-0">
+          <motion.div variants={item} className="flex w-full min-w-0 max-w-[min(100%,420px)] flex-col items-center lg:max-w-none lg:items-stretch">
             {slides.length > 0 ? (
-              <div className="relative">
+              <div className="relative w-full">
                 <div
                   className={`overflow-hidden rounded-[1.35rem] border border-[rgba(46,74,54,0.1)] bg-[#F4EBDD]/80 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_16px_48px_-20px_rgba(17,23,19,0.12)] ring-1 ring-[rgba(46,74,54,0.06)] sm:p-5 md:rounded-[1.75rem] md:p-6 ${LUMINOUS_EDGE_CARD}`}
                 >
-                  <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p className="font-inter text-[11px] font-medium uppercase tracking-[0.2em] text-[rgba(46,74,54,0.55)]">
                       {featuredRailLabel}
                     </p>
@@ -181,7 +182,7 @@ export default function ProductsHero({
                         onClick={goPrev}
                         disabled={start <= 0}
                         className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(46,74,54,0.15)] text-[#2E4A36] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#2E4A36]/35 hover:bg-[rgba(46,74,54,0.04)] disabled:pointer-events-none disabled:opacity-35"
-                        aria-label="Previous products"
+                        aria-label={carouselPrevAria}
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-4 w-4">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -206,7 +207,7 @@ export default function ProductsHero({
                     initial={reduceMotion ? false : { opacity: 0.85, x: 8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.55, ease: EASE }}
-                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-6"
+                    className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:justify-items-stretch lg:gap-6"
                   >
                     {visible.map((product) => (
                       <div key={product.id} className="min-w-0">

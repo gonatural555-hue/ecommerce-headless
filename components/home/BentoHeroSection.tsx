@@ -7,6 +7,7 @@ import HomeHeroCarousel from "@/components/home/HomeHeroCarousel";
 import type { HomeHeroCarouselProps } from "@/components/home/HomeHeroCarousel";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { LUMINOUS_EDGE_CARD, LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
+import { GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
 
 const BENTO_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
 
@@ -45,7 +46,7 @@ export default function BentoHeroSection(props: HomeHeroCarouselProps) {
 
   return (
     <section
-      className={`relative bg-[#FFFFFF] pb-8 pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.5rem+6px)] sm:pb-10 sm:pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.75rem+6px)] md:pb-12 md:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+6px)] lg:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+8px)] ${LUMINOUS_EDGE_LIGHT}`}
+      className={`relative overflow-x-hidden bg-[#FFFFFF] pb-8 ${GN_HERO_TOP_PAD} sm:pb-10 md:pb-12 ${LUMINOUS_EDGE_LIGHT}`}
       aria-label="Hero"
     >
       <div className="mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0">

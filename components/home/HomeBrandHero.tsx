@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
-import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
+import { GN_EASE_PREMIUM, GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 
 export type HomeBrandHeroProps = {
@@ -69,9 +69,6 @@ export default function HomeBrandHero({
     },
   };
 
-  const heroTopPad =
-    "pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.5rem+6px)] sm:pt-[calc(env(safe-area-inset-top,0px)+0.5rem+10.75rem+6px)] md:pt-[calc(env(safe-area-inset-top,0px)+0.75rem+11rem+6px)]";
-
   return (
     <section
       className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-[#F4EBDD]"
@@ -82,7 +79,7 @@ export default function HomeBrandHero({
         aria-hidden
       />
       <motion.div
-        className={`relative z-[1] mx-auto flex min-h-[100svh] w-full min-w-0 max-w-[1080px] flex-col px-[18px] pb-3 md:px-[28px] md:pb-4 lg:px-[48px] ${heroTopPad}`}
+        className={`relative z-[1] mx-auto flex min-h-[100svh] w-full min-w-0 max-w-[1080px] flex-col px-[18px] pb-3 md:px-[28px] md:pb-4 lg:px-[48px] ${GN_HERO_TOP_PAD}`}
         variants={containerVariants}
         initial="hidden"
         animate="show"

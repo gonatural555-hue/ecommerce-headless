@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
@@ -74,12 +75,14 @@ export default function Footer() {
               className="group mb-4 inline-flex shrink-0 items-center transition-opacity duration-200 hover:opacity-90"
               aria-label="Go Natural"
             >
-              <img
-                src="/assets/images/logo/GONATURAL-LOGO.svg"
+              <Image
+                src="/assets/images/logo/LOGO-GONATURAL.png"
                 alt="Go Natural"
-                className="h-10 w-auto transition-transform duration-300 ease-out group-hover:scale-[1.03] sm:h-11 md:h-12"
+                width={640}
+                height={256}
                 loading="lazy"
-                decoding="async"
+                className="h-10 w-auto max-w-[11rem] object-contain object-left transition-transform duration-300 ease-out group-hover:scale-[1.02] sm:h-11 sm:max-w-[12rem] md:h-12 md:max-w-[13rem]"
+                sizes="(max-width: 768px) 160px, 200px"
               />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-warm-sand/65">
