@@ -7,7 +7,8 @@ import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
 import AuthModal from "@/components/AuthModal";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { getAllCategories } from "@/lib/categories";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
@@ -139,6 +140,19 @@ export default function Header() {
     };
   }, [categoriesOpen]);
 
+  /** Ancla el bloque al viewport (encima del hero): evita que un ancestro con transform rompa `fixed`. */
+  const [headerPortalRoot, setHeaderPortalRoot] = useState<HTMLElement | null>(null);
+  useLayoutEffect(() => {
+    const id = "gn-header-fixed-root";
+    let el = document.getElementById(id) as HTMLElement | null;
+    if (!el) {
+      el = document.createElement("div");
+      el.id = id;
+      document.body.insertAdjacentElement("afterbegin", el);
+    }
+    setHeaderPortalRoot(el);
+  }, []);
+
   const { mainCategories, subCategoriesByParent } = useMemo(() => {
     const all = getAllCategories();
     const mains = all.filter((cat) => !cat.parentSlug);
@@ -203,7 +217,7 @@ export default function Header() {
     </svg>
   );
 
-  return (
+  const headerUi = (
     <header className="pointer-events-none !fixed inset-x-0 top-0 z-50 w-full font-inter">
       <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-6 md:px-7 lg:px-12">
         {/* Desktop: idiomas a la izquierda; Home/Blog al borde interior (junto al logo); Products/Categories + utilidades */}
@@ -547,4 +561,6 @@ export default function Header() {
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} initialTab={initialTab} />
     </header>
   );
+
+  return headerPortalRoot ? createPortal(headerUi, headerPortalRoot) : headerUi;
 }
