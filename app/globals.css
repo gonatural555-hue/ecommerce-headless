@@ -411,9 +411,91 @@ main[data-route="order-success"] .bg-gray-50 {
   }
 
   /**
-   * Hero marca (home): escala display vs. cuerpo según sistema GN.
-   * Referencia visual dominante; no sustituye .hero-display en otras rutas.
+   * Hero marca home — bloque editorial (3 líneas + subtítulo refinados).
    */
+  .gn-hero-editorial {
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Título multicolor — tonos suavizados (mezcla con crema editorial) */
+  .gn-hero-c-navy {
+    color: color-mix(in srgb, var(--gn-navy) 86%, var(--gn-cream) 14%);
+  }
+
+  .gn-hero-c-burgundy {
+    color: color-mix(in srgb, var(--gn-burgundy) 86%, var(--gn-cream) 14%);
+  }
+
+  .gn-hero-c-burnt {
+    color: color-mix(in srgb, var(--gn-burnt-orange) 88%, var(--gn-cream) 12%);
+  }
+
+  .gn-hero-c-mustard {
+    color: color-mix(in srgb, var(--gn-mustard) 88%, var(--gn-cream) 12%);
+  }
+
+  /* Línea 1 — “Go Back” / primera línea: mismo bloque, ritmo fuerte pero menor que “Essentials” */
+  .gn-hero-line-1 {
+    font-size: clamp(46px, 10.5vw, 64px);
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+  }
+
+  @media (min-width: 768px) {
+    .gn-hero-line-1 {
+      font-size: clamp(72px, 7.5vw, 120px);
+      line-height: 0.86;
+      letter-spacing: -0.038em;
+    }
+  }
+
+  /* Línea 2 — “To”: menor peso, ligeramente metida hacia arriba */
+  .gn-hero-line-2 {
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-top: -0.14em;
+  }
+
+  @media (min-width: 768px) {
+    .gn-hero-line-2 {
+      font-size: clamp(50px, 4.8vw, 80px);
+      margin-top: -0.16em;
+    }
+  }
+
+  /* Línea 3 — “Essentials”: ancla visual (clamp editorial pedido) */
+  .gn-hero-line-3 {
+    font-size: clamp(52px, 12vw, 72px);
+    line-height: 0.86;
+    letter-spacing: -0.036em;
+    margin-top: 0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .gn-hero-line-3 {
+      font-size: clamp(84px, 9vw, 150px);
+      line-height: 0.84;
+    }
+  }
+
+  .gn-hero-label {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #c9622b;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
   .gn-hero-title {
     font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
     font-size: clamp(2.25rem, 9.5vw, 3.35rem);
@@ -437,18 +519,18 @@ main[data-route="order-success"] .bg-gray-50 {
 
   .gn-hero-subtitle {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(0.9375rem, 0.88rem + 0.2vw, 1.0625rem);
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.7;
     color: rgba(46, 74, 54, 0.82);
     text-wrap: pretty;
-    max-width: min(100%, 40rem);
+    max-width: min(100%, 720px);
   }
 
   @media (min-width: 768px) {
     .gn-hero-subtitle {
-      font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
-      line-height: 1.62;
-      max-width: min(100%, 40rem);
+      font-size: 22px;
+      line-height: 1.7;
+      max-width: min(100%, 720px);
     }
   }
 

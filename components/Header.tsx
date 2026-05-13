@@ -13,26 +13,22 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { usePathname, useSearchParams } from "next/navigation";
 
-/** Isla flotante del header (crema / vidrio). */
-const HEADER_ISLAND =
-  "rounded-full border border-[#2E4A36]/12 bg-[#F4EBDD]/74 shadow-[0_14px_48px_-22px_rgba(46,74,54,0.2),inset_0_1px_0_rgba(255,255,255,0.78)] backdrop-blur-[18px]";
+/** Barra única flotante — refinamiento editorial (sin islas por control). */
+const HEADER_PILL_BAR =
+  "relative flex h-[76px] w-full max-w-[1440px] items-center rounded-full border border-[rgba(46,74,54,0.08)] bg-[rgba(255,255,255,0.55)] shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-[18px]";
 
-/** Inter — panel móvil / mega (mismo stack que el header). */
+const NAV_LINK_HEADER_DESKTOP =
+  "whitespace-nowrap text-[12px] font-semibold uppercase tracking-[0.18em] text-[rgba(46,74,54,0.65)] transition-colors duration-200 hover:text-[#2E4A36]";
+
+const LOCALE_IN_PILL =
+  "rounded-full px-2 py-1.5 font-inter text-[11px] font-semibold uppercase tracking-[0.16em] text-[rgba(46,74,54,0.65)] transition-colors hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36] md:text-[12px] md:tracking-[0.18em]";
+
+const ICON_GHOST =
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[rgba(46,74,54,0.65)] transition-colors hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36]";
+
+/** Hoja menú móvil — enlaces con jerarquía cromática existente. */
 const NAV_LINK =
   "font-inter text-[0.8125rem] font-semibold tracking-[0.04em] text-charcoal transition-opacity duration-200 hover:opacity-80 sm:text-[0.875rem]";
-
-/** Base desktop: enlaces de página (color por ruta) — sistema GN: 12–14px, tracking 0.18em. */
-const NAV_LINK_HEADER_BASE =
-  "font-inter whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition-[opacity,transform] duration-200 hover:opacity-90 md:px-3 md:text-sm";
-
-const NAV_HEADER_HOME = `${NAV_LINK_HEADER_BASE} text-[#2A2E4B]`;
-const NAV_HEADER_PRODUCTS = `${NAV_LINK_HEADER_BASE} text-[#6E1F28]`;
-const NAV_HEADER_BLOG = `${NAV_LINK_HEADER_BASE} text-[#C9622B]`;
-const NAV_HEADER_CATEGORIES = `${NAV_LINK_HEADER_BASE} text-[#D9A441]`;
-
-/** Enlaces de idioma. */
-const LOCALE_LINK =
-  "rounded-full px-2 py-1.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] transition-colors md:px-2.5";
 
 const logoEase = [0.22, 1, 0.36, 1] as const;
 
@@ -193,180 +189,170 @@ export default function Header() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 font-inter">
-      <div className="mx-auto w-full max-w-gn-content px-8 pb-1 pt-3 lg:px-12 md:pt-4">
-      {/* Desktop — idiomas + Home/Blog | logo centrado | Products/Categorías + utilidades */}
-      <div className="pointer-events-auto hidden w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-0.5 gap-y-2 md:grid md:min-h-[7.5rem] lg:min-h-[8rem] lg:gap-x-1">
-        <div className="flex min-w-0 items-center justify-end gap-1.5 pr-0.5 lg:gap-2 lg:pr-1">
+      <div className="mx-auto w-full max-w-[1440px] px-[18px] pt-6 md:px-7 lg:px-12">
+        {/* Desktop — pastilla única; logo anclado al centro geométrico */}
+        <div
+          className={`${HEADER_PILL_BAR} pointer-events-auto hidden w-full md:flex md:px-5 lg:px-8`}
+        >
+          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end gap-4 pr-[4.25rem] lg:gap-6 lg:pr-[5.25rem]">
+            <nav
+              className="flex shrink-0 items-center gap-0.5"
+              aria-label={t("header.localeNavAria")}
+            >
+              {locales.map((lang) => (
+                <Link
+                  key={lang}
+                  href={buildLocaleHref(lang)}
+                  className={`${LOCALE_IN_PILL} ${
+                    lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
+                  }`}
+                >
+                  {lang.toUpperCase()}
+                </Link>
+              ))}
+            </nav>
+            <nav
+              className="hidden min-w-0 flex-wrap items-center justify-end gap-6 md:flex lg:gap-8"
+              aria-label="Principal"
+            >
+              <Link href={`/${locale}`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
+                {t("header.nav.home")}
+              </Link>
+              <Link href={`/${locale}/blog`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
+                {t("header.nav.blog")}
+              </Link>
+              <Link href={`/${locale}/products`} className={`${NAV_LINK_HEADER_DESKTOP} font-inter`}>
+                {t("header.nav.products")}
+              </Link>
+              <div
+                className="relative"
+                onMouseEnter={openCategoriesMenu}
+                onMouseLeave={scheduleCloseCategories}
+              >
+                <button
+                  type="button"
+                  className={`${NAV_LINK_HEADER_DESKTOP} cursor-pointer border-0 bg-transparent font-inter text-left`}
+                  aria-expanded={categoriesOpen}
+                  aria-haspopup="true"
+                  aria-controls="header-categories-mega"
+                  onFocus={openCategoriesMenu}
+                  onBlur={scheduleCloseCategories}
+                >
+                  {t("header.nav.categories")}
+                </button>
+              </div>
+            </nav>
+          </div>
+
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+            <div className="pointer-events-auto">
+              <BrandLogoLink
+                locale={locale}
+                alt={t("header.logoAlt")}
+                imageClassName="h-[4.5rem] w-auto max-h-[5.0625rem] max-w-[min(32vw,9.5rem)] object-contain object-center md:max-h-[5rem] lg:max-h-[5.125rem] lg:max-w-[11rem]"
+              />
+            </div>
+          </div>
+
+          <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start gap-2 pl-[4.25rem] lg:gap-3 lg:pl-[5.25rem]">
+            <Link
+              href={`/${locale}/cart`}
+              className={`${ICON_GHOST} relative`}
+              aria-label={`Cart with ${totalItems} items`}
+            >
+              {cartIcon}
+              {totalItems > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Link>
+
+            {isLoggedIn && user ? (
+              <Link
+                href={`/${locale}/account`}
+                className="flex max-w-[9.5rem] shrink-0 items-center gap-2 rounded-full border border-transparent py-1.5 pl-2.5 pr-1.5 font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[rgba(46,74,54,0.65)] transition-colors hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36]"
+              >
+                <span className="truncate">{user.name}</span>
+                <span
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
+                  aria-hidden
+                >
+                  {userInitials(user.name)}
+                </span>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => openAuthModal("login")}
+                className="shrink-0 rounded-full border border-transparent px-4 py-2 font-inter text-[12px] font-semibold uppercase tracking-[0.18em] text-[rgba(46,74,54,0.65)] transition-colors hover:border-[rgba(46,74,54,0.08)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36]"
+              >
+                {t("header.account")}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile — misma pastilla compacta */}
+        <div
+          className={`${HEADER_PILL_BAR} pointer-events-auto flex h-[76px] w-full items-center justify-between gap-2 px-3 md:hidden`}
+        >
           <nav
-            className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
+            className="flex shrink-0 items-center gap-0.5"
             aria-label={t("header.localeNavAria")}
           >
             {locales.map((lang) => (
               <Link
                 key={lang}
                 href={buildLocaleHref(lang)}
-                className={`${LOCALE_LINK} ${
-                  lang === locale
-                    ? "bg-[#2E4A36] text-[#F4EBDD]"
-                    : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
+                className={`${LOCALE_IN_PILL} px-1.5 py-1 text-[10px] ${
+                  lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
                 }`}
               >
                 {lang.toUpperCase()}
               </Link>
             ))}
           </nav>
-          <nav
-            className={`${HEADER_ISLAND} relative z-10 flex max-w-full flex-wrap items-center gap-0.5 px-1.5 py-1 sm:gap-1 sm:px-2 sm:py-1.5`}
-            aria-label="Principal"
-          >
-            <Link href={`/${locale}`} className={NAV_HEADER_HOME}>
-              {t("header.nav.home")}
-            </Link>
-            <Link href={`/${locale}/blog`} className={NAV_HEADER_BLOG}>
-              {t("header.nav.blog")}
-            </Link>
-          </nav>
-        </div>
 
-        <div className="flex shrink-0 justify-center px-0.5 md:px-1">
-          <BrandLogoLink
-            locale={locale}
-            alt={t("header.logoAlt")}
-            imageClassName="h-[5.25rem] w-auto max-w-[min(88vw,22rem)] object-contain object-center md:h-24 md:max-w-[min(72vw,26rem)] lg:h-[7.5rem] lg:max-w-[min(42vw,30rem)]"
-          />
-        </div>
+          <div className="flex min-w-0 flex-1 justify-center px-1">
+            <BrandLogoLink
+              locale={locale}
+              alt={t("header.logoAlt")}
+              imageClassName="h-[4.25rem] w-auto max-w-[min(48vw,10rem)] object-contain object-center"
+            />
+          </div>
 
-        <div className="relative z-10 flex min-w-0 shrink-0 items-center justify-start gap-1.5 pl-0.5 lg:gap-2 lg:pl-1">
-          <nav
-            className={`${HEADER_ISLAND} flex max-w-full flex-wrap items-center justify-center gap-0.5 px-1.5 py-1.5 sm:gap-1 sm:px-2 sm:py-2`}
-            aria-label={`${t("header.nav.products")}, ${t("header.nav.categories")}`}
-          >
-            <Link href={`/${locale}/products`} className={NAV_HEADER_PRODUCTS}>
-              {t("header.nav.products")}
-            </Link>
-            <div
-              className="relative"
-              onMouseEnter={openCategoriesMenu}
-              onMouseLeave={scheduleCloseCategories}
-            >
-              <button
-                type="button"
-                className={`${NAV_HEADER_CATEGORIES} cursor-pointer border-0 bg-transparent text-left`}
-                aria-expanded={categoriesOpen}
-                aria-haspopup="true"
-                aria-controls="header-categories-mega"
-                onFocus={openCategoriesMenu}
-                onBlur={scheduleCloseCategories}
-              >
-                {t("header.nav.categories")}
-              </button>
-            </div>
-          </nav>
-          <div className="ml-auto flex shrink-0 items-center gap-2 lg:gap-2.5">
-          <Link
-            href={`/${locale}/cart`}
-            className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
-            aria-label={`Cart with ${totalItems} items`}
-          >
-            {cartIcon}
-            {totalItems > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
-                {totalItems > 99 ? "99+" : totalItems}
-              </span>
-            )}
-          </Link>
-
-          {isLoggedIn && user ? (
-            <Link
-              href={`/${locale}/account`}
-              className={`${HEADER_ISLAND} flex max-w-[10rem] shrink-0 items-center gap-2 pl-2.5 pr-1.5 py-1`}
-            >
-              <span className="truncate font-inter text-[11px] font-semibold tracking-[0.04em] text-[#2E4A36] sm:text-[12px]">
-                {user.name}
-              </span>
-              <span
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2E4A36] to-[#1e3228] font-inter text-[10px] font-semibold uppercase tracking-wide text-[#F4EBDD] shadow-inner"
-                aria-hidden
-              >
-                {userInitials(user.name)}
-              </span>
-            </Link>
-          ) : (
+          <div className="flex shrink-0 items-center gap-1">
             <button
               type="button"
-              onClick={() => openAuthModal("login")}
-              className={`${HEADER_ISLAND} shrink-0 px-3.5 py-2 font-inter text-[11px] font-semibold tracking-[0.06em] text-[#2E4A36] transition hover:bg-white/40 sm:px-4 sm:text-[12px]`}
+              className={ICON_GHOST}
+              onClick={() => {
+                setMobileMenuOpen((o) => !o);
+              }}
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
-              {t("header.account")}
+              {mobileMenuOpen ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              )}
             </button>
-          )}
+
+            <Link href={`/${locale}/cart`} className={`${ICON_GHOST} relative`} aria-label={`Cart with ${totalItems} items`}>
+              {cartIcon}
+              {totalItems > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
-      </div>
-
-      {/* Mobile — idiomas | logo | menú | carrito */}
-      <div className="pointer-events-auto flex min-h-[5.5rem] w-full items-center gap-1.5 md:hidden">
-        <nav
-          className={`${HEADER_ISLAND} flex shrink-0 items-center gap-0.5 px-1.5 py-1`}
-          aria-label={t("header.localeNavAria")}
-        >
-          {locales.map((lang) => (
-            <Link
-              key={lang}
-              href={buildLocaleHref(lang)}
-              className={`${LOCALE_LINK} ${
-                lang === locale
-                  ? "bg-[#2E4A36] text-[#F4EBDD]"
-                  : "text-[#2E4A36]/65 hover:bg-white/90 hover:text-[#2E4A36]"
-              }`}
-            >
-              {lang.toUpperCase()}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex min-w-0 flex-1 justify-center px-1">
-          <BrandLogoLink
-            locale={locale}
-            alt={t("header.logoAlt")}
-            imageClassName="h-[5.25rem] w-auto max-w-[min(52vw,13rem)] object-contain object-center"
-          />
-        </div>
-
-        <button
-          type="button"
-          className={`${HEADER_ISLAND} flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
-          onClick={() => {
-            setMobileMenuOpen((o) => !o);
-          }}
-          aria-label="Toggle menu"
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-5 w-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          )}
-        </button>
-
-        <Link
-          href={`/${locale}/cart`}
-          className={`${HEADER_ISLAND} relative flex h-10 w-10 shrink-0 items-center justify-center text-[#2E4A36] transition hover:text-[#C9622B]`}
-          aria-label={`Cart with ${totalItems} items`}
-        >
-          {cartIcon}
-          {totalItems > 0 && (
-            <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#D9A441] px-0.5 font-inter text-[9px] font-semibold text-[#2E4A36]">
-              {totalItems > 99 ? "99+" : totalItems}
-            </span>
-          )}
-        </Link>
-      </div>
-
       </div>
 
       {/* Mega menu backdrop */}
@@ -384,7 +370,7 @@ export default function Header() {
           id="header-categories-mega"
           className={[
             "pointer-events-auto fixed inset-x-0 bottom-0 z-40 border-t transition-all duration-200 ease-out",
-            "top-[8rem] sm:top-[8.25rem] md:top-[8.75rem]",
+            "top-[6.75rem] sm:top-[6.875rem] md:top-[7rem]",
             "overflow-y-auto overscroll-contain",
             categoriesPanelShell,
             categoriesOpen ? "opacity-100" : "pointer-events-none invisible opacity-0",
