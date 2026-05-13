@@ -132,7 +132,6 @@ export default async function HomePage({
           subtitle={t("homeBrandHero.subtitle")}
           ctaPrimary={t("homeBrandHero.ctaPrimary")}
           ctaSecondary={t("homeBrandHero.ctaSecondary")}
-          scrollHint={t("homeBrandHero.scrollHint")}
         />
 
         <BrandStatement text={h.brandStatement ?? t("story.title")} />

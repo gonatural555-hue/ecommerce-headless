@@ -12,7 +12,6 @@ export type HomeBrandHeroProps = {
   subtitle: string;
   ctaPrimary: string;
   ctaSecondary: string;
-  scrollHint: string;
 };
 
 const easeOut = GN_EASE_PREMIUM;
@@ -38,7 +37,6 @@ export default function HomeBrandHero({
   subtitle,
   ctaPrimary,
   ctaSecondary,
-  scrollHint,
 }: HomeBrandHeroProps) {
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
@@ -65,7 +63,7 @@ export default function HomeBrandHero({
   };
 
   const heroTopPad =
-    "pt-[calc(env(safe-area-inset-top,0px)+9.25rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+9.5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+9.75rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+10rem)]";
+    "pt-[calc(env(safe-area-inset-top,0px)+1.25rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+1.5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+1.75rem)]";
 
   return (
     <section
@@ -194,32 +192,6 @@ export default function HomeBrandHero({
             <Link href={`/${locale}/blog`} className={secondaryCtaClass}>
               {ctaSecondary}
             </Link>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="mt-12 flex flex-col items-center gap-gn-xs md:mt-14">
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-gn-forest md:text-[12px] md:tracking-[0.22em]">
-              {scrollHint}
-            </p>
-            {!off ? (
-              <motion.div
-                className="flex flex-col items-center gap-gn-xs"
-                animate={{ y: [0, 6, 0] }}
-                transition={{
-                  duration: 2.4,
-                  repeat: Infinity,
-                  ease: [0.45, 0, 0.55, 1],
-                }}
-                aria-hidden
-              >
-                <span className="block h-7 w-[1.125rem] rounded-full border border-gn-forest/35 bg-[#f5ece1]/70 shadow-[inset_0_2px_4px_rgba(255,255,255,0.65)]" />
-                <span className="block h-1 w-1 rounded-full bg-gn-forest/45" />
-              </motion.div>
-            ) : (
-              <div className="flex flex-col items-center gap-gn-xs" aria-hidden>
-                <span className="block h-7 w-[1.125rem] rounded-full border border-gn-forest/35 bg-[#f5ece1]/70" />
-                <span className="block h-1 w-1 rounded-full bg-gn-forest/45" />
-              </div>
-            )}
           </motion.div>
         </div>
       </motion.div>

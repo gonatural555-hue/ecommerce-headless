@@ -44,7 +44,7 @@ export default function FeaturedProducts({
   return (
     <section
       id="essential-gear"
-      className={`scroll-mt-4 border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28 lg:py-32 ${LUMINOUS_EDGE_LIGHT}`}
+      className={`scroll-mt-4 border-t border-earth-brown/10 bg-[#f5ece1] py-20 md:py-28 lg:py-32 ${LUMINOUS_EDGE_LIGHT}`}
     >
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <ScrollReveal>
