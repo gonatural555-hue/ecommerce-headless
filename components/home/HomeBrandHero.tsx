@@ -17,10 +17,10 @@ export type HomeBrandHeroProps = {
 const easeOut = GN_EASE_PREMIUM;
 
 const primaryCtaClass =
-  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5ece1] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8ECDB] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
 
 const secondaryCtaClass =
-  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full border border-gn-forest/22 bg-transparent px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-gn-forest/90 shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/40 hover:bg-[#ebe3d6]/90 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5ece1] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
+  "group inline-flex h-[52px] min-h-[52px] items-center justify-center rounded-full border border-gn-forest/22 bg-transparent px-8 text-center font-sans text-[12px] font-bold uppercase tracking-[0.18em] text-gn-forest/90 shadow-none transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gn-forest/40 hover:bg-[#ebe3d6]/90 hover:shadow-[var(--gn-shadow-default)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-burnt/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8ECDB] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:px-9";
 
 function splitTitleLines(title: string): string[] {
   if (title.includes("\n")) {
@@ -68,7 +68,7 @@ export default function HomeBrandHero({
 
   return (
     <section
-      className="relative isolate flex w-full flex-col overflow-x-clip bg-[#f5ece1]"
+      className="relative isolate flex w-full flex-col overflow-x-clip bg-[#F8ECDB]"
       aria-label="Hero"
     >
       <motion.div
