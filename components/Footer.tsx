@@ -68,26 +68,23 @@ export default function Footer() {
     <footer className="mt-auto border-t border-mountain-green/25 bg-dark-base font-sans text-warm-sand/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
-          {/* Branding Section */}
-          <div className="lg:col-span-1">
+          {/* Branding: solo marca gráfica, ocupa el área que antes cubrían logo + copy */}
+          <div className="flex min-h-[9.5rem] items-center lg:col-span-1 md:min-h-[10.5rem]">
             <Link
               href={`/${locale}`}
-              className="group mb-4 inline-flex shrink-0 items-center transition-opacity duration-200 hover:opacity-90"
-              aria-label="Go Natural"
+              className="group flex h-full min-h-[inherit] w-full max-w-[min(100%,20rem)] items-center sm:max-w-[22rem] md:max-w-[24rem] lg:max-w-[26rem]"
+              aria-label={t("header.logoAlt")}
             >
               <Image
-                src="/assets/images/logo/LOGO-GONATURAL.png"
-                alt="Go Natural"
+                src="/assets/images/logo/LOGO.png"
+                alt={t("header.logoAlt")}
                 width={640}
-                height={256}
+                height={640}
                 loading="lazy"
-                className="h-10 w-auto max-w-[11rem] object-contain object-left transition-transform duration-300 ease-out group-hover:scale-[1.02] sm:h-11 sm:max-w-[12rem] md:h-12 md:max-w-[13rem]"
-                sizes="(max-width: 768px) 160px, 200px"
+                className="h-auto max-h-[8.25rem] w-full object-contain object-left transition-opacity duration-300 ease-out group-hover:opacity-90 sm:max-h-[9.25rem] md:max-h-[10.25rem] lg:max-h-[11rem]"
+                sizes="(max-width: 768px) 90vw, 400px"
               />
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-warm-sand/65">
-              {t("footer.brandBlurb")}
-            </p>
           </div>
 
           {/* Navigation Section */}

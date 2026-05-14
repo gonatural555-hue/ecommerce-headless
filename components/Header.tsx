@@ -285,9 +285,9 @@ export default function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center">
+              <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end pr-1 md:pr-2">
                 <nav
-                  className="flex max-w-full shrink-0 items-center justify-center px-2"
+                  className="flex max-w-full shrink-0 items-center justify-end pl-2"
                   aria-label={t("header.nav.outdoorKnowledge")}
                 >
                   <PremiumNavLink href={`/${locale}/blog`}>
