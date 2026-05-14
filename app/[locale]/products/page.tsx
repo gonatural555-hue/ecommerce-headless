@@ -177,7 +177,7 @@ export default async function ProductsPage({
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-dark-base text-text-primary">
+    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#F4EBDD] text-dark-base">
       <ProductsHero
         locale={locale}
         title={t("productsPage.heroEssentialTitle")}
@@ -210,7 +210,7 @@ export default async function ProductsPage({
 
       <section
         id="products-catalog"
-        className="scroll-mt-[calc(env(safe-area-inset-top,0px)+6.5rem)] border-b border-white/[0.05] bg-[#0a0e0d] py-12 md:py-16"
+        className="scroll-mt-[calc(env(safe-area-inset-top,0px)+6.5rem)] border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] py-12 md:py-16"
       >
         <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
@@ -237,11 +237,11 @@ export default async function ProductsPage({
 
       <div className="mx-auto max-w-[1400px] px-6 py-12 sm:px-10 md:py-16 lg:px-12 lg:py-20">
         {hasActiveSearch && displayProducts.length === 0 ? (
-          <div className="rounded-sm border border-white/10 bg-[#0f1412]/80 px-6 py-14 text-center">
-            <p className="text-lg font-medium text-text-primary">
+          <div className="rounded-sm border border-[rgba(46,74,54,0.14)] bg-[rgba(255,255,255,0.5)] px-6 py-14 text-center backdrop-blur-sm">
+            <p className="text-lg font-medium text-dark-base">
               {t("productsPage.searchNoResults", "")}
             </p>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-text-muted">
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[rgba(46,74,54,0.68)]">
               {t("productsPage.searchNoResultsHint", "")}
             </p>
             <Link

@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
 import AuthModal from "@/components/AuthModal";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getAllCategories } from "@/lib/categories";
 import { locales, type Locale } from "@/lib/i18n/config";
@@ -161,6 +161,8 @@ export default function Header() {
   const reduceMotion = useReducedMotion() ?? false;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+  const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
+  const mobileLocaleWrapRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const t = useTranslations();
   const pathname = usePathname();
@@ -214,6 +216,16 @@ export default function Header() {
     });
     return { mainCategories: mains, subCategoriesByParent: subsByParent };
   }, []);
+
+  useEffect(() => {
+    if (!mobileLocaleOpen) return;
+    const close = (e: MouseEvent) => {
+      const el = mobileLocaleWrapRef.current;
+      if (el && !el.contains(e.target as Node)) setMobileLocaleOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [mobileLocaleOpen]);
 
   const buildLocaleHref = (nextLocale: Locale) => {
     const segments = pathname.split("/").filter(Boolean);
@@ -273,9 +285,9 @@ export default function Header() {
                   </Link>
                 ))}
               </nav>
-              <div className="flex min-h-0 min-w-0 flex-1 items-center justify-end">
+              <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center">
                 <nav
-                  className="flex shrink-0 items-center"
+                  className="flex max-w-full shrink-0 items-center justify-center px-2"
                   aria-label={t("header.nav.outdoorKnowledge")}
                 >
                   <PremiumNavLink href={`/${locale}/blog`}>
@@ -346,22 +358,66 @@ export default function Header() {
           </div>
 
           <div className={`${HEADER_TOOLBAR_ROW} flex w-full items-center justify-between gap-2 md:hidden`}>
-            <nav
-              className="flex shrink-0 items-center gap-0.5"
-              aria-label={t("header.localeNavAria")}
-            >
-              {locales.map((lang) => (
-                <Link
-                  key={lang}
-                  href={buildLocaleHref(lang)}
-                  className={`${LOCALE_FLOAT} px-1.5 py-1 text-[10px] ${
-                    lang === locale ? "bg-[rgba(46,74,54,0.1)] text-[#2E4A36]" : ""
-                  }`}
+            <div className="flex min-w-0 shrink-0 items-center gap-1.5">
+              <div ref={mobileLocaleWrapRef} className="relative shrink-0">
+                <button
+                  type="button"
+                  className={`inline-flex min-h-[40px] items-center gap-1 rounded-full border border-[rgba(46,74,54,0.14)] bg-[rgba(46,74,54,0.04)] px-2.5 py-1.5 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[#2E4A36] transition-colors duration-300 hover:bg-[rgba(46,74,54,0.07)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]`}
+                  aria-expanded={mobileLocaleOpen}
+                  aria-haspopup="listbox"
+                  aria-label={t("header.localeNavAria")}
+                  onClick={() => {
+                    setMobileLocaleOpen((o) => !o);
+                  }}
                 >
-                  {lang.toUpperCase()}
-                </Link>
-              ))}
-            </nav>
+                  {locale.toUpperCase()}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className={`h-3.5 w-3.5 text-[rgba(46,74,54,0.55)] transition-transform duration-300 ${mobileLocaleOpen ? "rotate-180" : ""}`}
+                    aria-hidden
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                {mobileLocaleOpen ? (
+                  <ul
+                    role="listbox"
+                    className="absolute left-0 top-[calc(100%+6px)] z-40 min-w-[9.5rem] overflow-hidden rounded-xl border border-[rgba(46,74,54,0.12)] bg-[#F4EBDD] py-1 shadow-[0_16px_40px_rgba(46,74,54,0.12)]"
+                  >
+                    {locales.map((lang) => (
+                      <li key={lang} role="presentation">
+                        <Link
+                          role="option"
+                          aria-selected={lang === locale}
+                          href={buildLocaleHref(lang)}
+                          className={`block px-3 py-2 font-inter text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors ${
+                            lang === locale
+                              ? "bg-[rgba(46,74,54,0.08)] text-[#2E4A36]"
+                              : "text-[rgba(46,74,54,0.72)] hover:bg-[rgba(46,74,54,0.05)] hover:text-[#2E4A36]"
+                          }`}
+                          onClick={() => setMobileLocaleOpen(false)}
+                        >
+                          {lang.toUpperCase()}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+
+              <Link
+                href={`/${locale}`}
+                className="inline-flex min-h-[40px] shrink-0 items-center rounded-full border border-transparent px-2 py-1.5 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.78)] transition-colors duration-300 hover:border-[rgba(46,74,54,0.1)] hover:bg-[rgba(46,74,54,0.04)] hover:text-[#2E4A36] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]"
+              >
+                {t("header.nav.home")}
+              </Link>
+            </div>
 
             <div className="min-w-0 flex-1" aria-hidden="true" />
 
@@ -370,6 +426,7 @@ export default function Header() {
                 type="button"
                 className={ICON_GHOST}
                 onClick={() => {
+                  setMobileLocaleOpen(false);
                   setMobileMenuOpen((o) => !o);
                 }}
                 aria-label="Toggle menu"
@@ -432,6 +489,13 @@ export default function Header() {
             className={MOBILE_DRAWER}
           >
             <div className="flex flex-col gap-4">
+              <Link
+                href={`/${locale}`}
+                className={MOBILE_PRIMARY_LINK}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("header.nav.home")}
+              </Link>
               <Link
                 href={`/${locale}/blog`}
                 className={MOBILE_PRIMARY_LINK}
@@ -519,17 +583,6 @@ export default function Header() {
               </div>
 
               <div className="flex flex-wrap items-center gap-3 border-t border-[rgba(46,74,54,0.08)] pt-4">
-                {locales.map((lang) => (
-                  <Link
-                    key={lang}
-                    href={buildLocaleHref(lang)}
-                    className={`font-inter text-[12px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 ${
-                      lang === locale ? "text-[#D9A441]" : "text-[rgba(46,74,54,0.55)] hover:text-[#2E4A36]"
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </Link>
-                ))}
                 {isLoggedIn && user ? (
                   <Link
                     href={`/${locale}/account`}
