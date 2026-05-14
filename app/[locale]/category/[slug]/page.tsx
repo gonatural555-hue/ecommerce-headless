@@ -11,10 +11,12 @@ import { createTranslator } from "@/lib/i18n/translate";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { buildMetadata, formatTemplate } from "@/lib/seo";
 import EditorialPostCards from "@/components/editorial/EditorialPostCards";
+import CategoryEditorialHero from "@/components/category/CategoryEditorialHero";
 import {
   pickPostsForCategory,
   pickPrimaryPostForCategory,
 } from "@/lib/internal-links";
+import { resolveCategoryHeroKind } from "@/lib/category-hero-theme";
 
 type Props = {
   params: Promise<{
@@ -220,8 +222,6 @@ export default async function CategoryPage({ params }: Props) {
   const products = getProductsByCategorySlug(slug);
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
-  const heroImage =
-    CATEGORY_HERO_IMAGES[slug] || "/assets/images/products/gn-outdoor-002/featured01.webp";
   const editorialIntro = category.description;
 
   const categoryLabel = t(`categories.names.${category.slug}`, category.name);
@@ -230,6 +230,29 @@ export default async function CategoryPage({ params }: Props) {
     categoryLabel.includes("para") || categoryLabel.includes("de")
       ? categoryLabel
       : `${categoryLabel}`;
+
+  const visualKind = resolveCategoryHeroKind(category);
+  const parentSlugs = [
+    "fishing",
+    "mountain-snow",
+    "water-sports",
+    "outdoor-adventure",
+    "active-sports",
+  ] as const;
+  const isRootParent =
+    !category.parentSlug &&
+    parentSlugs.includes(category.slug as (typeof parentSlugs)[number]);
+  const eyebrowLabel = isRootParent
+    ? t("homeBrandHero.eyebrow")
+    : t(
+        `categories.names.${category.parentSlug ?? category.slug}`,
+        category.name
+      );
+  const rawDescription = category.description.trim();
+  const heroSubtitle =
+    rawDescription.length > 200
+      ? `${rawDescription.slice(0, 197).trimEnd()}…`
+      : rawDescription;
 
   const primaryStory = pickPrimaryPostForCategory(slug, messages.blog.posts);
   const primaryStoryHref = primaryStory
@@ -253,24 +276,15 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <main className="bg-warm-sand text-dark-base">
-      {/* Category Hero */}
-      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-end">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt={`${category.name} hero`}
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-base/60 via-dark-base/40 to-dark-base/90" />
-        <div className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-16 md:pb-20">
-            <h1 className="font-sans text-4xl md:text-5xl font-semibold text-text-primary">
-              {seoH1}
-            </h1>
-          </div>
-        </div>
-      </section>
+      <CategoryEditorialHero
+        locale={locale}
+        slug={slug}
+        title={seoH1}
+        eyebrow={eyebrowLabel}
+        subtitle={heroSubtitle}
+        ctaLabel={t("homePage.ctaProducts")}
+        visualKind={visualKind}
+      />
 
       {/* Editorial intro */}
       <section className="py-12 md:py-16">
@@ -292,46 +306,51 @@ export default async function CategoryPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Product grid */}
-      {products.length > 0 ? (
-        <section className="pb-16 md:pb-24">
-          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <div className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
-              {products.map((product) => (
-                <ProductCardSimple
-                  key={product.id}
-                  product={product}
-                  locale={locale}
-                  analyticsListId={slug}
-                  analyticsListName={`category:${slug}`}
-                  labels={{
-                    viewProduct: t("common.viewProduct"),
-                    addToCart: t("common.addToCart"),
-                    noImage: t("common.noImage"),
-                  }}
-                />
-              ))}
+      {/* Product grid (ancla hero CTA) */}
+      <div
+        id="category-products"
+        className="scroll-mt-[calc(env(safe-area-inset-top,0px)+6.5rem)]"
+      >
+        {products.length > 0 ? (
+          <section className="pb-16 md:pb-24">
+            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+              <div className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
+                {products.map((product) => (
+                  <ProductCardSimple
+                    key={product.id}
+                    product={product}
+                    locale={locale}
+                    analyticsListId={slug}
+                    analyticsListName={`category:${slug}`}
+                    labels={{
+                      viewProduct: t("common.viewProduct"),
+                      addToCart: t("common.addToCart"),
+                      noImage: t("common.noImage"),
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      ) : (
-        <section className="pb-16 md:pb-24">
-          <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 text-center">
-            <p className="text-lg text-text-primary mb-3">
-              {t("categoriesPage.emptyTitle")}
-            </p>
-            <p className="text-sm text-text-muted mb-8">
-              {t("categoriesPage.emptyText")}
-            </p>
-            <Link
-              href={`/${locale}/products`}
-              className="inline-flex items-center justify-center rounded-md bg-accent-gold px-6 py-3 text-sm font-medium text-dark-base"
-            >
-              {t("categoriesPage.ctaButton")}
-            </Link>
-          </div>
-        </section>
-      )}
+          </section>
+        ) : (
+          <section className="pb-16 md:pb-24">
+            <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 text-center">
+              <p className="text-lg text-text-primary mb-3">
+                {t("categoriesPage.emptyTitle")}
+              </p>
+              <p className="text-sm text-text-muted mb-8">
+                {t("categoriesPage.emptyText")}
+              </p>
+              <Link
+                href={`/${locale}/products`}
+                className="inline-flex items-center justify-center rounded-md bg-accent-gold px-6 py-3 text-sm font-medium text-dark-base"
+              >
+                {t("categoriesPage.ctaButton")}
+              </Link>
+            </div>
+          </section>
+        )}
+      </div>
 
       <EditorialPostCards
         title={t("categoriesPage.fieldStoriesTitle")}
