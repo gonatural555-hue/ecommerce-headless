@@ -561,12 +561,24 @@
     "decline": "Rifiuta"
   },
   "registrationCTA": {
-    "title": "Spedizione gratuita per 1 anno",
-    "subtitle": "Crea il tuo account e goditi un checkout più veloce",
-    "secondaryText": "Solo per nuovi utenti",
-    "cta": "Crea account",
+    "title": "Iscriviti per sconti settimanali",
+    "subtitle": "Ricevi offerte selezionate e novità via email. Disiscriviti quando vuoi.",
+    "secondaryText": "Email settimanali, niente spam. Puoi uscire in qualsiasi momento.",
+    "cta": "Iscrivimi",
     "minimize": "Riduci",
-    "expand": "Espandi"
+    "expand": "Espandi",
+    "minimizedLabel": "Newsletter",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "marketingLabel": "Accetto di ricevere email di marketing (offerte e novità). Consulta la",
+    "privacyLink": "informativa sulla privacy",
+    "submitLoading": "Invio…",
+    "successMessage": "Fatto. Controlla presto la posta—grazie per esserti iscritto.",
+    "hideAfterSuccess": "Nascondi",
+    "errorGeneric": "Qualcosa è andato storto. Riprova tra poco.",
+    "errorDuplicate": "Questa email è già iscritta. Grazie per il tuo interesse.",
+    "errorInvalidEmail": "Inserisci un indirizzo email valido.",
+    "errorMarketingRequired": "Spunta la casella per completare l’iscrizione."
   },
   "cartPage": {
     "emptyTitle": "Il tuo carrello è vuoto",

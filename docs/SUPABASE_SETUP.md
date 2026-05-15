@@ -9,9 +9,16 @@
 
 1. **SQL Editor** → nueva query.
 2. Pegar el contenido de `supabase/migrations/001_init_schema.sql` y ejecutar (**Run**).
-3. Comprueba en **Table Editor** que existan `profiles`, `addresses`, `orders`, `order_items`.
+3. Ejecutar también `supabase/migrations/002_newsletter_subscriptions.sql` para crear la tabla `newsletter_subscriptions` (altas del CTA flotante de newsletter) y su política RLS de **solo inserción** para `anon`/`authenticated` cuando `marketing_accepted = true`.
+4. Comprueba en **Table Editor** que existan `profiles`, `addresses`, `orders`, `order_items` y `newsletter_subscriptions`.
 
 Las políticas **RLS** permiten a cada usuario leer/escribir solo sus filas. Los pedidos PayPal se insertan con el JWT del usuario en la ruta `/api/orders/paypal`.
+
+### Newsletter (CTA flotante)
+
+- **Variables de entorno** (mismas que el resto del cliente Supabase): `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+- **Inserción:** `POST /api/newsletter` usa el cliente con la **anon key** en el servidor; no hace falta `SUPABASE_SERVICE_ROLE_KEY` si la migración `002` está aplicada (RLS permite insert con consentimiento explícito).
+- **Sin tabla o sin migración:** la ruta responde 500/503; revisa logs del servidor y el SQL Editor.
 
 ## 3. Autenticación
 

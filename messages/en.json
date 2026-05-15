@@ -561,12 +561,24 @@
     "decline": "Decline"
   },
   "registrationCTA": {
-    "title": "Free shipping for 1 year",
-    "subtitle": "Create your account and enjoy faster checkout",
-    "secondaryText": "For new users only",
-    "cta": "Create account",
+    "title": "Subscribe for weekly discount drops",
+    "subtitle": "Get curated offers and launch news in your inbox—unsubscribe anytime.",
+    "secondaryText": "Weekly emails. No spam. You can leave whenever you like.",
+    "cta": "Subscribe",
     "minimize": "Minimize",
-    "expand": "Expand"
+    "expand": "Expand",
+    "minimizedLabel": "Newsletter",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "marketingLabel": "I agree to receive marketing emails (offers and news). See the",
+    "privacyLink": "privacy policy",
+    "submitLoading": "Sending…",
+    "successMessage": "You’re in. Check your inbox soon—and thanks for joining.",
+    "hideAfterSuccess": "Hide",
+    "errorGeneric": "Something went wrong. Please try again in a moment.",
+    "errorDuplicate": "This email is already subscribed. Thank you for your interest.",
+    "errorInvalidEmail": "Please enter a valid email address.",
+    "errorMarketingRequired": "Please accept marketing emails to subscribe."
   },
   "cartPage": {
     "emptyTitle": "Your cart is empty",

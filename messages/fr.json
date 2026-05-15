@@ -561,12 +561,24 @@
     "decline": "Refuser"
   },
   "registrationCTA": {
-    "title": "Livraison gratuite pendant 1 an",
-    "subtitle": "Créez votre compte et profitez d'un paiement plus rapide",
-    "secondaryText": "Uniquement pour les nouveaux utilisateurs",
-    "cta": "Créer un compte",
+    "title": "Inscrivez-vous pour des réductions chaque semaine",
+    "subtitle": "Recevez des offres sélectionnées et des nouveautés par e-mail. Désinscription en un clic.",
+    "secondaryText": "E-mails hebdomadaires, pas de spam. Vous pouvez partir quand vous voulez.",
+    "cta": "M'inscrire",
     "minimize": "Réduire",
-    "expand": "Développer"
+    "expand": "Développer",
+    "minimizedLabel": "Newsletter",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "marketingLabel": "J'accepte de recevoir des e-mails marketing (offres et actualités). Voir la",
+    "privacyLink": "politique de confidentialité",
+    "submitLoading": "Envoi…",
+    "successMessage": "C'est noté. Surveillez votre boîte de réception—merci de nous rejoindre.",
+    "hideAfterSuccess": "Masquer",
+    "errorGeneric": "Une erreur s'est produite. Réessayez dans un instant.",
+    "errorDuplicate": "Cette adresse est déjà inscrite. Merci pour votre intérêt.",
+    "errorInvalidEmail": "Veuillez saisir une adresse e-mail valide.",
+    "errorMarketingRequired": "Cochez la case pour confirmer votre inscription."
   },
   "cartPage": {
     "emptyTitle": "Votre panier est vide",
