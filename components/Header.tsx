@@ -268,7 +268,7 @@ export default function Header() {
       <div className="mx-auto w-full max-w-[1440px] px-0 pt-3 md:px-7 md:pt-5 lg:px-12">
         <div className={HEADER_PILL}>
           <div className={`${HEADER_TOOLBAR_ROW} hidden w-full md:flex`}>
-            <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(11.5rem+6px)] md:pr-[calc(12rem+8px)] lg:pr-[calc(12.75rem+10px)]">
+            <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(7.5rem+6px)] md:pr-[calc(7rem+8px)] lg:pr-[calc(7.75rem+10px)]">
               <nav
                 className="flex shrink-0 items-center gap-0.5"
                 aria-label={t("header.localeNavAria")}
