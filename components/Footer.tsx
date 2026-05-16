@@ -5,6 +5,17 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 
+/** Enlaces de cuerpo: forest ~88% sobre cream ≈ contraste accesible sin negro puro. */
+const FOOTER_LINK =
+  "font-inter text-sm text-[rgba(46,74,54,0.88)] transition-colors duration-200 hover:text-[#2E4A36]";
+
+/** Legal mantiene text-xs con contraste revisado (~0.78 alpha sobre #F4EBDD). */
+const FOOTER_LEGAL_LINK =
+  "font-inter text-xs text-[rgba(46,74,54,0.78)] transition-colors duration-200 hover:text-[#2E4A36]";
+
+const FOOTER_COL_TITLE =
+  "mb-4 font-inter text-[10px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] md:text-xs";
+
 export default function Footer() {
   const locale = useLocale();
   const t = useTranslations();
@@ -65,21 +76,16 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto border-t border-[rgba(46,74,54,0.18)] bg-[#F8ECDB] font-sans text-[rgba(46,74,54,0.78)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-12 md:gap-y-10 lg:grid-cols-5 lg:gap-12">
+    <footer className="mt-auto border-t border-[rgba(46,74,54,0.12)] bg-[#F4EBDD] font-inter text-[rgba(46,74,54,0.82)] shadow-[0_1px_0_rgba(46,74,54,0.04)]">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+        <div className="grid grid-cols-1 items-start gap-x-10 gap-y-10 md:grid-cols-2 md:gap-y-12 lg:grid-cols-5 lg:gap-y-12">
           {/* Navigation Section */}
-          <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#2E4A36]">
-              {t("footer.navigationTitle")}
-            </h3>
+          <div className="min-w-0">
+            <h3 className={FOOTER_COL_TITLE}>{t("footer.navigationTitle")}</h3>
             <ul className="space-y-3">
               {navigationLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-                  >
+                  <Link href={link.href} className={FOOTER_LINK}>
                     {link.label}
                   </Link>
                 </li>
@@ -88,17 +94,12 @@ export default function Footer() {
           </div>
 
           {/* Company Section */}
-          <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#2E4A36]">
-              {t("footer.companyTitle")}
-            </h3>
+          <div className="min-w-0">
+            <h3 className={FOOTER_COL_TITLE}>{t("footer.companyTitle")}</h3>
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-muted hover:text-text-primary transition-colors duration-200"
-                  >
+                  <Link href={link.href} className={FOOTER_LINK}>
                     {link.label}
                   </Link>
                 </li>
@@ -106,11 +107,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Logo: centered between Company and Legal / Trust */}
-          <div className="flex min-h-[7rem] flex-col items-center justify-center md:col-span-2 lg:col-span-1 lg:min-h-0">
+          {/* Logo: columna central en lg; fila completa centrada en md (col-span-2) */}
+          <div className="flex min-w-0 flex-col items-center justify-center self-center md:col-span-2 md:w-full md:max-w-none md:px-4 lg:col-span-1 lg:max-w-full lg:px-0">
             <Link
               href={`/${locale}`}
-              className="group flex w-full max-w-[min(100%,18rem)] items-center justify-center sm:max-w-[20rem] md:max-w-[22rem] lg:max-w-[15rem]"
+              className="group flex w-full max-w-[min(100%,18rem)] items-center justify-center sm:max-w-[20rem] md:mx-auto md:max-w-[22rem] lg:max-w-[15rem]"
               aria-label={t("header.logoAlt")}
             >
               <Image
@@ -126,17 +127,12 @@ export default function Footer() {
           </div>
 
           {/* Legal Section */}
-          <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#2E4A36]">
-              {t("footer.legalTitle")}
-            </h3>
+          <div className="min-w-0">
+            <h3 className={FOOTER_COL_TITLE}>{t("footer.legalTitle")}</h3>
             <ul className="space-y-3">
               {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-[rgba(46,74,54,0.58)] transition-colors duration-200 hover:text-[#2E4A36]"
-                  >
+                  <Link href={link.href} className={FOOTER_LEGAL_LINK}>
                     {link.label}
                   </Link>
                 </li>
@@ -145,11 +141,9 @@ export default function Footer() {
           </div>
 
           {/* Trust Section */}
-          <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#2E4A36]">
-              {t("footer.trustTitle")}
-            </h3>
-            <ul className="space-y-3 text-sm text-[rgba(46,74,54,0.82)]">
+          <div className="min-w-0">
+            <h3 className={FOOTER_COL_TITLE}>{t("footer.trustTitle")}</h3>
+            <ul className="space-y-3 text-sm text-[rgba(46,74,54,0.88)]">
               <li className="flex items-start gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +151,8 @@ export default function Footer() {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="mt-0.5 h-5 w-5 flex-shrink-0 text-[rgba(46,74,54,0.45)]"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[rgba(46,74,54,0.55)]"
+                  aria-hidden
                 >
                   <path
                     strokeLinecap="round"
@@ -174,7 +169,8 @@ export default function Footer() {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="mt-0.5 h-5 w-5 flex-shrink-0 text-[rgba(46,74,54,0.45)]"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[rgba(46,74,54,0.55)]"
+                  aria-hidden
                 >
                   <path
                     strokeLinecap="round"
@@ -191,7 +187,8 @@ export default function Footer() {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="mt-0.5 h-5 w-5 flex-shrink-0 text-[rgba(46,74,54,0.45)]"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[rgba(46,74,54,0.55)]"
+                  aria-hidden
                 >
                   <path
                     strokeLinecap="round"
@@ -208,7 +205,8 @@ export default function Footer() {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="mt-0.5 h-5 w-5 flex-shrink-0 text-[rgba(46,74,54,0.45)]"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[rgba(46,74,54,0.55)]"
+                  aria-hidden
                 >
                   <path
                     strokeLinecap="round"
@@ -222,10 +220,17 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright Section */}
-        <div className="mt-12 border-t border-[rgba(46,74,54,0.18)] pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-sm text-[rgba(46,74,54,0.58)] sm:flex-row">
-            <p>
+        {/*
+          Barra inferior: el chip "Boletín" es el CTA global (RegistrationCTA), fijo al viewport.
+          Reservamos ancho aproximado a la izquierda en sm+ para no solapar visualmente con el copyright alineado a la derecha.
+        */}
+        <div className="mt-12 border-t border-[rgba(46,74,54,0.12)] pt-8 md:pt-9">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:w-full sm:items-center sm:gap-0">
+            <span
+              className="hidden min-h-[1px] sm:block sm:min-w-[5.5rem] sm:flex-1 md:min-w-0"
+              aria-hidden
+            />
+            <p className="max-w-prose text-center text-sm leading-relaxed text-[rgba(46,74,54,0.76)] sm:shrink-0 sm:text-right">
               © {currentYear} Go Natural. {t("footer.rights")}
             </p>
           </div>
