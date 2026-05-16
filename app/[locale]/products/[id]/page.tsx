@@ -13,7 +13,6 @@ import PdpBenefitsSection from "@/components/pdp/PdpBenefitsSection";
 import PdpImageStorySection from "@/components/pdp/PdpImageStorySection";
 import PdpSpecsAccordion from "@/components/pdp/PdpSpecsAccordion";
 import PdpRelatedProductsRail from "@/components/pdp/PdpRelatedProductsRail";
-import PdpMiniBrandBlock from "@/components/pdp/PdpMiniBrandBlock";
 import { REVIEWS_SEED, getReviewsByProductSlug } from "@/lib/reviews-data";
 import { PRODUCT_BLUR_DATA_URL } from "@/lib/product-image-helper";
 
@@ -431,10 +430,6 @@ export default async function ProductPage({ params }: Props) {
         />
       ) : null}
 
-      <PdpMiniBrandBlock
-        message={t("homePage.brandStatement")}
-        surface="light"
-      />
     </main>
   );
 }
