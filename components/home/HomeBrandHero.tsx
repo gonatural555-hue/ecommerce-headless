@@ -19,10 +19,10 @@ export type HomeBrandHeroProps = {
 const easeOut = GN_EASE_PREMIUM;
 
 const primaryCtaClass =
-  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
+  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
 
 const secondaryCtaClass =
-  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full border-[1.5px] border-white bg-[#D9A441] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#c9a03a] hover:shadow-[0_12px_40px_-18px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4A36]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
+  "group inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full border-[1.5px] border-white bg-[#D9A441] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-white transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#c9a03a] hover:shadow-[0_12px_40px_-18px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4A36]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
 
 /** Convierte títulos en 3 líneas (p. ej. EN) en 2 bloques editoriales sin tocar JSON. */
 function editorialHeadlineFromTitle(title: string): { line1: string; line2: string | null } {
@@ -72,7 +72,7 @@ export default function HomeBrandHero({
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-[#F4EBDD]"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-[#FFFFFF]"
       aria-label="Hero"
     >
       <div

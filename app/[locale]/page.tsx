@@ -120,7 +120,7 @@ export default async function HomePage({
 
   return (
     <main
-      className={`relative overflow-x-hidden flex min-h-screen flex-col bg-[#F4EBDD] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}
+      className={`relative overflow-x-hidden flex min-h-screen flex-col bg-[#FFFFFF] text-dark-base ${LUMINOUS_EDGE_LIGHT}`}
     >
       <div className="relative z-10 flex flex-1 flex-col">
         <HomeBrandHero
