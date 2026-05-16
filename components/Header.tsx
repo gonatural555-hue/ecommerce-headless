@@ -32,6 +32,10 @@ const HEADER_TOOLBAR_ROW =
 const HEADER_PILL =
   "pointer-events-auto relative w-full overflow-x-clip rounded-none border-0 border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] px-3 py-2.5 shadow-none sm:px-4 md:rounded-full md:border md:border-[rgba(46,74,54,0.10)] md:bg-[rgba(244,235,221,0.72)] md:px-4 md:py-0 md:shadow-[0_10px_40px_rgba(0,0,0,0.05)] md:backdrop-blur-[16px] md:supports-[backdrop-filter]:bg-[rgba(244,235,221,0.62)]";
 
+/** PDP: fondo cream opaco (#F4EBDD) en todos los breakpoints (sin translucidez ni blur). */
+const HEADER_PILL_PDP =
+  "pointer-events-auto relative w-full overflow-x-clip rounded-none border-0 border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] px-3 py-2.5 shadow-none sm:px-4 md:rounded-full md:border md:border-[rgba(46,74,54,0.10)] md:bg-[#F4EBDD] md:px-4 md:py-0 md:shadow-[0_10px_40px_rgba(46,74,54,0.06)]";
+
 const LOCALE_FLOAT =
   "rounded-full px-2 py-1 font-inter text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36] md:text-[12px] md:tracking-[0.12em]";
 
@@ -269,7 +273,7 @@ export default function Header() {
   const headerUi = (
     <header className={headerShellClass}>
       <div className="mx-auto w-full max-w-[1440px] overflow-x-clip px-0 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] md:px-7 md:pt-[calc(2.75rem+env(safe-area-inset-top,0px))] lg:px-12 lg:pt-[calc(3rem+env(safe-area-inset-top,0px))]">
-        <div className={HEADER_PILL}>
+        <div className={isPdp ? HEADER_PILL_PDP : HEADER_PILL}>
           <div className={`${HEADER_TOOLBAR_ROW} relative z-0 hidden w-full md:flex md:min-h-[3.5rem]`}>
             <div className="flex min-h-0 min-w-0 flex-1 items-center pr-[calc(7.5rem+6px)] md:pr-[calc(7rem+8px)] lg:pr-[calc(7.75rem+10px)]">
               <nav
