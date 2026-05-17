@@ -22,7 +22,7 @@ export default function GoNaturalEditorialColumn({
   isActive,
 }: GoNaturalEditorialColumnProps) {
   return (
-    <div className="relative z-20 mx-auto flex w-full max-w-[300px] flex-col items-center text-center">
+    <div className="relative z-20 mx-auto flex w-full max-w-[340px] flex-col items-center text-center">
       <p className="w-full font-inter text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D9A441]">
         Outdoor
       </p>
@@ -35,17 +35,17 @@ export default function GoNaturalEditorialColumn({
           height={256}
           priority
           draggable={false}
-          className="mx-auto h-auto w-full max-w-[220px] object-contain drop-shadow-[0_8px_28px_rgba(46,74,54,0.1)] md:max-w-[240px]"
+          className="mx-auto h-auto w-full max-w-[min(72vw,288px)] object-contain drop-shadow-[0_8px_28px_rgba(46,74,54,0.1)] md:max-w-[312px]"
         />
         <p
           aria-hidden
-          className="font-display mt-3 w-full text-[clamp(1.5rem,4.2vw,2.15rem)] font-normal uppercase leading-none tracking-[-0.02em] text-[#2E4A36]"
+          className="font-display mt-3 w-full text-[clamp(1.65rem,4.5vw,2.35rem)] font-normal uppercase leading-none tracking-[-0.02em] text-[#2E4A36]"
         >
           GO NATURAL
         </p>
       </div>
 
-      <p className="mt-5 max-w-[280px] font-inter text-[15px] leading-relaxed text-[rgba(46,74,54,0.72)] md:text-[16px]">
+      <p className="mt-5 max-w-[300px] font-inter text-[15px] leading-relaxed text-[rgba(46,74,54,0.72)] md:text-[16px]">
         {tagline}
       </p>
 

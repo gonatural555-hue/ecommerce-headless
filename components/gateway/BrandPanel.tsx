@@ -115,7 +115,7 @@ export default function BrandPanel({
           <GoNaturalMountainLayer revealed={isGoNaturalHovered} parallax={parallax} />
           {/* Isla editorial — protege logo/texto/CTA de montañas en hover */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[min(88%,560px)] bg-[radial-gradient(ellipse_90%_80%_at_50%_100%,#F4EBDD_0%,#F4EBDD_42%,rgba(244,235,221,0.92)_58%,transparent_78%)]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[min(92%,600px)] bg-[radial-gradient(ellipse_100%_88%_at_50%_100%,#F4EBDD_0%,#F4EBDD_40%,rgba(244,235,221,0.94)_56%,transparent_76%)]"
             aria-hidden
           />
         </>
