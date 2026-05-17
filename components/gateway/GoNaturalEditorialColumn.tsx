@@ -13,7 +13,8 @@ export type GoNaturalEditorialColumnProps = {
 };
 
 /**
- * Columna editorial centrada — gap uniforme 1.5 entre eyebrow, logo, wordmark, tagline y CTA.
+ * Columna editorial centrada y agrupada — espaciado por par según spec hero gateway.
+ * OUTDOOR→logo 20px · logo→wordmark 16px · wordmark→tagline 12px · tagline→CTA 24px.
  */
 export default function GoNaturalEditorialColumn({
   tagline,
@@ -23,7 +24,7 @@ export default function GoNaturalEditorialColumn({
 }: GoNaturalEditorialColumnProps) {
   return (
     <motion.div
-      className="relative z-20 mx-auto flex w-full max-w-[340px] flex-col items-center gap-1.5 text-center"
+      className="relative z-20 mx-auto flex w-full max-w-[340px] flex-col items-center text-center"
       initial={false}
       animate={{ opacity: isActive ? 1 : 0.92 }}
       transition={{ duration: 0.6, ease: PANEL_EASE }}
@@ -33,7 +34,7 @@ export default function GoNaturalEditorialColumn({
       </p>
 
       <motion.div
-        className="w-full"
+        className="mt-5 w-full"
         initial={false}
         animate={{ y: isActive ? 0 : 2 }}
         transition={{ duration: 0.6, ease: PANEL_EASE }}
@@ -51,15 +52,15 @@ export default function GoNaturalEditorialColumn({
 
       <p
         aria-hidden
-        className="font-display w-full text-[clamp(1.65rem,4.5vw,2.35rem)] font-normal uppercase leading-none tracking-[-0.02em] text-[#2E4A36]"
+        className="font-display mt-4 w-full text-[clamp(1.65rem,4.5vw,2.35rem)] font-normal uppercase leading-none tracking-[-0.02em] text-[#2E4A36]"
       >
         GO NATURAL
       </p>
 
-      <p className="gn-hero-subtitle max-w-[300px] leading-snug">{tagline}</p>
+      <p className="gn-hero-subtitle mt-3 max-w-[300px] leading-snug">{tagline}</p>
 
       <motion.div
-        className="relative z-20 flex w-full justify-center"
+        className="relative z-20 mt-6 flex w-full justify-center"
         animate={{
           opacity: isActive ? 1 : 0.82,
           y: isActive ? 0 : 4,

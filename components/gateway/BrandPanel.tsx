@@ -112,8 +112,10 @@ export default function BrandPanel({
       )}
 
       <div
-        className={`relative z-10 flex h-full w-full flex-col px-8 py-10 sm:px-12 sm:py-12 md:px-14 md:py-14 ${
-          isGoNatural ? "items-center justify-center" : "justify-end pb-16 pt-24 sm:pb-[4.5rem] md:pb-20 md:pt-28"
+        className={`relative z-10 flex h-full w-full flex-col ${
+          isGoNatural
+            ? "items-center justify-center px-8 py-12 sm:px-12 md:px-14 md:py-[72px] lg:px-14 lg:py-24"
+            : "justify-end px-8 pb-16 pt-24 sm:px-12 sm:pb-[4.5rem] md:px-14 md:pb-20 md:pt-28"
         } ${layout === "column" ? "min-h-[50dvh]" : ""}`}
       >
         {isGoNatural ? (
