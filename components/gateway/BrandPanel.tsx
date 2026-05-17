@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useCallback, useRef, useState } from "react";
 import { GN_GATEWAY_PARALLAX_MAX_PX } from "@/lib/ui/gateway-mountains";
 import type { BrandId } from "@/lib/routing/brands";
 import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
 import GoNaturalEditorialColumn from "@/components/gateway/GoNaturalEditorialColumn";
+import GoodIdeasEditorialColumn from "@/components/gateway/GoodIdeasEditorialColumn";
 import GoNaturalMountainLayer from "@/components/gateway/GoNaturalMountainLayer";
 
 const TRANSITION_MS = 600;
@@ -112,11 +112,9 @@ export default function BrandPanel({
       )}
 
       <div
-        className={`relative z-10 flex h-full w-full flex-col ${
-          isGoNatural
-            ? "items-center justify-center px-8 py-12 sm:px-12 md:px-14 md:py-[72px] lg:px-14 lg:py-24"
-            : "justify-end px-8 pb-16 pt-24 sm:px-12 sm:pb-[4.5rem] md:px-14 md:pb-20 md:pt-28"
-        } ${layout === "column" ? "min-h-[50dvh]" : ""}`}
+        className={`relative z-10 flex h-full w-full flex-col items-center justify-center px-8 py-12 sm:px-12 md:px-14 ${
+          layout === "column" ? "min-h-[50dvh]" : ""
+        }`}
       >
         {isGoNatural ? (
           <GoNaturalEditorialColumn
@@ -126,40 +124,13 @@ export default function BrandPanel({
             isActive={isActive}
           />
         ) : (
-          <>
-            <p className="font-inter text-[11px] font-semibold uppercase tracking-[0.22em] text-[rgba(232,236,241,0.5)]">
-              Lifestyle & Tech
-            </p>
-            <h2 className="mt-3 max-w-[14ch] font-display text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.02em] text-[#E8ECF1]">
-              {title}
-            </h2>
-            <p className="mt-4 max-w-md font-inter text-[15px] leading-relaxed text-[rgba(232,236,241,0.72)] md:text-[16px]">
-              {tagline}
-            </p>
-            <motion.div
-              className="mt-8"
-              animate={{
-                opacity: isActive ? 1 : 0.82,
-                y: isActive ? 0 : 4,
-              }}
-              transition={{ duration: TRANSITION_MS / 1000, ease: PANEL_EASE }}
-            >
-              <Link
-                href={href}
-                className="group inline-flex min-h-[52px] items-center justify-center rounded-full bg-[#E8ECF1] px-8 font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0B0F14] shadow-[0_12px_40px_rgba(0,0,0,0.35)] transition-[transform,box-shadow,background-color] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/50 focus-visible:ring-offset-[#0B0F14] motion-reduce:transition-none"
-              >
-                <span className="flex items-center gap-2">
-                  {cta}
-                  <span
-                    className="inline-block transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5"
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                </span>
-              </Link>
-            </motion.div>
-          </>
+          <GoodIdeasEditorialColumn
+            title={title}
+            tagline={tagline}
+            cta={cta}
+            href={href}
+            isActive={isActive}
+          />
         )}
       </div>
     </motion.section>
