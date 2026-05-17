@@ -2,9 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useCallback, useRef, useState } from "react";
+import { GN_GATEWAY_PARALLAX_MAX_PX } from "@/lib/ui/gateway-mountains";
 import type { BrandId } from "@/lib/routing/brands";
+import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
+import GoNaturalBrandMark from "@/components/gateway/GoNaturalBrandMark";
+import GoNaturalMountainLayer from "@/components/gateway/GoNaturalMountainLayer";
 
 const TRANSITION_MS = 600;
+const PANEL_EASE = GN_EASE_PREMIUM;
 
 export type BrandPanelProps = {
   brand: BrandId;
@@ -32,20 +38,54 @@ export default function BrandPanel({
   layout,
 }: BrandPanelProps) {
   const isGoNatural = brand === "go-natural";
+  const panelRef = useRef<HTMLElement>(null);
+  const [isGoNaturalHovered, setIsGoNaturalHovered] = useState(false);
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
 
   const flexGrow = isActive ? 1.06 : isDimmed ? 0.94 : 1;
 
+  const handleParallaxMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (!isGoNatural || !isGoNaturalHovered) return;
+      const el = panelRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      setParallax({
+        x: nx * GN_GATEWAY_PARALLAX_MAX_PX,
+        y: ny * (GN_GATEWAY_PARALLAX_MAX_PX * 0.45),
+      });
+    },
+    [isGoNatural, isGoNaturalHovered]
+  );
+
+  const handleEnter = () => {
+    onEnter();
+    if (isGoNatural) setIsGoNaturalHovered(true);
+  };
+
+  const handleLeave = () => {
+    onLeave();
+    if (isGoNatural) {
+      setIsGoNaturalHovered(false);
+      setParallax({ x: 0, y: 0 });
+    }
+  };
+
   return (
     <motion.section
+      ref={panelRef}
       className="relative flex min-h-[50dvh] flex-1 overflow-hidden md:min-h-0"
       style={{ flexGrow }}
-      transition={{ duration: TRANSITION_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onFocus={onEnter}
-      onBlur={onLeave}
+      transition={{ duration: TRANSITION_MS / 1000, ease: PANEL_EASE }}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      onMouseMove={isGoNatural ? handleParallaxMove : undefined}
+      onFocus={handleEnter}
+      onBlur={handleLeave}
     >
-      <div
+      <motion.div
         className={`absolute inset-0 transition-[opacity,transform] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isGoNatural
             ? "bg-[#F4EBDD]"
@@ -69,8 +109,12 @@ export default function BrandPanel({
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(to_top,rgba(46,74,54,0.08),transparent)]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[38%] bg-[linear-gradient(to_top,rgba(46,74,54,0.08),transparent)]"
             aria-hidden
+          />
+          <GoNaturalMountainLayer
+            revealed={isGoNaturalHovered}
+            parallax={parallax}
           />
         </>
       ) : (
@@ -81,7 +125,7 @@ export default function BrandPanel({
             transition={{ duration: TRANSITION_MS / 1000 }}
             aria-hidden
           />
-          <div
+          <motion.div
             className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:48px_48px]"
             aria-hidden
           />
@@ -95,19 +139,19 @@ export default function BrandPanel({
       >
         <p
           className={`font-inter text-[11px] font-semibold uppercase tracking-[0.22em] ${
-            isGoNatural ? "text-[rgba(46,74,54,0.55)]" : "text-[rgba(232,236,241,0.5)]"
+            isGoNatural ? "text-[#D9A441]" : "text-[rgba(232,236,241,0.5)]"
           }`}
         >
           {isGoNatural ? "Outdoor" : "Lifestyle & Tech"}
         </p>
 
-        <h2
-          className={`mt-3 max-w-[14ch] font-tan-nimbus text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.02em] ${
-            isGoNatural ? "text-[#2E4A36]" : "text-[#E8ECF1]"
-          }`}
-        >
-          {title}
-        </h2>
+        {isGoNatural ? (
+          <GoNaturalBrandMark />
+        ) : (
+          <h2 className="mt-3 max-w-[14ch] font-tan-nimbus text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.02em] text-[#E8ECF1]">
+            {title}
+          </h2>
+        )}
 
         <p
           className={`mt-4 max-w-md font-inter text-[15px] leading-relaxed md:text-[16px] ${
@@ -123,7 +167,7 @@ export default function BrandPanel({
             opacity: isActive ? 1 : 0.82,
             y: isActive ? 0 : 4,
           }}
-          transition={{ duration: TRANSITION_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: TRANSITION_MS / 1000, ease: PANEL_EASE }}
         >
           <Link
             href={href}
