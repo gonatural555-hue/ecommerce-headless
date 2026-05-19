@@ -522,6 +522,109 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
       },
     },
   },
+  {
+    id: "gi-hogar-002",
+    slug: "portable-electric-travel-kettle-450ml",
+    title: "Portable Electric Travel Kettle 450ML",
+    price: 19.69,
+    category: "Hogar",
+    images: [
+      ...getGoodIdeasProductImagePaths("gi-hogar-002", 5),
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-002/us.webp`,
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-002/eu.webp`,
+    ],
+    description:
+      "Compact portable electric kettle with temperature display and insulated design for travel, office use, tea, coffee, and hot water on the go. Quick heating, minimal aesthetic, and convenient daily use.",
+    shortDescription:
+      "Compact 450ML portable electric kettle designed for travel, office, tea, coffee, and hot water preparation anywhere.",
+    longDescription: [
+      "Heat water wherever your day takes you. This 450ML portable electric kettle is built for travel, office desks, dorms, and hotel stays when you want tea, coffee, or hot water without a full kitchen.",
+      "A compact 450ML capacity is sized for personal servings—morning tea, pour-over coffee, instant meals, or a quick hot drink between meetings.",
+      "The digital temperature display adds clarity and control, while the insulated, minimal exterior fits a modern lifestyle setup at home or on the road.",
+      "From office routines to weekend trips, it delivers quick heating in a travel-friendly footprint that is easy to pack and store.",
+      "Choose US or EU plug options to match your region and keep your kettle ready for daily convenience.",
+    ],
+    features: [
+      "Portable 450ML electric kettle",
+      "Quick water heating functionality",
+      "Digital temperature display",
+      "Compact travel-friendly design",
+      "Suitable for tea, coffee, and hot water",
+      "Minimal insulated exterior",
+      "Ideal for office, dorm, and hotel use",
+      "Available with US and EU plug options",
+    ],
+    freeShipping: true,
+    variants: {
+      type: "plug",
+      label: "Plug Type",
+      default: "eu",
+      options: [
+        { value: "us", label: "US Plug" },
+        { value: "eu", label: "EU Plug" },
+      ],
+    },
+    translations: {
+      es: {
+        title: "Hervidor eléctrico portátil de viaje 450ML",
+        description:
+          "Hervidor eléctrico portátil compacto con pantalla de temperatura y diseño aislado para viaje, oficina, té, café y agua caliente. Calentamiento rápido y estética minimal.",
+        shortDescription:
+          "Hervidor eléctrico portátil 450ML para viaje, oficina, té, café y preparación de agua caliente en cualquier lugar.",
+        longDescription: [
+          "Calienta agua donde estés: viaje, oficina, residencia u hotel, para té, café o agua caliente sin cocina completa.",
+          "Capacidad de 450ML para uso personal: té matutino, café, comidas instantáneas o bebidas entre reuniones.",
+          "Pantalla digital de temperatura y exterior minimal aislado para un setup moderno.",
+          "Calentamiento rápido en formato viajero, fácil de guardar y transportar.",
+          "Opciones de enchufe US o EU según tu región.",
+        ],
+        features: [
+          "Hervidor eléctrico portátil 450ML",
+          "Calentamiento rápido de agua",
+          "Pantalla digital de temperatura",
+          "Diseño compacto para viaje",
+          "Apto para té, café y agua caliente",
+          "Exterior minimal aislado",
+          "Ideal para oficina, residencia y hotel",
+          "Disponible con enchufe US y EU",
+        ],
+      },
+      fr: {
+        title: "Bouilloire électrique portable voyage 450ML",
+        description:
+          "Bouilloire électrique portable compacte avec affichage température et design isolé pour voyage, bureau, thé, café et eau chaude. Chauffage rapide, esthétique minimaliste.",
+        shortDescription:
+          "Bouilloire électrique portable 450ML pour voyage, bureau, thé, café et eau chaude partout.",
+        features: [
+          "Bouilloire électrique portable 450ML",
+          "Chauffage rapide de l'eau",
+          "Affichage digital de température",
+          "Design compact pour voyage",
+          "Adaptée thé, café et eau chaude",
+          "Extérieur minimal isolé",
+          "Idéale bureau, dortoir et hôtel",
+          "Disponible prise US et EU",
+        ],
+      },
+      it: {
+        title: "Bollitore elettrico portatile da viaggio 450ML",
+        description:
+          "Bollitore elettrico portatile compatto con display temperatura e design isolato per viaggio, ufficio, tè, caffè e acqua calda. Riscaldamento rapido, estetica minimal.",
+        shortDescription:
+          "Bollitore elettrico portatile 450ML per viaggio, ufficio, tè, caffè e acqua calda ovunque.",
+        features: [
+          "Bollitore elettrico portatile 450ML",
+          "Riscaldamento rapido dell'acqua",
+          "Display digitale della temperatura",
+          "Design compatto da viaggio",
+          "Adatto a tè, caffè e acqua calda",
+          "Esterno minimal isolato",
+          "Ideale per ufficio, dormitorio e hotel",
+          "Disponibile con spina US e EU",
+        ],
+      },
+    },
+  },
 
   {
 
