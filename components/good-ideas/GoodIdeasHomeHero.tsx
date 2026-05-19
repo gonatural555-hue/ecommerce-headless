@@ -4,8 +4,8 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
+import { goodIdeasProductsPath } from "@/lib/routing/brands";
 import {
-  GI_BLOG_POSTS_ANCHOR,
   GI_EASE,
   GI_HERO_PRIMARY_CTA_CLASS,
   GI_HERO_TOP_PAD,
@@ -14,27 +14,23 @@ import {
 
 const easeOut = GI_EASE;
 
-export type GoodIdeasBlogHeroProps = {
+export type GoodIdeasHomeHeroProps = {
   locale: Locale;
   title: string;
   subtitle: string;
   eyebrow: string;
-  exploreCtaLabel: string;
-  scrollHint: string;
-  postsAnchorId?: string;
+  ctaLabel: string;
   sectionAriaLabel: string;
 };
 
-export default function GoodIdeasBlogHero({
+export default function GoodIdeasHomeHero({
   locale,
   title,
   subtitle,
   eyebrow,
-  exploreCtaLabel,
-  scrollHint,
-  postsAnchorId = GI_BLOG_POSTS_ANCHOR,
+  ctaLabel,
   sectionAriaLabel,
-}: GoodIdeasBlogHeroProps) {
+}: GoodIdeasHomeHeroProps) {
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
 
@@ -62,8 +58,6 @@ export default function GoodIdeasBlogHero({
     },
   };
 
-  const exploreHref = `/${locale}/good-ideas/blog#${postsAnchorId}`;
-
   return (
     <section
       className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip border-b border-white/[0.08] bg-[#0B0F14] text-[#E8ECF1]"
@@ -83,7 +77,7 @@ export default function GoodIdeasBlogHero({
           className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:56px_56px]"
           aria-hidden
         />
-        <div className="flex min-h-0 flex-1 flex-col justify-between gap-3 md:gap-4">
+        <div className="flex min-h-0 flex-1 flex-col justify-center gap-3 md:gap-4">
           <motion.div className="relative flex w-full max-w-[980px] flex-col items-center">
             <motion.p
               variants={itemVariants}
@@ -117,25 +111,14 @@ export default function GoodIdeasBlogHero({
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-6 w-full max-w-md md:mt-7">
-              <Link href={exploreHref} className={GI_HERO_PRIMARY_CTA_CLASS} aria-label={exploreCtaLabel}>
-                {exploreCtaLabel}
+              <Link
+                href={goodIdeasProductsPath(locale)}
+                className={GI_HERO_PRIMARY_CTA_CLASS}
+                aria-label={ctaLabel}
+              >
+                {ctaLabel}
               </Link>
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex shrink-0 flex-col items-center gap-1.5 pb-1 pt-2 text-center"
-          >
-            <div
-              className="flex h-6 w-4 items-start justify-center rounded-full border border-white/25 pt-1"
-              aria-hidden
-            >
-              <span className="block h-1.5 w-[3px] rounded-full bg-white/45" />
-            </div>
-            <p className="max-w-xs font-inter text-[11px] font-medium uppercase tracking-[0.2em] text-[rgba(232,236,241,0.5)] md:text-xs">
-              {scrollHint}
-            </p>
           </motion.div>
         </div>
       </motion.div>

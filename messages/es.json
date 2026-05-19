@@ -39,10 +39,12 @@
       "allBrands": "Todas las marcas"
     },
     "hero": {
+      "eyebrow": "Hogar & Tech",
       "title": "Buenos\nProductos son Buenas Ideas.",
       "subtitle": "Productos útiles para hogar, tecnología, estilo de vida y el día a día.",
       "cta": "Explorar productos",
-      "comingSoon": "Estamos preparando el catálogo. Pronto encontrarás gadgets para el hogar, electrónica y esenciales del día a día."
+      "comingSoon": "Estamos preparando el catálogo. Pronto encontrarás gadgets para el hogar, electrónica y esenciales del día a día.",
+      "sectionAria": "Good Ideas — inicio"
     },
     "products": {
       "heroTitle": "Esenciales\npara el día a día",

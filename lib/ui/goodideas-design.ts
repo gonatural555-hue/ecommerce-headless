@@ -27,3 +27,33 @@ export const GI_PRODUCTS_CATEGORY_TONES = {
 } as const;
 
 export type GiProductsCategoryTone = keyof typeof GI_PRODUCTS_CATEGORY_TONES;
+
+/** CTA principal de heroes editoriales (home, blog). */
+export const GI_HERO_PRIMARY_CTA_CLASS =
+  "group inline-flex h-[56px] min-h-[56px] w-full max-w-md items-center justify-center rounded-full bg-[#E8ECF1] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[#0B0F14] shadow-[0_12px_40px_rgba(0,0,0,0.35)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0F14] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
+
+/** Título multilínea con acentos (misma lógica que blog). */
+export function parseGoodIdeasEditorialTitle(title: string): {
+  line1: string;
+  row1Accent: string;
+  row2Muted: string | null;
+} {
+  const raw = title.trim();
+  if (!raw) return { line1: "", row1Accent: "", row2Muted: null };
+  const lines = raw.split("\n").map((l) => l.trim()).filter(Boolean);
+  const line1 = lines[0] ?? "";
+  const secondLineText = lines.slice(1).join(" ").trim();
+  const words = secondLineText.split(/\s+/).filter(Boolean);
+
+  if (words.length === 0) {
+    return { line1, row1Accent: "", row2Muted: null };
+  }
+  if (words.length === 1) {
+    return { line1, row1Accent: "", row2Muted: words[0] ?? null };
+  }
+  return {
+    line1,
+    row1Accent: words[0] ?? "",
+    row2Muted: words.slice(1).join(" "),
+  };
+}

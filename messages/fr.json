@@ -39,10 +39,12 @@
       "allBrands": "Toutes les marques"
     },
     "hero": {
-      "title": "Produits malins. Good Ideas.",
+      "eyebrow": "Maison & Tech",
+      "title": "Bons\nproduits, bonnes idées.",
       "subtitle": "Produits utiles pour la maison, la tech, le lifestyle et le quotidien.",
       "cta": "Explorer les produits",
-      "comingSoon": "Notre catalogue est en préparation. Bientôt : gadgets maison, électronique et essentiels du quotidien."
+      "comingSoon": "Notre catalogue est en préparation. Bientôt : gadgets maison, électronique et essentiels du quotidien.",
+      "sectionAria": "Good Ideas — accueil"
     },
     "products": {
       "heroTitle": "Essentiels\nau quotidien",

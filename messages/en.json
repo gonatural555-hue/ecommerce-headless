@@ -39,10 +39,12 @@
       "allBrands": "All brands"
     },
     "hero": {
-      "title": "Smart Products. Good Ideas.",
+      "eyebrow": "Home & Tech",
+      "title": "Smart\nProducts are Good Ideas.",
       "subtitle": "Useful products for home, tech, lifestyle and everyday life.",
       "cta": "Explore Products",
-      "comingSoon": "Our catalog is being curated. Check back soon for smart home gadgets, electronics and everyday essentials."
+      "comingSoon": "Our catalog is being curated. Check back soon for smart home gadgets, electronics and everyday essentials.",
+      "sectionAria": "Good Ideas — home"
     },
     "products": {
       "heroTitle": "Everyday\nEssentials",
