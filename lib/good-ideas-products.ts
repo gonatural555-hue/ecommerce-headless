@@ -602,6 +602,96 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
       },
     },
   },
+  {
+    id: "gi-lifestyle-004",
+    slug: "bluetooth-sleep-headband-wireless-earphones",
+    title: "Bluetooth Sleep Headband Wireless Earphones",
+    price: 4.19,
+    category: "Lifestyle",
+    images: getGoodIdeasProductImagePaths("gi-lifestyle-004", 5),
+    description:
+      "Wireless Bluetooth headband with integrated earphones, designed for sleeping, relaxing, sports, running, travel, and hands-free music listening. Soft stretch fabric, wireless audio, built-in control panel, comfortable fit, sleep-friendly design, and versatile everyday use.",
+    shortDescription:
+      "Soft Bluetooth sleep headband with built-in wireless earphones, designed for music, rest, workouts, travel, and comfortable daily use.",
+    longDescription: [
+      "Listen comfortably while you sleep, relax, or unwind. This Bluetooth sleep headband combines soft fabric with built-in wireless earphones for a cozy way to enjoy music, podcasts, or meditation without bulky headphones.",
+      "Bluetooth wireless audio keeps your setup cable-free, with a stable connection for bedtime listening, light workouts, and everyday lifestyle use.",
+      "Soft stretch fabric wraps gently around your head for a comfortable fit that works for rest, travel, and hands-free listening on the go.",
+      "From running and light sports to flights and daily commutes, the headband design stays practical for movement while keeping audio close.",
+      "An integrated control panel and lightweight everyday design make it easy to manage playback—ideal for wellness routines, relaxation, and sleep-friendly listening.",
+    ],
+    features: [
+      "Bluetooth wireless audio",
+      "Built-in stereo earphones",
+      "Soft stretch fabric headband",
+      "Comfortable for sleep and relaxation",
+      "Suitable for running, workouts, and travel",
+      "Integrated control panel",
+      "Lightweight everyday design",
+      "Ideal for music, podcasts, meditation, and rest",
+    ],
+    freeShipping: false,
+    translations: {
+      es: {
+        title: "Diadema Bluetooth para dormir con auriculares inalámbricos",
+        description:
+          "Diadema Bluetooth inalámbrica con auriculares integrados para dormir, relajarse, deporte, running, viajes y música manos libres. Tejido suave elástico, audio inalámbrico, panel de control y diseño cómodo para el descanso.",
+        shortDescription:
+          "Diadema suave Bluetooth para dormir con auriculares inalámbricos integrados, ideal para música, descanso, entrenamientos, viajes y uso diario cómodo.",
+        longDescription: [
+          "Escucha con comodidad mientras duermes, descansas o te relajas. Combina tejido suave y auriculares inalámbricos integrados para música, podcasts o meditación sin auriculares voluminosos.",
+          "Audio Bluetooth sin cables para escucha nocturna, entrenamientos ligeros y uso lifestyle diario.",
+          "Tejido suave y elástico para un ajuste cómodo en reposo, viajes y escucha manos libres.",
+          "Práctica para running, deporte ligero, vuelos y desplazamientos con el audio siempre cerca.",
+          "Panel de control integrado y diseño ligero para gestionar la reproducción: ideal para bienestar, relajación y sueño.",
+        ],
+        features: [
+          "Audio inalámbrico Bluetooth",
+          "Auriculares estéreo integrados",
+          "Diadema de tejido suave elástico",
+          "Cómoda para dormir y relajarse",
+          "Apta para running, entrenamientos y viajes",
+          "Panel de control integrado",
+          "Diseño ligero para el día a día",
+          "Ideal para música, podcasts, meditación y descanso",
+        ],
+      },
+      fr: {
+        title: "Bandeau Bluetooth sommeil avec écouteurs sans fil",
+        description:
+          "Bandeau Bluetooth sans fil avec écouteurs intégrés pour dormir, se détendre, sport, course, voyage et musique mains libres. Tissu doux extensible, audio sans fil, commandes intégrées et confort au repos.",
+        shortDescription:
+          "Bandeau doux Bluetooth pour le sommeil avec écouteurs sans fil intégrés, pour musique, repos, entraînement, voyage et usage quotidien confortable.",
+        features: [
+          "Audio sans fil Bluetooth",
+          "Écouteurs stéréo intégrés",
+          "Bandeau en tissu doux extensible",
+          "Confortable pour dormir et se détendre",
+          "Adapté course, entraînement et voyage",
+          "Panneau de commande intégré",
+          "Design léger pour le quotidien",
+          "Idéal musique, podcasts, méditation et repos",
+        ],
+      },
+      it: {
+        title: "Fascia Bluetooth per dormire con auricolari wireless",
+        description:
+          "Fascia Bluetooth wireless con auricolari integrati per dormire, rilassarsi, sport, corsa, viaggio e musica hands-free. Tessuto morbido elastico, audio wireless, pannello comandi e comfort per il riposo.",
+        shortDescription:
+          "Fascia morbida Bluetooth per il sonno con auricolari wireless integrati, per musica, riposo, allenamento, viaggio e uso quotidiano confortevole.",
+        features: [
+          "Audio wireless Bluetooth",
+          "Auricolari stereo integrati",
+          "Fascia in tessuto morbido elastico",
+          "Comoda per sonno e relax",
+          "Adatta a corsa, allenamento e viaggio",
+          "Pannello comandi integrato",
+          "Design leggero per tutti i giorni",
+          "Ideale per musica, podcast, meditazione e riposo",
+        ],
+      },
+    },
+  },
 
 ];
 
