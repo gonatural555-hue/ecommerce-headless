@@ -1,0 +1,18 @@
+{
+  "id": "gi-tech-003",
+  "brand": "Good Ideas",
+  "images": {
+    "featured": [
+      "/assets/images/good-ideas-products/gi-tech-003/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/good-ideas-products/gi-tech-003/gallery-1.webp",
+      "/assets/images/good-ideas-products/gi-tech-003/gallery-2.webp",
+      "/assets/images/good-ideas-products/gi-tech-003/gallery-3.webp",
+      "/assets/images/good-ideas-products/gi-tech-003/gallery-4.webp",
+      "/assets/images/good-ideas-products/gi-tech-003/gallery-5.webp"
+    ],
+    "lifestyle": [],
+    "extras": []
+  }
+}

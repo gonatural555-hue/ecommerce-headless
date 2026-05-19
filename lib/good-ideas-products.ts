@@ -324,6 +324,96 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
       },
     },
   },
+  {
+    id: "gi-tech-003",
+    slug: "portable-car-refrigerator-cooler",
+    title: "Portable Car Refrigerator Cooler",
+    price: 96.3,
+    category: "Tech",
+    images: getGoodIdeasProductImagePaths("gi-tech-003", 5),
+    description:
+      "Portable car refrigerator and cooler for vehicles, travel, camping, and outdoor use—designed to keep drinks, snacks, and food cold on the road. Portable design, car-friendly build, digital control panel, generous storage capacity options (8L–75L positioning), travel convenience, and outdoor practicality.",
+    shortDescription:
+      "Portable car refrigerator cooler designed for road trips, camping, outdoor travel, and keeping drinks or food cold on the go.",
+    longDescription: [
+      "Hit the road with drinks and snacks kept cool when you need them. This portable car refrigerator cooler is built for road trips, long drives, and travel days where a standard cooler is not enough.",
+      "Designed to keep beverages, snacks, and food chilled on the go, it helps you pack smarter for families, campers, and anyone who spends hours behind the wheel.",
+      "The portable, vehicle-friendly design fits naturally into car, van, and camping setups—ready for weekends away or everyday transport.",
+      "A digital temperature control panel makes it easy to manage cooling settings, while spacious storage capacity positioning (8L–75L range) supports different trip sizes and packing needs.",
+      "From camping and outdoor travel to daily commutes with meal prep, it is a practical companion for convenience on long drives.",
+    ],
+    features: [
+      "Portable car refrigerator cooler",
+      "Designed for road trips and camping",
+      "Keeps drinks, snacks, and food cold",
+      "Vehicle-friendly portable design",
+      "Digital temperature control panel",
+      "Spacious storage capacity positioning",
+      "Practical for outdoor travel",
+      "Suitable for cars, vans, camping, and daily transport",
+    ],
+    freeShipping: true,
+    translations: {
+      es: {
+        title: "Nevera portátil para coche 8L–75L",
+        description:
+          "Nevera/enfriador portátil para coche, viajes, camping y exterior. Mantiene bebidas, snacks y comida fríos en ruta. Diseño portátil, panel digital, gran capacidad (8L–75L) y uso práctico en vehículo.",
+        shortDescription:
+          "Nevera portátil para coche ideal para viajes por carretera, camping y mantener bebidas o comida fría en movimiento.",
+        longDescription: [
+          "Viaja con bebidas y snacks fríos cuando los necesitas. Pensada para road trips, trayectos largos y días de viaje.",
+          "Mantiene bebidas, snacks y comida refrigerada en ruta—ideal para familias, camping y quien pasa muchas horas conduciendo.",
+          "Diseño portátil y apto para coche, furgoneta y camping.",
+          "Panel digital de temperatura y opciones de capacidad generosa (rango 8L–75L) según el tamaño del viaje.",
+          "Compañera práctica para camping, exterior y trayectos largos del día a día.",
+        ],
+        features: [
+          "Nevera portátil para coche",
+          "Diseñada para viajes y camping",
+          "Mantiene bebidas, snacks y comida fría",
+          "Diseño portátil apto para vehículo",
+          "Panel digital de control de temperatura",
+          "Amplia capacidad de almacenamiento",
+          "Práctica para viajes al aire libre",
+          "Apta para coches, furgonetas, camping y transporte diario",
+        ],
+      },
+      fr: {
+        title: "Réfrigérateur portable voiture 8L–75L",
+        description:
+          "Réfrigérateur/glacière portable pour voiture, voyage, camping et extérieur. Garde boissons, snacks et nourriture au frais. Design portable, panneau digital, grande capacité (8L–75L).",
+        shortDescription:
+          "Glacière portable voiture pour road trips, camping et garder boissons ou nourriture au frais en déplacement.",
+        features: [
+          "Réfrigérateur portable voiture",
+          "Conçu pour road trips et camping",
+          "Garde boissons, snacks et nourriture au frais",
+          "Design portable adapté au véhicule",
+          "Panneau de contrôle digital de température",
+          "Grande capacité de stockage",
+          "Pratique pour voyage outdoor",
+          "Adapté voitures, vans, camping et transport quotidien",
+        ],
+      },
+      it: {
+        title: "Frigorifero portatile auto 8L–75L",
+        description:
+          "Frigorifero/ cooler portatile per auto, viaggi, campeggio e outdoor. Mantiene bevande, snack e cibo freddi. Design portatile, pannello digitale, ampia capacità (8L–75L).",
+        shortDescription:
+          "Frigorifero portatile auto per road trip, campeggio e tenere bevande o cibo freddi in movimento.",
+        features: [
+          "Frigorifero portatile per auto",
+          "Progettato per viaggi e campeggio",
+          "Mantiene bevande, snack e cibo freddi",
+          "Design portatile adatto al veicolo",
+          "Pannello digitale controllo temperatura",
+          "Ampia capacità di stoccaggio",
+          "Pratico per viaggi outdoor",
+          "Adatto ad auto, van, campeggio e trasporto quotidiano",
+        ],
+      },
+    },
+  },
 
   {
 
