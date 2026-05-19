@@ -512,6 +512,96 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
       },
     },
   },
+  {
+    id: "gi-lifestyle-003",
+    slug: "rechargeable-electric-nose-hair-trimmer-men",
+    title: "Rechargeable Electric Nose Hair Trimmer for Men",
+    price: 3.49,
+    category: "Lifestyle",
+    images: getGoodIdeasProductImagePaths("gi-lifestyle-003", 5),
+    description:
+      "Portable rechargeable electric nose hair trimmer designed for men's grooming. A compact tool for nose hair, eyebrow touch-ups, and precise facial trimming—with portability, rechargeable use, pocket-size body, protective cap, and simple daily grooming.",
+    shortDescription:
+      "Compact rechargeable electric trimmer for nose, eyebrow, and facial grooming, designed for quick daily touch-ups at home or on the go.",
+    longDescription: [
+      "Keep your grooming routine quick and effortless. This rechargeable electric trimmer is built for everyday personal care, from nose hair to eyebrow touch-ups and precise facial trimming.",
+      "The portable rechargeable design means you can maintain a clean look at home or on the go without bulky tools or complicated setup.",
+      "Designed for nose and eyebrow trimming, it helps you handle detail areas with control and a minimalist grooming routine that fits busy mornings.",
+      "A compact pocket-size body and protective transparent cap make it easy to store in a bag, drawer, or travel kit.",
+      "Simple daily maintenance and travel-friendly use make it a practical lightweight accessory for men who want a cleaner, more polished look in minutes.",
+    ],
+    features: [
+      "Rechargeable electric grooming tool",
+      "Designed for nose hair trimming",
+      "Suitable for eyebrow touch-ups",
+      "Compact pocket-size design",
+      "Protective transparent cap",
+      "Portable for travel and daily use",
+      "Simple one-button operation",
+      "Lightweight personal care accessory",
+    ],
+    freeShipping: false,
+    translations: {
+      es: {
+        title: "Cortapelos eléctrico recargable para nariz y cejas",
+        description:
+          "Recortador eléctrico recargable y portátil para el cuidado masculino: vello nasal, retoques de cejas y recorte facial preciso. Compacto, con tapa protectora y uso diario sencillo.",
+        shortDescription:
+          "Recortador eléctrico recargable compacto para nariz, cejas y grooming facial, ideal para retoques rápidos en casa o de viaje.",
+        longDescription: [
+          "Mantén tu rutina de grooming rápida y sin complicaciones. Pensado para el cuidado diario: vello nasal, cejas y detalles faciales.",
+          "Diseño recargable y portátil para usar en casa o fuera, sin herramientas voluminosas.",
+          "Ayuda a trabajar zonas de detalle con control y una rutina minimalista que encaja en mañanas ocupadas.",
+          "Cuerpo compacto de bolsillo y tapa protectora transparente para guardar en bolso, cajón o neceser.",
+          "Mantenimiento sencillo y uso viajero: accesorio ligero para un aspecto más cuidado en minutos.",
+        ],
+        features: [
+          "Herramienta eléctrica recargable de grooming",
+          "Diseñada para vello nasal",
+          "Apta para retoques de cejas",
+          "Diseño compacto de bolsillo",
+          "Tapa protectora transparente",
+          "Portátil para viaje y uso diario",
+          "Operación simple de un botón",
+          "Accesorio ligero de cuidado personal",
+        ],
+      },
+      fr: {
+        title: "Tondeuse électrique rechargeable nez et sourcils homme",
+        description:
+          "Tondeuse électrique rechargeable portable pour le grooming masculin : poils du nez, retouches des sourcils et taille faciale précise. Compacte, capuchon protecteur, usage quotidien simple.",
+        shortDescription:
+          "Tondeuse électrique rechargeable compacte pour nez, sourcils et grooming facial, idéale pour les retouches rapides à domicile ou en déplacement.",
+        features: [
+          "Outil de grooming électrique rechargeable",
+          "Conçu pour les poils du nez",
+          "Adapté aux retouches des sourcils",
+          "Design compact de poche",
+          "Capuchon protecteur transparent",
+          "Portable pour voyage et quotidien",
+          "Fonctionnement simple à un bouton",
+          "Accessoire léger de soins personnels",
+        ],
+      },
+      it: {
+        title: "Tagliacapelli elettrico ricaricabile per naso e sopracciglia",
+        description:
+          "Tagliacapelli elettrico ricaricabile portatile per la cura maschile: peli del naso, ritocchi sopracciglia e rifinitura facciale. Compatto, cappuccio protettivo, uso quotidiano semplice.",
+        shortDescription:
+          "Tagliacapelli elettrico ricaricabile compatto per naso, sopracciglia e grooming facciale, ideale per ritocchi rapidi a casa o in viaggio.",
+        features: [
+          "Strumento di grooming elettrico ricaricabile",
+          "Progettato per peli del naso",
+          "Adatto a ritocchi delle sopracciglia",
+          "Design compatto tascabile",
+          "Cappuccio protettivo trasparente",
+          "Portatile per viaggio e uso quotidiano",
+          "Funzionamento semplice a un pulsante",
+          "Accessorio leggero per la cura personale",
+        ],
+      },
+    },
+  },
 
 ];
 
