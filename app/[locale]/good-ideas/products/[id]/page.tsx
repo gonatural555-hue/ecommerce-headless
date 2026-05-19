@@ -5,6 +5,7 @@ import {
   getGoodIdeasProducts,
   localizeGoodIdeasProduct,
   getGoodIdeasProductCopy,
+  resolveGoodIdeasProductVariants,
 } from "@/lib/good-ideas-products";
 import { getGoodIdeasProductImages } from "@/lib/good-ideas-product-images";
 import { getMessages } from "@/lib/i18n/messages";
@@ -81,6 +82,7 @@ export default async function GoodIdeasProductPage({ params }: Props) {
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
   const productImages = await getGoodIdeasProductImages(product.id);
+  const productVariants = resolveGoodIdeasProductVariants(localizedProduct);
 
   const pdpDesktop = {
     benefitsTitle: t("productPage.pdpDesktop.benefitsTitle"),
@@ -134,7 +136,7 @@ export default async function GoodIdeasProductPage({ params }: Props) {
           product={localizedProduct}
           seoH1={localizedProduct.title}
           productImages={productImages}
-          productVariants={null}
+          productVariants={productVariants}
           ctaLabel={t("common.addToCart")}
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}

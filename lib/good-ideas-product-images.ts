@@ -17,6 +17,7 @@ interface GoodIdeasProductJson {
     gallery: string[];
     lifestyle: string[];
     extras: string[];
+    variantImages?: VariantImagesMap | VariantImagesValueMap;
   };
   variantImages?: VariantImagesMap | VariantImagesValueMap;
 }
@@ -78,8 +79,10 @@ export async function getGoodIdeasProductImages(
       );
     }
 
-    if (productData.variantImages && typeof productData.variantImages === "object") {
-      result.variantImages = productData.variantImages;
+    const variantImages =
+      productData.images.variantImages ?? productData.variantImages;
+    if (variantImages && typeof variantImages === "object") {
+      result.variantImages = variantImages;
     }
 
     const totalImages =

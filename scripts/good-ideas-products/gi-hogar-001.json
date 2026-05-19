@@ -1,0 +1,32 @@
+{
+  "id": "gi-hogar-001",
+  "brand": "Good Ideas",
+  "images": {
+    "featured": [
+      "/assets/images/good-ideas-products/gi-hogar-001/image.webp"
+    ],
+    "gallery": [
+      "/assets/images/good-ideas-products/gi-hogar-001/gallery-1.webp",
+      "/assets/images/good-ideas-products/gi-hogar-001/gallery-2.webp",
+      "/assets/images/good-ideas-products/gi-hogar-001/gallery-3.webp",
+      "/assets/images/good-ideas-products/gi-hogar-001/gallery-4.webp",
+      "/assets/images/good-ideas-products/gi-hogar-001/gallery-5.webp"
+    ],
+    "lifestyle": [],
+    "extras": [],
+    "variantImages": {
+      "blue": [
+        "/assets/images/good-ideas-products/gi-hogar-001/blue.webp"
+      ],
+      "gold": [
+        "/assets/images/good-ideas-products/gi-hogar-001/gold.webp"
+      ],
+      "white": [
+        "/assets/images/good-ideas-products/gi-hogar-001/white.webp"
+      ],
+      "pink": [
+        "/assets/images/good-ideas-products/gi-hogar-001/pink.webp"
+      ]
+    }
+  }
+}
