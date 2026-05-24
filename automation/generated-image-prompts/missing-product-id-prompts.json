@@ -1,0 +1,12 @@
+{
+  "id": "",
+  "brand": "Good Ideas",
+  "productCardPrompt": "A premium product from Good Ideas, featuring top of the line quality and design. Image shows high-end product packaging with attention to detail.",
+  "pdpMainPrompt": "Product details page main image for a premium ecommerce item by Good Ideas. Showcasing the highest quality craftsmanship in our 'Product from 1005008414973716.html?gatewayAdapt=glo2esp' product, with a focus on material, design and build.",
+  "pdpLifestylePrompt": "Product details page lifestyle images for a premium ecommerce item by Good Ideas. Highlight the best use of the product in real-world scenarios showcasing craftsmanship and quality like this 'Product from 1005008414973716.html?gatewayAdapt=glo2esp'.",
+  "pdpDetailPrompt": "Product detail page images for a premium ecommerce item by Good Ideas. Detailed close-up shots of the product features, materials and craftsmanship.",
+  "blogHeroPrompt": "Blog hero image prompt for a premium ecommerce item by Good Ideas. Showcasing a stunning example of quality workmanship in our 'Product from 1005008414973716.html?gatewayAdapt=glo2esp' product, with an emphasis on the material and design.",
+  "blogSectionPrompt": "Blog section image prompt for a premium ecommerce item by Good Ideas. High quality images of the 'Product from 1005008414973716.html?gatewayAdapt=glo2esp' product, showing various angles and features in detail.",
+  "productImageFolder": "goodideas_highquality",
+  "blogImageFolder": "goodideas_blog"
+}
