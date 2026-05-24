@@ -1,0 +1,12 @@
+{
+  "id": "",
+  "brand": "Good Ideas",
+  "productCardPrompt": "A high-quality product card for Good Ideas Product from 1005006438780849.html featuring a premium close-up of the item, with Good Ideas logo in the corner.",
+  "pdpMainPrompt": "Product main page for Good Ideas Product from 1005006438780849.html showcasing an eye-catching high-resolution image of the product from multiple angles, including front and side views. Include Good Ideas brand name and possibly a tagline.",
+  "pdpLifestylePrompt": "Product lifestyle page for Good Ideas Product from 1005006438780849.html featuring images that highlight how the product can be used in different settings or with other products, emphasizing convenience and versatility. Focus on people interacting with the item.",
+  "pdpDetailPrompt": "Product detail page for Good Ideas Product from 1005006438780849.html presenting a detailed view of the product's features and benefits, including close-ups of key parts and possibly some assembly or usage instructions. Use plain language to describe functionalities.",
+  "blogHeroPrompt": "Blog hero page for Good Ideas Product from 1005006438780849.html featuring a large image that showcases the product in an engaging way, such as multiple angles of the product with good lighting and background. Include short description of the product features.",
+  "blogSectionPrompt": "Blog section for Good Ideas Product from 1005006438780849.html featuring a collection of images that demonstrate different uses or settings of the product, using clear descriptions to highlight each image’s purpose.",
+  "productImageFolder": "goodideas_productimages",
+  "blogImageFolder": "goodideas_blogimages"
+}
