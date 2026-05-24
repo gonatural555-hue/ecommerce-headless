@@ -101,6 +101,33 @@
             }
           ],
           "closing": "Explora el catálogo Good Ideas: hogar, tech, lifestyle y regalos pensados para el uso diario."
+        },
+        "product-from-1005006438780849": {
+          "title": "Hervidor de viaje portátil 450ML para hogar y desplazamientos",
+          "excerpt": "Una selección compacta de Good Ideas para té, café y agua caliente en el escritorio, la residencia o de viaje.",
+          "subtitle": "Esenciales de hogar que encajan en rutinas reales.",
+          "intro": "Good Ideas selecciona productos útiles para el hogar, no objetos de relleno. Este hervidor compacto de 450ML está pensado para cuando quieres agua caliente sin ocupar toda la encimera.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
+          "relatedProductIds": ["gi-hogar-002"],
+          "sections": [
+            {
+              "heading": "Por qué un hervidor compacto merece sitio en tu bolso",
+              "paragraphs": [
+                "Las mejores mejoras del hogar quitan fricción a rutinas que ya repites. Un hervidor pequeño cubre té, café, comidas instantáneas y agua caliente sin dominar una estantería o maleta.",
+                "Con 450ML, el tamaño es honesto para una o dos tazas: ideal en escritorio, mesita, residencia u hotel cuando no hay cocina completa."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
+            },
+            {
+              "heading": "Pensado para el uso diario en Good Ideas",
+              "paragraphs": [
+                "Elige el formato de enchufe según tu región para el mismo diseño compacto en casa y en viaje.",
+                "Consulta la ficha del producto para medidas, opciones de enchufe y galería, y combínalo con otras selecciones de hogar y lifestyle del catálogo Good Ideas."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
+            }
+          ],
+          "closing": "Descubre el hervidor de viaje portátil 450ML en el catálogo de hogar Good Ideas y monta un setup acorde a cómo vives."
         }
       }
     },

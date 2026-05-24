@@ -101,6 +101,33 @@
             }
           ],
           "closing": "Explore the Good Ideas catalog for home, tech, lifestyle, and gift-ready picks built for everyday use."
+        },
+        "product-from-1005006438780849": {
+          "title": "Portable travel kettle 450ML for home and on the go",
+          "excerpt": "A compact Good Ideas home pick for tea, coffee, and quick hot water at your desk, in a dorm, or while traveling.",
+          "subtitle": "Home essentials that fit real routines.",
+          "intro": "Good Ideas curates useful home products—not clutter. This compact 450ML travel kettle is built for the moments when you want hot water without filling the kitchen counter.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
+          "relatedProductIds": ["gi-hogar-002"],
+          "sections": [
+            {
+              "heading": "Why a compact kettle earns a spot in your bag",
+              "paragraphs": [
+                "The best home upgrades remove friction from routines you already repeat. A small kettle handles tea, coffee, instant meals, and warm water without taking over a shelf or suitcase.",
+                "At 450ML, the size stays honest for one or two cups—ideal for a desk, nightstand, dorm, or hotel room where a full kitchen is not part of the plan."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
+            },
+            {
+              "heading": "Built for everyday Good Ideas home use",
+              "paragraphs": [
+                "Choose the plug format that matches your region so the same compact design works at home and on travel days.",
+                "Explore the full product page for sizing, plug options, and gallery details—then pair it with other home and lifestyle picks from the Good Ideas catalog."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
+            }
+          ],
+          "closing": "See the Portable Travel Kettle 450ML in the Good Ideas home catalog and build a setup that fits how you actually live."
         }
       }
     },

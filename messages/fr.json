@@ -101,6 +101,33 @@
             }
           ],
           "closing": "Explorez le catalogue Good Ideas : maison, tech, lifestyle et idées cadeaux pour le quotidien."
+        },
+        "product-from-1005006438780849": {
+          "title": "Bouilloire de voyage portable 450ML pour la maison et les déplacements",
+          "excerpt": "Un choix compact Good Ideas pour le thé, le café et l’eau chaude au bureau, en résidence ou en voyage.",
+          "subtitle": "Essentiels maison adaptés aux vraies routines.",
+          "intro": "Good Ideas sélectionne des produits utiles pour la maison, pas du superflu. Cette bouilloire compacte 450ML est faite pour l’eau chaude sans encombrer le plan de travail.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
+          "relatedProductIds": ["gi-hogar-002"],
+          "sections": [
+            {
+              "heading": "Pourquoi une bouilloire compacte mérite sa place dans le sac",
+              "paragraphs": [
+                "Les meilleures améliorations maison simplifient les routines que vous répétez déjà. Une petite bouilloire gère thé, café, plats instantanés et eau chaude sans envahir une étagère ou une valise.",
+                "Avec 450ML, la taille reste honnête pour une ou deux tasses—idéal au bureau, chevet, résidence ou hôtel sans cuisine complète."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
+            },
+            {
+              "heading": "Conçue pour l’usage quotidien Good Ideas",
+              "paragraphs": [
+                "Choisissez le format de prise selon votre région pour le même design compact à la maison et en voyage.",
+                "Consultez la fiche produit pour les dimensions, options de prise et galerie, puis associez-la à d’autres sélections maison et lifestyle du catalogue Good Ideas."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
+            }
+          ],
+          "closing": "Découvrez la bouilloire de voyage portable 450ML dans le catalogue maison Good Ideas et composez un setup adapté à votre quotidien."
         }
       }
     },

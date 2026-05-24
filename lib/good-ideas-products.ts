@@ -524,6 +524,106 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
   },
 
   {
+    id: "gi-hogar-002",
+    slug: "portable-travel-kettle-450ml",
+    title: "Portable Travel Kettle 450ML",
+    price: 44.25,
+    category: "Hogar",
+    images: [
+      ...getGoodIdeasProductImagePaths("gi-hogar-002", 5),
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-002/us.webp`,
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-002/eu.webp`,
+    ],
+    description:
+      "Compact 450ML portable travel kettle for home, office, hotel stays, and daily tea or coffee routines. Fast boil, small footprint, and plug options for different regions.",
+    shortDescription:
+      "450ML portable travel kettle for home, desk, and travel—compact size with US and EU plug options.",
+    longDescription: [
+      "A compact kettle sized for one or two cups keeps desks, nightstands, and travel bags uncluttered while still delivering a quick boil when you need it.",
+      "The 450ML capacity is practical for tea, coffee, instant meals, and warm water for small daily routines without filling a full kitchen counter.",
+      "Use it at home, in a dorm, at the office, or in a hotel room when you want hot water on your schedule.",
+      "Choose the plug format that matches your region so the same compact design works across everyday and travel setups.",
+      "Built for Good Ideas home essentials: simple controls, honest sizing, and a form factor that earns a permanent spot in a bag or shelf.",
+    ],
+    features: [
+      "Compact 450ML travel kettle",
+      "Suitable for home, office, and travel",
+      "Fast boil for tea, coffee, and instant meals",
+      "Small footprint for desks and nightstands",
+      "US and EU plug options",
+      "Portable everyday design",
+      "Practical home and travel essential",
+    ],
+    freeShipping: true,
+    variants: {
+      type: "plug",
+      label: "Plug type",
+      default: "eu",
+      options: [
+        { value: "eu", label: "EU plug" },
+        { value: "us", label: "US plug" },
+      ],
+    },
+    translations: {
+      es: {
+        title: "Hervidor de viaje portátil 450ML",
+        description:
+          "Hervidor de viaje compacto de 450ML para hogar, oficina, hotel y rutinas diarias de té o café. Hervido rápido, tamaño reducido y opciones de enchufe US y EU.",
+        shortDescription:
+          "Hervidor portátil 450ML para hogar, escritorio y viaje, con opciones de enchufe US y EU.",
+        longDescription: [
+          "Un hervidor compacto para una o dos tazas mantiene ordenados escritorios, mesitas y maletas sin renunciar a un hervido rápido.",
+          "La capacidad de 450ML encaja en té, café, comidas instantáneas y agua caliente para rutinas diarias sin ocupar toda la encimera.",
+          "Úsalo en casa, residencia, oficina o habitación de hotel cuando quieras agua caliente a tu ritmo.",
+          "Elige el formato de enchufe según tu región para el mismo diseño compacto en viaje y día a día.",
+          "Esencial de hogar Good Ideas: controles simples, tamaño honesto y formato que merece quedarse en el bolso o la estantería.",
+        ],
+        features: [
+          "Hervidor de viaje compacto 450ML",
+          "Apto para hogar, oficina y viaje",
+          "Hervido rápido para té, café e instantáneos",
+          "Pequeño para escritorios y mesitas",
+          "Opciones de enchufe US y EU",
+          "Diseño portátil para el día a día",
+          "Esencial práctico de hogar y viaje",
+        ],
+      },
+      fr: {
+        title: "Bouilloire de voyage portable 450ML",
+        description:
+          "Bouilloire de voyage compacte 450ML pour maison, bureau, hôtel et thé ou café quotidien. Ébullition rapide, faible encombrement, prises US et EU.",
+        shortDescription:
+          "Bouilloire portable 450ML pour maison, bureau et voyage, avec options de prise US et EU.",
+        features: [
+          "Bouilloire de voyage compacte 450ML",
+          "Adaptée maison, bureau et voyage",
+          "Ébullition rapide pour thé, café et plats instantanés",
+          "Faible encombrement pour bureaux et tables de nuit",
+          "Options de prise US et EU",
+          "Design portable quotidien",
+          "Essentiel pratique maison et voyage",
+        ],
+      },
+      it: {
+        title: "Bollitore da viaggio portatile 450ML",
+        description:
+          "Bollitore da viaggio compatto 450ML per casa, ufficio, hotel e tè o caffè quotidiano. Bollitura rapida, ingombro ridotto, spine US e EU.",
+        shortDescription:
+          "Bollitore portatile 450ML per casa, scrivania e viaggio, con opzioni spina US e EU.",
+        features: [
+          "Bollitore da viaggio compatto 450ML",
+          "Adatto a casa, ufficio e viaggio",
+          "Bollitura rapida per tè, caffè e pasti instant",
+          "Ingombro ridotto per scrivanie e comodini",
+          "Opzioni spina US e EU",
+          "Design portatile quotidiano",
+          "Essenziale pratico per casa e viaggio",
+        ],
+      },
+    },
+  },
+
+  {
 
     id: "gi-lifestyle-001",
 

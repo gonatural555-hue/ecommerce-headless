@@ -101,6 +101,33 @@
             }
           ],
           "closing": "Esplora il catalogo Good Ideas: casa, tech, lifestyle e idee regalo per l’uso quotidiano."
+        },
+        "product-from-1005006438780849": {
+          "title": "Bollitore da viaggio portatile 450ML per casa e spostamenti",
+          "excerpt": "Una scelta compatta Good Ideas per tè, caffè e acqua calda alla scrivania, in dormitorio o in viaggio.",
+          "subtitle": "Essenziali per la casa che si adattano alle routine reali.",
+          "intro": "Good Ideas seleziona prodotti utili per la casa, non oggetti superflui. Questo bollitore compatto da 450ML è pensato per l’acqua calda senza occupare tutto il piano cucina.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
+          "relatedProductIds": ["gi-hogar-002"],
+          "sections": [
+            {
+              "heading": "Perché un bollitore compatto merita spazio nella borsa",
+              "paragraphs": [
+                "I migliori upgrade per la casa riducono l’attrito nelle routine che già ripeti. Un bollitore piccolo copre tè, caffè, pasti instant e acqua calda senza dominare uno scaffale o una valigia.",
+                "Con 450ML, la dimensione resta onesta per una o due tazze—ideale su scrivania, comodino, dormitorio o hotel senza cucina completa."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
+            },
+            {
+              "heading": "Pensato per l’uso quotidiano Good Ideas",
+              "paragraphs": [
+                "Scegli il formato spina in base alla tua regione per lo stesso design compatto a casa e in viaggio.",
+                "Consulta la scheda prodotto per dimensioni, opzioni spina e galleria, e abbinalo ad altre selezioni casa e lifestyle del catalogo Good Ideas."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
+            }
+          ],
+          "closing": "Scopri il bollitore da viaggio portatile 450ML nel catalogo casa Good Ideas e crea un setup adatto a come vivi."
         }
       }
     },
