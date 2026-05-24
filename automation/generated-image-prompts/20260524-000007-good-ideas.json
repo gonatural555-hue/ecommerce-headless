@@ -1,0 +1,12 @@
+{
+  "id": "",
+  "brand": "Good Ideas",
+  "productCardPrompt": "Luxury home decor item, Good Ideas brand, high quality product photography, modern and stylish design, upscale living.",
+  "pdpMainPrompt": "High-end Good Ideas home decor product in premium photography. Modern and sophisticated design, luxurious feel, showcasing the latest trends in home decor.",
+  "pdpLifestylePrompt": "Good Ideas home decor item in premium lifestyle setting, elegant room with soft lighting, stylish modern furniture creating a perfect living space.",
+  "pdpDetailPrompt": "Close-up shots of Good Ideas home decor product, showcasing intricate details and high-quality craftsmanship. Attention to every tiny aspect for perfection.",
+  "blogHeroPrompt": "Good Ideas home decor item in stunning lifestyle photography setting, capturing the essence of upscale living with modern design elements. Perfect for a premium blog post.",
+  "blogSectionPrompt": "Product detail shots featuring Good Ideas home decor item, perfect for product description and highlight sections on premium blogs.",
+  "productImageFolder": "goodideas_home_decor",
+  "blogImageFolder": "goodideas_highlifestyle"
+}
