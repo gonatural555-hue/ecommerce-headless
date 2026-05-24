@@ -624,6 +624,130 @@ const GOOD_IDEAS_PRODUCTS: Product[] = [
   },
 
   {
+    id: "gi-hogar-003",
+    slug: "portable-800ml-stainless-steel-electric-kettle-220v",
+    title: "800ML Stainless Steel Electric Kettle 220V",
+    price: 17.41,
+    category: "Hogar",
+    images: [
+      ...getGoodIdeasProductImagePaths("gi-hogar-003", 5),
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-003/eu.webp`,
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-003/uk.webp`,
+      `${GOOD_IDEAS_IMAGE_BASE}/gi-hogar-003/au.webp`,
+    ],
+    description:
+      "800ML portable electric kettle in brushed stainless steel for tea, Turkish or Greek coffee, moka-style brewing, and everyday hot water at home or the office. Compact six-cup capacity, 220V–240V, light gray finish, and EU, UK, or AU plug options.",
+    shortDescription:
+      "800ML stainless steel electric kettle for tea and coffee—portable, 220V, with EU, UK, and AU plug options.",
+    longDescription: [
+      "A compact 800ML kettle keeps daily hot drinks within reach without claiming half the counter. Sized for roughly six cups, it fits kitchens, desks, and small apartments where space matters.",
+      "Brushed stainless steel delivers a clean, durable look with a light gray finish, black handle, and a simple base with an illuminated power switch for quick, confident use.",
+      "Brew tea, prepare Turkish or Greek coffee, or heat water for moka-style routines and instant meals—one honest appliance for multiple morning and evening habits.",
+      "220V–240V operation suits European and compatible regions; choose EU, UK, or AU plug options so the same compact design works at home or when you travel with the right adapter setup.",
+      "Built for Good Ideas home essentials: practical capacity, straightforward controls, and a footprint that earns a permanent spot beside the coffee setup or on a work desk.",
+    ],
+    features: [
+      "800ML capacity (~6 cups)",
+      "Brushed stainless steel body",
+      "Light gray finish with black handle",
+      "220V–240V operation",
+      "Suitable for tea, coffee, and hot water",
+      "Compact portable design",
+      "EU, UK, and AU plug options",
+      "Illuminated base power switch",
+      "Ideal for home, office, and daily routines",
+    ],
+    freeShipping: true,
+    variants: {
+      type: "plug",
+      label: "Plug type",
+      default: "eu",
+      options: [
+        { value: "eu", label: "EU plug" },
+        { value: "uk", label: "UK plug" },
+        { value: "au", label: "AU plug" },
+      ],
+    },
+    translations: {
+      es: {
+        title: "Hervidor eléctrico de acero inoxidable 800 ml 220V",
+        description:
+          "Hervidor eléctrico portátil de 800 ml en acero inoxidable cepillado para té, café turco o griego, estilo moka y agua caliente diaria. Capacidad compacta de seis tazas, 220V–240V, acabado gris claro y opciones de enchufe EU, UK o AU.",
+        shortDescription:
+          "Hervidor eléctrico de 800 ml en acero inoxidable para té y café—portátil, 220V, con enchufes EU, UK y AU.",
+        longDescription: [
+          "Un hervidor compacto de 800 ml mantiene las bebidas calientes al alcance sin ocupar media encimera. Tamaño para unas seis tazas, ideal en cocinas, escritorios y pisos pequeños.",
+          "Acero inoxidable cepillado con acabado gris claro, mango negro y base sencilla con interruptor iluminado para un uso rápido y claro.",
+          "Prepara té, café turco o griego, o calienta agua para rutinas tipo moka y comidas instantáneas en un solo electrodoméstico versátil.",
+          "Operación 220V–240V; elige enchufe EU, UK o AU según tu región para el mismo diseño compacto en casa o viaje.",
+          "Esencial de hogar Good Ideas: capacidad práctica, controles directos y un formato que merece quedarse junto al café o en el escritorio.",
+        ],
+        features: [
+          "Capacidad de 800 ml (~6 tazas)",
+          "Cuerpo de acero inoxidable cepillado",
+          "Acabado gris claro con mango negro",
+          "Operación 220V–240V",
+          "Para té, café y agua caliente",
+          "Diseño compacto y portátil",
+          "Opciones de enchufe EU, UK y AU",
+          "Interruptor iluminado en la base",
+          "Ideal para hogar, oficina y rutinas diarias",
+        ],
+      },
+      fr: {
+        title: "Bouilloire électrique inox 800 ml 220V",
+        description:
+          "Bouilloire électrique portable 800 ml en acier inoxydable brossé pour thé, café turc ou grec, style moka et eau chaude quotidienne. Capacité compacte six tasses, 220V–240V, finition gris clair, prises EU, UK ou AU.",
+        shortDescription:
+          "Bouilloire électrique 800 ml en inox pour thé et café—portable, 220V, prises EU, UK et AU.",
+        longDescription: [
+          "Une bouilloire compacte 800 ml garde les boissons chaudes à portée de main sans envahir le plan de travail. Environ six tasses, idéale en cuisine, bureau ou petit logement.",
+          "Acier inoxydable brossé, finition gris clair, poignée noire et base simple avec interrupteur lumineux pour une utilisation rapide.",
+          "Préparez thé, café turc ou grec, ou chauffez l'eau pour routines moka et plats instantanés.",
+          "Fonctionnement 220V–240V ; choisissez prise EU, UK ou AU selon votre région.",
+          "Essentiel maison Good Ideas : capacité pratique, commandes directes, format compact.",
+        ],
+        features: [
+          "Capacité 800 ml (~6 tasses)",
+          "Corps en acier inoxydable brossé",
+          "Finition gris clair, poignée noire",
+          "Fonctionnement 220V–240V",
+          "Pour thé, café et eau chaude",
+          "Design compact et portable",
+          "Options prise EU, UK et AU",
+          "Interrupteur lumineux sur la base",
+          "Idéal maison, bureau et quotidien",
+        ],
+      },
+      it: {
+        title: "Bollitore elettrico in acciaio inox 800 ml 220V",
+        description:
+          "Bollitore elettrico portatile 800 ml in acciaio inox spazzolato per tè, caffè turco o greco, stile moka e acqua calda quotidiana. Capacità compatta sei tazze, 220V–240V, finitura grigio chiaro, spine EU, UK o AU.",
+        shortDescription:
+          "Bollitore elettrico 800 ml in acciaio inox per tè e caffè—portatile, 220V, spine EU, UK e AU.",
+        longDescription: [
+          "Un bollitore compatto da 800 ml tiene le bevande calde a portata di mano senza occupare metà piano cucina. Circa sei tazze, ideale in cucina, scrivania o monolocale.",
+          "Acciaio inox spazzolato, finitura grigio chiaro, manico nero e base con interruttore illuminato per un uso rapido.",
+          "Prepara tè, caffè turco o greco, o scalda l'acqua per routine moka e pasti instant.",
+          "Funzionamento 220V–240V; scegli spina EU, UK o AU in base alla regione.",
+          "Essenziale casa Good Ideas: capacità pratica, comandi semplici, ingombro ridotto.",
+        ],
+        features: [
+          "Capacità 800 ml (~6 tazze)",
+          "Corpo in acciaio inox spazzolato",
+          "Finitura grigio chiaro, manico nero",
+          "Funzionamento 220V–240V",
+          "Per tè, caffè e acqua calda",
+          "Design compatto e portatile",
+          "Opzioni spina EU, UK e AU",
+          "Interruttore illuminato sulla base",
+          "Ideale per casa, ufficio e routine quotidiane",
+        ],
+      },
+    },
+  },
+
+  {
 
     id: "gi-lifestyle-001",
 
