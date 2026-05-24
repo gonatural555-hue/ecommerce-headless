@@ -1,0 +1,27 @@
+{
+  "id": "",
+  "brand": "Good Ideas",
+  "targetCatalogFile": "",
+  "productObject": {
+    "id": "",
+    "title": "Product from 1005008414973716.html?gatewayAdapt=glo2esp",
+    "slug": "Product-from-1005008414973716-html-gatewayadaptglo2esp",
+    "price": 0,
+    "category": "",
+    "description": "",
+    "shortDescription": "",
+    "longDescription": [],
+    "images": [
+      ""
+    ],
+    "features": [],
+    "freeShipping": true,
+    "translations": {
+      "en": {},
+      "es": {},
+      "fr": {},
+      "it": {}
+    },
+    "variants": []
+  }
+}
