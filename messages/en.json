@@ -69,7 +69,40 @@
       "scrollHint": "Scroll to explore",
       "sectionAria": "Good Ideas Blog",
       "comingSoonTitle": "Coming soon",
-      "comingSoonBody": "The Good Ideas journal is on the way. Articles about home, tech and lifestyle will land here soon."
+      "comingSoonBody": "The Good Ideas journal is on the way. Articles about home, tech and lifestyle will land here soon.",
+      "featuredLabel": "Featured story",
+      "articlesLabel": "Latest articles",
+      "backToBlog": "Back to blog",
+      "featuredSlug": "smart-home-essentials-2026",
+      "posts": {
+        "smart-home-essentials-2026": {
+          "title": "Smart home essentials for everyday calm",
+          "excerpt": "Small upgrades for home and tech that make daily routines simpler, quieter, and more enjoyable.",
+          "subtitle": "Practical picks for home, desk, and travel.",
+          "intro": "Good Ideas is about useful products that fit real life—not clutter. These are the kinds of upgrades that earn a permanent spot on a shelf, in a bag, or on a desk.",
+          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
+          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
+          "sections": [
+            {
+              "heading": "Start with the routines you repeat",
+              "paragraphs": [
+                "The best home tech is not the loudest gadget on a feed. It is the item that removes friction from something you already do every day—making tea, charging devices, or keeping a corner of the home organized.",
+                "A compact travel kettle, a pair of wireless earbuds, or a small fridge for drinks and skincare can change how a room feels without a full remodel."
+              ],
+              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
+            },
+            {
+              "heading": "Tech that stays out of the way",
+              "paragraphs": [
+                "Choose gear with clear controls, honest sizing, and a design you are happy to see when it is not in use. Minimal interfaces and portable formats travel well between kitchen, office, and weekend plans.",
+                "When a product does one job well, it is easier to recommend—and easier to live with."
+              ],
+              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
+            }
+          ],
+          "closing": "Explore the Good Ideas catalog for home, tech, lifestyle, and gift-ready picks built for everyday use."
+        }
+      }
     },
     "cart": {
       "title": "Your cart",
@@ -145,6 +178,10 @@
       "blog": {
         "title": "Blog | Good Ideas",
         "description": "Ideas, guides and trends for home, tech and lifestyle."
+      },
+      "blogPost": {
+        "titleTemplate": "{title} | Good Ideas Blog",
+        "descriptionTemplate": "{excerpt}"
       },
       "cart": {
         "title": "Cart | Good Ideas",

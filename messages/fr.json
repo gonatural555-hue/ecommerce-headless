@@ -69,7 +69,40 @@
       "scrollHint": "Faites défiler",
       "sectionAria": "Blog Good Ideas",
       "comingSoonTitle": "Bientôt",
-      "comingSoonBody": "Le journal Good Ideas arrive bientôt. Articles maison, tech et lifestyle à suivre."
+      "comingSoonBody": "Le journal Good Ideas arrive bientôt. Articles maison, tech et lifestyle à suivre.",
+      "featuredLabel": "Article à la une",
+      "articlesLabel": "Derniers articles",
+      "backToBlog": "Retour au blog",
+      "featuredSlug": "smart-home-essentials-2026",
+      "posts": {
+        "smart-home-essentials-2026": {
+          "title": "Essentiels smart home pour le quotidien",
+          "excerpt": "Petites améliorations maison et tech pour des routines plus simples et agréables.",
+          "subtitle": "Sélections pratiques pour la maison, le bureau et les déplacements.",
+          "intro": "Good Ideas, ce sont des produits utiles qui s’intègrent à la vraie vie—sans encombrer. Des upgrades qui méritent leur place sur une étagère, dans un sac ou sur un bureau.",
+          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
+          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
+          "sections": [
+            {
+              "heading": "Commencez par les routines que vous répétez",
+              "paragraphs": [
+                "La meilleure tech maison n’est pas le gadget le plus bruyant du fil. C’est ce qui enlève une friction à quelque chose que vous faites déjà—thé, charge, ou un coin rangé.",
+                "Une bouilloire de voyage compacte, des écouteurs sans fil ou un mini frigo pour boissons et soins peuvent changer une pièce sans travaux."
+              ],
+              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
+            },
+            {
+              "heading": "Une tech discrète",
+              "paragraphs": [
+                "Choisissez des objets aux commandes claires, aux dimensions honnêtes et à un design que vous aimez voir au repos. Les formats portables voyagent bien entre cuisine, bureau et week-end.",
+                "Quand un produit fait bien une chose, il est plus facile à recommander—et à vivre avec."
+              ],
+              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
+            }
+          ],
+          "closing": "Explorez le catalogue Good Ideas : maison, tech, lifestyle et idées cadeaux pour le quotidien."
+        }
+      }
     },
     "cart": {
       "title": "Votre panier",
@@ -145,6 +178,10 @@
       "blog": {
         "title": "Blog | Good Ideas",
         "description": "Idées, guides et tendances maison, tech et lifestyle."
+      },
+      "blogPost": {
+        "titleTemplate": "{title} | Blog Good Ideas",
+        "descriptionTemplate": "{excerpt}"
       },
       "cart": {
         "title": "Panier | Good Ideas",

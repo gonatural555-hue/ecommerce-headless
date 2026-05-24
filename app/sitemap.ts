@@ -5,6 +5,7 @@ import { getGoodIdeasProducts } from "@/lib/good-ideas-products";
 import { BRAND_SEGMENTS } from "@/lib/routing/brands";
 import { getCategorySlugs } from "@/lib/categories";
 import { getMessages } from "@/lib/i18n/messages";
+import { getGoodIdeasBlogPosts } from "@/lib/good-ideas-blog";
 import { blogSections } from "@/lib/blog-sections";
 import { LEGAL_SLUGS, getSiteUrl } from "@/lib/seo";
 
@@ -71,6 +72,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     postSlugs.forEach((slug) => {
       urls.push({
         url: `${baseUrl}/${locale}/blog/${slug}`,
+        lastModified: now,
+      });
+    });
+  });
+
+  const giBlogPosts = getGoodIdeasBlogPosts(messages);
+  const giPostSlugs = Object.keys(giBlogPosts);
+  locales.forEach((locale) => {
+    urls.push({
+      url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/blog`,
+      lastModified: now,
+    });
+    giPostSlugs.forEach((slug) => {
+      urls.push({
+        url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/blog/${slug}`,
         lastModified: now,
       });
     });
