@@ -1,0 +1,25 @@
+{
+  "id": "",
+  "brand": "Good Ideas",
+  "targetCatalogFile": "Home",
+  "productObject": {
+    "id": "",
+    "title": "",
+    "slug": "",
+    "price": 0,
+    "category": "Home",
+    "description": "",
+    "shortDescription": "",
+    "longDescription": [],
+    "images": [],
+    "features": [],
+    "freeShipping": true,
+    "translations": {
+      "en": {},
+      "es": {},
+      "fr": {},
+      "it": {}
+    },
+    "variants": []
+  }
+}
