@@ -128,6 +128,32 @@
             }
           ],
           "closing": "Descubre el hervidor de viaje portátil 450ML en el catálogo de hogar Good Ideas y monta un setup acorde a cómo vives."
+        },
+        "product-from-supplier-link": {
+          "title": "Selecciones premium de hogar que elevan tus espacios",
+          "excerpt": "Descubre un producto de hogar premium pensado para la vida moderna: líneas limpias, materiales de calidad y estilo que encaja en espacios reales.",
+          "subtitle": "Estilo hogareño contemporáneo con acabado premium.",
+          "intro": "Good Ideas reúne productos de hogar elegidos por calidad y uso diario. Esta selección premium apuesta por diseño cuidado y materiales que encajan en interiores modernos, sin convertirse en ruido visual.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
+          "sections": [
+            {
+              "heading": "Diseño que complementa cómo vives",
+              "paragraphs": [
+                "La estética moderna y limpia mejora el espacio y encaja con un estilo de vida contemporáneo. La simplicidad elegante y los acabados cuidados funcionan en ambientes minimalistas y en estancias más cargadas.",
+                "Es una pieza que destaca por lo correcto: presencia calmada, materiales honestos y una silueta que no compite con el resto de la habitación."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
+            },
+            {
+              "heading": "Versátil para un refresh o un cambio mayor",
+              "paragraphs": [
+                "Tanto si actualizas un rincón como si replanteas una estancia completa, esta pieza se adapta a distintos gustos y ambientes.",
+                "Varias direcciones de estilo permiten ubicarla en escritorio, salón o dormitorio sin que resulte fuera de lugar."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
+            }
+          ],
+          "closing": "Explora el catálogo de hogar Good Ideas: selecciones premium que equilibran calidad, accesibilidad y utilidad diaria."
         }
       }
     },

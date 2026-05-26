@@ -128,6 +128,32 @@
             }
           ],
           "closing": "See the Portable Travel Kettle 450ML in the Good Ideas home catalog and build a setup that fits how you actually live."
+        },
+        "product-from-supplier-link": {
+          "title": "Premium home picks that elevate everyday spaces",
+          "excerpt": "Discover a premium home product curated for modern living—clean lines, quality materials, and style that fits real rooms.",
+          "subtitle": "Contemporary home style with a premium feel.",
+          "intro": "Good Ideas brings home products chosen for quality and everyday use. This premium pick is selected for thoughtful design and materials that feel at home in modern interiors—not showroom clutter.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
+          "sections": [
+            {
+              "heading": "Design that complements how you live",
+              "paragraphs": [
+                "The sleek, modern look enhances your space while matching a contemporary lifestyle. Elegant simplicity and careful finishing work in minimalist setups and richer rooms alike.",
+                "It is the kind of piece you notice for the right reasons: calm presence, honest materials, and a profile that does not fight the rest of the room."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
+            },
+            {
+              "heading": "Versatile enough for a refresh or a new direction",
+              "paragraphs": [
+                "Whether you are updating one corner or planning a fuller room change, this home pick adapts to different tastes and interior moods.",
+                "Multiple style directions mean it can sit naturally in a desk nook, living area, or bedroom shelf without feeling out of place."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
+            }
+          ],
+          "closing": "Explore the Good Ideas home catalog for premium picks that balance quality, accessibility, and everyday usefulness."
         }
       }
     },

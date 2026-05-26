@@ -128,6 +128,32 @@
             }
           ],
           "closing": "Découvrez la bouilloire de voyage portable 450ML dans le catalogue maison Good Ideas et composez un setup adapté à votre quotidien."
+        },
+        "product-from-supplier-link": {
+          "title": "Sélections maison premium qui élèvent vos espaces",
+          "excerpt": "Découvrez un produit maison premium pensé pour la vie moderne : lignes épurées, matériaux de qualité et style adapté aux vraies pièces.",
+          "subtitle": "Style maison contemporain avec finition premium.",
+          "intro": "Good Ideas propose des produits maison choisis pour la qualité et l’usage quotidien. Cette sélection premium mise sur un design réfléchi et des matériaux qui s’intègrent aux intérieurs modernes, sans encombrer l’espace.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
+          "sections": [
+            {
+              "heading": "Un design qui accompagne votre quotidien",
+              "paragraphs": [
+                "L’esthétique moderne et épurée valorise l’espace tout en s’accordant à un mode de vie contemporain. Simplicité élégante et finitions soignées pour intérieurs minimalistes ou plus riches.",
+                "Une pièce remarquable pour les bonnes raisons : présence calme, matériaux honnêtes et silhouette qui n’entre pas en conflit avec la pièce."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
+            },
+            {
+              "heading": "Assez versatile pour un refresh ou un nouveau cap",
+              "paragraphs": [
+                "Que vous mettiez à jour un coin ou repensiez une pièce entière, cette sélection s’adapte à différents goûts et ambiances.",
+                "Plusieurs directions de style permettent de la placer au bureau, au salon ou en chambre sans déparement."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
+            }
+          ],
+          "closing": "Explorez le catalogue maison Good Ideas : des sélections premium qui équilibrent qualité, accessibilité et utilité quotidienne."
         }
       }
     },

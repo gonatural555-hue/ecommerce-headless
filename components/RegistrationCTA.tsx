@@ -7,6 +7,7 @@ import { useUser } from "@/context/UserContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslations, useLocale } from "@/components/i18n/LocaleProvider";
 import { shouldShowNewsletterCta } from "@/lib/newsletter-cta";
+import { isGoodIdeasPath } from "@/lib/routing/brands";
 
 const SESSION_STORAGE_MINIMIZED = "gn-registration-cta-minimized";
 const SESSION_STORAGE_SUBSCRIBED = "gn-newsletter-cta-subscribed";
@@ -226,6 +227,70 @@ export default function RegistrationCTA() {
           : errorCode === "generic"
             ? t("registrationCTA.errorGeneric")
             : null;
+  const isGoodIdeas = pathname ? isGoodIdeasPath(pathname) : false;
+  const palette = isGoodIdeas
+    ? {
+        minimizedButton:
+          "font-inter w-full rounded-full border border-white/[0.08] bg-[#151B24] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E8ECF1] shadow-[0_10px_36px_-12px_rgba(0,0,0,0.52),0_2px_8px_rgba(0,0,0,0.22)] transition hover:border-[rgba(59,130,246,0.45)] hover:bg-[#1B2432] hover:text-white md:w-auto md:px-4 md:text-xs",
+        panel:
+          "rounded-2xl border border-white/[0.08] bg-[#151B24] p-4 shadow-[0_18px_48px_-20px_rgba(0,0,0,0.6),0_6px_20px_rgba(0,0,0,0.28)] sm:p-5",
+        title:
+          "font-display text-balance text-lg font-medium leading-snug tracking-[-0.02em] text-[#E8ECF1] md:text-xl",
+        subtitle:
+          "font-inter mt-1.5 text-sm leading-relaxed text-[rgba(232,236,241,0.78)]",
+        secondaryText:
+          "font-inter mt-1 text-xs leading-relaxed text-[rgba(232,236,241,0.55)]",
+        iconButton:
+          "shrink-0 rounded-lg p-1 text-[rgba(232,236,241,0.55)] transition hover:bg-white/[0.06] hover:text-[#E8ECF1]",
+        successText:
+          "font-inter text-sm font-medium leading-relaxed text-[#E8ECF1]",
+        primaryAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(59,130,246,0.28),inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:bg-[#2563EB] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#151B24]",
+        submitAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(59,130,246,0.28),inset_0_1px_0_rgba(255,255,255,0.12)] transition enabled:hover:bg-[#2563EB] enabled:focus:outline-none enabled:focus-visible:ring-2 enabled:focus-visible:ring-[#3B82F6]/50 enabled:focus-visible:ring-offset-2 enabled:focus-visible:ring-offset-[#151B24] disabled:cursor-not-allowed disabled:opacity-45",
+        secondaryAction:
+          "font-inter inline-flex min-h-[44px] items-center justify-center rounded-xl border border-white/[0.12] px-4 py-2.5 text-sm font-medium text-[#E8ECF1] transition hover:border-[rgba(59,130,246,0.38)] hover:bg-[rgba(59,130,246,0.1)]",
+        input:
+          "font-inter w-full rounded-xl border border-white/[0.12] bg-[#0B0F14] px-3 py-2.5 text-sm text-[#E8ECF1] placeholder:text-[rgba(232,236,241,0.4)] shadow-inner outline-none ring-[#3B82F6]/25 transition focus:border-[rgba(59,130,246,0.45)] focus:ring-2",
+        checkboxLabel:
+          "font-inter flex cursor-pointer gap-2.5 text-left text-xs leading-snug text-[rgba(232,236,241,0.82)]",
+        checkbox:
+          "mt-0.5 h-4 w-4 shrink-0 rounded border-white/[0.22] bg-[#0B0F14] text-[#3B82F6] focus:ring-[#3B82F6]/30",
+        privacyLink:
+          "font-medium text-[#3B82F6] underline decoration-[rgba(59,130,246,0.35)] underline-offset-2 hover:decoration-[#3B82F6]",
+        error: "font-inter text-sm text-[#FCA5A5]",
+      }
+    : {
+        minimizedButton:
+          "font-inter w-full rounded-full border border-[rgba(110,31,40,0.35)] bg-[#F4EBDD] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] shadow-[0_10px_36px_-12px_rgba(46,74,54,0.35),0_2px_8px_rgba(46,74,54,0.08)] transition hover:border-[#6E1F28]/55 hover:shadow-[0_14px_40px_-10px_rgba(46,74,54,0.28)] md:w-auto md:px-4 md:text-xs",
+        panel:
+          "rounded-2xl border border-[rgba(46,74,54,0.12)] bg-[#F4EBDD] p-4 shadow-[0_18px_48px_-20px_rgba(46,74,54,0.35),0_6px_20px_rgba(46,74,54,0.12)] sm:p-5",
+        title:
+          "font-display text-balance text-lg font-medium leading-snug tracking-[-0.02em] text-[#2E4A36] md:text-xl",
+        subtitle:
+          "font-inter mt-1.5 text-sm leading-relaxed text-[rgba(46,74,54,0.78)]",
+        secondaryText:
+          "font-inter mt-1 text-xs leading-relaxed text-[rgba(46,74,54,0.62)]",
+        iconButton:
+          "shrink-0 rounded-lg p-1 text-[rgba(46,74,54,0.55)] transition hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36]",
+        successText:
+          "font-inter text-sm font-medium leading-relaxed text-[#2E4A36]",
+        primaryAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#6E1F28] px-4 py-2.5 text-sm font-semibold text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:bg-[#5c1a22] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4A36]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]",
+        submitAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#6E1F28] px-4 py-2.5 text-sm font-semibold text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition enabled:hover:bg-[#5c1a22] enabled:focus:outline-none enabled:focus-visible:ring-2 enabled:focus-visible:ring-[#2E4A36]/30 enabled:focus-visible:ring-offset-2 enabled:focus-visible:ring-offset-[#F4EBDD] disabled:cursor-not-allowed disabled:opacity-45",
+        secondaryAction:
+          "font-inter inline-flex min-h-[44px] items-center justify-center rounded-xl border border-[rgba(46,74,54,0.2)] px-4 py-2.5 text-sm font-medium text-[#2E4A36] transition hover:border-[rgba(46,74,54,0.35)] hover:bg-[rgba(46,74,54,0.04)]",
+        input:
+          "font-inter w-full rounded-xl border border-[rgba(46,74,54,0.18)] bg-white/90 px-3 py-2.5 text-sm text-[#2E4A36] placeholder:text-[rgba(46,74,54,0.45)] shadow-inner outline-none ring-[#6E1F28]/25 transition focus:border-[rgba(110,31,40,0.45)] focus:ring-2",
+        checkboxLabel:
+          "font-inter flex cursor-pointer gap-2.5 text-left text-xs leading-snug text-[rgba(46,74,54,0.85)]",
+        checkbox:
+          "mt-0.5 h-4 w-4 shrink-0 rounded border-[rgba(46,74,54,0.35)] text-[#6E1F28] focus:ring-[#6E1F28]/30",
+        privacyLink:
+          "font-medium text-[#6E1F28] underline decoration-[rgba(110,31,40,0.35)] underline-offset-2 hover:decoration-[#6E1F28]",
+        error: "font-inter text-sm text-[#6E1F28]",
+      };
 
   if (isMinimized) {
     return (
@@ -233,7 +298,7 @@ export default function RegistrationCTA() {
         <button
           type="button"
           onClick={handleExpand}
-          className="font-inter w-full rounded-full border border-[rgba(110,31,40,0.35)] bg-[#F4EBDD] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] shadow-[0_10px_36px_-12px_rgba(46,74,54,0.35),0_2px_8px_rgba(46,74,54,0.08)] transition hover:border-[#6E1F28]/55 hover:shadow-[0_14px_40px_-10px_rgba(46,74,54,0.28)] md:w-auto md:px-4 md:text-xs"
+          className={palette.minimizedButton}
           aria-label={t("registrationCTA.expand")}
         >
           {t("registrationCTA.minimizedLabel")}
@@ -248,23 +313,23 @@ export default function RegistrationCTA() {
       data-gn-newsletter-cta
       className="fixed bottom-4 left-1/2 z-[45] w-[min(100%-1rem,calc(100vw-1rem))] max-w-md -translate-x-1/2 animate-fade-in pb-[max(0.75rem,env(safe-area-inset-bottom))] md:left-4 md:translate-x-0"
     >
-      <div className="rounded-2xl border border-[rgba(46,74,54,0.12)] bg-[#F4EBDD] p-4 shadow-[0_18px_48px_-20px_rgba(46,74,54,0.35),0_6px_20px_rgba(46,74,54,0.12)] sm:p-5">
+      <div className={palette.panel}>
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <h3 className="font-display text-balance text-lg font-medium leading-snug tracking-[-0.02em] text-[#2E4A36] md:text-xl">
+            <h3 className={palette.title}>
               {t("registrationCTA.title")}
             </h3>
-            <p className="font-inter mt-1.5 text-sm leading-relaxed text-[rgba(46,74,54,0.78)]">
+            <p className={palette.subtitle}>
               {t("registrationCTA.subtitle")}
             </p>
-            <p className="font-inter mt-1 text-xs leading-relaxed text-[rgba(46,74,54,0.62)]">
+            <p className={palette.secondaryText}>
               {t("registrationCTA.secondaryText")}
             </p>
           </div>
           <button
             type="button"
             onClick={handleMinimize}
-            className="shrink-0 rounded-lg p-1 text-[rgba(46,74,54,0.55)] transition hover:bg-[rgba(46,74,54,0.06)] hover:text-[#2E4A36]"
+            className={palette.iconButton}
             aria-label={t("registrationCTA.minimize")}
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -280,21 +345,21 @@ export default function RegistrationCTA() {
 
         {submitState === "success" ? (
           <div className="space-y-3">
-            <p className="font-inter text-sm font-medium leading-relaxed text-[#2E4A36]">
+            <p className={palette.successText}>
               {t("registrationCTA.successMessage")}
             </p>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={handleHideAfterSuccess}
-                className="font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#6E1F28] px-4 py-2.5 text-sm font-semibold text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:bg-[#5c1a22] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4A36]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD]"
+                className={palette.primaryAction}
               >
                 {t("registrationCTA.hideAfterSuccess")}
               </button>
               <button
                 type="button"
                 onClick={handleMinimize}
-                className="font-inter inline-flex min-h-[44px] items-center justify-center rounded-xl border border-[rgba(46,74,54,0.2)] px-4 py-2.5 text-sm font-medium text-[#2E4A36] transition hover:border-[rgba(46,74,54,0.35)] hover:bg-[rgba(46,74,54,0.04)]"
+                className={palette.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>
@@ -327,12 +392,12 @@ export default function RegistrationCTA() {
                   newsletterInputFocusedRef.current = false;
                 }}
                 placeholder={t("registrationCTA.emailPlaceholder")}
-                className="font-inter w-full rounded-xl border border-[rgba(46,74,54,0.18)] bg-white/90 px-3 py-2.5 text-sm text-[#2E4A36] placeholder:text-[rgba(46,74,54,0.45)] shadow-inner outline-none ring-[#6E1F28]/25 transition focus:border-[rgba(110,31,40,0.45)] focus:ring-2"
+                className={palette.input}
                 required
               />
             </div>
 
-            <label className="font-inter flex cursor-pointer gap-2.5 text-left text-xs leading-snug text-[rgba(46,74,54,0.85)]">
+            <label className={palette.checkboxLabel}>
               <input
                 type="checkbox"
                 checked={marketingAccepted}
@@ -343,13 +408,13 @@ export default function RegistrationCTA() {
                     setErrorCode(null);
                   }
                 }}
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-[rgba(46,74,54,0.35)] text-[#6E1F28] focus:ring-[#6E1F28]/30"
+                className={palette.checkbox}
               />
               <span>
                 {t("registrationCTA.marketingLabel")}{" "}
                 <Link
                   href={privacyHref}
-                  className="font-medium text-[#6E1F28] underline decoration-[rgba(110,31,40,0.35)] underline-offset-2 hover:decoration-[#6E1F28]"
+                  className={palette.privacyLink}
                 >
                   {t("registrationCTA.privacyLink")}
                 </Link>
@@ -357,7 +422,7 @@ export default function RegistrationCTA() {
             </label>
 
             {errorMessage ? (
-              <p className="font-inter text-sm text-[#6E1F28]" role="alert">
+              <p className={palette.error} role="alert">
                 {errorMessage}
               </p>
             ) : null}
@@ -368,7 +433,7 @@ export default function RegistrationCTA() {
                 disabled={
                   !marketingAccepted || submitState === "loading" || !email.trim()
                 }
-                className="font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#6E1F28] px-4 py-2.5 text-sm font-semibold text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition enabled:hover:bg-[#5c1a22] enabled:focus:outline-none enabled:focus-visible:ring-2 enabled:focus-visible:ring-[#2E4A36]/30 enabled:focus-visible:ring-offset-2 enabled:focus-visible:ring-offset-[#F4EBDD] disabled:cursor-not-allowed disabled:opacity-45"
+                className={palette.submitAction}
               >
                 {submitState === "loading"
                   ? t("registrationCTA.submitLoading")
@@ -377,7 +442,7 @@ export default function RegistrationCTA() {
               <button
                 type="button"
                 onClick={handleMinimize}
-                className="font-inter inline-flex min-h-[44px] items-center justify-center rounded-xl border border-[rgba(46,74,54,0.2)] px-4 py-2.5 text-sm font-medium text-[#2E4A36] transition hover:border-[rgba(46,74,54,0.35)] hover:bg-[rgba(46,74,54,0.04)]"
+                className={palette.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>

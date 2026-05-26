@@ -128,6 +128,32 @@
             }
           ],
           "closing": "Scopri il bollitore da viaggio portatile 450ML nel catalogo casa Good Ideas e crea un setup adatto a come vivi."
+        },
+        "product-from-supplier-link": {
+          "title": "Scelte premium per la casa che elevano gli spazi",
+          "excerpt": "Scopri un prodotto per la casa premium pensato per la vita moderna: linee pulite, materiali di qualità e stile adatto a stanze reali.",
+          "subtitle": "Stile casa contemporaneo con finitura premium.",
+          "intro": "Good Ideas seleziona prodotti per la casa scelti per qualità e uso quotidiano. Questa scelta premium punta su design curato e materiali che si integrano negli interni moderni, senza creare disordine visivo.",
+          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
+          "sections": [
+            {
+              "heading": "Design che completa il tuo modo di vivere",
+              "paragraphs": [
+                "L’estetica moderna e pulita valorizza lo spazio e si adatta a uno stile di vita contemporaneo. Semplicità elegante e finiture curate per ambienti minimalisti o più ricchi.",
+                "Un pezzo che si nota per le ragioni giuste: presenza calma, materiali onesti e profilo che non compete con il resto della stanza."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
+            },
+            {
+              "heading": "Versatile per un refresh o una nuova direzione",
+              "paragraphs": [
+                "Che tu aggiorni un angolo o ripensi un’intera stanza, questa scelta si adatta a gusti e atmosfere diverse.",
+                "Più direzioni di stile permettono di collocarla su scrivania, soggiorno o camera senza risultare fuori posto."
+              ],
+              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
+            }
+          ],
+          "closing": "Esplora il catalogo casa Good Ideas: scelte premium che bilanciano qualità, accessibilità e utilità quotidiana."
         }
       }
     },
