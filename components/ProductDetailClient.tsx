@@ -310,14 +310,16 @@ export default function ProductDetailClient({
   return (
     <>
       {/* Mobile: galería + mismo panel editorial que desktop */}
-      <section className="mx-auto grid max-w-full gap-8 pb-24 pt-0 lg:hidden md:gap-10">
-        <ProductGallery
-          images={pdpGalleryImages}
-          title={product.title}
-          noImageLabel={noImageLabel}
-          surface={surface}
-          aspectMode={galleryAspect}
-        />
+      <section className="mx-auto grid max-w-full gap-5 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-0 max-lg:-mx-1 max-lg:gap-6 sm:max-lg:-mx-0 lg:hidden">
+        <div className="min-w-0 w-[calc(100%+2rem)] max-lg:-mx-4 sm:max-lg:w-full sm:max-lg:mx-0">
+          <ProductGallery
+            images={pdpGalleryImages}
+            title={product.title}
+            noImageLabel={noImageLabel}
+            surface={surface}
+            aspectMode={galleryAspect}
+          />
+        </div>
         <ProductInfoPanel
           productId={product.id}
           surface={surface}

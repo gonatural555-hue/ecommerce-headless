@@ -124,7 +124,7 @@ export default async function GoodIdeasProductPage({ params }: Props) {
 
   return (
     <main className={`overflow-x-hidden bg-[#0B0F14] text-[#E8ECF1] ${GI_HERO_TOP_PAD}`}>
-      <div className="mx-auto max-w-7xl px-6 pb-28 pt-6 sm:px-10 md:pb-32 lg:px-16">
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-5 sm:px-10 sm:pt-6 md:pb-32 lg:px-16 lg:pb-28">
         <Link
           href={goodIdeasProductsPath(locale)}
           className="mb-8 inline-flex font-inter text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(232,236,241,0.55)] transition hover:text-[#3B82F6]"

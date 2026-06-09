@@ -10,12 +10,8 @@ import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { buildMetadata, formatTemplate } from "@/lib/seo";
-import EditorialPostCards from "@/components/editorial/EditorialPostCards";
 import CategoryEditorialHero from "@/components/category/CategoryEditorialHero";
-import {
-  pickPostsForCategory,
-  pickPrimaryPostForCategory,
-} from "@/lib/internal-links";
+import { pickPrimaryPostForCategory } from "@/lib/internal-links";
 import { resolveCategoryHeroKind } from "@/lib/category-hero-theme";
 
 type Props = {
@@ -260,20 +256,6 @@ export default async function CategoryPage({ params }: Props) {
     : "";
   const primaryStoryTitle = primaryStory?.post?.title || "";
 
-  const fieldStories = pickPostsForCategory(slug, messages.blog.posts, 3)
-    .map(([postSlug, post]) => ({
-      href: `/${locale}/blog/${postSlug}`,
-      title: post.title,
-      image:
-        post.heroImage ||
-        post.sections?.[0]?.image ||
-        "/assets/images/blog/blog-hero.webp",
-    }))
-    .filter(
-      (post): post is { href: string; title: string; image: string } =>
-        Boolean(post.title)
-    );
-
   return (
     <main className="bg-warm-sand text-dark-base">
       <CategoryEditorialHero
@@ -351,11 +333,6 @@ export default async function CategoryPage({ params }: Props) {
           </section>
         )}
       </div>
-
-      <EditorialPostCards
-        title={t("categoriesPage.fieldStoriesTitle")}
-        posts={fieldStories}
-      />
 
       {/* Final soft CTA */}
       <section className="py-16 md:py-20">

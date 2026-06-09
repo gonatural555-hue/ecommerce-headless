@@ -302,8 +302,8 @@ export default async function ProductPage({ params }: Props) {
       <div
         className={
           isCyclingTraining001
-            ? "mx-auto max-w-7xl bg-transparent px-6 pb-3 pt-10 sm:px-10 sm:pt-12 md:pt-14 lg:px-16 lg:pb-2 lg:pt-16"
-            : "mx-auto max-w-7xl bg-transparent px-6 pb-24 pt-12 sm:px-10 sm:pt-14 md:pb-28 md:pt-16 lg:px-16 lg:pt-[4.5rem]"
+            ? "mx-auto max-w-7xl bg-transparent px-4 pb-3 pt-8 sm:px-10 sm:pt-12 md:pt-14 lg:px-16 lg:pb-2 lg:pt-16"
+            : "mx-auto max-w-7xl bg-transparent px-4 pb-14 pt-8 sm:px-10 sm:pt-14 md:pb-28 md:pt-16 lg:px-16 lg:pb-28 lg:pt-[4.5rem]"
         }
       >
         <ProductDetailClient
@@ -332,7 +332,7 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {isCyclingTraining001 && (
-        <div className="mx-auto max-w-7xl px-6 pb-10 pt-1 sm:px-10 lg:px-16 lg:pb-12 lg:pt-0">
+        <div className="mx-auto max-w-7xl px-4 pb-8 pt-2 sm:px-10 lg:px-16 lg:pb-12 lg:pt-0">
           <div className="grid lg:grid-cols-[5fr_2.5fr] lg:items-start lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20">
             <div className="min-w-0">
               <div className="overflow-hidden rounded-2xl border border-neutral-200/90 bg-neutral-50/80 shadow-sm ring-1 ring-neutral-200/60">

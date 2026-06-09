@@ -147,29 +147,6 @@ export function pickPostsForProduct(
   return entries.slice(0, limit);
 }
 
-export function pickPostsForCategory(
-  categorySlug: string,
-  postsBySlug: Record<string, BlogPost>,
-  limit = 3
-) {
-  const slugs = CATEGORY_TO_BLOG_SLUGS[categorySlug] || [];
-  const selected = slugs
-    .map((slug) => [slug, postsBySlug[slug]] as const)
-    .filter(([, post]) => Boolean(post));
-
-  if (selected.length >= limit) {
-    return selected.slice(0, limit);
-  }
-
-  const entries = Object.entries(postsBySlug);
-  const combined = [...selected, ...entries];
-  const unique = combined.filter(
-    ([slug], index, all) => all.findIndex(([s]) => s === slug) === index
-  );
-
-  return unique.slice(0, limit);
-}
-
 export function pickPrimaryPostForCategory(
   categorySlug: string,
   postsBySlug: Record<string, BlogPost>

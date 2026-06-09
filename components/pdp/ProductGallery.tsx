@@ -87,22 +87,25 @@ export default function ProductGallery({
     else if (d >= threshold) go(safeIndex - 1);
   };
 
-  /** Contenedor principal: móvil más compacto; desktop más presencia (rounded-2xl, profundidad suave). */
+  /** Contenedor principal: móvil fondo oscuro (sin bandas blancas); desktop marco editorial. */
   const stageShell = light
-    ? "rounded-xl border border-neutral-200/85 bg-neutral-100/95 shadow-[0_10px_32px_-18px_rgba(0,0,0,0.12)] ring-1 ring-black/[0.04] lg:rounded-2xl lg:border-neutral-200/70 lg:shadow-[0_4px_28px_-12px_rgba(0,0,0,0.1)]"
-    : "rounded-xl border border-white/[0.1] bg-dark-surface/72 shadow-[0_14px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.07] lg:rounded-2xl lg:border-white/[0.12] lg:bg-[linear-gradient(168deg,rgba(255,255,255,0.07)_0%,rgba(18,24,22,0.96)_42%,#0b0f0e_100%)] lg:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_56px_-30px_rgba(0,0,0,0.58)] lg:ring-white/[0.09]";
+    ? "rounded-xl border border-neutral-800/70 bg-black shadow-[0_10px_32px_-18px_rgba(0,0,0,0.28)] ring-1 ring-black/[0.2] max-lg:border-neutral-800/80 lg:rounded-2xl lg:border-neutral-200/70 lg:bg-neutral-100/95 lg:shadow-[0_4px_28px_-12px_rgba(0,0,0,0.1)] lg:ring-black/[0.04]"
+    : "rounded-xl border border-white/[0.1] bg-[#0a0a0a] shadow-[0_14px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.07] max-lg:bg-black lg:rounded-2xl lg:border-white/[0.12] lg:bg-dark-surface/72 lg:bg-[linear-gradient(168deg,rgba(255,255,255,0.07)_0%,rgba(18,24,22,0.96)_42%,#0b0f0e_100%)] lg:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_56px_-30px_rgba(0,0,0,0.58)] lg:ring-white/[0.09]";
 
-  /** Móvil: superficie clara + cuadrado → marco más compacto para no tapar título/CTA. */
+  /** Móvil: ancho completo del contenedor; desktop sin tope artificial. */
   const squareMobileWidthCap =
     light && aspectMode === "square"
-      ? "mx-auto max-w-[min(100%,min(92vw,300px))] sm:max-w-[min(100%,360px)] md:max-w-[min(100%,420px)] lg:mx-0 lg:max-w-none"
-      : "max-w-[min(100%,560px)]";
+      ? "w-full max-w-none lg:max-w-none"
+      : "w-full max-w-none lg:max-w-[min(100%,560px)]";
 
-  /** Móvil: tope opcional; desktop: sin tope artificial — crece con la columna del grid */
+  /**
+   * Móvil: sin aspect-ratio fijo — la imagen define altura (sin bandas laterales).
+   * Desktop: marco square / cinematic estable.
+   */
   const stageFrameClass =
     aspectMode === "cinematic"
-      ? `relative w-full max-w-[min(100%,560px)] overflow-hidden ${stageShell} aspect-[16/10] max-h-[min(380px,62vh)] sm:max-h-[min(420px,68vh)] lg:max-w-none lg:max-h-[min(520px,82vh)] xl:max-h-[min(560px,85vh)]`
-      : `relative w-full ${squareMobileWidthCap} overflow-hidden ${stageShell} aspect-square lg:max-w-none`;
+      ? `relative w-full max-w-none overflow-hidden ${stageShell} max-lg:aspect-auto max-lg:max-h-none aspect-[16/10] max-h-[min(380px,62vh)] sm:max-h-[min(420px,68vh)] lg:max-w-[min(100%,560px)] lg:max-h-[min(520px,82vh)] xl:max-h-[min(560px,85vh)]`
+      : `relative w-full ${squareMobileWidthCap} overflow-hidden ${stageShell} max-lg:aspect-auto aspect-square lg:max-w-none`;
 
   const imgObject =
     imageFit === "contain"
@@ -129,12 +132,12 @@ export default function ProductGallery({
   }
 
   return (
-    <div className="flex w-full max-w-full flex-col gap-4 lg:w-full lg:flex-row lg:items-start lg:gap-7 xl:gap-8">
+    <div className="flex w-full max-w-full flex-col gap-3 sm:gap-4 lg:w-full lg:flex-row lg:items-start lg:gap-7 xl:gap-8">
       {/* Miniaturas: debajo en móvil; desktop: columna más ancha + hit area claro */}
       {list.length > 1 ? (
         <div
           className={
-            "order-2 flex shrink-0 gap-2 overflow-x-auto overflow-y-hidden pb-1 scrollbar-rail-premium lg:order-1 lg:w-[4.75rem] lg:flex-col lg:gap-3 lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0 " +
+            "order-2 -mx-1 flex shrink-0 gap-2.5 overflow-x-auto overflow-y-hidden px-1 pb-1 scrollbar-rail-premium sm:mx-0 sm:gap-3 lg:order-1 lg:mx-0 lg:w-[4.75rem] lg:flex-col lg:gap-3 lg:overflow-y-auto lg:overflow-x-hidden lg:px-0 lg:pb-0 " +
             "lg:max-h-[min(720px,88vh)] xl:w-20"
           }
           aria-label="Miniaturas"
@@ -147,7 +150,7 @@ export default function ProductGallery({
               aria-label={`${title} — ${i + 1} / ${list.length}`}
               aria-current={i === safeIndex ? "true" : undefined}
               className={[
-                "relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border transition-all duration-200 ease-out",
+                "relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-lg border transition-all duration-200 ease-out sm:h-20 sm:w-20",
                 "lg:h-[4.75rem] lg:w-[4.75rem] lg:rounded-xl xl:h-20 xl:w-20",
                 i === safeIndex
                   ? "border-accent-gold ring-2 ring-accent-gold/45 scale-[1.03] z-[1] lg:ring-[3px] lg:ring-accent-gold/50 lg:shadow-[0_0_28px_-6px_rgba(212,175,55,0.45)]"
@@ -180,23 +183,23 @@ export default function ProductGallery({
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
         >
-          {/* Fondo + viñeta suave (desktop: más profundidad sin sombras baratas) */}
+          {/* Fondo + viñeta: móvil plano negro; desktop editorial */}
           <div
             className={
               light
-                ? "pointer-events-none absolute inset-0 bg-neutral-100"
-                : "pointer-events-none absolute inset-0 bg-dark-surface/35"
+                ? "pointer-events-none absolute inset-0 bg-black max-lg:bg-black lg:bg-neutral-100"
+                : "pointer-events-none absolute inset-0 bg-black max-lg:bg-black lg:bg-dark-surface/35"
             }
             aria-hidden
           />
           {!light ? (
             <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_85%_70%_at_50%_42%,rgba(255,255,255,0.07)_0%,transparent_58%)] opacity-90 lg:opacity-100"
+              className="pointer-events-none absolute inset-0 z-[1] hidden bg-[radial-gradient(ellipse_85%_70%_at_50%_42%,rgba(255,255,255,0.07)_0%,transparent_58%)] opacity-90 lg:block lg:opacity-100"
               aria-hidden
             />
           ) : (
             <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_80%_65%_at_50%_45%,rgba(255,255,255,0.35)_0%,transparent_55%)] opacity-70"
+              className="pointer-events-none absolute inset-0 z-[1] hidden bg-[radial-gradient(ellipse_80%_65%_at_50%_45%,rgba(255,255,255,0.35)_0%,transparent_55%)] opacity-70 lg:block"
               aria-hidden
             />
           )}
@@ -211,23 +214,45 @@ export default function ProductGallery({
               {noImageLabel}
             </div>
           ) : (
-            <div
-              key={`${currentSrc}-${safeIndex}`}
-              className="animate-fade-in absolute inset-0 z-[2] p-1 lg:p-1.5 xl:p-2"
-            >
-              <Image
-                src={currentSrc}
-                alt={`${title} — ${safeIndex + 1}`}
-                fill
-                priority={safeIndex === 0}
-                loading={safeIndex === 0 ? "eager" : "lazy"}
-                placeholder="blur"
-                blurDataURL={PRODUCT_BLUR_DATA_URL}
-                sizes="(max-width: 1023px) 100vw, min(960px, 58vw)"
-                onError={() => setMainError(true)}
-                className={`${imgObject} ${imgMotion}`}
-              />
-            </div>
+            <>
+              {/* Móvil: ancho completo, altura intrínseca — imagen completa sin bandas */}
+              <div
+                key={`${currentSrc}-${safeIndex}-mobile`}
+                className="animate-fade-in relative z-[2] w-full lg:hidden"
+              >
+                <Image
+                  src={currentSrc}
+                  alt={`${title} — ${safeIndex + 1}`}
+                  width={1400}
+                  height={1400}
+                  priority={safeIndex === 0}
+                  loading={safeIndex === 0 ? "eager" : "lazy"}
+                  placeholder="blur"
+                  blurDataURL={PRODUCT_BLUR_DATA_URL}
+                  sizes="100vw"
+                  onError={() => setMainError(true)}
+                  className="block h-auto w-full object-contain object-center"
+                />
+              </div>
+              {/* Desktop: marco fijo con fill */}
+              <div
+                key={`${currentSrc}-${safeIndex}-desktop`}
+                className="animate-fade-in absolute inset-0 z-[2] hidden p-1.5 lg:block xl:p-2"
+              >
+                <Image
+                  src={currentSrc}
+                  alt={`${title} — ${safeIndex + 1}`}
+                  fill
+                  priority={safeIndex === 0}
+                  loading={safeIndex === 0 ? "eager" : "lazy"}
+                  placeholder="blur"
+                  blurDataURL={PRODUCT_BLUR_DATA_URL}
+                  sizes="min(960px, 58vw)"
+                  onError={() => setMainError(true)}
+                  className={`${imgObject} ${imgMotion}`}
+                />
+              </div>
+            </>
           )}
 
           <button

@@ -11,6 +11,7 @@ export type TrustBadgeCopy = {
 type Props = {
   copy: TrustBadgeCopy;
   surface?: UISurface;
+  className?: string;
 };
 
 const iconClass = "mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-gold/85";
@@ -63,18 +64,23 @@ function RefreshIcon() {
 /**
  * Líneas de confianza bajo el CTA: envíos, devoluciones, pago seguro — estilo editorial mínimo.
  */
-export default function TrustBadges({ copy, surface = "dark" }: Props) {
+export default function TrustBadges({
+  copy,
+  surface = "dark",
+  className = "",
+}: Props) {
   const L = surface === "light";
   const text = L ? "text-neutral-600" : "text-text-muted/90";
-  const row = `flex gap-3 text-[13px] leading-snug ${text}`;
+  const row = `flex gap-3 text-[12px] leading-snug sm:text-[13px] ${text}`;
 
   return (
     <div
-      className={
+      className={[
         L
-          ? "space-y-3 border-t border-neutral-200/90 pt-6"
-          : "space-y-3 border-t border-white/[0.08] pt-6"
-      }
+          ? "space-y-2.5 border-t border-neutral-200/90 pt-6 max-lg:space-y-2 sm:space-y-3"
+          : "space-y-2.5 border-t border-white/[0.08] pt-6 max-lg:space-y-2 sm:space-y-3",
+        className,
+      ].join(" ")}
     >
       <p className={row}>
         <TruckIcon />

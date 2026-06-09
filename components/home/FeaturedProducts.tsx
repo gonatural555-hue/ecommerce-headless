@@ -19,7 +19,7 @@ type Props = {
 };
 
 const FEATURED_IDS = [
-  "gn-ski-snow-001",
+  "gn-ski-snow-001-sk7a1",
   "gn-cycling-011",
   "gn-cycling-eq-001",
   "gn-cycling-jacket-003",

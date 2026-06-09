@@ -114,7 +114,13 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-fishing-eq-007": ["fishing-equipment"], // KastKing Sharky III Carrete Giratorio Spinning
   "gn-fishing-eq-008": ["fishing-equipment"], // BEARKING BKT Carrete Giratorio Spinning
   // Mountain & Snow - asignados a subcategorías
-  "gn-ski-snow-001": ["ski-snowboard"], // Gafas de Esquí & Snowboard KAPVOE Fotocromáticas Magnéticas UV400
+  "gn-ski-snow-001-sk7a1": ["ski-snowboard"], // KAPVOE SK7-A1 Glacier
+  "gn-ski-snow-001-sk7b2": ["ski-snowboard"], // KAPVOE SK7-B2 Solar Gold
+  "gn-ski-snow-001-sk7c3": ["ski-snowboard"], // KAPVOE SK7-C3 Storm Chrome
+  "gn-ski-snow-001-sk7d4": ["ski-snowboard"], // KAPVOE SK7-D4 Midnight IR
+  "gn-ski-snow-001-sk7e5": ["ski-snowboard"], // KAPVOE SK7-E5 Aurora Rose
+  "gn-ski-snow-001-sk7f6": ["ski-snowboard"], // KAPVOE SK7-F6 Volt Amber
+  "gn-ski-snow-001-sk7g7": ["ski-snowboard"], // KAPVOE SK7-G7 Carbon Edge
   "gn-ski-snow-002": ["ski-snowboard"], // Parka Técnica de Invierno con Capucha – Outdoor Military Anorak
   "gn-ski-snow-003": ["ski-snowboard"], // Chaqueta Impermeable Unisex JNLN – Cortaviento Térmica
   "gn-ski-snow-004": ["ski-snowboard"], // Chaqueta Polar con Capucha – Lana Sintética

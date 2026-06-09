@@ -9,7 +9,7 @@ import { HOME_CATEGORY_IMAGE } from "@/lib/home-category-visuals";
 
 type Translator = ReturnType<typeof createTranslator>;
 
-const HERO_PRODUCT_MAIN_ID = "gn-ski-snow-001";
+const HERO_PRODUCT_MAIN_ID = "gn-ski-snow-001-sk7a1";
 const HERO_PRODUCT_STRIP_IDS = ["gn-water-007", "gn-outdoor-009", "gn-cycling-eq-001"] as const;
 const FALLBACK_IMG = "/assets/images/hero/hero.webp";
 

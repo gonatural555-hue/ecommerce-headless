@@ -12,6 +12,7 @@ export type ProductVariants = {
 };
 
 import type { Locale } from "@/lib/i18n/config";
+import { KAPVOE_SKI_GOGGLE_PRODUCTS } from "@/lib/kapvoe-ski-goggle-products";
 
 export type ProductTranslation = {
   title?: string;
@@ -324,84 +325,8 @@ const PRODUCTS: Product[] = [
       ],
     },
   },
-  // ===== SKI & SNOWBOARD =====
-  {
-    id: "gn-ski-snow-001",
-    title: "KAPVOE Gafas de Esquí Fotocromáticas para Outdoor",
-    price: 69.90,
-    category: "Ski & Snow Equipment",
-    images: [
-      "/assets/images/products/gn-ski-snow-001/model-1/image.webp"
-    ],
-    description:
-      "Gafas de esquí KAPVOE con lentes fotocromáticas, protección UV400 y diseño antivaho, ideales para esquí y snowboard en condiciones de luz variables.",
-    features: [
-      "Lentes fotocromáticas",
-      "Protección UV400",
-      "Tratamiento antivaho",
-      "Diseño outdoor",
-    ],
-    translations: {
-      en: {
-        title: "KAPVOE Photochromic Ski Goggles for Outdoor",
-        description:
-          "KAPVOE ski goggles with photochromic lenses, UV400 protection, and anti-fog design, ideal for skiing and snowboarding in changing light.",
-        features: [
-          "Photochromic lenses",
-          "UV400 protection",
-          "Anti-fog treatment",
-          "Outdoor-ready design",
-        ],
-      },
-      es: {
-        title: "KAPVOE Gafas de Esquí Fotocromáticas para Outdoor",
-        description:
-          "Gafas de esquí KAPVOE con lentes fotocromáticas, protección UV400 y diseño antivaho, ideales para esquí y snowboard en condiciones de luz variables.",
-        features: [
-          "Lentes fotocromáticas",
-          "Protección UV400",
-          "Tratamiento antivaho",
-          "Diseño outdoor",
-        ],
-      },
-      fr: {
-        title: "Masque de ski photochromique KAPVOE pour l’outdoor",
-        description:
-          "Masque de ski KAPVOE avec verres photochromiques, protection UV400 et traitement antibuée, idéal en conditions de lumière variables.",
-        features: [
-          "Verres photochromiques",
-          "Protection UV400",
-          "Traitement antibuée",
-          "Design outdoor",
-        ],
-      },
-      it: {
-        title: "Maschera da sci fotocromatica KAPVOE per outdoor",
-        description:
-          "Maschera da sci KAPVOE con lenti fotocromatiche, protezione UV400 e trattamento antiappannamento, ideale con luce variabile.",
-        features: [
-          "Lenti fotocromatiche",
-          "Protezione UV400",
-          "Trattamento antiappannamento",
-          "Design outdoor",
-        ],
-      },
-    },
-    variants: {
-      type: "model",
-      label: "Modelo",
-      default: "model-1",
-      options: [
-        { value: "model-1", label: "Modelo 1", priceModifier: 0 },
-        { value: "model-2", label: "Modelo 2", priceModifier: 0 },
-        { value: "model-3", label: "Modelo 3", priceModifier: 0 },
-        { value: "model-4", label: "Modelo 4", priceModifier: 0 },
-        { value: "model-5", label: "Modelo 5", priceModifier: 0 },
-        { value: "model-6", label: "Modelo 6", priceModifier: 0 },
-        { value: "model-7", label: "Modelo 7", priceModifier: 0 },
-      ],
-    },
-  },
+  // ===== SKI & SNOWBOARD — KAPVOE gafas (7 modelos SK7, ex gn-ski-snow-001) =====
+  ...KAPVOE_SKI_GOGGLE_PRODUCTS,
   {
     id: "gn-ski-snow-002",
     title: "Parka Militar con Capucha para Hombre – Outdoor & Nieve",

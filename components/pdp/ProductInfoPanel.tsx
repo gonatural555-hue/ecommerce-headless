@@ -155,8 +155,8 @@ export default function ProductInfoPanel({
     ) : null;
 
   return (
-    <div className="flex w-full min-w-0 max-w-xl flex-col gap-8 lg:max-w-[23rem] lg:gap-7 lg:sticky lg:top-28 xl:max-w-[24rem] xl:gap-8 2xl:max-w-[25rem]">
-      <header className="space-y-5 lg:space-y-4">
+    <div className="flex w-full min-w-0 max-w-xl flex-col gap-6 max-lg:gap-5 lg:max-w-[23rem] lg:gap-7 lg:sticky lg:top-28 xl:max-w-[24rem] xl:gap-8 2xl:max-w-[25rem]">
+      <header className="space-y-4 max-lg:space-y-3 lg:space-y-4">
         <h1
           className={
             L
@@ -169,7 +169,9 @@ export default function ProductInfoPanel({
 
         <div
           className={
-            L ? "space-y-2 border-t border-neutral-200/90 pt-5" : "space-y-2 border-t border-white/[0.08] pt-5"
+            L
+              ? "space-y-2 border-t border-neutral-200/90 pt-4 max-lg:border-t-0 max-lg:pt-1 lg:pt-5"
+              : "space-y-2 border-t border-white/[0.08] pt-4 max-lg:border-t-0 max-lg:pt-1 lg:pt-5"
           }
         >
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -238,7 +240,7 @@ export default function ProductInfoPanel({
         ) : null}
       </header>
 
-      <div className="flex flex-col gap-7 lg:gap-6">
+      <div className="flex flex-col gap-5 max-lg:gap-4 lg:gap-6">
         {colorDef ? (
           <ColorSwatchSelector
             variant={colorDef}
@@ -264,49 +266,55 @@ export default function ProductInfoPanel({
 
         {otherVariantsBlock}
 
-        <div className="space-y-4">
-          {cartBrand === "good-ideas" ? (
-            <GoodIdeasAddToCartButton
-              id={cartPayload.id}
-              title={cartPayload.title}
-              price={cartPayload.price}
-              image={cartPayload.image}
-              variantSelections={cartPayload.variantSelections}
-              label={ctaText}
-              disabled={ctaDisabled}
-              className={pillCta}
-              onAfterAdd={onAfterAdd}
-            />
-          ) : (
-            <AddToCartButton
-              id={cartPayload.id}
-              title={cartPayload.title}
-              price={cartPayload.price}
-              image={cartPayload.image}
-              variantSelections={cartPayload.variantSelections}
-              label={ctaText}
-              disabled={ctaDisabled}
-              surface={surface}
-              className={pillCta}
-              onAfterAdd={onAfterAdd}
-            />
-          )}
-          <TrustBadges copy={trustBadgeCopy} surface={surface} />
+        <div className="space-y-4 max-lg:space-y-0">
+          <div className="max-lg:hidden">
+            {cartBrand === "good-ideas" ? (
+              <GoodIdeasAddToCartButton
+                id={cartPayload.id}
+                title={cartPayload.title}
+                price={cartPayload.price}
+                image={cartPayload.image}
+                variantSelections={cartPayload.variantSelections}
+                label={ctaText}
+                disabled={ctaDisabled}
+                className={pillCta}
+                onAfterAdd={onAfterAdd}
+              />
+            ) : (
+              <AddToCartButton
+                id={cartPayload.id}
+                title={cartPayload.title}
+                price={cartPayload.price}
+                image={cartPayload.image}
+                variantSelections={cartPayload.variantSelections}
+                label={ctaText}
+                disabled={ctaDisabled}
+                surface={surface}
+                className={pillCta}
+                onAfterAdd={onAfterAdd}
+              />
+            )}
+          </div>
+          <TrustBadges
+            copy={trustBadgeCopy}
+            surface={surface}
+            className="max-lg:border-t-0 max-lg:pt-0 lg:border-t lg:pt-6"
+          />
         </div>
       </div>
 
       <div
         className={
           L
-            ? "border-t border-neutral-200/90 pt-7"
-            : "border-t border-white/[0.08] pt-7"
+            ? "border-t border-neutral-200/90 pt-5 max-lg:pt-4 lg:pt-7"
+            : "border-t border-white/[0.08] pt-5 max-lg:pt-4 lg:pt-7"
         }
       >
         <p
           className={
             L
-              ? "line-clamp-3 text-sm leading-relaxed text-neutral-600 lg:leading-[1.55]"
-              : "line-clamp-3 text-sm leading-relaxed text-text-muted lg:leading-[1.55]"
+              ? "line-clamp-4 text-sm leading-relaxed text-neutral-600 max-lg:text-[13px] lg:line-clamp-3 lg:leading-[1.55]"
+              : "line-clamp-4 text-sm leading-relaxed text-text-muted max-lg:text-[13px] lg:line-clamp-3 lg:leading-[1.55]"
           }
         >
           {description}

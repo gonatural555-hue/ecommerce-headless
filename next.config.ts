@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         destination: "/:locale/category/camping-survival-gear",
         permanent: true,
       },
+      {
+        source: "/:locale/products/gn-ski-snow-001",
+        destination: "/:locale/products/gn-ski-snow-001-sk7a1",
+        permanent: true,
+      },
     ];
   },
 };

@@ -405,7 +405,7 @@ function GoNaturalHomeNewsletterModalInner() {
                           {t("homeNewsletterModal.headlineFreeShipping")}
                         </span>
                         {t("homeNewsletterModal.headlineMiddle")}
-                        <span style={{ color: GN_COLORS.burgundy }}>
+                        <span style={{ color: GN_COLORS.mustard }}>
                           {t("homeNewsletterModal.headlineFirstOrders")}
                         </span>
                       </h2>
