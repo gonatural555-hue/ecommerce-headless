@@ -16,6 +16,7 @@ import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 import { sortProductsList } from "@/lib/products-page-segments";
 import { buildCatalogFilterCategories } from "@/lib/plp-filter-categories";
 import { buildProductsPageFilterChips } from "@/lib/plp-active-filters";
+import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
 
 export const dynamic = "force-dynamic";
 
@@ -127,6 +128,7 @@ export default async function ProductsPage({
     sort === "featured" ? undefined : sort,
     locale
   );
+  const colorImageMaps = await getColorImageMapsForProducts(displayProducts);
 
   const hasActiveSearch = rawQuery.trim().length > 0;
 
@@ -255,6 +257,7 @@ export default async function ProductsPage({
               locale={locale}
               variant="patagonia"
               labels={cardLabels}
+              colorImages={colorImageMaps[product.id]}
               analyticsListName="all_products"
             />
           ))

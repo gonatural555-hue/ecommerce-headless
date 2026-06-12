@@ -16,6 +16,7 @@ import { buildMetadata, formatTemplate } from "@/lib/seo";
 import { sortProductsList } from "@/lib/products-page-segments";
 import { buildCatalogFilterCategories } from "@/lib/plp-filter-categories";
 import { buildCategoryPageFilterChips } from "@/lib/plp-active-filters";
+import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
 import { resolveCategoryHeroKind } from "@/lib/category-hero-theme";
 
 type Props = {
@@ -236,6 +237,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     sort === "featured" ? undefined : sort,
     locale
   );
+  const colorImageMaps = await getColorImageMapsForProducts(products);
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
 
@@ -351,6 +353,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                 analyticsListId={slug}
                 analyticsListName={`category:${slug}`}
                 labels={cardLabels}
+                colorImages={colorImageMaps[product.id]}
               />
             ))}
           </ProductsCatalogLayout>

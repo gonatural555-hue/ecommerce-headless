@@ -16,6 +16,7 @@ import {
   getPatagoniaCardBadges,
   getProductCompareAtPrice,
 } from "@/lib/plp-card-meta";
+import { getDefaultColorSwatchIndex } from "@/lib/plp-color-images";
 import { plpPatagoniaClasses } from "@/lib/ui/plp-patagonia";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 
@@ -33,6 +34,8 @@ type Props = {
     /** Plantilla serializable, p. ej. "{pct}% OFF" */
     salePercentTemplate?: string;
   };
+  /** Mapa color → URL de imagen (resuelto en servidor desde variantImages). */
+  colorImages?: Record<string, string>;
   analyticsListId?: string;
   analyticsListName?: string;
   surface?: UISurface;
@@ -135,6 +138,7 @@ export default function ProductCardSimple({
   surface = "light",
   editorial = false,
   variant = "default",
+  colorImages,
 }: Props) {
   const t = useTranslations();
   const localized = product.translations?.[locale];
@@ -148,8 +152,12 @@ export default function ProductCardSimple({
     () => (product.images || []).filter((src) => isValidImageSrc(src)),
     [product.images]
   );
+  const defaultSwatchIndex = useMemo(
+    () => getDefaultColorSwatchIndex(product),
+    [product]
+  );
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeSwatch, setActiveSwatch] = useState(0);
+  const [activeSwatch, setActiveSwatch] = useState(defaultSwatchIndex);
   const activeImage = imageList[activeIndex] || imageList[0];
   const hasValidImage = Boolean(activeImage);
   const viewProductLabel = labels?.viewProduct || "View product";
@@ -187,6 +195,11 @@ export default function ProductCardSimple({
 
   if (variant === "patagonia") {
     const swatches = getProductColorSwatches(product);
+    const activeSwatchData = swatches[activeSwatch];
+    const patagoniaImage =
+      (activeSwatchData && colorImages?.[activeSwatchData.value]) ||
+      imageList[0];
+    const hasPatagoniaImage = isValidImageSrc(patagoniaImage);
     const badges = getPatagoniaCardBadges(product, {
       newColor: labels?.newColor ?? t("productsPage.badgeNewColor"),
       salePercentTemplate:
@@ -208,9 +221,9 @@ export default function ProductCardSimple({
               <span className={plpPatagoniaClasses.badge}>{displayBadge.label}</span>
             ) : null}
             <div className={plpPatagoniaClasses.imageInner}>
-              {hasValidImage ? (
+              {hasPatagoniaImage ? (
                 <ProductImage
-                  src={activeImage!}
+                  src={patagoniaImage!}
                   title={title}
                   cover={false}
                   containFill
@@ -241,7 +254,6 @@ export default function ProductCardSimple({
                       e.preventDefault();
                       e.stopPropagation();
                       setActiveSwatch(index);
-                      if (imageList[index]) setActiveIndex(index);
                     }}
                     className={`${plpPatagoniaClasses.swatch} ${
                       isActive ? plpPatagoniaClasses.swatchActive : ""

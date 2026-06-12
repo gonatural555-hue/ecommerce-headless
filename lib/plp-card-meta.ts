@@ -41,10 +41,13 @@ export function getProductReviewAverage(product: Product): number | null {
   return Math.round((total / reviews.length) * 10) / 10;
 }
 
-export function getProductColorSwatches(product: Product): {
+export type ProductColorSwatch = {
   label: string;
   hex: string;
-}[] {
+  value: string;
+};
+
+export function getProductColorSwatches(product: Product): ProductColorSwatch[] {
   const variants = normalizeVariants(product.variants);
   const colorVariant = variants.find(
     (v) =>
@@ -55,9 +58,11 @@ export function getProductColorSwatches(product: Product): {
   if (!colorVariant) return [];
 
   return colorVariant.options.slice(0, 6).map((opt) => {
-    const key = (opt.value ?? opt.label).toLowerCase().trim();
+    const value = opt.value ?? opt.label;
+    const key = value.toLowerCase().trim();
     return {
       label: opt.label,
+      value,
       hex: COLOR_HEX[key] ?? "#8a8a8a",
     };
   });
