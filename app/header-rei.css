@@ -3,9 +3,10 @@
  */
 
 :root {
-  --gn-rei-utility-bg: #f5f0e6;
-  --gn-rei-utility-text: #171717;
-  --gn-rei-utility-text-active: #171717;
+  --gn-rei-utility-bg: #000000;
+  --gn-rei-utility-text: #ffffff;
+  --gn-rei-utility-text-active: #ffffff;
+  --gn-rei-utility-text-selected: #d9a441;
   --gn-rei-band-bg: #f5f0e6;
   --gn-rei-ink: #171717;
   --gn-rei-link: #171717;
@@ -53,7 +54,7 @@
   color: var(--gn-rei-utility-text);
   font-size: 11px;
   line-height: 1;
-  border-bottom: 1px solid rgba(23, 23, 23, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media (min-width: 768px) {
@@ -87,11 +88,18 @@
 
 .gn-rei-utility__link:hover {
   color: var(--gn-rei-utility-text-active);
+  opacity: 0.85;
 }
 
 .gn-rei-utility__link--active {
-  color: var(--gn-rei-utility-text-active);
+  color: var(--gn-rei-utility-text-selected);
   font-weight: 600;
+  opacity: 1;
+}
+
+.gn-rei-utility__link--active:hover {
+  color: var(--gn-rei-utility-text-selected);
+  opacity: 1;
 }
 
 .gn-rei-utility__locales {
@@ -115,11 +123,17 @@
 
 .gn-rei-utility__locale:hover {
   color: var(--gn-rei-utility-text-active);
+  opacity: 0.85;
 }
 
 .gn-rei-utility__locale--active {
-  background: rgba(23, 23, 23, 0.08);
-  color: var(--gn-rei-utility-text-active);
+  background: rgba(217, 164, 65, 0.15);
+  color: var(--gn-rei-utility-text-selected);
+}
+
+.gn-rei-utility__locale--active:hover {
+  color: var(--gn-rei-utility-text-selected);
+  opacity: 1;
 }
 
 /* —— Main band —— */

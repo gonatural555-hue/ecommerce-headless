@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/lib/i18n/config";
-import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
+import { homePrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
+import MembershipPromoBadge from "@/components/products/MembershipPromoBadge";
 import {
   DEFAULT_MEMBERSHIP_PROMO_LAYOUT,
   isProductsDirectorMode,
@@ -52,25 +52,17 @@ export default function MembershipPromotionBanner({ locale }: Props) {
             <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[45fr_55fr] md:gap-12 lg:gap-16">
               <div className="flex items-center justify-center">
                 <div
-                  className="gn-membership-promo-image-wrap"
+                  className="gn-membership-promo-image-wrap flex items-center justify-center"
                   style={membershipPromoImageStyle(layout)}
                 >
-                  <Image
-                    src="/assets/images/promocion.png"
-                    alt={t("productsPage.membershipPromo.imageAlt")}
-                    width={480}
-                    height={640}
-                    sizes="(max-width: 768px) min(88vw, 360px), 480px"
-                    className="h-auto w-auto max-h-full max-w-full object-contain"
-                    priority={false}
-                  />
+                  <MembershipPromoBadge />
                 </div>
               </div>
 
               <div className="flex flex-col items-center text-center md:items-start md:text-left">
                 <h2
                   id="membership-promo-heading"
-                  className="section-display text-balance text-[clamp(1.65rem,3.6vw,2.35rem)] font-semibold leading-[1.12] tracking-tight text-dark-base"
+                  className="section-display text-balance text-[clamp(1.65rem,3.6vw,2.35rem)] font-semibold leading-[1.12] tracking-tight text-gn-burgundy"
                 >
                   {t("productsPage.membershipPromo.title")}
                 </h2>
@@ -85,7 +77,7 @@ export default function MembershipPromotionBanner({ locale }: Props) {
 
                 <Link
                   href={`/${locale}/auth`}
-                  className={`${premiumPrimaryCtaClass} mt-8 md:mt-10`}
+                  className={`${homePrimaryCtaClass} mt-8 md:mt-10`}
                 >
                   {t("productsPage.membershipPromo.cta")}
                 </Link>

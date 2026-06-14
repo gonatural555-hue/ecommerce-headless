@@ -702,7 +702,7 @@ main[data-route="order-success"] .bg-gray-50 {
     }
   }
 
-  /* —— Membership promo PNG (15% descuento) —— */
+  /* —— Membership promo badge (15% descuento) —— */
   .gn-membership-promo-image-wrap {
     transform: translate(var(--gn-promo-tx, 0px), var(--gn-promo-ty, 0px))
       scale(var(--gn-promo-scale, 1));

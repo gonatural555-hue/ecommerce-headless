@@ -13,6 +13,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { pickHomeEssentialProducts } from "@/lib/home-featured-products";
 import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
 import { goNaturalCatalogPath } from "@/lib/routing/brands";
+import { homePrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 
 type HomePageMessages = {
   essentialTitle: string;
@@ -144,6 +145,7 @@ export default async function GoNaturalHomePage({
           body={h.communityBody ?? t("blog.journal.communityBody")}
           ctaLabel={h.communityCta ?? t("blog.journal.communityCta")}
           href={`/${locale}/contact`}
+          ctaClassName={homePrimaryCtaClass}
         />
       </div>
     </main>

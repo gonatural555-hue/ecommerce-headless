@@ -45,6 +45,16 @@ export function resolveUtilityHref(
   return typeof link.href === "function" ? link.href(locale) : link.href;
 }
 
+export function isUtilityLinkActive(
+  link: HeaderUtilityLink,
+  locale: Locale,
+  pathname: string
+): boolean {
+  const href = resolveUtilityHref(link, locale);
+  if (!href || href === "#") return false;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 /** Reparte items del dropdown en N columnas (relleno uniforme). */
 export function distributeDropdownColumns<T>(
   items: T[],

@@ -6,9 +6,9 @@ import { useTranslations } from "@/components/i18n/LocaleProvider";
 import { locales, type Locale } from "@/lib/i18n/config";
 import {
   HEADER_UTILITY_LINKS,
+  isUtilityLinkActive,
   resolveUtilityHref,
 } from "@/lib/header-utility-links";
-import { goNaturalHomePath, isGoNaturalHomePath } from "@/lib/routing/brands";
 
 type Props = {
   locale: Locale;
@@ -38,8 +38,7 @@ export default function HeaderUtilityBar({ locale }: Props) {
           <nav className="gn-rei-utility__links" aria-label={t("header.utility.aria")}>
             {HEADER_UTILITY_LINKS.map((link) => {
               const href = resolveUtilityHref(link, locale);
-              const isActive =
-                link.isPrimary && isGoNaturalHomePath(pathname);
+              const isActive = isUtilityLinkActive(link, locale, pathname);
               return (
                 <Link
                   key={link.id}

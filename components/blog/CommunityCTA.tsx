@@ -10,6 +10,7 @@ type CommunityCTAProps = {
   body: string;
   ctaLabel: string;
   href: string;
+  ctaClassName?: string;
 };
 
 /**
@@ -21,12 +22,13 @@ export default function CommunityCTA({
   body,
   ctaLabel,
   href,
+  ctaClassName = premiumPrimaryCtaClass,
 }: CommunityCTAProps) {
   return (
     <section className={`border-t border-earth-brown/10 bg-[#FFFFFF] py-20 md:py-28 lg:py-32 ${LUMINOUS_EDGE_LIGHT}`}>
       <div className="mx-auto max-w-3xl px-6 text-center sm:px-10">
         <ScrollReveal>
-          <h2 className="section-display font-bold tracking-tight text-dark-base text-[clamp(1.85rem,4vw,2.75rem)] leading-tight">
+          <h2 className="section-display font-bold tracking-tight text-gn-burgundy text-[clamp(1.85rem,4vw,2.75rem)] leading-tight">
             {title}
           </h2>
           {tagline ? (
@@ -37,7 +39,7 @@ export default function CommunityCTA({
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-gray md:text-lg">
             {body}
           </p>
-          <Link href={href} className={`${premiumPrimaryCtaClass} mt-10`}>
+          <Link href={href} className={`${ctaClassName} mt-10`}>
             {ctaLabel}
           </Link>
         </ScrollReveal>

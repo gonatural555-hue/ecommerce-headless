@@ -522,7 +522,13 @@
       "description": "Obtén un 15% de descuento en productos seleccionados al crear tu cuenta y comenzar tu próxima aventura.",
       "descriptionSecondary": "Accede además a novedades, recomendaciones y lanzamientos exclusivos.",
       "cta": "Crear cuenta",
-      "imageAlt": "15% de descuento para nuevos miembros Go Natural"
+      "imageAlt": "15% de descuento para nuevos miembros Go Natural",
+      "badge": {
+        "title": "Nuevos miembros",
+        "discountValue": "15",
+        "discountSuffix": "OFF",
+        "ariaLabel": "15% de descuento para nuevos miembros"
+      }
     },
     "catalogDescription": "Equipamiento outdoor funcional para viajar ligero y moverte libre.",
     "readMore": "Leer más",

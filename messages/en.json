@@ -522,7 +522,13 @@
       "description": "Get 15% off selected products when you create your account and start your next adventure.",
       "descriptionSecondary": "Plus access to news, recommendations, and exclusive launches.",
       "cta": "Create account",
-      "imageAlt": "15% off for new Go Natural members"
+      "imageAlt": "15% off for new Go Natural members",
+      "badge": {
+        "title": "New members",
+        "discountValue": "15",
+        "discountSuffix": "OFF",
+        "ariaLabel": "15% off for new members"
+      }
     },
     "catalogDescription": "Functional outdoor gear to travel light and move freely.",
     "readMore": "Read more",

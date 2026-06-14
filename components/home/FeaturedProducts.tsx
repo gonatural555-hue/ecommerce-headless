@@ -6,7 +6,7 @@ import ProductCardSimple from "@/components/ProductCardSimple";
 import type { Locale } from "@/lib/i18n/config";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import { pickHomeEssentialProducts } from "@/lib/home-featured-products";
-import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
+import { homePrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 
 type Props = {
   products: Product[];
@@ -46,7 +46,7 @@ export default function FeaturedProducts({
       <div className="mx-auto max-w-[1400px] px-4 md:px-6 lg:px-10">
         <ScrollReveal>
           <header className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-black">
+            <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-gn-burgundy">
               {title}
             </h2>
             <p className="mt-4 font-inter text-sm leading-relaxed text-[#666666] md:text-base">
@@ -74,7 +74,7 @@ export default function FeaturedProducts({
         {viewAllHref && viewAllLabel ? (
           <ScrollReveal delayMs={80}>
             <div className="mt-12 text-center md:mt-14">
-              <Link href={viewAllHref} className={premiumPrimaryCtaClass}>
+              <Link href={viewAllHref} className={homePrimaryCtaClass}>
                 {viewAllLabel}
               </Link>
             </div>
