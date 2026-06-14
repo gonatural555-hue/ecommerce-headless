@@ -468,6 +468,42 @@
     "segmentMountainSnow": "Mountain & snow",
     "segmentOutdoorAdventure": "Outdoor & adventure",
     "segmentWaterSports": "Water sports",
+    "heroCategoryCarouselPrevAria": "Previous categories",
+    "heroCategoryCarouselNextAria": "Next categories",
+    "heroCategoryCards": {
+      "campamento": {
+        "description": "Essentials for camp, routes, getaways and life outdoors.",
+        "cta": "Explore camping"
+      },
+      "escalada": {
+        "description": "Technical apparel and gear for rock climbing, altitude and mountain routes.",
+        "cta": "Explore climbing"
+      },
+      "ciclismo": {
+        "description": "Functional gear for road, mountain and everyday riding.",
+        "cta": "Explore cycling"
+      },
+      "agua": {
+        "description": "Functional gear for water, movement, sun and coastal adventure.",
+        "cta": "Explore water sports"
+      },
+      "running": {
+        "description": "Layers, footwear and accessories for running, trail and training.",
+        "cta": "Explore running"
+      },
+      "nieve": {
+        "description": "Technical layers, footwear and equipment for cold, snow and demanding trails.",
+        "cta": "Explore snow"
+      },
+      "viaje": {
+        "description": "Light essentials for travel, routes and outdoor getaways.",
+        "cta": "Explore travel"
+      },
+      "fishing": {
+        "description": "Gear chosen for calm, precise days connected to the water.",
+        "cta": "Explore fishing"
+      }
+    },
     "sortLabel": "Sort",
     "sortFeatured": "Featured",
     "sortPriceAsc": "Price · low to high",
@@ -481,6 +517,13 @@
     "searchNoResultsHint": "Try different words or browse the full catalog.",
     "searchViewAll": "View all products",
     "catalogTitle": "Shop all",
+    "membershipPromo": {
+      "title": "Benefits for new members",
+      "description": "Get 15% off selected products when you create your account and start your next adventure.",
+      "descriptionSecondary": "Plus access to news, recommendations, and exclusive launches.",
+      "cta": "Create account",
+      "imageAlt": "15% off for new Go Natural members"
+    },
     "catalogDescription": "Functional outdoor gear to travel light and move freely.",
     "readMore": "Read more",
     "filtersLabel": "Filters",
@@ -2196,7 +2239,15 @@
       "cycling-running": "Cycling / Running",
       "men": "Men",
       "women": "Women",
-      "kids": "Kids"
+      "kids": "Kids",
+      "campamento-senderismo": "Camping & Hiking",
+      "escalada": "Climbing",
+      "ciclismo": "Cycling",
+      "agua": "Water",
+      "running": "Running",
+      "nieve": "Snow",
+      "viaje": "Travel",
+      "ofertas": "Deals"
     }
   },
   "accountPage": {

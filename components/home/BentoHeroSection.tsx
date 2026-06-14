@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import HomeHeroCarousel from "@/components/home/HomeHeroCarousel";
 import type { HomeHeroCarouselProps } from "@/components/home/HomeHeroCarousel";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import { LUMINOUS_EDGE_CARD, LUMINOUS_EDGE_LIGHT } from "@/lib/ui/luminous-edge";
 import { GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
+import { BLOG_HERO_BENTO_OVERLAP_LG_PX } from "@/lib/blog-hero-layout";
 
 const BENTO_RADIUS = "rounded-[1.35rem] md:rounded-[1.75rem]";
 
@@ -37,7 +38,10 @@ function ArrowCircle({ onDark = false }: { onDark?: boolean }) {
 }
 
 /** Grid bento con carrusel (antes Hero de Home; ahora reutilizable en Journal). */
-export default function BentoHeroSection(props: HomeHeroCarouselProps) {
+export default function BentoHeroSection({
+  flushAfterEditorialHero = false,
+  ...props
+}: HomeHeroCarouselProps & { flushAfterEditorialHero?: boolean }) {
   const locale = useLocale();
   const t = useTranslations();
   const [bannerImg, setBannerImg] = useState("/assets/images/hero/trekking.webp");
@@ -46,11 +50,22 @@ export default function BentoHeroSection(props: HomeHeroCarouselProps) {
 
   return (
     <section
-      className={`relative overflow-x-hidden bg-[#FFFFFF] pb-8 sm:pb-10 md:pb-12 ${LUMINOUS_EDGE_LIGHT}`}
+      className={`relative overflow-x-hidden bg-[#FFFFFF] pb-8 sm:pb-10 md:pb-12 ${LUMINOUS_EDGE_LIGHT} ${
+        flushAfterEditorialHero ? "relative z-[2] pt-0 lg:-mt-[var(--blog-bento-overlap)]" : ""
+      }`}
+      style={
+        flushAfterEditorialHero
+          ? ({
+              "--blog-bento-overlap": `${BLOG_HERO_BENTO_OVERLAP_LG_PX}px`,
+            } as CSSProperties)
+          : undefined
+      }
       aria-label="Hero"
     >
       <div
-        className={`mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0 ${GN_HERO_TOP_PAD}`}
+        className={`mx-auto w-full max-w-none px-4 sm:px-5 md:px-6 lg:w-[calc(100%-48px)] lg:max-w-none lg:px-0 ${
+          flushAfterEditorialHero ? "pt-4 md:pt-5" : GN_HERO_TOP_PAD
+        }`}
       >
         <div className="flex flex-col gap-4 lg:min-h-[min(calc(100svh-13.25rem),min(96svh,1000px))] lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:grid-rows-[1fr_1fr] lg:items-stretch lg:gap-5">
           <div className="flex min-h-0 w-full flex-col gap-4 lg:col-start-1 lg:row-span-2 lg:min-h-0">

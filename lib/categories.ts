@@ -49,6 +49,48 @@ export const CATEGORIES: Category[] = [
     name: "Kids",
     description: "Equipamiento outdoor para niños.",
   },
+  // ===== CATEGORÍAS EDITORIALES DEL HEADER =====
+  {
+    slug: "campamento-senderismo",
+    name: "Camping & Hiking",
+    description:
+      "Equipo esencial para campamento, rutas, senderismo y vida al aire libre.",
+  },
+  {
+    slug: "escalada",
+    name: "Climbing",
+    description: "Equipamiento técnico para escalada en roca y montaña.",
+  },
+  {
+    slug: "ciclismo",
+    name: "Cycling",
+    description: "Equipamiento para ciclismo en ruta, montaña y ciudad.",
+  },
+  {
+    slug: "agua",
+    name: "Water",
+    description: "Deportes y actividades en el agua.",
+  },
+  {
+    slug: "running",
+    name: "Running",
+    description: "Equipamiento para running, trail y entrenamiento.",
+  },
+  {
+    slug: "nieve",
+    name: "Snow",
+    description: "Equipamiento para nieve, ski y snowboard.",
+  },
+  {
+    slug: "viaje",
+    name: "Travel",
+    description: "Esenciales para viajes, escapadas y rutas outdoor.",
+  },
+  {
+    slug: "ofertas",
+    name: "Deals",
+    description: "Ofertas y descuentos en equipamiento outdoor.",
+  },
   // ===== SUBCATEGORÍAS (HIJO) =====
   // Fishing subcategorías
   {
@@ -187,9 +229,28 @@ export function getCategoryBySlug(slug: string): Category | undefined {
   return CATEGORIES.find((cat) => cat.slug === slug);
 }
 
+/** Categorías editoriales del header → slug de catálogo para productos. */
+export const EDITORIAL_CATEGORY_PRODUCT_SOURCE: Record<string, string> = {
+  "campamento-senderismo": "outdoor-adventure",
+  escalada: "outdoor-adventure",
+  ciclismo: "active-sports",
+  agua: "water-sports",
+  running: "active-sports",
+  nieve: "mountain-snow",
+  viaje: "outdoor-adventure",
+};
+
 /** Alias cortos en `?category=` → slug real (p. ej. home → productos) */
 const PRODUCTS_CATEGORY_QUERY_ALIASES: Record<string, string> = {
   outdoor: "outdoor-adventure",
+  "camp-hike": "campamento-senderismo",
+  climb: "escalada",
+  cycle: "ciclismo",
+  water: "agua",
+  run: "running",
+  snow: "nieve",
+  travel: "viaje",
+  deals: "ofertas",
 };
 
 /**
@@ -228,12 +289,18 @@ export function getCategoryWithChildren(slug: string): {
 
 export function getProductsByCategorySlug(slug: string): Product[] {
   const allProducts = getProducts();
-  const category = getCategoryBySlug(slug);
-  
+
+  if (slug === "ofertas") {
+    return allProducts;
+  }
+
+  const catalogSlug = EDITORIAL_CATEGORY_PRODUCT_SOURCE[slug] ?? slug;
+  const category = getCategoryBySlug(catalogSlug);
+
   // Si es categoría principal, incluir productos de sus subcategorías
   const slugsToMatch = category && !category.parentSlug
-    ? [slug, ...getSubcategories(slug).map((sub) => sub.slug)]
-    : [slug];
+    ? [catalogSlug, ...getSubcategories(catalogSlug).map((sub) => sub.slug)]
+    : [catalogSlug];
   
   return allProducts.filter((product) => {
     const categorySlugs = PRODUCT_CATEGORY_MAP[product.id] || [];

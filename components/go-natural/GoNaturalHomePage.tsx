@@ -1,19 +1,20 @@
-import HomeBrandHero from "@/components/home/HomeBrandHero";
-import BrandStatement from "@/components/home/BrandStatement";
+import { Suspense } from "react";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ImageStorySection from "@/components/home/ImageStorySection";
 import CategoryGrid from "@/components/home/CategoryGrid";
 import BlogPreview from "@/components/home/BlogPreview";
 import CommunityCTA from "@/components/blog/CommunityCTA";
+import ProductsHero from "@/components/products/ProductsHero";
+import MembershipPromotionBanner from "@/components/products/MembershipPromotionBanner";
 import { getProducts } from "@/lib/products";
 import { getMessages } from "@/lib/i18n/messages";
 import { createTranslator } from "@/lib/i18n/translate";
 import type { Locale } from "@/lib/i18n/config";
 import { pickHomeEssentialProducts } from "@/lib/home-featured-products";
 import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
+import { goNaturalCatalogPath } from "@/lib/routing/brands";
 
 type HomePageMessages = {
-  brandStatement: string;
   essentialTitle: string;
   essentialSubtitle: string;
   imageStoryTitle: string;
@@ -89,19 +90,19 @@ export default async function GoNaturalHomePage({
   return (
     <main
       data-hero-bleed
-      className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#F4EBDD] text-dark-base"
+      className="relative flex min-h-screen flex-col overflow-x-hidden text-dark-base"
     >
-      <div className="relative z-10 flex flex-1 flex-col">
-        <HomeBrandHero
-          locale={locale}
-          title={t("homeBrandHero.title")}
-          subtitle={t("homeBrandHero.subtitle")}
-          ctaPrimary={t("homeBrandHero.ctaPrimary")}
-          ctaSecondary={t("homeBrandHero.ctaSecondary")}
-        />
+      <div className="bg-white">
+        <Suspense fallback={null}>
+          <ProductsHero locale={locale} />
+        </Suspense>
 
-        <BrandStatement text={h.brandStatement ?? t("story.title")} />
+        <Suspense fallback={null}>
+          <MembershipPromotionBanner locale={locale} />
+        </Suspense>
+      </div>
 
+      <div className="relative z-10 flex flex-1 flex-col bg-[#F4EBDD]">
         <FeaturedProducts
           products={products}
           locale={locale}
@@ -109,6 +110,8 @@ export default async function GoNaturalHomePage({
           subtitle={h.essentialSubtitle ?? t("featured.subtitle")}
           colorImageMaps={colorImageMaps}
           labels={cardLabels}
+          viewAllHref={goNaturalCatalogPath(locale)}
+          viewAllLabel={t("productsPage.searchViewAll")}
         />
 
         <ImageStorySection

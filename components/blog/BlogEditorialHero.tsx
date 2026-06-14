@@ -5,7 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
+import {
+  blogHeroElementStyle,
+  DEFAULT_BLOG_HERO_LAYOUT,
+} from "@/lib/blog-hero-layout";
 import { GN_EASE_PREMIUM, GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
+import {
+  GN_HERO_CTA_CLASS_WIDE,
+  GN_HERO_CTA_FOREST,
+  gnHeroCtaStyle,
+} from "@/lib/ui/gn-hero-cta";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 
 const easeOut = GN_EASE_PREMIUM;
@@ -13,8 +22,9 @@ const easeOut = GN_EASE_PREMIUM;
 export const BLOG_COVER_WIDTH = 1260;
 export const BLOG_COVER_HEIGHT = 720;
 
-const exploreCtaClass =
-  "group inline-flex h-[56px] min-h-[56px] w-full max-w-md items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F3527_0%,#2E4A36_50%,#3E654B_100%)] px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] text-[#F4EBDD] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_12px_44px_rgba(46,74,54,0.14)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.26),0_16px_52px_rgba(46,74,54,0.18)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
+const exploreCtaStyle = gnHeroCtaStyle(GN_HERO_CTA_FOREST);
+const copyBlockStyle = blogHeroElementStyle(DEFAULT_BLOG_HERO_LAYOUT.copyBlock);
+const coverImageStyle = blogHeroElementStyle(DEFAULT_BLOG_HERO_LAYOUT.coverImage);
 
 /** Primera línea: forest + opcional burgundy (1.ª palabra del bloque tras \\n); segunda: mustard. */
 function parseBlogEditorialTitle(title: string): {
@@ -101,10 +111,58 @@ export default function BlogEditorialHero({
     ? "items-start text-left"
     : "items-center text-center";
 
+  const copyBlockContent = (
+    <>
+      <motion.p
+        variants={itemVariants}
+        className={`mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[rgba(46,74,54,0.62)] md:mb-4 ${
+          hasCover ? "" : "text-center"
+        }`}
+      >
+        {eyebrow}
+      </motion.p>
+
+      <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
+        <span className="block text-balance">
+          <span className="gn-hero-editorial-line-forest">{line1Forest}</span>
+          {row1Burgundy ? (
+            <>
+              {" "}
+              <span className="gn-hero-c-burgundy">{row1Burgundy}</span>
+            </>
+          ) : null}
+        </span>
+        {row2Mustard ? (
+          <span className="gn-hero-editorial-line-mustard text-balance">
+            {row2Mustard}
+          </span>
+        ) : null}
+      </motion.h1>
+
+      <motion.p
+        variants={itemVariants}
+        className={`gn-hero-subtitle mt-4 md:mt-5 ${hasCover ? "" : "text-center"}`}
+      >
+        {subtitle}
+      </motion.p>
+
+      <motion.div variants={itemVariants} className="mt-6 w-full max-w-md md:mt-7">
+        <Link
+          href={exploreHref}
+          className={GN_HERO_CTA_CLASS_WIDE}
+          style={exploreCtaStyle}
+          aria-label={exploreCtaLabel}
+        >
+          {exploreCtaLabel}
+        </Link>
+      </motion.div>
+    </>
+  );
+
   return (
     <section
       className={`relative isolate overflow-x-clip border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD] ${
-        hasCover ? "py-10 md:py-14 lg:py-16" : "flex min-h-[100svh] flex-col"
+        hasCover ? "overflow-visible pt-10 pb-0 md:pt-14 lg:pt-16" : "flex min-h-[100svh] flex-col"
       }`}
       aria-label={sectionAriaLabel}
     >
@@ -123,102 +181,41 @@ export default function BlogEditorialHero({
         animate="show"
       >
         {hasCover ? (
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-            <div className={`flex w-full max-w-xl flex-col ${textAlign} lg:max-w-md xl:max-w-lg`}>
-              <motion.p
-                variants={itemVariants}
-                className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[rgba(46,74,54,0.62)] md:mb-4"
-              >
-                {eyebrow}
-              </motion.p>
-
-              <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
-                <span className="block text-balance">
-                  <span className="gn-hero-editorial-line-forest">{line1Forest}</span>
-                  {row1Burgundy ? (
-                    <>
-                      {" "}
-                      <span className="gn-hero-c-burgundy">{row1Burgundy}</span>
-                    </>
-                  ) : null}
-                </span>
-                {row2Mustard ? (
-                  <span className="gn-hero-editorial-line-mustard text-balance">
-                    {row2Mustard}
-                  </span>
-                ) : null}
-              </motion.h1>
-
-              <motion.p variants={itemVariants} className="gn-hero-subtitle mt-4 md:mt-5">
-                {subtitle}
-              </motion.p>
-
-              <motion.div variants={itemVariants} className="mt-6 w-full max-w-md md:mt-7">
-                <Link
-                  href={exploreHref}
-                  className={exploreCtaClass}
-                  aria-label={exploreCtaLabel}
-                >
-                  {exploreCtaLabel}
-                </Link>
-              </motion.div>
+          <div className="relative flex min-h-0 flex-col gap-10 overflow-visible lg:min-h-[720px] lg:justify-center">
+            <div
+              className={`relative z-10 flex w-full max-w-xl flex-col ${textAlign} lg:absolute lg:inset-y-0 lg:left-0 lg:max-w-md lg:justify-center xl:max-w-lg`}
+              style={copyBlockStyle}
+            >
+              {copyBlockContent}
             </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="relative ml-auto aspect-[7/4] w-full max-w-[1260px] shrink-0 overflow-hidden lg:h-[720px] lg:w-[1260px] lg:max-w-none"
+            <div
+              className="relative z-[1] mx-auto w-full max-w-[1260px] shrink-0"
+              style={coverImageStyle}
             >
-              <Image
-                src={coverImageSrc!}
-                alt={coverImageAlt ?? sectionAriaLabel}
-                width={BLOG_COVER_WIDTH}
-                height={BLOG_COVER_HEIGHT}
-                priority
-                className="h-full w-full object-cover object-right"
-                sizes="(max-width: 1024px) 100vw, 1260px"
-              />
-            </motion.div>
+              <motion.div
+                variants={itemVariants}
+                className="relative mx-auto aspect-[7/4] w-full overflow-hidden lg:h-[720px] lg:w-[1260px]"
+              >
+                <Image
+                  src={coverImageSrc!}
+                  alt={coverImageAlt ?? sectionAriaLabel}
+                  width={BLOG_COVER_WIDTH}
+                  height={BLOG_COVER_HEIGHT}
+                  priority
+                  className="h-full w-full object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 1260px"
+                />
+              </motion.div>
+            </div>
           </div>
         ) : (
           <div className="flex min-h-0 flex-1 flex-col justify-between gap-3 md:gap-4">
-            <div className={`flex w-full max-w-[980px] flex-col ${textAlign}`}>
-              <motion.p
-                variants={itemVariants}
-                className="mb-3 text-center text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[rgba(46,74,54,0.62)] md:mb-4"
-              >
-                {eyebrow}
-              </motion.p>
-
-              <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
-                <span className="block text-balance">
-                  <span className="gn-hero-editorial-line-forest">{line1Forest}</span>
-                  {row1Burgundy ? (
-                    <>
-                      {" "}
-                      <span className="gn-hero-c-burgundy">{row1Burgundy}</span>
-                    </>
-                  ) : null}
-                </span>
-                {row2Mustard ? (
-                  <span className="gn-hero-editorial-line-mustard text-balance">
-                    {row2Mustard}
-                  </span>
-                ) : null}
-              </motion.h1>
-
-              <motion.p variants={itemVariants} className="gn-hero-subtitle mt-4 text-center md:mt-5">
-                {subtitle}
-              </motion.p>
-
-              <motion.div variants={itemVariants} className="mt-6 w-full max-w-md md:mt-7">
-                <Link
-                  href={exploreHref}
-                  className={exploreCtaClass}
-                  aria-label={exploreCtaLabel}
-                >
-                  {exploreCtaLabel}
-                </Link>
-              </motion.div>
+            <div
+              className={`flex w-full max-w-[980px] flex-col ${textAlign}`}
+              style={copyBlockStyle}
+            >
+              {copyBlockContent}
             </div>
 
             <motion.div

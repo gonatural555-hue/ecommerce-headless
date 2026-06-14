@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getProducts, type Product } from "@/lib/products";
-import ProductsHero from "@/components/products/ProductsHero";
 import SortingBar from "@/components/products/SortingBar";
 import ProductsCatalogLayout from "@/components/products/ProductsCatalogLayout";
 import ProductCardSimple from "@/components/ProductCardSimple";
@@ -19,10 +18,6 @@ import { buildProductsPageFilterChips } from "@/lib/plp-active-filters";
 import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
 
 export const dynamic = "force-dynamic";
-
-function interpolate(template: string, vars: Record<string, string>) {
-  return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
-}
 
 function normalizeText(value: string) {
   return value
@@ -132,12 +127,6 @@ export default async function ProductsPage({
 
   const hasActiveSearch = rawQuery.trim().length > 0;
 
-  const searchHint = hasActiveSearch
-    ? interpolate(t("productsPage.searchResultsFor", ""), {
-        query: rawQuery.trim(),
-      })
-    : null;
-
   const sortOptions = [
     { value: "featured", label: t("productsPage.sortFeatured") },
     { value: "price-asc", label: t("productsPage.sortPriceAsc") },
@@ -181,40 +170,7 @@ export default async function ProductsPage({
   };
 
   return (
-    <main
-      data-hero-bleed
-      className="relative flex min-h-screen flex-col overflow-x-hidden bg-white text-dark-base"
-    >
-      <ProductsHero
-        locale={locale}
-        title={t("productsPage.heroEssentialTitle")}
-        subtitle={t("productsPage.heroEditorialSubtitle")}
-        discoverCtaLabel={t("productsPage.heroDiscoverProducts")}
-        categoryCtas={[
-          {
-            slug: "fishing",
-            label: t("productsPage.segmentFishing"),
-            tone: "forest",
-          },
-          {
-            slug: "mountain-snow",
-            label: t("productsPage.segmentMountainSnow"),
-            tone: "burgundy",
-          },
-          {
-            slug: "water-sports",
-            label: t("productsPage.segmentWaterSports"),
-            tone: "burnt",
-          },
-          {
-            slug: "outdoor-adventure",
-            label: t("productsPage.segmentOutdoorAdventure"),
-            tone: "mustard",
-          },
-        ]}
-        searchHint={searchHint}
-      />
-
+    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-white text-dark-base">
       <ProductsCatalogLayout
         visualStyle="patagonia"
         surface="white"

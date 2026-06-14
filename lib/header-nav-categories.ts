@@ -33,12 +33,12 @@ export type HeaderNavTab = {
   items: HeaderNavDropdownItem[];
 };
 
-/** Cycle vs Run: mismo parent active-sports; labels editoriales distintos (opción B). */
+/** Cycle vs Run: páginas editoriales dedicadas por pestaña del header. */
 export const HEADER_NAV_TABS: HeaderNavTab[] = [
   {
     id: "camp-hike",
     labelKey: "campHike",
-    parentSlug: "outdoor-adventure",
+    parentSlug: "campamento-senderismo",
     items: [
       { categorySlug: "trekking" },
       { categorySlug: "camping-survival-gear" },
@@ -48,13 +48,13 @@ export const HEADER_NAV_TABS: HeaderNavTab[] = [
   {
     id: "climb",
     labelKey: "climb",
-    parentSlug: "outdoor-adventure",
+    parentSlug: "escalada",
     items: [{ categorySlug: "trekking" }],
   },
   {
     id: "cycle",
     labelKey: "cycle",
-    parentSlug: "active-sports",
+    parentSlug: "ciclismo",
     items: [
       { categorySlug: "cycling-running", labelKey: "cycleEyewear" },
       { categorySlug: "cycling-running", labelKey: "cycleApparel" },
@@ -64,7 +64,7 @@ export const HEADER_NAV_TABS: HeaderNavTab[] = [
   {
     id: "water",
     labelKey: "water",
-    parentSlug: "water-sports",
+    parentSlug: "agua",
     items: [
       { categorySlug: "surfing" },
       { categorySlug: "diving-swimming-equipment" },
@@ -73,7 +73,7 @@ export const HEADER_NAV_TABS: HeaderNavTab[] = [
   {
     id: "run",
     labelKey: "run",
-    parentSlug: "active-sports",
+    parentSlug: "running",
     items: [
       { categorySlug: "cycling-running", labelKey: "runningWear" },
       { categorySlug: "cycling-running", labelKey: "runningAccessories" },
@@ -82,13 +82,13 @@ export const HEADER_NAV_TABS: HeaderNavTab[] = [
   {
     id: "snow",
     labelKey: "snow",
-    parentSlug: "mountain-snow",
+    parentSlug: "nieve",
     items: [{ categorySlug: "ski-snowboard" }],
   },
   {
     id: "travel",
     labelKey: "travel",
-    parentSlug: "outdoor-adventure",
+    parentSlug: "viaje",
     items: [{ categorySlug: "camping-survival-gear" }],
   },
   {

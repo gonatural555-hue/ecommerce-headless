@@ -5,16 +5,15 @@
 export const GN_EASE_PREMIUM = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Padding superior en heroes: clearance bajo header sticky REI (~9.5rem desktop).
+ * Padding superior en heroes full-bleed (header en flujo normal encima del main).
  */
 export const GN_HERO_TOP_PAD =
-  "pt-[calc(env(safe-area-inset-top,0px)+4.5rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+9.5rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+9.75rem)]";
+  "pt-[calc(env(safe-area-inset-top,0px)+2rem)] sm:pt-[calc(env(safe-area-inset-top,0px)+2.5rem)] md:pt-[calc(env(safe-area-inset-top,0px)+3rem)] lg:pt-[calc(env(safe-area-inset-top,0px)+3.5rem)]";
 
-/** Páginas sin hero full-bleed: el header sticky ocupa flujo normal; padding mínimo mobile. */
-export const GN_FLOAT_HEADER_CLEARANCE =
-  "pt-[calc(env(safe-area-inset-top,0px)+3.5rem)] md:pt-0";
+/** Páginas sin hero full-bleed: el header ocupa flujo normal. */
+export const GN_FLOAT_HEADER_CLEARANCE = "pt-0";
 
-/** @deprecated Header REI usa sticky; mantener alias vacío por compatibilidad. */
+/** Shell del header Go Natural. */
 export const GN_HEADER_SHELL_CLASS = "font-inter";
 
 export const GN_SPACE_PX = {

@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductCardSimple from "@/components/ProductCardSimple";
 import type { Locale } from "@/lib/i18n/config";
 import ScrollReveal from "@/components/blog/ScrollReveal";
 import { pickHomeEssentialProducts } from "@/lib/home-featured-products";
+import { premiumPrimaryCtaClass } from "@/lib/ui/premium-cta-classes";
 
 type Props = {
   products: Product[];
@@ -12,6 +14,8 @@ type Props = {
   title: string;
   subtitle: string;
   colorImageMaps?: Record<string, Record<string, string>>;
+  viewAllHref?: string;
+  viewAllLabel?: string;
   labels?: {
     viewProduct?: string;
     noImage?: string;
@@ -28,6 +32,8 @@ export default function FeaturedProducts({
   title,
   subtitle,
   colorImageMaps = {},
+  viewAllHref,
+  viewAllLabel,
   labels,
 }: Props) {
   const featured = pickHomeEssentialProducts(products);
@@ -64,6 +70,16 @@ export default function FeaturedProducts({
             </ScrollReveal>
           ))}
         </div>
+
+        {viewAllHref && viewAllLabel ? (
+          <ScrollReveal delayMs={80}>
+            <div className="mt-12 text-center md:mt-14">
+              <Link href={viewAllHref} className={premiumPrimaryCtaClass}>
+                {viewAllLabel}
+              </Link>
+            </div>
+          </ScrollReveal>
+        ) : null}
       </div>
     </section>
   );

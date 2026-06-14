@@ -176,8 +176,15 @@ export default function HeaderCategoryBar({ locale }: Props) {
 
           <div className="gn-rei-categories__item">
             <Link
-              href={`/${locale}/products?deals=1`}
-              className="gn-rei-categories__tab gn-rei-categories__tab--deals"
+              href={`/${locale}/category/ofertas`}
+              className={[
+                "gn-rei-categories__tab gn-rei-categories__tab--deals",
+                categorySlug === "ofertas"
+                  ? "gn-rei-categories__tab--route-active"
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
             >
               {t("header.tabs.deals")}
             </Link>

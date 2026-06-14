@@ -30,7 +30,7 @@ function MegaSubLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="block py-1 font-inter text-[14px] text-[rgba(48,76,61,0.72)] hover:text-[#304C3D]"
+      className="block py-1 font-inter text-[14px] text-[rgba(23,23,23,0.72)] hover:text-[#171717]"
     >
       {label}
     </Link>
@@ -57,21 +57,21 @@ function HeaderMobileDrawer({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.4, ease: PREMIUM_EASE }}
-      className="border-t border-[rgba(48,76,61,0.1)] bg-[#F4EBDD] p-4 md:hidden"
+      className="border-t border-[rgba(48,76,61,0.1)] bg-[#F5F0E6] p-4 md:hidden"
     >
       <div className="flex flex-col gap-3">
-        <Link href={goNaturalHomePath(locale)} className="font-inter text-sm font-medium text-[#304C3D]" onClick={onClose}>
+        <Link href={goNaturalHomePath(locale)} className="font-inter text-sm font-medium text-[#171717]" onClick={onClose}>
           {t("header.nav.home")}
         </Link>
-        <Link href={`/${locale}/products`} className="font-inter text-sm font-medium text-[#304C3D]" onClick={onClose}>
+        <Link href={goNaturalHomePath(locale)} className="font-inter text-sm font-medium text-[#171717]" onClick={onClose}>
           {t("header.shop")}
         </Link>
-        <Link href={`/${locale}/blog`} className="font-inter text-sm font-medium text-[#304C3D]" onClick={onClose}>
+        <Link href={`/${locale}/blog`} className="font-inter text-sm font-medium text-[#171717]" onClick={onClose}>
           {t("header.utility.expertAdvice")}
         </Link>
         <button
           type="button"
-          className="flex w-full items-center justify-between py-1 text-left font-inter text-sm font-medium text-[#304C3D]"
+          className="flex w-full items-center justify-between py-1 text-left font-inter text-sm font-medium text-[#171717]"
           onClick={() => setCategoriesOpen((o) => !o)}
         >
           {t("header.nav.categories")}
@@ -83,7 +83,7 @@ function HeaderMobileDrawer({
               <div key={tab.id}>
                 <Link
                   href={`/${locale}/category/${tab.parentSlug}`}
-                  className="block font-inter text-base font-semibold text-[#304C3D]"
+                  className="block font-inter text-base font-semibold text-[#171717]"
                   onClick={onClose}
                 >
                   {t(`header.tabs.${tab.labelKey}`, tab.labelKey)}
@@ -108,8 +108,8 @@ function HeaderMobileDrawer({
               </div>
             ))}
             <Link
-              href={`/${locale}/products?deals=1`}
-              className="block font-inter text-base font-semibold text-[#C9622B]"
+              href={`/${locale}/category/ofertas`}
+              className="block font-inter text-base font-semibold text-[#171717]"
               onClick={onClose}
             >
               {t("header.tabs.deals")}
@@ -150,7 +150,7 @@ function HeaderInner() {
           <div className="gn-rei-header__max gn-rei-mobile">
             <button
               type="button"
-              className="flex h-10 w-10 items-center justify-center text-[#304C3D]"
+              className="flex h-10 w-10 items-center justify-center text-[#171717]"
               aria-label="Menu"
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((o) => !o)}
@@ -174,14 +174,14 @@ function HeaderInner() {
                 className="gn-rei-mobile__logo"
               />
             </Link>
-            <Link href={`/${locale}/cart`} className="relative flex h-10 w-10 items-center justify-center text-[#304C3D]" aria-label={t("header.nav.cart")}>
+            <Link href={`/${locale}/cart`} className="relative flex h-10 w-10 items-center justify-center text-[#171717]" aria-label={t("header.nav.cart")}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" className="h-6 w-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.5 3.5h3l2.2 10.4a2 2 0 0 0 2 1.6h7.1a2 2 0 0 0 2-1.6l1.7-8.4H6.1" />
                 <circle cx="9" cy="20" r="1.25" />
                 <circle cx="18" cy="20" r="1.25" />
               </svg>
               {totalItems > 0 ? (
-                <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D9A441] px-0.5 text-[9px] font-bold text-[#304C3D]">
+                <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D9A441] px-0.5 text-[9px] font-bold text-[#171717]">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               ) : null}

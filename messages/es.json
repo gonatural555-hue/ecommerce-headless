@@ -468,6 +468,42 @@
     "segmentMountainSnow": "Montaña y nieve",
     "segmentOutdoorAdventure": "Outdoor y aventura",
     "segmentWaterSports": "Deportes acuáticos",
+    "heroCategoryCarouselPrevAria": "Categorías anteriores",
+    "heroCategoryCarouselNextAria": "Siguientes categorías",
+    "heroCategoryCards": {
+      "campamento": {
+        "description": "Esenciales para campamento, rutas, escapadas y vida al aire libre.",
+        "cta": "Explorar campamento"
+      },
+      "escalada": {
+        "description": "Ropa y equipo técnico para escalada en roca, altura y montaña.",
+        "cta": "Explorar escalada"
+      },
+      "ciclismo": {
+        "description": "Equipamiento funcional para ruta, montaña y pedaleo diario.",
+        "cta": "Explorar ciclismo"
+      },
+      "agua": {
+        "description": "Equipo funcional para agua, movimiento, sol y aventura costera.",
+        "cta": "Explorar agua"
+      },
+      "running": {
+        "description": "Capas, calzado y accesorios para running, trail y entrenamiento.",
+        "cta": "Explorar running"
+      },
+      "nieve": {
+        "description": "Ropa, calzado y equipo técnico para frío, nieve y senderos exigentes.",
+        "cta": "Explorar nieve"
+      },
+      "viaje": {
+        "description": "Esenciales ligeros para viajes, rutas y escapadas outdoor.",
+        "cta": "Explorar viaje"
+      },
+      "fishing": {
+        "description": "Equipamiento seleccionado para jornadas tranquilas, precisas y conectadas con el agua.",
+        "cta": "Explorar pesca"
+      }
+    },
     "sortLabel": "Ordenar",
     "sortFeatured": "Destacados",
     "sortPriceAsc": "Precio · menor a mayor",
@@ -481,6 +517,13 @@
     "searchNoResultsHint": "Probá otras palabras o volvé al catálogo completo.",
     "searchViewAll": "Ver todos los productos",
     "catalogTitle": "Todos los productos",
+    "membershipPromo": {
+      "title": "Beneficios para nuevos miembros",
+      "description": "Obtén un 15% de descuento en productos seleccionados al crear tu cuenta y comenzar tu próxima aventura.",
+      "descriptionSecondary": "Accede además a novedades, recomendaciones y lanzamientos exclusivos.",
+      "cta": "Crear cuenta",
+      "imageAlt": "15% de descuento para nuevos miembros Go Natural"
+    },
     "catalogDescription": "Equipamiento outdoor funcional para viajar ligero y moverte libre.",
     "readMore": "Leer más",
     "filtersLabel": "Filtros",
@@ -2196,7 +2239,15 @@
       "cycling-running": "Ciclismo / Running",
       "men": "Hombre",
       "women": "Mujer",
-      "kids": "Niños"
+      "kids": "Niños",
+      "campamento-senderismo": "Campamento y senderismo",
+      "escalada": "Escalada",
+      "ciclismo": "Ciclismo",
+      "agua": "Agua",
+      "running": "Running",
+      "nieve": "Nieve",
+      "viaje": "Viaje",
+      "ofertas": "Ofertas"
     }
   },
   "accountPage": {

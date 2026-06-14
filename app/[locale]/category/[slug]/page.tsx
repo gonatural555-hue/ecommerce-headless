@@ -18,6 +18,7 @@ import { buildCatalogFilterCategories } from "@/lib/plp-filter-categories";
 import { buildCategoryPageFilterChips } from "@/lib/plp-active-filters";
 import { getColorImageMapsForProducts } from "@/lib/plp-product-color-images";
 import { resolveCategoryHeroKind } from "@/lib/category-hero-theme";
+import { getCategoryHeroBackgroundImage } from "@/lib/products-hero-categories";
 
 type Props = {
   params: Promise<{
@@ -37,14 +38,14 @@ function parseSort(raw: string | undefined): (typeof SORT_KEYS)[number] {
 }
 
 const CATEGORY_HERO_IMAGES: Record<string, string> = {
-  "mountain-snow": "/assets/images/categories/mountain-snow.webp",
-  "water-sports": "/assets/images/categories/water-sports.webp",
-  "outdoor-adventure": "/assets/images/hero/storysection.webp",
+  fishing: "/assets/images/hero/products/fishing.webp",
+  "mountain-snow": "/assets/images/hero/products/snow.webp",
+  "water-sports": "/assets/images/hero/products/surf.webp",
+  "outdoor-adventure": "/assets/images/hero/products/camping.webp",
+  "active-sports": "/assets/images/hero/products/camping.webp",
   "cycling-running": "/assets/images/categories/cycling.webp",
-  fishing: "/assets/images/hero/fishin-hero.webp",
   "fishing-equipment": "/assets/images/hero/equipo-pesca.webp",
   "fishing-gadgets": "/assets/images/hero/accesorios-pesca.webp",
-  "active-sports": "/assets/images/categories/active-sports.webp",
   trekking: "/assets/images/hero/trekking.webp",
   "camping-survival-gear": "/assets/images/hero/camping-outdoor.webp",
   "outdoor-lighting": "/assets/images/hero/iluminacion-outdoor.webp",
@@ -248,16 +249,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       : `${categoryLabel}`;
 
   const visualKind = resolveCategoryHeroKind(category);
-  const parentSlugs = [
-    "fishing",
-    "mountain-snow",
-    "water-sports",
-    "outdoor-adventure",
-    "active-sports",
-  ] as const;
-  const isRootParent =
-    !category.parentSlug &&
-    parentSlugs.includes(category.slug as (typeof parentSlugs)[number]);
+  const isRootParent = !category.parentSlug;
   const eyebrowLabel = isRootParent
     ? t("homeBrandHero.eyebrow")
     : t(
@@ -316,6 +308,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         subtitle={heroSubtitle}
         ctaLabel={t("homePage.ctaProducts")}
         visualKind={visualKind}
+        backgroundImage={getCategoryHeroBackgroundImage(visualKind, slug)}
       />
 
       <div

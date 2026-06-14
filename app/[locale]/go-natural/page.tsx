@@ -11,18 +11,22 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const messages = await getMessages(locale);
-  const seo = messages.seo?.home;
+  const homeSeo = messages.seo?.home;
+  const productsSeo = messages.seo?.products;
 
   return buildMetadata({
     locale,
-    title: seo?.title,
-    description: seo?.description,
+    title: homeSeo?.title,
+    description: [homeSeo?.description, productsSeo?.description]
+      .filter(Boolean)
+      .join(" "),
     pathByLocale: {
       en: `/en/${BRAND_SEGMENTS.goNatural}`,
       es: `/es/${BRAND_SEGMENTS.goNatural}`,
       fr: `/fr/${BRAND_SEGMENTS.goNatural}`,
       it: `/it/${BRAND_SEGMENTS.goNatural}`,
     },
+    ogImage: "/assets/images/hero/productsbanner.webp",
   });
 }
 

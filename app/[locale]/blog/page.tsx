@@ -93,7 +93,6 @@ export default async function BlogPage({
     : entries;
 
   const tagline = journal?.tagline ?? "";
-  const manifesto = journal?.manifesto ?? t("blog.intro");
   const blogTitle = t("blog.title");
   const blogHeroAriaLabel = blogTitle.split("\n")[0]?.trim() || blogTitle;
 
@@ -122,17 +121,7 @@ export default async function BlogPage({
         coverImageAlt={blogHeroAriaLabel}
       />
 
-      <section className="border-b border-earth-brown/12 bg-soft-stone py-20 md:py-28 lg:py-32">
-        <ScrollReveal>
-          <p className="mx-auto max-w-2xl px-6 text-center font-display text-lg font-light leading-relaxed tracking-tight text-dark-base md:text-xl md:leading-relaxed">
-            {manifesto}
-          </p>
-        </ScrollReveal>
-      </section>
-
-      <ScrollReveal>
-        <BlogHero {...blogHeroProps} />
-      </ScrollReveal>
+      <BlogHero {...blogHeroProps} />
 
       {featured ? (
         <FeaturedStory

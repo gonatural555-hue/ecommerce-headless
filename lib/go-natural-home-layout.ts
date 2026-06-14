@@ -24,7 +24,7 @@ const ZERO: ElementOffset = { x: 0, y: 0 };
 
 export const DEFAULT_GO_NATURAL_HOME_LAYOUT: GoNaturalHomeLayout = {
   header: { x: 0, y: 0 },
-  hero: { x: -320, y: 71 },
+  hero: { x: 0, y: 0 },
 };
 
 function parseOffset(raw: unknown): ElementOffset {

@@ -52,10 +52,11 @@ export function GoNaturalHomeLayoutProvider({
 
   const offsetStyle = useCallback(
     (id: GoNaturalHomeLayoutElementId): CSSProperties | undefined => {
+      if (!isDirector) return undefined;
       if (id === "hero" && !isHomeGn) return undefined;
       return elementOffsetTransform(layout[id]);
     },
-    [isHomeGn, layout]
+    [isDirector, isHomeGn, layout]
   );
 
   const value = useMemo(

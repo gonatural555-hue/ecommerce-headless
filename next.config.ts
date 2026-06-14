@@ -19,11 +19,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/:locale/category/running",
-        destination: "/:locale/category/cycling-running",
-        permanent: true,
-      },
-      {
         source: "/:locale/category/sleeping-systems",
         destination: "/:locale/category/camping-survival-gear",
         permanent: true,

@@ -3,20 +3,20 @@
  */
 
 :root {
-  --gn-rei-utility-bg: #222222;
-  --gn-rei-utility-text: rgba(255, 255, 255, 0.72);
-  --gn-rei-utility-text-active: #ffffff;
-  --gn-rei-band-bg: #f4ebdd;
-  --gn-rei-ink: #304c3d;
-  --gn-rei-border: rgba(48, 76, 61, 0.14);
+  --gn-rei-utility-bg: #f5f0e6;
+  --gn-rei-utility-text: #171717;
+  --gn-rei-utility-text-active: #171717;
+  --gn-rei-band-bg: #f5f0e6;
+  --gn-rei-ink: #171717;
+  --gn-rei-link: #171717;
+  --gn-rei-border: rgba(23, 23, 23, 0.14);
   --gn-rei-category-border-bottom: #6e1f28;
-  --gn-rei-deals: #c9622b;
+  --gn-rei-deals: #171717;
   --gn-rei-dropdown-width: 480px;
 }
 
 .gn-rei-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   width: 100%;
   overflow: visible;
@@ -53,6 +53,7 @@
   color: var(--gn-rei-utility-text);
   font-size: 11px;
   line-height: 1;
+  border-bottom: 1px solid rgba(23, 23, 23, 0.08);
 }
 
 @media (min-width: 768px) {
@@ -117,7 +118,7 @@
 }
 
 .gn-rei-utility__locale--active {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(23, 23, 23, 0.08);
   color: var(--gn-rei-utility-text-active);
 }
 
@@ -166,7 +167,8 @@
 }
 
 .gn-rei-main__shop {
-  color: var(--gn-rei-ink);
+  position: relative;
+  color: var(--gn-rei-link);
   font-size: 1em;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -175,8 +177,33 @@
   white-space: nowrap;
 }
 
-.gn-rei-main__shop:hover {
-  opacity: 0.85;
+.gn-rei-main__shop::after,
+.gn-rei-categories__tab:not(.gn-rei-categories__tab--open)::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gn-rei-main__shop::after {
+  left: 0;
+  right: 0;
+  bottom: -3px;
+}
+
+.gn-rei-main__shop:hover::after,
+.gn-rei-categories__tab:not(.gn-rei-categories__tab--open):hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gn-rei-main__shop::after,
+  .gn-rei-categories__tab:not(.gn-rei-categories__tab--open)::after {
+    transition: none;
+  }
 }
 
 .gn-rei-main__search-wrap {
@@ -191,7 +218,7 @@
   max-width: 640px;
   margin-inline: auto;
   overflow: hidden;
-  border: 1px solid rgba(48, 76, 61, 0.22);
+  border: 1px solid rgba(23, 23, 23, 0.22);
   border-radius: 4px;
   background: #ffffff;
 }
@@ -208,7 +235,7 @@
 }
 
 .gn-rei-main__search-input::placeholder {
-  color: rgba(48, 76, 61, 0.45);
+  color: rgba(23, 23, 23, 0.45);
 }
 
 .gn-rei-main__search-btn {
@@ -219,12 +246,12 @@
   border: none;
   background: transparent;
   padding: 10px 14px;
-  color: rgba(48, 76, 61, 0.55);
+  color: rgba(23, 23, 23, 0.55);
   cursor: pointer;
 }
 
 .gn-rei-main__search-btn:hover {
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
 }
 
 .gn-rei-main__utils {
@@ -241,7 +268,7 @@
   border: none;
   background: transparent;
   padding: 0;
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
   font-size: 13px;
   font-family: inherit;
   font-weight: 500;
@@ -283,7 +310,7 @@
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
   overflow: visible;
-  border-top: 1px solid rgba(48, 76, 61, 0.1);
+  border-top: 1px solid rgba(23, 23, 23, 0.1);
   border-bottom: none;
 }
 
@@ -316,30 +343,29 @@
 }
 
 .gn-rei-categories__tab {
+  position: relative;
   display: block;
   border: none;
   background: transparent;
   padding: 12px 16px;
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
+  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 200ms ease;
 }
 
-.gn-rei-categories__tab:hover {
-  color: rgba(48, 76, 61, 0.75);
+.gn-rei-categories__tab:not(.gn-rei-categories__tab--open)::after {
+  left: 16px;
+  right: 16px;
+  bottom: 10px;
 }
 
 .gn-rei-categories__tab--deals {
-  color: var(--gn-rei-deals);
+  color: var(--gn-rei-link);
   font-weight: 600;
-}
-
-.gn-rei-categories__tab--deals:hover {
-  color: #a84e22;
 }
 
 .gn-rei-categories__tab--open {
@@ -348,7 +374,7 @@
   border: 1px solid var(--gn-rei-ink);
   border-bottom: none;
   background: #ffffff;
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
   margin-bottom: -1px;
   padding-bottom: 13px;
 }
@@ -389,7 +415,7 @@
 .gn-rei-dropdown__all {
   display: inline-block;
   margin-bottom: 14px;
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -415,14 +441,14 @@
 .gn-rei-dropdown__link {
   display: block;
   padding: 4px 0;
-  color: rgba(48, 76, 61, 0.82);
+  color: rgba(23, 23, 23, 0.82);
   font-size: 13px;
   line-height: 1.35;
   text-decoration: none;
 }
 
 .gn-rei-dropdown__link:hover {
-  color: var(--gn-rei-ink);
+  color: var(--gn-rei-link);
   text-decoration: underline;
 }
 

@@ -6,7 +6,10 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
-import { goNaturalHomePath } from "@/lib/routing/brands";
+import {
+  goNaturalCatalogPath,
+  goNaturalHomePath,
+} from "@/lib/routing/brands";
 
 type Props = {
   locale: Locale;
@@ -32,8 +35,8 @@ export default function HeaderMainRow({
     const q = query.trim();
     router.push(
       q
-        ? `/${locale}/products?q=${encodeURIComponent(q)}`
-        : `/${locale}/products`
+        ? `${goNaturalCatalogPath(locale)}?q=${encodeURIComponent(q)}`
+        : goNaturalHomePath(locale)
     );
   };
 
@@ -50,7 +53,7 @@ export default function HeaderMainRow({
               className="gn-rei-main__logo"
             />
           </Link>
-          <Link href={`/${locale}/products`} className="gn-rei-main__shop">
+          <Link href={goNaturalHomePath(locale)} className="gn-rei-main__shop">
             {t("header.shop")}
           </Link>
         </div>

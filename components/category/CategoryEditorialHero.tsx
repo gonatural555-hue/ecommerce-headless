@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
@@ -9,6 +10,7 @@ import {
   type CategoryHeroKind,
 } from "@/lib/category-hero-theme";
 import { GN_EASE_PREMIUM, GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
+import { GN_HERO_CTA_CLASS, gnHeroCtaStyle } from "@/lib/ui/gn-hero-cta";
 
 type CategoryEditorialHeroProps = {
   locale: Locale;
@@ -18,6 +20,7 @@ type CategoryEditorialHeroProps = {
   subtitle: string;
   ctaLabel: string;
   visualKind: CategoryHeroKind;
+  backgroundImage?: string;
 };
 
 const easeOut = GN_EASE_PREMIUM;
@@ -187,6 +190,7 @@ export default function CategoryEditorialHero({
   subtitle,
   ctaLabel,
   visualKind,
+  backgroundImage,
 }: CategoryEditorialHeroProps) {
   const reduceMotion = useReducedMotion() ?? false;
   const off = reduceMotion;
@@ -219,11 +223,27 @@ export default function CategoryEditorialHero({
       className="relative isolate overflow-hidden border-b border-[rgba(46,74,54,0.08)] bg-[#F4EBDD]"
       aria-labelledby="category-hero-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(217,164,65,0.06),transparent_50%)]"
-        aria-hidden
-      />
-      <HeroGraphic kind={visualKind} accent={accent} reduceMotion={off} />
+      {backgroundImage ? (
+        <>
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="gn-category-hero__photo"
+          />
+          <div className="gn-category-hero__photo-overlay" aria-hidden />
+        </>
+      ) : (
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(217,164,65,0.06),transparent_50%)]"
+          aria-hidden
+        />
+      )}
+      {!backgroundImage ? (
+        <HeroGraphic kind={visualKind} accent={accent} reduceMotion={off} />
+      ) : null}
 
       <motion.div
         className={`relative z-[1] mx-auto w-full max-w-[1200px] px-[18px] pb-14 md:px-8 md:pb-16 lg:px-12 lg:pb-20 ${GN_HERO_TOP_PAD}`}
@@ -234,7 +254,11 @@ export default function CategoryEditorialHero({
         <div className="mx-auto flex max-w-[920px] flex-col items-center text-center">
           <motion.p
             variants={itemVariants}
-            className="font-inter text-[10px] font-semibold uppercase tracking-[0.28em] text-[rgba(46,74,54,0.52)] md:text-[11px]"
+            className={`font-inter text-[10px] font-semibold uppercase tracking-[0.28em] md:text-[11px] ${
+              backgroundImage
+                ? "text-white"
+                : "text-[rgba(46,74,54,0.52)]"
+            }`}
           >
             {eyebrow}
           </motion.p>
@@ -250,7 +274,9 @@ export default function CategoryEditorialHero({
 
           <motion.p
             variants={itemVariants}
-            className="font-inter mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[rgba(46,74,54,0.72)] md:mt-6 md:text-lg"
+            className={`font-inter mt-5 max-w-2xl text-pretty text-base leading-relaxed md:mt-6 md:text-lg ${
+              backgroundImage ? "text-white" : "text-[rgba(46,74,54,0.72)]"
+            }`}
           >
             {subtitle}
           </motion.p>
@@ -258,16 +284,10 @@ export default function CategoryEditorialHero({
           <motion.div variants={itemVariants} className="mt-8 md:mt-10">
             <Link
               href={ctaHref}
-              className="group inline-flex min-h-[52px] items-center justify-center rounded-full px-9 py-3 font-inter text-[12px] font-semibold uppercase tracking-[0.14em] shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none md:min-h-[56px] md:px-10 md:text-[13px]"
-              style={{
-                backgroundColor: accent,
-                color: ctaFg,
-                boxShadow: `inset 0 1px 0 rgba(255,255,255,0.2), 0 12px 40px -12px ${accent}55`,
-              }}
+              className={GN_HERO_CTA_CLASS}
+              style={gnHeroCtaStyle({ bg: accent, fg: ctaFg })}
             >
-              <span className="motion-safe:transition motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:shadow-[0_18px_48px_-14px_rgba(46,74,54,0.18)]">
-                {ctaLabel}
-              </span>
+              {ctaLabel}
             </Link>
           </motion.div>
         </div>

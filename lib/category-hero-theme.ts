@@ -20,6 +20,20 @@ function isKnownParent(slug: string): slug is CategoryHeroKind {
   return (KNOWN as readonly string[]).includes(slug);
 }
 
+const EDITORIAL_HERO_KIND: Record<string, CategoryHeroKind> = {
+  "campamento-senderismo": "outdoor-adventure",
+  escalada: "outdoor-adventure",
+  ciclismo: "active-sports",
+  agua: "water-sports",
+  running: "active-sports",
+  nieve: "mountain-snow",
+  viaje: "outdoor-adventure",
+  ofertas: "outdoor-adventure",
+  men: "outdoor-adventure",
+  women: "outdoor-adventure",
+  kids: "outdoor-adventure",
+};
+
 /**
  * Resuelve la familia visual (acento + gráfica) desde la categoría actual.
  * Las subcategorías heredan el tema del padre.
@@ -28,6 +42,10 @@ export function resolveCategoryHeroKind(category: {
   slug: string;
   parentSlug?: string;
 }): CategoryHeroKind {
+  if (EDITORIAL_HERO_KIND[category.slug]) {
+    return EDITORIAL_HERO_KIND[category.slug]!;
+  }
+
   const root = category.parentSlug ?? category.slug;
   if (isKnownParent(root)) return root;
   if (category.slug.startsWith("fishing")) return "fishing";

@@ -4,7 +4,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
-import { GN_EASE_PREMIUM, GN_HERO_TOP_PAD } from "@/lib/ui/gonatural-design";
+import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
+import {
+  GN_HERO_CTA_CLASS,
+  GN_HERO_CTA_HOME,
+  gnHeroCtaStyle,
+} from "@/lib/ui/gn-hero-cta";
 import { splitHeroLineWithAccent } from "@/lib/ui/hero-title-accent";
 import { useGoNaturalHomeLayout } from "@/context/GoNaturalHomeLayoutContext";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
@@ -19,11 +24,7 @@ export type HomeBrandHeroProps = {
 
 const easeOut = GN_EASE_PREMIUM;
 
-const heroCtaBase =
-  "inline-flex h-[56px] min-h-[56px] items-center justify-center rounded-full border border-black px-9 text-center font-inter text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EBDD] motion-reduce:transition-none md:h-[58px] md:min-h-[58px] md:px-10 md:text-[13px]";
-
-/** CTAs Hero — negro / blanco, invierte en hover */
-const heroCtaClass = `${heroCtaBase} bg-black text-white hover:bg-white hover:text-black`;
+const homeCtaStyle = gnHeroCtaStyle(GN_HERO_CTA_HOME);
 
 /** Convierte títulos en 3 líneas (p. ej. EN) en 2 bloques editoriales sin tocar JSON. */
 function editorialHeadlineFromTitle(title: string): { line1: string; line2: string | null } {
@@ -47,7 +48,7 @@ export default function HomeBrandHero({
   ctaSecondary,
 }: HomeBrandHeroProps) {
   const t = useTranslations();
-  const { offsetStyle: homeLayoutOffset } = useGoNaturalHomeLayout();
+  const { offsetStyle: homeLayoutOffset, isDirector } = useGoNaturalHomeLayout();
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
 
@@ -74,9 +75,9 @@ export default function HomeBrandHero({
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-[#F4EBDD]"
+      className="relative isolate flex min-h-[100svh] w-full flex-col items-center overflow-x-clip bg-[#F4EBDD]"
       aria-label="Hero"
-      style={homeLayoutOffset("hero")}
+      style={isDirector ? homeLayoutOffset("hero") : undefined}
       data-home-layout-element="hero"
     >
       <div
@@ -84,13 +85,13 @@ export default function HomeBrandHero({
         aria-hidden
       />
       <motion.div
-        className={`relative z-[1] mx-auto flex min-h-[100svh] w-full min-w-0 max-w-[1080px] flex-col px-[18px] pb-3 md:px-[28px] md:pb-4 lg:px-[48px] ${GN_HERO_TOP_PAD}`}
+        className="relative z-[1] mx-auto flex min-h-[100svh] w-full min-w-0 max-w-[1080px] flex-col items-center px-[18px] pb-3 pt-[env(safe-area-inset-top,0px)] md:px-[28px] md:pb-4 lg:px-[48px]"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        <div className="flex min-h-0 flex-1 flex-col justify-between gap-3 md:gap-4">
-          <div className="flex w-full max-w-[980px] flex-col items-center">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="mx-auto flex w-full max-w-[980px] flex-1 flex-col items-center justify-center gap-3 md:gap-4">
             <motion.h1 variants={itemVariants} className="gn-hero-editorial-two-line w-full">
               {splitHeroLineWithAccent(
                 line1,
@@ -110,10 +111,18 @@ export default function HomeBrandHero({
               variants={itemVariants}
               className="mt-6 flex w-full max-w-md flex-col items-stretch justify-center gap-4 sm:max-w-none sm:flex-row sm:justify-center md:mt-7"
             >
-              <Link href={`/${locale}/products`} className={heroCtaClass}>
+              <Link
+                href={`/${locale}/products`}
+                className={GN_HERO_CTA_CLASS}
+                style={homeCtaStyle}
+              >
                 {ctaPrimary}
               </Link>
-              <Link href={`/${locale}/blog`} className={heroCtaClass}>
+              <Link
+                href={`/${locale}/blog`}
+                className={GN_HERO_CTA_CLASS}
+                style={homeCtaStyle}
+              >
                 {ctaSecondary}
               </Link>
             </motion.div>

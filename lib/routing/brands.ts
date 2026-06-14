@@ -15,6 +15,10 @@ export function goNaturalHomePath(locale: Locale): string {
   return `/${locale}/${BRAND_SEGMENTS.goNatural}`;
 }
 
+export function goNaturalCatalogPath(locale: Locale): string {
+  return `/${locale}/products`;
+}
+
 export function goodIdeasHomePath(locale: Locale): string {
   return `/${locale}/${BRAND_SEGMENTS.goodIdeas}`;
 }

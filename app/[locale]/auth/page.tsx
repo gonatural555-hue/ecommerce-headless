@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthForm from "@/components/AuthForm";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { goNaturalHomePath } from "@/lib/routing/brands";
 import { useUser } from "@/context/UserContext";
 
 function AuthPageContent() {
@@ -46,7 +47,7 @@ function AuthPageContent() {
       <div className="max-w-md mx-auto">
         {/* Back button */}
         <Link
-          href={`/${locale}/products`}
+          href={goNaturalHomePath(locale)}
           className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-text-primary transition-colors duration-200 mb-8"
         >
           <svg
