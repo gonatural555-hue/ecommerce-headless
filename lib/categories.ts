@@ -125,6 +125,18 @@ export const CATEGORIES: Category[] = [
     description: "Equipamiento profesional para buceo y natación.",
     parentSlug: "water-sports",
   },
+  {
+    slug: "paddlesurf",
+    name: "Paddle Surf",
+    description: "Tablas de paddle surf hinchables y accesorios para SUP.",
+    parentSlug: "water-sports",
+  },
+  {
+    slug: "water-footwear",
+    name: "Water Footwear",
+    description: "Calzado técnico para agua, playa, pesca y actividades acuáticas.",
+    parentSlug: "water-sports",
+  },
   // Outdoor & Adventure subcategorías
   {
     slug: "trekking",
@@ -201,6 +213,7 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-cycling-clothes-002": ["cycling-running"], // Thermal Cycling Jacket – Long-Ride Weather Layer
   "gn-cycling-017": ["cycling-running"], // ROCKBROS Smart Bluetooth Audio Cycling Sunglasses
   "gn-cycling-018": ["cycling-running"], // ROCKBROS PU Leather Waterproof Motorcycle Gloves
+  "gn-cycling-019": ["cycling-running"], // ROCKBROS Luz LED Delantera RHL 400 — 2000mAh USB-C
   // Water Sports - Diving & Swimming Equipment
   "gn-water-001": ["diving-swimming-equipment"], // Máscara de Snorkel Full Face con Soporte para Cámara
   "gn-water-002": ["diving-swimming-equipment"], // Calcetines de Agua de Neopreno 3 mm
@@ -209,6 +222,8 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-water-005": ["diving-swimming-equipment"], // Boya de Natación Inflable con Bolsa Estanca
   "gn-water-006": ["diving-swimming-equipment"], // Mochila / Bolsa Seca Impermeable PVC
   "gn-water-007": ["diving-swimming-equipment"], // Mini Tanque de Buceo TRIMIX 0.5L con Máscara – Snorkel y Buceo Recreativo
+  "gn-water-009": ["paddlesurf"], // TOURUS Tabla de Paddle Surf Hinchable Touring 11' — Kit Completo
+  "gn-water-010": ["water-footwear"], // Uway Zapatos de Agua Transpirables Five-Toe — Pesca y Playa
   // Outdoor & Adventure
   "gn-outdoor-001": ["camping-survival-gear"], // Tienda de Campaña Ultraligera 1–2 Personas (Económica)
   "gn-outdoor-002": ["camping-survival-gear"], // Tienda Naturehike Cloud Up (Premium)

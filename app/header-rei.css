@@ -157,6 +157,7 @@
   grid-template-columns: subgrid;
   align-items: center;
   padding-block: 14px;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
@@ -172,17 +173,32 @@
   gap: 10px;
   font-size: 20px;
   line-height: 1;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.gn-rei-main__brand > a:first-child {
+  display: flex;
+  align-items: center;
+  height: 3.5em;
+  overflow: visible;
+  /* Reserva el ancho extra del scale(2) sin agrandar la altura del header */
+  margin-right: calc(3.5em * 2.5);
 }
 
 .gn-rei-main__logo {
   display: block;
   height: 3.5em;
   width: auto;
+  transform: scale(2);
+  transform-origin: left center;
 }
 
 .gn-rei-main__shop {
   position: relative;
   color: var(--gn-rei-link);
+  font-family: var(--font-tan-nimbus), Georgia, "Times New Roman", serif;
   font-size: 1em;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -503,6 +519,7 @@
   justify-content: space-between;
   gap: 8px;
   padding-block: 10px;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
@@ -511,7 +528,16 @@
   }
 }
 
+.gn-rei-mobile > a:has(.gn-rei-mobile__logo) {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  overflow: visible;
+}
+
 .gn-rei-mobile__logo {
   height: 36px;
   width: auto;
+  transform: scale(2);
+  transform-origin: center center;
 }

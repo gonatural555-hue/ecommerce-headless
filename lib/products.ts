@@ -2776,6 +2776,143 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
+    id: "gn-cycling-019",
+    brand: "ROCKBROS",
+    title:
+      "ROCKBROS Luz LED Delantera RHL 400 para MTB — 2000mAh, USB-C, Aluminio",
+    price: 15.99,
+    category: "Cycling Equipment",
+    images: ["/assets/images/products/gn-cycling-019/image.webp"],
+    shortDescription:
+      "Faro delantero LED ultraligero en aluminio, 2000mAh, carga USB-C y resistente a la lluvia — oferta por tiempo limitado.",
+    description:
+      "Luz delantera ROCKBROS RHL 400 para bicicleta de montaña y ruta. Cuerpo compacto en aluminio ultraligero, batería integrada de 2000mAh, recarga USB tipo C y diseño a prueba de lluvia. Montaje rápido en manillar con abrazadera incluida. Oferta por tiempo limitado a precio especial en esta ficha.",
+    longDescription: [
+      "El faro ROCKBROS RHL 400 está pensado para salidas nocturnas en MTB, gravel y carretera cuando necesitás luz fiable sin añadir peso al manillar.",
+      "Su carcasa rectangular en aluminio ultraligero integra un botón superior de encendido y modos, con la marca ROCKBROS y la referencia RHL 400 grabadas en el lateral.",
+      "La batería integrada de 2000mAh ofrece autonomía para tramos largos, con recarga práctica mediante puerto USB tipo C según ficha del proveedor.",
+      "El diseño a prueba de lluvia ayuda a mantener el rendimiento en condiciones húmedas, lluvia ligera y rutas con salpicaduras.",
+      "Incluye montaje en manillar con abrazadera de liberación rápida para instalar y retirar la luz sin herramientas.",
+      "Precio promocional por tiempo limitado exclusivo en esta ficha de producto.",
+    ],
+    features: [
+      "Marca ROCKBROS — modelo RHL 400",
+      "Luz LED delantera para bicicleta de montaña y ruta",
+      "Carcasa de aluminio ultraligero",
+      "Batería integrada 2000mAh",
+      "Recarga USB tipo C",
+      "Resistente a la lluvia (según ficha del proveedor)",
+      "Montaje en manillar con abrazadera incluida",
+      "Oferta por tiempo limitado en PDP",
+    ],
+    translations: {
+      en: {
+        title:
+          "ROCKBROS RHL 400 LED Front Bike Light — 2000mAh, USB-C, Aluminum",
+        shortDescription:
+          "Ultralight aluminum LED front light, 2000mAh, USB-C charging, and rain-resistant — limited-time offer.",
+        description:
+          "ROCKBROS RHL 400 front light for mountain and road cycling. Compact ultralight aluminum body, built-in 2000mAh battery, USB Type-C charging, and rain-resistant design. Quick handlebar mount included. Limited-time offer at a special price on this page.",
+        longDescription: [
+          "The ROCKBROS RHL 400 is built for night rides on MTB, gravel, and road when you need dependable light without adding handlebar weight.",
+          "Its compact rectangular aluminum housing features a top power/mode button with ROCKBROS and RHL 400 branding on the side.",
+          "The built-in 2000mAh battery supports longer segments with practical USB Type-C recharging per the supplier listing.",
+          "Rain-resistant design helps maintain performance in wet conditions, light rain, and splash-heavy routes.",
+          "Includes a quick-release handlebar strap mount for tool-free installation and removal.",
+          "Limited-time promotional price exclusive to this product page.",
+        ],
+        features: [
+          "ROCKBROS brand — RHL 400 model",
+          "LED front light for mountain and road cycling",
+          "Ultralight aluminum housing",
+          "Built-in 2000mAh battery",
+          "USB Type-C charging",
+          "Rain resistant (per supplier listing)",
+          "Handlebar mount with strap included",
+          "Limited-time offer on PDP",
+        ],
+      },
+      es: {
+        title:
+          "ROCKBROS Luz LED Delantera RHL 400 para MTB — 2000mAh, USB-C, Aluminio",
+        shortDescription:
+          "Faro delantero LED ultraligero en aluminio, 2000mAh, carga USB-C y resistente a la lluvia — oferta por tiempo limitado.",
+        description:
+          "Luz delantera ROCKBROS RHL 400 para bicicleta de montaña y ruta. Cuerpo compacto en aluminio ultraligero, batería integrada de 2000mAh, recarga USB tipo C y diseño a prueba de lluvia. Montaje rápido en manillar con abrazadera incluida. Oferta por tiempo limitado a precio especial en esta ficha.",
+        longDescription: [
+          "El faro ROCKBROS RHL 400 está pensado para salidas nocturnas en MTB, gravel y carretera cuando necesitás luz fiable sin añadir peso al manillar.",
+          "Su carcasa rectangular en aluminio ultraligero integra un botón superior de encendido y modos, con la marca ROCKBROS y la referencia RHL 400 grabadas en el lateral.",
+          "La batería integrada de 2000mAh ofrece autonomía para tramos largos, con recarga práctica mediante puerto USB tipo C según ficha del proveedor.",
+          "El diseño a prueba de lluvia ayuda a mantener el rendimiento en condiciones húmedas, lluvia ligera y rutas con salpicaduras.",
+          "Incluye montaje en manillar con abrazadera de liberación rápida para instalar y retirar la luz sin herramientas.",
+          "Precio promocional por tiempo limitado exclusivo en esta ficha de producto.",
+        ],
+        features: [
+          "Marca ROCKBROS — modelo RHL 400",
+          "Luz LED delantera para bicicleta de montaña y ruta",
+          "Carcasa de aluminio ultraligero",
+          "Batería integrada 2000mAh",
+          "Recarga USB tipo C",
+          "Resistente a la lluvia (según ficha del proveedor)",
+          "Montaje en manillar con abrazadera incluida",
+          "Oferta por tiempo limitado en PDP",
+        ],
+      },
+      fr: {
+        title:
+          "Feu avant LED ROCKBROS RHL 400 VTT — 2000mAh, USB-C, Aluminium",
+        shortDescription:
+          "Feu avant LED ultraléger en aluminium, 2000mAh, charge USB-C et résistant à la pluie — offre limitée dans le temps.",
+        description:
+          "Feu avant ROCKBROS RHL 400 pour VTT et route. Corps compact en aluminium ultraléger, batterie intégrée 2000mAh, recharge USB Type-C et conception résistante à la pluie. Montage guidon rapide inclus. Offre limitée dans le temps sur cette fiche.",
+        longDescription: [
+          "Le feu ROCKBROS RHL 400 est conçu pour les sorties nocturnes en VTT, gravel et route lorsque vous avez besoin d'une lumière fiable sans alourdir le guidon.",
+          "Son boîtier aluminium compact intègre un bouton supérieur d'alimentation et de modes, avec le marquage ROCKBROS RHL 400 sur le côté.",
+          "La batterie intégrée 2000mAh permet des sorties plus longues avec recharge pratique en USB Type-C.",
+          "La conception résistante à la pluie aide à maintenir les performances par temps humide.",
+          "Montage guidon à sangle à dégagement rapide inclus.",
+          "Prix promotionnel limité dans le temps exclusif à cette fiche produit.",
+        ],
+        features: [
+          "Marque ROCKBROS — modèle RHL 400",
+          "Feu avant LED pour VTT et route",
+          "Boîtier aluminium ultraléger",
+          "Batterie intégrée 2000mAh",
+          "Charge USB Type-C",
+          "Résistant à la pluie (selon fiche fournisseur)",
+          "Montage guidon avec sangle incluse",
+          "Offre limitée dans le temps sur le PDP",
+        ],
+      },
+      it: {
+        title:
+          "Luce anteriore LED ROCKBROS RHL 400 MTB — 2000mAh, USB-C, Alluminio",
+        shortDescription:
+          "Luce anteriore LED ultraleggera in alluminio, 2000mAh, ricarica USB-C e resistente alla pioggia — offerta a tempo limitato.",
+        description:
+          "Luce anteriore ROCKBROS RHL 400 per mountain bike e strada. Corpo compatto in alluminio ultraleggero, batteria integrata 2000mAh, ricarica USB Type-C e design resistente alla pioggia. Montaggio manubrio rapido incluso. Offerta a tempo limitato su questa scheda.",
+        longDescription: [
+          "Il faro ROCKBROS RHL 400 è pensato per uscite notturne in MTB, gravel e strada quando serve luce affidabile senza appesantire il manubrio.",
+          "Il corpo rettangolare in alluminio integra un pulsante superiore di accensione e modalità, con marchio ROCKBROS RHL 400 sul lato.",
+          "La batteria integrata da 2000mAh supporta tratti lunghi con ricarica pratica via USB Type-C.",
+          "Il design resistente alla pioggia aiuta a mantenere le prestazioni con umidità e pioggia leggera.",
+          "Include montaggio manubrio con fascia a sgancio rapido.",
+          "Prezzo promozionale a tempo limitato esclusivo su questa scheda prodotto.",
+        ],
+        features: [
+          "Marca ROCKBROS — modello RHL 400",
+          "Luce anteriore LED per MTB e strada",
+          "Corpo in alluminio ultraleggero",
+          "Batteria integrata 2000mAh",
+          "Ricarica USB Type-C",
+          "Resistente alla pioggia (secondo scheda fornitore)",
+          "Montaggio manubrio con fascia inclusa",
+          "Offerta a tempo limitato sul PDP",
+        ],
+      },
+    },
+  },
+  {
     id: "gn-ski-snow-jacket-001",
     slug: "gn-ski-snow-jacket-001",
     title: "Alpine Shell Jacket — Quiet Winter Layer",
@@ -4049,6 +4186,334 @@ const PRODUCTS: Product[] = [
           "3 pinne incluse",
           "Kit di riparazione incluso",
           "Pagaia in alluminio inclusa",
+        ],
+      },
+    },
+  },
+  {
+    id: "gn-water-009",
+    brand: "TOURUS",
+    title: "TOURUS Tabla de Paddle Surf Hinchable Touring 11' — Kit Completo",
+    price: 150,
+    category: "Water Sports",
+    images: ["/assets/images/products/gn-water-009/image.webp"],
+    shortDescription:
+      "SUP hinchable tipo touring de 11' con acabado madera, kit completo y estabilidad para lagos, ríos y aguas abiertas.",
+    description:
+      "Tabla de paddle surf hinchable TOURUS TS-002S de 11' x 33'' x 6'', pensada para travesías y uso versátil en aguas tranquilas y ligeramente abiertas. Construcción drop-stitch con deck EVA antideslizante, sistema de tres aletas y pack completo listo para salir al agua.",
+    longDescription: [
+      "La TOURUS TS-002S es una tabla de paddle surf hinchable tipo touring que combina un acabado estético imitación madera con una construcción drop-stitch pensada para rigidez y estabilidad en el agua.",
+      "Con 11' de eslora y 33'' de ancho, ofrece una plataforma generosa para principiantes y paddlers intermedios que buscan equilibrio entre deslizamiento, control y comodidad en sesiones largas.",
+      "El deck incorpora una amplia zona de tracción EVA antideslizante y un sistema de elásticos en proa para asegurar equipo seco, mientras que el sistema de tres aletas mejora el seguimiento y la maniobrabilidad.",
+      "Pesa 14,3 kg inflada y se transporta enrollada en la mochila incluida, lo que la convierte en una opción portátil para escapadas a lagos, ríos y costas con oleaje suave.",
+      "El kit incluye pala ajustable de tres piezas, bomba manual de alta presión con manómetro, leash en espiral, tres quillas desmontables, mochila de transporte, kit de reparación y funda estanca para móvil.",
+      "Disponible en dos acabados de color visibles en ficha — Green y Gris — con garantía de fabricante de 5 años según especificaciones del proveedor.",
+    ],
+    features: [
+      "Modelo TS-002S — tipo SUP Touring",
+      "Construcción drop-stitch + PVC + EVA",
+      "Dimensiones: 11' x 33'' x 6'' (335 x 83,8 x 15 cm)",
+      "Peso de la tabla: 14,3 kg",
+      "Sistema de 3 aletas desmontables",
+      "Deck EVA antideslizante con elásticos de sujeción en proa",
+      "Uso recomendado: ríos, lagos, océano y aguas tranquilas",
+      "Garantía de 5 años (según ficha del proveedor)",
+      "Kit completo: pala, bomba con manómetro, leash, quillas, mochila, kit de reparación y funda estanca",
+      "Embalaje: caja de cartón corrugado de 7 capas (94 x 37 x 28 cm; peso bruto 15 kg)",
+    ],
+    variants: {
+      type: "color",
+      label: "Color",
+      default: "green",
+      options: [
+        { value: "green", label: "Green" },
+        { value: "gris", label: "Gris" },
+      ],
+    },
+    translations: {
+      en: {
+        title: "TOURUS 11' Inflatable Touring Paddle Board — Complete Kit",
+        shortDescription:
+          "11' touring inflatable SUP with wood-grain finish, full accessory kit, and stable platform for lakes, rivers, and open water.",
+        description:
+          "TOURUS TS-002S inflatable paddle board at 11' x 33'' x 6'', built for touring and versatile use on calm to lightly open water. Drop-stitch construction with anti-slip EVA deck, three-fin setup, and a complete ready-to-paddle kit.",
+        longDescription: [
+          "The TOURUS TS-002S is a touring-style inflatable SUP that pairs a wood-grain aesthetic with drop-stitch construction designed for on-water rigidity and stability.",
+          "At 11' long and 33'' wide, it offers a generous platform for beginners and intermediate paddlers who want a balance of glide, control, and comfort on longer sessions.",
+          "The deck features a large anti-slip EVA traction pad and front bungee storage, while the three-fin system improves tracking and maneuverability.",
+          "Weighing 14.3 kg inflated, it packs down into the included backpack for portable trips to lakes, rivers, and mellow coastal water.",
+          "The kit includes a three-piece adjustable paddle, high-pressure hand pump with gauge, coiled leash, three removable fins, carry backpack, repair kit, and waterproof phone pouch.",
+          "Available in two color finishes shown on the listing — Green and Grey — with a 5-year manufacturer warranty per supplier specifications.",
+        ],
+        features: [
+          "Model TS-002S — Touring SUP type",
+          "Drop-stitch + PVC + EVA construction",
+          "Dimensions: 11' x 33'' x 6'' (335 x 83.8 x 15 cm)",
+          "Board weight: 14.3 kg",
+          "Three removable fin system",
+          "Anti-slip EVA deck with front bungee storage",
+          "Recommended use: rivers, lakes, ocean, and calm water",
+          "5-year warranty (per supplier listing)",
+          "Complete kit: paddle, gauge pump, leash, fins, backpack, repair kit, and waterproof pouch",
+          "Packaging: 7-layer corrugated box (94 x 37 x 28 cm; 15 kg gross weight)",
+        ],
+      },
+      es: {
+        title: "TOURUS Tabla de Paddle Surf Hinchable Touring 11' — Kit Completo",
+        shortDescription:
+          "SUP hinchable tipo touring de 11' con acabado madera, kit completo y estabilidad para lagos, ríos y aguas abiertas.",
+        description:
+          "Tabla de paddle surf hinchable TOURUS TS-002S de 11' x 33'' x 6'', pensada para travesías y uso versátil en aguas tranquilas y ligeramente abiertas. Construcción drop-stitch con deck EVA antideslizante, sistema de tres aletas y pack completo listo para salir al agua.",
+        longDescription: [
+          "La TOURUS TS-002S es una tabla de paddle surf hinchable tipo touring que combina un acabado estético imitación madera con una construcción drop-stitch pensada para rigidez y estabilidad en el agua.",
+          "Con 11' de eslora y 33'' de ancho, ofrece una plataforma generosa para principiantes y paddlers intermedios que buscan equilibrio entre deslizamiento, control y comodidad en sesiones largas.",
+          "El deck incorpora una amplia zona de tracción EVA antideslizante y un sistema de elásticos en proa para asegurar equipo seco, mientras que el sistema de tres aletas mejora el seguimiento y la maniobrabilidad.",
+          "Pesa 14,3 kg inflada y se transporta enrollada en la mochila incluida, lo que la convierte en una opción portátil para escapadas a lagos, ríos y costas con oleaje suave.",
+          "El kit incluye pala ajustable de tres piezas, bomba manual de alta presión con manómetro, leash en espiral, tres quillas desmontables, mochila de transporte, kit de reparación y funda estanca para móvil.",
+          "Disponible en dos acabados de color visibles en ficha — Green y Gris — con garantía de fabricante de 5 años según especificaciones del proveedor.",
+        ],
+        features: [
+          "Modelo TS-002S — tipo SUP Touring",
+          "Construcción drop-stitch + PVC + EVA",
+          "Dimensiones: 11' x 33'' x 6'' (335 x 83,8 x 15 cm)",
+          "Peso de la tabla: 14,3 kg",
+          "Sistema de 3 aletas desmontables",
+          "Deck EVA antideslizante con elásticos de sujeción en proa",
+          "Uso recomendado: ríos, lagos, océano y aguas tranquilas",
+          "Garantía de 5 años (según ficha del proveedor)",
+          "Kit completo: pala, bomba con manómetro, leash, quillas, mochila, kit de reparación y funda estanca",
+          "Embalaje: caja de cartón corrugado de 7 capas (94 x 37 x 28 cm; peso bruto 15 kg)",
+        ],
+      },
+      fr: {
+        title: "TOURUS Planche de Paddle Gonflable Touring 11' — Kit Complet",
+        shortDescription:
+          "SUP gonflable touring 11' finition bois, kit complet et plateforme stable pour lacs, rivières et eaux ouvertes.",
+        description:
+          "Planche de paddle gonflable TOURUS TS-002S 11' x 33'' x 6'', conçue pour le touring et un usage polyvalent en eaux calmes à légèrement ouvertes. Construction drop-stitch, deck EVA antidérapant, système trois ailerons et kit complet prêt à pagayer.",
+        longDescription: [
+          "La TOURUS TS-002S est une planche de paddle gonflable type touring qui associe une esthétique effet bois à une construction drop-stitch pensée pour la rigidité et la stabilité sur l'eau.",
+          "Avec 11' de longueur et 33'' de largeur, elle offre une plateforme généreuse pour les débutants et paddlers intermédiaires recherchant un bon équilibre entre glisse, contrôle et confort.",
+          "Le deck intègre une large zone de traction EVA antidérapante et un système de sandows avant pour fixer l'équipement, tandis que le système trois ailerons améliore le cap et la maniabilité.",
+          "Pesant 14,3 kg gonflée, elle se range dans le sac à dos inclus pour des escapades portables vers lacs, rivières et côtes à houle légère.",
+          "Le kit comprend pagaie réglable trois pièces, pompe manuelle haute pression avec manomètre, leash spiralé, trois ailerons amovibles, sac de transport, kit de réparation et pochette étanche pour téléphone.",
+          "Disponible en deux finitions visibles sur la fiche — Green et Gris — avec garantie fabricant de 5 ans selon les spécifications du fournisseur.",
+        ],
+        features: [
+          "Modèle TS-002S — type SUP Touring",
+          "Construction drop-stitch + PVC + EVA",
+          "Dimensions : 11' x 33'' x 6'' (335 x 83,8 x 15 cm)",
+          "Poids de la planche : 14,3 kg",
+          "Système à 3 ailerons amovibles",
+          "Deck EVA antidérapant avec sandows avant",
+          "Usage recommandé : rivières, lacs, océan et eaux calmes",
+          "Garantie 5 ans (selon fiche fournisseur)",
+          "Kit complet : pagaie, pompe avec manomètre, leash, ailerons, sac, kit de réparation et pochette étanche",
+          "Emballage : carton ondulé 7 plis (94 x 37 x 28 cm ; poids brut 15 kg)",
+        ],
+      },
+      it: {
+        title: "TOURUS Tavola da Paddle Gonfiabile Touring 11' — Kit Completo",
+        shortDescription:
+          "SUP gonfiabile touring da 11' con finitura legno, kit completo e stabilità per laghi, fiumi e acque aperte.",
+        description:
+          "Tavola da paddle gonfiabile TOURUS TS-002S 11' x 33'' x 6'', pensata per touring e uso versatile in acque calme e leggermente aperte. Costruzione drop-stitch, deck EVA antiscivolo, sistema a tre pinne e kit completo pronto all'uso.",
+        longDescription: [
+          "La TOURUS TS-002S è una tavola da paddle gonfiabile tipo touring che unisce un'estetica effetto legno a una costruzione drop-stitch pensata per rigidità e stabilità in acqua.",
+          "Con 11' di lunghezza e 33'' di larghezza, offre una piattaforma generosa per principianti e paddler intermedi che cercano equilibrio tra scivolamento, controllo e comfort.",
+          "Il deck include un'ampia zona di trazione EVA antiscivolo e un sistema di elastici di prua per fissare l'equipaggiamento, mentre il sistema a tre pinne migliora la tenuta di rotta e la manovrabilità.",
+          "Pesa 14,3 kg gonfiata e si ripone nello zaino incluso, rendendola portatile per uscite su laghi, fiumi e coste con mare calmo.",
+          "Il kit include pagaia regolabile a tre pezzi, pompa manuale ad alta pressione con manometro, leash a spirale, tre pinne removibili, zaino da trasporto, kit di riparazione e custodia impermeabile per telefono.",
+          "Disponibile in due finiture colore visibili in scheda — Green e Gris — con garanzia produttore di 5 anni secondo le specifiche del fornitore.",
+        ],
+        features: [
+          "Modello TS-002S — tipo SUP Touring",
+          "Costruzione drop-stitch + PVC + EVA",
+          "Dimensioni: 11' x 33'' x 6'' (335 x 83,8 x 15 cm)",
+          "Peso tavola: 14,3 kg",
+          "Sistema a 3 pinne removibili",
+          "Deck EVA antiscivolo con elastici di prua",
+          "Uso consigliato: fiumi, laghi, oceano e acque calme",
+          "Garanzia 5 anni (secondo scheda fornitore)",
+          "Kit completo: pagaia, pompa con manometro, leash, pinne, zaino, kit riparazione e custodia impermeabile",
+          "Imballo: scatola cartone ondulato 7 strati (94 x 37 x 28 cm; peso lordo 15 kg)",
+        ],
+      },
+    },
+  },
+  {
+    id: "gn-water-010",
+    brand: "Uway",
+    title:
+      "Uway Zapatos de Agua Transpirables Five-Toe — Pesca y Playa",
+    price: 35,
+    category: "Water Sports",
+    images: ["/assets/images/products/gn-water-010/image.webp"],
+    shortDescription:
+      "Calzado acuático five-toe transpirable con suela antideslizante para playa, pesca y snorkel.",
+    description:
+      "Zapatos de agua Uway modelo 705 con diseño five-toe, upper de malla elástica transpirable y suela de caucho antideslizante. Pensados para pesca, playa, snorkel y uso unisex en entornos húmedos y rocosos.",
+    longDescription: [
+      "El modelo 705 de Uway combina la libertad de movimiento de un calzado tipo barefoot con la protección que necesitás en playas, ríos y embarcaciones.",
+      "La malla elástica transpirable seca rápido y mantiene el pie ventilado en jornadas calurosas, mientras los refuerzos estructurales aportan soporte sin rigidez.",
+      "La suela de caucho envolvente con patrón de agarre texturizado mejora la tracción sobre rocas, maderos y superficies mojadas.",
+      "El sistema de cordón rápido con toggle permite ajustar el calce en segundos, ideal para entrar y salir del agua con frecuencia.",
+      "Diseño unisex disponible en seis colores y tallas EUR 36–44 visibles en ficha, apto para yoga, escalada en roca húmeda, snorkel y pesca desde orilla.",
+      "Temporada cuatro estaciones según especificaciones del proveedor. Origen Zhejiang, China.",
+    ],
+    features: [
+      "Modelo 705 — diseño five-toe tipo barefoot",
+      "Upper: tela elástica transpirable (malla)",
+      "Suela: caucho y poliéster — antideslizante",
+      "Forro: malla y nailon",
+      "Entresuela: poliéster",
+      "Uso: pesca, playa, snorkel, yoga y escalada (según ficha)",
+      "Unisex — todas las estaciones",
+      "Cordón rápido con toggle de ajuste",
+      "Tallas EUR: 36, 37, 38, 39, 40, 41, 42, 43, 44",
+      "Seis colores: Blanco, Azul/Amarillo, Gris, Negro, Rosa y Beige",
+    ],
+    variants: [
+      {
+        type: "color",
+        label: "Color",
+        default: "blanco",
+        options: [
+          { value: "blanco", label: "Blanco", swatchHex: "#F5F5F0" },
+          { value: "azul-amarillo", label: "Azul / Amarillo", swatchHex: "#2A9D8F" },
+          { value: "gris", label: "Gris", swatchHex: "#9CA3AF" },
+          { value: "negro", label: "Negro", swatchHex: "#1A1A1A" },
+          { value: "rosa", label: "Rosa", swatchHex: "#F4A6B8" },
+          { value: "beige", label: "Beige", swatchHex: "#C4A882" },
+        ],
+      },
+      {
+        type: "size",
+        label: "Talla (EUR)",
+        default: "40",
+        options: [
+          { value: "36", label: "36" },
+          { value: "37", label: "37" },
+          { value: "38", label: "38" },
+          { value: "39", label: "39" },
+          { value: "40", label: "40" },
+          { value: "41", label: "41" },
+          { value: "42", label: "42" },
+          { value: "43", label: "43" },
+          { value: "44", label: "44" },
+        ],
+      },
+    ],
+    translations: {
+      en: {
+        title: "Uway Breathable Five-Toe Water Shoes — Fishing & Beach",
+        shortDescription:
+          "Breathable five-toe water shoes with anti-slip rubber sole for beach, fishing, and snorkel.",
+        description:
+          "Uway model 705 water shoes with five-toe design, breathable stretch-mesh upper, and anti-slip rubber sole. Built for fishing, beach, snorkel, and unisex use on wet and rocky terrain.",
+        longDescription: [
+          "Uway model 705 pairs barefoot-style toe freedom with the protection you need on beaches, rivers, and boat decks.",
+          "Breathable stretch mesh dries quickly and keeps feet ventilated on hot days, while structural overlays add support without stiffness.",
+          "The wrap-around rubber outsole with textured grip improves traction on rocks, docks, and wet surfaces.",
+          "A quick-cinch bungee lacing system with toggle lets you dial fit in seconds — ideal for frequent water entry and exit.",
+          "Unisex design in six colors and visible EUR sizes 36–44, suitable for yoga, wet rock, snorkel, and shore fishing per supplier listing.",
+          "All-season use per supplier specs. Origin: Zhejiang, China.",
+        ],
+        features: [
+          "Model 705 — five-toe barefoot-style design",
+          "Upper: breathable stretch mesh fabric",
+          "Outsole: rubber and polyester — anti-slip",
+          "Lining: mesh and nylon",
+          "Midsole: polyester",
+          "Use: fishing, beach, snorkel, yoga, and climbing (per listing)",
+          "Unisex — all seasons",
+          "Quick-cinch toggle lacing",
+          "EUR sizes: 36, 37, 38, 39, 40, 41, 42, 43, 44",
+          "Six colors: White, Blue/Yellow, Grey, Black, Pink, and Beige",
+        ],
+      },
+      es: {
+        title:
+          "Uway Zapatos de Agua Transpirables Five-Toe — Pesca y Playa",
+        shortDescription:
+          "Calzado acuático five-toe transpirable con suela antideslizante para playa, pesca y snorkel.",
+        description:
+          "Zapatos de agua Uway modelo 705 con diseño five-toe, upper de malla elástica transpirable y suela de caucho antideslizante. Pensados para pesca, playa, snorkel y uso unisex en entornos húmedos y rocosos.",
+        longDescription: [
+          "El modelo 705 de Uway combina la libertad de movimiento de un calzado tipo barefoot con la protección que necesitás en playas, ríos y embarcaciones.",
+          "La malla elástica transpirable seca rápido y mantiene el pie ventilado en jornadas calurosas, mientras los refuerzos estructurales aportan soporte sin rigidez.",
+          "La suela de caucho envolvente con patrón de agarre texturizado mejora la tracción sobre rocas, maderos y superficies mojadas.",
+          "El sistema de cordón rápido con toggle permite ajustar el calce en segundos, ideal para entrar y salir del agua con frecuencia.",
+          "Diseño unisex disponible en seis colores y tallas EUR 36–44 visibles en ficha, apto para yoga, escalada en roca húmeda, snorkel y pesca desde orilla.",
+          "Temporada cuatro estaciones según especificaciones del proveedor. Origen Zhejiang, China.",
+        ],
+        features: [
+          "Modelo 705 — diseño five-toe tipo barefoot",
+          "Upper: tela elástica transpirable (malla)",
+          "Suela: caucho y poliéster — antideslizante",
+          "Forro: malla y nailon",
+          "Entresuela: poliéster",
+          "Uso: pesca, playa, snorkel, yoga y escalada (según ficha)",
+          "Unisex — todas las estaciones",
+          "Cordón rápido con toggle de ajuste",
+          "Tallas EUR: 36, 37, 38, 39, 40, 41, 42, 43, 44",
+          "Seis colores: Blanco, Azul/Amarillo, Gris, Negro, Rosa y Beige",
+        ],
+      },
+      fr: {
+        title:
+          "Chaussures aquatiques Uway Five-Toe respirantes — Pêche et plage",
+        shortDescription:
+          "Chaussures aquatiques five-toe respirantes avec semelle antidérapante pour plage, pêche et snorkel.",
+        description:
+          "Chaussures aquatiques Uway modèle 705 au design five-toe, tige en mesh élastique respirant et semelle caoutchouc antidérapante. Pour pêche, plage, snorkel et usage unisexe sur terrains humides.",
+        longDescription: [
+          "Le modèle 705 Uway allie la liberté de mouvement d'une chaussure barefoot à la protection nécessaire sur plages, rivières et ponts de bateau.",
+          "Le mesh élastique respirant sèche rapidement et ventile le pied par temps chaud, avec des renforts structurels sans rigidité.",
+          "La semelle caoutchouc enveloppante à motif texturé améliore l'adhérence sur rochers, pontons et surfaces mouillées.",
+          "Le système de serrage rapide à toggle permet un ajustement en quelques secondes.",
+          "Design unisexe en six couleurs et tailles EUR 36–44 visibles sur la fiche.",
+          "Usage quatre saisons selon le fournisseur. Origine : Zhejiang, Chine.",
+        ],
+        features: [
+          "Modèle 705 — design five-toe barefoot",
+          "Tige : tissu élastique respirant (mesh)",
+          "Semelle : caoutchouc et polyester — antidérapant",
+          "Doublure : mesh et nylon",
+          "Semelle intermédiaire : polyester",
+          "Usage : pêche, plage, snorkel, yoga et escalade",
+          "Unisexe — toutes saisons",
+          "Lacage rapide à toggle",
+          "Tailles EUR : 36 à 44",
+          "Six couleurs : Blanc, Bleu/Jaune, Gris, Noir, Rose et Beige",
+        ],
+      },
+      it: {
+        title:
+          "Scarpe da acqua Uway Five-Toe traspiranti — Pesca e spiaggia",
+        shortDescription:
+          "Scarpe da acqua five-toe traspiranti con suola antiscivolo per spiaggia, pesca e snorkel.",
+        description:
+          "Scarpe da acqua Uway modello 705 con design five-toe, upper in mesh elastico traspirante e suola in gomma antiscivolo. Per pesca, spiaggia, snorkel e uso unisex su terreni umidi.",
+        longDescription: [
+          "Il modello 705 Uway unisce la libertà di movimento di una scarpa barefoot alla protezione necessaria su spiagge, fiumi e ponti di barca.",
+          "La mesh elastica traspirante si asciuga rapidamente e ventila il piede nelle giornate calde.",
+          "La suola in gomma avvolgente con pattern texturizzato migliora la trazione su rocce e superfici bagnate.",
+          "Il sistema di allacciatura rapida con toggle consente una calzata precisa in pochi secondi.",
+          "Design unisex in sei colori e taglie EUR 36–44 visibili in scheda.",
+          "Uso quattro stagioni secondo il fornitore. Origine: Zhejiang, Cina.",
+        ],
+        features: [
+          "Modello 705 — design five-toe barefoot",
+          "Upper: tessuto elastico traspirante (mesh)",
+          "Suola: gomma e poliestere — antiscivolo",
+          "Fodera: mesh e nylon",
+          "Intersuola: poliestere",
+          "Uso: pesca, spiaggia, snorkel, yoga e arrampicata",
+          "Unisex — tutte le stagioni",
+          "Allacciatura rapida con toggle",
+          "Taglie EUR: da 36 a 44",
+          "Sei colori: Bianco, Blu/Giallo, Grigio, Nero, Rosa e Beige",
         ],
       },
     },
