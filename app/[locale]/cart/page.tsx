@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
 import CurrencyDisclaimer from "@/components/currency/CurrencyDisclaimer";
+import UsdChargeNotice from "@/components/currency/UsdChargeNotice";
 import { useLocale, useTranslations } from "@/components/i18n/LocaleProvider";
 import {
   cartLineToGa4Item,
@@ -274,6 +275,7 @@ export default function CartPage() {
                 {t("cartPage.summaryNote")}
               </p>
               <CurrencyDisclaimer className="text-[11px] leading-relaxed text-muted-gray" />
+              <UsdChargeNotice amountUsd={subtotal} variant="compact" />
             </div>
 
             <div className="border-t border-earth-brown/15 pt-2">

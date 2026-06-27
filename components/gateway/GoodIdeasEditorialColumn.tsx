@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
+import GoodProductsBrandName from "@/components/good-ideas/GoodProductsBrandName";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { GN_EASE_PREMIUM } from "@/lib/ui/gonatural-design";
 import BrandHeroContent from "@/components/gateway/BrandHeroContent";
 
@@ -14,20 +18,21 @@ export type GoodIdeasEditorialColumnProps = {
 };
 
 export default function GoodIdeasEditorialColumn({
-  title,
+  title: _title,
   tagline,
   cta,
   href,
   isActive,
 }: GoodIdeasEditorialColumnProps) {
+  const locale = useLocale();
   return (
     <BrandHeroContent isActive={isActive}>
       <p className="w-full font-inter text-[11px] font-semibold uppercase tracking-[0.22em] text-[rgba(232,236,241,0.5)]">
         Lifestyle & Tech
       </p>
 
-      <h2 className="mx-auto max-w-[14ch] font-display text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.02em] text-[#E8ECF1]">
-        {title}
+      <h2 className="mx-auto max-w-[14ch] font-display text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.02em]">
+        <GoodProductsBrandName locale={locale} />
       </h2>
 
       <p className="max-w-md font-inter text-[15px] leading-relaxed text-[rgba(232,236,241,0.72)] md:text-[16px]">

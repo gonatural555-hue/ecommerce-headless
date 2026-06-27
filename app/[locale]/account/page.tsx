@@ -135,16 +135,19 @@ export default function AccountPage() {
   }
 
   return (
-      <main className="min-h-[100dvh] bg-warm-sand px-6 pb-16 pt-24 sm:px-10 lg:px-16">
+      <main className="min-h-[100dvh] bg-gn-page-bg px-6 pb-16 pt-28 sm:px-10 md:pt-32 lg:px-16">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-8">
-          <h1 className="font-sans text-3xl font-semibold text-dark-base">
+        <header className="mb-10 max-w-2xl md:mb-12">
+          <p className="mb-3 text-[0.65rem] uppercase tracking-[0.28em] text-accent-gold/90">
+            Go Natural
+          </p>
+          <h1 className="font-sans mb-3 text-3xl font-semibold tracking-tight text-dark-base md:text-4xl">
             {t("accountPage.title")}
           </h1>
-          <p className="mt-2 text-sm text-muted-gray">
+          <p className="text-base leading-relaxed text-muted-gray md:text-lg">
             {t("accountPage.subtitle")}
           </p>
-        </div>
+        </header>
 
         <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
           <aside className="space-y-3">
@@ -162,8 +165,8 @@ export default function AccountPage() {
                   className={[
                     "w-full rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors duration-200 ease-out",
                     isActive
-                      ? "border-accent-gold bg-warm-sand text-dark-base shadow-sm"
-                      : "border-earth-brown/15 bg-soft-stone text-muted-gray hover:text-dark-base",
+                      ? "border-accent-gold/50 bg-warm-sand text-dark-base shadow-[0_8px_24px_-8px_rgba(17,23,19,0.12)]"
+                      : "border-earth-brown/15 bg-soft-stone text-muted-gray hover:border-earth-brown/25 hover:text-dark-base",
                   ].join(" ")}
                 >
                   {item.label}

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import GoodProductsBrandName from "@/components/good-ideas/GoodProductsBrandName";
 import { useGoodIdeasCart } from "@/context/GoodIdeasCartContext";
-import { locales, type Locale } from "@/lib/i18n/config";
+import { headerLocales, locales, type Locale } from "@/lib/i18n/config";
 import {
   brandGatewayPath,
   goodIdeasBlogPath,
@@ -44,9 +45,13 @@ export default function GoodIdeasHeader() {
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-3 sm:px-6 md:py-3.5">
         <Link
           href={goodIdeasHomePath(locale)}
-          className="font-display text-[1.35rem] tracking-[-0.02em] text-[#E8ECF1] transition-opacity hover:opacity-90"
+          className="group font-display text-[1.35rem] tracking-[-0.02em]"
         >
-          {t("goodIdeas.brandName")}
+          <GoodProductsBrandName
+            locale={locale}
+            prefixClassName="text-white transition-colors duration-200 group-hover:text-[#3B82F6]"
+            suffixClassName="text-[#3B82F6] transition-colors duration-200 group-hover:text-white"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label={t("goodIdeas.brandName")}>
@@ -54,14 +59,14 @@ export default function GoodIdeasHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="font-inter text-[12px] font-medium uppercase tracking-[0.14em] text-white/55 transition-colors hover:text-white"
+              className="font-inter text-[12px] font-medium uppercase tracking-[0.14em] text-white/55 transition-colors duration-200 hover:text-[#3B82F6]"
             >
               {item.label}
             </Link>
           ))}
           <Link
             href={brandGatewayPath(locale)}
-            className="font-inter text-[12px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-white/70"
+            className="font-inter text-[12px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-200 hover:text-[#3B82F6]"
           >
             {t("goodIdeas.nav.allBrands")}
           </Link>
@@ -70,12 +75,12 @@ export default function GoodIdeasHeader() {
         <div className="flex items-center gap-2">
           <HeaderCurrencySwitcher variant="good-ideas" />
           <div className="flex items-center gap-0.5 rounded-full border border-white/10 px-1 py-0.5">
-            {locales.map((lang) => (
+            {headerLocales.map((lang) => (
               <Link
                 key={lang}
                 href={buildLocaleHref(lang)}
                 className={`rounded-full px-2 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.12em] ${
-                  lang === locale ? "bg-white/12 text-white" : "text-white/45 hover:text-white/80"
+                  lang === locale ? "bg-white/12 text-white" : "text-white/45 transition-colors duration-200 hover:text-[#3B82F6]"
                 }`}
               >
                 {lang}
@@ -85,7 +90,7 @@ export default function GoodIdeasHeader() {
 
           <Link
             href={goodIdeasCartPath(locale)}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/70 transition hover:bg-white/8 hover:text-white"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/70 transition-colors duration-200 hover:bg-white/8 hover:text-[#3B82F6]"
             aria-label={`${t("goodIdeas.nav.cart")} (${totalItems})`}
           >
             <svg

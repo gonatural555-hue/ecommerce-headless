@@ -325,7 +325,10 @@
     "priceLabel": "Precio"
   },
   "currency": {
-    "checkoutDisclaimer": "Precios en {currency} son referenciales. El pago se procesa en USD."
+    "checkoutDisclaimer": "Precios en {currency} son referenciales. El pago se procesa en USD.",
+    "usdChargeHeadline": "El cobro se realiza en dólares estadounidenses (USD)",
+    "usdChargeReference": "Referencia en pesos: {amount}.",
+    "usdChargeAmount": "Total a cobrar: {amount}"
   },
   "authForm": {
     "confirmEmailTitle": "Revisá tu correo",
@@ -1116,6 +1119,8 @@
     "hoursLine3": "Domingos: Cerrado",
     "quickTitle": "Respuesta rápida:",
     "quickText": "Normalmente respondemos en 24-48 horas. Si tu consulta es urgente, marcá tu mensaje como tal y haremos lo posible por responderte antes.",
+    "orderContext": "Consulta relacionada con el pedido #{orderId}.",
+    "prefillOrderMessage": "Hola, tengo una consulta sobre mi pedido #{orderId}.\n\n",
     "form": {
       "nameLabel": "Nombre",
       "namePlaceholder": "Tu nombre",
@@ -2418,7 +2423,9 @@
     "whatsappNeedsAddress": "Agregá una dirección de envío para usar esta opción.",
     "paymentDividerOr": "O pagá online",
     "whatsappPrefillBody": "Hola, quiero coordinar el pago de mi pedido {orderId}.\n\nTotal: {total}\nEmail: {email}\n\nProductos:\n{items}\n\nEnvío:\n{address}",
-    "paypalNeedsAddress": "Agregá una dirección de envío para pagar con PayPal.",
+    "paypalNeedsAddress": "Completá la dirección de envío para pagar con PayPal.",
+    "addressDefaultHint": "Esta dirección quedará guardada como predeterminada en tu cuenta.",
+    "paymentFailed": "No pudimos confirmar el pago. Intentá de nuevo o contactanos.",
     "emailNote": "Te enviaremos la confirmación y las novedades del pedido por email.",
     "trustSecureCheckout": "Checkout seguro",
     "trustPayPalProtection": "Protección al comprador de PayPal cuando corresponda.",
@@ -2485,7 +2492,9 @@
     "noOrderHint": "Si acabás de finalizar el checkout, los datos pueden tardar unos segundos.",
     "continueShopping": "Seguir comprando",
     "viewAccount": "Ver mi cuenta",
-    "whatsappCta": "Contactar por WhatsApp",
+    "contactCta": "Contactanos",
+    "contactSubject": "Consulta sobre pedido #{orderId}",
+    "contactPrefill": "Hola, tengo una consulta sobre mi pedido #{orderId}.\n\n",
     "whatsappMessage": "Hola! Quiero coordinar el pago del pedido {orderId} ({amount}).",
     "stepsTitle": "Qué pasa ahora",
     "brandQuote": "Cada pieza que elegiste está hecha para ir donde importa.",

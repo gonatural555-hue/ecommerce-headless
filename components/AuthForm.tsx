@@ -64,10 +64,10 @@ const inputClass =
   "w-full rounded-xl border border-[rgba(46,74,54,0.18)] bg-white/95 px-3 py-3 font-inter text-sm text-[#171717] placeholder:text-[#666666]/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] focus:border-[rgba(110,31,40,0.45)] focus:outline-none focus:ring-2 focus:ring-[rgba(217,164,65,0.28)] sm:px-4";
 
 const labelClass =
-  "font-inter text-xs font-semibold uppercase tracking-[0.12em] text-[rgba(46,74,54,0.72)]";
+  "font-inter text-xs font-semibold uppercase tracking-[0.12em] text-[#FFFFFF]";
 
 const toggleButtonClass =
-  "absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[#666666] transition hover:bg-[rgba(46,74,54,0.06)] hover:text-[#171717] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40";
+  "absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[#FFFFFF]/80 transition hover:bg-white/10 hover:text-[#FFFFFF] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/40";
 
 function AuthTabButton({
   tab,
@@ -89,7 +89,7 @@ function AuthTabButton({
       onClick={() => onSelect(tab)}
       className={[
         "gn-auth-tab relative pb-3 pt-1 font-inter text-sm font-medium transition-colors duration-200",
-        isActive ? "text-[#171717]" : "text-[#666666] hover:text-[#171717]",
+        isActive ? "text-[#FFFFFF]" : "text-[#FFFFFF]/70 hover:text-[#FFFFFF]",
       ].join(" ")}
     >
       {children}
@@ -222,7 +222,7 @@ export default function AuthForm({
   return (
     <div className="gn-auth-form w-full">
       <nav
-        className="flex gap-8 border-b border-[rgba(46,74,54,0.12)]"
+        className="flex gap-8 border-b border-white/20"
         role="tablist"
         aria-label="Autenticación"
       >
@@ -243,7 +243,7 @@ export default function AuthForm({
               : "Creá tu cuenta"}
         </h2>
         {!(awaitingEmailConfirmation && activeTab === "register") ? (
-          <p className="font-inter text-sm leading-relaxed text-[#666666]">
+          <p className="font-inter text-sm leading-relaxed text-[#FFFFFF]">
             {subtitle}
           </p>
         ) : null}

@@ -28,7 +28,7 @@ export default function HeaderCurrencySwitcher({ variant = "utility" }: Props) {
             className={`rounded-full px-2 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.12em] transition ${
               code === currency
                 ? "bg-white/12 text-white"
-                : "text-white/45 hover:text-white/80"
+                : "text-white/45 transition-colors duration-200 hover:text-[#3B82F6]"
             }`}
             aria-pressed={code === currency}
           >

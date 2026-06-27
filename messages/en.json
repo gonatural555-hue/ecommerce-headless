@@ -325,7 +325,10 @@
     "priceLabel": "Price"
   },
   "currency": {
-    "checkoutDisclaimer": "Prices in {currency} are indicative. Payment is processed in USD."
+    "checkoutDisclaimer": "Prices in {currency} are indicative. Payment is processed in USD.",
+    "usdChargeHeadline": "Payment is processed in US dollars (USD)",
+    "usdChargeReference": "Reference in local currency: {amount}.",
+    "usdChargeAmount": "Amount charged: {amount}"
   },
   "authForm": {
     "confirmEmailTitle": "Check your email",
@@ -1116,6 +1119,8 @@
     "hoursLine3": "Sunday: Closed",
     "quickTitle": "Quick response:",
     "quickText": "We usually reply within 24–48 hours. If your request is urgent, mark your message as such and we’ll do our best to respond sooner.",
+    "orderContext": "Inquiry related to order #{orderId}.",
+    "prefillOrderMessage": "Hi, I have a question about my order #{orderId}.\n\n",
     "form": {
       "nameLabel": "Name",
       "namePlaceholder": "Your name",
@@ -2418,7 +2423,9 @@
     "whatsappNeedsAddress": "Add a shipping address to use this option.",
     "paymentDividerOr": "Or pay online",
     "whatsappPrefillBody": "Hi, I'd like to coordinate payment for my order {orderId}.\n\nTotal: {total}\nEmail: {email}\n\nItems:\n{items}\n\nShipping:\n{address}",
-    "paypalNeedsAddress": "Add a shipping address to pay with PayPal.",
+    "paypalNeedsAddress": "Complete your shipping address to pay with PayPal.",
+    "addressDefaultHint": "This address will be saved as your default in your account.",
+    "paymentFailed": "We couldn't confirm your payment. Please try again or contact us.",
     "emailNote": "We'll send your confirmation and order updates by email.",
     "trustSecureCheckout": "Secure checkout",
     "trustPayPalProtection": "Protected by PayPal Buyer Protection where applicable.",
@@ -2485,7 +2492,9 @@
     "noOrderHint": "If you just completed checkout, details may take a moment to appear.",
     "continueShopping": "Continue shopping",
     "viewAccount": "View account",
-    "whatsappCta": "Contact via WhatsApp",
+    "contactCta": "Contact us",
+    "contactSubject": "Inquiry about order #{orderId}",
+    "contactPrefill": "Hi, I have a question about my order #{orderId}.\n\n",
     "whatsappMessage": "Hi! I'd like to coordinate payment for order {orderId} ({amount}).",
     "stepsTitle": "What happens next",
     "brandQuote": "Every piece of gear you chose is made to go where it matters.",

@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import { goodIdeasProductsPath } from "@/lib/routing/brands";
+import GoodProductsBrandName from "@/components/good-ideas/GoodProductsBrandName";
 import {
   GI_EASE,
   GI_HERO_PRIMARY_CTA_CLASS,
@@ -34,7 +35,7 @@ export default function GoodIdeasHomeHero({
   const reduceMotion = useReducedMotion();
   const off = reduceMotion ?? false;
 
-  const { line1, row1Accent, row2Muted } = useMemo(
+  const { row1Accent, row2Muted } = useMemo(
     () => parseGoodIdeasEditorialTitle(title),
     [title]
   );
@@ -90,7 +91,9 @@ export default function GoodIdeasHomeHero({
               variants={itemVariants}
               className="w-full text-center font-display text-[clamp(38px,9.5vw,56px)] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[clamp(58px,6.5vw,102px)] md:leading-[0.88]"
             >
-              <span className="block text-balance text-[#E8ECF1]">{line1}</span>
+              <span className="block text-balance">
+                <GoodProductsBrandName locale={locale} />
+              </span>
               {row1Accent || row2Muted ? (
                 <span className="mt-0 block text-balance">
                   {row1Accent ? (

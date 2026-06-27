@@ -123,7 +123,7 @@ type UserContextValue = UserState & {
   }>;
   logout: () => Promise<void>;
   setAddresses: (next: Address[]) => void;
-  upsertAddress: (next: Address) => Promise<void>;
+  upsertAddress: (next: Address) => Promise<Address | null>;
   removeAddress: (id: string) => Promise<void>;
   setDefaultAddress: (id: string) => Promise<void>;
   addOrder: (order: Order) => void;
@@ -372,10 +372,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const upsertAddress = useCallback(
-    async (addr: Address) => {
-      if (!sessionUser?.id || !isSupabaseConfigured()) return;
+    async (addr: Address): Promise<Address | null> => {
+      if (!sessionUser?.id || !isSupabaseConfigured()) return null;
       const supabase = getSupabaseBrowserClient();
       const base = addressToRow(sessionUser.id, addr);
+      let saved = addr;
 
       if (addr.isDefault) {
         await supabase
@@ -394,22 +395,29 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           })
           .eq("id", addr.id)
           .eq("user_id", sessionUser.id);
-        if (error) console.error("[UserContext] address update", error);
+        if (error) {
+          console.error("[UserContext] address update", error);
+          return null;
+        }
       } else {
         const { data, error } = await supabase
           .from("addresses")
-          .insert(base)
+          .insert({
+            ...base,
+            is_default: addr.isDefault,
+          })
           .select("id")
           .single();
         if (error) {
           console.error("[UserContext] address insert", error);
-          return;
+          return null;
         }
         if (data?.id) {
-          addr = { ...addr, id: data.id as string };
+          saved = { ...addr, id: data.id as string };
         }
       }
       await loadAddresses(sessionUser.id);
+      return saved;
     },
     [sessionUser, loadAddresses]
   );

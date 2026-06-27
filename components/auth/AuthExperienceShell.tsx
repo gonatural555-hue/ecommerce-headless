@@ -162,7 +162,7 @@ export default function AuthExperienceShell({
 
           <div
 
-            className={`${GN_AUTH_PANEL_CLASS} relative isolate flex min-h-[100dvh] flex-1 flex-col bg-[#F4EBDD]/97 md:min-h-0 md:h-auto md:bg-[#F4EBDD]`}
+            className={`${GN_AUTH_PANEL_CLASS} relative isolate flex min-h-[100dvh] flex-1 flex-col bg-black/50 md:min-h-0 md:h-auto md:bg-black/45`}
 
           >
 
@@ -172,7 +172,7 @@ export default function AuthExperienceShell({
 
             <div
 
-              className="absolute inset-0 z-0 hidden bg-[#F4EBDD]/88 md:block"
+              className="absolute inset-0 z-0 hidden bg-black/35 md:block"
 
               aria-hidden
 
@@ -216,7 +216,7 @@ export default function AuthExperienceShell({
 
                     onClick={onClose}
 
-                    className="mt-[max(0.5rem,env(safe-area-inset-top))] flex shrink-0 items-center gap-2 rounded-sm p-2 font-inter text-[13px] font-medium text-[#171717]/80 transition hover:text-[#171717] focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/50 md:mt-0"
+                    className="mt-[max(0.5rem,env(safe-area-inset-top))] flex shrink-0 items-center gap-2 rounded-sm p-2 font-inter text-[13px] font-medium text-[#FFFFFF] transition hover:text-[#FFFFFF]/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-gn-mustard/50 md:mt-0"
 
                     aria-label={t("common.close", "Cerrar")}
 
@@ -268,7 +268,7 @@ export default function AuthExperienceShell({
 
                     href={backHref}
 
-                    className="mt-[max(0.5rem,env(safe-area-inset-top))] inline-flex shrink-0 items-center gap-2 font-inter text-sm text-[#666666] transition hover:text-[#171717] md:mt-0"
+                    className="mt-[max(0.5rem,env(safe-area-inset-top))] inline-flex shrink-0 items-center gap-2 font-inter text-sm text-[#FFFFFF] transition hover:text-[#FFFFFF]/85 md:mt-0"
 
                   >
 

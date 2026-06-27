@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createOrder, markOrderAsPaid, type OrderItem } from "@/lib/orders";
+import { verifyPayPalCapture } from "@/lib/paypal/verify-capture";
 import {
   getPaidOrderCountForUser,
   getWelcomeFreeShippingRemaining,
@@ -82,6 +83,49 @@ export async function POST(request: NextRequest) {
           error: "shippingAddress es obligatorio.",
         },
         { status: 400 }
+      );
+    }
+
+    if (!paypalOrderId?.trim()) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "paypalOrderId es obligatorio.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const { data: existingPaypalOrder } = await supabase
+      .from("orders")
+      .select("id, status")
+      .eq("paypal_order_id", paypalOrderId)
+      .maybeSingle();
+
+    if (existingPaypalOrder && existingPaypalOrder.id !== orderId) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Este pago PayPal ya fue utilizado en otro pedido.",
+        },
+        { status: 409 }
+      );
+    }
+
+    const verification = await verifyPayPalCapture(
+      paypalOrderId,
+      totalAmount
+    );
+
+    if (!verification.ok) {
+      console.error("[PayPal Order API] Verificación fallida", {
+        orderId,
+        paypalOrderId,
+        error: verification.error,
+      });
+      return NextResponse.json(
+        { success: false, error: verification.error },
+        { status: 402 }
       );
     }
 

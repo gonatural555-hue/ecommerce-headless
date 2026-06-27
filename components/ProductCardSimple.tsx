@@ -214,6 +214,7 @@ export default function ProductCardSimple({
                 type="button"
                 onClick={handlePatagoniaAddToCart}
                 className={plpPatagoniaClasses.addNowBtn}
+                style={plpPatagoniaClasses.addNowBtnStyle}
                 aria-label={addNowLabel}
               >
                 {addNowLabel}
@@ -337,6 +338,7 @@ export default function ProductCardSimple({
                 type="button"
                 onClick={handleAddToCart}
                 className={plpPatagoniaClasses.addNowBtn}
+                style={plpPatagoniaClasses.addNowBtnStyle}
                 aria-label={quickAddLabel}
               >
                 {quickAddLabel}
@@ -499,6 +501,7 @@ export default function ProductCardSimple({
                 type="button"
                 onClick={handleAddToCart}
                 className={plpPatagoniaClasses.addNowBtn}
+                style={plpPatagoniaClasses.addNowBtnStyle}
                 aria-label={addToCartLabel}
               >
                 {addToCartLabel}

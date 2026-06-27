@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { locales, type Locale } from "@/lib/i18n/config";
+import { headerLocales, type Locale } from "@/lib/i18n/config";
 import {
   goNaturalHomePath,
   goodIdeasHomePath,
@@ -35,7 +35,7 @@ export default function BrandGateway({
           className="pointer-events-auto flex items-center gap-1 rounded-full border border-white/10 bg-black/20 px-2 py-1 backdrop-blur-md"
           aria-label={copy.localeAria}
         >
-          {locales.map((lang) => (
+          {headerLocales.map((lang) => (
             <Link
               key={lang}
               href={`/${lang}`}

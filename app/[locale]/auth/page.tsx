@@ -33,7 +33,7 @@ function AuthPageContent() {
   if (!mounted || authLoading) {
     return (
       <AuthExperienceShell mode="page" backHref={goNaturalHomePath(locale)}>
-        <p className="font-inter text-sm text-[#666666]">Cargando...</p>
+        <p className="font-inter text-sm text-[#FFFFFF]">Cargando...</p>
       </AuthExperienceShell>
     );
   }
@@ -58,7 +58,7 @@ export default function AuthPage() {
     <Suspense
       fallback={
         <AuthExperienceShell mode="page">
-          <p className="font-inter text-sm text-[#666666]">Cargando...</p>
+          <p className="font-inter text-sm text-[#FFFFFF]">Cargando...</p>
         </AuthExperienceShell>
       }
     >
