@@ -1,10 +1,9 @@
 import type { UISurface } from "@/lib/ui-surface";
 
-import type { SpecRow } from "@/lib/pdp-spec-rows";
-import { parseFeatureSpecRows } from "@/lib/pdp-spec-rows";
-
-export type { SpecRow };
-export { parseFeatureSpecRows };
+export type SpecRow = {
+  label: string;
+  value: string;
+};
 
 type Props = {
   featuresTitle: string;
@@ -13,6 +12,19 @@ type Props = {
   specRows: SpecRow[];
   surface?: UISurface;
 };
+
+export function parseFeatureSpecRows(lines: string[]): SpecRow[] {
+  return lines.map((line) => {
+    const colon = line.indexOf(":");
+    if (colon > 0 && colon < line.length - 1) {
+      return {
+        label: line.slice(0, colon).trim(),
+        value: line.slice(colon + 1).trim(),
+      };
+    }
+    return { label: line.trim(), value: "—" };
+  });
+}
 
 export default function PdpFeaturesSpecsSection({
   featuresTitle,

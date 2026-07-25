@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import SmartImage from "@/components/SmartImage";
-import CartPaymentMethods from "@/components/good-ideas/CartPaymentMethods";
 import UsdChargeNotice from "@/components/currency/UsdChargeNotice";
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 
@@ -89,8 +88,6 @@ export default function CheckoutOrderSummary({
           {formatPrice(subtotal)}
         </span>
       </div>
-
-      <CartPaymentMethods id="checkout-payment-methods" className="mt-8" />
     </div>
   );
 }

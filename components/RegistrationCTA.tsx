@@ -8,10 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 import { useTranslations, useLocale } from "@/components/i18n/LocaleProvider";
 import { shouldShowRegistrationCta } from "@/lib/newsletter-cta";
 import { submitNewsletterSubscription } from "@/lib/newsletter-client";
-<<<<<<< HEAD
-=======
-import { newsletterCtaStyles as s } from "@/lib/ui/newsletter-cta-styles";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 
 const SESSION_STORAGE_MINIMIZED = "gn-registration-cta-minimized";
 const SESSION_STORAGE_SUBSCRIBED = "gn-newsletter-cta-subscribed";
@@ -227,8 +223,40 @@ export default function RegistrationCTA() {
           : errorCode === "generic"
             ? t("registrationCTA.errorGeneric")
             : null;
-<<<<<<< HEAD
-  const palette = {
+  const isGoodIdeas = false;
+  const palette = isGoodIdeas
+    ? {
+        minimizedButton:
+          "font-inter w-full rounded-full border border-white/[0.08] bg-[#151B24] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E8ECF1] shadow-[0_10px_36px_-12px_rgba(0,0,0,0.52),0_2px_8px_rgba(0,0,0,0.22)] transition hover:border-[rgba(59,130,246,0.45)] hover:bg-[#1B2432] hover:text-white md:w-auto md:px-4 md:text-xs",
+        panel:
+          "rounded-2xl border border-white/[0.08] bg-[#151B24] p-4 shadow-[0_18px_48px_-20px_rgba(0,0,0,0.6),0_6px_20px_rgba(0,0,0,0.28)] sm:p-5",
+        title:
+          "font-display text-balance text-lg font-medium leading-snug tracking-[-0.02em] text-[#E8ECF1] md:text-xl",
+        subtitle:
+          "font-inter mt-1.5 text-sm leading-relaxed text-[rgba(232,236,241,0.78)]",
+        secondaryText:
+          "font-inter mt-1 text-xs leading-relaxed text-[rgba(232,236,241,0.55)]",
+        iconButton:
+          "shrink-0 rounded-lg p-1 text-[rgba(232,236,241,0.55)] transition hover:bg-white/[0.06] hover:text-[#E8ECF1]",
+        successText:
+          "font-inter text-sm font-medium leading-relaxed text-[#E8ECF1]",
+        primaryAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(59,130,246,0.28),inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:bg-[#2563EB] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#151B24]",
+        submitAction:
+          "font-inter inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(59,130,246,0.28),inset_0_1px_0_rgba(255,255,255,0.12)] transition enabled:hover:bg-[#2563EB] enabled:focus:outline-none enabled:focus-visible:ring-2 enabled:focus-visible:ring-[#3B82F6]/50 enabled:focus-visible:ring-offset-2 enabled:focus-visible:ring-offset-[#151B24] disabled:cursor-not-allowed disabled:opacity-45",
+        secondaryAction:
+          "font-inter inline-flex min-h-[44px] items-center justify-center rounded-xl border border-white/[0.12] px-4 py-2.5 text-sm font-medium text-[#E8ECF1] transition hover:border-[rgba(59,130,246,0.38)] hover:bg-[rgba(59,130,246,0.1)]",
+        input:
+          "font-inter w-full rounded-xl border border-white/[0.12] bg-[#0B0F14] px-3 py-2.5 text-sm text-[#E8ECF1] placeholder:text-[rgba(232,236,241,0.4)] shadow-inner outline-none ring-[#3B82F6]/25 transition focus:border-[rgba(59,130,246,0.45)] focus:ring-2",
+        checkboxLabel:
+          "font-inter flex cursor-pointer gap-2.5 text-left text-xs leading-snug text-[rgba(232,236,241,0.82)]",
+        checkbox:
+          "mt-0.5 h-4 w-4 shrink-0 rounded border-white/[0.22] bg-[#0B0F14] text-[#3B82F6] focus:ring-[#3B82F6]/30",
+        privacyLink:
+          "font-medium text-[#3B82F6] underline decoration-[rgba(59,130,246,0.35)] underline-offset-2 hover:decoration-[#3B82F6]",
+        error: "font-inter text-sm text-[#FCA5A5]",
+      }
+    : {
         minimizedButton:
           "font-inter w-full rounded-full border border-[rgba(110,31,40,0.35)] bg-[#F4EBDD] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] shadow-[0_10px_36px_-12px_rgba(46,74,54,0.35),0_2px_8px_rgba(46,74,54,0.08)] transition hover:border-[#6E1F28]/55 hover:shadow-[0_14px_40px_-10px_rgba(46,74,54,0.28)] md:w-auto md:px-4 md:text-xs",
         panel:
@@ -259,8 +287,6 @@ export default function RegistrationCTA() {
           "font-medium text-[#6E1F28] underline decoration-[rgba(110,31,40,0.35)] underline-offset-2 hover:decoration-[#6E1F28]",
         error: "font-inter text-sm text-[#6E1F28]",
       };
-=======
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 
   if (isMinimized) {
     return (
@@ -268,7 +294,7 @@ export default function RegistrationCTA() {
         <button
           type="button"
           onClick={handleExpand}
-          className={s.minimizedButton}
+          className={palette.minimizedButton}
           aria-label={t("registrationCTA.expand")}
         >
           {t("registrationCTA.minimizedLabel")}
@@ -283,23 +309,23 @@ export default function RegistrationCTA() {
       data-gn-newsletter-cta
       className="fixed bottom-4 left-1/2 z-[45] w-[min(100%-1rem,calc(100vw-1rem))] max-w-md -translate-x-1/2 animate-fade-in pb-[max(0.75rem,env(safe-area-inset-bottom))] md:left-4 md:translate-x-0"
     >
-      <div className={s.panel}>
+      <div className={palette.panel}>
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <h3 className={s.title}>
+            <h3 className={palette.title}>
               {t("registrationCTA.title")}
             </h3>
-            <p className={s.subtitle}>
+            <p className={palette.subtitle}>
               {t("registrationCTA.subtitle")}
             </p>
-            <p className={s.secondaryText}>
+            <p className={palette.secondaryText}>
               {t("registrationCTA.secondaryText")}
             </p>
           </div>
           <button
             type="button"
             onClick={handleMinimize}
-            className={s.iconButton}
+            className={palette.iconButton}
             aria-label={t("registrationCTA.minimize")}
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -315,21 +341,21 @@ export default function RegistrationCTA() {
 
         {submitState === "success" ? (
           <div className="space-y-3">
-            <p className={s.successText}>
+            <p className={palette.successText}>
               {t("registrationCTA.successMessage")}
             </p>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={handleHideAfterSuccess}
-                className={s.primaryAction}
+                className={palette.primaryAction}
               >
                 {t("registrationCTA.hideAfterSuccess")}
               </button>
               <button
                 type="button"
                 onClick={handleMinimize}
-                className={s.secondaryAction}
+                className={palette.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>
@@ -362,12 +388,12 @@ export default function RegistrationCTA() {
                   newsletterInputFocusedRef.current = false;
                 }}
                 placeholder={t("registrationCTA.emailPlaceholder")}
-                className={s.input}
+                className={palette.input}
                 required
               />
             </div>
 
-            <label className={s.checkboxLabel}>
+            <label className={palette.checkboxLabel}>
               <input
                 type="checkbox"
                 checked={marketingAccepted}
@@ -378,13 +404,13 @@ export default function RegistrationCTA() {
                     setErrorCode(null);
                   }
                 }}
-                className={s.checkbox}
+                className={palette.checkbox}
               />
               <span>
                 {t("registrationCTA.marketingLabel")}{" "}
                 <Link
                   href={privacyHref}
-                  className={s.privacyLink}
+                  className={palette.privacyLink}
                 >
                   {t("registrationCTA.privacyLink")}
                 </Link>
@@ -392,7 +418,7 @@ export default function RegistrationCTA() {
             </label>
 
             {errorMessage ? (
-              <p className={s.error} role="alert">
+              <p className={palette.error} role="alert">
                 {errorMessage}
               </p>
             ) : null}
@@ -403,7 +429,7 @@ export default function RegistrationCTA() {
                 disabled={
                   !marketingAccepted || submitState === "loading" || !email.trim()
                 }
-                className={s.submitAction}
+                className={palette.submitAction}
               >
                 {submitState === "loading"
                   ? t("registrationCTA.submitLoading")
@@ -412,7 +438,7 @@ export default function RegistrationCTA() {
               <button
                 type="button"
                 onClick={handleMinimize}
-                className={s.secondaryAction}
+                className={palette.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>

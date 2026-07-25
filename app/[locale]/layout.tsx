@@ -4,7 +4,7 @@ import { getMessages } from "@/lib/i18n/messages";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import SmoothScroll from "@/components/SmoothScroll";
-import AppChrome from "@/components/layout/AppChrome";
+import LocaleChrome from "@/components/layout/LocaleChrome";
 
 export default async function LocaleLayout({
   children,
@@ -25,7 +25,7 @@ export default async function LocaleLayout({
     <LocaleProvider locale={locale as Locale} messages={messages}>
       <CurrencyProvider>
         <SmoothScroll />
-        <AppChrome>{children}</AppChrome>
+        <LocaleChrome>{children}</LocaleChrome>
       </CurrencyProvider>
     </LocaleProvider>
   );

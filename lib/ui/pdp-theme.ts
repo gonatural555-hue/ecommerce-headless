@@ -1,5 +1,4 @@
 import type { UISurface } from "@/lib/ui-surface";
-import { giType } from "@/lib/ui/gi-typography";
 
 export type PdpBrandTheme = "go-natural";
 
@@ -7,60 +6,12 @@ export function resolvePdpBrandTheme(): PdpBrandTheme {
   return "go-natural";
 }
 
-/** Class bundles for the PDP buy column (Go Natural). */
+/** Class bundles for the PDP buy column — Good Products uses GI_COLORS, not GN gold/moss. */
 export function getPdpBuyBoxTheme(
-  _brand: PdpBrandTheme,
+  brand: PdpBrandTheme,
   surface: UISurface
 ) {
   const L = surface === "light";
-<<<<<<< HEAD
-=======
-  const gi = brand === "good-ideas";
-
-  if (gi) {
-    return {
-      brandLink: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)] underline-offset-2 hover:text-[#60A5FA] hover:underline`,
-      title: `font-body text-[clamp(1.75rem,2.8vw,2.375rem)] font-bold leading-[1.22] tracking-[var(--gi-tracking-tight)] text-[var(--gi-text-on-dark)]`,
-      reviewsRating: "text-text-muted",
-      reviewsScore: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)]`,
-      reviewsDot: "text-white/20",
-      reviewsLink: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)] underline-offset-2 hover:text-[#60A5FA] hover:underline`,
-      price: `font-body text-[clamp(1.5rem,2.2vw,1.875rem)] font-bold tabular-nums tracking-[var(--gi-tracking-tight)] text-[var(--gi-text-on-dark)]`,
-      freeShipping: `${giType.badge} text-[#4ADE80]`,
-      taxNote: `${giType.productMeta} text-[var(--gi-text-muted-on-dark)]`,
-      currencyDisclaimer: `${giType.productMeta} text-[var(--gi-text-muted-on-dark)]`,
-      variantLabelHeading: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)]`,
-      variantLabelMuted: `${giType.input} text-[var(--gi-text-on-dark)]`,
-      variantSelected:
-        "border-[#3B82F6] bg-[#151B24] text-[#E8ECF1] ring-1 ring-[#3B82F6] shadow-[0_0_0_1px_rgba(59,130,246,0.25)]",
-      variantDefault:
-        "border-white/[0.18] bg-[rgba(21,27,36,0.6)] text-[rgba(232,236,241,0.85)] hover:border-[rgba(59,130,246,0.45)] hover:bg-[#151B24]",
-      variantDisabled:
-        "opacity-35 cursor-not-allowed border-white/10 bg-[#151B24]/40 text-[rgba(232,236,241,0.4)]",
-      variantFocusRing:
-        "focus-visible:ring-[#3B82F6] focus-visible:ring-offset-[#0B0F14]",
-      colorLabel: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)]`,
-      colorValue: `${giType.input} text-[var(--gi-text-on-dark)]`,
-      colorSwatchActive:
-        "border-[#3B82F6] shadow-[0_0_0_1px_rgba(59,130,246,0.35)]",
-      colorSwatchIdle: "border-white/25 hover:border-white/45",
-      colorSwatchFocus:
-        "focus-visible:ring-[#3B82F6] focus-visible:ring-offset-[#0B0F14]",
-      qtyLabel: `${giType.productMeta} text-[var(--gi-text-secondary-on-dark)]`,
-      qtyContainer:
-        "inline-flex items-center overflow-hidden rounded-xl border border-white/[0.12] bg-[#151B24]",
-      qtyBtn:
-        "flex h-12 w-12 items-center justify-center text-xl font-medium text-[var(--gi-text-on-dark)] transition-colors hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/50 disabled:cursor-not-allowed disabled:opacity-40",
-      qtyValue:
-        `min-w-[3rem] px-3 text-center ${giType.input} text-lg font-semibold tabular-nums text-[var(--gi-text-on-dark)]`,
-      availCard:
-        "rounded-md border border-white/[0.08] bg-[#151B24] px-4 py-3.5",
-      availTitle: `${giType.filterHeading} text-[var(--gi-text-on-dark)]`,
-      availStatus: `${giType.badge} text-[#4ADE80]`,
-      availDetail: `${giType.productMeta} text-[var(--gi-text-muted-on-dark)]`,
-    };
-  }
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 
   return {
     brandLink: L

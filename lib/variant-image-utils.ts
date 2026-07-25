@@ -23,33 +23,6 @@ export function getColorVariantDefinition(
   return productVariants?.variants.find(isColorVariantDefinition);
 }
 
-function isModelVariantDefinition(variant: VariantDefinition): boolean {
-  const type = variant.type.toLowerCase();
-  const label = variant.label.toLowerCase();
-  return (
-    type === "model" ||
-    type === "capacity" ||
-    label.includes("model") ||
-    label.includes("capacity") ||
-    label.includes("capacidad")
-  );
-}
-
-export function getModelVariantDefinition(
-  productVariants: ProductVariants | null | undefined
-): VariantDefinition | undefined {
-  return productVariants?.variants.find(isModelVariantDefinition);
-}
-
-function getImageDrivingVariantDefinition(
-  productVariants: ProductVariants | null | undefined
-): VariantDefinition | undefined {
-  return (
-    getColorVariantDefinition(productVariants) ??
-    getModelVariantDefinition(productVariants)
-  );
-}
-
 export function pickFeaturedFromVariantSet(
   variant: VariantImageSet | string[] | undefined
 ): string | null {
@@ -88,8 +61,8 @@ function imagesFromVariantSet(
 }
 
 /**
- * Resuelve imágenes activas del PDP según color o modelo/capacidad seleccionados.
- * Talle y otras variantes no cambian la imagen.
+ * Resuelve imágenes activas del PDP según la variante de color seleccionada.
+ * Talle, modelo u otras variantes no cambian la imagen.
  */
 export function resolveColorVariantActiveImages(
   productImages: ProductImages,
@@ -97,32 +70,32 @@ export function resolveColorVariantActiveImages(
   selections: Record<string, string>,
   defaults: { featured: string | null; gallery: string[] }
 ): { featured: string | null; gallery: string[] } {
-  const imageVariant = getImageDrivingVariantDefinition(productVariants);
-  if (!imageVariant || !productImages.variantImages) {
+  const colorVariant = getColorVariantDefinition(productVariants);
+  if (!colorVariant || !productImages.variantImages) {
     return defaults;
   }
 
-  const selectedValue = selections[imageVariant.type];
-  if (!selectedValue) {
+  const colorValue = selections[colorVariant.type];
+  if (!colorValue) {
     return defaults;
   }
 
   const { variantImages } = productImages;
-  const variantType = imageVariant.type;
+  const variantType = colorVariant.type;
 
   const typedMap = (variantImages as VariantImagesMap)[variantType];
-  if (typedMap?.[selectedValue]) {
-    return imagesFromVariantSet(typedMap[selectedValue], defaults);
+  if (typedMap?.[colorValue]) {
+    return imagesFromVariantSet(typedMap[colorValue], defaults);
   }
 
   const nestedColorMap = (variantImages as VariantImagesMap).color;
-  if (nestedColorMap?.[selectedValue]) {
-    return imagesFromVariantSet(nestedColorMap[selectedValue], defaults);
+  if (nestedColorMap?.[colorValue]) {
+    return imagesFromVariantSet(nestedColorMap[colorValue], defaults);
   }
 
   const flatMap = variantImages as VariantImagesValueMap;
-  if (flatMap[selectedValue]) {
-    return imagesFromVariantSet(flatMap[selectedValue], defaults);
+  if (flatMap[colorValue]) {
+    return imagesFromVariantSet(flatMap[colorValue], defaults);
   }
 
   return defaults;

@@ -1,25 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-<<<<<<< HEAD
 import AddedToCartModal, {
   type AddedToCartLineSnapshot,
 } from "@/components/AddedToCartModal";
 import AddToCartButton, {
   type AddToCartLinePayload,
 } from "@/components/AddToCartButton";
-=======
-import type { AddToCartLinePayload } from "@/lib/cart-line";
-import GoodIdeasAddToCartButton from "@/components/good-ideas/GoodIdeasAddToCartButton";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 import ProductGalleryRei, {
   PDP_GALLERY_WIDTH_PX,
 } from "@/components/pdp/ProductGalleryRei";
 import PdpGalleryFramingPanel from "@/components/pdp/PdpGalleryFramingPanel";
 import ProductInfoPanel from "@/components/pdp/ProductInfoPanel";
 import type { AvailabilityCopy } from "@/components/pdp/PdpAvailabilityCards";
-import { usePdpProductStateContext } from "@/context/PdpProductStateContext";
+import { splitVariantDefinitions } from "@/lib/pdp-variant-utils";
+import { resolveColorVariantActiveImages } from "@/lib/variant-image-utils";
 import type { ProductImages } from "@/lib/product-images";
 import {
   isPdpGalleryFramingDirectorMode,
@@ -29,19 +25,10 @@ import {
   type PdpGalleryLayout,
 } from "@/lib/pdp-gallery-framing";
 import type { ProductVariants, VariantDefinition } from "@/lib/product-variants";
+import { trackViewItem } from "@/lib/analytics/ga4";
 import { useCurrency } from "@/context/CurrencyContext";
-<<<<<<< HEAD
-=======
 import { resolvePdpBrandTheme } from "@/lib/ui/pdp-theme";
-import {
-  GI_PDP_CTA_CLASS,
-  GI_PDP_GALLERY_STICKY,
-  GI_PDP_GRID,
-} from "@/lib/ui/gi-pdp-layout";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 import type { UISurface } from "@/lib/ui-surface";
-import type { BreadcrumbItem } from "@/components/Breadcrumbs";
-import type { GoodIdeasPdpAccordionBundle } from "@/lib/good-ideas-pdp-content";
 
 type ProductSummary = {
   id: string;
@@ -90,18 +77,33 @@ type Props = {
   availabilityCopy?: AvailabilityCopy;
   brandLabel?: string;
   brandHref?: string;
-  salesBadge?: string;
   mobileStickyTrustLines: [string, string, string];
-<<<<<<< HEAD
+  cartBrand?: "go-natural" | "good-ideas";
   cartPath?: string;
-=======
-  cartBrand?: "good-ideas";
-  breadcrumbItems?: BreadcrumbItem[];
-  accordionBundle?: GoodIdeasPdpAccordionBundle;
-  /** Fase 4: el sticky inteligente reemplaza la barra móvil legacy. */
-  suppressMobileSticky?: boolean;
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 };
+
+function getDefaultSelections(variants: VariantDefinition[]) {
+  const selections: Record<string, string> = {};
+
+  variants.forEach((variant) => {
+    const options = variant.options || [];
+    if (options.length === 0) return;
+
+    if (variant.default) {
+      const match = options.find(
+        (opt) => opt.value === variant.default || opt.label === variant.default
+      );
+      if (match) {
+        selections[variant.type] = match.value || match.label;
+        return;
+      }
+    }
+
+    selections[variant.type] = options[0].value || options[0].label;
+  });
+
+  return selections;
+}
 
 function buildInfoPanelProps(
   common: {
@@ -110,7 +112,6 @@ function buildInfoPanelProps(
     brandLabel?: string;
     brandHref?: string;
     seoH1: string;
-    salesBadge?: string;
     resolvedPrice: number;
     freeShipping?: boolean;
     freeShippingLabel?: string;
@@ -140,15 +141,10 @@ function buildInfoPanelProps(
       image?: string;
       variantSelections?: AddToCartLinePayload["variantSelections"];
     };
-<<<<<<< HEAD
     onAfterAdd: (item: AddToCartLinePayload) => void;
-=======
-    cartBrand: "good-ideas";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
+    cartBrand: "go-natural" | "good-ideas";
     sizeConfirmed: boolean;
     onSizeInteract: () => void;
-    breadcrumbItems?: BreadcrumbItem[];
-    accordionBundle?: GoodIdeasPdpAccordionBundle;
   },
   sticky: boolean
 ) {
@@ -174,23 +170,19 @@ export default function ProductDetailClient({
   sizeGuideHref,
   quantityLabel = "Quantity",
   availabilityCopy = {
+    pickupTitle: "Store pickup",
+    pickupStatus: "Check availability",
     shippingTitle: "Shipping",
     shippingStatus: "Available",
   },
   brandLabel,
   brandHref,
-  salesBadge,
   mobileStickyTrustLines,
-<<<<<<< HEAD
+  cartBrand = "go-natural",
   cartPath,
-=======
-  cartBrand = "good-ideas",
-  breadcrumbItems,
-  accordionBundle,
-  suppressMobileSticky = false,
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 }: Props) {
   const L = surface === "light";
+  const gi = false;
   const { formatMoney } = useCurrency();
   const searchParams = useSearchParams();
   const isFramingDirector = isPdpGalleryFramingDirectorMode(
@@ -202,25 +194,6 @@ export default function ProductDetailClient({
   );
   const [framingImageIndex, setFramingImageIndex] = useState(0);
 
-  const {
-    selections,
-    setSelections,
-    quantity,
-    setQuantity,
-    resolvedPrice,
-    variantSelections,
-    cartImage,
-    pdpGalleryImages,
-    colorDef,
-    sizeDef,
-    otherVariantDefs,
-    sizeConfirmed,
-    setSizeConfirmed,
-    ctaDisabled,
-  } = usePdpProductStateContext();
-
-  const mobileCtaText = ctaDisabled ? selectSizeLabel : ctaLabel;
-
   useEffect(() => {
     const fromJson = normalizePdpGalleryLayout(productImages.pdpGalleryLayout);
     if (isFramingDirector) {
@@ -231,12 +204,145 @@ export default function ProductDetailClient({
     }
   }, [isFramingDirector, product.id, productImages.pdpGalleryLayout]);
 
+  const baseFeatured =
+    productImages.featured || product.images[0] || "";
+  const baseGallery =
+    productImages.gallery.length > 0
+      ? productImages.gallery
+      : product.images.slice(1);
+
+  const initialSelections = useMemo(() => {
+    if (!productVariants) return {};
+    return getDefaultSelections(productVariants.variants);
+  }, [productVariants]);
+
+  const [selections, setSelections] = useState<Record<string, string>>(
+    initialSelections
+  );
+  const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState<AddedToCartLineSnapshot | null>(
+    null
+  );
+
+  const handleAfterAddToCart = useCallback((item: AddToCartLinePayload) => {
+    setAddedToCart({
+      title: item.title,
+      price: item.price,
+      image: item.image,
+      variantSelections: item.variantSelections,
+    });
+  }, []);
+
+  useEffect(() => {
+    setSelections(initialSelections);
+    setQuantity(1);
+  }, [initialSelections, product.id]);
+
+  useEffect(() => {
+    trackViewItem({
+      item_id: product.id,
+      item_name: seoH1,
+      price: product.price,
+      item_category: product.category,
+      quantity: 1,
+    });
+  }, [product.id, product.category, product.price, seoH1]);
+
+  const activeImages = useMemo(() => {
+    const defaultImages = {
+      featured: baseFeatured,
+      gallery: baseGallery,
+    };
+
+    return resolveColorVariantActiveImages(
+      productImages,
+      productVariants,
+      selections,
+      defaultImages
+    );
+  }, [
+    baseFeatured,
+    baseGallery,
+    productImages,
+    productVariants,
+    selections,
+  ]);
+
+  const resolvedPrice = useMemo(() => {
+    if (!productVariants) return product.price;
+    let price = product.price;
+
+    productVariants.variants.forEach((variant) => {
+      const selectedValue = selections[variant.type];
+      if (!selectedValue) return;
+      const option = variant.options.find(
+        (opt) => (opt.value || opt.label) === selectedValue
+      );
+      if (option && typeof option.priceModifier === "number") {
+        price += option.priceModifier;
+      }
+    });
+
+    return price;
+  }, [product.price, productVariants, selections]);
+
+  const variantSelections = useMemo(() => {
+    if (!productVariants) return undefined;
+    const selectionsList = productVariants.variants
+      .map((variant) => {
+        const selection = selections[variant.type];
+        if (!selection) return null;
+        const option = variant.options.find(
+          (opt) => (opt.value || opt.label) === selection
+        );
+        const value = option?.value || selection;
+        const label = option?.label || selection;
+        return {
+          type: variant.type,
+          typeLabel: variant.label,
+          value,
+          label,
+        };
+      })
+      .filter(
+        (entry): entry is NonNullable<typeof entry> => Boolean(entry)
+      );
+    return selectionsList.length ? selectionsList : undefined;
+  }, [productVariants, selections]);
+
+  const cartImage = activeImages.featured || product.images[0];
+
+  const pdpGalleryImages = useMemo(() => {
+    const list: string[] = [];
+    const push = (url: string) => {
+      if (url && !list.includes(url)) list.push(url);
+    };
+    if (activeImages.featured) push(activeImages.featured);
+    const gal = Array.isArray(activeImages.gallery) ? activeImages.gallery : [];
+    gal.forEach(push);
+    return list;
+  }, [activeImages]);
+
+  const { color: colorDef, size: sizeDef, other: otherVariantDefs } =
+    useMemo(
+      () => splitVariantDefinitions(productVariants?.variants ?? []),
+      [productVariants]
+    );
+
+  const needsSizePick = Boolean(sizeDef);
+  const [sizeConfirmed, setSizeConfirmed] = useState(!sizeDef);
+  useEffect(() => {
+    setSizeConfirmed(!sizeDef);
+  }, [product.id, sizeDef]);
+
+  const ctaDisabled = needsSizePick && !sizeConfirmed;
+  const mobileCtaText = ctaDisabled ? selectSizeLabel : ctaLabel;
+
   const panelCommon = {
     productId: product.id,
     surface,
     brandLabel,
     brandHref,
-    salesBadge,
     seoH1,
     resolvedPrice,
     freeShipping: product.freeShipping,
@@ -267,15 +373,10 @@ export default function ProductDetailClient({
       image: cartImage,
       variantSelections,
     },
-<<<<<<< HEAD
     onAfterAdd: handleAfterAddToCart,
-=======
     cartBrand,
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
     sizeConfirmed,
     onSizeInteract: () => setSizeConfirmed(true),
-    breadcrumbItems,
-    accordionBundle,
   };
 
   const galleryColumns = resolvePdpGalleryColumns(galleryLayout, 2);
@@ -288,35 +389,27 @@ export default function ProductDetailClient({
       surface={surface}
       galleryLayout={galleryLayout}
       columns={galleryColumns}
-      galleryWidthPx={PDP_GALLERY_WIDTH_PX}
+      galleryWidthPx={gi ? null : PDP_GALLERY_WIDTH_PX}
       debugHighlightIndex={isFramingDirector ? framingImageIndex : null}
     />
   );
 
-  const desktopGridClass = gi
-    ? GI_PDP_GRID
-    : "hidden lg:grid lg:grid-cols-[minmax(0,1.68fr)_minmax(280px,0.32fr)] lg:items-start lg:gap-x-10 xl:gap-x-12";
-
-  const galleryWrapClass = gi ? GI_PDP_GALLERY_STICKY : "min-w-0";
-
-  const panelSticky = !gi;
-
   return (
-    <div id="pdp-hero">
-      {/* Mobile: galería → información (sin sticky) */}
-      <section className="mx-auto grid max-w-full gap-8 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-0 sm:gap-10 lg:hidden">
+    <>
+      {/* Mobile: imágenes primero, panel de compra debajo */}
+      <section className="mx-auto grid max-w-full gap-6 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-0 lg:hidden">
         <div className="min-w-0">{gallery}</div>
         <ProductInfoPanel {...buildInfoPanelProps(panelCommon, false)} />
       </section>
 
       {/*
-        Desktop: galería sticky izquierda (GI) o panel sticky derecha (framing / legacy).
+        Desktop REI: 68/32 — panel sticky dentro de la fila del grid.
         El sticky termina al final de esta sección (antes de Features).
       */}
-      <section className={desktopGridClass}>
-        <div className={galleryWrapClass}>{gallery}</div>
+      <section className="hidden lg:grid lg:grid-cols-[minmax(0,1.68fr)_minmax(280px,0.32fr)] lg:items-start lg:gap-x-10 xl:gap-x-12">
+        <div className="min-w-0">{gallery}</div>
         <div className="min-w-0">
-          <ProductInfoPanel {...buildInfoPanelProps(panelCommon, panelSticky)} />
+          <ProductInfoPanel {...buildInfoPanelProps(panelCommon, true)} />
         </div>
       </section>
 
@@ -331,73 +424,66 @@ export default function ProductDetailClient({
         />
       ) : null}
 
-      {/* Sticky CTA móvil legacy (desactivado con Fase 4) */}
-      {!suppressMobileSticky ? (
+      {/* Sticky CTA móvil */}
       <div
         className={
-          L
-            ? "fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white/95 px-4 pt-3 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
-            : "fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-dark-base/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+          gi
+            ? "fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.08] bg-[#0B0F14]/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.45)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+            : L
+              ? "fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white/95 px-4 pt-3 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+              : "fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-dark-base/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
         }
       >
         <div className="mx-auto max-w-full">
           <div className="mb-2 text-center">
             <p
               className={
-                L
-                  ? "text-2xl font-bold text-neutral-900"
-                  : "text-2xl font-bold text-text-primary"
+                gi
+                  ? "text-2xl font-bold tabular-nums text-[#E8ECF1]"
+                  : L
+                    ? "text-2xl font-bold text-neutral-900"
+                    : "text-2xl font-bold text-text-primary"
               }
             >
               {formatMoney(resolvedPrice)}
             </p>
           </div>
 
-<<<<<<< HEAD
           <AddToCartButton
-=======
-          <GoodIdeasAddToCartButton
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
-            id={product.id}
-            title={product.title}
-            price={resolvedPrice}
-            image={cartImage}
-            variantSelections={variantSelections}
-            label={mobileCtaText}
-            disabled={ctaDisabled}
-<<<<<<< HEAD
-            variant="forest"
-            quantity={quantity}
-            className="mt-0 w-full rounded-md py-3.5 text-base"
-            surface={surface}
-            onAfterAdd={handleAfterAddToCart}
-=======
-            className={
-              gi
-                ? `${GI_PDP_CTA_CLASS} mt-0`
-                : "mt-0 w-full rounded-md py-3.5 text-base"
-            }
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
-          />
+              id={product.id}
+              title={product.title}
+              price={resolvedPrice}
+              image={cartImage}
+              variantSelections={variantSelections}
+              label={mobileCtaText}
+              disabled={ctaDisabled}
+              variant="forest"
+              quantity={quantity}
+              className="mt-0 w-full rounded-md py-3.5 text-base"
+              surface={surface}
+              onAfterAdd={handleAfterAddToCart}
+            />
 
           <div
             className={
-              L
-                ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-neutral-500"
-                : "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-text-muted/70"
+              gi
+                ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-[rgba(232,236,241,0.5)]"
+                : L
+                  ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-neutral-500"
+                  : "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-text-muted/70"
             }
           >
             <span>{mobileStickyTrustLines[0]}</span>
             <span
               aria-hidden
-              className={L ? "text-neutral-300" : "text-white/25"}
+              className={gi ? "text-white/20" : L ? "text-neutral-300" : "text-white/25"}
             >
               ·
             </span>
             <span>{mobileStickyTrustLines[1]}</span>
             <span
               aria-hidden
-              className={L ? "text-neutral-300" : "text-white/25"}
+              className={gi ? "text-white/20" : L ? "text-neutral-300" : "text-white/25"}
             >
               ·
             </span>
@@ -405,7 +491,13 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
-      ) : null}
-    </div>
+
+      <AddedToCartModal
+        open={addedToCart !== null}
+        item={addedToCart}
+        onClose={() => setAddedToCart(null)}
+        cartPath={cartPath}
+      />
+    </>
   );
 }

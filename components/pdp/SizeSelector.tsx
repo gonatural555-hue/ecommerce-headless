@@ -37,6 +37,7 @@ export default function SizeSelector({
   appearance = "pill",
 }: Props) {
   const L = surface === "light";
+  const gi = false;
   const rei = appearance === "rei";
   const theme = getPdpBuyBoxTheme(pdpBrand, surface);
   const current = selections[variant.type];
@@ -49,9 +50,11 @@ export default function SizeSelector({
           <Link
             href={sizeGuideHref}
             className={
-              L
-                ? "text-xs font-medium text-neutral-700 underline-offset-4 hover:text-accent-gold hover:underline"
-                : "text-xs font-medium text-text-muted underline-offset-4 hover:text-accent-gold hover:underline"
+              gi
+                ? "text-xs font-medium text-[rgba(232,236,241,0.72)] underline-offset-4 hover:text-[#60A5FA] hover:underline"
+                : L
+                  ? "text-xs font-medium text-neutral-700 underline-offset-4 hover:text-accent-gold hover:underline"
+                  : "text-xs font-medium text-text-muted underline-offset-4 hover:text-accent-gold hover:underline"
             }
           >
             {sizeGuideLabel}
@@ -73,17 +76,19 @@ export default function SizeSelector({
             ? "min-h-[2.75rem] rounded-md px-2 py-2.5 text-sm"
             : "min-w-[2.75rem] rounded-full border px-3.5 py-2 text-sm";
 
-          const focusRing = L
-            ? "focus-visible:ring-gn-forest/50 focus-visible:ring-offset-white"
-            : "focus-visible:ring-gn-forest/50 focus-visible:ring-offset-dark-base";
+          const focusRing = gi
+            ? "focus-visible:ring-[#3B82F6]/50 focus-visible:ring-offset-[#0B0F14]"
+            : L
+              ? "focus-visible:ring-gn-forest/50 focus-visible:ring-offset-white"
+              : "focus-visible:ring-gn-forest/50 focus-visible:ring-offset-dark-base";
 
           const stateClass = !valid
             ? theme.variantDisabled
             : active
-              ? rei && L
+              ? rei && L && !gi
                 ? "border-gn-forest bg-gn-forest text-[#F4EBDD] shadow-sm"
                 : theme.variantSelected
-              : rei && L
+              : rei && L && !gi
                 ? "border-neutral-300 bg-white text-neutral-900 hover:border-neutral-500"
                 : theme.variantDefault;
 

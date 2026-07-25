@@ -2,7 +2,7 @@
 
 import { useTranslations } from "@/components/i18n/LocaleProvider";
 import { useCurrency } from "@/context/CurrencyContext";
-import { giType } from "@/lib/ui/gi-typography";import { currencies, type DisplayCurrency } from "@/lib/currency/config";
+import { currencies, type DisplayCurrency } from "@/lib/currency/config";
 
 type Variant = "utility";
 
@@ -14,34 +14,6 @@ export default function HeaderCurrencySwitcher({ variant = "utility" }: Props) {
   const t = useTranslations();
   const { currency, setCurrency } = useCurrency();
 
-<<<<<<< HEAD
-=======
-  if (variant === "good-ideas") {
-    return (
-      <nav
-        className="flex items-center gap-0.5 rounded-full border border-white/10 px-1 py-0.5"
-        aria-label={t("header.currencyNavAria")}
-      >
-        {currencies.map((code) => (
-          <button
-            key={code}
-            type="button"
-            onClick={() => setCurrency(code)}
-            className={`rounded-full px-2.5 py-1 ${giType.navUtility} ${
-              code === currency
-                ? "text-[var(--gi-primary)]"
-                : "text-white hover:text-[var(--gi-primary)]"
-            }`}
-            aria-pressed={code === currency}
-          >
-            {code}
-          </button>
-        ))}
-      </nav>
-    );
-  }
-
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
   return (
     <nav
       className="gn-rei-utility__currencies"

@@ -1,17 +1,10 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-<<<<<<< HEAD
 import AddToCartButton, {
   type AddToCartLinePayload,
 } from "@/components/AddToCartButton";
-=======
-import type { AddToCartLinePayload } from "@/lib/cart-line";
-import Breadcrumbs, { type BreadcrumbItem } from "@/components/Breadcrumbs";
-import GoodIdeasAddToCartButton from "@/components/good-ideas/GoodIdeasAddToCartButton";
-import GoodIdeasPdpAccordions from "@/components/good-ideas/GoodIdeasPdpAccordions";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 import VariantSelector from "@/components/VariantSelector";
 import ColorSwatchSelector from "@/components/pdp/ColorSwatchSelector";
 import SizeSelector from "@/components/pdp/SizeSelector";
@@ -21,11 +14,8 @@ import PdpAvailabilityCards, {
 } from "@/components/pdp/PdpAvailabilityCards";
 import TrustBadges from "@/components/pdp/TrustBadges";
 import CurrencyDisclaimer from "@/components/currency/CurrencyDisclaimer";
-import { giType } from "@/lib/ui/gi-typography";
 import { useCurrency } from "@/context/CurrencyContext";
 import type { PdpDesktopContent } from "@/components/ProductDetailClient";
-import type { GoodIdeasPdpAccordionBundle } from "@/lib/good-ideas-pdp-content";
-import { resolvePdpSalesBadge } from "@/lib/pdp-sales-badge";
 import { isValidCombination } from "@/lib/product-variant-matrix";
 import type {
   ProductVariants,
@@ -37,7 +27,6 @@ import {
   resolvePdpBrandTheme,
   type PdpBrandTheme,
 } from "@/lib/ui/pdp-theme";
-import { GI_PDP_CTA_CLASS } from "@/lib/ui/gi-pdp-layout";
 
 type Props = {
   productId: string;
@@ -45,7 +34,6 @@ type Props = {
   brandLabel?: string;
   brandHref?: string;
   seoH1: string;
-  salesBadge?: string;
   resolvedPrice: number;
   freeShipping?: boolean;
   freeShippingLabel?: string;
@@ -81,15 +69,10 @@ type Props = {
     }[];
   };
   onAfterAdd?: (item: AddToCartLinePayload) => void;
-<<<<<<< HEAD
-=======
-  cartBrand?: "good-ideas";
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
+  cartBrand?: "go-natural" | "good-ideas";
   sticky?: boolean;
   sizeConfirmed: boolean;
   onSizeInteract: () => void;
-  breadcrumbItems?: BreadcrumbItem[];
-  accordionBundle?: GoodIdeasPdpAccordionBundle;
 };
 
 function MiniStars({
@@ -102,8 +85,9 @@ function MiniStars({
   pdpBrand: PdpBrandTheme;
 }) {
   const L = surface === "light";
+  const gi = false;
   const rounded = Math.round(rating);
-  const filled = "text-gn-mustard";
+  const filled = gi ? "text-[#FBBF24]" : "text-gn-mustard";
   const empty = L ? "text-neutral-300" : "text-white/25";
   return (
     <span className="flex items-center gap-0.5" aria-hidden>
@@ -122,11 +106,11 @@ function MiniStars({
 }
 
 export default function ProductInfoPanel({
+  productId,
   surface,
   brandLabel,
   brandHref,
   seoH1,
-  salesBadge,
   resolvedPrice,
   freeShipping,
   freeShippingLabel,
@@ -151,21 +135,15 @@ export default function ProductInfoPanel({
   pdpDesktop,
   cartPayload,
   onAfterAdd,
-<<<<<<< HEAD
-=======
-  cartBrand = "good-ideas",
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
+  cartBrand = "go-natural",
   sticky = true,
   sizeConfirmed,
   onSizeInteract,
-  breadcrumbItems,
-  accordionBundle,
 }: Props) {
   const pdpBrand = resolvePdpBrandTheme();
   const theme = getPdpBuyBoxTheme(pdpBrand, surface);
   const { formatMoney } = useCurrency();
   const matrix = productVariants?.variantMatrix;
-  const displaySalesBadge = resolvePdpSalesBadge(salesBadge);
 
   const pick = useCallback(
     (type: string, value: string, label: string) => {
@@ -181,11 +159,9 @@ export default function ProductInfoPanel({
   const needsSizePick = Boolean(sizeDef) && !sizeConfirmed;
   const ctaDisabled = needsSizePick;
   const ctaText = needsSizePick ? selectSizeLabel : ctaLabel;
-  const isGi = pdpBrand === "good-ideas";
 
-  const forestCta = isGi
-    ? GI_PDP_CTA_CLASS
-    : "w-full rounded-md py-3.5 px-6 text-[0.95rem] font-semibold tracking-wide transition-all duration-200 ease-out hover:-translate-y-px active:translate-y-0";
+  const forestCta =
+    "w-full rounded-md py-3.5 px-6 text-[0.95rem] font-semibold tracking-wide transition-all duration-200 ease-out hover:-translate-y-px active:translate-y-0";
 
   const trustBadgeCopy = {
     shippingEurope: pdpDesktop.shippingEurope,
@@ -209,146 +185,15 @@ export default function ProductInfoPanel({
       />
     ) : null;
 
-  const variantsBlock = (
-    <>
-      {colorDef ? (
-        <ColorSwatchSelector
-          variant={colorDef}
-          selections={selections}
-          variantMatrix={matrix}
-          surface={surface}
-          pdpBrand={pdpBrand}
-          onSelect={(value, label) => pick(colorDef.type, value, label)}
-        />
-      ) : null}
-
-      {sizeDef ? (
-        <SizeSelector
-          variant={sizeDef}
-          selections={selections}
-          variantMatrix={matrix}
-          sizeGuideHref={sizeGuideHref}
-          sizeGuideLabel={sizeGuideLabel}
-          surface={surface}
-          appearance="rei"
-          pdpBrand={pdpBrand}
-          onInteract={onSizeInteract}
-          onSelect={(value, label) => pick(sizeDef.type, value, label)}
-        />
-      ) : null}
-
-      {otherVariantsBlock}
-    </>
-  );
-
-  const shellClass = [
-    "flex w-full min-w-0 flex-col",
-    isGi ? "gap-8 max-lg:gap-6 lg:gap-10" : "gap-5 max-lg:gap-4 lg:max-w-none lg:gap-6",
-    sticky ? "lg:sticky lg:top-28 lg:self-start" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  if (isGi) {
-    return (
-      <div className={shellClass}>
-        {breadcrumbItems && breadcrumbItems.length > 0 ? (
-          <Breadcrumbs
-            variant="gi-dark"
-            items={breadcrumbItems}
-            className="!mb-0 lg:!mb-2"
-          />
-        ) : null}
-
-        {displaySalesBadge ? (
-          <span
-            className={`inline-flex w-fit items-center rounded-md bg-[var(--gi-primary)] px-2.5 py-1 ${giType.badge} text-white`}
-          >
-            {displaySalesBadge}
-          </span>
-        ) : null}
-
-        <h1 className={theme.title}>{seoH1}</h1>
-
-        {brandLabel && brandHref ? (
-          <Link href={brandHref} className={theme.brandLink}>
-            {brandLabel}
-          </Link>
-        ) : null}
-
-        {showReviews ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <MiniStars
-              rating={reviewsAverage}
-              surface={surface}
-              pdpBrand={pdpBrand}
-            />
-            <span className={theme.reviewsScore}>
-              {reviewsAverage.toFixed(1)}
-            </span>
-            <span className={theme.reviewsDot} aria-hidden>
-              ·
-            </span>
-            <Link href="#pdp-accordions" className={theme.reviewsLink}>
-              {reviewsLinkLabel ||
-                `${reviewsCount} ${reviewsCount === 1 ? "reseña" : "reseñas"}`}
-            </Link>
-          </div>
-        ) : null}
-
-        <div className="space-y-2">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <p className={theme.price}>{formatMoney(resolvedPrice)}</p>
-            {freeShipping && freeShippingLabel ? (
-              <span className={theme.freeShipping}>{freeShippingLabel}</span>
-            ) : null}
-          </div>
-          {taxNote ? <p className={theme.taxNote}>{taxNote}</p> : null}
-          <CurrencyDisclaimer className={theme.currencyDisclaimer} />
-        </div>
-
-        <div className="flex flex-col gap-7 max-lg:gap-5 lg:gap-8">
-          {variantsBlock}
-
-          <PdpQuantitySelector
-            value={quantity}
-            onChange={onQuantityChange}
-            label={quantityLabel}
-            surface={surface}
-            pdpBrand={pdpBrand}
-          />
-
-          <div className="max-lg:hidden">
-            <GoodIdeasAddToCartButton
-              id={cartPayload.id}
-              title={cartPayload.title}
-              price={cartPayload.price}
-              image={cartPayload.image}
-              variantSelections={cartPayload.variantSelections}
-              label={ctaText}
-              disabled={ctaDisabled}
-              className={forestCta}
-              onAfterAdd={onAfterAdd}
-            />
-          </div>
-        </div>
-
-        {accordionBundle ? (
-          <div id="pdp-accordions">
-            <GoodIdeasPdpAccordions
-              labels={accordionBundle.labels}
-              productDetails={accordionBundle.productDetails}
-              shippingSections={accordionBundle.shippingSections}
-              faqs={accordionBundle.faqs}
-            />
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-
   return (
-    <div className={shellClass}>
+    <div
+      className={[
+        "flex w-full min-w-0 flex-col gap-5 max-lg:gap-4 lg:max-w-none lg:gap-6",
+        sticky ? "lg:sticky lg:top-28 lg:self-start" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {brandLabel && brandHref ? (
         <Link href={brandHref} className={theme.brandLink}>
           {brandLabel}
@@ -356,16 +201,7 @@ export default function ProductInfoPanel({
       ) : null}
 
       <header className="space-y-3">
-        <div className="space-y-2">
-          <h1 className={theme.title}>{seoH1}</h1>
-          {displaySalesBadge ? (
-            <span
-              className={`inline-flex w-fit items-center rounded-md bg-[var(--gi-primary)] px-2.5 py-1 ${giType.badge} text-white`}
-            >
-              {displaySalesBadge}
-            </span>
-          ) : null}
-        </div>
+        <h1 className={theme.title}>{seoH1}</h1>
 
         {showReviews ? (
           <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -398,7 +234,33 @@ export default function ProductInfoPanel({
       </header>
 
       <div className="flex flex-col gap-5 max-lg:gap-4 lg:gap-5">
-        {variantsBlock}
+        {colorDef ? (
+          <ColorSwatchSelector
+            variant={colorDef}
+            selections={selections}
+            variantMatrix={matrix}
+            surface={surface}
+            pdpBrand={pdpBrand}
+            onSelect={(value, label) => pick(colorDef.type, value, label)}
+          />
+        ) : null}
+
+        {sizeDef ? (
+          <SizeSelector
+            variant={sizeDef}
+            selections={selections}
+            variantMatrix={matrix}
+            sizeGuideHref={sizeGuideHref}
+            sizeGuideLabel={sizeGuideLabel}
+            surface={surface}
+            appearance="rei"
+            pdpBrand={pdpBrand}
+            onInteract={onSizeInteract}
+            onSelect={(value, label) => pick(sizeDef.type, value, label)}
+          />
+        ) : null}
+
+        {otherVariantsBlock}
 
         <PdpQuantitySelector
           value={quantity}
@@ -416,33 +278,30 @@ export default function ProductInfoPanel({
 
         <div className="space-y-4">
           <div className="max-lg:hidden">
-<<<<<<< HEAD
             <AddToCartButton
-=======
-            <GoodIdeasAddToCartButton
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
-              id={cartPayload.id}
-              title={cartPayload.title}
-              price={cartPayload.price}
-              image={cartPayload.image}
-              variantSelections={cartPayload.variantSelections}
-              label={ctaText}
-              disabled={ctaDisabled}
-<<<<<<< HEAD
-              surface={surface}
-              variant="forest"
-              quantity={quantity}
-=======
->>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
-              className={forestCta}
-              onAfterAdd={onAfterAdd}
-            />
+                id={cartPayload.id}
+                title={cartPayload.title}
+                price={cartPayload.price}
+                image={cartPayload.image}
+                variantSelections={cartPayload.variantSelections}
+                label={ctaText}
+                disabled={ctaDisabled}
+                surface={surface}
+                variant="forest"
+                quantity={quantity}
+                className={forestCta}
+                onAfterAdd={onAfterAdd}
+              />
           </div>
 
           <TrustBadges
             copy={trustBadgeCopy}
             surface={surface}
-            className="border-t-0 pt-0 lg:border-t lg:border-neutral-200/90 lg:pt-5"
+            className={
+              false
+                ? "border-t-0 pt-0 lg:border-t lg:border-white/[0.08] lg:pt-5"
+                : "border-t-0 pt-0 lg:border-t lg:border-neutral-200/90 lg:pt-5"
+            }
           />
         </div>
       </div>
