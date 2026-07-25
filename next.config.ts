@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
-    "/*": ["./scripts/good-ideas-products/**/*.json", "./scripts/products/**/*.json"],
+    "/*": ["./scripts/products/**/*.json"],
   },
   images: {
     remotePatterns: [
@@ -41,6 +41,16 @@ const nextConfig: NextConfig = {
       {
         source: "/:locale/products/gn-ski-snow-001",
         destination: "/:locale/products/gn-ski-snow-001-sk7a1",
+        permanent: true,
+      },
+      {
+        source: "/:locale/good-ideas",
+        destination: "/:locale/go-natural",
+        permanent: true,
+      },
+      {
+        source: "/:locale/good-ideas/:path*",
+        destination: "/:locale/go-natural",
         permanent: true,
       },
     ];

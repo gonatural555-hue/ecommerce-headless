@@ -25,7 +25,7 @@ type Props = {
   open: boolean;
   item: AddedToCartLineSnapshot | null;
   onClose: () => void;
-  /** Ruta absoluta del carrito (p. ej. `/es/good-ideas/cart`). Por defecto carrito Go Natural. */
+  /** Ruta absoluta del carrito (p. ej. `/es/cart`). Por defecto carrito Go Natural. */
   cartPath?: string;
 };
 

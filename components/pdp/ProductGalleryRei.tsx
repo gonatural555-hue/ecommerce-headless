@@ -19,7 +19,7 @@ type Props = {
   galleryLayout?: PdpGalleryLayout | null;
   /** Override de columnas: 1 = hero + rejilla; 2 = rejilla uniforme 2 cols. */
   columns?: 1 | 2;
-  /** Ancho fijo desktop (px). Go Natural: 998. Good Products: fluido. */
+  /** Ancho fijo desktop (px). Go Natural: 998. Null = fluido. */
   galleryWidthPx?: number | null;
   debugHighlightIndex?: number | null;
 };

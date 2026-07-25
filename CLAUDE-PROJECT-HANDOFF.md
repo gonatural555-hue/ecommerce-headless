@@ -7,15 +7,13 @@ Generado automáticamente desde el repositorio local.
 
 ## 1. Resumen del proyecto
 
-**ecommerce-headless** es un ecommerce headless multi-marca construido con **Next.js 16** (App Router) y **React 19**.
-
-Dos marcas en un mismo codebase:
+**ecommerce-headless** es un ecommerce headless de **una sola marca (Go Natural)** construido con **Next.js 16** (App Router) y **React 19**.
 
 | Marca | Segmento URL | Descripción |
 |-------|--------------|-------------|
-| **Go Natural** | `/[locale]/go-natural`, `/[locale]/products`, `/[locale]/category/...` | Catálogo outdoor principal (pesca, montaña, agua, outdoor, deportes activos) |
-| **Good Ideas / Good Products** | `/[locale]/good-ideas/...` | Segunda tienda con PLP, blog y checkout propios |
-| **Gateway** | `/[locale]` | Selector de marca al entrar |
+| **Go Natural** | `/[locale]/go-natural`, `/[locale]/products`, `/[locale]/category/...` | Catálogo outdoor (pesca, montaña, agua, outdoor, deportes activos) |
+
+`/[locale]` redirige a la home Go Natural. Redirects SEO: `/{locale}/good-ideas/*` → Go Natural.
 
 Idiomas: **es** (default), **en**, **fr**, **it** — copy de productos nuevos solo ES+EN en raíz + `translations.es`.
 
@@ -43,7 +41,7 @@ Scripts npm: `dev`, `build`, `start`, `lint`.
 ```
 ecommerce-headless/
 ├── app/                 # Rutas Next.js (pages, API routes, layouts)
-├── components/          # UI React (header, PDP, PLP, blog, good-ideas, home, etc.)
+├── components/          # UI React (header, PDP, PLP, blog, go-natural, home, etc.)
 ├── lib/                 # Lógica de negocio, catálogo, i18n, checkout, shipping
 ├── context/             # React Context (cart, auth, currency, newsletter modal)
 ├── messages/            # i18n JSON (es, en, fr, it)
@@ -100,10 +98,6 @@ app/api/
 - Categorías: `lib/categories.ts` (`CATEGORIES`, `PRODUCT_CATEGORY_MAP`)
 - Sync colores: `node scripts/sync-color-variant-images.mjs`
 
-**Good Ideas**
-- Catálogo: `lib/good-ideas-products.ts`
-- JSON: `scripts/good-ideas-products/{id}.json`
-- Cards PLP: `GoodIdeasProductCard` + `lib/good-ideas-product-images.ts`
 
 ---
 
@@ -124,8 +118,6 @@ app/api/
 - **Imágenes por variante color**: solo color cambia imagen en PDP/cards; usar `lib/variant-image-utils.ts`
 - **JSON productos con color**: siempre `variantImages.color.{slug}`; ejecutar sync después de editar
 - **i18n productos**: EN en raíz, ES en `translations.es`; no FR/IT salvo pedido explícito
-- **Good Products cards**: imagen desde `scripts/good-ideas-products/{id}.json` → `featured[0]`
-- **Envío Good Ideas**: fechas dinámicas vía `lib/good-ideas-delivery.ts` (no fechas fijas en copy)
 
 ---
 
@@ -175,13 +167,6 @@ app/[locale]/descargo-de-responsabilidad
 app/[locale]/disclaimer
 app/[locale]/esclusione-di-responsabilita
 app/[locale]/go-natural
-app/[locale]/good-ideas
-app/[locale]/good-ideas/blog
-app/[locale]/good-ideas/blog/[slug]
-app/[locale]/good-ideas/cart
-app/[locale]/good-ideas/checkout
-app/[locale]/good-ideas/products
-app/[locale]/good-ideas/products/[id]
 app/[locale]/home-2
 app/[locale]/informativa-sui-cookie
 app/[locale]/informativa-sulla-privacy
@@ -223,7 +208,6 @@ automation
 automation/cursor-prompts
 automation/generated-blog
 automation/generated-blog/go-natural
-automation/generated-blog/good-ideas
 automation/generated-image-prompts
 automation/generated-products
 components
@@ -238,7 +222,6 @@ components/currency
 components/editorial
 components/gateway
 components/go-natural
-components/good-ideas
 components/header
 components/hero
 components/home
@@ -275,9 +258,6 @@ public/assets/brand
 public/assets/brand/mountains
 public/assets/brand/pop-up-login
 public/assets/documents
-public/assets/documents/good-ideas-products
-public/assets/documents/good-ideas-products/gi-hogar-007
-public/assets/documents/good-ideas-products/gi-hogar-008
 public/assets/images
 public/assets/images/about
 public/assets/images/blog
@@ -310,31 +290,10 @@ public/assets/images/categories/fishing
 public/assets/images/categories/motorcyclist
 public/assets/images/categories/outdoor
 public/assets/images/categories/running
-public/assets/images/good-ideas-blog
-public/assets/images/good-ideas-blog/product-from-supplier-link
-public/assets/images/good-ideas-products
-public/assets/images/good-ideas-products/gi-hogar-001
-public/assets/images/good-ideas-products/gi-hogar-002
-public/assets/images/good-ideas-products/gi-hogar-003
-public/assets/images/good-ideas-products/gi-hogar-004
-public/assets/images/good-ideas-products/gi-hogar-005
-public/assets/images/good-ideas-products/gi-hogar-006
-public/assets/images/good-ideas-products/gi-hogar-007
-public/assets/images/good-ideas-products/gi-hogar-008
-public/assets/images/good-ideas-products/gi-lifestyle-001
-public/assets/images/good-ideas-products/gi-lifestyle-002
-public/assets/images/good-ideas-products/gi-lifestyle-003
-public/assets/images/good-ideas-products/gi-lifestyle-004
-public/assets/images/good-ideas-products/gi-regalos-001
-public/assets/images/good-ideas-products/gi-tech-001
-public/assets/images/good-ideas-products/gi-tech-002
-public/assets/images/good-ideas-products/gi-tech-003
-public/assets/images/good-ideas-products/gi-tech-004
 public/assets/images/hero
 public/assets/images/hero/products
 public/assets/images/logo
 public/assets/images/products
-public/assets/images/products/gi-tech-001
 public/assets/images/products/gn-camping-survival-001
 public/assets/images/products/gn-camping-survival-001/featured
 public/assets/images/products/gn-camping-survival-002
@@ -509,7 +468,6 @@ public/assets/images/products/gn-water-007
 public/assets/images/products/gn-water-007/gallery
 public/fonts
 scripts
-scripts/good-ideas-products
 scripts/products
 scripts/products/cycling-shoes-performance
 scripts/products/cycling-shoes-performance/black
@@ -569,14 +527,6 @@ app/[locale]/descargo-de-responsabilidad/page.tsx
 app/[locale]/disclaimer/page.tsx
 app/[locale]/esclusione-di-responsabilita/page.tsx
 app/[locale]/go-natural/page.tsx
-app/[locale]/good-ideas/blog/[slug]/page.tsx
-app/[locale]/good-ideas/blog/page.tsx
-app/[locale]/good-ideas/cart/page.tsx
-app/[locale]/good-ideas/checkout/page.tsx
-app/[locale]/good-ideas/layout.tsx
-app/[locale]/good-ideas/page.tsx
-app/[locale]/good-ideas/products/[id]/page.tsx
-app/[locale]/good-ideas/products/page.tsx
 app/[locale]/informativa-sui-cookie/page.tsx
 app/[locale]/informativa-sulla-privacy/page.tsx
 app/[locale]/landing/page.tsx
@@ -623,18 +573,7 @@ automation/cursor-prompts/generated-product-integration-20260524-000256.md
 automation/cursor-prompts/generated-product-integration-20260524-004830.md
 automation/cursor-prompts/generated-product-integration-20260524-012837.md
 automation/generated-blog/go-natural/.json
-automation/generated-blog/good-ideas/good-ideas-home-decor-20260523-232221.json
-automation/generated-blog/good-ideas/good-ideas-home-decor-20260524-012034.json
-automation/generated-blog/good-ideas/good-ideas-home-decor-best-value-20260523-234513.json
-automation/generated-blog/good-ideas/good-ideas-home-decor-faq-20260523-235739.json
-automation/generated-blog/good-ideas/product-from-1005006438780849-20260524-003015.json
-automation/generated-blog/good-ideas/product-from-1005007426544805-20260524-135741.json
-automation/generated-blog/good-ideas/product-from-supplier-link-20260524-193757.json
 automation/generated-image-prompts/.json
-automation/generated-image-prompts/20260524-000007-good-ideas.json
-automation/generated-image-prompts/20260524-003512-good-ideas.json
-automation/generated-image-prompts/20260524-012626-good-ideas.json
-automation/generated-image-prompts/20260524-140313-good-ideas.json
 automation/generated-image-prompts/missing-product-id-prompts.json
 automation/generated-products/.json
 automation/generated-products/-20260523-224401.json
@@ -680,41 +619,14 @@ components/currency/CurrencyDisclaimer.tsx
 components/currency/UsdChargeNotice.tsx
 components/editorial/EditorialProductCards.tsx
 components/Footer.tsx
-components/gateway/BrandGateway.tsx
 components/gateway/BrandHeroContent.tsx
 components/gateway/BrandPanel.tsx
 components/gateway/GoNaturalEditorialColumn.tsx
 components/gateway/GoNaturalMountainLayer.tsx
-components/gateway/GoodIdeasEditorialColumn.tsx
 components/go-natural/GoNaturalHomeLayoutDirectorPanel.tsx
 components/go-natural/GoNaturalHomeNewsletterDirectorPanel.tsx
 components/go-natural/GoNaturalHomeNewsletterModal.tsx
 components/go-natural/GoNaturalHomePage.tsx
-components/good-ideas/GoodIdeasActiveFilterChips.tsx
-components/good-ideas/GoodIdeasAddToCartButton.tsx
-components/good-ideas/GoodIdeasBlogHero.tsx
-components/good-ideas/GoodIdeasBlogPostContent.tsx
-components/good-ideas/GoodIdeasBlogProductRail.tsx
-components/good-ideas/GoodIdeasBrandLayout.tsx
-components/good-ideas/GoodIdeasCartPage.tsx
-components/good-ideas/GoodIdeasCatalogEmptyState.tsx
-components/good-ideas/GoodIdeasCatalogLayout.tsx
-components/good-ideas/GoodIdeasComingSoonBlock.tsx
-components/good-ideas/GoodIdeasFeaturedStory.tsx
-components/good-ideas/GoodIdeasFilterSidebar.tsx
-components/good-ideas/GoodIdeasFilterTrigger.tsx
-components/good-ideas/GoodIdeasFooter.tsx
-components/good-ideas/GoodIdeasHeader.tsx
-components/good-ideas/GoodIdeasHomeHero.tsx
-components/good-ideas/GoodIdeasHomePage.tsx
-components/good-ideas/GoodIdeasPriceFilter.tsx
-components/good-ideas/GoodIdeasProductCard.tsx
-components/good-ideas/GoodIdeasProductCardClient.tsx
-components/good-ideas/GoodIdeasProductsCarouselHeader.tsx
-components/good-ideas/GoodIdeasProductsHero.tsx
-components/good-ideas/GoodIdeasSortingBar.tsx
-components/good-ideas/GoodProductsBrandName.tsx
-components/good-ideas/PdpGoodIdeasProductManual.tsx
 components/Header.tsx
 components/header/HeaderCategoryBar.tsx
 components/header/HeaderCurrencySwitcher.tsx
@@ -794,7 +706,6 @@ context/AuthContext.tsx
 context/CartContext.tsx
 context/CurrencyContext.tsx
 context/GoNaturalHomeLayoutContext.tsx
-context/GoodIdeasCartContext.tsx
 context/HomeNewsletterModalContext.tsx
 context/UserContext.tsx
 data/products/heritage-italian-leather-weekender-bag.json
@@ -836,17 +747,6 @@ lib/email-automation-templates.ts
 lib/email-service.ts
 lib/email-templates.ts
 lib/go-natural-home-layout.ts
-lib/good-ideas-blog.ts
-lib/good-ideas-brand.ts
-lib/good-ideas-categories.ts
-lib/good-ideas-delivery.ts
-lib/good-ideas-plp-categories.ts
-lib/good-ideas-plp-filters.ts
-lib/good-ideas-plp-price.ts
-lib/good-ideas-plp-segments.ts
-lib/good-ideas-product-images.ts
-lib/good-ideas-product-manual.ts
-lib/good-ideas-products.ts
 lib/google-sheets.ts
 lib/header-nav-categories.ts
 lib/header-utility-links.ts
@@ -903,8 +803,6 @@ lib/ui/gateway-hero.ts
 lib/ui/gateway-mountains.ts
 lib/ui/gn-hero-cta.ts
 lib/ui/gonatural-design.ts
-lib/ui/goodideas-design.ts
-lib/ui/good-ideas-plp.ts
 lib/ui/hero-title-accent.tsx
 lib/ui/luminous-edge.ts
 lib/ui/pdp-theme.ts
@@ -933,8 +831,6 @@ public/assets/brand/mountains/right-2.png
 public/assets/brand/mountains/right-3.png
 public/assets/brand/mountains/right-4.png
 public/assets/brand/pop-up-login/background.webp
-public/assets/documents/good-ideas-products/gi-hogar-007/user-manual.pdf
-public/assets/documents/good-ideas-products/gi-hogar-008/user-manual.pdf
 public/assets/images/about/about.webp
 public/assets/images/blog/appcamping/maps.webp
 public/assets/images/blog/appcamping/seek.webp
@@ -1043,52 +939,6 @@ public/assets/images/categories/outdoor/outdoor-aventura-home-intention.png
 public/assets/images/categories/outdoor-adventure.webp
 public/assets/images/categories/running/running-banner.webp
 public/assets/images/categories/water-sports.webp
-public/assets/images/good-ideas-blog/.gitkeep
-public/assets/images/good-ideas-blog/product-from-supplier-link/.gitkeep
-public/assets/images/good-ideas-products/gi-hogar-001/.gitkeep
-public/assets/images/good-ideas-products/gi-hogar-001/image.webp
-public/assets/images/good-ideas-products/gi-hogar-002/.gitkeep
-public/assets/images/good-ideas-products/gi-hogar-002/image.webp
-public/assets/images/good-ideas-products/gi-hogar-003/.gitkeep
-public/assets/images/good-ideas-products/gi-hogar-004/black.webp
-public/assets/images/good-ideas-products/gi-hogar-004/image.webp
-public/assets/images/good-ideas-products/gi-hogar-004/white.webp
-public/assets/images/good-ideas-products/gi-hogar-005/card.png
-public/assets/images/good-ideas-products/gi-hogar-005/image.webp
-public/assets/images/good-ideas-products/gi-hogar-006/image.webp
-public/assets/images/good-ideas-products/gi-hogar-006/white.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L.png
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS-1.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS-2.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS-3.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS-4.webp
-public/assets/images/good-ideas-products/gi-hogar-007/Licuadora-6000W-2.5L-GOODPRODUCTS-5.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión-1.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión-2.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión-3.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión-4.webp
-public/assets/images/good-ideas-products/gi-hogar-008/batidora-de mano-de-inmersión-5.webp
-public/assets/images/good-ideas-products/gi-lifestyle-001/.gitkeep
-public/assets/images/good-ideas-products/gi-lifestyle-001/image.webp
-public/assets/images/good-ideas-products/gi-lifestyle-002/.gitkeep
-public/assets/images/good-ideas-products/gi-lifestyle-002/image.webp
-public/assets/images/good-ideas-products/gi-lifestyle-003/.gitkeep
-public/assets/images/good-ideas-products/gi-lifestyle-003/image.webp
-public/assets/images/good-ideas-products/gi-lifestyle-004/.gitkeep
-public/assets/images/good-ideas-products/gi-lifestyle-004/image.webp
-public/assets/images/good-ideas-products/gi-regalos-001/.gitkeep
-public/assets/images/good-ideas-products/gi-regalos-001/image.webp
-public/assets/images/good-ideas-products/gi-tech-001/.gitkeep
-public/assets/images/good-ideas-products/gi-tech-001/ia-robot-kids-01.webp
-public/assets/images/good-ideas-products/gi-tech-001/ia-robots-kids-02.webp
-public/assets/images/good-ideas-products/gi-tech-001/image.webp
-public/assets/images/good-ideas-products/gi-tech-002/.gitkeep
-public/assets/images/good-ideas-products/gi-tech-002/image.webp
-public/assets/images/good-ideas-products/gi-tech-003/.gitkeep
-public/assets/images/good-ideas-products/gi-tech-003/image.webp
-public/assets/images/good-ideas-products/gi-tech-004/image.webp
 public/assets/images/hero/accesorios-pesca.webp
 public/assets/images/hero/camping-outdoor.webp
 public/assets/images/hero/contact.webp
@@ -1115,7 +965,6 @@ public/assets/images/logo/GONATURAL-LOGO.svg
 public/assets/images/logo/LOG-GONATURAL.png
 public/assets/images/logo/LOGO.png
 public/assets/images/logo/LOGO-GONATURAL.png
-public/assets/images/products/gi-tech-001/.gitkeep
 public/assets/images/products/gn-camping-survival-001/featured/featured.webp
 public/assets/images/products/gn-camping-survival-001/featured13.5L.webp
 public/assets/images/products/gn-camping-survival-001/featured22L.webp
@@ -1532,26 +1381,8 @@ scripts/clean-empty-products-json.js
 scripts/delete-empty-products.js
 scripts/fix-products-images-structure.js
 scripts/generate-products-base.js
-scripts/good-ideas-products/gi-hogar-001.json
-scripts/good-ideas-products/gi-hogar-002.json
-scripts/good-ideas-products/gi-hogar-003.json
-scripts/good-ideas-products/gi-hogar-004.json
-scripts/good-ideas-products/gi-hogar-005.json
-scripts/good-ideas-products/gi-hogar-006.json
-scripts/good-ideas-products/gi-hogar-007.json
-scripts/good-ideas-products/gi-hogar-008.json
-scripts/good-ideas-products/gi-lifestyle-001.json
-scripts/good-ideas-products/gi-lifestyle-002.json
-scripts/good-ideas-products/gi-lifestyle-003.json
-scripts/good-ideas-products/gi-lifestyle-004.json
-scripts/good-ideas-products/gi-regalos-001.json
-scripts/good-ideas-products/gi-tech-001.json
-scripts/good-ideas-products/gi-tech-002.json
-scripts/good-ideas-products/gi-tech-003.json
-scripts/good-ideas-products/gi-tech-004.json
 scripts/products/cana-trucha-carbono.json
 scripts/products/chaqueta-polar-con-capucha.json
-scripts/products/gi-tech-001.json
 scripts/products/gn-camping-survival-001.json
 scripts/products/gn-camping-survival-002.json
 scripts/products/gn-cycling-010.json

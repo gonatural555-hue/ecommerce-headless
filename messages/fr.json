@@ -59,179 +59,6 @@
       }
     }
   },
-  "brandGateway": {
-    "goNatural": {
-      "title": "Go Natural",
-      "tagline": "Équipement et accessoires outdoor",
-      "cta": "Découvrir Go Natural"
-    },
-    "goodIdeas": {
-      "title": "Good Products",
-      "tagline": "Produits malins pour la maison, la tech et le quotidien.",
-      "cta": "Découvrir Good Products"
-    },
-    "localeAria": "Choisir la langue"
-  },
-  "goodIdeas": {
-    "brandName": "Good Products",
-    "nav": {
-      "home": "Accueil",
-      "products": "Produits",
-      "blog": "Blog",
-      "cart": "Panier",
-      "allBrands": "Toutes les marques"
-    },
-    "hero": {
-      "eyebrow": "Maison & Tech",
-      "title": "Bons\nproduits, bonnes idées.",
-      "subtitle": "Produits utiles pour la maison, la tech, le lifestyle et le quotidien.",
-      "cta": "Explorer les produits",
-      "comingSoon": "Notre catalogue est en préparation. Bientôt : gadgets maison, électronique et essentiels du quotidien.",
-      "sectionAria": "Good Products — accueil"
-    },
-    "products": {
-      "heroTitle": "Essentiels\nau quotidien",
-      "heroSubtitle": "Gadgets, maison et lifestyle sélectionnés. Catalogue en préparation.",
-      "heroAccentWord": "Essentiels",
-      "heroDiscover": "Découvrir le catalogue",
-      "scrollHint": "Faites défiler",
-      "comingSoonTitle": "Bientôt",
-      "comingSoonBody": "Nous préparons le catalogue Good Products. Maison, tech et lifestyle arrivent très bientôt.",
-      "categories": {
-        "home": "Maison",
-        "tech": "Tech",
-        "lifestyle": "Lifestyle",
-        "gifts": "Cadeaux"
-      }
-    },
-    "blog": {
-      "eyebrow": "Lifestyle & Tech",
-      "heroTitle": "Des idées\nqui inspirent",
-      "heroSubtitle": "Guides, tendances et produits utiles pour la maison, la tech et le quotidien.",
-      "exploreCta": "Explorer les articles",
-      "scrollHint": "Faites défiler",
-      "sectionAria": "Blog Good Products",
-      "comingSoonTitle": "Bientôt",
-      "comingSoonBody": "Le journal Good Products arrive bientôt. Articles maison, tech et lifestyle à suivre.",
-      "featuredLabel": "Article à la une",
-      "articlesLabel": "Derniers articles",
-      "backToBlog": "Retour au blog",
-      "featuredSlug": "smart-home-essentials-2026",
-      "posts": {
-        "smart-home-essentials-2026": {
-          "title": "Essentiels smart home pour le quotidien",
-          "excerpt": "Petites améliorations maison et tech pour des routines plus simples et agréables.",
-          "subtitle": "Sélections pratiques pour la maison, le bureau et les déplacements.",
-          "intro": "Good Products, ce sont des produits utiles qui s’intègrent à la vraie vie—sans encombrer. Des upgrades qui méritent leur place sur une étagère, dans un sac ou sur un bureau.",
-          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
-          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
-          "sections": [
-            {
-              "heading": "Commencez par les routines que vous répétez",
-              "paragraphs": [
-                "La meilleure tech maison n’est pas le gadget le plus bruyant du fil. C’est ce qui enlève une friction à quelque chose que vous faites déjà—thé, charge, ou un coin rangé.",
-                "Une bouilloire de voyage compacte, des écouteurs sans fil ou un mini frigo pour boissons et soins peuvent changer une pièce sans travaux."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
-            },
-            {
-              "heading": "Une tech discrète",
-              "paragraphs": [
-                "Choisissez des objets aux commandes claires, aux dimensions honnêtes et à un design que vous aimez voir au repos. Les formats portables voyagent bien entre cuisine, bureau et week-end.",
-                "Quand un produit fait bien une chose, il est plus facile à recommander—et à vivre avec."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
-            }
-          ],
-          "closing": "Explorez le catalogue Good Products : maison, tech, lifestyle et idées cadeaux pour le quotidien."
-        },
-        "product-from-1005006438780849": {
-          "title": "Bouilloire de voyage portable 450ML pour la maison et les déplacements",
-          "excerpt": "Un choix compact Good Products pour le thé, le café et l’eau chaude au bureau, en résidence ou en voyage.",
-          "subtitle": "Essentiels maison adaptés aux vraies routines.",
-          "intro": "Good Products sélectionne des produits utiles pour la maison, pas du superflu. Cette bouilloire compacte 450ML est faite pour l’eau chaude sans encombrer le plan de travail.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
-          "relatedProductIds": ["gi-hogar-002"],
-          "sections": [
-            {
-              "heading": "Pourquoi une bouilloire compacte mérite sa place dans le sac",
-              "paragraphs": [
-                "Les meilleures améliorations maison simplifient les routines que vous répétez déjà. Une petite bouilloire gère thé, café, plats instantanés et eau chaude sans envahir une étagère ou une valise.",
-                "Avec 450ML, la taille reste honnête pour une ou deux tasses—idéal au bureau, chevet, résidence ou hôtel sans cuisine complète."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
-            },
-            {
-              "heading": "Conçue pour l’usage quotidien Good Products",
-              "paragraphs": [
-                "Choisissez le format de prise selon votre région pour le même design compact à la maison et en voyage.",
-                "Consultez la fiche produit pour les dimensions, options de prise et galerie, puis associez-la à d’autres sélections maison et lifestyle du catalogue Good Products."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
-            }
-          ],
-          "closing": "Découvrez la bouilloire de voyage portable 450ML dans le catalogue maison Good Products et composez un setup adapté à votre quotidien."
-        },
-        "product-from-supplier-link": {
-          "title": "Sélections maison premium qui élèvent vos espaces",
-          "excerpt": "Découvrez un produit maison premium pensé pour la vie moderne : lignes épurées, matériaux de qualité et style adapté aux vraies pièces.",
-          "subtitle": "Style maison contemporain avec finition premium.",
-          "intro": "Good Products propose des produits maison choisis pour la qualité et l’usage quotidien. Cette sélection premium mise sur un design réfléchi et des matériaux qui s’intègrent aux intérieurs modernes, sans encombrer l’espace.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
-          "sections": [
-            {
-              "heading": "Un design qui accompagne votre quotidien",
-              "paragraphs": [
-                "L’esthétique moderne et épurée valorise l’espace tout en s’accordant à un mode de vie contemporain. Simplicité élégante et finitions soignées pour intérieurs minimalistes ou plus riches.",
-                "Une pièce remarquable pour les bonnes raisons : présence calme, matériaux honnêtes et silhouette qui n’entre pas en conflit avec la pièce."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
-            },
-            {
-              "heading": "Assez versatile pour un refresh ou un nouveau cap",
-              "paragraphs": [
-                "Que vous mettiez à jour un coin ou repensiez une pièce entière, cette sélection s’adapte à différents goûts et ambiances.",
-                "Plusieurs directions de style permettent de la placer au bureau, au salon ou en chambre sans déparement."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
-            }
-          ],
-          "closing": "Explorez le catalogue maison Good Products : des sélections premium qui équilibrent qualité, accessibilité et utilité quotidienne."
-        }
-      }
-    },
-    "cart": {
-      "title": "Votre panier",
-      "empty": "Votre panier Good Products est vide.",
-      "emptyCta": "Explorer les produits",
-      "comingSoonCheckout": "Le paiement sera disponible au lancement du catalogue.",
-      "subtotal": "Sous-total",
-      "checkout": "Passer au paiement"
-    },
-    "checkout": {
-      "title": "Paiement",
-      "comingSoonTitle": "Bientôt",
-      "comingSoonBody": "Le checkout Good Products s’ouvrira avec le lancement du catalogue.",
-      "backToCart": "Retour au panier"
-    },
-    "product": {
-      "comingSoonTitle": "Produit indisponible",
-      "comingSoonBody": "Ce produit fera partie du catalogue Good Products prochainement.",
-      "backToProducts": "Retour aux produits"
-    },
-    "footer": {
-      "tagline": "Produits malins pour la maison, la tech et le quotidien.",
-      "shopHeading": "Boutique",
-      "legalHeading": "Mentions",
-      "home": "Accueil",
-      "products": "Produits",
-      "blog": "Blog",
-      "privacy": "Confidentialité",
-      "cookies": "Cookies",
-      "terms": "Conditions",
-      "rights": "Tous droits réservés."
-    }
-  },
   "common": {
     "viewProduct": "Voir le produit",
     "addToCart": "Ajouter au panier",
@@ -264,30 +91,6 @@
     "passwordMismatch": "Les mots de passe ne correspondent pas."
   },
   "seo": {
-    "gateway": {
-      "title": "Go Natural & Good Products | Choisissez votre boutique",
-      "description": "Go Natural pour l’outdoor ou Good Products pour la maison, la tech et le quotidien."
-    },
-    "goodIdeas": {
-      "title": "Good Products | Produits malins",
-      "description": "Gadgets utiles, tech maison et produits viraux. Bientôt disponible.",
-      "products": {
-        "title": "Produits | Good Products",
-        "description": "Catalogue Good Products : maison, tech et lifestyle. Bientôt."
-      },
-      "blog": {
-        "title": "Blog | Good Products",
-        "description": "Idées, guides et tendances maison, tech et lifestyle."
-      },
-      "blogPost": {
-        "titleTemplate": "{title} | Blog Good Products",
-        "descriptionTemplate": "{excerpt}"
-      },
-      "cart": {
-        "title": "Panier | Good Products",
-        "description": "Votre panier Good Products."
-      }
-    },
     "home": {
       "title": "Équipement outdoor premium pour l’exploration lente",
       "description": "Du matériel conçu avec intention pour le camping, l’eau et les voyages outdoor."
@@ -337,10 +140,26 @@
     "categoriesTitle": "Naviguer avec intention",
     "categoriesSubtitle": "Pêche, montagne et neige, outdoor et sports nautiques — grandes zones cliquables, mêmes choix posés.",
     "categoryCards": [
-      { "label": "Pêche", "path": "/products?category=fishing", "imageKey": "fishing" },
-      { "label": "Montagne et neige", "path": "/products?category=mountain-snow", "imageKey": "mountain-snow" },
-      { "label": "Outdoor et aventure", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
-      { "label": "Sports nautiques", "path": "/products?category=water-sports", "imageKey": "water-sports" }
+      {
+        "label": "Pêche",
+        "path": "/products?category=fishing",
+        "imageKey": "fishing"
+      },
+      {
+        "label": "Montagne et neige",
+        "path": "/products?category=mountain-snow",
+        "imageKey": "mountain-snow"
+      },
+      {
+        "label": "Outdoor et aventure",
+        "path": "/products?category=outdoor",
+        "imageKey": "outdoor-adventure"
+      },
+      {
+        "label": "Sports nautiques",
+        "path": "/products?category=water-sports",
+        "imageKey": "water-sports"
+      }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Récits de terrain — la même voix que dans la boutique.",
@@ -2469,4 +2288,3 @@
     }
   }
 }
-

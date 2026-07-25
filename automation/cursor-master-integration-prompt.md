@@ -1,6 +1,6 @@
 # Cursor Master Integration Prompt
 
-You are the integration layer for the ecommerce-headless project.
+You are the integration layer for the ecommerce-headless project (**Go Natural only**).
 
 Your job is to integrate the latest **blog** automation patches from n8n into the REAL project architecture.
 
@@ -8,6 +8,7 @@ IMPORTANT:
 - Files inside /automation are NOT rendered by the website.
 - They are only generated patches.
 - You must merge their content into the actual application structure.
+- There is no Good Ideas / Buenos Productos brand. Do not create routes, libs, or i18n keys for it.
 
 --------------------------------------------------
 AUTOMATION SCOPE (n8n)
@@ -18,7 +19,7 @@ n8n is used ONLY for blog posts.
 n8n does NOT load products or PDP data. Product catalog entries are added manually via Cursor (see PRODUCT MANUAL WORKFLOW below).
 
 Read patches from:
-- automation/generated-blog/
+- automation/generated-blog/go-natural/
 
 Ignore for n8n integration (unless explicitly requested by the user):
 - automation/generated-products/
@@ -32,26 +33,18 @@ Go Natural Blog Routes:
 - /{locale}/blog
 - /{locale}/blog/{slug}
 
-Good Ideas Blog Routes:
-- /{locale}/good-ideas/blog
-- /{locale}/good-ideas/blog/{slug}
-
 Rendering files:
 - app/[locale]/blog/page.tsx
 - app/[locale]/blog/[slug]/page.tsx
-- app/[locale]/good-ideas/blog/page.tsx
-- app/[locale]/good-ideas/blog/[slug]/page.tsx
 
 Shared blog components:
 - components/blog/
 
 Products (manual — not from n8n):
-- lib/products.ts (Go Natural)
-- lib/good-ideas-products.ts (Good Ideas)
+- lib/products.ts
 
 Images metadata (manual):
 - scripts/products/
-- scripts/good-ideas-products/
 
 Translations:
 - messages/en.json
@@ -63,13 +56,14 @@ Translations:
 MAIN TASK (n8n blog integration)
 --------------------------------------------------
 
-Read the latest generated file inside automation/generated-blog/ (check go-natural/ and good-ideas/ subfolders).
+Read the latest generated file inside automation/generated-blog/go-natural/.
 
-Detect brand from patch metadata or folder path, then integrate into the real i18n structure.
+Integrate into the real i18n structure under path: blog.posts.{slug}
 
 Never create:
 - data/products
 - data/blog
+- anything under good-ideas / Good Ideas / Buenos Productos
 
 --------------------------------------------------
 BLOG RULES
@@ -84,7 +78,7 @@ Blog post shape (required for rendering):
   "subtitle": "...",
   "intro": "...",
   "heroImage": "/assets/images/...",
-  "relatedProductIds": ["gi-tech-001"],
+  "relatedProductIds": ["gn-example-001"],
   "sections": [
     {
       "heading": "...",
@@ -99,8 +93,7 @@ Blog post shape (required for rendering):
 Minimum required: title, excerpt.
 Do NOT use raw HTML in a `content` field — convert to sections[].paragraphs[].
 
-If brand is "Go Natural":
-merge blog post into:
+Merge blog post into:
 - messages/en.json
 - messages/es.json
 - messages/fr.json
@@ -108,16 +101,7 @@ merge blog post into:
 
 Path: blog.posts.{slug}
 
-If brand is "Good Ideas":
-merge blog post into:
-- messages/en.json
-- messages/es.json
-- messages/fr.json
-- messages/it.json
-
-Path: goodIdeas.blog.posts.{slug}
-
-Good Ideas cross-sell: relatedProductIds must use gi-* IDs from lib/good-ideas-products.ts only (never getProducts / Go Natural IDs).
+Cross-sell: relatedProductIds must use Go Natural product IDs from lib/products.ts only.
 
 --------------------------------------------------
 PRODUCT MANUAL WORKFLOW (Cursor — not n8n)
@@ -125,21 +109,15 @@ PRODUCT MANUAL WORKFLOW (Cursor — not n8n)
 
 When the user asks to add a product to the catalog:
 
-If brand is "Go Natural":
 - insert productObject into lib/products.ts
 - create/update scripts/products/{id}.json
 - add images under public/assets/images/products/{id}/
-
-If brand is "Good Ideas":
-- insert productObject into lib/good-ideas-products.ts
-- create/update scripts/good-ideas-products/{id}.json
-- add images under public/assets/images/good-ideas-products/{id}/
+- map categories in lib/categories.ts (PRODUCT_CATEGORY_MAP)
 
 Product type fields: id, title, price, category, images[], description (+ optional slug, features, variants, translations).
 
-PDP routes (do not modify):
-- Go Natural: /{locale}/products/{id}
-- Good Ideas: /{locale}/good-ideas/products/{id}
+PDP route (do not modify):
+- /{locale}/products/{id}
 
 --------------------------------------------------
 STRICT RULES
@@ -153,24 +131,15 @@ STRICT RULES
 - Preserve formatting consistency
 - Preserve i18n structure
 - Preserve existing IDs
+- Do NOT reintroduce Good Ideas / good-ideas / Buenos Productos
 
 --------------------------------------------------
 FINAL TASKS
 --------------------------------------------------
 
-After integration:
+After integrating:
 
-1. Run:
-npm run build
-
-2. Fix all build/type/json errors automatically
-
-3. Prepare git commands:
-git add .
-git commit -m "Integrate generated automation patches"
-git push
-
-4. Output a summary of:
-- blog posts integrated (n8n)
-- products integrated (manual, if any)
-- modified files
+1. Confirm blog post appears under messages/*/blog.posts.{slug}
+2. Confirm relatedProductIds resolve in lib/products.ts
+3. Confirm TypeScript still typechecks
+4. Summarize files changed

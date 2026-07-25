@@ -5,7 +5,6 @@ import Link from "next/link";
 import AddToCartButton, {
   type AddToCartLinePayload,
 } from "@/components/AddToCartButton";
-import GoodIdeasAddToCartButton from "@/components/good-ideas/GoodIdeasAddToCartButton";
 import VariantSelector from "@/components/VariantSelector";
 import ColorSwatchSelector from "@/components/pdp/ColorSwatchSelector";
 import SizeSelector from "@/components/pdp/SizeSelector";
@@ -70,7 +69,6 @@ type Props = {
     }[];
   };
   onAfterAdd?: (item: AddToCartLinePayload) => void;
-  cartBrand?: "go-natural" | "good-ideas";
   sticky?: boolean;
   sizeConfirmed: boolean;
   onSizeInteract: () => void;
@@ -86,9 +84,8 @@ function MiniStars({
   pdpBrand: PdpBrandTheme;
 }) {
   const L = surface === "light";
-  const gi = pdpBrand === "good-ideas";
   const rounded = Math.round(rating);
-  const filled = gi ? "text-[#FBBF24]" : "text-gn-mustard";
+  const filled = "text-gn-mustard";
   const empty = L ? "text-neutral-300" : "text-white/25";
   return (
     <span className="flex items-center gap-0.5" aria-hidden>
@@ -136,12 +133,11 @@ export default function ProductInfoPanel({
   pdpDesktop,
   cartPayload,
   onAfterAdd,
-  cartBrand = "go-natural",
   sticky = true,
   sizeConfirmed,
   onSizeInteract,
 }: Props) {
-  const pdpBrand = resolvePdpBrandTheme(cartBrand);
+  const pdpBrand = resolvePdpBrandTheme();
   const theme = getPdpBuyBoxTheme(pdpBrand, surface);
   const { formatMoney } = useCurrency();
   const matrix = productVariants?.variantMatrix;
@@ -279,44 +275,26 @@ export default function ProductInfoPanel({
 
         <div className="space-y-4">
           <div className="max-lg:hidden">
-            {cartBrand === "good-ideas" ? (
-              <GoodIdeasAddToCartButton
-                id={cartPayload.id}
-                title={cartPayload.title}
-                price={cartPayload.price}
-                image={cartPayload.image}
-                variantSelections={cartPayload.variantSelections}
-                label={ctaText}
-                disabled={ctaDisabled}
-                className={forestCta}
-                onAfterAdd={onAfterAdd}
-              />
-            ) : (
-              <AddToCartButton
-                id={cartPayload.id}
-                title={cartPayload.title}
-                price={cartPayload.price}
-                image={cartPayload.image}
-                variantSelections={cartPayload.variantSelections}
-                label={ctaText}
-                disabled={ctaDisabled}
-                surface={surface}
-                variant="forest"
-                quantity={quantity}
-                className={forestCta}
-                onAfterAdd={onAfterAdd}
-              />
-            )}
+            <AddToCartButton
+              id={cartPayload.id}
+              title={cartPayload.title}
+              price={cartPayload.price}
+              image={cartPayload.image}
+              variantSelections={cartPayload.variantSelections}
+              label={ctaText}
+              disabled={ctaDisabled}
+              surface={surface}
+              variant="forest"
+              quantity={quantity}
+              className={forestCta}
+              onAfterAdd={onAfterAdd}
+            />
           </div>
 
           <TrustBadges
             copy={trustBadgeCopy}
             surface={surface}
-            className={
-              pdpBrand === "good-ideas"
-                ? "border-t-0 pt-0 lg:border-t lg:border-white/[0.08] lg:pt-5"
-                : "border-t-0 pt-0 lg:border-t lg:border-neutral-200/90 lg:pt-5"
-            }
+            className="border-t-0 pt-0 lg:border-t lg:border-neutral-200/90 lg:pt-5"
           />
         </div>
       </div>

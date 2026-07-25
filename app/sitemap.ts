@@ -1,18 +1,14 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n/config";
 import { getProducts } from "@/lib/products";
-import { getGoodIdeasProducts } from "@/lib/good-ideas-products";
-import { BRAND_SEGMENTS } from "@/lib/routing/brands";
 import { getCategorySlugs } from "@/lib/categories";
 import { getMessages } from "@/lib/i18n/messages";
-import { getGoodIdeasBlogPosts } from "@/lib/good-ideas-blog";
 import { blogSections } from "@/lib/blog-sections";
 import { LEGAL_SLUGS, getSiteUrl } from "@/lib/seo";
 
 const BASE_PAGES = [
   "",
   "go-natural",
-  "good-ideas",
   "products",
   "categories",
   "about",
@@ -52,41 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  const giProducts = getGoodIdeasProducts();
-  locales.forEach((locale) => {
-    urls.push({
-      url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/products`,
-      lastModified: now,
-    });
-    giProducts.forEach((product) => {
-      urls.push({
-        url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/products/${product.id}`,
-        lastModified: now,
-      });
-    });
-  });
-
   const messages = await getMessages("en");
   const postSlugs = Object.keys(messages.blog.posts);
   locales.forEach((locale) => {
     postSlugs.forEach((slug) => {
       urls.push({
         url: `${baseUrl}/${locale}/blog/${slug}`,
-        lastModified: now,
-      });
-    });
-  });
-
-  const giBlogPosts = getGoodIdeasBlogPosts(messages);
-  const giPostSlugs = Object.keys(giBlogPosts);
-  locales.forEach((locale) => {
-    urls.push({
-      url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/blog`,
-      lastModified: now,
-    });
-    giPostSlugs.forEach((slug) => {
-      urls.push({
-        url: `${baseUrl}/${locale}/${BRAND_SEGMENTS.goodIdeas}/blog/${slug}`,
         lastModified: now,
       });
     });
@@ -122,4 +89,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return urls;
 }
-

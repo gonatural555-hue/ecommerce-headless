@@ -1,56 +1,12 @@
-import BrandGateway from "@/components/gateway/BrandGateway";
-import { getMessages } from "@/lib/i18n/messages";
-import { createTranslator } from "@/lib/i18n/translate";
+import { redirect } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
-import { buildMetadata } from "@/lib/seo";
+import { goNaturalHomePath } from "@/lib/routing/brands";
 
-export async function generateMetadata({
+export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  const messages = await getMessages(locale);
-  const seo = messages.seo?.gateway;
-
-  return buildMetadata({
-    locale,
-    title: seo?.title,
-    description: seo?.description,
-    pathByLocale: {
-      en: "/en",
-      es: "/es",
-      fr: "/fr",
-      it: "/it",
-    },
-  });
-}
-
-export default async function BrandGatewayPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
-  const { locale } = await params;
-  const messages = await getMessages(locale);
-  const t = createTranslator(messages);
-
-  return (
-    <BrandGateway
-      locale={locale}
-      copy={{
-        goNatural: {
-          title: t("brandGateway.goNatural.title"),
-          tagline: t("brandGateway.goNatural.tagline"),
-          cta: t("brandGateway.goNatural.cta"),
-        },
-        goodIdeas: {
-          title: t("brandGateway.goodIdeas.title"),
-          tagline: t("brandGateway.goodIdeas.tagline"),
-          cta: t("brandGateway.goodIdeas.cta"),
-        },
-        localeAria: t("brandGateway.localeAria"),
-      }}
-    />
-  );
+  redirect(goNaturalHomePath(locale));
 }

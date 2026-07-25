@@ -59,251 +59,6 @@
       }
     }
   },
-  "brandGateway": {
-    "goNatural": {
-      "title": "Go Natural",
-      "tagline": "Outdoor Equipment and Accessories",
-      "cta": "Shop Go Natural"
-    },
-    "goodIdeas": {
-      "title": "Good Products",
-      "tagline": "Smart, useful products for home, tech and everyday life.",
-      "cta": "Shop Good Products"
-    },
-    "localeAria": "Choose language"
-  },
-  "goodIdeas": {
-    "brandName": "Good Products",
-    "nav": {
-      "home": "Home",
-      "products": "Products",
-      "blog": "Blog",
-      "cart": "Cart",
-      "allBrands": "All brands"
-    },
-    "hero": {
-      "eyebrow": "Home & Tech",
-      "title": "Good Products\nfor everyday life.",
-      "subtitle": "Useful products for home, tech, lifestyle and everyday life.",
-      "cta": "Explore Products",
-      "comingSoon": "Our catalog is being curated. Check back soon for smart home gadgets, electronics and everyday essentials.",
-      "sectionAria": "Good Products — home"
-    },
-    "products": {
-      "heroTitle": "Everyday\nEssentials",
-      "heroSubtitle": "Curated gadgets, home and lifestyle picks. Catalog coming soon.",
-      "heroAccentWord": "Everyday",
-      "heroDiscover": "Discover catalog",
-      "scrollHint": "Scroll to explore",
-      "comingSoonTitle": "Coming soon",
-      "comingSoonBody": "We are preparing the Good Products catalog. Home, tech and lifestyle products will be available soon.",
-      "filtersLabel": "Filters",
-      "closeFilters": "Close",
-      "categorySectionLabel": "Category",
-      "filterBrands": "Brand",
-      "filterPrice": "Price",
-      "filterSizes": "Size",
-      "filterColor": "Color",
-      "filterSale": "Sale",
-      "sortLabel": "Sort",
-      "sortFeatured": "Featured",
-      "sortPriceAsc": "Price · low to high",
-      "sortPriceDesc": "Price · high to low",
-      "sortNameAsc": "Name A → Z",
-      "searchLabel": "Search products",
-      "searchPlaceholder": "Search by name, category…",
-      "searchResultsFor": "Results for \"{query}\"",
-      "searchNoResults": "We couldn't find products matching that search.",
-      "searchNoResultsHint": "Try different words or browse the full catalog.",
-      "searchViewAll": "View all products",
-      "clearAllFilters": "Clear all",
-      "filterNoResults": "No products match these filters.",
-      "filterNoResultsHint": "Try adjusting category or price range, or browse the full catalog.",
-      "priceMinLabel": "Min",
-      "priceMaxLabel": "Max",
-      "priceApplyLabel": "Apply",
-      "priceChipRange": "{min} – {max}",
-      "priceChipFrom": "From {min}",
-      "priceChipUpTo": "Up to {max}",
-      "pricePresets": {
-        "under-15": "Under $15",
-        "15-50": "$15 – $50",
-        "50-100": "$50 – $100",
-        "over-100": "Over $100"
-      },
-      "carouselPrevAria": "Previous slide",
-      "carouselNextAria": "Next slide",
-      "carouselDotAria": "Go to slide {n}",
-      "categories": {
-        "home": "Home",
-        "tech": "Tech",
-        "lifestyle": "Lifestyle",
-        "gifts": "Gifts",
-        "names": {
-          "tech": "Tech",
-          "home": "Home",
-          "lifestyle": "Lifestyle",
-          "gifts": "Gifts",
-          "celulares": "Phones",
-          "herramientas-limpieza-celulares": "Phone Cleaning Tools",
-          "cocina": "Kitchen"
-        }
-      },
-      "carousel": {
-        "tech": {
-          "title": "Smart\nTech",
-          "subtitle": "Gadgets and accessories for everyday digital life.",
-          "accentWord": "Smart"
-        },
-        "home": {
-          "title": "Home\nEssentials",
-          "subtitle": "Comfort, kitchen and practical picks for your space.",
-          "accentWord": "Home"
-        },
-        "lifestyle": {
-          "title": "Daily\nLifestyle",
-          "subtitle": "Useful gear for work, travel and everyday routines.",
-          "accentWord": "Daily"
-        },
-        "gifts": {
-          "title": "Gift\nIdeas",
-          "subtitle": "Thoughtful picks for home, tech and daily life.",
-          "accentWord": "Gift"
-        }
-      }
-    },
-    "blog": {
-      "eyebrow": "Lifestyle & Tech",
-      "heroTitle": "Ideas\nthat inspire",
-      "heroSubtitle": "Guides, trends and useful picks for home, technology and daily life.",
-      "exploreCta": "Explore articles",
-      "scrollHint": "Scroll to explore",
-      "sectionAria": "Good Products Blog",
-      "comingSoonTitle": "Coming soon",
-      "comingSoonBody": "The Good Products journal is on the way. Articles about home, tech and lifestyle will land here soon.",
-      "featuredLabel": "Featured story",
-      "articlesLabel": "Latest articles",
-      "backToBlog": "Back to blog",
-      "featuredSlug": "smart-home-essentials-2026",
-      "posts": {
-        "smart-home-essentials-2026": {
-          "title": "Smart home essentials for everyday calm",
-          "excerpt": "Small upgrades for home and tech that make daily routines simpler, quieter, and more enjoyable.",
-          "subtitle": "Practical picks for home, desk, and travel.",
-          "intro": "Good Products is about useful products that fit real life—not clutter. These are the kinds of upgrades that earn a permanent spot on a shelf, in a bag, or on a desk.",
-          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
-          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
-          "sections": [
-            {
-              "heading": "Start with the routines you repeat",
-              "paragraphs": [
-                "The best home tech is not the loudest gadget on a feed. It is the item that removes friction from something you already do every day—making tea, charging devices, or keeping a corner of the home organized.",
-                "A compact travel kettle, a pair of wireless earbuds, or a small fridge for drinks and skincare can change how a room feels without a full remodel."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
-            },
-            {
-              "heading": "Tech that stays out of the way",
-              "paragraphs": [
-                "Choose gear with clear controls, honest sizing, and a design you are happy to see when it is not in use. Minimal interfaces and portable formats travel well between kitchen, office, and weekend plans.",
-                "When a product does one job well, it is easier to recommend—and easier to live with."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
-            }
-          ],
-          "closing": "Explore the Good Products catalog for home, tech, lifestyle, and gift-ready picks built for everyday use."
-        },
-        "product-from-1005006438780849": {
-          "title": "Portable travel kettle 450ML for home and on the go",
-          "excerpt": "A compact Good Products home pick for tea, coffee, and quick hot water at your desk, in a dorm, or while traveling.",
-          "subtitle": "Home essentials that fit real routines.",
-          "intro": "Good Products curates useful home products—not clutter. This compact 450ML travel kettle is built for the moments when you want hot water without filling the kitchen counter.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
-          "relatedProductIds": ["gi-hogar-002"],
-          "sections": [
-            {
-              "heading": "Why a compact kettle earns a spot in your bag",
-              "paragraphs": [
-                "The best home upgrades remove friction from routines you already repeat. A small kettle handles tea, coffee, instant meals, and warm water without taking over a shelf or suitcase.",
-                "At 450ML, the size stays honest for one or two cups—ideal for a desk, nightstand, dorm, or hotel room where a full kitchen is not part of the plan."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
-            },
-            {
-              "heading": "Built for everyday Good Products home use",
-              "paragraphs": [
-                "Choose the plug format that matches your region so the same compact design works at home and on travel days.",
-                "Explore the full product page for sizing, plug options, and gallery details—then pair it with other home and lifestyle picks from the Good Products catalog."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
-            }
-          ],
-          "closing": "See the Portable Travel Kettle 450ML in the Good Products home catalog and build a setup that fits how you actually live."
-        },
-        "product-from-supplier-link": {
-          "title": "Premium home picks that elevate everyday spaces",
-          "excerpt": "Discover a premium home product curated for modern living—clean lines, quality materials, and style that fits real rooms.",
-          "subtitle": "Contemporary home style with a premium feel.",
-          "intro": "Good Products brings home products chosen for quality and everyday use. This premium pick is selected for thoughtful design and materials that feel at home in modern interiors—not showroom clutter.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
-          "sections": [
-            {
-              "heading": "Design that complements how you live",
-              "paragraphs": [
-                "The sleek, modern look enhances your space while matching a contemporary lifestyle. Elegant simplicity and careful finishing work in minimalist setups and richer rooms alike.",
-                "It is the kind of piece you notice for the right reasons: calm presence, honest materials, and a profile that does not fight the rest of the room."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
-            },
-            {
-              "heading": "Versatile enough for a refresh or a new direction",
-              "paragraphs": [
-                "Whether you are updating one corner or planning a fuller room change, this home pick adapts to different tastes and interior moods.",
-                "Multiple style directions mean it can sit naturally in a desk nook, living area, or bedroom shelf without feeling out of place."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
-            }
-          ],
-          "closing": "Explore the Good Products home catalog for premium picks that balance quality, accessibility, and everyday usefulness."
-        }
-      }
-    },
-    "cart": {
-      "title": "Your cart",
-      "empty": "Your Good Products cart is empty.",
-      "emptyCta": "Explore products",
-      "comingSoonCheckout": "Checkout will be available when we launch the catalog.",
-      "subtotal": "Subtotal",
-      "checkout": "Go to checkout"
-    },
-    "checkout": {
-      "title": "Checkout",
-      "comingSoonTitle": "Coming soon",
-      "comingSoonBody": "Good Products checkout will open with the catalog launch.",
-      "backToCart": "Back to cart"
-    },
-    "product": {
-      "comingSoonTitle": "Product unavailable",
-      "comingSoonBody": "This product will be part of the Good Products catalog soon.",
-      "backToProducts": "Back to products",
-      "manualTitle": "User manual",
-      "manualDescription": "Read the official usage guide below or download the PDF for offline reference.",
-      "manualDownload": "Download PDF",
-      "manualOpen": "Open in new tab"
-    },
-    "footer": {
-      "tagline": "Smart products for home, technology and everyday life.",
-      "shopHeading": "Shop",
-      "legalHeading": "Legal",
-      "home": "Home",
-      "products": "Products",
-      "blog": "Blog",
-      "privacy": "Privacy",
-      "cookies": "Cookies",
-      "terms": "Terms",
-      "rights": "All rights reserved."
-    }
-  },
   "common": {
     "viewProduct": "View product",
     "addToCart": "Add to cart",
@@ -339,30 +94,6 @@
     "passwordMismatch": "Passwords do not match."
   },
   "seo": {
-    "gateway": {
-      "title": "Go Natural & Good Products | Choose Your Store",
-      "description": "Select Go Natural for outdoor gear or Good Products for smart home and lifestyle products."
-    },
-    "goodIdeas": {
-      "title": "Good Products | Smart Products for Everyday Life",
-      "description": "Useful gadgets, home tech and viral products for modern living. Coming soon.",
-      "products": {
-        "title": "Products | Good Products",
-        "description": "Good Products catalog: home, tech and lifestyle. Coming soon."
-      },
-      "blog": {
-        "title": "Blog | Good Products",
-        "description": "Ideas, guides and trends for home, tech and lifestyle."
-      },
-      "blogPost": {
-        "titleTemplate": "{title} | Good Products Blog",
-        "descriptionTemplate": "{excerpt}"
-      },
-      "cart": {
-        "title": "Cart | Good Products",
-        "description": "Your Good Products cart."
-      }
-    },
     "home": {
       "title": "Premium Outdoor Gear for Slow Exploration",
       "description": "Thoughtfully designed equipment for camping, water and quiet outdoor journeys."
@@ -412,10 +143,26 @@
     "categoriesTitle": "Browse with intention",
     "categoriesSubtitle": "Fishing, mountain & snow, outdoor adventure, and water sports — large touch targets, same calm decisions.",
     "categoryCards": [
-      { "label": "Fishing", "path": "/products?category=fishing", "imageKey": "fishing" },
-      { "label": "Mountain & snow", "path": "/products?category=mountain-snow", "imageKey": "mountain-snow" },
-      { "label": "Outdoor & adventure", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
-      { "label": "Water sports", "path": "/products?category=water-sports", "imageKey": "water-sports" }
+      {
+        "label": "Fishing",
+        "path": "/products?category=fishing",
+        "imageKey": "fishing"
+      },
+      {
+        "label": "Mountain & snow",
+        "path": "/products?category=mountain-snow",
+        "imageKey": "mountain-snow"
+      },
+      {
+        "label": "Outdoor & adventure",
+        "path": "/products?category=outdoor",
+        "imageKey": "outdoor-adventure"
+      },
+      {
+        "label": "Water sports",
+        "path": "/products?category=water-sports",
+        "imageKey": "water-sports"
+      }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Field notes in the same voice as the shop floor.",
@@ -2585,4 +2332,3 @@
     }
   }
 }
-

@@ -59,179 +59,6 @@
       }
     }
   },
-  "brandGateway": {
-    "goNatural": {
-      "title": "Go Natural",
-      "tagline": "Attrezzatura e accessori outdoor",
-      "cta": "Vai a Go Natural"
-    },
-    "goodIdeas": {
-      "title": "Good Products",
-      "tagline": "Prodotti smart per casa, tech e vita quotidiana.",
-      "cta": "Vai a Good Products"
-    },
-    "localeAria": "Scegli lingua"
-  },
-  "goodIdeas": {
-    "brandName": "Good Products",
-    "nav": {
-      "home": "Home",
-      "products": "Prodotti",
-      "blog": "Blog",
-      "cart": "Carrello",
-      "allBrands": "Tutti i brand"
-    },
-    "hero": {
-      "eyebrow": "Casa & Tech",
-      "title": "Buoni\nprodotti, buone idee.",
-      "subtitle": "Prodotti utili per casa, tech, lifestyle e vita di tutti i giorni.",
-      "cta": "Esplora i prodotti",
-      "comingSoon": "Stiamo curando il catalogo. Presto troverai gadget per la casa, elettronica e essenziali quotidiani.",
-      "sectionAria": "Good Products — home"
-    },
-    "products": {
-      "heroTitle": "Essenziali\nquotidiani",
-      "heroSubtitle": "Gadget, casa e lifestyle selezionati. Catalogo in arrivo.",
-      "heroAccentWord": "Essenziali",
-      "heroDiscover": "Scopri il catalogo",
-      "scrollHint": "Scorri per esplorare",
-      "comingSoonTitle": "In arrivo",
-      "comingSoonBody": "Stiamo preparando il catalogo Good Products. Presto prodotti per casa, tech e lifestyle.",
-      "categories": {
-        "home": "Casa",
-        "tech": "Tech",
-        "lifestyle": "Lifestyle",
-        "gifts": "Regali"
-      }
-    },
-    "blog": {
-      "eyebrow": "Lifestyle & Tech",
-      "heroTitle": "Idee\nche ispirano",
-      "heroSubtitle": "Guide, trend e prodotti utili per casa, tecnologia e vita quotidiana.",
-      "exploreCta": "Esplora gli articoli",
-      "scrollHint": "Scorri per esplorare",
-      "sectionAria": "Blog Good Products",
-      "comingSoonTitle": "In arrivo",
-      "comingSoonBody": "Il journal Good Products è in preparazione. Articoli su casa, tech e lifestyle in arrivo.",
-      "featuredLabel": "Storia in evidenza",
-      "articlesLabel": "Ultimi articoli",
-      "backToBlog": "Torna al blog",
-      "featuredSlug": "smart-home-essentials-2026",
-      "posts": {
-        "smart-home-essentials-2026": {
-          "title": "Essenziali smart home per la vita quotidiana",
-          "excerpt": "Piccoli upgrade per casa e tech che rendono le routine più semplici e piacevoli.",
-          "subtitle": "Scelte pratiche per casa, scrivania e viaggio.",
-          "intro": "Good Products propone prodotti utili che entrano nella vita reale—senza ingombro. Upgrade che meritano un posto fisso su uno scaffale, in una borsa o sulla scrivania.",
-          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
-          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
-          "sections": [
-            {
-              "heading": "Parti dalle routine che ripeti",
-              "paragraphs": [
-                "La migliore tech per la casa non è il gadget più rumoroso del feed. È ciò che toglie attrito a qualcosa che fai già—tè, ricarica o un angolo ordinato.",
-                "Un bollitore da viaggio compatto, auricolari wireless o un mini frigo per bevande e skincare possono cambiare una stanza senza ristrutturare."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
-            },
-            {
-              "heading": "Tech che non disturba",
-              "paragraphs": [
-                "Scegli prodotti con controlli chiari, dimensioni oneste e un design che ti piace vedere a riposo. I formati portatili funzionano tra cucina, ufficio e weekend.",
-                "Quando un prodotto fa bene un solo compito, è più facile consigliarlo—e conviverci."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
-            }
-          ],
-          "closing": "Esplora il catalogo Good Products: casa, tech, lifestyle e idee regalo per l’uso quotidiano."
-        },
-        "product-from-1005006438780849": {
-          "title": "Bollitore da viaggio portatile 450ML per casa e spostamenti",
-          "excerpt": "Una scelta compatta Good Products per tè, caffè e acqua calda alla scrivania, in dormitorio o in viaggio.",
-          "subtitle": "Essenziali per la casa che si adattano alle routine reali.",
-          "intro": "Good Products seleziona prodotti utili per la casa, non oggetti superflui. Questo bollitore compatto da 450ML è pensato per l’acqua calda senza occupare tutto il piano cucina.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
-          "relatedProductIds": ["gi-hogar-002"],
-          "sections": [
-            {
-              "heading": "Perché un bollitore compatto merita spazio nella borsa",
-              "paragraphs": [
-                "I migliori upgrade per la casa riducono l’attrito nelle routine che già ripeti. Un bollitore piccolo copre tè, caffè, pasti instant e acqua calda senza dominare uno scaffale o una valigia.",
-                "Con 450ML, la dimensione resta onesta per una o due tazze—ideale su scrivania, comodino, dormitorio o hotel senza cucina completa."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
-            },
-            {
-              "heading": "Pensato per l’uso quotidiano Good Products",
-              "paragraphs": [
-                "Scegli il formato spina in base alla tua regione per lo stesso design compatto a casa e in viaggio.",
-                "Consulta la scheda prodotto per dimensioni, opzioni spina e galleria, e abbinalo ad altre selezioni casa e lifestyle del catalogo Good Products."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
-            }
-          ],
-          "closing": "Scopri il bollitore da viaggio portatile 450ML nel catalogo casa Good Products e crea un setup adatto a come vivi."
-        },
-        "product-from-supplier-link": {
-          "title": "Scelte premium per la casa che elevano gli spazi",
-          "excerpt": "Scopri un prodotto per la casa premium pensato per la vita moderna: linee pulite, materiali di qualità e stile adatto a stanze reali.",
-          "subtitle": "Stile casa contemporaneo con finitura premium.",
-          "intro": "Good Products seleziona prodotti per la casa scelti per qualità e uso quotidiano. Questa scelta premium punta su design curato e materiali che si integrano negli interni moderni, senza creare disordine visivo.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
-          "sections": [
-            {
-              "heading": "Design che completa il tuo modo di vivere",
-              "paragraphs": [
-                "L’estetica moderna e pulita valorizza lo spazio e si adatta a uno stile di vita contemporaneo. Semplicità elegante e finiture curate per ambienti minimalisti o più ricchi.",
-                "Un pezzo che si nota per le ragioni giuste: presenza calma, materiali onesti e profilo che non compete con il resto della stanza."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
-            },
-            {
-              "heading": "Versatile per un refresh o una nuova direzione",
-              "paragraphs": [
-                "Che tu aggiorni un angolo o ripensi un’intera stanza, questa scelta si adatta a gusti e atmosfere diverse.",
-                "Più direzioni di stile permettono di collocarla su scrivania, soggiorno o camera senza risultare fuori posto."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
-            }
-          ],
-          "closing": "Esplora il catalogo casa Good Products: scelte premium che bilanciano qualità, accessibilità e utilità quotidiana."
-        }
-      }
-    },
-    "cart": {
-      "title": "Il tuo carrello",
-      "empty": "Il carrello Good Products è vuoto.",
-      "emptyCta": "Esplora i prodotti",
-      "comingSoonCheckout": "Il checkout sarà disponibile con il lancio del catalogo.",
-      "subtotal": "Subtotale",
-      "checkout": "Vai al checkout"
-    },
-    "checkout": {
-      "title": "Checkout",
-      "comingSoonTitle": "In arrivo",
-      "comingSoonBody": "Il checkout Good Products si aprirà con il lancio del catalogo.",
-      "backToCart": "Torna al carrello"
-    },
-    "product": {
-      "comingSoonTitle": "Prodotto non disponibile",
-      "comingSoonBody": "Questo prodotto farà parte del catalogo Good Products a breve.",
-      "backToProducts": "Torna ai prodotti"
-    },
-    "footer": {
-      "tagline": "Prodotti smart per casa, tecnologia e vita quotidiana.",
-      "shopHeading": "Shop",
-      "legalHeading": "Legale",
-      "home": "Home",
-      "products": "Prodotti",
-      "blog": "Blog",
-      "privacy": "Privacy",
-      "cookies": "Cookie",
-      "terms": "Termini",
-      "rights": "Tutti i diritti riservati."
-    }
-  },
   "common": {
     "viewProduct": "Vedi prodotto",
     "addToCart": "Aggiungi al carrello",
@@ -264,30 +91,6 @@
     "passwordMismatch": "Le password non coincidono."
   },
   "seo": {
-    "gateway": {
-      "title": "Go Natural & Good Products | Scegli il negozio",
-      "description": "Go Natural per l’outdoor o Good Products per casa, tech e prodotti smart."
-    },
-    "goodIdeas": {
-      "title": "Good Products | Prodotti smart",
-      "description": "Gadget utili, tech per la casa e prodotti virali. In arrivo.",
-      "products": {
-        "title": "Prodotti | Good Products",
-        "description": "Catalogo Good Products: casa, tech e lifestyle. In arrivo."
-      },
-      "blog": {
-        "title": "Blog | Good Products",
-        "description": "Idee, guide e trend per casa, tech e lifestyle."
-      },
-      "blogPost": {
-        "titleTemplate": "{title} | Blog Good Products",
-        "descriptionTemplate": "{excerpt}"
-      },
-      "cart": {
-        "title": "Carrello | Good Products",
-        "description": "Il tuo carrello Good Products."
-      }
-    },
     "home": {
       "title": "Equipaggiamento outdoor premium per l’esplorazione lenta",
       "description": "Prodotti pensati con intenzione per camping, acqua e viaggi outdoor."
@@ -337,10 +140,26 @@
     "categoriesTitle": "Naviga con intenzione",
     "categoriesSubtitle": "Pesca, montagna e neve, outdoor e sport acquatici — aree ampie, stesse scelte calme.",
     "categoryCards": [
-      { "label": "Pesca", "path": "/products?category=fishing", "imageKey": "fishing" },
-      { "label": "Montagna e neve", "path": "/products?category=mountain-snow", "imageKey": "mountain-snow" },
-      { "label": "Outdoor e avventura", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
-      { "label": "Sport acquatici", "path": "/products?category=water-sports", "imageKey": "water-sports" }
+      {
+        "label": "Pesca",
+        "path": "/products?category=fishing",
+        "imageKey": "fishing"
+      },
+      {
+        "label": "Montagna e neve",
+        "path": "/products?category=mountain-snow",
+        "imageKey": "mountain-snow"
+      },
+      {
+        "label": "Outdoor e avventura",
+        "path": "/products?category=outdoor",
+        "imageKey": "outdoor-adventure"
+      },
+      {
+        "label": "Sport acquatici",
+        "path": "/products?category=water-sports",
+        "imageKey": "water-sports"
+      }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Note dal campo — la stessa voce del negozio.",
@@ -2469,4 +2288,3 @@
     }
   }
 }
-

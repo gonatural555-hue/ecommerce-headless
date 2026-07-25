@@ -8,7 +8,6 @@ import AddedToCartModal, {
 import AddToCartButton, {
   type AddToCartLinePayload,
 } from "@/components/AddToCartButton";
-import GoodIdeasAddToCartButton from "@/components/good-ideas/GoodIdeasAddToCartButton";
 import ProductGalleryRei, {
   PDP_GALLERY_WIDTH_PX,
 } from "@/components/pdp/ProductGalleryRei";
@@ -28,7 +27,6 @@ import {
 import type { ProductVariants, VariantDefinition } from "@/lib/product-variants";
 import { trackViewItem } from "@/lib/analytics/ga4";
 import { useCurrency } from "@/context/CurrencyContext";
-import { resolvePdpBrandTheme } from "@/lib/ui/pdp-theme";
 import type { UISurface } from "@/lib/ui-surface";
 
 type ProductSummary = {
@@ -79,7 +77,6 @@ type Props = {
   brandLabel?: string;
   brandHref?: string;
   mobileStickyTrustLines: [string, string, string];
-  cartBrand?: "go-natural" | "good-ideas";
   cartPath?: string;
 };
 
@@ -143,7 +140,6 @@ function buildInfoPanelProps(
       variantSelections?: AddToCartLinePayload["variantSelections"];
     };
     onAfterAdd: (item: AddToCartLinePayload) => void;
-    cartBrand: "go-natural" | "good-ideas";
     sizeConfirmed: boolean;
     onSizeInteract: () => void;
   },
@@ -179,11 +175,9 @@ export default function ProductDetailClient({
   brandLabel,
   brandHref,
   mobileStickyTrustLines,
-  cartBrand = "go-natural",
   cartPath,
 }: Props) {
   const L = surface === "light";
-  const gi = resolvePdpBrandTheme(cartBrand) === "good-ideas";
   const { formatMoney } = useCurrency();
   const searchParams = useSearchParams();
   const isFramingDirector = isPdpGalleryFramingDirectorMode(
@@ -375,7 +369,6 @@ export default function ProductDetailClient({
       variantSelections,
     },
     onAfterAdd: handleAfterAddToCart,
-    cartBrand,
     sizeConfirmed,
     onSizeInteract: () => setSizeConfirmed(true),
   };
@@ -390,7 +383,7 @@ export default function ProductDetailClient({
       surface={surface}
       galleryLayout={galleryLayout}
       columns={galleryColumns}
-      galleryWidthPx={gi ? null : PDP_GALLERY_WIDTH_PX}
+      galleryWidthPx={PDP_GALLERY_WIDTH_PX}
       debugHighlightIndex={isFramingDirector ? framingImageIndex : null}
     />
   );
@@ -428,77 +421,57 @@ export default function ProductDetailClient({
       {/* Sticky CTA móvil */}
       <div
         className={
-          gi
-            ? "fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.08] bg-[#0B0F14]/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.45)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
-            : L
-              ? "fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white/95 px-4 pt-3 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
-              : "fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-dark-base/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+          L
+            ? "fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white/95 px-4 pt-3 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
+            : "fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-dark-base/98 px-4 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden"
         }
       >
         <div className="mx-auto max-w-full">
           <div className="mb-2 text-center">
             <p
               className={
-                gi
-                  ? "text-2xl font-bold tabular-nums text-[#E8ECF1]"
-                  : L
-                    ? "text-2xl font-bold text-neutral-900"
-                    : "text-2xl font-bold text-text-primary"
+                L
+                  ? "text-2xl font-bold text-neutral-900"
+                  : "text-2xl font-bold text-text-primary"
               }
             >
               {formatMoney(resolvedPrice)}
             </p>
           </div>
 
-          {cartBrand === "good-ideas" ? (
-            <GoodIdeasAddToCartButton
-              id={product.id}
-              title={product.title}
-              price={resolvedPrice}
-              image={cartImage}
-              variantSelections={variantSelections}
-              label={mobileCtaText}
-              disabled={ctaDisabled}
-              className="mt-0 w-full rounded-md py-3.5 text-base"
-              onAfterAdd={handleAfterAddToCart}
-            />
-          ) : (
-            <AddToCartButton
-              id={product.id}
-              title={product.title}
-              price={resolvedPrice}
-              image={cartImage}
-              variantSelections={variantSelections}
-              label={mobileCtaText}
-              disabled={ctaDisabled}
-              variant="forest"
-              quantity={quantity}
-              className="mt-0 w-full rounded-md py-3.5 text-base"
-              surface={surface}
-              onAfterAdd={handleAfterAddToCart}
-            />
-          )}
+          <AddToCartButton
+            id={product.id}
+            title={product.title}
+            price={resolvedPrice}
+            image={cartImage}
+            variantSelections={variantSelections}
+            label={mobileCtaText}
+            disabled={ctaDisabled}
+            variant="forest"
+            quantity={quantity}
+            className="mt-0 w-full rounded-md py-3.5 text-base"
+            surface={surface}
+            onAfterAdd={handleAfterAddToCart}
+          />
 
           <div
             className={
-              gi
-                ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-[rgba(232,236,241,0.5)]"
-                : L
-                  ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-neutral-500"
-                  : "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-text-muted/70"
+              L
+                ? "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-neutral-500"
+                : "mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[10px] leading-tight text-text-muted/70"
             }
           >
             <span>{mobileStickyTrustLines[0]}</span>
             <span
               aria-hidden
-              className={gi ? "text-white/20" : L ? "text-neutral-300" : "text-white/25"}
+              className={L ? "text-neutral-300" : "text-white/25"}
             >
               ·
             </span>
             <span>{mobileStickyTrustLines[1]}</span>
             <span
               aria-hidden
-              className={gi ? "text-white/20" : L ? "text-neutral-300" : "text-white/25"}
+              className={L ? "text-neutral-300" : "text-white/25"}
             >
               ·
             </span>

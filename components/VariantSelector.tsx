@@ -107,17 +107,13 @@ export default function VariantSelector({
     ? theme.variantLabelHeading
     : light
       ? "text-base font-semibold text-neutral-900"
-      : pdpBrand === "good-ideas"
-        ? "text-base font-semibold text-[#E8ECF1]"
-        : "text-base font-semibold text-text-primary";
+      : "text-base font-semibold text-text-primary";
 
   const headingMuted = isPremium
     ? theme.variantLabelMuted
     : light
       ? "text-sm text-neutral-600"
-      : pdpBrand === "good-ideas"
-        ? "text-sm text-[rgba(232,236,241,0.72)]"
-        : "text-sm text-text-muted";
+      : "text-sm text-text-muted";
 
   return (
     <div className={isPremium ? "space-y-5" : "space-y-6"}>
@@ -168,9 +164,7 @@ export default function VariantSelector({
                   "focus:outline-none focus-visible:ring-2",
                   isPremium ? theme.variantFocusRing : light
                     ? "focus-visible:ring-accent-gold focus-visible:ring-offset-white"
-                    : pdpBrand === "good-ideas"
-                      ? "focus-visible:ring-[#3B82F6] focus-visible:ring-offset-[#0B0F14]"
-                      : "focus-visible:ring-accent-gold focus-visible:ring-offset-dark-base",
+                    : "focus-visible:ring-accent-gold focus-visible:ring-offset-dark-base",
                 ].join(" ");
 
                 const premiumClasses = !isValid
@@ -182,20 +176,14 @@ export default function VariantSelector({
                 const defaultClasses = !isValid
                   ? light
                     ? "opacity-40 cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-500"
-                    : pdpBrand === "good-ideas"
-                      ? theme.variantDisabled
-                      : "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
+                    : "opacity-40 cursor-not-allowed border-white/10 bg-dark-surface/40 text-text-muted"
                   : isActive
                     ? light
                       ? "border-accent-gold bg-white text-neutral-900 ring-1 ring-accent-gold/60"
-                      : pdpBrand === "good-ideas"
-                        ? theme.variantSelected
-                        : "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
+                      : "border-accent-gold bg-dark-surface text-text-primary ring-1 ring-accent-gold/50"
                     : light
                       ? "border-neutral-200 bg-white text-neutral-900 hover:border-neutral-400"
-                      : pdpBrand === "good-ideas"
-                        ? theme.variantDefault
-                        : "border-white/15 bg-dark-surface/60 text-text-primary hover:border-white/30";
+                      : "border-white/15 bg-dark-surface/60 text-text-primary hover:border-white/30";
 
                 return (
                   <button

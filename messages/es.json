@@ -59,251 +59,6 @@
       }
     }
   },
-  "brandGateway": {
-    "goNatural": {
-      "title": "Go Natural",
-      "tagline": "Equipamiento y Accesorios Outdoor",
-      "cta": "Ir a Go Natural"
-    },
-    "goodIdeas": {
-      "title": "Buenos Productos",
-      "tagline": "Productos inteligentes para hogar, tecnología y vida diaria.",
-      "cta": "Ir a Buenos Productos"
-    },
-    "localeAria": "Elegir idioma"
-  },
-  "goodIdeas": {
-    "brandName": "Buenos Productos",
-    "nav": {
-      "home": "Inicio",
-      "products": "Productos",
-      "blog": "Blog",
-      "cart": "Carrito",
-      "allBrands": "Todas las marcas"
-    },
-    "hero": {
-      "eyebrow": "Hogar & Tech",
-      "title": "Buenos Productos\npara el día a día.",
-      "subtitle": "Productos útiles para hogar, tecnología, estilo de vida y el día a día.",
-      "cta": "Explorar productos",
-      "comingSoon": "Estamos preparando el catálogo. Pronto encontrarás gadgets para el hogar, electrónica y esenciales del día a día.",
-      "sectionAria": "Buenos Productos — inicio"
-    },
-    "products": {
-      "heroTitle": "Esenciales\npara el día a día",
-      "heroSubtitle": "Gadgets, hogar y lifestyle curados con criterio. Catálogo en preparación.",
-      "heroAccentWord": "Esenciales",
-      "heroDiscover": "Descubrir catálogo",
-      "scrollHint": "Desliza para explorar",
-      "comingSoonTitle": "Próximamente",
-      "comingSoonBody": "Estamos preparando el catálogo Buenos Productos. Muy pronto podrás explorar productos para hogar, tecnología y lifestyle.",
-      "filtersLabel": "Filtros",
-      "closeFilters": "Cerrar",
-      "categorySectionLabel": "Categoría",
-      "filterBrands": "Marca",
-      "filterPrice": "Precio",
-      "filterSizes": "Talle",
-      "filterColor": "Color",
-      "filterSale": "Ofertas",
-      "sortLabel": "Ordenar",
-      "sortFeatured": "Destacados",
-      "sortPriceAsc": "Precio · menor a mayor",
-      "sortPriceDesc": "Precio · mayor a menor",
-      "sortNameAsc": "Nombre A → Z",
-      "searchLabel": "Buscar productos",
-      "searchPlaceholder": "Buscar por nombre, categoría…",
-      "searchResultsFor": "Resultados para \"{query}\"",
-      "searchNoResults": "No encontramos productos para esa búsqueda.",
-      "searchNoResultsHint": "Probá con otras palabras o explorá el catálogo completo.",
-      "searchViewAll": "Ver todos los productos",
-      "clearAllFilters": "Limpiar todo",
-      "filterNoResults": "Ningún producto coincide con estos filtros.",
-      "filterNoResultsHint": "Probá ajustar categoría o rango de precio, o explorá el catálogo completo.",
-      "priceMinLabel": "Mín",
-      "priceMaxLabel": "Máx",
-      "priceApplyLabel": "Aplicar",
-      "priceChipRange": "{min} – {max}",
-      "priceChipFrom": "Desde {min}",
-      "priceChipUpTo": "Hasta {max}",
-      "pricePresets": {
-        "under-15": "Menos de USD 15",
-        "15-50": "USD 15 – 50",
-        "50-100": "USD 50 – 100",
-        "over-100": "Más de USD 100"
-      },
-      "carouselPrevAria": "Diapositiva anterior",
-      "carouselNextAria": "Diapositiva siguiente",
-      "carouselDotAria": "Ir a diapositiva {n}",
-      "categories": {
-        "home": "Hogar",
-        "tech": "Tech",
-        "lifestyle": "Lifestyle",
-        "gifts": "Regalos",
-        "names": {
-          "tech": "Tech",
-          "home": "Hogar",
-          "lifestyle": "Lifestyle",
-          "gifts": "Regalos",
-          "celulares": "Celulares",
-          "herramientas-limpieza-celulares": "Herramientas de Limpieza Para Celulares",
-          "cocina": "Cocina"
-        }
-      },
-      "carousel": {
-        "tech": {
-          "title": "Tech\nInteligente",
-          "subtitle": "Gadgets y accesorios para la vida digital del día a día.",
-          "accentWord": "Inteligente"
-        },
-        "home": {
-          "title": "Esenciales\nHogar",
-          "subtitle": "Confort, cocina y productos prácticos para tu espacio.",
-          "accentWord": "Hogar"
-        },
-        "lifestyle": {
-          "title": "Lifestyle\nDiario",
-          "subtitle": "Productos útiles para trabajo, viaje y rutinas cotidianas.",
-          "accentWord": "Diario"
-        },
-        "gifts": {
-          "title": "Ideas\nRegalo",
-          "subtitle": "Selecciones para hogar, tech y vida diaria.",
-          "accentWord": "Regalo"
-        }
-      }
-    },
-    "blog": {
-      "eyebrow": "Lifestyle & Tech",
-      "heroTitle": "Ideas\nque inspiran",
-      "heroSubtitle": "Guías, tendencias y productos útiles para hogar, tecnología y vida diaria.",
-      "exploreCta": "Explorar artículos",
-      "scrollHint": "Desliza para explorar",
-      "sectionAria": "Blog Buenos Productos",
-      "comingSoonTitle": "Próximamente",
-      "comingSoonBody": "Estamos preparando el journal Buenos Productos. Pronto encontrarás artículos sobre hogar, tech y lifestyle.",
-      "featuredLabel": "Historia destacada",
-      "articlesLabel": "Últimos artículos",
-      "backToBlog": "Volver al blog",
-      "featuredSlug": "smart-home-essentials-2026",
-      "posts": {
-        "smart-home-essentials-2026": {
-          "title": "Esenciales smart home para el día a día",
-          "excerpt": "Pequeñas mejoras de hogar y tech que simplifican rutinas diarias con calma y utilidad real.",
-          "subtitle": "Selecciones prácticas para hogar, escritorio y viaje.",
-          "intro": "Buenos Productos apuesta por productos útiles que encajan en la vida real, sin llenar espacios. Son mejoras que merecen quedarse en una estantería, un bolso o un escritorio.",
-          "heroImage": "/assets/images/good-ideas-blog/smart-home-essentials-2026-hero.webp",
-          "relatedProductIds": ["gi-hogar-002", "gi-lifestyle-001"],
-          "sections": [
-            {
-              "heading": "Empieza por las rutinas que repites",
-              "paragraphs": [
-                "La mejor tech del hogar no es el gadget más ruidoso del feed. Es lo que quita fricción a algo que ya haces: preparar té, cargar dispositivos u ordenar un rincón de casa.",
-                "Un hervidor de viaje compacto, auriculares inalámbricos o una mini nevera para bebidas y skincare pueden cambiar cómo se siente un espacio sin reformar."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-1.webp"
-            },
-            {
-              "heading": "Tecnología que no estorba",
-              "paragraphs": [
-                "Elige productos con controles claros, tamaño honesto y un diseño que te guste ver cuando no los usas. Formatos portátiles viajan bien entre cocina, oficina y fin de semana.",
-                "Cuando algo hace bien una sola función, es más fácil recomendarlo—y más fácil convivir con ello."
-              ],
-              "image": "/assets/images/good-ideas-blog/smart-home-essentials-2026-section-2.webp"
-            }
-          ],
-          "closing": "Explora el catálogo Buenos Productos: hogar, tech, lifestyle y regalos pensados para el uso diario."
-        },
-        "product-from-1005006438780849": {
-          "title": "Hervidor de viaje portátil 450ML para hogar y desplazamientos",
-          "excerpt": "Una selección compacta de Buenos Productos para té, café y agua caliente en el escritorio, la residencia o de viaje.",
-          "subtitle": "Esenciales de hogar que encajan en rutinas reales.",
-          "intro": "Buenos Productos selecciona productos útiles para el hogar, no objetos de relleno. Este hervidor compacto de 450ML está pensado para cuando quieres agua caliente sin ocupar toda la encimera.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-1005006438780849-hero.webp",
-          "relatedProductIds": ["gi-hogar-002"],
-          "sections": [
-            {
-              "heading": "Por qué un hervidor compacto merece sitio en tu bolso",
-              "paragraphs": [
-                "Las mejores mejoras del hogar quitan fricción a rutinas que ya repites. Un hervidor pequeño cubre té, café, comidas instantáneas y agua caliente sin dominar una estantería o maleta.",
-                "Con 450ML, el tamaño es honesto para una o dos tazas: ideal en escritorio, mesita, residencia u hotel cuando no hay cocina completa."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-1.webp"
-            },
-            {
-              "heading": "Pensado para el uso diario en Buenos Productos",
-              "paragraphs": [
-                "Elige el formato de enchufe según tu región para el mismo diseño compacto en casa y en viaje.",
-                "Consulta la ficha del producto para medidas, opciones de enchufe y galería, y combínalo con otras selecciones de hogar y lifestyle del catálogo Buenos Productos."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-1005006438780849-section-2.webp"
-            }
-          ],
-          "closing": "Descubre el hervidor de viaje portátil 450ML en el catálogo de hogar Buenos Productos y monta un setup acorde a cómo vives."
-        },
-        "product-from-supplier-link": {
-          "title": "Selecciones premium de hogar que elevan tus espacios",
-          "excerpt": "Descubre un producto de hogar premium pensado para la vida moderna: líneas limpias, materiales de calidad y estilo que encaja en espacios reales.",
-          "subtitle": "Estilo hogareño contemporáneo con acabado premium.",
-          "intro": "Buenos Productos reúne productos de hogar elegidos por calidad y uso diario. Esta selección premium apuesta por diseño cuidado y materiales que encajan en interiores modernos, sin convertirse en ruido visual.",
-          "heroImage": "/assets/images/good-ideas-blog/product-from-supplier-link/hero.webp",
-          "sections": [
-            {
-              "heading": "Diseño que complementa cómo vives",
-              "paragraphs": [
-                "La estética moderna y limpia mejora el espacio y encaja con un estilo de vida contemporáneo. La simplicidad elegante y los acabados cuidados funcionan en ambientes minimalistas y en estancias más cargadas.",
-                "Es una pieza que destaca por lo correcto: presencia calmada, materiales honestos y una silueta que no compite con el resto de la habitación."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-1.webp"
-            },
-            {
-              "heading": "Versátil para un refresh o un cambio mayor",
-              "paragraphs": [
-                "Tanto si actualizas un rincón como si replanteas una estancia completa, esta pieza se adapta a distintos gustos y ambientes.",
-                "Varias direcciones de estilo permiten ubicarla en escritorio, salón o dormitorio sin que resulte fuera de lugar."
-              ],
-              "image": "/assets/images/good-ideas-blog/product-from-supplier-link/section-2.webp"
-            }
-          ],
-          "closing": "Explora el catálogo de hogar Buenos Productos: selecciones premium que equilibran calidad, accesibilidad y utilidad diaria."
-        }
-      }
-    },
-    "cart": {
-      "title": "Tu carrito",
-      "empty": "Tu carrito Buenos Productos está vacío.",
-      "emptyCta": "Explorar productos",
-      "comingSoonCheckout": "El checkout estará disponible cuando lancemos el catálogo.",
-      "subtotal": "Subtotal",
-      "checkout": "Ir al checkout"
-    },
-    "checkout": {
-      "title": "Checkout",
-      "comingSoonTitle": "Próximamente",
-      "comingSoonBody": "El proceso de pago Buenos Productos se habilitará junto con el lanzamiento del catálogo.",
-      "backToCart": "Volver al carrito"
-    },
-    "product": {
-      "comingSoonTitle": "Producto no disponible",
-      "comingSoonBody": "Este producto formará parte del catálogo Buenos Productos próximamente.",
-      "backToProducts": "Volver a productos",
-      "manualTitle": "Manual de uso",
-      "manualDescription": "Consultá la guía oficial abajo o descargá el PDF para tenerla sin conexión.",
-      "manualDownload": "Descargar PDF",
-      "manualOpen": "Abrir en nueva pestaña"
-    },
-    "footer": {
-      "tagline": "Productos inteligentes para hogar, tecnología y vida diaria.",
-      "shopHeading": "Tienda",
-      "legalHeading": "Legal",
-      "home": "Inicio",
-      "products": "Productos",
-      "blog": "Blog",
-      "privacy": "Privacidad",
-      "cookies": "Cookies",
-      "terms": "Términos",
-      "rights": "Todos los derechos reservados."
-    }
-  },
   "common": {
     "viewProduct": "Ver producto",
     "addToCart": "Agregar al carrito",
@@ -339,30 +94,6 @@
     "passwordMismatch": "Las contraseñas no coinciden."
   },
   "seo": {
-    "gateway": {
-      "title": "Go Natural y Buenos Productos | Elige tu tienda",
-      "description": "Elige Go Natural para outdoor o Buenos Productos para productos smart y lifestyle."
-    },
-    "goodIdeas": {
-      "title": "Buenos Productos | Productos inteligentes",
-      "description": "Gadgets útiles, tecnología para el hogar y productos virales. Próximamente.",
-      "products": {
-        "title": "Productos | Buenos Productos",
-        "description": "Catálogo Buenos Productos: hogar, tecnología y lifestyle. Próximamente."
-      },
-      "blog": {
-        "title": "Blog | Buenos Productos",
-        "description": "Ideas, guías y tendencias sobre hogar, tech y lifestyle."
-      },
-      "blogPost": {
-        "titleTemplate": "{title} | Blog Buenos Productos",
-        "descriptionTemplate": "{excerpt}"
-      },
-      "cart": {
-        "title": "Carrito | Buenos Productos",
-        "description": "Tu carrito Buenos Productos."
-      }
-    },
     "home": {
       "title": "Equipamiento outdoor premium para explorar con calma",
       "description": "Equipo diseñado con intención para camping, agua y viajes outdoor tranquilos."
@@ -412,10 +143,26 @@
     "categoriesTitle": "Navegá por intención",
     "categoriesSubtitle": "Pesca, montaña y nieve, outdoor y deportes acuáticos — grandes áreas táctiles, mismas decisiones tranquilas.",
     "categoryCards": [
-      { "label": "Pesca", "path": "/products?category=fishing", "imageKey": "fishing" },
-      { "label": "Montaña y nieve", "path": "/products?category=mountain-snow", "imageKey": "mountain-snow" },
-      { "label": "Outdoor y aventura", "path": "/products?category=outdoor", "imageKey": "outdoor-adventure" },
-      { "label": "Deportes acuáticos", "path": "/products?category=water-sports", "imageKey": "water-sports" }
+      {
+        "label": "Pesca",
+        "path": "/products?category=fishing",
+        "imageKey": "fishing"
+      },
+      {
+        "label": "Montaña y nieve",
+        "path": "/products?category=mountain-snow",
+        "imageKey": "mountain-snow"
+      },
+      {
+        "label": "Outdoor y aventura",
+        "path": "/products?category=outdoor",
+        "imageKey": "outdoor-adventure"
+      },
+      {
+        "label": "Deportes acuáticos",
+        "path": "/products?category=water-sports",
+        "imageKey": "water-sports"
+      }
     ],
     "journalTitle": "Journal",
     "journalIntro": "Historias desde el terreno — el mismo silencio que en la tienda.",
@@ -2585,4 +2332,3 @@
     }
   }
 }
-
