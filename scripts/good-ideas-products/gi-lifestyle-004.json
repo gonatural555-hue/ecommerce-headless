@@ -1,0 +1,17 @@
+{
+  "id": "gi-lifestyle-004",
+  "brand": "Good Products",
+  "images": {
+    "featured": [
+      "https://s.alicdn.com/@sc04/kf/H2b968e155f45416b9817a950519d9edag.jpg"
+    ],
+    "gallery": [
+      "https://s.alicdn.com/@sc04/kf/H2fd220f95c404bb1b6a82e50b28ed4acu.jpg?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/Hc7c28a011dd144c8bdf635c064232fc10.jpg?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/H74b6c1395aba4289a8ba344581ae2816p.jpg?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/H22916f2365d14b21be2df5f443584442T.jpg?avif=close&webp=close"
+    ],
+    "lifestyle": [],
+    "extras": []
+  }
+}

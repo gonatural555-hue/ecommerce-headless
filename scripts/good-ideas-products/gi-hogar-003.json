@@ -1,0 +1,17 @@
+{
+  "id": "gi-hogar-003",
+  "brand": "Good Products",
+  "images": {
+    "featured": [
+      "https://s.alicdn.com/@sc04/kf/H8bcc78e7b88a44f5ad2a6d34c263ba50W.jpg?avif=close&webp=close"
+    ],
+    "gallery": [
+      "https://s.alicdn.com/@sc04/kf/H82f7867f49a64aec81a4f4efc473fd2dD.png?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/H69b8b061778b4c6ab6234fb5e665e5eeu.jpg?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/H3bc6d02ba73e4b4eacfc9087af24c01aP.jpg?avif=close&webp=close",
+      "https://s.alicdn.com/@sc04/kf/He3ca0e8a817a45659fddd5171de1e2a3B.jpg?avif=close&webp=close"
+    ],
+    "lifestyle": [],
+    "extras": []
+  }
+}

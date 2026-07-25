@@ -8,6 +8,10 @@ import { useAuth } from "@/context/AuthContext";
 import { useTranslations, useLocale } from "@/components/i18n/LocaleProvider";
 import { shouldShowRegistrationCta } from "@/lib/newsletter-cta";
 import { submitNewsletterSubscription } from "@/lib/newsletter-client";
+<<<<<<< HEAD
+=======
+import { newsletterCtaStyles as s } from "@/lib/ui/newsletter-cta-styles";
+>>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 
 const SESSION_STORAGE_MINIMIZED = "gn-registration-cta-minimized";
 const SESSION_STORAGE_SUBSCRIBED = "gn-newsletter-cta-subscribed";
@@ -223,6 +227,7 @@ export default function RegistrationCTA() {
           : errorCode === "generic"
             ? t("registrationCTA.errorGeneric")
             : null;
+<<<<<<< HEAD
   const palette = {
         minimizedButton:
           "font-inter w-full rounded-full border border-[rgba(110,31,40,0.35)] bg-[#F4EBDD] px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2E4A36] shadow-[0_10px_36px_-12px_rgba(46,74,54,0.35),0_2px_8px_rgba(46,74,54,0.08)] transition hover:border-[#6E1F28]/55 hover:shadow-[0_14px_40px_-10px_rgba(46,74,54,0.28)] md:w-auto md:px-4 md:text-xs",
@@ -254,6 +259,8 @@ export default function RegistrationCTA() {
           "font-medium text-[#6E1F28] underline decoration-[rgba(110,31,40,0.35)] underline-offset-2 hover:decoration-[#6E1F28]",
         error: "font-inter text-sm text-[#6E1F28]",
       };
+=======
+>>>>>>> 8e880344766638a7513f3b6c9d14c843a23fe9c1
 
   if (isMinimized) {
     return (
@@ -261,7 +268,7 @@ export default function RegistrationCTA() {
         <button
           type="button"
           onClick={handleExpand}
-          className={palette.minimizedButton}
+          className={s.minimizedButton}
           aria-label={t("registrationCTA.expand")}
         >
           {t("registrationCTA.minimizedLabel")}
@@ -276,23 +283,23 @@ export default function RegistrationCTA() {
       data-gn-newsletter-cta
       className="fixed bottom-4 left-1/2 z-[45] w-[min(100%-1rem,calc(100vw-1rem))] max-w-md -translate-x-1/2 animate-fade-in pb-[max(0.75rem,env(safe-area-inset-bottom))] md:left-4 md:translate-x-0"
     >
-      <div className={palette.panel}>
+      <div className={s.panel}>
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <h3 className={palette.title}>
+            <h3 className={s.title}>
               {t("registrationCTA.title")}
             </h3>
-            <p className={palette.subtitle}>
+            <p className={s.subtitle}>
               {t("registrationCTA.subtitle")}
             </p>
-            <p className={palette.secondaryText}>
+            <p className={s.secondaryText}>
               {t("registrationCTA.secondaryText")}
             </p>
           </div>
           <button
             type="button"
             onClick={handleMinimize}
-            className={palette.iconButton}
+            className={s.iconButton}
             aria-label={t("registrationCTA.minimize")}
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,21 +315,21 @@ export default function RegistrationCTA() {
 
         {submitState === "success" ? (
           <div className="space-y-3">
-            <p className={palette.successText}>
+            <p className={s.successText}>
               {t("registrationCTA.successMessage")}
             </p>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
               <button
                 type="button"
                 onClick={handleHideAfterSuccess}
-                className={palette.primaryAction}
+                className={s.primaryAction}
               >
                 {t("registrationCTA.hideAfterSuccess")}
               </button>
               <button
                 type="button"
                 onClick={handleMinimize}
-                className={palette.secondaryAction}
+                className={s.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>
@@ -355,12 +362,12 @@ export default function RegistrationCTA() {
                   newsletterInputFocusedRef.current = false;
                 }}
                 placeholder={t("registrationCTA.emailPlaceholder")}
-                className={palette.input}
+                className={s.input}
                 required
               />
             </div>
 
-            <label className={palette.checkboxLabel}>
+            <label className={s.checkboxLabel}>
               <input
                 type="checkbox"
                 checked={marketingAccepted}
@@ -371,13 +378,13 @@ export default function RegistrationCTA() {
                     setErrorCode(null);
                   }
                 }}
-                className={palette.checkbox}
+                className={s.checkbox}
               />
               <span>
                 {t("registrationCTA.marketingLabel")}{" "}
                 <Link
                   href={privacyHref}
-                  className={palette.privacyLink}
+                  className={s.privacyLink}
                 >
                   {t("registrationCTA.privacyLink")}
                 </Link>
@@ -385,7 +392,7 @@ export default function RegistrationCTA() {
             </label>
 
             {errorMessage ? (
-              <p className={palette.error} role="alert">
+              <p className={s.error} role="alert">
                 {errorMessage}
               </p>
             ) : null}
@@ -396,7 +403,7 @@ export default function RegistrationCTA() {
                 disabled={
                   !marketingAccepted || submitState === "loading" || !email.trim()
                 }
-                className={palette.submitAction}
+                className={s.submitAction}
               >
                 {submitState === "loading"
                   ? t("registrationCTA.submitLoading")
@@ -405,7 +412,7 @@ export default function RegistrationCTA() {
               <button
                 type="button"
                 onClick={handleMinimize}
-                className={palette.secondaryAction}
+                className={s.secondaryAction}
               >
                 {t("registrationCTA.minimize")}
               </button>
