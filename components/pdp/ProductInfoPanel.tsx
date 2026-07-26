@@ -37,6 +37,7 @@ type Props = {
   resolvedPrice: number;
   freeShipping?: boolean;
   freeShippingLabel?: string;
+  promoBadgeLabel?: string;
   taxNote?: string | null;
   reviewsAverage?: number;
   reviewsCount?: number;
@@ -114,6 +115,7 @@ export default function ProductInfoPanel({
   resolvedPrice,
   freeShipping,
   freeShippingLabel,
+  promoBadgeLabel,
   taxNote,
   reviewsAverage = 0,
   reviewsCount = 0,
@@ -225,6 +227,9 @@ export default function ProductInfoPanel({
 
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1">
           <p className={theme.price}>{formatMoney(resolvedPrice)}</p>
+          {promoBadgeLabel ? (
+            <span className={theme.freeShipping}>{promoBadgeLabel}</span>
+          ) : null}
           {freeShipping && freeShippingLabel ? (
             <span className={theme.freeShipping}>{freeShippingLabel}</span>
           ) : null}

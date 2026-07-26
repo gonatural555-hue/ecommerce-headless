@@ -1,0 +1,84 @@
+{
+  "id": "orz-rally-off-road-helmet",
+  "slug": "casco-off-road-orz-rally-antiparras",
+  "sku": "GN-ORZ-RALLY",
+  "images": {
+    "featured": [],
+    "gallery": [],
+    "lifestyle": [],
+    "extras": []
+  },
+  "variants": [
+    {
+      "type": "model",
+      "label": "Modelo",
+      "default": "model-1",
+      "options": [
+        { "value": "model-1", "label": "Modelo 1", "code": "M01" },
+        { "value": "model-2", "label": "Modelo 2", "code": "M02" },
+        { "value": "model-3", "label": "Modelo 3", "code": "M03" },
+        { "value": "model-4", "label": "Modelo 4", "code": "M04" },
+        { "value": "model-5", "label": "Modelo 5", "code": "M05" },
+        { "value": "model-6", "label": "Modelo 6", "code": "M06" }
+      ]
+    },
+    {
+      "type": "size",
+      "label": "Talle",
+      "default": "l",
+      "options": [
+        { "value": "l", "label": "L", "headCircumferenceCm": "57-58" },
+        { "value": "xl", "label": "XL", "headCircumferenceCm": "59-60" },
+        { "value": "xxl", "label": "XXL", "headCircumferenceCm": "61-62" }
+      ]
+    }
+  ],
+  "variantImages": {
+    "model": {
+      "model-1": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] },
+      "model-2": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] },
+      "model-3": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] },
+      "model-4": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] },
+      "model-5": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] },
+      "model-6": { "featured": [], "gallery": [], "lifestyle": [], "extras": [] }
+    }
+  },
+  "fulfillment": {
+    "type": "dropshipping",
+    "localStock": false,
+    "displayStatus": "Disponible bajo pedido"
+  },
+  "price": {
+    "currency": "ARS",
+    "amount": 209900,
+    "compareAt": null
+  },
+  "media": {
+    "status": "pending-manual-upload",
+    "main": null,
+    "gallery": [],
+    "technical": [],
+    "sizeGuide": [],
+    "usage": []
+  },
+  "variantSkus": [
+    { "model": "model-1", "size": "l", "sku": "GN-ORZ-RALLY-M01-L" },
+    { "model": "model-1", "size": "xl", "sku": "GN-ORZ-RALLY-M01-XL" },
+    { "model": "model-1", "size": "xxl", "sku": "GN-ORZ-RALLY-M01-XXL" },
+    { "model": "model-2", "size": "l", "sku": "GN-ORZ-RALLY-M02-L" },
+    { "model": "model-2", "size": "xl", "sku": "GN-ORZ-RALLY-M02-XL" },
+    { "model": "model-2", "size": "xxl", "sku": "GN-ORZ-RALLY-M02-XXL" },
+    { "model": "model-3", "size": "l", "sku": "GN-ORZ-RALLY-M03-L" },
+    { "model": "model-3", "size": "xl", "sku": "GN-ORZ-RALLY-M03-XL" },
+    { "model": "model-3", "size": "xxl", "sku": "GN-ORZ-RALLY-M03-XXL" },
+    { "model": "model-4", "size": "l", "sku": "GN-ORZ-RALLY-M04-L" },
+    { "model": "model-4", "size": "xl", "sku": "GN-ORZ-RALLY-M04-XL" },
+    { "model": "model-4", "size": "xxl", "sku": "GN-ORZ-RALLY-M04-XXL" },
+    { "model": "model-5", "size": "l", "sku": "GN-ORZ-RALLY-M05-L" },
+    { "model": "model-5", "size": "xl", "sku": "GN-ORZ-RALLY-M05-XL" },
+    { "model": "model-5", "size": "xxl", "sku": "GN-ORZ-RALLY-M05-XXL" },
+    { "model": "model-6", "size": "l", "sku": "GN-ORZ-RALLY-M06-L" },
+    { "model": "model-6", "size": "xl", "sku": "GN-ORZ-RALLY-M06-XL" },
+    { "model": "model-6", "size": "xxl", "sku": "GN-ORZ-RALLY-M06-XXL" }
+  ]
+}

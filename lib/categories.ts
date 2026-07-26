@@ -163,6 +163,12 @@ export const CATEGORIES: Category[] = [
     description: "Equipamiento para ciclismo y running.",
     parentSlug: "active-sports",
   },
+  {
+    slug: "motocross-off-road",
+    name: "Motocross & Off-Road",
+    description: "Cascos y equipamiento para motocross, enduro y conducción off-road.",
+    parentSlug: "active-sports",
+  },
   // Travel subcategorías
   {
     slug: "motorcyclist-accessories",
@@ -221,6 +227,7 @@ const PRODUCT_CATEGORY_MAP: Record<string, string[]> = {
   "gn-cycling-017": ["cycling-running"], // ROCKBROS Smart Bluetooth Audio Cycling Sunglasses
   "gn-cycling-019": ["cycling-running"], // ROCKBROS Luz LED Delantera RHL 400 — 2000mAh USB-C
   "gn-cycling-020": ["motorcyclist-accessories"], // ORZ Casco integral retro moto — ranura Bluetooth DOT
+  "orz-rally-off-road-helmet": ["motocross-off-road", "active-sports"], // Casco Off-Road ORZ Rally con Antiparras
   // Water Sports - Diving & Swimming Equipment
   "gn-water-001": ["diving-swimming-equipment"], // Máscara de Snorkel Full Face con Soporte para Cámara
   "gn-water-002": ["diving-swimming-equipment"], // Calcetines de Agua de Neopreno 3 mm

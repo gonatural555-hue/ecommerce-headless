@@ -64,6 +64,7 @@ type Props = {
   ctaLabel: string;
   noImageLabel: string;
   freeShippingLabel?: string;
+  promoBadgeLabel?: string;
   pdpDesktop: PdpDesktopContent;
   surface?: UISurface;
   reviewsAverage?: number;
@@ -115,6 +116,7 @@ function buildInfoPanelProps(
     resolvedPrice: number;
     freeShipping?: boolean;
     freeShippingLabel?: string;
+    promoBadgeLabel?: string;
     taxNote?: string | null;
     reviewsAverage: number;
     reviewsCount: number;
@@ -159,6 +161,7 @@ export default function ProductDetailClient({
   ctaLabel,
   noImageLabel,
   freeShippingLabel,
+  promoBadgeLabel,
   pdpDesktop,
   surface = "dark",
   reviewsAverage = 0,
@@ -347,6 +350,7 @@ export default function ProductDetailClient({
     resolvedPrice,
     freeShipping: product.freeShipping,
     freeShippingLabel,
+    promoBadgeLabel,
     taxNote,
     reviewsAverage,
     reviewsCount,

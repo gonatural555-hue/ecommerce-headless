@@ -183,8 +183,23 @@ export default async function ProductPage({ params }: Props) {
     features: localized?.features ?? product.features,
   };
 
-  const { useCase, whyBetter, benefits, idealFor } =
-    getProductCopy(localizedProduct);
+  const isOrzRallyHelmet = product.id === "orz-rally-off-road-helmet";
+
+  const { useCase, whyBetter, benefits, idealFor } = isOrzRallyHelmet
+    ? {
+        useCase:
+          localizedProduct.shortDescription ?? localizedProduct.description,
+        whyBetter:
+          locale === "es"
+            ? "Equipo off-road completo: cobertura integral, ventilación, interior lavable y antiparras incluidas."
+            : "Complete off-road setup: full coverage, ventilation, washable liner, and included goggles.",
+        idealFor:
+          locale === "es"
+            ? ["Motocross", "Enduro", "Off-road recreativo", "Tierra y senderos"]
+            : ["Motocross", "Enduro", "Recreational off-road", "Dirt trails"],
+        benefits: localizedProduct.features ?? [],
+      }
+    : getProductCopy(localizedProduct);
   const messages = await getMessages(locale);
   const t = createTranslator(messages);
   const productImages = await getProductImages(product.id);
@@ -237,9 +252,11 @@ export default async function ProductPage({ params }: Props) {
   // H1 optimizado para SEO
   const baseSeoTitle = localizedProduct.title;
   const seoH1 =
-    locale === "es" && !baseSeoTitle.includes("para")
-      ? `${baseSeoTitle} para Outdoor y Aventuras`
-      : baseSeoTitle;
+    isOrzRallyHelmet ||
+    locale !== "es" ||
+    baseSeoTitle.includes("para")
+      ? baseSeoTitle
+      : `${baseSeoTitle} para Outdoor y Aventuras`;
 
   const relatedProducts = getProducts()
     .filter((item) => item.category === product.category && item.id !== product.id)
@@ -283,14 +300,32 @@ export default async function ProductPage({ params }: Props) {
   const isCyclingTraining001 = product.id === "gn-cycling-training-001";
   const brandLabel = resolveProductBrand(localizedProduct);
   const brandHref = getBrandPageHref(locale, brandLabel);
-  const availabilityCopy = {
-    pickupTitle: t("productPage.pdpDesktop.pickupTitle"),
-    pickupStatus: t("productPage.pdpDesktop.pickupStatus"),
-    pickupDetail: t("productPage.pdpDesktop.pickupDetail"),
-    shippingTitle: t("productPage.pdpDesktop.shippingTitle"),
-    shippingStatus: t("productPage.freeShipping"),
-    shippingDetail: pdpDesktop.shippingEurope,
-  };
+  const availabilityCopy = isOrzRallyHelmet
+    ? {
+        pickupTitle:
+          locale === "es" ? "Disponibilidad" : "Availability",
+        pickupStatus:
+          locale === "es" ? "Disponible bajo pedido" : "Available on order",
+        pickupDetail:
+          locale === "es"
+            ? "Este producto se procesa mediante envío internacional. El plazo estimado de entrega se informa durante el proceso de compra y puede modificarse por controles aduaneros, inspecciones, demoras logísticas, huelgas u otras medidas externas."
+            : "This product is fulfilled via international shipping. Estimated delivery is shared at checkout and may change due to customs, inspections, logistics delays, strikes, or other external factors.",
+        shippingTitle: t("productPage.pdpDesktop.shippingTitle"),
+        shippingStatus:
+          locale === "es" ? "Disponible bajo pedido" : "Available on order",
+        shippingDetail:
+          locale === "es"
+            ? "Modalidad dropshipping — sin stock local."
+            : "Dropshipping fulfillment — no local stock.",
+      }
+    : {
+        pickupTitle: t("productPage.pdpDesktop.pickupTitle"),
+        pickupStatus: t("productPage.pdpDesktop.pickupStatus"),
+        pickupDetail: t("productPage.pdpDesktop.pickupDetail"),
+        shippingTitle: t("productPage.pdpDesktop.shippingTitle"),
+        shippingStatus: t("productPage.freeShipping"),
+        shippingDetail: pdpDesktop.shippingEurope,
+      };
   const featureSpecRows = parseFeatureSpecRows(specSource.slice(0, 10));
 
   return (
@@ -303,13 +338,23 @@ export default async function ProductPage({ params }: Props) {
         }
       >
         <ProductDetailClient
-          product={{ ...localizedProduct, freeShipping: true }}
+          product={{
+            ...localizedProduct,
+            freeShipping: isOrzRallyHelmet ? false : true,
+          }}
           seoH1={seoH1}
           productImages={productImages}
           productVariants={productVariants}
           ctaLabel={t("productPage.addToCart")}
           noImageLabel={t("common.noImage")}
           freeShippingLabel={t("productPage.freeShipping")}
+          promoBadgeLabel={
+            isOrzRallyHelmet
+              ? locale === "es"
+                ? "ANTIPARRAS INCLUIDAS"
+                : "GOGGLES INCLUDED"
+              : undefined
+          }
           pdpDesktop={pdpDesktop}
           surface="light"
           reviewsAverage={reviewsAverage}

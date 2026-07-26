@@ -23,6 +23,21 @@ export function getColorVariantDefinition(
   return productVariants?.variants.find(isColorVariantDefinition);
 }
 
+export function isModelVariantDefinition(variant: VariantDefinition): boolean {
+  return variant.type.toLowerCase() === "model";
+}
+
+/** Variante visual que cambia imagen en PDP: color primero, luego modelo. */
+export function getVisualVariantDefinition(
+  productVariants: ProductVariants | null | undefined
+): VariantDefinition | undefined {
+  if (!productVariants) return undefined;
+  return (
+    productVariants.variants.find(isColorVariantDefinition) ??
+    productVariants.variants.find(isModelVariantDefinition)
+  );
+}
+
 export function pickFeaturedFromVariantSet(
   variant: VariantImageSet | string[] | undefined
 ): string | null {
@@ -61,8 +76,8 @@ function imagesFromVariantSet(
 }
 
 /**
- * Resuelve imágenes activas del PDP según la variante de color seleccionada.
- * Talle, modelo u otras variantes no cambian la imagen.
+ * Resuelve imágenes activas del PDP según la variante visual seleccionada (color o modelo).
+ * Talle y otras variantes no cambian la imagen.
  */
 export function resolveColorVariantActiveImages(
   productImages: ProductImages,
@@ -70,32 +85,32 @@ export function resolveColorVariantActiveImages(
   selections: Record<string, string>,
   defaults: { featured: string | null; gallery: string[] }
 ): { featured: string | null; gallery: string[] } {
-  const colorVariant = getColorVariantDefinition(productVariants);
-  if (!colorVariant || !productImages.variantImages) {
+  const visualVariant = getVisualVariantDefinition(productVariants);
+  if (!visualVariant || !productImages.variantImages) {
     return defaults;
   }
 
-  const colorValue = selections[colorVariant.type];
-  if (!colorValue) {
+  const visualValue = selections[visualVariant.type];
+  if (!visualValue) {
     return defaults;
   }
 
   const { variantImages } = productImages;
-  const variantType = colorVariant.type;
+  const variantType = visualVariant.type;
 
   const typedMap = (variantImages as VariantImagesMap)[variantType];
-  if (typedMap?.[colorValue]) {
-    return imagesFromVariantSet(typedMap[colorValue], defaults);
+  if (typedMap?.[visualValue]) {
+    return imagesFromVariantSet(typedMap[visualValue], defaults);
   }
 
   const nestedColorMap = (variantImages as VariantImagesMap).color;
-  if (nestedColorMap?.[colorValue]) {
-    return imagesFromVariantSet(nestedColorMap[colorValue], defaults);
+  if (nestedColorMap?.[visualValue]) {
+    return imagesFromVariantSet(nestedColorMap[visualValue], defaults);
   }
 
   const flatMap = variantImages as VariantImagesValueMap;
-  if (flatMap[colorValue]) {
-    return imagesFromVariantSet(flatMap[colorValue], defaults);
+  if (flatMap[visualValue]) {
+    return imagesFromVariantSet(flatMap[visualValue], defaults);
   }
 
   return defaults;
